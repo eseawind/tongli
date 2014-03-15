@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<item>
+		<title>
+			标题0
+		</title>
+		<link>
+			http://localhost/0
+		</link>
+		<description>内容0</description>
+	</item>
+	<item>
+		<title>
+			标题1
+		</title>
+		<link>
+			http://localhost/1
+		</link>
+		<description>内容1</description>
+	</item>
+	<item>
+		<title>
+			标题2
+		</title>
+		<link>
+			http://localhost/2
+		</link>
+		<description>内容2</description>
+	</item>
+	<item>
+		<title>
+			标题3
+		</title>
+		<link>
+			http://localhost/3
+		</link>
+		<description>内容3</description>
+	</item>
+</root>

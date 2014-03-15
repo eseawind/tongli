@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="file" namespace="/h" extends="wechar-default" >
+    	<default-interceptor-ref name="wechar-auth" />
+		<!-- <action name="f001_*" class="f001Action" method="{1}">
+			<result name="list2">/WEB-INF/pages/file/F001_02.jsp</result>
+		</action> -->
+	</package>
+</struts>

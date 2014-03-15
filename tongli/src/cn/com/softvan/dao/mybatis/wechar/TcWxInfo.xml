@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.wechar.ITcWxInfoDao">
+	<sql id="Base_Column_List">
+		id,
+		keyword,
+		msgtype,
+		tousername,
+		fromusername,
+		createtime,
+		content,
+		mediaid,
+		title,
+		description,
+		musicurl,
+		hqmusicurl,
+		thumbmediaid,
+		format,
+		location_x,
+		location_y,
+		scale,
+		label,
+		articlecount,
+		articles_id,
+		picurl,
+		url,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		update_id,
+		update_ip,
+		version,
+		del_flag,
+		info_source,
+		default_flag,
+		subscribe_flag,
+		sort_num
+	</sql>
+	<select id="selectByPrimaryKey" resultType="tcWxInfoBean"  parameterType="tcWxInfoBean">
+		select
+		<include refid="Base_Column_List" />
+		from tc_wx_info
+		where id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from tc_wx_info
+		where id = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="tcWxInfoBean">
+		insert into tc_wx_info (
+		id,
+		keyword,
+		msgtype,
+		tousername,
+		fromusername,
+		createtime,
+		content,
+		mediaid,
+		title,
+		description,
+		musicurl,
+		hqmusicurl,
+		thumbmediaid,
+		format,
+		location_x,
+		location_y,
+		scale,
+		label,
+		articlecount,
+		articles_id,
+		picurl,
+		url,
+		date_created,
+		create_id,
+		create_ip,
+		version,
+		del_flag,
+		info_source,
+		last_updated,
+		default_flag,
+		subscribe_flag,
+		sort_num
+		) values (
+		#{id},
+		#{keyword},
+		#{msgtype},
+		#{tousername},
+		#{fromusername},
+		${createtime},
+		#{content},
+		#{mediaid},
+		#{title},
+		#{description},
+		#{musicurl},
+		#{hqmusicurl},
+		#{thumbmediaid},
+		#{format},
+		#{location_x},
+		#{location_y},
+		#{scale},
+		#{label},
+		#{articlecount},
+		#{articles_id},
+		#{picurl},
+		#{url},
+		now(),
+		#{create_id},
+		#{create_ip},
+		 0,
+		'0',
+		#{info_source},
+		now(),
+		#{default_flag},
+		#{subscribe_flag},
+		${sort_num}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="tcWxInfoBean">
+		insert into tc_wx_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			 id 
+			<if test=" keyword != null"> , keyword </if>
+			, msgtype 
+			<if test=" tousername != null"> , tousername </if>
+			<if test=" fromusername != null"> , fromusername </if>
+			<if test=" createtime != null"> , createtime </if>
+			<if test=" content != null"> , content </if>
+			<if test=" mediaid != null"> , mediaid </if>
+			<if test=" title != null"> , title </if>
+			<if test=" description != null"> , description </if>
+			<if test=" musicurl != null"> , musicurl </if>
+			<if test=" hqmusicurl != null"> , hqmusicurl </if>
+			<if test=" thumbmediaid != null"> , thumbmediaid </if>
+			<if test=" format != null"> , format </if>
+			<if test=" location_x != null"> , location_x </if>
+			<if test=" location_y != null"> , location_y </if>
+			<if test=" scale != null"> , scale </if>
+			<if test=" label != null"> , label </if>
+			<if test=" articlecount != null"> , articlecount </if>
+			<if test=" articles_id != null"> , articles_id </if>
+			<if test=" picurl != null"> , picurl </if>
+			<if test=" url != null"> , url </if>
+			<if test=" default_flag != null"> , default_flag </if>
+			<if test=" subscribe_flag != null"> , subscribe_flag </if>
+			 , date_created 
+			 , create_id 
+			 , create_ip 
+			 , version 
+			 , del_flag
+			 , info_source 
+			 ,last_updated
+			 ,sort_num
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			 #{id}, 
+			<if test=" keyword != null"> #{keyword},  </if>
+			 #{msgtype}, 
+			<if test=" tousername != null"> #{tousername},  </if>
+			<if test=" fromusername != null"> #{fromusername},  </if>
+			<if test=" createtime != null"> #{createtime},  </if>
+			<if test=" content != null"> #{content},  </if>
+			<if test=" mediaid != null"> #{mediaid},  </if>
+			<if test=" title != null"> #{title},  </if>
+			<if test=" description != null"> #{description},  </if>
+			<if test=" musicurl != null"> #{musicurl},  </if>
+			<if test=" hqmusicurl != null"> #{hqmusicurl},  </if>
+			<if test=" thumbmediaid != null"> #{thumbmediaid},  </if>
+			<if test=" format != null"> #{format},  </if>
+			<if test=" location_x != null"> #{location_x},  </if>
+			<if test=" location_y != null"> #{location_y},  </if>
+			<if test=" scale != null"> #{scale},  </if>
+			<if test=" label != null"> #{label},  </if>
+			<if test=" articlecount != null"> #{articlecount},  </if>
+			<if test=" articles_id != null"> #{articles_id},  </if>
+			<if test=" picurl != null"> #{picurl},  </if>
+			<if test=" url != null"> #{url},  </if>
+			<if test=" default_flag != null">  #{default_flag}, </if>
+			<if test=" subscribe_flag != null">  #{subscribe_flag} ,</if>
+			 #{date_created},  
+			 #{create_id}, 
+			 #{create_ip},  
+			 0, 
+			'0',
+			#{info_source},
+			now(),
+			${sort_num}
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="tcWxInfoBean">
+		update tc_wx_info set version=version+1
+		,last_updated=now()
+		,update_id=#{update_id}
+		,update_ip=#{update_ip}
+		<if test="keyword!= null">,keyword=#{keyword}</if>
+		<if test="msgtype!= null">,msgtype=#{msgtype}</if>
+		<if test="tousername!= null">,tousername=#{tousername}</if>
+		<if test="fromusername!= null">,fromusername=#{fromusername}</if>
+		<if test="createtime!= null">,createtime=#{createtime}</if>
+		<if test="content!= null">,content=#{content}</if>
+		<if test="mediaid!= null">,mediaid=#{mediaid}</if>
+		<if test="title!= null">,title=#{title}</if>
+		<if test="description!= null">,description=#{description}</if>
+		<if test="musicurl!= null">,musicurl=#{musicurl}</if>
+		<if test="hqmusicurl!= null">,hqmusicurl=#{hqmusicurl}</if>
+		<if test="thumbmediaid!= null">,thumbmediaid=#{thumbmediaid}</if>
+		<if test="format!= null">,format=#{format}</if>
+		<if test="location_x!= null">,location_x=#{location_x}</if>
+		<if test="location_y!= null">,location_y=#{location_y}</if>
+		<if test="scale!= null">,scale=#{scale}</if>
+		<if test="label!= null">,label=#{label}</if>
+		<if test="articlecount!= null">,articlecount=#{articlecount}</if>
+		<if test="articles_id!= null">,articles_id=#{articles_id}</if>
+		<if test="picurl!= null">,picurl=#{picurl}</if>
+		<if test="url!= null">,url=#{url}</if>
+		<if test="del_flag!= null and del_flag!=''">,del_flag=#{del_flag}</if>
+		<if test="info_source!= null">,info_source=#{info_source}</if>
+		,default_flag=#{default_flag}
+		,subscribe_flag=#{subscribe_flag}
+		,sort_num=${sort_num}
+		where id = #{id,jdbcType=VARCHAR}
+	</update>
+    <!-- 判断信息是否存在
+    int isDataYN(IEntity dto) throws Exception; --> 
+    <select id="isDataYN" resultType="int" parameterType="tcWxInfo">
+    	select count(0) from tc_wx_info where id=#{id}
+    </select>
+   <!--  查询信息 列表
+    List<TcWxInfoBean> findDataIsList(IEntity dto) throws Exception; --> 
+    <select id="findDataIsList" resultType="tcWxInfoBean" parameterType="tcWxInfo">
+    	select 
+    	<include refid="Base_Column_List" /> 
+    	from tc_wx_info 
+    	where 1=1 
+    	<if test="articles_id!= null">
+			and articles_id=#{articles_id}
+		</if>
+    	and del_flag='0'
+    	and info_source=#{info_source}
+    	and msgtype=#{msgtype}
+    	order by last_updated desc,sort_num asc
+    </select>
+    <!--  查询信息 分页
+    List<TcWxInfoBean> findDataIsPage(IEntity dto) throws Exception; --> 
+	<select id="findDataIsPage" resultType="tcWxInfoBean" parameterType="tcWxInfo">
+    	select <include refid="Base_Column_List" /> from tc_wx_info
+    	 where 1=1
+    	 order by last_updated desc
+    </select>
+    <!-- 
+     * 根据aid 逻辑删除信息
+    int deleteByAid(IEntity dto) throws Exception; -->
+    <update id="deleteByAid" parameterType="tcWxInfo">
+    	update tc_wx_info 
+    	set version=version+1
+    	,del_flag='1'
+    	where articles_id=#{articles_id}
+    </update>
+     <!-- 
+     * 根据id 逻辑删除信息
+    int deleteById(IEntity dto) throws Exception; -->
+    <update id="deleteById" parameterType="tcWxInfo">
+    	update tc_wx_info 
+    	set version=version+1
+    	,del_flag='1'
+    	where id=#{id}
+    </update>
+</mapper>

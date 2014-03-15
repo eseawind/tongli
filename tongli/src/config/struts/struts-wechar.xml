@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="wechar_info" namespace="/h" extends="wechar-default" >
+    	<default-interceptor-ref name="wechar-auth" /> 
+    	<!-- 账号绑定 -->
+		<action name="w001_*" class="w001Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechar/W001.jsp</result>
+			<result name="success" type="chain">w001_init</result>
+		</action>
+		<!-- 文章消息 -->
+		<action name="w004_*" class="w004Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechar/W004.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechar/W004_01.jsp</result>
+			<result name="view">/WEB-INF/pages/admin/wechar/W004_02.jsp</result>
+			<result name="success" type="chain">w004_init</result>
+		</action>
+		<!-- 素材管理 begin -->
+		<!-- 图文消息 -->
+		<action name="w002_*" class="w002Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechar/W002.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechar/W002_01.jsp</result>
+			<result name="success" type="chain">w002_init</result>
+		</action>
+		<!-- 图片消息 -->
+		<action name="w003_*" class="w003Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechar/W003.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechar/W003_01.jsp</result>
+			<result name="success" type="chain">w003_init</result>
+		</action>
+		<!-- 文本消息 -->
+		<action name="w009_*" class="w009Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechar/W009.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechar/W009_01.jsp</result>
+			<result name="success" type="chain">w009_init</result>
+		</action>
+		<!-- 音乐消息 -->
+		<action name="w005_*" class="w005Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechar/W005.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechar/W005_01.jsp</result>
+			<result name="success" type="chain">w005_init</result>
+		</action>
+		<!-- 素材管理 end -->
+		<!-- 自定义菜单 -->
+		<action name="w007_*" class="w007Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechar/W007.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechar/W007_01.jsp</result>
+			<result name="success" type="chain">w007_init</result>
+		</action>
+	</package>
+</struts>

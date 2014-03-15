@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/jee 
+		http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+	<context:annotation-config/>
+	<bean id="placeholderConfig"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:redis-manager-config.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 线程池 -->
+	<bean id ="taskExecutor"  class ="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" > 
+	    <!-- 线程池维护线程的最少数量 -->
+	    <property name ="corePoolSize" value="15" /> 
+	    <!-- 线程池维护线程所允许的空闲时间 -->
+	    <property name ="keepAliveSeconds" value="300" /> 
+	    <!-- 线程池维护线程的最大数量 -->
+	    <property name ="maxPoolSize" value="20" /> 
+	    <!-- 线程池所使用的缓冲队列  (卡不死机)-->
+	    <property name ="queueCapacity" value="2147483647" /> 
+ 	</bean> 
+	<!-- JTA事务管理器 -->
+	<bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp">
+		<description>UserTransactionImp</description>
+		<property name="transactionTimeout" value="300"/>
+	</bean>
+	<bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager" init-method="init" destroy-method="close">
+		<description>UserTransactionManager</description>
+		<property name="forceShutdown" value="true"/>
+	</bean>
+	<bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+		<description>JtaTransactionManager</description>
+		<property name="transactionManager" ref="atomikosTransactionManager"/>
+		<property name="userTransaction" ref="atomikosUserTransaction"/>
+		<property name="allowCustomIsolationLevels" value="true"/>
+	</bean>
+	 
+	<!-- 声明式事务 @Transactional -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- *****平台业务库连接信息开始************************************ -->
+	<bean id="dataSource_db1" class="com.atomikos.jdbc.AtomikosDataSourceBean" init-method="init" destroy-method="close">
+        <description>DB1_XA_DATASOURCE</description>
+        <property name="uniqueResourceName">
+            <value>MysqlXADataSource_db1</value>
+        </property>
+        <property name="xaDataSourceClassName">
+            <value>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</value>
+        </property>
+        <property name="xaProperties">
+            <props>
+                <prop key="user">${db1.username}</prop>
+                <prop key="password">${db1.password}</prop>
+                <prop key="URL">${db1.url}</prop>
+            </props>
+        </property>
+		<property name="testQuery"><value>select 1</value></property>
+		<property name="poolSize"><value>${db1.poolSize}</value></property>
+		<property name="minPoolSize"><value>${db1.minPoolSize}</value></property>  
+        <property name="maxPoolSize"><value>${db1.maxPoolSize}</value></property>      
+        <property name="loginTimeout"><value>${db1.loginTimeout}</value></property>    
+        <property name="reapTimeout"><value>${db1.reapTimeout}</value></property>
+    </bean>
+	<!-- MYSQL_MYBATIS管理库 -->
+	<bean id="sqlSessionFactory_db1" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:config/mybatis/mybatis-config.xml" />
+		<property name="dataSource" ref="dataSource_db1" />
+	</bean>
+	<!-- 平台业务库**基础dao -->
+	<bean id="baseDao" class="org.mybatis.spring.mapper.MapperFactoryBean" scope="prototype">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory_db1" />
+	</bean>
+	<!-- *****平台业务库连接信息结束************************************ -->
+	
+	
+	<!-- =================Redis缓存==============begin==================== -->
+	
+	 <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <property name="maxActive" value="${redis.maxActive}"></property>  
+        <property name="maxIdle" value="${redis.maxIdle}"></property>  
+        <property name="maxWait" value="${redis.maxWait}"></property>  
+        <property name="minEvictableIdleTimeMillis" value="300000"></property>  
+        <property name="numTestsPerEvictionRun" value="3"></property>  
+        <property name="timeBetweenEvictionRunsMillis" value="60000"></property>  
+        <!-- 当“连接池”中active数量达到阀值时，即“链接”资源耗尽时，连接池需要采取的手段, 默认为1：
+		 -> 0 : 抛出异常，
+		 -> 1 : 阻塞，直到有可用链接资源
+		 -> 2 : 强制创建新的链接资源 -->
+        <property name="whenExhaustedAction" value="2"></property>  
+    </bean>  
+    <bean id="jedisPool" class="redis.clients.jedis.JedisPool" destroy-method="destroy">  
+        <!-- config -->  
+        <constructor-arg ref="jedisPoolConfig"></constructor-arg>  
+        <!-- host -->  
+        <constructor-arg value="${redis.host}"></constructor-arg>  
+        <!-- port -->  
+        <constructor-arg value="${redis.port}"></constructor-arg>  
+        <!-- timeout -->  
+        <constructor-arg value="${redis.timeout}"></constructor-arg>  
+        <!-- password -->  
+        <constructor-arg value="${redis.pass}"></constructor-arg>  
+        <!-- database index -->  
+        <constructor-arg value="12"></constructor-arg>        
+    </bean>
+	<!-- redis缓存帮助类 -->
+	<bean id="jedisHelper" class="cn.com.softvan.common.JedisHelper">
+		<property name="jedisPool" ref="jedisPool"></property>
+	</bean>
+	
+	<!-- =================Redis缓存==============end==================== -->
+	
+	
+	<!-- 微信后台dao begin -->
+	<bean id="tcWxMenuDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.wechar.ITcWxMenuDao"></property>
+	</bean>
+	<bean id="tcWxPublicUserDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.wechar.ITcWxPublicUserDao"></property>
+	</bean>
+	<bean id="tcWxInfoDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.wechar.ITcWxInfoDao"></property>
+	</bean>
+	<bean id="tcWxUserDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.wechar.ITcWxUserDao"></property>
+	</bean>
+	<bean id="tcWxUserGroupsDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.wechar.ITcWxUserGroupsDao"></property>
+	</bean>
+	<!-- 微信后台dao end -->
+	
+	
+	
+	
+	<!-- ************************业务处理类************************************* -->
+	<!-- manager基类 -->
+	<bean id="baseManager" class="cn.com.softvan.service.BaseManager" scope="prototype">
+		<property name="userLogsManager" ref="userLogsManager"></property>
+	</bean>
+	<!-- 微信后台 service begin -->
+	<!-- 公共账号 -->
+	<bean id="tcWxPublicUserManager" class="cn.com.softvan.service.wechar.impl.TcWxPublicUserManager" scope="prototype">
+		<property name="tcWxPublicUserDao" ref="tcWxPublicUserDao"></property>
+	</bean>
+	<!-- 自定义菜单 -->
+	<bean id="tcWxMenuManager" class="cn.com.softvan.service.wechar.impl.TcWxMenuManager" scope="prototype">
+		<property name="tcWxMenuDao" ref="tcWxMenuDao"></property>
+	</bean>
+	<!-- 信息资源管理 -->
+	<bean id="tcWxInfoManager" class="cn.com.softvan.service.wechar.impl.TcWxInfoManager" scope="prototype">
+		<property name="tcWxInfoDao" ref="tcWxInfoDao"></property>
+	</bean>
+	<!-- 微信后台 service end -->
+	
+</beans>

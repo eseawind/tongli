@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<!-- ************************ACTION类************************************* -->
+	 <!-- action基类 -->
+	<bean id="baseAction" class="cn.com.softvan.web.action.BaseAction" scope="prototype">
+		<!-- <property name="userLogsManager" ref="userLogsManager"></property> -->
+	</bean>
+	<!-- servlet  -->
+	<bean id="wecharReplyServlet" class="cn.com.softvan.web.servlet.WeCharReplyServlet" scope="prototype">
+		<property name="tcWxMenuManager" ref="tcWxMenuManager"></property>
+		<property name="jedisHelper" ref="jedisHelper"></property>
+	</bean>
+	<!-- 系统登陆与系统首页 Action -->
+	<bean id="homeAction" class="cn.com.softvan.web.action.HomeAction" scope="prototype"/>
+	<!-- 微信服务_微信号绑定 -->
+	<bean id="w001Action" class="cn.com.softvan.web.action.wechar.W001Action" scope="prototype">
+		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
+	</bean>
+	<!-- 微信服务_素材管理_文章消息 -->
+	<bean id="w004Action" class="cn.com.softvan.web.action.wechar.W004Action" scope="prototype">
+		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+	</bean>
+	<!-- 微信服务_自动回复_图文消息 -->
+	<bean id="w002Action" class="cn.com.softvan.web.action.wechar.W002Action" scope="prototype">
+		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+	</bean>
+	<!-- 微信服务_自动回复_图片消息 -->
+	<bean id="w003Action" class="cn.com.softvan.web.action.wechar.W003Action" scope="prototype">
+		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+	</bean>
+	<!-- 微信服务_自动回复_文本消息 -->
+	<bean id="w009Action" class="cn.com.softvan.web.action.wechar.W009Action" scope="prototype">
+		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+	</bean>
+	<!-- 微信服务_自动回复_音乐消息 -->
+	<bean id="w005Action" class="cn.com.softvan.web.action.wechar.W005Action" scope="prototype">
+		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+	</bean>
+	<!-- 微信服务_自定义菜单 -->
+	<bean id="w007Action" class="cn.com.softvan.web.action.wechar.W007Action" scope="prototype">
+		<property name="tcWxMenuManager" ref="tcWxMenuManager"></property>
+	</bean>
+	
+</beans>
