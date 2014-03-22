@@ -37,6 +37,14 @@
 		<typeAlias type="cn.com.softvan.dao.entity.wechar.TcWxUser" alias="tcWxUser"/>
 		<typeAlias type="cn.com.softvan.dao.entity.wechar.TcWxUserGroups" alias="tcWxUserGroups"/>
 		<!-- 微信后台模块 end--> 
+		
+		<!-- 系统管理模块 begin -->
+		<!-- bean class -->
+		<typeAlias type="cn.com.softvan.bean.sys.TcSysNewsBean" alias="tcSysNewsBean"/>
+		<!-- entity class -->
+		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNews" alias="tcSysNews"/>
+		<!-- 系统管理模块 end -->
+		
 	</typeAliases>
 	<!-- 插件 -->
 	<plugins>
@@ -64,8 +72,24 @@
 		<!-- 行政区划 end-->	
 		
 		<!-- 用户信息 begin-->	
+		<mapper resource="/cn/com/softvan/dao/mybatis/user/TcUaUmBaseRole.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/user/TcUaUmBaseUser.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/user/TcUaUmOperationLog.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/user/TcUaUmPermission.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/user/TcUaUmPermissionGroup.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/user/TcUaUmPermissionGroupRole.xml"/>
 		<!-- 用户信息 end-->	
 		
+		<!-- 附件 begin -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/TcFile.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/TcFileLink.xml"/>
+		<!-- 附件 end -->
 		
+		<!-- 系统管理模块 begin -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysEmail.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysSms.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysVariable.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysNews.xml"/>
+		<!-- 系统管理模块 end -->
 	</mappers>
 </configuration>

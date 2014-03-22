@@ -18,7 +18,6 @@ public class ExceptionAndExecuteTimeInterceptor extends AbstractInterceptor {
 
 	private static final Log log = LogFactory
 			.getLog(ExceptionAndExecuteTimeInterceptor.class);
-
 //	private static final String EQUAL_SIGN = "=";
 //	private static final String PLUS_SIGN = "+";
 //	private static final String AND = "&";

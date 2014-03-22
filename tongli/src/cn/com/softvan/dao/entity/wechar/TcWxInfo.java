@@ -23,11 +23,13 @@ import cn.com.softvan.dao.entity.BaseEntity;
 public class TcWxInfo extends BaseEntity {
 	/** id */
 	private String id;
-	/** 消息类型 */
+	/** 关键字 */
+	private String keyword;
+	/** 消息类型 text:文本类型 image:图片信息 voice:语音 video:视频 music:音乐 news:图文 location:地理位置 link:链接  event:事件推送  */
 	private String msgtype;
-	/** 接收方帐号（收到的OpenID） */
-	private String tousername;
 	/** 开发者微信号 */
+	private String tousername;
+	/** 接收方帐号（收到的OpenID） */
 	private String fromusername;
 	/** 消息创建时间 （整型） */
 	private String createtime;
@@ -65,12 +67,24 @@ public class TcWxInfo extends BaseEntity {
 	private String url;
 	/** 消息来源0,自动回复,1,信息接收,2,客服回复 */
 	private String info_source;
-	/** 默认回复标记*/
+	/** 默认回复标记 */
 	private String default_flag;
-	/** 首次关注回复标记*/
+	/** 首次关注回复标记 */
 	private String subscribe_flag;
 	/** 序号 */
 	private String sort_num;
+	/**地理位置精度*/
+	private String location_precision;
+	/**事件类型 subscribe(订阅)、unsubscribe(取消订阅) SCAN(已关注) CLICK(自定义菜单事件) VIEW(点击菜单跳转链接时)*/
+	private String event;
+	/**事件key (用户未关注时，进行关注后的事件推送qrscene_为前缀，后面为二维码的参数值) 
+	 * 用户已关注时的事件推送 (事件KEY值，是一个32位无符号整数，即创建二维码时的二维码scene_id)
+	 * 自定义菜单事件 事件KEY值，与自定义菜单接口中KEY值对应
+	 * 点击菜单跳转链接时的事件推送 事件KEY值，设置的跳转URL
+	 * */
+	private String eventkey;
+	/**二维码的ticket，可用来换取二维码图片*/
+	private String ticket;
 	/**
 	 * id取得
 	 * @return id
@@ -86,43 +100,57 @@ public class TcWxInfo extends BaseEntity {
 	    this.id = id;
 	}
 	/**
-	 * 消息类型取得
-	 * @return 消息类型
+	 * 关键字取得
+	 * @return 关键字
+	 */
+	public String getKeyword() {
+	    return keyword;
+	}
+	/**
+	 * 关键字设定
+	 * @param keyword 关键字
+	 */
+	public void setKeyword(String keyword) {
+	    this.keyword = keyword;
+	}
+	/**
+	 * 消息类型 text:文本类型 image:图片信息 voice:语音 video:视频 music:音乐 news:图文 location:地理位置 link:链接  event:事件推送取得
+	 * @return 消息类型 text:文本类型 image:图片信息 voice:语音 video:视频 music:音乐 news:图文 location:地理位置 link:链接  event:事件推送
 	 */
 	public String getMsgtype() {
 	    return msgtype;
 	}
 	/**
-	 * 消息类型设定
-	 * @param msgtype 消息类型
+	 * 消息类型 text:文本类型 image:图片信息 voice:语音 video:视频 music:音乐 news:图文 location:地理位置 link:链接  event:事件推送设定
+	 * @param msgtype 消息类型 text:文本类型 image:图片信息 voice:语音 video:视频 music:音乐 news:图文 location:地理位置 link:链接  event:事件推送
 	 */
 	public void setMsgtype(String msgtype) {
 	    this.msgtype = msgtype;
 	}
 	/**
-	 * 接收方帐号（收到的OpenID）取得
-	 * @return 接收方帐号（收到的OpenID）
+	 * 开发者微信号取得
+	 * @return 开发者微信号
 	 */
 	public String getTousername() {
 	    return tousername;
 	}
 	/**
-	 * 接收方帐号（收到的OpenID）设定
-	 * @param tousername 接收方帐号（收到的OpenID）
+	 * 开发者微信号设定
+	 * @param tousername 开发者微信号
 	 */
 	public void setTousername(String tousername) {
 	    this.tousername = tousername;
 	}
 	/**
-	 * 开发者微信号取得
-	 * @return 开发者微信号
+	 * 接收方帐号（收到的OpenID）取得
+	 * @return 接收方帐号（收到的OpenID）
 	 */
 	public String getFromusername() {
 	    return fromusername;
 	}
 	/**
-	 * 开发者微信号设定
-	 * @param fromusername 开发者微信号
+	 * 接收方帐号（收到的OpenID）设定
+	 * @param fromusername 接收方帐号（收到的OpenID）
 	 */
 	public void setFromusername(String fromusername) {
 	    this.fromusername = fromusername;
@@ -420,6 +448,62 @@ public class TcWxInfo extends BaseEntity {
 	 */
 	public void setSort_num(String sort_num) {
 	    this.sort_num = sort_num;
+	}
+	/**
+	 * 地理位置精度取得
+	 * @return 地理位置精度
+	 */
+	public String getLocation_precision() {
+	    return location_precision;
+	}
+	/**
+	 * 地理位置精度设定
+	 * @param location_precision 地理位置精度
+	 */
+	public void setLocation_precision(String location_precision) {
+	    this.location_precision = location_precision;
+	}
+	/**
+	 * 事件类型 subscribe(订阅)、unsubscribe(取消订阅) SCAN(已关注) CLICK(自定义菜单事件) VIEW(点击菜单跳转链接时)取得
+	 * @return 事件类型 subscribe(订阅)、unsubscribe(取消订阅) SCAN(已关注) CLICK(自定义菜单事件) VIEW(点击菜单跳转链接时)
+	 */
+	public String getEvent() {
+	    return event;
+	}
+	/**
+	 * 事件类型 subscribe(订阅)、unsubscribe(取消订阅) SCAN(已关注) CLICK(自定义菜单事件) VIEW(点击菜单跳转链接时)设定
+	 * @param event 事件类型 subscribe(订阅)、unsubscribe(取消订阅) SCAN(已关注) CLICK(自定义菜单事件) VIEW(点击菜单跳转链接时)
+	 */
+	public void setEvent(String event) {
+	    this.event = event;
+	}
+	/**
+	 * eventkey取得
+	 * @return eventkey
+	 */
+	public String getEventkey() {
+	    return eventkey;
+	}
+	/**
+	 * eventkey设定
+	 * @param eventkey eventkey
+	 */
+	public void setEventkey(String eventkey) {
+	    this.eventkey = eventkey;
+	}
+	/**
+	 * 二维码的ticket，可用来换取二维码图片取得
+	 * @return 二维码的ticket，可用来换取二维码图片
+	 */
+	public String getTicket() {
+	    return ticket;
+	}
+	/**
+	 * 二维码的ticket，可用来换取二维码图片设定
+	 * @param ticket 二维码的ticket，可用来换取二维码图片
+	 */
+	public void setTicket(String ticket) {
+	    this.ticket = ticket;
 	}
 
 }

@@ -43,6 +43,8 @@ public class TcWxMenuBean extends BaseBean {
 	private String parent_id;
 	/** 序号 */
 	private Integer sort_num;
+	/**消息来源0,微信菜单,1,网站菜单*/
+	private String info_source;
 	/** 菜单列表 */
 	private List<TcWxMenuBean> beans;
 	/**
@@ -156,6 +158,20 @@ public class TcWxMenuBean extends BaseBean {
 	 */
 	public void setSort_num(Integer sort_num) {
 	    this.sort_num = sort_num;
+	}
+	/**
+	 * 消息来源0,微信菜单,1,网站菜单取得
+	 * @return 消息来源0,微信菜单,1,网站菜单
+	 */
+	public String getInfo_source() {
+	    return info_source;
+	}
+	/**
+	 * 消息来源0,微信菜单,1,网站菜单设定
+	 * @param info_source 消息来源0,微信菜单,1,网站菜单
+	 */
+	public void setInfo_source(String info_source) {
+	    this.info_source = info_source;
 	}
 	/**
 	 * 菜单列表取得

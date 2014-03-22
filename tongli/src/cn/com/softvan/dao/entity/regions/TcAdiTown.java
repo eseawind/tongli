@@ -41,7 +41,7 @@ public class TcAdiTown extends BaseEntity {
     /**
      * 地址纬度
      */
-    private String iatitude;
+    private String latitude;
 
     /**
      * 国标代码
@@ -49,7 +49,7 @@ public class TcAdiTown extends BaseEntity {
     private String gb_code;
 
 	/**
-	 * 城镇ID取得
+	 * 城镇IDを取得します。
 	 * @return 城镇ID
 	 */
 	public String getTown_id() {
@@ -57,7 +57,7 @@ public class TcAdiTown extends BaseEntity {
 	}
 
 	/**
-	 * 城镇ID设定
+	 * 城镇IDを設定します。
 	 * @param town_id 城镇ID
 	 */
 	public void setTown_id(String town_id) {
@@ -65,7 +65,7 @@ public class TcAdiTown extends BaseEntity {
 	}
 
 	/**
-	 * 城镇名称取得
+	 * 城镇名称を取得します。
 	 * @return 城镇名称
 	 */
 	public String getTown_name() {
@@ -73,7 +73,7 @@ public class TcAdiTown extends BaseEntity {
 	}
 
 	/**
-	 * 城镇名称设定
+	 * 城镇名称を設定します。
 	 * @param town_name 城镇名称
 	 */
 	public void setTown_name(String town_name) {
@@ -81,7 +81,7 @@ public class TcAdiTown extends BaseEntity {
 	}
 
 	/**
-	 * 序列号取得
+	 * 序列号を取得します。
 	 * @return 序列号
 	 */
 	public Integer getSort_num() {
@@ -89,7 +89,7 @@ public class TcAdiTown extends BaseEntity {
 	}
 
 	/**
-	 * 序列号设定
+	 * 序列号を設定します。
 	 * @param sort_num 序列号
 	 */
 	public void setSort_num(Integer sort_num) {
@@ -97,7 +97,7 @@ public class TcAdiTown extends BaseEntity {
 	}
 
 	/**
-	 * 地址经度取得
+	 * 地址经度を取得します。
 	 * @return 地址经度
 	 */
 	public String getLongitude() {
@@ -105,7 +105,7 @@ public class TcAdiTown extends BaseEntity {
 	}
 
 	/**
-	 * 地址经度设定
+	 * 地址经度を設定します。
 	 * @param longitude 地址经度
 	 */
 	public void setLongitude(String longitude) {
@@ -113,23 +113,23 @@ public class TcAdiTown extends BaseEntity {
 	}
 
 	/**
-	 * 地址纬度取得
+	 * 地址纬度を取得します。
 	 * @return 地址纬度
 	 */
-	public String getIatitude() {
-	    return iatitude;
+	public String getLatitude() {
+	    return latitude;
 	}
 
 	/**
-	 * 地址纬度设定
-	 * @param iatitude 地址纬度
+	 * 地址纬度を設定します。
+	 * @param latitude 地址纬度
 	 */
-	public void setIatitude(String iatitude) {
-	    this.iatitude = iatitude;
+	public void setLatitude(String latitude) {
+	    this.latitude = latitude;
 	}
 
 	/**
-	 * 国标代码取得
+	 * 国标代码を取得します。
 	 * @return 国标代码
 	 */
 	public String getGb_code() {
@@ -137,7 +137,7 @@ public class TcAdiTown extends BaseEntity {
 	}
 
 	/**
-	 * 国标代码设定
+	 * 国标代码を設定します。
 	 * @param gb_code 国标代码
 	 */
 	public void setGb_code(String gb_code) {

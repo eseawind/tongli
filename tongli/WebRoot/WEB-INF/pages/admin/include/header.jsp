@@ -26,7 +26,7 @@
 		<!-- BEGIN TOP NAVIGATION BAR -->
 		<div class="header-inner">
 			<!-- BEGIN LOGO -->
-			<a class="navbar-brand" href="http://localhost/h/home_init.ac">
+			<a class="navbar-brand" href="${basePath}/h/home_init.ac">
 			车主管家V1.0
 			</a>
 			<!-- END LOGO -->
@@ -37,6 +37,11 @@
 			<!-- END RESPONSIVE MENU TOGGLER -->
 			<!-- BEGIN TOP NAVIGATION MENU -->
 			<ul class="nav navbar-nav pull-right">
+				<li class="dropdown user">
+					<a href="${basePath}/h/w001_init.ac">
+					<i class="fa fa-user"></i>微信公共号绑定
+					</a>
+				</li>
 				<!-- BEGIN NOTIFICATION DROPDOWN -->
 				<li class="dropdown" id="header_notification_bar">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -327,10 +332,10 @@
 					<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu">
-						<li><a href="${basePath}/plugins/bootstrap.admin.theme/extra_profile.html"><i class="fa fa-user"></i> 信息修改</a></li>
+						<li><a href="${basePath}/plugins/bootstrap.admin.theme/extra_profile.html"><i class="fa fa-cogs"></i> 信息修改</a></li>
 						<li><a href="${basePath}/plugins/bootstrap.admin.theme/page_calendar.html"><i class="fa fa-calendar"></i> 工作日历</a></li>
-						<li><a href="${basePath}/plugins/bootstrap.admin.theme/inbox.html"><i class="fa fa-envelope"></i>消息 <span class="badge badge-danger">3</span></a></li>
-						<li><a href="#"><i class="fa fa-tasks"></i> 帮助 <span class="badge badge-success">7</span></a></li>
+						<li><a href="#"><i class="fa fa-tasks"></i> 帮助 </a></li>
+						<li><a href="${basePath}/h/w003_uc.ac" target="_blank"><i class="fa fa-tasks"></i> xx </a></li>
 						<li class="divider"></li>
 						<li><a href="javascript:;" id="trigger_fullscreen"><i class="fa fa-move"></i> 全屏展示</a></li>
 						<li><a href="<%=basePath%>/home_logout.ac"><i class="fa fa-key"></i> 安全退出</a></li>

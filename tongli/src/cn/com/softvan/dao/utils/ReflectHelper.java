@@ -79,4 +79,26 @@ public class ReflectHelper {
 			}
 		}
 	}
+	/**
+	 * 设置obj对象fieldName的属性值
+	 * @param obj
+	 * @param fieldName
+	 * @param value
+	 * @throws SecurityException
+	 * @throws NoSuchFieldException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
+	public static void setValueByFieldName2(Object obj, String fieldName,
+			Object value) throws SecurityException, NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
+		Field field = obj.getClass().getDeclaredField(fieldName);
+		if (field.isAccessible()) {
+			field.set(obj, value);
+		} else {
+			field.setAccessible(true);
+			field.set(obj, value);
+			field.setAccessible(false);
+		}
+	}
 }

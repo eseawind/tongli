@@ -37,117 +37,133 @@ public class TcWxMenu extends BaseEntity {
 	private String parent_id;
 	/** 序号 */
 	private Integer sort_num;
+	/**消息来源0,微信菜单,1,网站菜单*/
+	private String info_source;
 	/**
-	 * id *取得
-	 * @return id *
+	 * id取得
+	 * @return id
 	 */
 	public String getId() {
 	    return id;
 	}
 	/**
-	 * id *设定
-	 * @param id id *
+	 * id设定
+	 * @param id id
 	 */
 	public void setId(String id) {
 	    this.id = id;
 	}
 	/**
-	 * 菜单KEY值，用于消息接口推送，不超过128字节 *取得
-	 * @return 菜单KEY值，用于消息接口推送，不超过128字节 *
+	 * 菜单KEY值，用于消息接口推送，不超过128字节取得
+	 * @return 菜单KEY值，用于消息接口推送，不超过128字节
 	 */
 	public String getMenu_key() {
 	    return menu_key;
 	}
 	/**
-	 * 菜单KEY值，用于消息接口推送，不超过128字节 *设定
-	 * @param menu_key 菜单KEY值，用于消息接口推送，不超过128字节 *
+	 * 菜单KEY值，用于消息接口推送，不超过128字节设定
+	 * @param menu_key 菜单KEY值，用于消息接口推送，不超过128字节
 	 */
 	public void setMenu_key(String menu_key) {
 	    this.menu_key = menu_key;
 	}
 	/**
-	 * 菜单的响应动作类型，目前有click、view两种类型 *取得
-	 * @return 菜单的响应动作类型，目前有click、view两种类型 *
+	 * 菜单的响应动作类型，目前有click、view两种类型取得
+	 * @return 菜单的响应动作类型，目前有click、view两种类型
 	 */
 	public String getMenu_type() {
 	    return menu_type;
 	}
 	/**
-	 * 菜单的响应动作类型，目前有click、view两种类型 *设定
-	 * @param menu_type 菜单的响应动作类型，目前有click、view两种类型 *
+	 * 菜单的响应动作类型，目前有click、view两种类型设定
+	 * @param menu_type 菜单的响应动作类型，目前有click、view两种类型
 	 */
 	public void setMenu_type(String menu_type) {
 	    this.menu_type = menu_type;
 	}
 	/**
-	 * 菜单标题，不超过16个字节，子菜单不超过40个字节 *取得
-	 * @return 菜单标题，不超过16个字节，子菜单不超过40个字节 *
+	 * 菜单标题，不超过16个字节，子菜单不超过40个字节取得
+	 * @return 菜单标题，不超过16个字节，子菜单不超过40个字节
 	 */
 	public String getMenu_name() {
 	    return menu_name;
 	}
 	/**
-	 * 菜单标题，不超过16个字节，子菜单不超过40个字节 *设定
-	 * @param menu_name 菜单标题，不超过16个字节，子菜单不超过40个字节 *
+	 * 菜单标题，不超过16个字节，子菜单不超过40个字节设定
+	 * @param menu_name 菜单标题，不超过16个字节，子菜单不超过40个字节
 	 */
 	public void setMenu_name(String menu_name) {
 	    this.menu_name = menu_name;
 	}
 	/**
-	 * 网页链接，用户点击菜单可打开链接，不超过256字节 *取得
-	 * @return 网页链接，用户点击菜单可打开链接，不超过256字节 *
+	 * 网页链接，用户点击菜单可打开链接，不超过256字节取得
+	 * @return 网页链接，用户点击菜单可打开链接，不超过256字节
 	 */
 	public String getMenu_url() {
 	    return menu_url;
 	}
 	/**
-	 * 网页链接，用户点击菜单可打开链接，不超过256字节 *设定
-	 * @param menu_url 网页链接，用户点击菜单可打开链接，不超过256字节 *
+	 * 网页链接，用户点击菜单可打开链接，不超过256字节设定
+	 * @param menu_url 网页链接，用户点击菜单可打开链接，不超过256字节
 	 */
 	public void setMenu_url(String menu_url) {
 	    this.menu_url = menu_url;
 	}
 	/**
-	 * 备注 *取得
-	 * @return 备注 *
+	 * 备注取得
+	 * @return 备注
 	 */
 	public String getNote() {
 	    return note;
 	}
 	/**
-	 * 备注 *设定
-	 * @param note 备注 *
+	 * 备注设定
+	 * @param note 备注
 	 */
 	public void setNote(String note) {
 	    this.note = note;
 	}
 	/**
-	 * 父id *取得
-	 * @return 父id *
+	 * 父id取得
+	 * @return 父id
 	 */
 	public String getParent_id() {
 	    return parent_id;
 	}
 	/**
-	 * 父id *设定
-	 * @param parent_id 父id *
+	 * 父id设定
+	 * @param parent_id 父id
 	 */
 	public void setParent_id(String parent_id) {
 	    this.parent_id = parent_id;
 	}
 	/**
-	 * 序号 *取得
-	 * @return 序号 *
+	 * 序号取得
+	 * @return 序号
 	 */
 	public Integer getSort_num() {
 	    return sort_num;
 	}
 	/**
-	 * 序号 *设定
-	 * @param sort_num 序号 *
+	 * 序号设定
+	 * @param sort_num 序号
 	 */
 	public void setSort_num(Integer sort_num) {
 	    this.sort_num = sort_num;
+	}
+	/**
+	 * 消息来源0,微信菜单,1,网站菜单取得
+	 * @return 消息来源0,微信菜单,1,网站菜单
+	 */
+	public String getInfo_source() {
+	    return info_source;
+	}
+	/**
+	 * 消息来源0,微信菜单,1,网站菜单设定
+	 * @param info_source 消息来源0,微信菜单,1,网站菜单
+	 */
+	public void setInfo_source(String info_source) {
+	    this.info_source = info_source;
 	}
 
 }

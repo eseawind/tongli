@@ -49,5 +49,20 @@
 			<result name="edit">/WEB-INF/pages/admin/wechar/W007_01.jsp</result>
 			<result name="success" type="chain">w007_init</result>
 		</action>
+		<!-- 信息接收  展示界面 -->
+		<action name="w010_*" class="w010Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechar/W010.jsp</result>
+			<result name="list">/WEB-INF/pages/admin/wechar/W010_01.jsp</result>
+		</action>
+		<!-- 微信关注者(粉丝)  展示界面 -->
+		<action name="w012_*" class="w012Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechar/W012.jsp</result>
+			<result name="list">/WEB-INF/pages/admin/wechar/W012_01.jsp</result>
+		</action>
+	</package>
+	<!-- 微信api验证 与 消息接收  -->
+	<package name="wechar_api" extends="wechar-default" >
+		<action name="wxapi" class="weCharApiAction" method="init">
+		</action>
 	</package>
 </struts>

@@ -23,7 +23,7 @@ public class SmsInfoDao extends BaseDao {
 
 	private static final transient Logger log = Logger.getLogger(SmsInfoDao.class); 
 	
-	public final static String TABLE_NAME = "tc_ct_sms_info";
+	public final static String TABLE_NAME = "tc_sys_sms";
 	public final static String PK_NAME = "SMS_ID";
 	public final static String ORDER_NAME = "SMS_SEND_TIME DESC";
 	public final static String[] ITEMS = {

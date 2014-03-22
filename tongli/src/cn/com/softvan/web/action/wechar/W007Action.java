@@ -10,6 +10,7 @@
  */
 package cn.com.softvan.web.action.wechar;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -55,6 +56,8 @@ public class W007Action extends BaseAction {
 	 */
 	public String init() {
 		log.info("W007Action init.........");
+		TcWxMenuBean bean=new TcWxMenuBean();
+		bean.setInfo_source("0");
 		beans=tcWxMenuManager.findDataIsTree(bean);
 		return "init";
 	}
@@ -71,6 +74,7 @@ public class W007Action extends BaseAction {
 		log.info("W007Action edit.........");
 		bean=new TcWxMenuBean();
 		bean.setId(request.getParameter("id"));
+		bean.setInfo_source("0");
 		//详情
 		bean=tcWxMenuManager.findDataById(this.bean);
 		//顶级菜单列表
@@ -96,6 +100,7 @@ public class W007Action extends BaseAction {
 			bean.setUpdate_id(user.getUser_id());
 			bean.setUpdate_ip(getIpAddr());
 		}
+		bean.setInfo_source("0");
 		String msg=tcWxMenuManager.saveOrUpdateData(this.bean);
 		request.setAttribute("msg",msg);
 		
@@ -114,7 +119,8 @@ public class W007Action extends BaseAction {
 		log.info("W007Action edit.........");
 		bean=new TcWxMenuBean();
 		bean.setId(request.getParameter("id"));
-		String msg=tcWxMenuManager.deleteData(this.bean);
+		bean.setInfo_source("0");
+		String msg=tcWxMenuManager.deleteData(bean);
 		request.setAttribute("msg",msg);
 		
 		return SUCCESS;
@@ -141,10 +147,16 @@ public class W007Action extends BaseAction {
 	 * [功能概要] <div>菜单发布。</div>
 	 * </ol>
 	 * @return 转发字符串
+	 * @throws Exception 
 	 */
 	public String uploadMenu() {
 		log.info("W007Action uploadMenu.........");
-		
+		try {
+			//0 成功 1失败
+			getWriter().print(tcWxMenuManager.uploadMenu());
+		} catch (IOException e) {
+			log.error("菜单生成失败!",e);
+		}
 		return null;
 	}
 	/**

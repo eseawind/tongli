@@ -13,12 +13,14 @@
 	<!-- ************************ACTION类************************************* -->
 	 <!-- action基类 -->
 	<bean id="baseAction" class="cn.com.softvan.web.action.BaseAction" scope="prototype">
-		<!-- <property name="userLogsManager" ref="userLogsManager"></property> -->
+		<property name="userLogsManager" ref="userLogsManager"></property>
 	</bean>
-	<!-- servlet  -->
-	<bean id="wecharReplyServlet" class="cn.com.softvan.web.servlet.WeCharReplyServlet" scope="prototype">
-		<property name="tcWxMenuManager" ref="tcWxMenuManager"></property>
+	<!-- 微信api验证 与 消息接收  -->
+	<bean id="weCharApiAction" class="cn.com.softvan.web.action.wechar.WeCharApiAction" scope="prototype">
+		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+		<property name="taskExecutor" ref="taskExecutor"></property>
 		<property name="jedisHelper" ref="jedisHelper"></property>
+		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
 	</bean>
 	<!-- 系统登陆与系统首页 Action -->
 	<bean id="homeAction" class="cn.com.softvan.web.action.HomeAction" scope="prototype"/>
@@ -28,7 +30,7 @@
 	</bean>
 	<!-- 微信服务_素材管理_文章消息 -->
 	<bean id="w004Action" class="cn.com.softvan.web.action.wechar.W004Action" scope="prototype">
-		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+		<property name="newsManager" ref="newsManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_图文消息 -->
 	<bean id="w002Action" class="cn.com.softvan.web.action.wechar.W002Action" scope="prototype">
@@ -50,5 +52,12 @@
 	<bean id="w007Action" class="cn.com.softvan.web.action.wechar.W007Action" scope="prototype">
 		<property name="tcWxMenuManager" ref="tcWxMenuManager"></property>
 	</bean>
-	
+	<!-- 微信服务_信息接收  展示 -->
+	<bean id="w010Action" class="cn.com.softvan.web.action.wechar.W010Action" scope="prototype">
+		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+	</bean>
+	<!-- 微信服务_微信关注者_(粉丝)  展示 -->
+	<bean id="w012Action" class="cn.com.softvan.web.action.wechar.W012Action" scope="prototype">
+		<property name="tcWxUserManager" ref="tcWxUserManager"></property>
+	</bean>
 </beans>

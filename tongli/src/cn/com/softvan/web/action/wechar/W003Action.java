@@ -10,6 +10,7 @@
  */
 package cn.com.softvan.web.action.wechar;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -158,6 +159,22 @@ public class W003Action extends BaseAction {
 		}
 		request.setAttribute("msg",msg);
 		return SUCCESS;
+	}
+	/**
+	 * <p>
+	 * 更新所有缓存。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>更新所有缓存。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws IOException 
+	 */
+	public String uc() throws IOException {
+		log.info("W003Action updateAllMsgCache.........");
+		tcWxInfoManager.updateAllMsgCache();
+		getWriter().print("缓存已更新!所有数据将自动缓存3天!");
+		return null;
 	}
 	/**
 	 * BEAN类  微信资源信息取得

@@ -33,7 +33,8 @@ public class WxRecvMsg extends WxMsg {
 		super(toUser, fromUser, createDt, msgType);
 		this.msgId = msgId;
 	}
-
+	public WxRecvMsg() {
+	}
 	public WxRecvMsg(WxRecvMsg msg) {
 		this(msg.getToUser(), msg.getFromUser(), msg.getCreateDt(), msg
 				.getMsgType(), msg.getMsgId());

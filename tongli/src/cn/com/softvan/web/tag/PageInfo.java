@@ -3,9 +3,9 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2012.11.21  wuxiaogang      程序.发布
+ * 1.00     2013.11.21  wuxiaogang      程序.发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家  System. - All Rights Reserved.
+ * Copyright 2013 adsp System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.web.tag;
@@ -74,7 +74,7 @@ public class PageInfo implements Serializable {
         // 计算当前页首条数据的索引。（和数据库记录集同步）
         currPageFirstIndex = (currentPageNo - 1) * pageRowCount;
         // 计算当前页尾条数据的索引。（和数据库记录集同步）
-        int tmpCurrPageLastIndex = getCurrPageFirstIndex() + pageRowCount - 1;
+        int tmpCurrPageLastIndex = currPageFirstIndex + pageRowCount - 1;
         if (tmpCurrPageLastIndex < recordCount) {
             currPageLastIndex = tmpCurrPageLastIndex;
         } else {
@@ -91,13 +91,15 @@ public class PageInfo implements Serializable {
         this.recordCount = recordCount;
         this.pageRowCount = pageRowCount;
 
-        if (recordCount > 0) {
+        if (recordCount > 0 &&pageRowCount!=0) {
             int mod = recordCount % pageRowCount;
-            if (mod == 0) {
-                pageCount = recordCount / pageRowCount;
-            } else {
-                pageCount = (recordCount / pageRowCount) + 1;
-            }
+	            if (mod == 0) {
+	                pageCount = recordCount / pageRowCount;
+	            } else {
+	                pageCount = (recordCount / pageRowCount) + 1;
+	            }
+        }else{
+        	pageCount=0;
         }
     }
 
@@ -194,11 +196,10 @@ public class PageInfo implements Serializable {
 	 * @return 当前页码
 	 */
 	public int getCurrentPageNo() {
-		try {
-			currentPageNo=getCurrOffset()/pageRowCount + 1;
-		} catch (Exception e) {
-			currentPageNo=1;
+		if(pageRowCount<=0){
+			return 0;
 		}
+		currentPageNo=currOffset/pageRowCount + 1;
 	    return currentPageNo;
 	}
 
@@ -274,9 +275,6 @@ public class PageInfo implements Serializable {
 	 * @return 每页显示的纪录数
 	 */
 	public int getPageRowCount() {
-		if(pageRowCount<1){
-			pageRowCount=1;
-		}
 	    return pageRowCount;
 	}
 

@@ -218,6 +218,7 @@ public class ImageUtils {
 			try {
 				//上传的是原图n4
 				String forDate=sdf.format(new Date());
+				String   path  = Resources.getData("UPLOAD_ROOT_FOLDER_URL") + "image/n4"+forDate;
 				String   picture_path  = Resources.getData("UPLOAD_ROOT_FOLDER") + "image/n4"+forDate;
 				// 创建新的文件名
 				String newFileName = WebUtils.getTime("yyyyMMddHHmmss")+ WebUtils.getRandomString(5) + ".jpg";
@@ -235,7 +236,8 @@ public class ImageUtils {
 		            FileImageOutputStream fios=new FileImageOutputStream(newFile);
 		    		fios.write(Base64.decode(images));
 		    		imageResize(picture_path,newFileName);
-		    		imagePath=picture_path+newFileName;
+		    		
+		    		imagePath=path+newFileName;
 		    		if(!imagePath.equals("")){
 		    			imagePath.replace("n4", "n1");
 		    		}

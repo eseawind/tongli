@@ -16,6 +16,7 @@ import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.util.ServletContextAware;
 
 import cn.com.softvan.common.IpUtils;
+import cn.com.softvan.service.IUserLogsManager;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -25,8 +26,8 @@ public class BaseAction extends ActionSupport implements SessionAware, ServletRe
 	protected HttpServletRequest  request;
 	protected HttpServletResponse  response;
 	protected ServletContext servletContext;
-//	/** 管理员操作日志  service类 */
-//	protected IUserLogsManager userLogsManager;
+	/** 管理员操作日志  service类 */
+	protected IUserLogsManager userLogsManager;
 	/***
 	 * 返回上次访问链接
 	 * @return
@@ -116,19 +117,19 @@ public class BaseAction extends ActionSupport implements SessionAware, ServletRe
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext=servletContext;
 	}
-//	/**
-//	 * 管理员操作日志  service类取得
-//	 * @return 管理员操作日志  service类
-//	 */
-//	public IUserLogsManager getUserLogsManager() {
-//	    return userLogsManager;
-//	}
-//	/**
-//	 * 管理员操作日志  service类设定
-//	 * @param userLogsManager 管理员操作日志  service类
-//	 */
-//	public void setUserLogsManager(IUserLogsManager userLogsManager) {
-//	    this.userLogsManager = userLogsManager;
-//	}
+	/**
+	 * 管理员操作日志  service类取得
+	 * @return 管理员操作日志  service类
+	 */
+	public IUserLogsManager getUserLogsManager() {
+	    return userLogsManager;
+	}
+	/**
+	 * 管理员操作日志  service类设定
+	 * @param userLogsManager 管理员操作日志  service类
+	 */
+	public void setUserLogsManager(IUserLogsManager userLogsManager) {
+	    this.userLogsManager = userLogsManager;
+	}
 
 }

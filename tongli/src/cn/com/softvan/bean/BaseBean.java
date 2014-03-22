@@ -52,6 +52,10 @@ public class BaseBean implements Serializable,IBean,Cloneable {
 	private String keyword;
 	/** VERSION */
 	private Integer version;
+	/** 错误代码*/
+	private String errcode;
+	/** 错误信息 */
+	private String errmsg;
 	/**
 	 * 开始时间取得
 	 * @return 开始时间
@@ -244,5 +248,33 @@ public class BaseBean implements Serializable,IBean,Cloneable {
 		} catch (CloneNotSupportedException e) {
 		}
 		return o;
+	}
+	/**
+	 * 错误代码取得
+	 * @return 错误代码
+	 */
+	public String getErrcode() {
+	    return errcode;
+	}
+	/**
+	 * 错误代码设定
+	 * @param errcode 错误代码
+	 */
+	public void setErrcode(String errcode) {
+	    this.errcode = errcode;
+	}
+	/**
+	 * 错误信息取得
+	 * @return 错误信息
+	 */
+	public String getErrmsg() {
+	    return errmsg;
+	}
+	/**
+	 * 错误信息设定
+	 * @param errmsg 错误信息
+	 */
+	public void setErrmsg(String errmsg) {
+	    this.errmsg = errmsg;
 	}
 }

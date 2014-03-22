@@ -34,7 +34,7 @@ public class SerializeUtil {
 			ObjectInputStream ois = new ObjectInputStream(bais);
 			return ois.readObject();
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 		return null;
 	}

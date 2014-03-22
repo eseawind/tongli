@@ -8,7 +8,9 @@ import org.jdom.Element;
 
 public class WxReplyNewsMsg extends WxReplyMsg {
 	private List<WxReplyNewsMsgItem> items = new LinkedList<WxReplyNewsMsgItem>();
-
+	public WxReplyNewsMsg() {
+		setMsgType("news");
+	}
 	public WxReplyNewsMsg(WxReplyMsg msg) {
 		super(msg);
 		setMsgType("news");

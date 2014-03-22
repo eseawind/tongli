@@ -1,7 +1,9 @@
 package cn.com.softvan.bean.wechar.reply;
 
+import cn.com.softvan.bean.BaseBean;
 
-public class WxReplyNewsMsgItem {
+
+public class WxReplyNewsMsgItem extends BaseBean{
 	private String title;
 	private String description;
 	private String picUrl;

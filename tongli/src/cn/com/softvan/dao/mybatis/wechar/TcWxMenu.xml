@@ -23,14 +23,14 @@
 		parent_id, sort_num, date_created,
 		create_id, create_ip, last_updated,
 		update_id, update_ip, version,
-		del_flag)
+		del_flag,info_source)
 		values (#{id,jdbcType=VARCHAR}, #{menu_key,jdbcType=VARCHAR},
 		#{menu_type,jdbcType=VARCHAR},
 		#{menu_name,jdbcType=VARCHAR}, #{menu_url,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
 		#{parent_id,jdbcType=VARCHAR}, #{sort_num,jdbcType=INTEGER}, now(),
 		#{create_id,jdbcType=VARCHAR}, #{create_ip,jdbcType=VARCHAR}, now(),
 		#{update_id,jdbcType=VARCHAR}, #{update_ip,jdbcType=VARCHAR},0,
-		'0')
+		'0',#{info_source})
 	</insert>
 	<insert id="insertSelective" parameterType="tcWxMenu">
 		insert into tc_wx_menu
@@ -59,29 +59,20 @@
 			<if test="sort_num != null">
 				sort_num,
 			</if>
-			<if test="date_created != null">
 				date_created,
-			</if>
-			<if test="create_id != null">
 				create_id,
-			</if>
-			<if test="create_ip != null">
 				create_ip,
-			</if>
-			<if test="last_updated != null">
 				last_updated,
-			</if>
 			<if test="update_id != null">
 				update_id,
 			</if>
 			<if test="update_ip != null">
 				update_ip,
 			</if>
-			<if test="version != null">
 				version,
-			</if>
-			<if test="del_flag != null">
 				del_flag,
+			<if test="info_source!=null">
+				info_source
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -109,29 +100,20 @@
 			<if test="sort_num != null">
 				#{sort_num,jdbcType=INTEGER},
 			</if>
-			<if test="date_created != null">
-				#{date_created,jdbcType=TIMESTAMP},
-			</if>
-			<if test="create_id != null">
+				now(),
 				#{create_id,jdbcType=VARCHAR},
-			</if>
-			<if test="create_ip != null">
 				#{create_ip,jdbcType=VARCHAR},
-			</if>
-			<if test="last_updated != null">
-				#{last_updated,jdbcType=TIMESTAMP},
-			</if>
+				now(),
 			<if test="update_id != null">
 				#{update_id,jdbcType=VARCHAR},
 			</if>
 			<if test="update_ip != null">
 				#{update_ip,jdbcType=VARCHAR},
 			</if>
-			<if test="version != null">
-				#{version,jdbcType=INTEGER},
-			</if>
-			<if test="del_flag != null">
-				#{del_flag,jdbcType=CHAR},
+				 0,
+				'0',
+			<if test="info_source!=null">
+				#{info_source}
 			</if>
 		</trim>
 	</insert>
@@ -173,24 +155,6 @@
 		where id = #{id,jdbcType=VARCHAR}
 	</update>
 	<!--查询信息列表 -->
-	<!-- 
-	<resultMap id="findefindMenuBeanIsListMap" type="tcWxMenuBean">
-		<id column="id" property="id" jdbcType="VARCHAR" />
-		<result column="menu_key" property="menu_key" jdbcType="VARCHAR" />
-		<result column="menu_type" property="menu_type" jdbcType="VARCHAR" />
-		<result column="menu_name" property="menu_name" jdbcType="VARCHAR" />
-		<result column="menu_url" property="menu_url" jdbcType="VARCHAR" />
-		<result column="note" property="note" jdbcType="VARCHAR" />
-		<result column="parent_id" property="parent_id" jdbcType="VARCHAR" />
-		<result column="sort_num" property="sort_num" jdbcType="INTEGER" />
-		<collection property="beans"
-			javaType="java.util.List" 
-			column="{parent_id=parent_id}"
-			select="findefindMenuBeanIsList"
-			ofType="cn.com.softvan.bean.wechar.TcWxMenuBean">
-		</collection>
-	</resultMap> 
-	-->
 	<select id="findDataIsList" resultType="tcWxMenuBean" parameterType="tcWxMenu">
 		select
 		id,
@@ -211,6 +175,9 @@
 				and (parent_id is null or parent_id='')
 			</otherwise>
 		</choose>
+		<if test="info_source!=null">
+			and info_source=#{info_source}
+		</if>
 		order by sort_num asc
 	</select>
 	<!-- 判断信息是否存在 -->
@@ -231,5 +198,8 @@
 				and (parent_id is null or parent_id='')
 			</otherwise>
 		</choose>
+		<if test="info_source!=null">
+			and info_source=#{info_source}
+		</if>
 	</select>
 </mapper>

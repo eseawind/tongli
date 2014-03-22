@@ -41,4 +41,28 @@ public class IdUtils {
 		
 		// log.info();
 	}
+	
+	
+	/**
+	 * <p>
+	 * 生成认证码
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>生成邮箱和手机认证码，用于用户确认邮箱和手机。</div> <div>邮箱：33位UUID码。</div>
+	 * <div>手机：6位数字和小写字母的组合。</div>
+	 * </ol>
+	 * 
+	 * @param type
+	 *            1：邮箱 2：手机
+	 * @return 邮箱认证码
+	 */
+	public static String createVerifyInfo(String type) {	
+		//邮箱
+		if ("1".equals(type)) {
+			return java.util.UUID.randomUUID().toString().replaceAll("-", "");
+		} else {
+			return WebUtils.getRandomNum(6);
+		}
+
+	}
 }

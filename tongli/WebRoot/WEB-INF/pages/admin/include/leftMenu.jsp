@@ -65,6 +65,12 @@
 								<li id="wechar_sub_menu_li_sub_menu_5"><a href="#" onclick="myAlert('功能即将开放')">视频</a></li>
 							</ul>
 						</li>
+						<li id="w010_init">
+							<a href="${basePath}/h/w010_init.ac">
+							信息接收
+							</a>
+						</li>
+						<!-- 
 						<li class="">
 							<a href="javascript:;">
 							消息接收(普通消息)
@@ -91,19 +97,15 @@
 								<li><a href="#" onclick="myAlert('功能即将开放')">自定义菜单事件</a></li>
 							</ul>
 						</li>
+						 -->
 						<li class="">
 							<a href="#" onclick="myAlert('功能即将开放')">
 							客服响应
 							</a>
 						</li>
-						<li>
-							<a href="#" onclick="myAlert('功能即将开放')">
+						<li id="w012_init">
+							<a href="${basePath}/h/w012_init.ac">
 							用户管理
-							</a>
-						</li>
-						<li id="w001_init">
-							<a href="${basePath}/h/w001_init.ac">
-							微信号绑定
 							</a>
 						</li>
 						<li id="w007_init">

@@ -15,6 +15,10 @@ public interface ITcWxInfoDao {
      */
     int deleteByAid(IEntity dto) throws Exception;
     /**
+     * 根据Aid获取对象
+     */
+    TcWxInfoBean selectByAid(IEntity dto) throws Exception;
+    /**
      * 根据z主键id 逻辑删除信息
      */
     int deleteById(IEntity dto) throws Exception;
@@ -37,6 +41,10 @@ public interface ITcWxInfoDao {
      * 更新对象
      */
     int updateByPrimaryKeySelective(IEntity dto) throws Exception;
+    /**
+     * 更新 媒体id
+     */
+    int updateMediaIdByPrimaryKey(IEntity dto) throws Exception;
 
     /**
      * 判断信息是否存在

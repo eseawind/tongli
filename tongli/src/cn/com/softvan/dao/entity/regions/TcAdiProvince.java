@@ -41,7 +41,7 @@ public class TcAdiProvince extends BaseEntity {
     /**
      * 地址纬度
      */
-    private String iatitude;
+    private String latitude;
 
     /**
      * 国标代码
@@ -127,20 +127,21 @@ public class TcAdiProvince extends BaseEntity {
 	    this.longitude = longitude;
 	}
 
+
 	/**
 	 * 地址纬度を取得します。
 	 * @return 地址纬度
 	 */
-	public String getIatitude() {
-	    return iatitude;
+	public String getLatitude() {
+	    return latitude;
 	}
 
 	/**
 	 * 地址纬度を設定します。
-	 * @param iatitude 地址纬度
+	 * @param latitude 地址纬度
 	 */
-	public void setIatitude(String iatitude) {
-	    this.iatitude = iatitude;
+	public void setLatitude(String latitude) {
+	    this.latitude = latitude;
 	}
 
 	/**

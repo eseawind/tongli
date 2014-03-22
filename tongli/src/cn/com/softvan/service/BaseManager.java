@@ -12,6 +12,8 @@ package cn.com.softvan.service;
 
 import java.util.Observable;
 
+import cn.com.softvan.common.JedisHelper;
+
 /**
  * 基础Manager类接口
  * @author {wuxiaogang}

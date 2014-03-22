@@ -14,9 +14,13 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 
+import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.wechar.TcWxPublicUserBean;
+import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
+import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.dao.daointer.wechar.ITcWxPublicUserDao;
 import cn.com.softvan.dao.entity.wechar.TcWxPublicUser;
 import cn.com.softvan.service.BaseManager;
@@ -35,6 +39,8 @@ public class TcWxPublicUserManager extends BaseManager implements ITcWxPublicUse
 			.getLogger(TcWxPublicUserManager.class);
 	/**微信服务_公共账号  数据库处理 DAO*/
 	private ITcWxPublicUserDao tcWxPublicUserDao;
+	/**redis缓存工具类*/
+	protected JedisHelper jedisHelper;
 	/**
 	 * <p>信息编辑。</p>
 	 * <ol>[功能概要] 
@@ -47,7 +53,7 @@ public class TcWxPublicUserManager extends BaseManager implements ITcWxPublicUse
 		String msg="1";
 		if(bean!=null){
 			try {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				TcWxPublicUser dto=new TcWxPublicUser();
 				dto.setId(bean.getId());//id
 				dto.setName(bean.getName());//公共号名称
@@ -60,10 +66,10 @@ public class TcWxPublicUserManager extends BaseManager implements ITcWxPublicUse
 				dto.setCity(bean.getCity());//市
 				dto.setEmail(bean.getEmail());//邮箱
 				dto.setType(bean.getType());//类型
-				dto.setDate_created(sdf.parse(bean.getDate_created()));//数据输入日期
+//				dto.setDate_created(sdf.parse(bean.getDate_created()));//数据输入日期
 				dto.setCreate_id(bean.getCreate_id());//建立者ID
 				dto.setCreate_ip(bean.getCreate_ip());//建立者IP
-				dto.setLast_updated(sdf.parse(bean.getLast_updated()));//资料更新日期
+//				dto.setLast_updated(sdf.parse(bean.getLast_updated()));//资料更新日期
 				dto.setUpdate_id(bean.getUpdate_id());//修改者ID
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 				dto.setDel_flag(bean.getDel_flag());//del_flag
@@ -76,6 +82,8 @@ public class TcWxPublicUserManager extends BaseManager implements ITcWxPublicUse
 					dto.setId(IdUtils.createUUID(32));
 					tcWxPublicUserDao.insert(dto);
 				}
+				//缓存公共账号信息
+				jedisHelper.set(CommonConstant.SESSION_WECHAR_BEAN, bean);
 			} catch (Exception e) {
 				msg="信息保存失败,数据库处理错误!";
 				log.error(msg, e);
@@ -113,8 +121,10 @@ public class TcWxPublicUserManager extends BaseManager implements ITcWxPublicUse
 		TcWxPublicUserBean bean1=null;
 		try {
 			TcWxPublicUser dto=new TcWxPublicUser();
-//			dto.setId(bean.getId());//id
-			dto.setCreate_id(bean.getCreate_id());//管理员id
+			if(bean!=null){
+				dto.setId(bean.getId());//id
+				dto.setCreate_id(bean.getCreate_id());//管理员id
+			}
 			bean1=tcWxPublicUserDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
@@ -134,5 +144,39 @@ public class TcWxPublicUserManager extends BaseManager implements ITcWxPublicUse
 	 */
 	public void setTcWxPublicUserDao(ITcWxPublicUserDao tcWxPublicUserDao) {
 	    this.tcWxPublicUserDao = tcWxPublicUserDao;
+	}
+	/**
+	 * redis缓存工具类取得
+	 * @return redis缓存工具类
+	 */
+	public JedisHelper getJedisHelper() {
+	    return jedisHelper;
+	}
+	/**
+	 * redis缓存工具类设定
+	 * @param jedisHelper redis缓存工具类
+	 */
+	public void setJedisHelper(JedisHelper jedisHelper) {
+	    this.jedisHelper = jedisHelper;
+	}
+	/**
+	 * 初始
+	 */
+	public void initCache(){
+		if(!"1".equals(jedisHelper.get(CommonConstant.SESSION_WECHAR_BEAN_FLAG))){
+			TcWxPublicUserBean bean=new TcWxPublicUserBean();
+			BaseUserBean user= null;
+			try {
+				user= (BaseUserBean) ServletActionContext.getRequest().getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
+				if(user!=null){
+					bean.setCreate_id(user.getUser_id());
+				}
+			} catch (Exception e) {
+				log.error("缓存中读取管理员信息异常", e);
+			}
+			//缓存公共账号信息
+			jedisHelper.set(CommonConstant.SESSION_WECHAR_BEAN, findDataById(bean));
+			jedisHelper.set(CommonConstant.SESSION_WECHAR_BEAN_FLAG,"1");
+		}
 	}
 }

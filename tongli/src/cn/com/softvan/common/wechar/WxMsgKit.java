@@ -32,6 +32,10 @@ public final class WxMsgKit {
 		recvParserMap.put("image", new WxRecvPicMsgParser());
 		// 事件消息解析程序
 		recvParserMap.put("event", new WxRecvEventMsgParser());
+		// 语音消息解析程序
+		recvParserMap.put("voice", new WxRecvVoiceParser());
+		// 视频消息解析程序
+		recvParserMap.put("video", new WxRecvVideoParser());
 	}
 	
 	public static WxRecvMsg parse(InputStream in) throws JDOMException, IOException {

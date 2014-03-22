@@ -75,11 +75,11 @@ public class JedisHelper {
 	}
 
 	/**
-	 * 添加key value 并且设置存活时间(byte)
+	 * 添加key value 并且设置存活时间(byte) (秒)
 	 * 
 	 * @param key
 	 * @param value
-	 * @param liveTime
+	 * @param liveTime (秒)
 	 */
 	public void set(byte[] key, byte[] value, int liveTime) {
 		try{
@@ -91,11 +91,11 @@ public class JedisHelper {
 	}
 
 	/**
-	 * 添加key value 并且设置存活时间
+	 * 添加key value 并且设置存活时间(秒)
 	 * 
 	 * @param key
 	 * @param value
-	 * @param liveTime
+	 * @param liveTime(秒)
 	 */
 	public void set(String key, Object value, int liveTime) {
 		try {
@@ -154,7 +154,11 @@ public class JedisHelper {
 				return null;
 			}
 			byte[] bs = this.getJedis().get(key.getBytes());
-			return SerializeUtil.unserialize(bs);
+			if(bs != null){
+				return SerializeUtil.unserialize(bs);
+			} else {
+				return null;
+			}
 		}finally{
 			jedisPool.returnResource(this.getJedis());
 		}

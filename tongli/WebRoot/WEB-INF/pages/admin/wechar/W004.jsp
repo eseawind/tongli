@@ -88,148 +88,76 @@
 			<!-- BEGIN PAGE CONTENT-->
 			<div class="row">
 				<div class="col-md-12">
-					<div class="matter">
-						<div class="container-fluid">
-							<div class="row-fluid">
-								<div class="col-md-12">
+					<style>
+					.nav-list li {
+						position: relative;
+					}
+					
+					.nav-list span.oper {
+						position: absolute;
+						right: 0;
+						top: 0;
+					}
+					
+					.nav-list span.oper,li#add-grp-btn {
+						font-size: 18px;
+					}
+					</style>
 
-									<style>
-.nav-list li {
-	position: relative;
-}
-
-.nav-list span.oper {
-	position: absolute;
-	right: 0;
-	top: 0;
-}
-
-.nav-list span.oper,li#add-grp-btn {
-	font-size: 18px;
-}
-</style>
-
-									<div class="row-fluid">
-										<div class="col-md-2">
-											<ul class="nav nav-list well">
-												<li class="active"><a href="/articles">未分组 (9)</a></li>
+					<div class="row-fluid">
+						<div class="col-md-2">
+							<ul class="nav nav-list well">
+								<li class="active"><a href="">未分组 (${fn:length(beans)})</a></li>
 
 
-												<li class="divider"></li>
-												<li id="add-grp-btn"><a href="javascript:void(0)"
-													class="manage-grp-btn"><i class="icon-plus"></i> 新建分组</a></li>
-											</ul>
-										</div>
-										<div class="col-md-10">
-											<div class="btn-toolbar">
-												<a href="${basePath}/h/w004_edit.ac" class="btn btn-primary">新建文章</a>
-											</div>
-
-											<table class="table table-condensed table-striped">
-												<tbody>
-													<tr>
-														<th>时间</th>
-														<th>标题</th>
-														<th></th>
-													</tr>
-													<tr>
-														<td>2014-02-28 15:31</td>
-														<td>联系捷道</td>
-														<td><a
-															href="${basePath}/h/w004_view.ac"
-															class="btn  btn-info" target="_blank">查看</a> <a
-															href="${basePath}/h/w004_edit.ac"
-															class="btn edit green">编辑</a> <a
-															href="/articles/ljjdwz--611" class="btn btn-danger"
-															data-confirm="Are you sure?" data-method="delete"
-															rel="nofollow">删除</a></td>
-													</tr>
-													<tr>
-														<td>2014-02-28 15:31</td>
-														<td>删除广告</td>
-														<td><a href="/articles/scggwz--601"
-															class="btn  btn-info" target="_blank">查看</a> <a
-															href="/articles/scggwz--601/edit" class="btn edit green">编辑</a>
-															<a href="/articles/scggwz--601" class="btn btn-danger"
-															data-confirm="Are you sure?" data-method="delete"
-															rel="nofollow">删除</a></td>
-													</tr>
-													<tr>
-														<td>2014-02-28 15:31</td>
-														<td>关于我们</td>
-														<td><a href="/articles/gywmwz--616"
-															class="btn btn-info" target="_blank">查看</a> <a
-															href="/articles/gywmwz--616/edit" class="btn edit green">编辑</a>
-															<a href="/articles/gywmwz--616" class="btn btn-danger"
-															data-confirm="Are you sure?" data-method="delete"
-															rel="nofollow">删除</a></td>
-													</tr>
-													<tr>
-														<td>2014-02-28 15:31</td>
-														<td>联系我们</td>
-														<td><a href="/articles/ljwmwz--617"
-															class="btn btn-info" target="_blank">查看</a> <a
-															href="/articles/ljwmwz--617/edit" class="btn edit green">编辑</a>
-															<a href="/articles/ljwmwz--617" class="btn btn-danger"
-															data-confirm="Are you sure?" data-method="delete"
-															rel="nofollow">删除</a></td>
-													</tr>
-													<tr>
-														<td>2014-02-28 15:31</td>
-														<td>新闻</td>
-														<td><a href="/articles/xwwz--610"
-															class="btn btn-info" target="_blank">查看</a> <a
-															href="/articles/xwwz--610/edit" class="btn edit green">编辑</a>
-															<a href="/articles/xwwz--610" class="btn btn-danger"
-															data-confirm="Are you sure?" data-method="delete"
-															rel="nofollow">删除</a></td>
-													</tr>
-													<tr>
-														<td>2014-02-28 15:31</td>
-														<td>新品推荐</td>
-														<td><a href="/articles/xptjwz--614"
-															class="btn btn-info" target="_blank">查看</a> <a
-															href="/articles/xptjwz--614/edit" class="btn edit green">编辑</a>
-															<a href="/articles/xptjwz--614" class="btn btn-danger"
-															data-confirm="Are you sure?" data-method="delete"
-															rel="nofollow">删除</a></td>
-													</tr>
-													<tr>
-														<td>2014-02-28 15:31</td>
-														<td>特惠商品</td>
-														<td><a href="/articles/thspwz--613"
-															class="btn btn-info" target="_blank">查看</a> <a
-															href="/articles/thspwz--613/edit" class="btn edit green">编辑</a>
-															<a href="/articles/thspwz--613" class="btn btn-danger"
-															data-confirm="Are you sure?" data-method="delete"
-															rel="nofollow">删除</a></td>
-													</tr>
-													<tr>
-														<td>2014-02-28 15:31</td>
-														<td>关于微播</td>
-														<td><a href="/articles/gywbwz--280"
-															class="btn btn-info" target="_blank">查看</a> <a
-															href="/articles/gywbwz--280/edit" class="btn edit green">编辑</a>
-															<a href="/articles/gywbwz--280" class="btn btn-danger"
-															data-confirm="Are you sure?" data-method="delete"
-															rel="nofollow">删除</a></td>
-													</tr>
-													<tr>
-														<td>2014-02-28 15:31</td>
-														<td>如何使用</td>
-														<td><a href="/articles/rhsywz--612"
-															class="btn btn-info" target="_blank">查看</a> <a
-															href="/articles/rhsywz--612/edit" class="btn edit green">编辑</a>
-															<a href="/articles/rhsywz--612" class="btn btn-danger"
-															data-confirm="Are you sure?" data-method="delete"
-															rel="nofollow">删除</a></td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
+								<li class="divider"></li>
+								<li id="add-grp-btn"><a href="javascript:void(0)"
+									class="manage-grp-btn"><i class="icon-plus"></i> 新建分组</a></li>
+							</ul>
+						</div>
+						<div class="col-md-10">
+							<c:if test="${msg!=null}">
+							<c:choose>
+								<c:when test="${msg!='1'}">
+									<div class="alert alert-danger">
+										<button class="close" data-dismiss="alert"></button>
+										<strong>Error!</strong> ${msg}
 									</div>
-								</div>
+								</c:when>
+								<c:otherwise>
+									<div class="alert alert-success">
+										<button class="close" data-dismiss="alert"></button>
+										<strong>Success!</strong> 图文信息操作成功。
+									</div>
+								</c:otherwise>
+							</c:choose>
+						</c:if>
+							<div class="btn-toolbar">
+								<a href="${basePath}/h/w004_edit.ac" class="btn btn-primary">新建文章</a>
 							</div>
+
+							<table class="table table-condensed table-striped">
+								<tbody>
+									<tr>
+										<th>时间</th>
+										<th>标题</th>
+										<th></th>
+									</tr>
+									<c:forEach items="${beans}" var="bean">
+									<tr>
+										<td>${bean.last_updated}</td>
+										<td>${bean.title}</td>
+										<td><a
+											href="${basePath}/h/w004_view.ac?id=${bean.id}"
+											class="btn  btn-info" target="_blank">查看</a> <a
+											href="${basePath}/h/w004_edit.ac?id=${bean.id}"
+											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
+											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/w004_del.ac?id=${bean.id}'};"
+											rel="nofollow">删除</a></td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>

@@ -55,6 +55,21 @@
 				$('#wechar_arrow').addClass('open');
 				$('#wechar_sub_menu').show();
 			});
+			function uploadMenu() {
+				jQuery.ajax({
+					url : '${basePath}/h/w007_uploadMenu.ac?time=' + new Date().getTime(),
+					success : function(req) {
+						if(req=='ok'){
+							jQuery("#msg").html('<div class="alert alert-success"><button class="close" data-dismiss="alert"></button><strong>Success!</strong> 菜单发布成功!</div>');
+						}else{
+							jQuery("#msg").html('<div class="alert alert-danger"><button class="close" data-dismiss="alert"></button><strong>Error!</strong> '+req+'!</div>');
+						}
+					},
+					error : function() {
+						jQuery("#msg").html('<div class="alert alert-danger"><button class="close" data-dismiss="alert"></button><strong>Error!</strong> 菜单发布失败!</div>');
+					}
+				});
+			}
 		</script>
 		<!-- END SIDEBAR -->
 		<!-- BEGIN PAGE -->
@@ -101,16 +116,19 @@
 								</c:otherwise>
 							</c:choose>
 						</c:if>
+						<div id="msg"></div>
 						<div class="btn btn-toolbar">
-							<a href="http://localhost/h/w007_edit.ac" class="btn btn-primary">新建</a>
+							<a href="${basePath}/h/w007_edit.ac" class="btn btn-primary">新建</a>
 						</div>
 						<button id="download" class="btn">从微信下载</button>
-						<button id="upload" class="btn">发布到微信</button>
+						<button id="upload" onclick="uploadMenu();" class="btn">发布到微信</button>
 						<table class="table table-condensed table-striped">
 							<tbody>
 								<tr>
 									<th>名称</th>
 									<th>显示顺序</th>
+									<th>类型</th>
+									<th>KEY</th>
 									<th>链接地址</th>
 									<th></th>
 								</tr>
@@ -120,7 +138,26 @@
 									${bean.menu_name}
 									</td>
 									<td></td>
-									<td><a href="" target="_blank"></a></td>
+									<c:choose>
+										<c:when test="${bean.beans!=null && fn:length(bean.beans)>0}">
+											<td></td>
+											<td></td>
+											<td></td>
+										</c:when>
+										<c:otherwise>
+											<td>${bean.menu_type}</td>
+											<td>
+											<c:if test="${bean.menu_type!='view'}">
+											${bean.menu_key}
+											</c:if>
+											</td>
+											<td>
+											<c:if test="${bean1.menu_type=='view'}">
+											<a href="${bean1.menu_url}" target="_blank">${bean1.menu_url}</a>
+											</c:if>
+											</td>
+										</c:otherwise>
+									</c:choose>
 									<td><a href="${basePath}/h/w007_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
 										<a href="${basePath}/h/w007_del.ac?id=${bean.id}" class="btn btn-danger"
 										data-confirm="确定删除吗?" data-method="delete" rel="nofollow">删除</a>
@@ -132,7 +169,17 @@
 										|-- ${bean1.menu_name}
 										</td>
 										<td>${bean1.sort_num}</td>
-										<td><a href="${bean1.menu_url}" target="_blank">${bean1.menu_url}</a></td>
+										<td>${bean1.menu_type}</td>
+										<td>
+										<c:if test="${bean1.menu_type!='view'}">
+										${bean1.menu_key}
+										</c:if>
+										</td>
+										<td>
+										<c:if test="${bean1.menu_type=='view'}">
+										<a href="${bean1.menu_url}" target="_blank">${bean1.menu_url}</a>
+										</c:if>
+										</td>
 										<td><a href="${basePath}/h/w007_edit.ac?id=${bean1.id}" class="btn edit green">编辑</a>
 											<a href="${basePath}/h/w007_del.ac?id=${bean1.id}" class="btn btn-danger"
 											data-confirm="确定删除吗?" data-method="delete" rel="nofollow">删除</a>

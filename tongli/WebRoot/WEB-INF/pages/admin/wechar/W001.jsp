@@ -140,8 +140,8 @@
 
 					<div class="col-md-6 well col-md-offset-1">
 						<h4>公众帐号的服务器配置（用于接收用户信息）</h4>
-						接口地址: http://weiport.com/api/10387
-						<br> 接口TOKEN:${bean.id}
+						接口地址: ${basePath}/wxapi.ac<br>
+						接口TOKEN:${bean.id}
 					</div>
 					<div class="col-md-6 well col-md-offset-1">
 						<h4>开发者凭据</h4>

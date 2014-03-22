@@ -346,7 +346,7 @@ public class WebUtils {
         	if(pos>-1){
         		return temp.substring(0,pos);
         	}
-            return temp;
+            return temp.trim().replaceAll("\"","");
         }
         return "";
     }

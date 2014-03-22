@@ -3,9 +3,9 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2012.11.24  WuXiaogang        程序,发布
+ * 1.00     2013.11.24  WuXiaogang        程序,发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家  System. - All Rights Reserved.
+ * Copyright 2013 adsp System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.web.tag;

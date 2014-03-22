@@ -151,11 +151,11 @@ public class UploadServlet extends HttpServlet {
 			if (!Validator.isNullEmpty(isRichEditor)
 					&& isRichEditor.equals("1")) {
 				// 在富文本编辑器内上传的返n3
-				saveUrl = "/" + Resources.getData("UPLOAD_ROOT_FOLDER_URL") + "/"
+				saveUrl =  Resources.getData("UPLOAD_ROOT_FOLDER_URL") + "/"
 						+ dirName + "/" + "n3" +forDate+ "/";
 			} else {
 				// 在其他地方上传的返n1
-				saveUrl = "/" + Resources.getData("UPLOAD_ROOT_FOLDER_URL") + "/"
+				saveUrl =  Resources.getData("UPLOAD_ROOT_FOLDER_URL") + "/"
 						+ dirName + "/" + "n1" +forDate + "/";
 			}
 		} else {
@@ -165,7 +165,7 @@ public class UploadServlet extends HttpServlet {
 					+forDate;
 
 			// 文件保存目录URL
-			saveUrl = "/" + Resources.getData("UPLOAD_ROOT_FOLDER_URL") + "/" + dirName
+			saveUrl = Resources.getData("UPLOAD_ROOT_FOLDER_URL") + "/" + dirName
 					 +forDate+ "/";
 		}
 
@@ -259,7 +259,7 @@ public class UploadServlet extends HttpServlet {
 
 				JSONObject obj = new JSONObject();
 				obj.put("error", 0);
-				obj.put("url", (saveUrl + newFileName).replaceAll("//","/"));
+				obj.put("url", (saveUrl + newFileName).replaceAll("//","/").replaceAll("//","/"));
 				obj.put("fileName", name);
 				response.getWriter().write(obj.toJSONString());
 			}

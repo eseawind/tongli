@@ -21,7 +21,15 @@ import cn.com.softvan.bean.wechar.TcWxInfoBean;
  *
  */
 public interface ITcWxInfoManager {
-	
+	/**
+	 * <p>信息编辑。</p>
+	 * <ol>[功能概要] 
+	 * <div>新增信息。</div>
+	 * <div>修改信息。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public String saveOrUpdateData(TcWxInfoBean bean) throws Exception;
 	/**
 	 * <p>信息编辑。</p>
 	 * <ol>[功能概要] 
@@ -82,4 +90,6 @@ public interface ITcWxInfoManager {
 	 * @return 处理结果
 	 */
 	public TcWxInfoBean findDataById(TcWxInfoBean bean);
+	/**重新将所有信息放入缓存*/
+	public void updateAllMsgCache();
 }

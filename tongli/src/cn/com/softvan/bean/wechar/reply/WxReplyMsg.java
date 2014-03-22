@@ -21,7 +21,8 @@ public class WxReplyMsg extends WxMsg {
 		super(toUser, fromUser, createDt, msgType);
 		this.star = star;
 	}
-	
+	public WxReplyMsg() {
+	}
 	public WxReplyMsg(WxMsg msg) {
 		this(msg.getToUser(),msg.getFromUser(),msg.getCreateDt(),msg.getMsgType(),false);
 	}

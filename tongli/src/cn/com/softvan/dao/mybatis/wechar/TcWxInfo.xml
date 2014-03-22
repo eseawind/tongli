@@ -35,7 +35,11 @@
 		info_source,
 		default_flag,
 		subscribe_flag,
-		sort_num
+		sort_num,
+		location_precision,
+		event,
+		eventkey,
+		ticket
 	</sql>
 	<select id="selectByPrimaryKey" resultType="tcWxInfoBean"  parameterType="tcWxInfoBean">
 		select
@@ -80,7 +84,11 @@
 		last_updated,
 		default_flag,
 		subscribe_flag,
-		sort_num
+		sort_num,
+		location_precision,
+		event,
+		eventkey,
+		ticket
 		) values (
 		#{id},
 		#{keyword},
@@ -113,36 +121,44 @@
 		now(),
 		#{default_flag},
 		#{subscribe_flag},
-		${sort_num}
+		${sort_num},
+		#{location_precision},
+		#{event},
+		#{eventkey},
+		#{ticket}
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="tcWxInfoBean">
 		insert into tc_wx_info
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			 id 
-			<if test=" keyword != null"> , keyword </if>
+			<if test="keyword != null"> , keyword </if>
 			, msgtype 
-			<if test=" tousername != null"> , tousername </if>
-			<if test=" fromusername != null"> , fromusername </if>
-			<if test=" createtime != null"> , createtime </if>
-			<if test=" content != null"> , content </if>
-			<if test=" mediaid != null"> , mediaid </if>
-			<if test=" title != null"> , title </if>
-			<if test=" description != null"> , description </if>
-			<if test=" musicurl != null"> , musicurl </if>
-			<if test=" hqmusicurl != null"> , hqmusicurl </if>
-			<if test=" thumbmediaid != null"> , thumbmediaid </if>
-			<if test=" format != null"> , format </if>
-			<if test=" location_x != null"> , location_x </if>
-			<if test=" location_y != null"> , location_y </if>
-			<if test=" scale != null"> , scale </if>
-			<if test=" label != null"> , label </if>
-			<if test=" articlecount != null"> , articlecount </if>
-			<if test=" articles_id != null"> , articles_id </if>
-			<if test=" picurl != null"> , picurl </if>
-			<if test=" url != null"> , url </if>
-			<if test=" default_flag != null"> , default_flag </if>
-			<if test=" subscribe_flag != null"> , subscribe_flag </if>
+			<if test="tousername != null"> , tousername </if>
+			<if test="fromusername != null"> , fromusername </if>
+			<if test="createtime != null"> , createtime </if>
+			<if test="content != null"> , content </if>
+			<if test="mediaid != null"> , mediaid </if>
+			<if test="title != null"> , title </if>
+			<if test="description != null"> , description </if>
+			<if test="musicurl != null"> , musicurl </if>
+			<if test="hqmusicurl != null"> , hqmusicurl </if>
+			<if test="thumbmediaid != null"> , thumbmediaid </if>
+			<if test="format != null"> , format </if>
+			<if test="location_x != null"> , location_x </if>
+			<if test="location_y != null"> , location_y </if>
+			<if test="scale != null"> , scale </if>
+			<if test="label != null"> , label </if>
+			<if test="articlecount != null"> , articlecount </if>
+			<if test="articles_id != null"> , articles_id </if>
+			<if test="picurl != null"> , picurl </if>
+			<if test="url != null"> , url </if>
+			<if test="default_flag != null"> , default_flag </if>
+			<if test="subscribe_flag != null"> , subscribe_flag </if>
+			<if test="location_precision != null"> ,location_precision  </if>
+			<if test="event != null"> ,event</if>
+			<if test="eventkey != null"> ,eventkey</if>
+			<if test="ticket != null"> ,ticket</if>
 			 , date_created 
 			 , create_id 
 			 , create_ip 
@@ -154,29 +170,33 @@
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			 #{id}, 
-			<if test=" keyword != null"> #{keyword},  </if>
+			<if test="keyword != null"> #{keyword},  </if>
 			 #{msgtype}, 
-			<if test=" tousername != null"> #{tousername},  </if>
-			<if test=" fromusername != null"> #{fromusername},  </if>
-			<if test=" createtime != null"> #{createtime},  </if>
-			<if test=" content != null"> #{content},  </if>
-			<if test=" mediaid != null"> #{mediaid},  </if>
-			<if test=" title != null"> #{title},  </if>
-			<if test=" description != null"> #{description},  </if>
-			<if test=" musicurl != null"> #{musicurl},  </if>
-			<if test=" hqmusicurl != null"> #{hqmusicurl},  </if>
-			<if test=" thumbmediaid != null"> #{thumbmediaid},  </if>
-			<if test=" format != null"> #{format},  </if>
-			<if test=" location_x != null"> #{location_x},  </if>
-			<if test=" location_y != null"> #{location_y},  </if>
-			<if test=" scale != null"> #{scale},  </if>
-			<if test=" label != null"> #{label},  </if>
-			<if test=" articlecount != null"> #{articlecount},  </if>
-			<if test=" articles_id != null"> #{articles_id},  </if>
-			<if test=" picurl != null"> #{picurl},  </if>
-			<if test=" url != null"> #{url},  </if>
-			<if test=" default_flag != null">  #{default_flag}, </if>
-			<if test=" subscribe_flag != null">  #{subscribe_flag} ,</if>
+			<if test="tousername != null"> #{tousername},  </if>
+			<if test="fromusername != null"> #{fromusername},  </if>
+			<if test="createtime != null"> #{createtime},  </if>
+			<if test="content != null"> #{content},  </if>
+			<if test="mediaid != null"> #{mediaid},  </if>
+			<if test="title != null"> #{title},  </if>
+			<if test="description != null"> #{description},  </if>
+			<if test="musicurl != null"> #{musicurl},  </if>
+			<if test="hqmusicurl != null"> #{hqmusicurl},  </if>
+			<if test="thumbmediaid != null"> #{thumbmediaid},  </if>
+			<if test="format != null"> #{format},  </if>
+			<if test="location_x != null"> #{location_x},  </if>
+			<if test="location_y != null"> #{location_y},  </if>
+			<if test="scale != null"> #{scale},  </if>
+			<if test="label != null"> #{label},  </if>
+			<if test="articlecount != null"> #{articlecount},  </if>
+			<if test="articles_id != null"> #{articles_id},  </if>
+			<if test="picurl != null"> #{picurl},  </if>
+			<if test="url != null"> #{url},  </if>
+			<if test="default_flag != null">  #{default_flag}, </if>
+			<if test="subscribe_flag != null">  #{subscribe_flag} ,</if>
+			<if test="location_precision != null"> #{location_precision},  </if>
+			<if test="event != null"> #{event},</if>
+			<if test="eventkey != null"> #{eventkey},</if>
+			<if test="ticket != null"> #{ticket},</if>
 			 #{date_created},  
 			 #{create_id}, 
 			 #{create_ip},  
@@ -215,6 +235,10 @@
 		<if test="url!= null">,url=#{url}</if>
 		<if test="del_flag!= null and del_flag!=''">,del_flag=#{del_flag}</if>
 		<if test="info_source!= null">,info_source=#{info_source}</if>
+		<if test="location_precision != null">,location_precision=#{location_precision}  </if>
+		<if test="event != null"> ,event=#{event}</if>
+		<if test="eventkey != null">,eventkey #{eventkey}</if>
+		<if test="ticket != null"> ,ticket=#{ticket}</if>
 		,default_flag=#{default_flag}
 		,subscribe_flag=#{subscribe_flag}
 		,sort_num=${sort_num}
@@ -229,7 +253,20 @@
     List<TcWxInfoBean> findDataIsList(IEntity dto) throws Exception; --> 
     <select id="findDataIsList" resultType="tcWxInfoBean" parameterType="tcWxInfo">
     	select 
-    	<include refid="Base_Column_List" /> 
+    		id
+			,keyword
+			,msgtype
+			,picurl
+			,url
+			,musicurl
+			,hqmusicurl
+    		,articles_id
+	    	,title
+	    	,content
+	    	,description
+	    	,default_flag
+			,subscribe_flag
+			,last_updated
     	from tc_wx_info 
     	where 1=1 
     	<if test="articles_id!= null">
@@ -237,15 +274,64 @@
 		</if>
     	and del_flag='0'
     	and info_source=#{info_source}
+    	<if test="msgtype!=null">
     	and msgtype=#{msgtype}
+    	</if>
+    	<if test="note=='notNews'">
+    	and msgtype!='news'
+    	</if>
     	order by last_updated desc,sort_num asc
     </select>
     <!--  查询信息 分页
     List<TcWxInfoBean> findDataIsPage(IEntity dto) throws Exception; --> 
 	<select id="findDataIsPage" resultType="tcWxInfoBean" parameterType="tcWxInfo">
-    	select <include refid="Base_Column_List" /> from tc_wx_info
-    	 where 1=1
-    	 order by last_updated desc
+    	select 
+    		t.id,
+			t.keyword,
+			t.msgtype,
+			t.tousername,
+			t.fromusername,
+			t.createtime,
+			t.content,
+			t.title,
+			t.description,
+			t.musicurl,
+			t.hqmusicurl,
+			t.thumbmediaid,
+			t.format,
+			t.location_x,
+			t.location_y,
+			t.scale,
+			t.label,
+			t.picurl,
+			t.url,
+			t.date_created,
+			t.location_precision,
+			t.event,
+			t.eventkey,
+			t.ticket,
+			t2.nickname, 
+			t2.remarkname, 
+			t2.sex, 
+			t2.country, 
+			t2.province, 
+			t2.city,
+    		t2.headimgurl
+    	from tc_wx_info t
+    	left join tc_wx_user t2 on (t.fromusername=t2.openid)
+    	where 1=1 
+    	<if test="articles_id!= null">
+			and articles_id=#{articles_id}
+		</if>
+    	and del_flag='0'
+    	and info_source=#{info_source}
+    	<if test="msgtype!=null">
+    	and msgtype=#{msgtype}
+    	</if>
+    	<if test="note=='notNews'">
+    	and msgtype!='news'
+    	</if>
+    	order by last_updated desc,sort_num asc
     </select>
     <!-- 
      * 根据aid 逻辑删除信息
@@ -265,4 +351,24 @@
     	,del_flag='1'
     	where id=#{id}
     </update>
+    <!--  
+     * 更新对象 对媒体id
+     * -->
+     <update id="updateMediaIdByPrimaryKey" parameterType="tcWxInfo">
+    	update tc_wx_info 
+    	set version=version+1
+    	<if test="mediaid!= null">,mediaid=#{mediaid}</if>
+    	<if test="thumbmediaid != null">,thumbmediaid=#{thumbmediaid}</if>
+    	where id=#{id}
+    </update>
+    <!-- 根据Aid获取对象
+    TcWxInfoBean selectByAid(IEntity dto) throws Exception; -->
+     <select id="selectByAid" resultType="tcWxInfoBean" parameterType="tcWxInfo">
+    	select 
+    		id
+			,keyword
+    	from tc_wx_info 
+    	where articles_id=#{articles_id}
+    	limit 0,1
+    </select>
 </mapper>

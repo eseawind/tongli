@@ -11,7 +11,7 @@
     <result column="province_name" property="province_name" jdbcType="VARCHAR" />
     <result column="sort_num" property="sort_num" jdbcType="INTEGER" />
     <result column="longitude" property="longitude" jdbcType="VARCHAR" />
-    <result column="iatitude" property="iatitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
     <result column="gb_code" property="gb_code" jdbcType="VARCHAR" />
     <result column="version" property="version" jdbcType="INTEGER" />
     <result column="invalid_time" property="invalid_time" jdbcType="BIGINT" />

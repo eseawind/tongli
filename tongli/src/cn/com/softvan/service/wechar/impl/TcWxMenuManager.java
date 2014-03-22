@@ -3,31 +3,33 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.03.05  wuxiaogang      程序・发布
+ * 1.00     2014.03.20  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家 System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.service.wechar.impl;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import net.sf.json.JSONObject;
 
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.wechar.TcWxMenuBean;
+import cn.com.softvan.bean.wechar.TcWxPublicUserBean;
+import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
+import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.Validator;
+import cn.com.softvan.common.wechar.WxApiUtil;
 import cn.com.softvan.dao.daointer.wechar.ITcWxMenuDao;
 import cn.com.softvan.dao.entity.wechar.TcWxMenu;
 import cn.com.softvan.service.BaseManager;
 import cn.com.softvan.service.wechar.ITcWxMenuManager;
+import cn.com.softvan.service.wechar.ITcWxPublicUserManager;
 /**
  *<p>微信服务_自定义菜单 service类。</p>
  * <ol>[功能概要] 
@@ -42,6 +44,10 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 			.getLogger(TcWxMenuManager.class);
 	/**微信服务_自定义菜单  数据库处理 DAO*/
 	private ITcWxMenuDao tcWxMenuDao;
+	/**redis缓存工具类*/
+	protected JedisHelper jedisHelper;
+	/**微信服务_公共账号 service */
+	private ITcWxPublicUserManager tcWxPublicUserManager;
 	/**
 	 * <p>信息编辑。</p>
 	 * <ol>[功能概要] 
@@ -70,6 +76,7 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 				dto.setVersion(bean.getVersion());//VERSION
 				dto.setDel_flag(bean.getDel_flag());//del_flag
+				dto.setInfo_source(bean.getInfo_source());
 				//判断数据是否存在
 				if(tcWxMenuDao.isDataYN(dto)!=0){
 					//数据存在
@@ -124,6 +131,7 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 				dto.setId(bean.getId());//id
 				dto.setMenu_type(bean.getMenu_type());//菜单的响应动作类型，目前有click、view两种类型
 				dto.setParent_id(bean.getParent_id());//父id
+				dto.setInfo_source(bean.getInfo_source());
 			}
 			beans=tcWxMenuDao.findDataIsList(dto);
 		} catch (Exception e) {
@@ -142,9 +150,10 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 	public List<TcWxMenuBean> findDataIsTree(TcWxMenuBean bean){
 		List<TcWxMenuBean> beans=null;
 		try {
-			beans=tcWxMenuDao.findDataIsList(null);
+			TcWxMenu dto=new TcWxMenu();
+			dto.setInfo_source(bean.getInfo_source());
+			beans=tcWxMenuDao.findDataIsList(dto);
 			if(beans!=null){
-				TcWxMenu dto=null;
 				for(TcWxMenuBean bean1:beans){
 					if(bean1!=null){
 						dto=new TcWxMenu();
@@ -206,157 +215,82 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 	 * @return 处理结果
 	 */
 	public String uploadMenu(){
-		String msg="";
-		String appid="";
-    	String secret="";
-    	String access_token=getAccessToken(appid, secret);
-//    	System.err.println(access_token);
-    		/**
-    		 * 设置菜单
-    		 */
-    		String menu = "{"+
-    				"\"button\":["+
-////    				---------------a---------------------------------------------
-//    					"{\"name\":\"初始回复\","+
-//
-//    					" \"sub_button\":["+
-//    					"	{"+
-//	    				"	   \"type\":\"click\","+
-//	    				"	   \"name\":\"玩家的奥特莱斯\","+
-//	    				"	   \"key\":\"a1\""+
-//	    				"	}"+
-//	    				","+
-//	    				"	{"+
-//    					"		\"type\":\"click\","+
-//    					"		\"name\":\"玩品宣言\","+
-//    					"		\"key\":\"a2\""+
-//    					"	}"+
-//    					","+
-//	    				"	{"+
-//    					"		\"type\":\"click\","+
-//    					"		\"name\":\"使用向导\","+
-//    					"		\"key\":\"a3\""+
-//    					"	}"+
-//    					","+
-//	    				"	{"+
-//    					"		\"type\":\"click\","+
-//    					"		\"name\":\"特惠速查\","+
-//    					"		\"key\":\"a4\""+
-//    					"	}"+
-//    					","+
-//	    				"	{"+
-//    					"		\"type\":\"click\","+
-//    					"		\"name\":\"“过时不候”是什么\","+
-//    					"		\"key\":\"a5\""+
-//    					"	}"+
-//    					","+
-//	    				"	{"+
-//    					"		\"type\":\"click\","+
-//    					"		\"name\":\"身边特惠\","+
-//    					"		\"key\":\"a6\""+
-//    					"	}"+
-//    					","+
-//	    				"	{"+
-//    					"		\"type\":\"click\","+
-//    					"		\"name\":\"当季特惠精选\","+
-//    					"		\"key\":\"a7\""+
-//    					"	}"+
-//    					","+
-//	    				"	{"+
-//    					"		\"type\":\"click\","+
-//    					"		\"name\":\"戳！神奇的品哥\","+
-//    					"		\"key\":\"a8\""+
-//    					"	}"+
-//	    				"]"+
-//    					"}"+
-////    					-----------b---------------------------------------------------
-//						","+
-//						"{\"name\":\"找特惠\","+
-//    					"\"sub_button\":["+
-//    					"{"+
-//    					"   \"type\":\"click\","+
-//    					"   \"name\":\"身边\","+
-//    					"   \"key\":\"b1\""+
-//    					"}"+
-//    					","+
-//    					"{"+
-//    					"   \"type\":\"click\","+
-//    					"   \"name\":\"当季\","+
-//    					"   \"key\":\"b2\""+
-//    					"}"+
-//    					","+
-//    					"{"+
-//    					"   \"type\":\"click\","+
-//    					"   \"name\":\"景点门票\","+
-//    					"   \"key\":\"b3\""+
-//    					"}"+
-//    					","+
-//    					"{"+
-//    					"   \"type\":\"click\","+
-//    					"   \"name\":\"机票/酒店/线路\","+
-//    					"   \"key\":\"b4\""+
-//    					"}"+
-//    					","+
-//    					"{"+
-//    					"   \"type\":\"click\","+
-//    					"   \"name\":\"各种享受\","+
-//    					"   \"key\":\"b5\""+
-//    					"}"+
-//    					"]"+
-//    					"}"+
-////    					-----------c---------------------------------------------------
-//						","+
-//    					"{\"name\":\"过时不候\","+
-//    					"\"sub_button\":["+
-//    					"	{"+
-//	    				"	   \"type\":\"click\","+
-//	    				"	   \"name\":\"产品列表\","+
-//	    				"	   \"key\":\"c1\""+
-//	    				"	}" +
-//	    				"]"+
-//    					"}"+
-////    					------------d--------------------------------------------------
-//						","+
-//						"{\"name\":\"我\","+
-//    					"\"sub_button\":["+
-//    					"	{"+
-//	    				"	   \"type\":\"click\","+
-//	    				"	   \"name\":\"我的特惠玩\","+
-//	    				"	   \"key\":\"d1\""+
-//	    				"	}" +
-//	    				","+
-//	    				"	{"+
-//	    				"	   \"type\":\"click\","+
-//	    				"	   \"name\":\"想去\","+
-//	    				"	   \"key\":\"d2\""+
-//	    				"	}" +
-//	    				","+
-//	    				"	{"+
-//	    				"	   \"type\":\"click\","+
-//	    				"	   \"name\":\"戳！神奇的品哥\","+
-//	    				"	   \"key\":\"d3\""+
-//	    				"	}" +
-//	    				","+
-//	    				"	{"+
-//	    				"	   \"type\":\"click\","+
-//	    				"	   \"name\":\"找客服\","+
-//	    				"	   \"key\":\"d4\""+
-//	    				"	}" +
-//	    				"]"+
-//    					"}"+
-////    					-----------e---------------------------------------------------
-//						","+
-//						"{	"+
-//    				     "     \"type\":\"click\","+
-//    				     "     \"name\":\"每月推送\","+
-//    				     "     \"key\":\"e1\""+
-//    				     "}"+
-    				"]"+
-    			"}";
-    		//set
-    		setMenu(access_token, menu);
+		String msg="1";
+		try {
+			//公共账号信息
+			TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAR_BEAN);
+			if((publicUserBean==null) || (publicUserBean.getId()==null)){
+				publicUserBean=tcWxPublicUserManager.findDataById(null);
+				jedisHelper.set(CommonConstant.SESSION_WECHAR_BEAN,publicUserBean);
+			}
+			//TODO 设置菜单
+			TcWxMenuBean bean=new TcWxMenuBean();
+			bean.setInfo_source("0");
+	    	List<TcWxMenuBean> beans=findDataIsTree(bean);
+	    	if(beans!=null && beans.size()>0){
+				StringBuffer menu=new StringBuffer("");
+				menu.append("{");
+				menu.append("\"button\":[");
+				for(int i=0;i<beans.size();i++){
+					TcWxMenuBean bean1=beans.get(i);
+					List<TcWxMenuBean> beans1=bean1.getBeans();
+					if(beans1!=null && beans1.size()>0){
+						menu.append("{\"name\":\""+bean1.getMenu_name()+"\",");
+						menu.append(" \"sub_button\":[");
+						for(int n=0;n<beans1.size();n++){
+							TcWxMenuBean bean2=beans1.get(n);
+							menu.append("{");
+							menu.append("\"type\":\""+bean2.getMenu_type()+"\",");
+							menu.append("\"name\":\""+bean2.getMenu_name()+"\",");
+							if("click".equals(bean2.getMenu_type())){
+								menu.append("\"key\":\""+bean2.getMenu_key()+"\"");
+							}else{
+								menu.append("\"url\":\""+bean2.getMenu_url()+"\"");
+							}
+							menu.append("}");
+							if(n<(beans1.size()-1)){
+								menu.append(",");
+							}
+						}
+						menu.append("]");
+						menu.append("}");
+					}else{
+						menu.append("{");
+						menu.append("\"type\":\""+bean1.getMenu_type()+"\",");
+						menu.append("\"name\":\""+bean1.getMenu_name()+"\",");
+						if("click".equals(bean1.getMenu_type())){
+							menu.append("\"key\":\""+bean1.getMenu_key()+"\"");
+						}else{
+							menu.append("\"url\":\""+bean1.getMenu_url()+"\"");
+						}
+						menu.append("}");
+					}
+					if(i<(beans.size()-1)){
+						menu.append(",");
+					}
+				}
+				menu.append("]");
+				menu.append("}");
+				String appid=publicUserBean.getAppid();
+//				System.out.println("----------1---------------");
+				String secret=publicUserBean.getAppsecret();
+//				System.out.println("----------2---------------");
+				String access_token=new WxApiUtil().getAccess_token(false,jedisHelper,appid, secret);
+//				System.out.println("----------3---------------");
+				//set
+				msg=setMenu(access_token, menu.toString());
+				if(new WxApiUtil().isErrAccessToken(msg)){
+					access_token=new WxApiUtil().getAccess_token(true,jedisHelper,appid, secret);
+					msg=setMenu(access_token, menu.toString());
+				}
+//				System.out.println("----------4---------------");
+	    	}
+    	} catch (Exception e) {
+			log.error("微信菜单生成失败!", e);
+		}
 		return msg;
 	}
+	
 	/**
 	 * <p>下载微信菜单。</p>
 	 * <ol>[功能概要] 
@@ -383,28 +317,11 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 	public void setTcWxMenuDao(ITcWxMenuDao tcWxMenuDao) {
 	    this.tcWxMenuDao = tcWxMenuDao;
 	}
-	/**获取access_token*/
-    private String getAccessToken(String appid,String secret){
-		String url="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="+appid+"&secret="+secret;
-		//构建http构建[使用HttpClient的jar,怎么获得自己百度]
-		HttpClient client = new HttpClient();
-		PostMethod post = new PostMethod(url);
-		post.getParams().setContentCharset("utf-8");
-		//发送http请求
-		String respStr = "";
-		try {
-			client.executeMethod(post);
-			respStr = post.getResponseBodyAsString();
-		} catch (HttpException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		JSONObject dataJson =new JSONObject().fromObject(respStr);
-    	return dataJson.getString("access_token");
-    }
     /**设置菜单*/
-    private String setMenu(String access_token,String menu){
+    @SuppressWarnings("deprecation")
+	private String setMenu(String access_token,String menu){
+    	log.debug("======access_token====="+access_token);
+    	log.debug("======menu====="+menu);
 		String url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token="+access_token;
 		HttpClient client = new HttpClient();
 		PostMethod post = new PostMethod(url);
@@ -415,13 +332,39 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 		try {
 			client.executeMethod(post);
 			respStr = post.getResponseBodyAsString();
-		} catch (HttpException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			log.error("xxxxxxx", e);
 		}
-		System.out.println(respStr);
-		JSONObject dataJson =new JSONObject().fromObject(respStr);
-    	return dataJson.getString("errmsg");
+		log.info(respStr);
+		JSONObject dataJson =JSONObject.fromObject(respStr);
+    	return dataJson.getString("errcode");
     }
+	/**
+	 * redis缓存工具类取得
+	 * @return redis缓存工具类
+	 */
+	public JedisHelper getJedisHelper() {
+	    return jedisHelper;
+	}
+	/**
+	 * redis缓存工具类设定
+	 * @param jedisHelper redis缓存工具类
+	 */
+	public void setJedisHelper(JedisHelper jedisHelper) {
+	    this.jedisHelper = jedisHelper;
+	}
+	/**
+	 * 微信服务_公共账号 service取得
+	 * @return 微信服务_公共账号 service
+	 */
+	public ITcWxPublicUserManager getTcWxPublicUserManager() {
+	    return tcWxPublicUserManager;
+	}
+	/**
+	 * 微信服务_公共账号 service设定
+	 * @param tcWxPublicUserManager 微信服务_公共账号 service
+	 */
+	public void setTcWxPublicUserManager(ITcWxPublicUserManager tcWxPublicUserManager) {
+	    this.tcWxPublicUserManager = tcWxPublicUserManager;
+	}
 }

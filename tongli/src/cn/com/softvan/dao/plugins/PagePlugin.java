@@ -101,7 +101,7 @@ public class PagePlugin implements Interceptor {
 						}
 					}
 					String pageSql = generatePageSql(sql,page);
-					ReflectHelper.setValueByFieldName(boundSql, "sql", pageSql); //将分页sql语句反射回BoundSql.
+					ReflectHelper.setValueByFieldName2(boundSql, "sql", pageSql); //将分页sql语句反射回BoundSql.
 				}
 			}
 		}

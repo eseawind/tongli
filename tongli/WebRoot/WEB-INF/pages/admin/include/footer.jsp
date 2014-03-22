@@ -29,9 +29,7 @@
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/excanvas.min.js"></script>
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/respond.min.js"></script>  
 <![endif]--> 
-<%-- 
-<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
- --%>
+
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>  
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
@@ -39,6 +37,17 @@
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery.cookie.min.js" type="text/javascript"></script>
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript" ></script>
+
+<script type="text/javascript" src="${basePath}/plugins/editor/kindeditor.js" charset="utf-8" ></script>
+<script type="text/javascript" src="${basePath}/plugins/editor/lang/zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="${basePath}/plugins/editor/plugins/code/prettify.js" charset="utf-8"></script>
+
+<script type="text/javascript" src="${basePath}/plugins/noty/js/jquery.noty.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/noty/js/layouts/top.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/noty/js/themes/default.js"></script>
+
+<script type="text/javascript" src="${basePath}/js/global.js"></script>
+
 <!-- END CORE PLUGINS -->
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/scripts/app.js"></script>      
 <script>

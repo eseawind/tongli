@@ -4,7 +4,10 @@ import org.jdom.Document;
 
 public class WxReplyTextMsg extends WxReplyMsg {
 	private String content;
-	
+	public WxReplyTextMsg(String content) {
+		setMsgType("text");
+		this.content = content;
+	}
 	public WxReplyTextMsg(WxReplyMsg msg,String content) {
 		super(msg);
 		setMsgType("text");

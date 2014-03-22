@@ -34,7 +34,11 @@
 		select
 		<include refid="Base_Column_List" />
 		from tc_wx_public_user
-		where create_id = #{create_id,jdbcType=VARCHAR}
+		where 1=1 
+		<if test="create_id!=null">
+		and create_id = #{create_id,jdbcType=VARCHAR}
+		</if>
+		 limit 0,1
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
 		delete from
