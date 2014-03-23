@@ -13,22 +13,6 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
-	<!-- 
-	<filter>
-		<display-name>encodeFilter</display-name> 
-		<filter-name>encodeFilter</filter-name>
-		<filter-class>cn.com.softvan.filter.EncodingFilter</filter-class>  
-		<init-param>
-			<description>编码格式</description>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encodeFilter</filter-name>
-		<url-pattern>*.ac</url-pattern>
-	</filter-mapping>
-	-->
 	<!-- 编码过滤 -->
 	<filter>
 	    <filter-name>encoding</filter-name>
@@ -77,7 +61,7 @@
 	</context-param>
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>carSteward.root</param-value>
+		<param-value>xx1.root</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
@@ -117,7 +101,6 @@
 	<welcome-file-list>
 		<welcome-file>/index.jsp</welcome-file>
 	</welcome-file-list>
-	
 	
 	
 	<!-- 短信  线程监听器 -->

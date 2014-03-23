@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.sys.ITcSysNewsDao" >
+  <sql id="Base_Column_List" >
+	id ,
+	version ,
+	sort_num ,
+	title ,
+	second_title ,
+	keyword ,
+	brief_info ,
+	detail_info ,
+	is_ontop ,
+	click_count ,
+	msgtype ,
+	note ,
+	date_created ,
+	create_id ,
+	create_ip ,
+	last_updated ,
+	info_source	
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcSysNewsBean" parameterType="tcSysNews" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_sys_news
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcSysNews" >
+    delete from tc_sys_news
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="tcSysNews" >
+    insert into tc_sys_news (
+	    id ,
+		version ,
+		sort_num ,
+		title ,
+		second_title ,
+		keyword ,
+		brief_info ,
+		detail_info ,
+		is_ontop ,
+		click_count ,
+		msgtype ,
+		note ,
+		date_created ,
+		create_id ,
+		create_ip ,
+		last_updated ,
+		del_flag ,
+		info_source	
+      ) values (
+	    #{id},
+		0,
+		${sort_num},
+		#{title},
+		#{second_title},
+		#{keyword},
+		#{brief_info},
+		#{detail_info},
+		#{is_ontop},
+		0,
+		#{msgtype},
+		#{note},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		'0',
+		#{info_source}
+    )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcSysNews" >
+    update tc_sys_news set version=version+1
+    ,last_updated=now()
+	,update_id=#{update_id}
+	,update_ip=#{update_ip}
+	<if test="sort_num!= null" >,sort_num=${sort_num}</if>
+	<if test="title!= null" >,title=#{title}</if>
+	<if test="second_title!= null" >,second_title=#{second_title}</if>
+	<if test="keyword!= null" >,keyword=#{keyword}</if>
+	<if test="brief_info!= null" >,brief_info=#{brief_info}</if>
+	<if test="detail_info!= null" >,detail_info=#{detail_info}</if>
+	<if test="is_ontop!= null" >,is_ontop=#{is_ontop}</if>
+	<if test="click_count!= null" >,click_count=${click_count}</if>
+	<if test="msgtype!= null" >,msgtype=#{msgtype}</if>
+	<if test="note!= null" >,note=#{note}</if>
+	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+	<if test="info_source!= null" >,info_source=#{info_source}</if>
+	where id=#{id}
+  </update>
+  <!--判断是否存在-->
+    <select id="isDataYN" parameterType="tcSysNews" resultType="int">
+    select count(0) from tc_sys_news where id=#{id}
+    </select>
+    <!--
+	 * <p>信息列表 分页。</p>
+	 */
+	public List<TcSysNewsBean> findDataIsPage(IEntity dto);
+	-->
+	<select id="findDataIsPage" resultType="tcSysNewsBean" parameterType="tcSysNews" >
+    select 
+    id ,
+	title ,
+	last_updated 
+    from tc_sys_news
+    where del_flag='0'
+    <if test="info_source!= null" > and info_source=#{info_source}</if>
+    order by last_updated desc
+    </select>
+	<!-- 
+	 * <p>信息列表。</p>
+	public List<TcSysNewsBean> findDataIsList(IEntity dto); -->
+	<select id="findDataIsList" resultType="tcSysNewsBean" parameterType="tcSysNews" >
+    select 
+     id ,
+	title ,
+	last_updated 
+    from tc_sys_news
+    where del_flag='0'
+    <if test="info_source!= null" > and info_source=#{info_source}</if>
+     order by last_updated desc
+   </select>
+   <!-- 逻辑删除 -->
+   <update id="deleteById" parameterType="tcSysNews">
+	  	update tc_sys_news set version=version+1,last_updated=now(),del_flag='1',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+</mapper>
