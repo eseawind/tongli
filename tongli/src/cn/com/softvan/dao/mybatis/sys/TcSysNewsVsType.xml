@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.sys.ITcSysNewsVsTypeDao" >
+  <delete id="deleteByPrimaryKey" parameterType="tcSysNewsVsType" >
+    delete from tc_sys_news_vs_type
+    where new_id = #{new_id}
+  </delete>
+  <insert id="insert" parameterType="tcSysNewsVsType" >
+    insert into tc_sys_news_vs_type (
+	    new_id,
+		type_id,
+		date_created,
+		create_id,
+		create_ip	
+      ) values (
+	    #{new_id},
+		#{type_id},
+		now(),
+		#{create_id},
+		#{create_ip}	
+    )
+  </insert>
+  <select id="findTypeDataByIdIsList" resultType="tcSysNewsTypeBean" parameterType="tcSysNewsType" >
+    select 
+    t2.id as id,
+	t2.name as name
+    from tc_sys_news_vs_type t
+    left join tc_sys_news_type t2 on (t.type_id=t2.id)
+    where 1=1
+  	and t.new_id=#{id}
+    </select>
+</mapper>

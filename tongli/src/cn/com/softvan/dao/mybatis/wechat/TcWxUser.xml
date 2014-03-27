@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.wechat.ITcWxUserDao" >
+  <sql id="Base_Column_List" >
+    subscribe, openid, nickname, remarkname, sex, language, country, province, city, 
+    headimgurl, FROM_UNIXTIME(subscribe_time) as subscribe_time, groupid
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcWxUserBean" parameterType="tcWxUser" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_wx_user
+    where openid = #{openid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcWxUser" >
+    delete from tc_wx_user
+    where openid = #{openid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tcWxUser" >
+    insert into tc_wx_user (subscribe, openid, 
+      nickname, remarkname, sex, 
+      language, country, province, 
+      city, headimgurl, subscribe_time, 
+      groupid)
+    values (#{subscribe,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{remarkname,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{language,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR}, ${subscribe_time}, 
+      #{groupid,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcWxUser" >
+    update tc_wx_user
+    <set >
+      <if test="subscribe != null" >
+        subscribe = #{subscribe,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkname != null" >
+        remarkname = #{remarkname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="headimgurl != null" >
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="subscribe_time != null" >
+        subscribe_time =${subscribe_time},
+      </if>
+      <if test="groupid != null" >
+        groupid = #{groupid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where openid = #{openid,jdbcType=VARCHAR}
+  </update>
+  <!-- 判断信息是否存在
+    int isDataYN(IEntity dto) throws Exception; -->
+    <select id="isDataYN" parameterType="tcWxUser" resultType="int">
+    	select count(0) from tc_wx_user where openid = #{openid,jdbcType=VARCHAR}
+    </select>
+    <!-- 
+     * 查询信息 分页
+    List<TcWxUserBean> findDataIsPage(IEntity dto) throws Exception;
+     -->
+     <select id="findDataIsPage" parameterType="tcWxUser" resultType="tcWxUserBean">
+    	 select 
+			<include refid="Base_Column_List"/>
+		 from tc_wx_user 
+		 order by subscribe_time desc
+     </select>
+    <!-- 
+     * 查询信息 列表
+    List<TcWxUserBean> findDataIsList(IEntity dto) throws Exception; -->
+    <select id="findDataIsList" parameterType="tcWxUser" resultType="tcWxUserBean">
+    	 select 
+			<include refid="Base_Column_List"/>
+		 from tc_wx_user 
+		 order by subscribe_time desc
+     </select>
+</mapper>

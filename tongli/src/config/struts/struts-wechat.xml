@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="wechat_info" namespace="/h" extends="wechat-default" >
+    	<default-interceptor-ref name="wechat-auth" /> 
+    	<!-- 账号绑定 -->
+		<action name="w001_*" class="w001Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W001.jsp</result>
+			<result name="success" type="chain">w001_init</result>
+		</action>
+		<!-- 文章消息 -->
+		<action name="w004_*" class="w004Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W004.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechat/W004_01.jsp</result>
+			<result name="view">/WEB-INF/pages/admin/wechat/W004_02.jsp</result>
+			<result name="success" type="chain">w004_init</result>
+		</action>
+		<!-- 素材管理 begin -->
+		<!-- 图文消息 -->
+		<action name="w002_*" class="w002Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W002.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechat/W002_01.jsp</result>
+			<result name="success" type="chain">w002_init</result>
+		</action>
+		<!-- 图片消息 -->
+		<action name="w003_*" class="w003Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W003.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechat/W003_01.jsp</result>
+			<result name="success" type="chain">w003_init</result>
+		</action>
+		<!-- 文本消息 -->
+		<action name="w009_*" class="w009Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W009.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechat/W009_01.jsp</result>
+			<result name="success" type="chain">w009_init</result>
+		</action>
+		<!-- 音乐消息 -->
+		<action name="w005_*" class="w005Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W005.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechat/W005_01.jsp</result>
+			<result name="success" type="chain">w005_init</result>
+		</action>
+		<!-- 素材管理 end -->
+		<!-- 自定义菜单 -->
+		<action name="w007_*" class="w007Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W007.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechat/W007_01.jsp</result>
+			<result name="success" type="chain">w007_init</result>
+		</action>
+		<!-- 信息接收  展示界面 -->
+		<action name="w010_*" class="w010Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W010.jsp</result>
+			<result name="list">/WEB-INF/pages/admin/wechat/W010_01.jsp</result>
+		</action>
+		<!-- 微信关注者(粉丝)  展示界面 -->
+		<action name="w012_*" class="w012Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W012.jsp</result>
+			<result name="list">/WEB-INF/pages/admin/wechat/W012_01.jsp</result>
+		</action>
+	</package>
+	<!-- 微信api验证 与 消息接收  -->
+	<package name="wechat_api" extends="wechat-default" >
+		<action name="wxapi" class="weChatApiAction" method="init">
+		</action>
+	</package>
+</struts>

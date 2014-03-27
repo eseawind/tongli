@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.sys.ITcSysParterDao" >
+  <sql id="Base_Column_List" >
+	id,
+	version,
+	name,
+	url,
+	pic_url,
+	type,
+	sort_num,
+	is_ontop,
+	is_show,
+	note,
+	date_created,
+	create_id,
+	create_ip,
+	last_updated,
+	update_id,
+	update_ip,
+	del_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcSysParterBean" parameterType="tcSysParter" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_sys_parter
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcSysParter" >
+    delete from tc_sys_parter
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="tcSysParter" >
+    insert into tc_sys_parter (
+	    id,
+		version,
+		name,
+		url,
+		pic_url,
+		type,
+		sort_num,
+		is_ontop,
+		is_show,
+		note,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		del_flag
+      ) values (
+	    #{id},
+		0,
+		#{name},
+		#{url},
+		#{pic_url},
+		#{type},
+		#{sort_num},
+		#{is_ontop},
+		#{is_show},
+		#{note},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		'0'
+    )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcSysParter" >
+    update tc_sys_parter set version=version+1
+    ,last_updated=now()
+	,update_id=#{update_id}
+	,update_ip=#{update_ip}
+	<if test="name!= null" >,name=#{name}</if>
+	<if test="url!= null" >,url=#{url}</if>
+	<if test="pic_url!= null" >,pic_url=#{pic_url}</if>
+	<if test="type!= null" >,type=#{type}</if>
+	<if test="sort_num!= null" >,sort_num=#{sort_num}</if>
+	<if test="is_ontop!= null" >,is_ontop=#{is_ontop}</if>
+	<if test="is_show!= null" >,is_show=#{is_show}</if>
+	<if test="note!= null" >,note=#{note}</if>
+	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+	where id=#{id}
+  </update>
+  	<!--判断是否存在-->
+    <select id="isDataYN" parameterType="tcSysParter" resultType="int">
+    select count(0) from tc_sys_parter where id=#{id}
+    </select>
+    <!--
+	 * <p>信息列表 分页。</p>
+	 */
+	public List<TcSysParterBean> findDataIsPage(IEntity dto);
+	-->
+	<select id="findDataIsPage" resultType="tcSysParterBean" parameterType="tcSysParter" >
+    select
+	<include refid="Base_Column_List"/>
+	from tc_sys_parter t1
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+    <if test="type!=null"> and t1.type=#{type}</if>
+    order by t1.sort_num asc
+    </select>
+	<!-- 
+	 * <p>信息列表。</p>
+	public List<TcSysParterBean> findDataIsList(IEntity dto); -->
+	<select id="findDataIsList" resultType="tcSysParterBean" parameterType="tcSysParter" >
+	select
+	<include refid="Base_Column_List"/>
+	from tc_sys_parter t1
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+    <if test="type!=null"> and t1.type=#{type}</if>
+    order by t1.sort_num asc
+   </select>
+   <!-- 逻辑删除 -->
+   <update id="deleteById" parameterType="tcSysParter">
+	  	update tc_sys_parter set version=version+1,last_updated=now(),del_flag='1',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+   <!-- 恢复逻辑删除的数据 -->
+   <update id="recoveryDataById" parameterType="tcSysParter">
+	  	update tc_sys_parter set version=version+1,last_updated=now(),del_flag='0',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+   <select id="findDataIsListTop" resultType="tcSysParterBean" parameterType="tcSysParter" >
+	select
+	<include refid="Base_Column_List"/>
+	from tc_sys_parter t1
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+    <if test="type!=null"> and t1.type=#{type}</if>
+    order by t1.is_ontop desc, t1.sort_num asc
+    limit 0,8
+   </select>
+</mapper>
