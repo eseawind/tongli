@@ -3,12 +3,14 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.03.18  wuxiaogang      程序发布
+ * 1.00     2014.03.25  wuxiaogang      程序发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.bean.sys;
+
+import java.util.List;
 
 import cn.com.softvan.bean.BaseBean;
 
@@ -43,7 +45,15 @@ public class TcSysNewsBean extends BaseBean {
 	private String click_count;
 	/** 消息类型 */
 	private String msgtype;
-	/** 消息来源0, 微信,1,网站 */
+	/** 资讯栏目集合 */
+	private List<String> news_type;
+	/** new_id */
+	private String new_id;
+	/** type_id */
+	private String type_id;
+	/** 标题图url */
+	private String pic_url;
+	/** 消息来源0:微信,1:网站 */
 	private String info_source;
 	/**
 	 * ID取得
@@ -172,18 +182,73 @@ public class TcSysNewsBean extends BaseBean {
 	    this.msgtype = msgtype;
 	}
 	/**
-	 * 消息来源0, 微信,1,网站取得
-	 * @return 消息来源0, 微信,1,网站
+	 * 资讯栏目集合取得
+	 * @return 资讯栏目集合
+	 */
+	public List<String> getNews_type() {
+	    return news_type;
+	}
+	/**
+	 * 资讯栏目集合设定
+	 * @param news_type 资讯栏目集合
+	 */
+	public void setNews_type(List<String> news_type) {
+	    this.news_type = news_type;
+	}
+	/**
+	 * new_id取得
+	 * @return new_id
+	 */
+	public String getNew_id() {
+	    return new_id;
+	}
+	/**
+	 * new_id设定
+	 * @param new_id new_id
+	 */
+	public void setNew_id(String new_id) {
+	    this.new_id = new_id;
+	}
+	/**
+	 * type_id取得
+	 * @return type_id
+	 */
+	public String getType_id() {
+	    return type_id;
+	}
+	/**
+	 * type_id设定
+	 * @param type_id type_id
+	 */
+	public void setType_id(String type_id) {
+	    this.type_id = type_id;
+	}
+	/**
+	 * 标题图url取得
+	 * @return 标题图url
+	 */
+	public String getPic_url() {
+	    return pic_url;
+	}
+	/**
+	 * 标题图url设定
+	 * @param pic_url 标题图url
+	 */
+	public void setPic_url(String pic_url) {
+	    this.pic_url = pic_url;
+	}
+	/**
+	 * 消息来源0:微信,1:网站取得
+	 * @return 消息来源0:微信,1:网站
 	 */
 	public String getInfo_source() {
 	    return info_source;
 	}
 	/**
-	 * 消息来源0, 微信,1,网站设定
-	 * @param info_source 消息来源0, 微信,1,网站
+	 * 消息来源0:微信,1:网站设定
+	 * @param info_source 消息来源0:微信,1:网站
 	 */
 	public void setInfo_source(String info_source) {
 	    this.info_source = info_source;
 	}
-
 }

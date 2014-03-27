@@ -15,8 +15,12 @@
 	<bean id="baseAction" class="cn.com.softvan.web.action.BaseAction" scope="prototype">
 		<property name="userLogsManager" ref="userLogsManager"></property>
 	</bean>
+	<!-- 行政区划 管理 -->
+	<bean id="areaAction" class="cn.com.softvan.web.action.adi.AreaAction" scope="prototype">
+		<property name="areaManager" ref="areaManager"></property>
+	</bean>
 	<!-- 微信api验证 与 消息接收  -->
-	<bean id="weCharApiAction" class="cn.com.softvan.web.action.wechar.WeCharApiAction" scope="prototype">
+	<bean id="weChatApiAction" class="cn.com.softvan.web.action.wechat.WeChatApiAction" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 		<property name="taskExecutor" ref="taskExecutor"></property>
 		<property name="jedisHelper" ref="jedisHelper"></property>
@@ -25,39 +29,54 @@
 	<!-- 系统登陆与系统首页 Action -->
 	<bean id="homeAction" class="cn.com.softvan.web.action.HomeAction" scope="prototype"/>
 	<!-- 微信服务_微信号绑定 -->
-	<bean id="w001Action" class="cn.com.softvan.web.action.wechar.W001Action" scope="prototype">
+	<bean id="w001Action" class="cn.com.softvan.web.action.wechat.W001Action" scope="prototype">
 		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
 	</bean>
 	<!-- 微信服务_素材管理_文章消息 -->
-	<bean id="w004Action" class="cn.com.softvan.web.action.wechar.W004Action" scope="prototype">
+	<bean id="w004Action" class="cn.com.softvan.web.action.wechat.W004Action" scope="prototype">
 		<property name="newsManager" ref="newsManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_图文消息 -->
-	<bean id="w002Action" class="cn.com.softvan.web.action.wechar.W002Action" scope="prototype">
+	<bean id="w002Action" class="cn.com.softvan.web.action.wechat.W002Action" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_图片消息 -->
-	<bean id="w003Action" class="cn.com.softvan.web.action.wechar.W003Action" scope="prototype">
+	<bean id="w003Action" class="cn.com.softvan.web.action.wechat.W003Action" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_文本消息 -->
-	<bean id="w009Action" class="cn.com.softvan.web.action.wechar.W009Action" scope="prototype">
+	<bean id="w009Action" class="cn.com.softvan.web.action.wechat.W009Action" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_音乐消息 -->
-	<bean id="w005Action" class="cn.com.softvan.web.action.wechar.W005Action" scope="prototype">
+	<bean id="w005Action" class="cn.com.softvan.web.action.wechat.W005Action" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_自定义菜单 -->
-	<bean id="w007Action" class="cn.com.softvan.web.action.wechar.W007Action" scope="prototype">
+	<bean id="w007Action" class="cn.com.softvan.web.action.wechat.W007Action" scope="prototype">
 		<property name="tcWxMenuManager" ref="tcWxMenuManager"></property>
 	</bean>
 	<!-- 微信服务_信息接收  展示 -->
-	<bean id="w010Action" class="cn.com.softvan.web.action.wechar.W010Action" scope="prototype">
+	<bean id="w010Action" class="cn.com.softvan.web.action.wechat.W010Action" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_微信关注者_(粉丝)  展示 -->
-	<bean id="w012Action" class="cn.com.softvan.web.action.wechar.W012Action" scope="prototype">
+	<bean id="w012Action" class="cn.com.softvan.web.action.wechat.W012Action" scope="prototype">
 		<property name="tcWxUserManager" ref="tcWxUserManager"></property>
 	</bean>
+	<!-- =======系统管理  begin======== -->
+	<!-- 资讯管理 -->
+	<bean id="s001Action" class="cn.com.softvan.web.action.sys.S001Action" scope="prototype">
+		<property name="newsManager" ref="newsManager"></property>
+		<property name="newsTypeManager" ref="newsTypeManager"></property>
+	</bean>
+	<!-- 资讯栏目管理 -->
+	<bean id="s002Action" class="cn.com.softvan.web.action.sys.S002Action" scope="prototype">
+		<property name="newsTypeManager" ref="newsTypeManager"></property>
+	</bean>
+	<!-- 友情链接 管理 -->
+	<bean id="s003Action" class="cn.com.softvan.web.action.sys.S003Action" scope="prototype">
+		<property name="parterManager" ref="parterManager"></property>
+	</bean>
+	<!-- =======系统管理  end======== -->
 </beans>

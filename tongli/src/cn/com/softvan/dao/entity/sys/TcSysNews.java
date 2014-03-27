@@ -39,7 +39,11 @@ public class TcSysNews extends BaseEntity {
 	private String click_count;
 	/** 消息类型 */
 	private String msgtype;
-	/** 消息来源0, 微信,1,网站 */
+	/** type_id */
+	private String type_id;
+	/** 标题图url */
+	private String pic_url;
+	/** 消息来源0:微信,1:网站 */
 	private String info_source;
 	/**
 	 * ID取得
@@ -168,18 +172,45 @@ public class TcSysNews extends BaseEntity {
 	    this.msgtype = msgtype;
 	}
 	/**
-	 * 消息来源0, 微信,1,网站取得
-	 * @return 消息来源0, 微信,1,网站
+	 * type_id取得
+	 * @return type_id
+	 */
+	public String getType_id() {
+	    return type_id;
+	}
+	/**
+	 * type_id设定
+	 * @param type_id type_id
+	 */
+	public void setType_id(String type_id) {
+	    this.type_id = type_id;
+	}
+	/**
+	 * 标题图url取得
+	 * @return 标题图url
+	 */
+	public String getPic_url() {
+	    return pic_url;
+	}
+	/**
+	 * 标题图url设定
+	 * @param pic_url 标题图url
+	 */
+	public void setPic_url(String pic_url) {
+	    this.pic_url = pic_url;
+	}
+	/**
+	 * 消息来源0:微信,1:网站取得
+	 * @return 消息来源0:微信,1:网站
 	 */
 	public String getInfo_source() {
 	    return info_source;
 	}
 	/**
-	 * 消息来源0, 微信,1,网站设定
-	 * @param info_source 消息来源0, 微信,1,网站
+	 * 消息来源0:微信,1:网站设定
+	 * @param info_source 消息来源0:微信,1:网站
 	 */
 	public void setInfo_source(String info_source) {
 	    this.info_source = info_source;
 	}
-
 }

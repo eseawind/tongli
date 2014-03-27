@@ -39,30 +39,30 @@
 					系统主页
 					</a>
 				</li>
-				<li id="wechar" class="">
+				<li id="wechat" class="">
 					<a class="" href="javascript:;">
 					<i class="fa fa-leaf"></i> 
 					<span class="title">微信服务</span>
-					<span id="wechar_arrow" class="arrow"></span>
+					<span id="wechat_arrow" class="arrow"></span>
 					</a>
-					<ul id="wechar_sub_menu" style="display: none;" class="sub-menu">
+					<ul id="wechat_sub_menu" style="display: none;" class="sub-menu">
 						<li id="w004_init">
 							<a href="${basePath}/h/w004_init.ac">
 							文章管理
 							</a>
 						</li>
-						<li id="wechar_sub_menu_li" class="">
+						<li id="wechat_sub_menu_li" class="">
 							<a href="javascript:;">
 							自动回复(关键字)
-							<span id="wechar_sub_menu_li_arrow" class="arrow"></span>
+							<span id="wechat_sub_menu_li_arrow" class="arrow"></span>
 							</a>
-							<ul id="wechar_sub_menu_li_sub_menu" style="display: none;" class="sub-menu">
-								<li id="wechar_sub_menu_li_sub_menu_1"><a href="${basePath}/h/w002_init.ac">图文</a></li>
-								<li id="wechar_sub_menu_li_sub_menu_2"><a href="${basePath}/h/w003_init.ac">图片</a></li>
-								<li id="wechar_sub_menu_li_sub_menu_3"><a href="${basePath}/h/w009_init.ac">文本</a></li>
-								<li id="wechar_sub_menu_li_sub_menu_4"><a href="${basePath}/h/w005_init.ac">音乐</a></li>
-								<li id="wechar_sub_menu_li_sub_menu_10"><a href="#" onclick="myAlert('功能即将开放')">语音</a></li>
-								<li id="wechar_sub_menu_li_sub_menu_5"><a href="#" onclick="myAlert('功能即将开放')">视频</a></li>
+							<ul id="wechat_sub_menu_li_sub_menu" style="display: none;" class="sub-menu">
+								<li id="wechat_sub_menu_li_sub_menu_1"><a href="${basePath}/h/w002_init.ac">图文</a></li>
+								<li id="wechat_sub_menu_li_sub_menu_2"><a href="${basePath}/h/w003_init.ac">图片</a></li>
+								<li id="wechat_sub_menu_li_sub_menu_3"><a href="${basePath}/h/w009_init.ac">文本</a></li>
+								<li id="wechat_sub_menu_li_sub_menu_4"><a href="#"  onclick="myAlert('功能即将开放')">音乐</a></li><!-- ${basePath}/h/w005_init.ac -->
+								<li id="wechat_sub_menu_li_sub_menu_10"><a href="#" onclick="myAlert('功能即将开放')">语音</a></li>
+								<li id="wechat_sub_menu_li_sub_menu_5"><a href="#" onclick="myAlert('功能即将开放')">视频</a></li>
 							</ul>
 						</li>
 						<li id="w010_init">
@@ -105,7 +105,7 @@
 						</li>
 						<li id="w012_init">
 							<a href="${basePath}/h/w012_init.ac">
-							用户管理
+							粉丝列表
 							</a>
 						</li>
 						<li id="w007_init">
@@ -115,37 +115,27 @@
 						</li>
 					</ul>
 				</li>
-				<li class="">
-					<a class="active" href="javascript:;">
-					<i class="fa fa-cogs"></i> 
-					<span class="title">车主管家</span>
-					<span class="arrow "></span>
-					</a>
-					<ul style="display: none;" class="sub-menu">
-						<li>
-							<a href="#" onclick="myAlert('功能即将开放')">
-							功能1
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="">
+				<li id="sys" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-bar-chart-o"></i> 
-					<span class="title">系统日志</span>
-					<span class="arrow"></span>
+					<span class="title">资讯管理</span>
+					<span id="sys_arrow" class="arrow"></span>
 					</a>
-					<ul style="display: none;" class="sub-menu">
-						<li>
-							<a href="#" onclick="myAlert('功能即将开放')">
-							管理员操作日志
-							</a>
-						</li>
-						<li>
-							<a href="#" onclick="myAlert('功能即将开放')">
-							系统运行日志
-							</a>
-						</li>
+					<ul id="sys_sub_menu" style="display: none;" class="sub-menu">
+						<li id="sys_sub_menu_l1_sub_menu_l0"><a href="${basePath }/h/s002_init.ac">栏目管理</a></li>
+						<li id="sys_sub_menu_l1_sub_menu_l1"><a href="${basePath }/h/s001_init.ac">资讯管理</a></li>
+						<li id="sys_sub_menu_l1_sub_menu_l2"><a href="${basePath }/h/s001_recycle.ac">资讯回收站</a></li>
+					</ul>
+				</li>
+				<li id="sys3" class="">
+					<a class="active" href="javascript:;">
+					<i class="fa fa-bullhorn"></i> 
+					<span class="title">友情链接</span>
+					<span id="sys3_arrow" class="arrow"></span>
+					</a>
+					<ul id="sys3_sub_menu" style="display: none;" class="sub-menu">
+						<li id="sys3_sub_menu_l1_sub_menu_l1"><a href="${basePath }/h/s003_init.ac">信息管理</a></li>
+						<li id="sys3_sub_menu_l1_sub_menu_l2"><a href="${basePath }/h/s003_recycle.ac">信息回收站</a></li>
 					</ul>
 				</li>
 			</ul>

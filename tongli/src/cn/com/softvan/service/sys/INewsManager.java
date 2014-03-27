@@ -5,7 +5,7 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.18  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家 System. - All Rights Reserved.
+ * Copyright 2014 jfq System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.service.sys;
@@ -13,6 +13,7 @@ package cn.com.softvan.service.sys;
 import java.util.List;
 
 import cn.com.softvan.bean.sys.TcSysNewsBean;
+import cn.com.softvan.bean.sys.TcSysNewsTypeBean;
 
 
 /**
@@ -38,6 +39,14 @@ public interface INewsManager {
 	 * @return 处理结果
 	 */
 	public String deleteData(TcSysNewsBean bean) throws Exception;
+	/**
+	 * <p>信息 单条。</p>
+	 * <ol>[功能概要] 
+	 * <div>恢复逻辑删除的数据。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public String recoveryDataById(TcSysNewsBean bean) throws Exception;
 	/**
 	 * <p>信息 单条。</p>
 	 * <ol>[功能概要] 
@@ -73,4 +82,13 @@ public interface INewsManager {
 	 * @return 处理结果
 	 */
 	public TcSysNewsBean findDataById(TcSysNewsBean bean);
+	/**
+	 * <p>根据资讯id查询资讯的所属栏目集合。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>集合。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcSysNewsTypeBean> findTypeDataByIdIsList(TcSysNewsBean bean);
 }

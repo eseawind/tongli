@@ -22,7 +22,7 @@ import java.io.PrintWriter;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
-import cn.com.softvan.common.wechar.WxApiUtil;
+import cn.com.softvan.common.wechat.WxApiUtil;
 
 /**
  * <p>IO工具类</p>

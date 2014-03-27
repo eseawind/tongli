@@ -23,7 +23,7 @@
 	 <!--上传文件的大小限制 B-->
 	<constant name="struts.multipart.maxSize" value="10701096"/>
 	<!-- 基类package，定义了所有action共用的拦截器栈 -->
-	<package name="wechar-default" extends="struts-default"
+	<package name="wechat-default" extends="struts-default"
 		abstract="true">
 		<!-- 拦截器配置 -->
 		<interceptors>
@@ -32,7 +32,7 @@
 				class="cn.com.softvan.filter.ExceptionAndExecuteTimeInterceptor">
 			</interceptor>
 			<!-- 定义默认拦截器栈 -->
-			<interceptor-stack name="wechar-default">
+			<interceptor-stack name="wechat-default">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="exceptionAndExecuteTimeInterceptor" />
 			</interceptor-stack>
@@ -42,18 +42,13 @@
 				class="cn.com.softvan.filter.AuthInterceptor">
 			</interceptor>
 			
-			<interceptor-stack name="checkBlind">
-				<interceptor-ref name="defaultStack" />
-				<interceptor-ref name="exceptionAndExecuteTimeInterceptor" />
-			</interceptor-stack>
-			
 			<!-- 定义权限拦截器栈 -->
-			<interceptor-stack name="wechar-auth">
+			<interceptor-stack name="wechat-auth">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="authInterceptor" />
 			</interceptor-stack>
 		</interceptors>
-		<default-interceptor-ref name="wechar-default" />
+		<default-interceptor-ref name="wechat-default" />
 
 		<!-- 全局 results配置 -->
 		<global-results>
@@ -68,13 +63,16 @@
 		</global-exception-mappings>
 	</package>
 	
-	<package name="default-package" extends="wechar-default">
+	<package name="default-package" extends="wechat-default">
 		<!-- 验证码图片 -->
 		<action name="verifyImage" class="cn.com.softvan.web.action.VerifyImageAction" method="verifyImage">
 		</action>
+		<!-- 行政区划 -->
+		<action name="area_*" class="areaAction" method="{1}">
+		</action>
 	</package>
-	<package name="home-package" extends="wechar-default">
-		<default-interceptor-ref name="wechar-auth" />
+	<package name="home-package" extends="wechat-default">
+		<default-interceptor-ref name="wechat-auth" />
 		<!-- 初始化界面 -->
 		<action name="home_*" class="homeAction" method="{1}">
 		    <result type="redirect" name="home">/h/home_init.ac</result>

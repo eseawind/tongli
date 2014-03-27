@@ -3,7 +3,7 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.03.18  wuxiaogang      程序・发布
+ * 1.00     2014.03.25  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家 System. - All Rights Reserved.
  *
@@ -18,13 +18,16 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.softvan.bean.sys.TcSysNewsBean;
+import cn.com.softvan.bean.sys.TcSysNewsTypeBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IOHelper;
 import cn.com.softvan.common.IdUtils;
-import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.dao.daointer.sys.ITcSysNewsDao;
+import cn.com.softvan.dao.daointer.sys.ITcSysNewsVsTypeDao;
 import cn.com.softvan.dao.entity.sys.TcSysNews;
+import cn.com.softvan.dao.entity.sys.TcSysNewsType;
+import cn.com.softvan.dao.entity.sys.TcSysNewsVsType;
 import cn.com.softvan.service.BaseManager;
 import cn.com.softvan.service.sys.INewsManager;
 /**
@@ -41,8 +44,8 @@ public class NewsManager extends BaseManager implements INewsManager {
 	
 	/**信息DAO 接口类*/
 	private ITcSysNewsDao tcSysNewsDao;
-	/**redis缓存工具类*/
-	private JedisHelper jedisHelper;
+	/**资讯信息 栏目 分类 Dao类 */
+	private ITcSysNewsVsTypeDao tcSysNewsVsTypeDao;
 	/**
 	 * <p>信息编辑。</p>
 	 * <ol>[功能概要] 
@@ -70,7 +73,7 @@ public class NewsManager extends BaseManager implements INewsManager {
 				IOHelper.deleteFile(bean.getDetail_info());//TODO=删除文件
 				dto.setDetail_info(IOHelper.writeHtml("html",bean.getDetail_info()));//内容
 				}
-				dto.setIs_ontop(bean.getIs_ontop());//推荐置顶
+				dto.setIs_ontop(!"1".equals(bean.getIs_ontop())?"0":"1");//推荐置顶
 				dto.setClick_count(bean.getClick_count());//点击量
 				dto.setMsgtype(bean.getMsgtype());//消息类型
 				dto.setNote(bean.getNote());//备注
@@ -81,7 +84,8 @@ public class NewsManager extends BaseManager implements INewsManager {
 				dto.setUpdate_id(bean.getUpdate_id());//修改者ID
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 				dto.setDel_flag(bean.getDel_flag());//是否删除
-				dto.setInfo_source(bean.getInfo_source());//消息来源0, 微信,1,网站
+				dto.setPic_url(bean.getPic_url());//标题图url
+				dto.setInfo_source(bean.getInfo_source());//0微信1网站
 				//判断数据是否存在
 				if(tcSysNewsDao.isDataYN(dto)!=0){
 					//数据存在
@@ -92,6 +96,21 @@ public class NewsManager extends BaseManager implements INewsManager {
 						dto.setId(IdUtils.createUUID(32));
 					}
 					tcSysNewsDao.insert(dto);
+				}
+				//增加资讯 栏目 关联关系
+				if(bean.getNews_type()!=null){
+					//TODO ---清空资讯栏目关联关系----
+					TcSysNewsVsType typeDto1=new TcSysNewsVsType();
+					typeDto1.setNew_id(dto.getId());//资讯id
+					tcSysNewsVsTypeDao.deleteByPrimaryKey(typeDto1);
+					//==================================================
+					for(String type:bean.getNews_type()){
+						TcSysNewsVsType typeDto2=new TcSysNewsVsType();
+						typeDto2.setNew_id(dto.getId());//资讯id
+						typeDto2.setType_id(type);//资讯栏目id
+						//TODO ---保存资讯栏目关联关系----
+						tcSysNewsVsTypeDao.insert(typeDto2);
+					}
 				}
 			} catch (Exception e) {
 				msg="信息保存失败,数据库处理错误!";
@@ -164,7 +183,10 @@ public class NewsManager extends BaseManager implements INewsManager {
 			dto.setKeyword(bean.getKeyword());//关键字
 			dto.setIs_ontop(bean.getIs_ontop());//推荐置顶
 			dto.setMsgtype(bean.getMsgtype());//消息类型
-			dto.setInfo_source(bean.getInfo_source());//消息来源0, 微信,1,网站
+			dto.setType_id(bean.getType_id());//
+			dto.setPageInfo(bean.getPageInfo());//分页对象
+			dto.setDel_flag(bean.getDel_flag());//删除标记
+			dto.setInfo_source(bean.getInfo_source());//0微信1网站
     	   }
 			beans=tcSysNewsDao.findDataIsPage(dto);
 		} catch (Exception e) {
@@ -190,7 +212,9 @@ public class NewsManager extends BaseManager implements INewsManager {
 		   			dto.setKeyword(bean.getKeyword());//关键字
 		   			dto.setIs_ontop(bean.getIs_ontop());//推荐置顶
 		   			dto.setMsgtype(bean.getMsgtype());//消息类型
-		   			dto.setInfo_source(bean.getInfo_source());//消息来源0, 微信,1,网站
+		   			dto.setDel_flag(bean.getDel_flag());//是否删除
+		   			dto.setType_id(bean.getType_id());//
+		   			dto.setInfo_source(bean.getInfo_source());//0微信1网站
 	    	   }
 				beans=tcSysNewsDao.findDataIsList(dto);
 		} catch (Exception e) {
@@ -216,7 +240,8 @@ public class NewsManager extends BaseManager implements INewsManager {
 	   			dto.setKeyword(bean.getKeyword());//关键字
 	   			dto.setIs_ontop(bean.getIs_ontop());//推荐置顶
 	   			dto.setMsgtype(bean.getMsgtype());//消息类型
-	   			dto.setInfo_source(bean.getInfo_source());//消息来源0, 微信,1,网站
+	   			dto.setDel_flag(bean.getDel_flag());//是否删除
+	   			dto.setInfo_source(bean.getInfo_source());//0微信1网站
     	   }
 			bean1=tcSysNewsDao.selectByPrimaryKey(dto);
 			if(bean1!=null){
@@ -242,17 +267,60 @@ public class NewsManager extends BaseManager implements INewsManager {
 	    this.tcSysNewsDao = tcSysNewsDao;
 	}
 	/**
-	 * redis缓存工具类取得
-	 * @return redis缓存工具类
+	 * <p>信息 单条。</p>
+	 * <ol>[功能概要] 
+	 * <div>恢复逻辑删除的数据。</div>
+	 * </ol>
+	 * @return 处理结果
 	 */
-	public JedisHelper getJedisHelper() {
-	    return jedisHelper;
+	public String recoveryDataById(TcSysNewsBean bean) throws Exception{
+		String msg="1";
+		if(bean!=null){
+			try {
+				TcSysNews dto=new TcSysNews();
+				dto.setId(bean.getId());//ID
+				tcSysNewsDao.recoveryDataById(dto);
+			} catch (Exception e) {
+				msg="信息删除失败,数据库处理错误!";
+				log.error(msg, e);
+				throw new Exception(msg);
+			}
+		}
+		return msg;
 	}
 	/**
-	 * redis缓存工具类设定
-	 * @param jedisHelper redis缓存工具类
+	 * 资讯信息 栏目 分类 Dao类取得
+	 * @return 资讯信息 栏目 分类 Dao类
 	 */
-	public void setJedisHelper(JedisHelper jedisHelper) {
-	    this.jedisHelper = jedisHelper;
+	public ITcSysNewsVsTypeDao getTcSysNewsVsTypeDao() {
+	    return tcSysNewsVsTypeDao;
+	}
+	/**
+	 * 资讯信息 栏目 分类 Dao类设定
+	 * @param tcSysNewsVsTypeDao 资讯信息 栏目 分类 Dao类
+	 */
+	public void setTcSysNewsVsTypeDao(ITcSysNewsVsTypeDao tcSysNewsVsTypeDao) {
+	    this.tcSysNewsVsTypeDao = tcSysNewsVsTypeDao;
+	}
+	/**
+	 * <p>根据资讯id查询资讯的所属栏目集合。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>集合。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcSysNewsTypeBean> findTypeDataByIdIsList(TcSysNewsBean bean){
+		List<TcSysNewsTypeBean> beans=null;
+		try {
+			TcSysNewsType dto=new TcSysNewsType();
+	    	   if(bean!=null){
+	    		    dto.setId(bean.getId());//资讯ID
+	    	   }
+				beans=tcSysNewsVsTypeDao.findTypeDataByIdIsList(dto);
+		} catch (Exception e) {
+			log.error("信息查询失败,数据库错误!", e);
+		}
+		return beans;
 	}
 }

@@ -23,19 +23,22 @@
 		<setting name="defaultStatementTimeout" value="25000" />
 	</settings>
 	<typeAliases>
+		<!-- 行政区划 begin -->
+		<typeAlias type="cn.com.softvan.bean.adi.AreaBean" alias="AreaBean"/>
+		<!-- 行政区划 end -->
 		<!-- 微信后台模块 begin--> 
 		<!-- bean class -->
-		<typeAlias type="cn.com.softvan.bean.wechar.TcWxMenuBean" alias="tcWxMenuBean"/>
-		<typeAlias type="cn.com.softvan.bean.wechar.TcWxPublicUserBean" alias="tcWxPublicUserBean"/>
-		<typeAlias type="cn.com.softvan.bean.wechar.TcWxInfoBean" alias="tcWxInfoBean"/>
-		<typeAlias type="cn.com.softvan.bean.wechar.TcWxUserBean" alias="tcWxUserBean"/>
-		<typeAlias type="cn.com.softvan.bean.wechar.TcWxUserGroupsBean" alias="tcWxUserGroupsBean"/>
+		<typeAlias type="cn.com.softvan.bean.wechat.TcWxMenuBean" alias="tcWxMenuBean"/>
+		<typeAlias type="cn.com.softvan.bean.wechat.TcWxPublicUserBean" alias="tcWxPublicUserBean"/>
+		<typeAlias type="cn.com.softvan.bean.wechat.TcWxInfoBean" alias="tcWxInfoBean"/>
+		<typeAlias type="cn.com.softvan.bean.wechat.TcWxUserBean" alias="tcWxUserBean"/>
+		<typeAlias type="cn.com.softvan.bean.wechat.TcWxUserGroupsBean" alias="tcWxUserGroupsBean"/>
 		<!-- entity class -->
-		<typeAlias type="cn.com.softvan.dao.entity.wechar.TcWxMenu" alias="tcWxMenu"/>
-		<typeAlias type="cn.com.softvan.dao.entity.wechar.TcWxPublicUser" alias="tcWxPublicUser"/>
-		<typeAlias type="cn.com.softvan.dao.entity.wechar.TcWxInfo" alias="tcWxInfo"/>
-		<typeAlias type="cn.com.softvan.dao.entity.wechar.TcWxUser" alias="tcWxUser"/>
-		<typeAlias type="cn.com.softvan.dao.entity.wechar.TcWxUserGroups" alias="tcWxUserGroups"/>
+		<typeAlias type="cn.com.softvan.dao.entity.wechat.TcWxMenu" alias="tcWxMenu"/>
+		<typeAlias type="cn.com.softvan.dao.entity.wechat.TcWxPublicUser" alias="tcWxPublicUser"/>
+		<typeAlias type="cn.com.softvan.dao.entity.wechat.TcWxInfo" alias="tcWxInfo"/>
+		<typeAlias type="cn.com.softvan.dao.entity.wechat.TcWxUser" alias="tcWxUser"/>
+		<typeAlias type="cn.com.softvan.dao.entity.wechat.TcWxUserGroups" alias="tcWxUserGroups"/>
 		<!-- 微信后台模块 end--> 
 		
 		<!-- 系统管理模块 begin -->
@@ -55,12 +58,15 @@
 	</plugins>
 	<!-- xxx -->
 	<mappers>
+		<!-- 行政区划 begin -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/adi/area.xml"/>
+		<!-- 行政区划 end -->
 		<!-- 微信后台模块 begin-->
-		<mapper resource="/cn/com/softvan/dao/mybatis/wechar/TcWxMenu.xml"/>
-		<mapper resource="/cn/com/softvan/dao/mybatis/wechar/TcWxPublicUser.xml"/>
-		<mapper resource="/cn/com/softvan/dao/mybatis/wechar/TcWxInfo.xml"/>
-		<mapper resource="/cn/com/softvan/dao/mybatis/wechar/TcWxUser.xml"/>
-		<mapper resource="/cn/com/softvan/dao/mybatis/wechar/TcWxUserGroups.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/wechat/TcWxMenu.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/wechat/TcWxPublicUser.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/wechat/TcWxInfo.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/wechat/TcWxUser.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/wechat/TcWxUserGroups.xml"/>
 		<!-- 微信后台模块 end-->		
 		
 		<!-- 行政区划 begin-->	

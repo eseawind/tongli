@@ -14,7 +14,6 @@ import java.util.List;
 
 import cn.com.softvan.bean.sys.TcSysNewsBean;
 import cn.com.softvan.dao.entity.IEntity;
-import cn.com.softvan.dao.entity.sys.TcSysNews;
 /**
  * <p> 资讯信息 Dao类 <p>
  * @author wuxiaogang
@@ -48,6 +47,10 @@ public interface ITcSysNewsDao {
      * 逻辑删除
      */
     int deleteById(IEntity dto);
+    /**
+     * 恢复逻辑删除的数据
+     */
+    int recoveryDataById(IEntity dto);
     /**
 	 * <p>信息列表 分页。</p>
 	 * <ol>[功能概要] 
