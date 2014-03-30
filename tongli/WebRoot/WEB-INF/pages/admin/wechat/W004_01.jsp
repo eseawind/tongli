@@ -33,8 +33,7 @@
 <meta name="MobileOptimized" content="320">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%@ include file="../include/public_js_css.jsp"%>
-<link href="${basePath}/css/messages.css" media="all" rel="stylesheet"
-	type="text/css" />
+<link href="${basePath}/css/messages.css" media="all" rel="stylesheet"	type="text/css" />
 
 <link href="${basePath}/css/font-awesome/css/font-awesome.css"
 	rel="stylesheet">
@@ -90,6 +89,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<form accept-charset="UTF-8"  action="${basePath}/h/w004_save.ac" class="edit_article" id="edit_article_13632" method="post">
+						<s:token></s:token>
 						<input name="bean.id" type="hidden" value="${bean.id}">
 						<div class="form-group">
 							<label for="article_title">标题</label> <input class="form-control"

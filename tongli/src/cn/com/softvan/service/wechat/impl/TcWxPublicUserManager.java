@@ -83,7 +83,7 @@ public class TcWxPublicUserManager extends BaseManager implements ITcWxPublicUse
 					tcWxPublicUserDao.insert(dto);
 				}
 				//缓存公共账号信息
-				jedisHelper.set(CommonConstant.SESSION_WECHAR_BEAN, bean);
+				jedisHelper.set(CommonConstant.SESSION_WECHAT_BEAN, bean);
 			} catch (Exception e) {
 				msg="信息保存失败,数据库处理错误!";
 				log.error(msg, e);
@@ -163,7 +163,7 @@ public class TcWxPublicUserManager extends BaseManager implements ITcWxPublicUse
 	 * 初始
 	 */
 	public void initCache(){
-		if(!"1".equals(jedisHelper.get(CommonConstant.SESSION_WECHAR_BEAN_FLAG))){
+		if(!"1".equals(jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN_FLAG))){
 			TcWxPublicUserBean bean=new TcWxPublicUserBean();
 			BaseUserBean user= null;
 			try {
@@ -175,8 +175,8 @@ public class TcWxPublicUserManager extends BaseManager implements ITcWxPublicUse
 				log.error("缓存中读取管理员信息异常", e);
 			}
 			//缓存公共账号信息
-			jedisHelper.set(CommonConstant.SESSION_WECHAR_BEAN, findDataById(bean));
-			jedisHelper.set(CommonConstant.SESSION_WECHAR_BEAN_FLAG,"1");
+			jedisHelper.set(CommonConstant.SESSION_WECHAT_BEAN, findDataById(bean));
+			jedisHelper.set(CommonConstant.SESSION_WECHAT_BEAN_FLAG,"1");
 		}
 	}
 }

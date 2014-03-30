@@ -158,6 +158,16 @@
 	<bean id="tcSysVariableDao" parent="baseDao">
 		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.sys.ITcSysVariableDao"></property>
 	</bean>
+	<bean id="tcSysNewsTypeDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.sys.ITcSysNewsTypeDao"></property>
+	</bean>
+	<bean id="tcSysNewsVsTypeDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.sys.ITcSysNewsVsTypeDao"></property>
+	</bean>
+	<bean id="tcSysParterDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.sys.ITcSysParterDao"></property>
+	</bean>
+	<!-- 系统管理 dao end -->
 	<!-- 系统管理 dao end -->
 	<!-- 附件 dao begin -->
 	<bean id="tcFileDao" parent="baseDao">

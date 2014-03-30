@@ -33,13 +33,10 @@
 <meta name="MobileOptimized" content="320">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%@ include file="../include/public_js_css.jsp"%>
+<link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/pages/timeline.css" rel="stylesheet" type="text/css"/>
 <style type="text/css">
-.timeline div.timeline-icon,.timeline .timeline-blue,
-.timeline .timeline-green,
-.timeline .timeline-purple,
-.timeline .timeline-red,
-.timeline .timeline-grey{left: 20px;}
+.timeline div.timeline-icon,.timeline .timeline-blue{left: 20px;}
 .timeline:before{left: 40px;}
 .timeline div.timeline-body{margin:0px 0px 15px 60px;}
 .userInfo{
@@ -123,8 +120,33 @@
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN PAGE CONTENT-->
 			<div class="row">
-				<div id="a_div_info_list_" class="col-md-12">
+				<div class="col-md-12">
+				<div class="well form-inline">
+						<label>信息类型
+							<select class="upload-wrapper " name="bean.msgtype" style="width: 150px;">
+								<option>事件信息</option>
+							</select>
+						</label>
+						&nbsp; 
+						<label>关键字 
+							<input class="upload-wrapper" id="message_keyword" name="bean.keyword" size="20" value="" placeholder="关键字" title="关键字" type="text">
+						</label>
+						&nbsp; 
+						<label>粉丝昵称
+							<input class="upload-wrapper" id="message_keyword" name="bean.keyword" size="20" value="" placeholder="粉丝昵称" title="粉丝昵称" type="text">
+						</label>
+						&nbsp; 
+						<label>接收时间
+							<input class="upload-wrapper" id="message_keyword" name="bean.keyword" size="20" value="" placeholder="接收时间" title="接收时间" type="text">
+						</label>
+						&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+						<label>
+						<input class="btn default" name="commit" type="submit" value="检索">
+						</label>
+				</div>
+				<div id="a_div_info_list_"  class="col-md-12" >
 					
+				</div>
 				</div>
 			</div>
 			<!-- END PAGE CONTENT-->

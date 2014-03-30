@@ -115,6 +115,34 @@
 						</li>
 					</ul>
 				</li>
+				<li id="course" class="">
+					<a class="active" href="javascript:;">
+					<i class="fa fa-cogs"></i> 
+					<span class="title">课程管理</span>
+					<span id="car_arrow" class="arrow "></span>
+					</a>
+					<ul id="car_sub_menu" style="display: none;" class="sub-menu">
+						<li>
+							<a  id="car_sub_menu_l1" href="#" onclick="myAlert('功能即将开放')">
+							功能1
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li id="user" class="">
+					<a class="active" href="javascript:;">
+					<i class="fa fa-cogs"></i> 
+					<span class="title">会员管理</span>
+					<span id="car_arrow" class="arrow "></span>
+					</a>
+					<ul id="car_sub_menu" style="display: none;" class="sub-menu">
+						<li>
+							<a  id="car_sub_menu_l1" href="#" onclick="myAlert('功能即将开放')">
+							功能1
+							</a>
+						</li>
+					</ul>
+				</li>
 				<li id="sys" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-bar-chart-o"></i> 

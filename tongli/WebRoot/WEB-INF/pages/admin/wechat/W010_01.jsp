@@ -30,29 +30,6 @@ event:事件推送 --%>
 <c:forEach items="${beans}" var="bean" varStatus="i">
 	<li 
 		class="timeline-blue"
-	<%--
-	<c:if test="${bean.msgtype=='text'}">
-		class="timeline-blue"
-	</c:if>
-	<c:if test="${bean.msgtype=='image'}">
-		class="timeline-green"
-	</c:if>
-	<c:if test="${bean.msgtype=='voice'}">
-		class="timeline-blue"
-	</c:if>
-	<c:if test="${bean.msgtype=='video'}">
-		class="timeline-green"
-	</c:if>
-	<c:if test="${bean.msgtype=='location'}">
-		class="timeline-red"
-	</c:if>
-	<c:if test="${bean.msgtype=='link'}">
-		class="timeline-grey"
-	</c:if>
-	<c:if test="${bean.msgtype=='event'}">
-		class="timeline-purple"
-	</c:if>
-	--%>
 	>
 		
 		<div class="timeline-icon"><img onerror="this.src='${basePath}/images/getheadimg.jpg'" 
@@ -64,18 +41,18 @@ event:事件推送 --%>
 			src="${basePath}/images/getheadimg.jpg"
 			</c:otherwise>
 		</c:choose>
-		 style="width: 38px;height: 38px; class="avatar img-circle"></i></div>
-		<div class="timeline-body">
+		 style="width: 40px;height: 40px;box-shadow: 0px 0px 0px 8px #CCC;border-radius: 30px !important;" class="avatar img-circle"></i></div>
+		<div class=" timeline-body">
 			<p class="userInfo">
 				<span class="name">${bean.nickname}</span>
 				<span class="date">${bean.date_created}</span>
 			</p>
-			<div class="timeline-content">
+			<div class="timeline-content alert">
 				<c:if test="${bean.msgtype=='text'}">
 					${bean.content}
 				</c:if>
 				<c:if test="${bean.msgtype=='image'}">
-					<a href="${basePath}${bean.picurl}" target="_blank"><img src="${basePath}${bean.picurl}" style="height: 100px;"></a>
+					<a href="${basePath}${bean.picurl}" target="_blank"><img  onerror="this.src='${basePath}/images/error/165_110px.gif'"  src="${basePath}${bean.picurl}" style="height: 100px;"></a>
 				</c:if>
 				<c:if test="${bean.msgtype=='voice'}">
 					${bean.url}
@@ -91,21 +68,24 @@ event:事件推送 --%>
 				</c:if>
 				<c:if test="${bean.msgtype=='event'}">
 					<c:if test="${bean.event=='subscribe'}">
-						用户关注
+						用户关注 ${bean.eventkey}
 					</c:if>
 					<c:if test="${bean.event=='unsubscribe'}">
-						取消关注
+						取消关注 ${bean.eventkey}
 					</c:if>
 					<c:if test="${bean.event=='SCAN'}">
-						事件推送
+						事件推送 ${bean.eventkey}
 					</c:if>
 					<c:if test="${bean.event=='CLICK'}">
-						点击菜单
+						点击菜单 ${bean.eventkey}
 					</c:if>
 					<c:if test="${bean.event=='VIEW'}">
-						点击菜单
+						点击菜单链接 ${bean.eventkey}
 					</c:if>
-					${bean.eventkey}
+					<c:if test="${bean.event=='LOCATION'}">
+						地理位置 x=${bean.location_x} y=${bean.location_y} ${bean.label}
+					</c:if>
+					
 				</c:if>
 			</div>
 			<div class="timeline-footer">

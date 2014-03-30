@@ -59,7 +59,7 @@
 				jQuery.ajax({
 					url : '${basePath}/h/w007_uploadMenu.ac?time=' + new Date().getTime(),
 					success : function(req) {
-						if(req=='ok'){
+						if(req=='0'){
 							jQuery("#msg").html('<div class="alert alert-success"><button class="close" data-dismiss="alert"></button><strong>Success!</strong> 菜单发布成功!</div>');
 						}else{
 							jQuery("#msg").html('<div class="alert alert-danger"><button class="close" data-dismiss="alert"></button><strong>Error!</strong> '+req+'!</div>');
@@ -125,12 +125,12 @@
 						<table class="table table-condensed table-striped">
 							<tbody>
 								<tr>
-									<th>名称</th>
-									<th>显示顺序</th>
-									<th>类型</th>
-									<th>KEY</th>
-									<th>链接地址</th>
-									<th></th>
+									<th class="col-md-2">名称</th>
+									<th class="col-md-1">显示顺序</th>
+									<th class="col-md-1">类型</th>
+									<th class="col-md-1">KEY</th>
+									<th class="col-md-4" style="word-break:break-all;">链接地址</th>
+									<th class="col-md-2"></th>
 								</tr>
 							<c:forEach items="${beans}" var="bean">
 								<tr>
@@ -158,7 +158,7 @@
 											</td>
 										</c:otherwise>
 									</c:choose>
-									<td><a href="${basePath}/h/w007_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
+									<td c><a href="${basePath}/h/w007_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
 										<a href="${basePath}/h/w007_del.ac?id=${bean.id}" class="btn btn-danger"
 										data-confirm="确定删除吗?" data-method="delete" rel="nofollow">删除</a>
 									</td>
@@ -175,7 +175,7 @@
 										${bean1.menu_key}
 										</c:if>
 										</td>
-										<td>
+										<td style="word-break:break-all;">
 										<c:if test="${bean1.menu_type=='view'}">
 										<a href="${bean1.menu_url}" target="_blank">${bean1.menu_url}</a>
 										</c:if>

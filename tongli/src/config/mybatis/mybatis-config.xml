@@ -44,8 +44,13 @@
 		<!-- 系统管理模块 begin -->
 		<!-- bean class -->
 		<typeAlias type="cn.com.softvan.bean.sys.TcSysNewsBean" alias="tcSysNewsBean"/>
+		<typeAlias type="cn.com.softvan.bean.sys.TcSysNewsTypeBean" alias="tcSysNewsTypeBean"/>
+		<typeAlias type="cn.com.softvan.bean.sys.TcSysParterBean" alias="tcSysParterBean"/>
 		<!-- entity class -->
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNews" alias="tcSysNews"/>
+		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNewsType" alias="tcSysNewsType"/>
+		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNewsVsType" alias="tcSysNewsVsType"/>
+		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysParter" alias="tcSysParter"/>
 		<!-- 系统管理模块 end -->
 		
 	</typeAliases>
@@ -96,6 +101,9 @@
 		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysSms.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysVariable.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysNews.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysNewsType.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysNewsVsType.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysParter.xml"/>
 		<!-- 系统管理模块 end -->
 	</mappers>
 </configuration>

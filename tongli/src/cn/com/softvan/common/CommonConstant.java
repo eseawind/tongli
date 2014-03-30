@@ -21,9 +21,9 @@ public class CommonConstant {
 	/** SESSION里面存放认证码 */
 	public static final String SESSION_VERIFY_CODE = "SESSION_VERIFY_CODE";
 	/** SESSION里面存放公共账号信息 */
-	public static final String SESSION_WECHAR_BEAN = "SESSION_WECHAR_BEAN_";
+	public static final String SESSION_WECHAT_BEAN = "SESSION_WECHAT_BEAN_";
 	/** SESSION里面存放公共账号信息 flag */
-	public static final String SESSION_WECHAR_BEAN_FLAG = "SESSION_WECHAR_BEAN_FLAG_";
+	public static final String SESSION_WECHAT_BEAN_FLAG = "SESSION_WECHAT_BEAN_FLAG_";
 	/** SESSION里面存放 用户信息 */
 	public static final String SESSION_KEY_USER = "SESSION_KEY_USER";
 	
@@ -102,7 +102,7 @@ public class CommonConstant {
 
 
 	/** SESSION里面存放 微信粉丝的OPENID信息 */
-	public static final String SESSION_KEY_USER_WECHAR_OPENID = "SESSION_KEY_USER_WECHAR_OPENID";
+	public static final String SESSION_KEY_USER_WECHAT_OPENID = "SESSION_KEY_USER_WECHAT_OPENID";
 
 	/**驾照过期提醒 */
 	public static final String DRIVING_LICENCE_FLAG= "3";
@@ -113,7 +113,7 @@ public class CommonConstant {
 	/**车辆标题图片*/
 	public static   final  String  FILE_VEHICLE_LOGO="btt001";
 	/** 存放 微信公共账号的Access_token */
-	public static final String SESSION_KEY_USER_WECHAR_ACCESS_TOKEN = "SESSION_KEY_USER_WECHAR_ACCESS_TOKEN";
+	public static final String SESSION_KEY_USER_WECHAT_ACCESS_TOKEN = "SESSION_KEY_USER_WECHAT_ACCESS_TOKEN";
 	/** 案件状态 */
 	/** 未绑定手机 不可以实时查看案件状态 */
 	public static final String REPORT_NO = "-2";
@@ -129,4 +129,15 @@ public class CommonConstant {
 	public static final String REPORT_3 = "3";
 	/** 注销 */
 	public static final String REPORT_4 = "4";
+	/**保单短信提醒*/
+	public static final String SMS_TYPE_POLICY="1";
+	/**违章短信提醒类型*/
+	public static final String SMS_TYPE_VIOLATION="2";
+	
+	/**车辆年检提醒类型*/
+	public static final String SMS_TYPE_VCHECK="3";
+	/**保单到期提醒配置 提前天数  30天*/
+	public static final int SMS_REMIND_POLICY_DAY=30;
+	/**车辆年检提醒*/
+	public static final int SMS_REMIND_VCHECK_DAY=30;
 }

@@ -92,4 +92,8 @@ public interface ITcWxInfoManager {
 	public TcWxInfoBean findDataById(TcWxInfoBean bean);
 	/**重新将所有信息放入缓存*/
 	public void updateAllMsgCache();
+	/**
+	 * 根据用户openId获取经纬度
+	 */
+	public TcWxInfoBean queryLocation(TcWxInfoBean bean) throws Exception;
 }

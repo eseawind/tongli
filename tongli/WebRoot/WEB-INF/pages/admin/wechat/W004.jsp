@@ -33,13 +33,8 @@
 <meta name="MobileOptimized" content="320">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%@ include file="../include/public_js_css.jsp"%>
-<link href="${basePath}/css/messages.css" media="all" rel="stylesheet"
-	type="text/css" />
-
-<link href="${basePath}/css/font-awesome/css/font-awesome.css"
-	rel="stylesheet">
-<link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css"
-	rel="stylesheet">
+<link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+<link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -106,14 +101,12 @@
 
 					<div class="row-fluid">
 						<div class="col-md-2">
-							<ul class="nav nav-list well">
-								<li class="active"><a href="">未分组 (${fn:length(beans)})</a></li>
-
-
-								<li class="divider"></li>
-								<li id="add-grp-btn"><a href="javascript:void(0)"
-									class="manage-grp-btn"><i class="icon-plus"></i> 新建分组</a></li>
-							</ul>
+							<div class="list-group">
+							  <a href="#" class="list-group-item active">
+							   <i class="fa fa-check"></i> 未分组 (${fn:length(beans)})
+							  </a>
+							  <a class="list-group-item" href="#myModal1"data-toggle="modal"><i class="fa fa-bolt"></i> 新建分组</a>
+							</div>
 						</div>
 						<div class="col-md-10">
 							<c:if test="${msg!=null}">
@@ -133,15 +126,15 @@
 							</c:choose>
 						</c:if>
 							<div class="btn-toolbar">
-								<a href="${basePath}/h/w004_edit.ac" class="btn btn-primary">新建文章</a>
+								<a href="${basePath}/h/w004_edit.ac" class="btn btn-primary"><i class="fa fa-book"></i> 新建文章</a>
 							</div>
 
 							<table class="table table-condensed table-striped">
 								<tbody>
 									<tr>
-										<th>时间</th>
-										<th>标题</th>
-										<th></th>
+										<th class="col-md-3">时间</th>
+										<th class="col-md-6">标题</th>
+										<th class="col-md-3"></th>
 									</tr>
 									<c:forEach items="${beans}" var="bean">
 									<tr>
@@ -170,7 +163,27 @@
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<!-- END FOOTER -->
-
 </body>
 <!-- END BODY -->
 </html>
+<!-- Modal -->
+<div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">新建分组</h4>
+			</div>
+			<div class="modal-body">
+				<p></p>
+				<div class="form-group">
+					<input class="form-control" placeholder="请输入分组名称" size="5" data-tabindex="1" type="text">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn default" data-dismiss="modal" aria-hidden="true">关闭</button>
+				<button class="btn blue">保存</button>
+			</div>
+		</div>
+	</div>
+</div>

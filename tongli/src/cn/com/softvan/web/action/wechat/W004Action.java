@@ -43,6 +43,8 @@ public class W004Action extends BaseAction {
 	private List<TcSysNewsBean> beans;
 	/**资讯信息管理 业务处理*/
 	private INewsManager newsManager;
+	/**信息来源0微信文章1系统资讯*/
+	private final String info_source="0";
 	//
 	public W004Action() {
 		log.info("默认构造器......W004Action");
@@ -60,7 +62,7 @@ public class W004Action extends BaseAction {
 	public String init() {
 		log.info("W004Action init.........");
 		TcSysNewsBean bean1=new TcSysNewsBean();
-		bean1.setInfo_source("0");
+		bean1.setInfo_source(info_source);
 		beans=newsManager.findDataIsList(bean1);
 		return "init";
 	}
@@ -79,7 +81,7 @@ public class W004Action extends BaseAction {
 		if(id!=null){
 			TcSysNewsBean bean1=new TcSysNewsBean();
 			bean1.setId(id);
-			bean1.setInfo_source("0");
+			bean1.setInfo_source(info_source);
 			bean=newsManager.findDataById(bean1);
 		}else{
 			SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日");
@@ -101,7 +103,7 @@ public class W004Action extends BaseAction {
 		String id=request.getParameter("id");
 		TcSysNewsBean bean1=new TcSysNewsBean();
 		bean1.setId(id);
-		bean1.setInfo_source("0");
+		bean1.setInfo_source(info_source);
 		String msg="1";
 		try {
 			msg=newsManager.deleteDataById(bean1);
@@ -137,7 +139,7 @@ public class W004Action extends BaseAction {
 						bean.setUpdate_ip(getIpAddr());
 						bean.setUpdate_id(user.getUser_id());
 					}
-					bean.setInfo_source("0");
+					bean.setInfo_source(info_source);
 					msg=newsManager.saveOrUpdateData(bean);
 				}
 			} catch (Exception e) {
@@ -164,7 +166,7 @@ public class W004Action extends BaseAction {
 		if(id!=null){
 			TcSysNewsBean bean1=new TcSysNewsBean();
 			bean1.setId(id);
-			bean1.setInfo_source("0");
+			bean1.setInfo_source(info_source);
 			bean=newsManager.findDataById(bean1);
 		}
 		return "view";

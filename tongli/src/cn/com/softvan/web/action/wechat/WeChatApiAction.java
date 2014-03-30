@@ -10,6 +10,7 @@
  *
  */
 package cn.com.softvan.web.action.wechat;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -48,6 +49,7 @@ import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IpUtils;
 import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.Resources;
+import cn.com.softvan.common.StrUtil;
 import cn.com.softvan.common.WebUtils;
 import cn.com.softvan.common.wechat.WeChatUtil;
 import cn.com.softvan.common.wechat.WxApiUtil;
@@ -68,23 +70,25 @@ public class WeChatApiAction extends BaseAction {
     private ITcWxUserManager tcWxUserManager;
 	/**redis缓存工具类*/
 	protected JedisHelper jedisHelper;
-	/** 公共账号bean*/
-	private TcWxPublicUserBean publicUserBean=null;
 	/**微信api工具类*/
 	WxApiUtil api=new WxApiUtil();
-	 /***/
-	private String  getTOKEN(){
-//		System.out.println("=========================="+jedisHelper+"===================");
-		publicUserBean=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAR_BEAN);
+	/**收到的xml信息 */
+	private String xml=null;
+	/**微信 公共号 信息*/
+	private TcWxPublicUserBean getPublicUserBean(){
+		TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
 		if((publicUserBean==null) || (publicUserBean.getId()==null)){
 			publicUserBean=tcWxPublicUserManager.findDataById(null);
-			jedisHelper.set(CommonConstant.SESSION_WECHAR_BEAN,publicUserBean);
+			jedisHelper.set(CommonConstant.SESSION_WECHAT_BEAN,publicUserBean);
 		}
-		log.error("========getTOKEN====bean.getId()======"+publicUserBean.getId());
-		if(publicUserBean.getId()==null){
-			return "c11e93a511b946d8a1427c02868ef854";
+		return publicUserBean;
+	}
+	private String  getToken(){
+		if(getPublicUserBean()==null||getPublicUserBean().getId()==null){
+			log.error("===公共号信息为空===");
+			return "";//"c11e93a511b946d8a1427c02868ef854";
 		}else{
-			return publicUserBean.getId();
+			return getPublicUserBean().getId();
 		}
 	}
 	/**
@@ -116,12 +120,14 @@ public class WeChatApiAction extends BaseAction {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
         try {
+        	xml=StrUtil.convertStreamToString(request.getInputStream());
+        	log.error("==收到信息=="+xml);
         	//接收信息
-			WxRecvMsg msg = WeChatUtil.recv(request.getInputStream());
+			WxRecvMsg msg = WeChatUtil.recv(new ByteArrayInputStream(xml.getBytes()));
 			//回复信息
 			WxReplyMsg replyMsg = WeChatUtil.builderSendByRecv(msg);
 			//--微信粉丝openid==
-			request.getSession().setAttribute(CommonConstant.SESSION_KEY_USER_WECHAR_OPENID, msg.getToUser());
+			request.getSession().setAttribute(CommonConstant.SESSION_KEY_USER_WECHAT_OPENID, msg.getToUser());
 			//TODO -------处理接收信息类型------------------
 			msgManager(msg, replyMsg);
 		} catch (JDOMException e) {
@@ -145,6 +151,7 @@ public class WeChatApiAction extends BaseAction {
 			bean=getTcWxInfoBean(msg,request);
 			//TODO ----事件---
 			if(msg instanceof WxRecvEventMsg) {
+				log.error("==收到一个事件==");
 				WxRecvEventMsg m = (WxRecvEventMsg) msg;
 				String event = m.getEvent();
 				//TODO 首次关注
@@ -193,10 +200,14 @@ public class WeChatApiAction extends BaseAction {
 	//				if("VIEW".equals(event)){
 	//					//
 	//				}else	
-	//				//上报地理位置事件 事件类型，LOCATION
-	//				if("LOCATION".equals(event)){
-	//					//
-	//				}
+					//上报地理位置事件 事件类型，LOCATION
+					if("LOCATION".equals(event)){
+						log.error("====地理位置===");
+						//
+						msg = WeChatUtil.recv(new ByteArrayInputStream(xml.getBytes()));
+						m = (WxRecvEventMsg) msg;
+						m.setEvent("LOCATION");
+					}
 				}
 				//-----------封装信息--------------
 				bean.setEvent(m.getEvent());
@@ -223,7 +234,7 @@ public class WeChatApiAction extends BaseAction {
 				media_reply_text=Resources.getData("wx.media_reply_text_pic");
 //				-------------下载图片-----------
 				String picurl=null;
-				if(publicUserBean==null){
+				if(getPublicUserBean()==null){
 					picurl=downImg(m.getPicUrl());
 				}else{
 					picurl=api.downMedia(getAccess_token(false), "image", m.getMediaId());
@@ -252,7 +263,7 @@ public class WeChatApiAction extends BaseAction {
 				bean.setLocation_y(""+m.getLongitude());
 				bean.setScale(""+m.getScale());
 				bean.setLabel(m.getLabel());
-			}
+			}else
 			//TODO ----- 语音信息
 			if(msg instanceof WxRecvVoiceMsg){
 				WxRecvVoiceMsg m=(WxRecvVoiceMsg)msg;
@@ -262,7 +273,7 @@ public class WeChatApiAction extends BaseAction {
 				media_reply_text=Resources.getData("wx.media_reply_text_voice");
 //				-------------下载语音-----------
 				String url=null;
-				if(publicUserBean!=null){
+				if(getPublicUserBean()!=null){
 					url=api.downMedia(getAccess_token(false), "voice", m.getMediaId());
 					if(api.isErrAccessToken(url)){
 						url=api.downMedia(getAccess_token(true), "voice", m.getMediaId());
@@ -282,7 +293,7 @@ public class WeChatApiAction extends BaseAction {
 				media_reply_text=Resources.getData("wx.media_reply_text_video");
 //					-------------下载视频-----------
 				String url=null;
-				if(publicUserBean!=null){
+				if(getPublicUserBean()!=null){
 					url=api.downMedia(getAccess_token(false), "video", m.getMediaId());
 					if(api.isErrAccessToken(url)){
 						url=api.downMedia(getAccess_token(true), "video", m.getMediaId());
@@ -294,8 +305,8 @@ public class WeChatApiAction extends BaseAction {
 				bean.setMediaid(m.getMediaId());
 				bean.setThumbmediaid(m.getThumbMediaId());
 			}else{
-				log.info("接收到未知类型消息!");
-				bean.setNote("接收到未知类型消息!");
+				log.error("接收到未知类型消息!"+xml);
+				bean.setDescription("接收到未知类型消息!");
 			}
 			//TODO--自动回复--
 			if(media_flag){
@@ -312,7 +323,10 @@ public class WeChatApiAction extends BaseAction {
 	}
 	/***/
 	private String  getAccess_token(Boolean flag){
-		return api.getAccess_token(flag, jedisHelper, publicUserBean.getAppid(), publicUserBean.getAppsecret());
+		if(getPublicUserBean()==null){
+			log.error("===公共号信息为空===");
+		}
+		return api.getAccess_token(flag, jedisHelper, getPublicUserBean().getAppid(), getPublicUserBean().getAppsecret());
 	}
 	/**
 	 * 信息自动回复
@@ -387,10 +401,7 @@ public class WeChatApiAction extends BaseAction {
 	 * @return
 	 */
 	private boolean checkSignature(String signature,String timestamp,String nonce){
-		log.error("===getTOKEN()=="+getTOKEN());
-		log.error("===timestamp=="+timestamp);
-		log.error("===nonce=="+nonce);
-		String[] arr = new String[]{ getTOKEN(),timestamp,nonce};
+		String[] arr = new String[]{ getToken(),timestamp,nonce};
 		Arrays.sort(arr);
 		StringBuilder content = new StringBuilder();
 		for(int i=0;i<arr.length;i++){
@@ -568,17 +579,31 @@ public class WeChatApiAction extends BaseAction {
 	    this.jedisHelper = jedisHelper;
 	}
 	/**
-	 * 公共账号bean取得
-	 * @return 公共账号bean
+	 * 微信api工具类取得
+	 * @return 微信api工具类
 	 */
-	public TcWxPublicUserBean getPublicUserBean() {
-	    return publicUserBean;
+	public WxApiUtil getApi() {
+	    return api;
 	}
 	/**
-	 * 公共账号bean设定
-	 * @param publicUserBean 公共账号bean
+	 * 微信api工具类设定
+	 * @param api 微信api工具类
 	 */
-	public void setPublicUserBean(TcWxPublicUserBean publicUserBean) {
-	    this.publicUserBean = publicUserBean;
+	public void setApi(WxApiUtil api) {
+	    this.api = api;
+	}
+	/**
+	 * 收到的xml信息取得
+	 * @return 收到的xml信息
+	 */
+	public String getXml() {
+	    return xml;
+	}
+	/**
+	 * 收到的xml信息设定
+	 * @param xml 收到的xml信息
+	 */
+	public void setXml(String xml) {
+	    this.xml = xml;
 	}
 }

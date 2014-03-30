@@ -5,7 +5,7 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.26  wuxiaogang      程序发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 jfq  System. - All Rights Reserved.
+ * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.dao.daointer.adi;

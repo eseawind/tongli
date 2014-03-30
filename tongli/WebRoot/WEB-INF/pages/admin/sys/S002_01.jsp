@@ -1,10 +1,10 @@
 <%--
 /*
- * 友情链接管理_编辑 (页面)
+ * 系统管理_资讯栏目管理_编辑 (页面)
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
- * 1.00     2014-03-26  wuxiaogang   程序・发布
+ * 1.00     2014-03-25  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 jfq System. - All Rights Reserved.
  *
@@ -25,7 +25,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8" />
-<name>友情链接管理【jfq】</name>
+<%@include file="../include/admin_title.jsp" %>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="" name="description" />
@@ -54,9 +54,9 @@
 		<%@ include file="../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#sys3,#sys3_sub_menu_l1_sub_menu_l1').addClass('active');
-				$('#sys3_arrow,#sys3_sub_l1_arrow').addClass('open');
-				$('#sys3_sub_menu,#sys3_sub_l1_sub_menu').show();
+				$('#sys,#sys_sub_menu_l1_sub_menu_l0').addClass('active');
+				$('#sys_arrow,#sys_sub_l1_arrow').addClass('open');
+				$('#sys_sub_menu,#sys_sub_l1_sub_menu').show();
 			});
 		</script>
 		<!-- END SIDEBAR -->
@@ -70,13 +70,14 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-name">
-						友情链接管理 <small><span class="help-inline">这里编辑友情链接信息</span></small>
+						资讯栏目管理 <small><span class="help-inline">这里编辑各种栏目的介绍</span></small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="#">友情链接管理</a> <i class="fa fa-angle-right"></i></li>
+						<li><a href="#">资讯管理</a> <i class="fa fa-angle-right"></i></li>
+						<li><a href="${basePath}/h/s002_init.ac">栏目管理</a> <i class="fa fa-angle-right"></i></li>
 						<li>编辑</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
@@ -86,51 +87,58 @@
 			<!-- BEGIN PAGE CONTENT-->
 			<div class="row">
 				<div class="col-md-12">
-					<form accept-charset="UTF-8"  action="${basePath}/h/s003_save.ac" class="edit_article" id="edit_article_13632" method="post">
+					<form accept-charset="UTF-8"  action="${basePath}/h/s002_save.ac" class="edit_article" id="edit_article_13632" method="post">
 						<s:token></s:token>
 						<input name="bean.id" type="hidden" value="${bean.id}">
-						<div class="well form-inline">
-							合作商类型:
-							<label title="积分发行商">
-							<input name="bean.type" value="0"
-							<c:if test="${bean.type=='0'}">
-							 	checked="checked"
-							 </c:if>
-							 type="radio">
-							 积分发行商</label>
-							 <label title="市场合作商">
-							<input name="bean.type" value="1"
-							<c:if test="${bean.type=='1'}">
-							 	checked="checked"
-							 </c:if>
-							 type="radio">
-							 市场合作商</label>
+						<div class="form-group">
+							<label class="control-label">父栏目</label>
+						</div>
+						<div  class="form-group">
+							<select class="form-control" name="bean.parent_id">
+								<option value="">请选择</option>
+								<c:forEach items="${beans}" var="bean1">
+									<option value="${bean1.id }" 
+									<c:if test="${bean.parent_id==bean1.id }">
+									selected="selected"
+									</c:if>
+									>${bean1.name}</option>
+									<c:forEach items="${bean1.beans}" var="bean2">
+										<option value="${bean2.id }" 
+										<c:if test="${bean.parent_id==bean2.id }">
+										selected="selected"
+										</c:if>
+										>|--${bean2.name}</option>
+											<c:forEach items="${bean2.beans}" var="bean3">
+											<option value="${bean3.id }" 
+											<c:if test="${bean.parent_id==bean3.id }">
+											selected="selected"
+											</c:if>
+											>|--|--${bean3.name}</option>
+										</c:forEach>
+									</c:forEach>
+								</c:forEach>
+							</select>
 						</div>
 						<div class="form-group">
-							<label for="article_name">名称</label> <input class="form-control"
+							<label for="article_sort_num">显示顺序</label> <input class="form-control"
+								id="article_sort_num" name="bean.sort_num" size="30" type="number" value="${bean.sort_num}">
+						</div>
+						<div class="form-group">
+							<label for="article_name">栏目名称</label> <input class="form-control"
 								id="article_name" name="bean.name" size="30" type="text" value="${bean.name}">
 						</div>
 						<div class="form-group">
-							<label for="article_url">链接</label> <input class="form-control"
-								id="article_url" name="bean.url" size="30" type="text" value="${bean.url}">
-						</div>
-						<div class="portlet box btn default btn-block">
-							<div class="portlet-title">
-								<div class="caption"  id="select-image-modal"><i class="fa fa-anchor"></i><font color="#000">点击上传[照片]</font></div>
-								<div class="tools">
-									<a href="javascript:;" class="collapse"></a>
-									<a href="javascript:;" class="remove"></a>
-								</div>
-							</div>
-							<div class="portlet-body" style="display: block; ">
-								<input id="input_pic_url"  name="bean.pic_url" size="30" type="hidden" value="${bean.pic_url}">
-								<img id="img_pic_url" alt="" src="${bean.pic_url}">
+							<label for="article_description">栏目内容</label>
+							<div class="qeditor_border">
+								<textarea name="bean.detail_info" style="height: 300px;width: 100%;" id="article_description" >
+									${bean.detail_info}
+								</textarea>
 							</div>
 						</div>
 						<div class="form-actions">
 							<input class="btn btn-primary" name="commit" type="submit"
 								value="保存"> | <a
-								href="${basePath}/h/s003_init.ac">返回</a>
+								href="${basePath}/h/s002_init.ac">返回</a>
 						</div>
 					</form>
 				</div>
@@ -149,25 +157,11 @@
 <script type="text/javascript">
 jQuery(document).ready(function() {
 	KindEditor.ready(function(K) {
-		//--图片
-		var editor = K.editor({
-			resizeType : 2,
-			uploadJson : '${basePath}/uploadFile?isrich=1',
-			fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
-			allowFileManager : true
-		});
-		//--
-		K('#select-image-modal').click(function() {
-			editor.loadPlugin('image',function() {
-				editor.plugin.imageDialog({
-					imageUrl : $('#img_pic_url').attr('src'),clickFn : function(
-						url,title,width,height,border,align) {
-							$('#img_pic_url').attr('src',url);
-							$('#input_pic_url').val(url);
-							editor.hideDialog();
-						}
-				});
-			});
+		K.create('#article_description', {
+			 resizeType : 2,
+	         uploadJson : '${basePath}/uploadFile?isrich=1',
+	         fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
+			 allowFileManager : true
 		});
 	});
 });

@@ -58,4 +58,8 @@ public interface ITcWxInfoDao {
      * 查询信息 分页
      */
     List<TcWxInfoBean> findDataIsPage(IEntity dto) throws Exception;
+    /**
+     * 查询用户当前位置
+     */
+    TcWxInfoBean queryLocation(TcWxInfoBean bean) throws Exception;
 }

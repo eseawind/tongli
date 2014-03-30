@@ -129,6 +129,30 @@ public class S001Action extends BaseAction {
 	}
 	/**
 	 * <p>
+	 * 删除。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>物理删除。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String delxx() {
+		log.info("S001Action delxx.........");
+		String id=request.getParameter("id");
+		TcSysNewsBean bean1=new TcSysNewsBean();
+		bean1.setId(id);
+		String msg="1";
+		try {
+			msg=newsManager.deleteData(bean1);
+		} catch (Exception e) {
+			msg=e.getMessage();
+		}
+		request.setAttribute("msg",msg);
+		
+		return SUCCESS;
+	}
+	/**
+	 * <p>
 	 * 信息保存
 	 * </p>
 	 * <ol>

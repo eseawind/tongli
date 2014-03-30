@@ -104,7 +104,7 @@
 						</c:choose>
 						 type="hidden">
 						
-						<div class="well form-inline row">
+						<div class="well form-inline">
 								<label>自动回复:关键字 
 									<input class="upload-wrapper" id="message_keyword" name="bean.keyword" size="30" value="${bean.keyword }" placeholder="多个关键字请用空格隔开" title="客户发送和关键字匹配的信息，系统回复该内容" type="text">
 								</label>

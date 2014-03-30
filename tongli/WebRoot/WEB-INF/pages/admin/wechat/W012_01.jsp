@@ -19,16 +19,18 @@
 <table class="table table-condensed table-striped">
 <tbody>
 	<tr>
-		<th>昵称</th>
-		<th>备注名</th>
-		<th>性别</th>
-		<th>地区</th>
-		<th>订阅否</th>
-		<th>关注时间</th>
+		<th class="col-md-1"></th>
+		<th class="col-md-2">昵称</th>
+		<th class="col-md-2">备注名</th>
+		<th class="col-md-1">性别</th>
+		<th class="col-md-2">地区</th>
+		<th class="col-md-1">订阅否</th>
+		<th class="col-md-2">关注时间</th>
 	</tr>
 	<c:forEach items="${beans}" var="bean">
 	<tr>
-		<td><img src="${bean.headimgurl}" style="width: 40px;height: 40px;">${bean.nickname}</td>
+		<td><img src="${bean.headimgurl}" style="width: 40px;height: 40px;"  onerror="this.src='${basePath}/images/getheadimg.jpg'" ></td>
+		<td>${bean.nickname}</td>
 		<td>${bean.remarkname}</td>
 		<td>
 		<c:choose>
@@ -52,10 +54,6 @@
 		<td>${bean.subscribe_time}</td>
 	</tr>
 	</c:forEach>
-	<tr>
-		<td colspan="6">
-		<customtag:pagingext func="loadUrlPage" params="'h/w012_', 'list', 'a_div_info_list_'" />
-			</td>
-		</tr>
 	</tbody>
 </table>
+<customtag:pagingext func="loadUrlPage" params="'h/w012_', 'list', 'a_div_info_list_'" />

@@ -25,7 +25,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8" />
-<title>系统管理-资讯管理-文章【jfq】</title>
+<%@include file="../include/admin_title.jsp" %>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="" name="description" />
@@ -95,14 +95,21 @@
 							<label>关键字 
 								<input class="upload-wrapper" id="message_keyword" name="bean.keyword" size="30" value="${bean.keyword }" placeholder="多个关键字请用空格隔开" title="关键字" type="text">
 							</label>
-							&nbsp;  -->
+							&nbsp; 
 							 <label title="置顶">
 							<input name="bean.is_ontop" value="1"
 							<c:if test="${bean.is_ontop=='1'}">
 							 	checked="checked"
 							 </c:if>
 							 type="checkbox">
-							 置顶</label>
+							 置顶</label> -->
+							  <label title="快速导航">
+							<input name="bean.msgtype" value="1"
+							<c:if test="${bean.msgtype=='1'}">
+							 	checked="checked"
+							 </c:if>
+							 type="checkbox">
+							 快速导航</label>
 							 &nbsp; &nbsp; 栏目<i class="fa fa-angle-right"></i>
 							<c:forEach items="${tree}" var="tree">
 							<label>

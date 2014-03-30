@@ -110,6 +110,7 @@
 						<c:forEach items="${beans}" var="bean1" varStatus="n">
 							<div class="col-md-6 message-size">
 							<form accept-charset="UTF-8" action="${basePath}/h/w009_edit.ac?id=${bean1.id}" class="edit_message" method="post">
+								<s:token></s:token>
 								<ul id="message-info" class="unstyled">
 									<li class="article pos-rel cover">
 										<div class="msg-date">关键字:${bean1.keyword}</div>

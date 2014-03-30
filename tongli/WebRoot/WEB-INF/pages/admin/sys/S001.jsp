@@ -1,6 +1,6 @@
 <%--
 /*
- * 系统管理_资讯管理_回收站 (页面)
+ * 系统管理_资讯管理 (页面)
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
@@ -16,7 +16,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
-
 </head>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
@@ -27,7 +26,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8" />
-<title>系统管理-资讯管理_回收站【jfq】</title>
+<%@include file="../include/admin_title.jsp" %>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="" name="description" />
@@ -56,7 +55,7 @@
 		<%@ include file="../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#sys,#sys_sub_menu_l1_sub_menu_l2').addClass('active');
+				$('#sys,#sys_sub_menu_l1_sub_menu_l1').addClass('active');
 				$('#sys_arrow,#sys_sub_menu_l1_arrow').addClass('open');
 				$('#sys_sub_menu,#sys_sub_menu_l1_sub_menu').show();
 			});
@@ -72,14 +71,14 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						资讯回收站 <small><span class="help-inline">逻辑删除的数据,可恢复</span></small>
+						资讯列表 <small><span class="help-inline">展示所有未删除的资讯</span></small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="#">资讯管理</a> <i class="fa fa-angle-right"></i></li>
-						<li>资讯回收站</a> </li>
+						<li><a href="${basePath }/h/s001_init.ac">资讯管理</a> <i class="fa fa-angle-right"></i></li>
+						<li>资讯列表</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -122,6 +121,10 @@
 								</c:otherwise>
 							</c:choose>
 						</c:if>
+							<div class="btn-toolbar">
+								<a href="${basePath}/h/s001_edit.ac" class="btn btn-primary">新建资讯</a>
+							</div>
+
 							<table class="table table-condensed table-striped">
 								<tbody>
 									<tr>
@@ -134,15 +137,17 @@
 										<td>${bean.last_updated}</td>
 										<td>${bean.title}</td>
 										<td><a
-											href="${basePath}/h/s001_view.ac?id=${bean.id}"
-											class="btn  btn-info" target="_blank">预览</a> <a href="javascript:void(0)"   class="btn btn-danger" 
-											onclick="if(confirm('确认恢复吗?')){location.href='${basePath}/h/s001_recovery.ac?id=${bean.id}'};"
-											rel="nofollow">恢复</a></td>
+											href="${basePath}/h/j003_init.ac?id=${bean.id}"
+											class="btn  btn-info" target="_blank">预览</a> <a
+											href="${basePath}/h/s001_edit.ac?id=${bean.id}"
+											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
+											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/s001_del.ac?id=${bean.id}'};"
+											rel="nofollow">删除</a></td>
 									</tr>
 									</c:forEach>
 									<tr>
 										<td colspan="3">
-											<customtag:pagingext func="loadUrlPage" params="'h/s001_','recycle'" />
+											<customtag:pagingext func="loadUrlPage" params="'h/s001_','init'" />
 										</td>
 									</tr>
 								</tbody>

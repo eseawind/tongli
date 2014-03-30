@@ -218,10 +218,10 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 		String msg="1";
 		try {
 			//公共账号信息
-			TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAR_BEAN);
+			TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
 			if((publicUserBean==null) || (publicUserBean.getId()==null)){
 				publicUserBean=tcWxPublicUserManager.findDataById(null);
-				jedisHelper.set(CommonConstant.SESSION_WECHAR_BEAN,publicUserBean);
+				jedisHelper.set(CommonConstant.SESSION_WECHAT_BEAN,publicUserBean);
 			}
 			//TODO 设置菜单
 			TcWxMenuBean bean=new TcWxMenuBean();

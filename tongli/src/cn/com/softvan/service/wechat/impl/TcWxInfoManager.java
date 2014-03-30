@@ -403,10 +403,10 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	 */
 	private void setMsgCache(List<TcWxInfoBean> beans){
 		//公共账号信息
-		TcWxPublicUserBean publicUser=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAR_BEAN);
+		TcWxPublicUserBean publicUser=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
 		if(publicUser==null){
 			tcWxPublicUserManager.initCache();
-			publicUser=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAR_BEAN);
+			publicUser=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
 		}
 		String appid=publicUser.getAppid();
 		String secret=publicUser.getAppsecret();
@@ -678,5 +678,12 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	 */
 	public void setTcWxPublicUserManager(TcWxPublicUserManager tcWxPublicUserManager) {
 	    this.tcWxPublicUserManager = tcWxPublicUserManager;
+	}
+	/**
+	 * 根据openID获取用户经纬度
+	 * @throws Exception 
+	 */
+	public TcWxInfoBean queryLocation(TcWxInfoBean bean) throws Exception {
+		return tcWxInfoDao.queryLocation(bean);
 	}
 }

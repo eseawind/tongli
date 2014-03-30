@@ -1,6 +1,6 @@
 <%--
 /*
- * 友情链接管理(页面)
+ * 友情链接管理 (页面)
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
@@ -25,7 +25,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8" />
-<title>友情链接管理【jfq】</title>
+<%@include file="../include/admin_title.jsp" %>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 <meta content="" name="description" />
@@ -54,7 +54,7 @@
 		<%@ include file="../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#sys3,#sys3_sub_menu_l1_sub_menu_l1').addClass('active');
+				$('#sys3,#sys3_sub_menu_l1_sub_menu_l2').addClass('active');
 				$('#sys3_arrow,#sys3_sub_l1_arrow').addClass('open');
 				$('#sys3_sub_menu,#sys3_sub_l1_sub_menu').show();
 			});
@@ -70,14 +70,14 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						友情链接管理 <small><span class="help-inline">展示所有</span></small>
+						友情链接 回收站 <small><span class="help-inline">展示所有XX</span></small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
 						<li><a href="#">友情链接管理</a> <i class="fa fa-angle-right"></i></li>
-						<li>列表</a> </li>
+						<li>回收站</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -87,26 +87,6 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="matter">
-						<c:if test="${msg!=null}">
-							<c:choose>
-								<c:when test="${msg!='1'}">
-									<div class="alert alert-danger">
-										<button class="close" data-dismiss="alert"></button>
-										<strong>Error!</strong> ${msg}
-									</div>
-								</c:when>
-								<c:otherwise>
-									<div class="alert alert-success">
-										<button class="close" data-dismiss="alert"></button>
-										<strong>Success!</strong> 操作成功。
-									</div>
-								</c:otherwise>
-							</c:choose>
-						</c:if>
-						<div id="msg"></div>
-						<div class="btn btn-toolbar">
-							<a href="${basePath}/h/s003_edit.ac" class="btn btn-primary">新增</a>
-						</div>
 						<table class="table table-condensed table-striped">
 							<tbody>
 								<tr>
@@ -118,9 +98,10 @@
 									<td>
 									${bean.name}
 									</td>
-									<td c><a href="${basePath}/h/s003_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
-										<a href="${basePath}/h/s003_del.ac?id=${bean.id}" class="btn btn-danger"
-										data-confirm="确定删除吗?" data-method="delete" rel="nofollow">删除</a>
+									<td c><a href="${basePath}/h/s003_recovery.ac?id=${bean.id}" class="btn edit green">恢复</a>
+										<a href="javascript:void(0)"   class="btn btn-danger" 
+											onclick="if(confirm('此操作不可恢复!确认删除吗?')){location.href='${basePath}/h/s003_delxx.ac?id=${bean.id}'};"
+											rel="nofollow">删除</a>
 									</td>
 								</tr>
 								</c:forEach>

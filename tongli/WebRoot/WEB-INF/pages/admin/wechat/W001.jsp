@@ -99,6 +99,7 @@
 					<div class="col-md-4">
 						<form accept-charset="UTF-8" action="${basePath }/h/w001_save.ac" data-remote="true"
 							method="post">
+							<s:token></s:token>
 							<div style="margin: 0; padding: 0; display: inline">
 								<input name="id" type="hidden" value="${bean.id}">
 							</div>
@@ -133,9 +134,9 @@
 								</div>
 							</div>
 							<div class="col-md-offset-4 form-group">
-								<button href="javascript:void(0)" class="btn btn-primary">绑定</button>
+								<input type="submit" class="btn btn-primary" value="绑定" />
 							</div>
-						</form>
+						<form>
 					</div>
 
 					<div class="col-md-6 well col-md-offset-1">

@@ -15,8 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -25,8 +23,10 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.log4j.Logger;
 
+import cn.com.softvan.bean.wechat.TcWxMenuBean;
 import cn.com.softvan.bean.wechat.TcWxUserBean;
 import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.Resources;
 import cn.com.softvan.common.Validator;
@@ -245,7 +245,80 @@ public final class WxApiUtil {
 		}
 		return null;
 	}
-
+	/** 获取微信自定义菜单 */
+	public List<TcWxMenuBean> getMenu(String access_token) {
+		//---------beans-------------
+		List<TcWxMenuBean> beans=new ArrayList<TcWxMenuBean>();
+		String url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + access_token;
+		// 构建http构建[使用HttpClient的jar,怎么获得自己百度]
+		boolean error_flag=false;
+		// 构建http构建[使用HttpClient的jar,怎么获得自己百度]
+		HttpClient client = new HttpClient();
+		GetMethod mothod = new GetMethod(url);
+		mothod.getParams().setContentCharset("utf-8");
+		// 发送http请求
+		String respStr = "";
+		try {
+			client.executeMethod(mothod);
+			respStr = mothod.getResponseBodyAsString();
+			log.debug(respStr);
+			JSONObject dataJson = JSONObject.fromObject(respStr);
+			try {
+				if(dataJson!=null && null!=dataJson.getString("errcode")){
+					error_flag=true;
+					TcWxMenuBean bean=new TcWxMenuBean();
+					bean.setErrcode(dataJson.getString("errcode"));
+					bean.setErrmsg(dataJson.getString("errmsg"));
+					beans.add(bean);
+				}
+			} catch (Exception e) {
+			}
+			if(!error_flag){
+				log.debug(dataJson);
+				//{"menu":{"button":[{"type":"click","name":"今日歌曲","key":"V1001_TODAY_MUSIC","sub_button":[]},{"type":"click","name":"歌手简介","key":"V1001_TODAY_SINGER","sub_button":[]},{"name":"菜单","sub_button":[{"type":"view","name":"搜索","url":"http://www.soso.com/","sub_button":[]},{"type":"view","name":"视频","url":"http://v.qq.com/","sub_button":[]},{"type":"click","name":"赞一下我们","key":"V1001_GOOD","sub_button":[]}]}]}}
+				JSONArray jsonArray=(dataJson.getJSONObject("menu").getJSONArray("button"));
+				if(jsonArray!=null){
+					//1.获取一级菜单
+					for(int i=0;i<jsonArray.size();i++){
+						String s1=jsonArray.getString(i);
+						JSONObject j1=JSONObject.fromObject(s1);
+						String uuid=IdUtils.createUUID(32);
+						//TODO--
+						TcWxMenuBean bean=new TcWxMenuBean();
+						bean.setId(uuid);//主键id
+						bean.setMenu_name(j1.getString("name"));
+						JSONArray j2Array=j1.getJSONArray("sub_button");
+						bean.setBeans(new ArrayList<TcWxMenuBean>());
+						//判断是否有子菜单
+						if(j2Array!=null && j2Array.size()>0){
+							for(int n=0;n<jsonArray.size();n++){
+								String s2=jsonArray.getString(n);
+								JSONObject j2=JSONObject.fromObject(s2);
+								//TODO--
+								TcWxMenuBean bean2=new TcWxMenuBean();
+								bean2.setId(IdUtils.createUUID(32));//主键id
+								bean2.setParent_id(uuid);//父菜单id
+								bean2.setMenu_name(j2.getString("name"));
+								bean2.setMenu_type(j2.getString("type"));
+								bean2.setMenu_key(j2.getString("key"));
+								bean.getBeans().add(bean2);
+//								xx
+							}
+						}else{
+							bean.setMenu_type(j1.getString("type"));
+							bean.setMenu_key(j1.getString("key"));
+						}
+						//add
+						beans.add(bean);
+					}
+				}
+			}
+			
+		} catch (Exception e) {
+			log.error("获取微信公共账号access_token异常!",e);
+		}
+		return beans;
+	}
 	/**
 	 * 将服务器相对地址转为物理地址
 	 * 
@@ -255,17 +328,7 @@ public final class WxApiUtil {
 	public String escapeRemoteToLocal(String url) {
 		String local_url = null;
 		if (url != null) {
-			String regEx = "^(http|https|ftp)//://([a-zA-Z0-9//.//-]+(//:[a-zA-"
-					+ "Z0-9//.&%//$//-]+)*@)?((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{"
-					+ "2}|[1-9]{1}[0-9]{1}|[1-9])//.(25[0-5]|2[0-4][0-9]|[0-1]{1}"
-					+ "[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)//.(25[0-5]|2[0-4][0-9]|"
-					+ "[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)//.(25[0-5]|2[0-"
-					+ "4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0"
-					+ "-9//-]+//.)*[a-zA-Z0-9//-]+//.[a-zA-Z]{2,4})(//:[0-9]+)?(/"
-					+ "[^/][a-zA-Z0-9//.//,//?//'///////+&%//$//=~_//-@]*)*$";
-			Pattern p = Pattern.compile(regEx);
-			Matcher matcher = p.matcher(url);
-			if (!matcher.matches()) {
+			if (!Validator.isUrl(url)) {
 				local_url = url.replaceAll(
 						Resources.getData("UPLOAD_ROOT_FOLDER_URL"),
 						Resources.getData("UPLOAD_ROOT_FOLDER")).replaceAll(
@@ -284,17 +347,7 @@ public final class WxApiUtil {
 	public String escapeLocalToRemote(String url) {
 		String remote_url = null;
 		if (url != null) {
-			String regEx = "^(http|https|ftp)//://([a-zA-Z0-9//.//-]+(//:[a-zA-"
-					+ "Z0-9//.&%//$//-]+)*@)?((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{"
-					+ "2}|[1-9]{1}[0-9]{1}|[1-9])//.(25[0-5]|2[0-4][0-9]|[0-1]{1}"
-					+ "[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)//.(25[0-5]|2[0-4][0-9]|"
-					+ "[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)//.(25[0-5]|2[0-"
-					+ "4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0"
-					+ "-9//-]+//.)*[a-zA-Z0-9//-]+//.[a-zA-Z]{2,4})(//:[0-9]+)?(/"
-					+ "[^/][a-zA-Z0-9//.//,//?//'///////+&%//$//=~_//-@]*)*$";
-			Pattern p = Pattern.compile(regEx);
-			Matcher matcher = p.matcher(url);
-			if (!matcher.matches()) {
+			if (!Validator.isUrl(url)){
 				remote_url = url.replaceAll(
 						Resources.getData("UPLOAD_ROOT_FOLDER"),
 						Resources.getData("UPLOAD_ROOT_FOLDER_URL"))
@@ -435,11 +488,11 @@ public final class WxApiUtil {
 	 * Boolean falg,JedisHelper jedisHelper,String appid, String secret
 	 */
 	public String  getAccess_token(Boolean falg,JedisHelper jedisHelper,String appid, String secret){
-		String access_token=(String) jedisHelper.get(CommonConstant.SESSION_KEY_USER_WECHAR_ACCESS_TOKEN);
+		String access_token=(String) jedisHelper.get(CommonConstant.SESSION_KEY_USER_WECHAT_ACCESS_TOKEN);
 		if(null==access_token||falg){
 			access_token=new WxApiUtil().getAccessToken(appid, secret);
 			//认证信息缓存7100秒
-			jedisHelper.set(CommonConstant.SESSION_KEY_USER_WECHAR_ACCESS_TOKEN,access_token,7150);
+			jedisHelper.set(CommonConstant.SESSION_KEY_USER_WECHAT_ACCESS_TOKEN,access_token,7150);
 		}
 		return access_token;
 	}
