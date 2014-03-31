@@ -215,6 +215,8 @@ public class NewsManager extends BaseManager implements INewsManager {
 		   			dto.setDel_flag(bean.getDel_flag());//是否删除
 		   			dto.setType_id(bean.getType_id());//
 		   			dto.setInfo_source(bean.getInfo_source());//0微信1网站
+		   			dto.setLimit_s(bean.getLimit_s());
+		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
 				beans=tcSysNewsDao.findDataIsList(dto);
 		} catch (Exception e) {

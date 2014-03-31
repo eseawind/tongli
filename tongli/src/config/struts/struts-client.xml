@@ -8,6 +8,17 @@
 		<action name="index" class="c001Action" method="init">
 			<result name="init">/WEB-INF/pages/client/C001.jsp</result>
 		</action>
-		
+		<!-- 栏目页 -->
+		<action name="c002_*" class="c002Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client/C002.jsp</result>
+		</action>
+		<!-- 内容页 -->
+		<action name="c003_*" class="c003Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client/C003.jsp</result>
+		</action>
+		<!-- 夏利营页 -->
+		<action name="c004_*" class="c004Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client/C004.jsp</result>
+		</action>
 	</package>
 </struts>

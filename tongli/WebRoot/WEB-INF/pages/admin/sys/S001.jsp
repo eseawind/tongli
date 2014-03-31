@@ -137,7 +137,7 @@
 										<td>${bean.last_updated}</td>
 										<td>${bean.title}</td>
 										<td><a
-											href="${basePath}/h/j003_init.ac?id=${bean.id}"
+											href="${basePath}/h/s001_view.ac?id=${bean.id}"
 											class="btn  btn-info" target="_blank">预览</a> <a
 											href="${basePath}/h/s001_edit.ac?id=${bean.id}"
 											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 

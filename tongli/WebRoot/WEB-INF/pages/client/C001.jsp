@@ -22,75 +22,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="include/title_meta.jsp"%>
 <%@ include file="include/public_js_css.jsp"%>
-<script>
-$(function(){			
-	$("#slides").slides({
-		preload: true,
-		preloadImage: 'images/loading.gif',
-		play: 5000,
-		pause: 2500,
-		hoverPause: true,
-		effect:"fade"
-	});
-	var mw = $(".mbox").width()+10;
-	var ml = $(".mbox").length;	
-	$(".themes").width(mw*ml);
-	$(".t_menu li").mouseover(function(){
-		var index = $(this).index();
-		$(".themes").animate({left:-mw*index,opacity:1},500);
-	})
-});
-</script>
 <script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
-<script type="text/javascript">
-//jquery图片滚动
-$(function(){
-	$('#img_slide').bxCarousel({
-		display_num:2,
-		move: 1,
-		margin:0
-	});
-	
-	$('#video_slide').bxCarousel({
-	display_num:3,
-	move: 1,
-	margin:0
-});
-});
-</script>
 </head>
 
 <body class="page-header-fixed">
-	<!-- BEGIN HEADER -->
-	<%@ include file="include/header.jsp"%>
-	<!-- END   HEADER -->
+<!-- BEGIN HEADER -->
+<%@ include file="include/header.jsp"%>
+<!-- END   HEADER -->
+<%@ include file="include/slider.jsp"%>
 
-<div class="slider">
-<div id="slides">
-<div class="slides_container">
-<div class="slide"><a href="#"><img src="images/img1.jpg"/></a></div>
-<div class="slide"><a href="#"><img src="images/img2.jpg"/></a></div>
-<div class="slide"><a href="#"><img src="images/img3.jpg"/></a></div>
-<div class="slide"><a href="#"><img src="images/img4.jpg"/></a></div>
-</div>
-<div class="prev"></div><div class="next"></div>
-</div>
-</div>
 <div class="main">
 <div class="c10"></div>
 <div class="w">
 
 <div class="body fl" style=" width:400px;">
-<div class="title"><a href="news.html" class="ico_news">新闻中心</a><em><a href="news.html"></a></em></div>
+<div class="title"><a href="${basePath}/c002_init.ac?tid=523c1d77d4de4390af8a0924e69e3084" class="ico_news">新闻中心</a><em><a href="${basePath}/c002_init.ac?tid=523c1d77d4de4390af8a0924e69e3084"></a></em></div>
 <div class="content home_news" style="height:170px;">
 <ul>
-<li><a href="#">• 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a><em>02-04</em></li>
-<li><a href="#">• 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a><em>02-04</em></li>
-<li><a href="#">• 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a><em>02-04</em></li>
-<li><a href="#">• 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a><em>02-04</em></li>
-<li><a href="#">• 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a><em>02-04</em></li>
-<li><a href="#">• 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a><em>02-04</em></li>
-<li><a href="#">• 新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻新闻</a><em>02-04</em></li>
+<c:forEach items="${beans}" var="bean">
+<li><a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=${bean.parent_id}">• ${bean.title}</a>
+<em>
+${fn:substring(bean.last_updated,5,10)}
+</em>
+</li>
+</c:forEach>
 </ul>
 </div>
 </div>

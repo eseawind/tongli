@@ -51,6 +51,8 @@ public class TcSysNewsBean extends BaseBean {
 	private String new_id;
 	/** type_id */
 	private String type_id;
+	/** 父级分类 */
+	private String parent_id;
 	/** 标题图url */
 	private String pic_url;
 	/** 消息来源0:微信,1:网站 */
@@ -222,6 +224,20 @@ public class TcSysNewsBean extends BaseBean {
 	 */
 	public void setType_id(String type_id) {
 	    this.type_id = type_id;
+	}
+	/**
+	 * 父级分类取得
+	 * @return 父级分类
+	 */
+	public String getParent_id() {
+	    return parent_id;
+	}
+	/**
+	 * 父级分类设定
+	 * @param parent_id 父级分类
+	 */
+	public void setParent_id(String parent_id) {
+	    this.parent_id = parent_id;
 	}
 	/**
 	 * 标题图url取得

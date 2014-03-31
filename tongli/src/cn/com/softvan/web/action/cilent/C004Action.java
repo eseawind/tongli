@@ -19,7 +19,6 @@ import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.sys.INewsManager;
 import cn.com.softvan.service.sys.INewsTypeManager;
-import cn.com.softvan.service.wechat.impl.TcWxInfoManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
@@ -29,13 +28,13 @@ import cn.com.softvan.web.tag.PageInfo;
  * @author wuxiaogang
  * 
  */
-public class C001Action extends BaseAction {
+public class C004Action extends BaseAction {
 
 	/**
 	 * 序列号
 	 */
 	private static final long serialVersionUID = -3061791975484213551L;
-	private static final transient Logger log = Logger.getLogger(C001Action.class);
+	private static final transient Logger log = Logger.getLogger(C004Action.class);
 	
 	/**BEAN类  资讯信息*/
 	private TcSysNewsBean bean;
@@ -45,10 +44,10 @@ public class C001Action extends BaseAction {
 	private INewsManager newsManager;
 	/**资讯栏目信息管理 业务处理*/
 	private INewsTypeManager newsTypeManager;
-	//
 	private String info_source="1";
-	public C001Action() {
-		log.info("默认构造器......C001Action");
+	//
+	public C004Action() {
+		log.info("默认构造器......S001Action");
 	}
 
 	/**
@@ -61,13 +60,24 @@ public class C001Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String init() {
-		log.info("C001Action init.........");
-		
-		TcSysNewsBean bean1=new TcSysNewsBean();
-		bean1.setInfo_source(info_source);
-		bean1.setLimit_s(0);
-		bean1.setLimit_e(7);
-		beans=newsManager.findDataIsList(bean1);
+		log.info("S001Action init.........");
+//		int offset = 0;
+//		// 分页偏移量
+//		if (!Validator.isNullEmpty(request.getParameter("offset"))
+//				&& Validator.isNum(request.getParameter("offset"))) {
+//			offset = Integer.parseInt(request.getParameter("offset"));
+//		}
+//		PageInfo page = new PageInfo(); 
+//		//当前页
+//		page.setCurrOffset(offset);
+//		//每页显示条数
+//		page.setPageRowCount(15);
+//		TcSysNewsBean bean1 = new TcSysNewsBean();
+//		bean1.setPageInfo(page);
+//		//栏目资讯列表
+//		List<TcSysNewsBean> beans=newsManager.findDataIsPage(bean1);
+//		request.setAttribute("beans",beans);
+//		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "init";
 	}
 

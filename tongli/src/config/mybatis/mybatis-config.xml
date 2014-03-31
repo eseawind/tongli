@@ -74,14 +74,6 @@
 		<mapper resource="/cn/com/softvan/dao/mybatis/wechat/TcWxUserGroups.xml"/>
 		<!-- 微信后台模块 end-->		
 		
-		<!-- 行政区划 begin-->	
-		<mapper resource="/cn/com/softvan/dao/mybatis/regions/TcAdiCity.xml"/>
-		<mapper resource="/cn/com/softvan/dao/mybatis/regions/TcAdiCounty.xml"/>
-		<mapper resource="/cn/com/softvan/dao/mybatis/regions/TcAdiProvince.xml"/>
-		<mapper resource="/cn/com/softvan/dao/mybatis/regions/TcAdiTown.xml"/>
-		<mapper resource="/cn/com/softvan/dao/mybatis/regions/TcAdiVillage.xml"/>
-		<!-- 行政区划 end-->	
-		
 		<!-- 用户信息 begin-->	
 		<mapper resource="/cn/com/softvan/dao/mybatis/user/TcUaUmBaseRole.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/user/TcUaUmBaseUser.xml"/>

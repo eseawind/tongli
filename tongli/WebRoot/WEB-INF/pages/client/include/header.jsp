@@ -28,8 +28,8 @@
 		<div class="nav_con">
 			<div class="login">
 				<div class="loglink">
-					<a href="login.html" target="_blank">登录</a> | <a
-						href="register.html" target="_blank">注册</a>
+					<a href="${basePath}/c005_init.ac" target="_blank">登录</a> | <a
+						href="${basePath}/c005_init.ac" target="_blank">注册</a>
 				</div>
 				<div class="shortcut">
 					<select>
@@ -42,11 +42,11 @@
 			</div>
 			<div class="nav">
 				<ul>
-					<li class="home"><a href="index.html">首 页</a></li>
-					<li class="about"><a href="aboutus.html">关于我们</a></li>
-					<li class="course"><a href="course.html">课 程</a></li>
-					<li class="camp"><a href="camp.html">冬夏令营</a></li>
-					<li class="contact"><a href="contact.html">联系我们</a></li>
+					<li class="home"><a href="${basePath}/index.ac">首 页</a></li>
+					<li class="about"><a href="${basePath}/c002_init.ac?id=cc273bdf05ff466cbbaddedb8071dda4">关于我们</a></li>
+					<li class="course"><a href="${basePath}/c002_init.ac?id=30b7f89148054a94801ce579df68e78c">课 程</a></li>
+					<li class="camp"><a href="${basePath}/c002_init.ac?id=e90ac273a9534c90bc725112125b83ff">冬夏令营</a></li>
+					<li class="contact"><a href="${basePath}/c002_init.ac?id=47d9cbde8f104c97b7e963548fa59ea5">联系我们</a></li>
 				</ul>
 			</div>
 		</div>

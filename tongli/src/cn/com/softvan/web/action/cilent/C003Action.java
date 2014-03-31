@@ -19,7 +19,6 @@ import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.sys.INewsManager;
 import cn.com.softvan.service.sys.INewsTypeManager;
-import cn.com.softvan.service.wechat.impl.TcWxInfoManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
@@ -29,13 +28,13 @@ import cn.com.softvan.web.tag.PageInfo;
  * @author wuxiaogang
  * 
  */
-public class C001Action extends BaseAction {
+public class C003Action extends BaseAction {
 
 	/**
 	 * 序列号
 	 */
 	private static final long serialVersionUID = -3061791975484213551L;
-	private static final transient Logger log = Logger.getLogger(C001Action.class);
+	private static final transient Logger log = Logger.getLogger(C003Action.class);
 	
 	/**BEAN类  资讯信息*/
 	private TcSysNewsBean bean;
@@ -45,10 +44,10 @@ public class C001Action extends BaseAction {
 	private INewsManager newsManager;
 	/**资讯栏目信息管理 业务处理*/
 	private INewsTypeManager newsTypeManager;
-	//
 	private String info_source="1";
-	public C001Action() {
-		log.info("默认构造器......C001Action");
+	//
+	public C003Action() {
+		log.info("默认构造器......S001Action");
 	}
 
 	/**
@@ -61,13 +60,11 @@ public class C001Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String init() {
-		log.info("C001Action init.........");
-		
+		log.info("S001Action init.........");
+		String id=request.getParameter("id");
 		TcSysNewsBean bean1=new TcSysNewsBean();
-		bean1.setInfo_source(info_source);
-		bean1.setLimit_s(0);
-		bean1.setLimit_e(7);
-		beans=newsManager.findDataIsList(bean1);
+		bean1.setId(id);
+		bean=newsManager.findDataById(bean1);
 		return "init";
 	}
 

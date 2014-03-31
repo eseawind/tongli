@@ -45,6 +45,10 @@ public class TcSysNews extends BaseEntity {
 	private String pic_url;
 	/** 消息来源0:微信,1:网站 */
 	private String info_source;
+	/** limit 起 */
+	private Integer limit_s;
+	/** limit 止 */
+	private Integer limit_e;
 	/**
 	 * ID取得
 	 * @return ID
@@ -212,5 +216,33 @@ public class TcSysNews extends BaseEntity {
 	 */
 	public void setInfo_source(String info_source) {
 	    this.info_source = info_source;
+	}
+	/**
+	 * limit 起取得
+	 * @return limit 起
+	 */
+	public Integer getLimit_s() {
+	    return limit_s;
+	}
+	/**
+	 * limit 起设定
+	 * @param limit_s limit 起
+	 */
+	public void setLimit_s(Integer limit_s) {
+	    this.limit_s = limit_s;
+	}
+	/**
+	 * limit 止取得
+	 * @return limit 止
+	 */
+	public Integer getLimit_e() {
+	    return limit_e;
+	}
+	/**
+	 * limit 止设定
+	 * @param limit_e limit 止
+	 */
+	public void setLimit_e(Integer limit_e) {
+	    this.limit_e = limit_e;
 	}
 }

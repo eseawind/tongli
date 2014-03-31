@@ -1,5 +1,5 @@
 /*
- * 前台首页 ActionClass
+ * 栏目页 ActionClass
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
@@ -15,27 +15,27 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.sys.TcSysNewsBean;
+import cn.com.softvan.bean.sys.TcSysNewsTypeBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.sys.INewsManager;
 import cn.com.softvan.service.sys.INewsTypeManager;
-import cn.com.softvan.service.wechat.impl.TcWxInfoManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
 /**
- * 前台首页 ActionClass
+ * 栏目页 ActionClass
  * 
  * @author wuxiaogang
  * 
  */
-public class C001Action extends BaseAction {
+public class C002Action extends BaseAction {
 
 	/**
 	 * 序列号
 	 */
 	private static final long serialVersionUID = -3061791975484213551L;
-	private static final transient Logger log = Logger.getLogger(C001Action.class);
+	private static final transient Logger log = Logger.getLogger(C002Action.class);
 	
 	/**BEAN类  资讯信息*/
 	private TcSysNewsBean bean;
@@ -47,8 +47,8 @@ public class C001Action extends BaseAction {
 	private INewsTypeManager newsTypeManager;
 	//
 	private String info_source="1";
-	public C001Action() {
-		log.info("默认构造器......C001Action");
+	public C002Action() {
+		log.info("默认构造器......S002Action");
 	}
 
 	/**
@@ -61,13 +61,45 @@ public class C001Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String init() {
-		log.info("C001Action init.........");
+		log.info("S002Action init.........");
+		String tid=request.getParameter("tid");//栏目id
+		String pid=request.getParameter("pid");//栏目父级id
 		
-		TcSysNewsBean bean1=new TcSysNewsBean();
+		int offset = 0;
+		// 分页偏移量
+		if (!Validator.isNullEmpty(request.getParameter("offset"))
+				&& Validator.isNum(request.getParameter("offset"))) {
+			offset = Integer.parseInt(request.getParameter("offset"));
+		}
+		PageInfo page = new PageInfo(); 
+		//当前页
+		page.setCurrOffset(offset);
+		//每页显示条数
+		page.setPageRowCount(15);
+		TcSysNewsBean bean1 = new TcSysNewsBean();
+		bean1.setPageInfo(page);
+		bean1.setType_id(tid);
 		bean1.setInfo_source(info_source);
-		bean1.setLimit_s(0);
-		bean1.setLimit_e(7);
-		beans=newsManager.findDataIsList(bean1);
+		//栏目资讯列表
+		List<TcSysNewsBean> beans=newsManager.findDataIsPage(bean1);
+		request.setAttribute("beans",beans);
+		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
+		//栏目树
+		TcSysNewsTypeBean bean2=new TcSysNewsTypeBean();
+		bean2.setParent_id(pid);
+		request.setAttribute("tree_array",newsTypeManager.findDataIsTree(bean2));
+		//当前栏目id
+		request.setAttribute("tid",tid);
+		//当前栏目详情
+		TcSysNewsTypeBean typeBean=new TcSysNewsTypeBean();
+		typeBean.setId(tid);
+		request.setAttribute("typeBean", newsTypeManager.findDataById(typeBean));
+		//当前父栏目id
+		request.setAttribute("pid",pid);
+		//当前 父级 栏目详情
+		TcSysNewsTypeBean typeBeanP=new TcSysNewsTypeBean();
+		typeBeanP.setId(pid);
+		request.setAttribute("typeBeanP", newsTypeManager.findDataById(typeBeanP));
 		return "init";
 	}
 

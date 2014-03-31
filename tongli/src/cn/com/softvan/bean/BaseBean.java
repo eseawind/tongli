@@ -56,6 +56,10 @@ public class BaseBean implements Serializable,IBean,Cloneable {
 	private String errcode;
 	/** 错误信息 */
 	private String errmsg;
+	/** limit 起 */
+	private Integer limit_s;
+	/** limit 止 */
+	private Integer limit_e;
 	/**
 	 * 开始时间取得
 	 * @return 开始时间
@@ -276,5 +280,33 @@ public class BaseBean implements Serializable,IBean,Cloneable {
 	 */
 	public void setErrmsg(String errmsg) {
 	    this.errmsg = errmsg;
+	}
+	/**
+	 * limit 起取得
+	 * @return limit 起
+	 */
+	public Integer getLimit_s() {
+	    return limit_s;
+	}
+	/**
+	 * limit 起设定
+	 * @param limit_s limit 起
+	 */
+	public void setLimit_s(Integer limit_s) {
+	    this.limit_s = limit_s;
+	}
+	/**
+	 * limit 止取得
+	 * @return limit 止
+	 */
+	public Integer getLimit_e() {
+	    return limit_e;
+	}
+	/**
+	 * limit 止设定
+	 * @param limit_e limit 止
+	 */
+	public void setLimit_e(Integer limit_e) {
+	    this.limit_e = limit_e;
 	}
 }

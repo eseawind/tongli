@@ -46,6 +46,7 @@ public class S001Action extends BaseAction {
 	/**资讯栏目信息管理 业务处理*/
 	private INewsTypeManager newsTypeManager;
 	//
+	private String info_source="1";
 	public S001Action() {
 		log.info("默认构造器......S001Action");
 	}
@@ -74,6 +75,7 @@ public class S001Action extends BaseAction {
 		page.setPageRowCount(15);
 		TcSysNewsBean bean1 = new TcSysNewsBean();
 		bean1.setPageInfo(page);
+		bean1.setInfo_source(info_source);
 		//栏目资讯列表
 		List<TcSysNewsBean> beans=newsManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
@@ -176,6 +178,7 @@ public class S001Action extends BaseAction {
 						bean.setUpdate_ip(getIpAddr());
 						bean.setUpdate_id(user.getUser_id());
 					}
+					bean.setInfo_source(info_source);
 					msg=newsManager.saveOrUpdateData(bean);
 				}
 			} catch (Exception e) {
@@ -232,6 +235,7 @@ public class S001Action extends BaseAction {
 		bean1.setPageInfo(page);
 		//已删除
 		bean1.setDel_flag("1");
+		bean1.setInfo_source(info_source);
 		//栏目资讯列表
 		List<TcSysNewsBean> beans=newsManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
