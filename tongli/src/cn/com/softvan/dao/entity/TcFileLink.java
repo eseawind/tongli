@@ -3,7 +3,7 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.02.26  wangzi           程序发布
+ * 1.00     2014.02.26  wuxiaogang           程序.发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
@@ -13,7 +13,7 @@ package cn.com.softvan.dao.entity;
 
 /**
  * <p> 车主管家模块附件关联表  <p>
- * @author wangzi
+ * @author wuxiaogang
  *
  */
 public class TcFileLink extends BaseEntity {

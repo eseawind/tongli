@@ -52,7 +52,16 @@
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNewsVsType" alias="tcSysNewsVsType"/>
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysParter" alias="tcSysParter"/>
 		<!-- 系统管理模块 end -->
-		
+		<!-- 课程管理 begin -->
+		<!-- bean class -->
+		<typeAlias type="cn.com.softvan.bean.course.TcCourseBean" alias="tcCourseBean"/>
+		<typeAlias type="cn.com.softvan.bean.course.TcCourseSyllabusBean" alias="tcCourseSyllabusBean"/>
+		<typeAlias type="cn.com.softvan.bean.course.TcCourseSyllabusItemsBean" alias="tcCourseSyllabusItemsBean"/>
+		<!-- entity class -->
+		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourse" alias="tcCourse"/>
+		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseSyllabus" alias="tcCourseSyllabus"/>
+		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseSyllabusItems" alias="tcCourseSyllabusItems"/>
+		<!-- 课程管理 eng -->
 	</typeAliases>
 	<!-- 插件 -->
 	<plugins>
@@ -97,5 +106,11 @@
 		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysNewsVsType.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysParter.xml"/>
 		<!-- 系统管理模块 end -->
+		
+		<!-- 课程管理 begin -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourse.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseSyllabus.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseSyllabusItems.xml"/>
+		<!-- 课程管理 end -->
 	</mappers>
 </configuration>

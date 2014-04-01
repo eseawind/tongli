@@ -3,7 +3,7 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.02.26  wangzi           程序发布
+ * 1.00     2014.02.26  wuxiaogang           程序.发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
@@ -13,7 +13,7 @@ package cn.com.softvan.bean.wechat;
 import cn.com.softvan.bean.BaseBean;
 /**
  * <p> 微信用户信息 <p>
- * @author wangzi
+ * @author wuxiaogang
  *
  */
 public class TcWxUserBean extends BaseBean {

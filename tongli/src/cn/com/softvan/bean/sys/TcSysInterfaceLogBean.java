@@ -2,7 +2,7 @@
  *  系统调用车险接口日志 bean类
  * VERSION          DATE                 BY              REASON
  * -------- -------------------  ---------------------- ------------------------------------------
- * 1.00     2014-03-24 下14:32:33             wangzi              程序发布
+ * 1.00     2014-03-24 下14:32:33             wuxiaogang              程序.发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  */
@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * <p> 系统调用车险接口日志 bean类 <p>
- * @author wangzi
+ * @author wuxiaogang
  *
  */
 public class TcSysInterfaceLogBean {

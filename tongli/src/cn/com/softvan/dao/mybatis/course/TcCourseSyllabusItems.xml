@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.course.ITcCourseSyllabusItemsDao" >
+  <sql id="Base_Column_List" >
+	id,
+	syllabus_id,
+	begin_time,
+	end_time,
+	note
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcCourseBean" parameterType="tcCourse" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_course_syllabus_items
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcCourse" >
+    delete from tc_course_syllabus_items
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="tcCourse" >
+    insert into tc_course_syllabus_items (
+	    id,
+		syllabus_id,
+		begin_time,
+		end_time,
+		note
+      ) values (
+	    #{id},
+		#{syllabus_id},
+		#{begin_time},
+		#{end_time},
+		#{note}
+    )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcCourse" >
+    update tc_course_syllabus_items set note=#{note}
+	<if test="syllabus_id!= null" >,syllabus_id=#{syllabus_id}</if>
+	<if test="begin_time!= null" >,begin_time=#{begin_time}</if>
+	<if test="end_time!= null" >,end_time=#{end_time}</if>
+	where id=#{id}
+  </update>
+  	<!--判断是否存在-->
+    <select id="isDataYN" parameterType="tcCourse" resultType="int">
+    select count(0) from tc_course_syllabus_items where id=#{id}
+    </select>
+    <!--
+	 * <p>信息列表 分页。</p>
+	public List<TcCourseBean> findDataIsPage(IEntity dto);
+	-->
+	<select id="findDataIsPage" resultType="tcCourseBean" parameterType="tcCourse" >
+    select
+	<include refid="Base_Column_List"/>
+	from tc_course_syllabus_items t1
+    </select>
+	<!-- 
+	 * <p>信息列表。</p>
+	public List<TcCourseBean> findDataIsList(IEntity dto); -->
+	<select id="findDataIsList" resultType="tcCourseBean" parameterType="tcCourse" >
+	select
+	<include refid="Base_Column_List"/>
+	from tc_course_syllabus_items t1
+   </select>
+</mapper>

@@ -119,11 +119,11 @@
 					<a class="active" href="javascript:;">
 					<i class="fa fa-cogs"></i> 
 					<span class="title">课程管理</span>
-					<span id="car_arrow" class="arrow "></span>
+					<span id="course_arrow" class="arrow "></span>
 					</a>
-					<ul id="car_sub_menu" style="display: none;" class="sub-menu">
+					<ul id="course_sub_menu" style="display: none;" class="sub-menu">
 						<li>
-							<a  id="car_sub_menu_l1" href="#" onclick="myAlert('功能即将开放')">
+							<a  id="course_sub_menu_l1" href="${basePath}/h/c101_init.ac" onclick="myAlert('功能即将开放')">
 							功能1
 							</a>
 						</li>

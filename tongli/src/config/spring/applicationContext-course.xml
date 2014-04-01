@@ -15,5 +15,12 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/jee 
 		http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
-		
+		<!-- ****************************dao*************************************** -->
+		<bean id="tcCourseDao" parent="baseDao">
+			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.course.ITcCourseDao"></property>
+		</bean>
+		<!-- ************************业务处理类************************************* -->
+		<bean id="courseManager" class="cn.com.softvan.service.course.impl.CourseManager" scope="prototype">
+			<property name="tcCourseDao" ref="tcCourseDao"></property>
+		</bean>
 </beans>

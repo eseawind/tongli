@@ -19,7 +19,7 @@ import redis.clients.jedis.Jedis;
 import cn.com.softvan.dao.utils.SerializeUtil;
 /**
  * <p>封装redis 缓存服务器服务接口   <p>
- * @author wangzi
+ * @author wuxiaogang
  *
  */
 public class JedisHelper {

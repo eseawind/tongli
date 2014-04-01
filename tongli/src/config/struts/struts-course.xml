@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="course_info" namespace="/h" extends="wechat-default" >
+    	<default-interceptor-ref name="wechat-auth" /> 
+		<!-- 课程管理 -->
+		<action name="c101_*" class="c101Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/course/C101.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/course/C101_01.jsp</result>
+			<result name="success" type="chain">c101_init</result>
+		</action>
+	</package>
+</struts>

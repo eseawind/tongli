@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.course.ITcCourseSyllabusDao" >
+  <sql id="Base_Column_List" >
+	id,
+	student_id,
+	course_id,
+	user_id,
+	day,
+	truancy_status,
+	truancy_note,
+	note,
+	date_created,
+	create_id,
+	create_ip,
+	last_updated,
+	update_id,
+	update_ip,
+	del_flag,
+	version
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcCourseBean" parameterType="tcCourse" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_course_syllabus
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcCourse" >
+    delete from tc_course_syllabus
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="tcCourse" >
+    insert into tc_course_syllabus (
+	    id,
+		student_id,
+		course_id,
+		user_id,
+		day,
+		truancy_status,
+		truancy_note,
+		note,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		del_flag,
+		version
+      ) values (
+	    #{id},
+		#{student_id},
+		#{course_id},
+		#{user_id},
+		#{day},
+		#{truancy_status},
+		#{truancy_note},
+		#{note},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		'0',
+		 0
+    )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcCourse" >
+    update tc_course_syllabus set version=version+1
+    ,last_updated=now()
+	,update_id=#{update_id}
+	,update_ip=#{update_ip}
+	<if test="student_id!= null" >,student_id=#{student_id}</if>
+	<if test="course_id!= null" >,course_id=#{course_id}</if>
+	<if test="user_id!= null" >,user_id=#{user_id}</if>
+	<if test="day!= null" >,day=#{day}</if>
+	<if test="truancy_status!= null" >,truancy_status=#{truancy_status}</if>
+	<if test="truancy_note!= null" >,truancy_note=#{truancy_note}</if>
+	<if test="note!= null" >,note=#{note}</if>
+	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+	where id=#{id}
+  </update>
+  	<!--判断是否存在-->
+    <select id="isDataYN" parameterType="tcCourse" resultType="int">
+    select count(0) from tc_course_syllabus where id=#{id}
+    </select>
+    <!--
+	 * <p>信息列表 分页。</p>
+	public List<TcCourseBean> findDataIsPage(IEntity dto);
+	-->
+	<select id="findDataIsPage" resultType="tcCourseBean" parameterType="tcCourse" >
+    select
+	<include refid="Base_Column_List"/>
+	from tc_course_syllabus t1
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+    order by t1.day asc
+    </select>
+	<!-- 
+	 * <p>信息列表。</p>
+	public List<TcCourseBean> findDataIsList(IEntity dto); -->
+	<select id="findDataIsList" resultType="tcCourseBean" parameterType="tcCourse" >
+	select
+	<include refid="Base_Column_List"/>
+	from tc_course_syllabus t1
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+    order by t1.day asc
+   </select>
+   <!-- 逻辑删除 -->
+   <update id="deleteById" parameterType="tcCourse">
+	  	update tc_course_syllabus set version=version+1,last_updated=now(),del_flag='1',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+   <!-- 恢复逻辑删除的数据 -->
+   <update id="recoveryDataById" parameterType="tcCourse">
+	  	update tc_course_syllabus set version=version+1,last_updated=now(),del_flag='0',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+</mapper>

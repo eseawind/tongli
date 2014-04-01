@@ -11,4 +11,8 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- ************************ACTION类************************************* -->
+	 <!-- 课程管理ACTION -->
+	<bean id="c101Action" class="cn.com.softvan.web.action.course.C101Action" scope="prototype">
+		<property name="courseManager" ref="courseManager"></property>
+	</bean>
 </beans>

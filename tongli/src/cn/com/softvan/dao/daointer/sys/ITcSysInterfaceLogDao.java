@@ -2,7 +2,7 @@
  * 系统调用车险接口异常日志 Dao层接口
  * VERSION          DATE                 BY              REASON
  * -------- -------------------  ---------------------- ------------------------------------------
- * 1.00     2014-03-24 14:33:36             wangzi              程序发布
+ * 1.00     2014-03-24 14:33:36             wuxiaogang              程序.发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  */
@@ -15,7 +15,7 @@ import cn.com.softvan.dao.entity.IEntity;
 
 /**
  * <p> 系统调用车险接口异常日志 Dao层接口 <p>
- * @author wangzi
+ * @author wuxiaogang
  *
  */
 public interface ITcSysInterfaceLogDao {
