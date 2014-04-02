@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-24  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 jfq System. - All Rights Reserved.
+ * Copyright 2014 车主管家 System. - All Rights Reserved.
  *
  */
 --%>
@@ -15,7 +15,6 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-</head>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -26,11 +25,7 @@
 <head>
 <meta charset="utf-8" />
 <%@include file="../include/admin_title.jsp" %>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta content="" name="description" />
-<meta content="" name="author" />
-<meta name="MobileOptimized" content="320">
+
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet"
@@ -95,21 +90,14 @@
 							<label>关键字 
 								<input class="upload-wrapper" id="message_keyword" name="bean.keyword" size="30" value="${bean.keyword }" placeholder="多个关键字请用空格隔开" title="关键字" type="text">
 							</label>
-							&nbsp; 
+							&nbsp;  -->
 							 <label title="置顶">
 							<input name="bean.is_ontop" value="1"
 							<c:if test="${bean.is_ontop=='1'}">
 							 	checked="checked"
 							 </c:if>
 							 type="checkbox">
-							 置顶</label> -->
-							  <label title="快速导航">
-							<input name="bean.msgtype" value="1"
-							<c:if test="${bean.msgtype=='1'}">
-							 	checked="checked"
-							 </c:if>
-							 type="checkbox">
-							 快速导航</label>
+							 置顶</label>
 							 &nbsp; &nbsp; 栏目<i class="fa fa-angle-right"></i>
 							<c:forEach items="${tree}" var="tree">
 							<label>
@@ -147,7 +135,7 @@
 						</div>
 						<div class="portlet box btn default btn-block">
 						<div class="portlet-title">
-							<div class="caption"  id="select-image-modal"><i class="fa fa-anchor"></i><font color="#000">点击上传焦点新闻图片</font></div>
+							<div class="caption"  id="select-image-modal"><i class="fa fa-anchor"></i><font color="#000">点击上传[标题图片]</font></div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse"></a>
 								<a href="javascript:;" class="remove"></a>

@@ -15,7 +15,6 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-</head>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -25,12 +24,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8" />
-<title>微信服务-自定义菜单【车主管家】</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta content="" name="description" />
-<meta content="" name="author" />
-<meta name="MobileOptimized" content="320">
+<%@include file="../include/admin_title.jsp" %>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/font-awesome/css/font-awesome.css"
@@ -120,7 +114,9 @@
 						<div class="btn btn-toolbar">
 							<a href="${basePath}/h/w007_edit.ac" class="btn btn-primary">新建</a>
 						</div>
-						<button id="download" class="btn">从微信下载</button>
+						<form action="${basePath}/h/w007_downMenu.ac" class="btn" method="post">
+						<button id="download" class="btn" type="submit">从微信下载</button>
+						</form>
 						<button id="upload" onclick="uploadMenu();" class="btn">发布到微信</button>
 						<table class="table table-condensed table-striped">
 							<tbody>

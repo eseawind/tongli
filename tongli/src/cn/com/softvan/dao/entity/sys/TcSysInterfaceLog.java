@@ -2,7 +2,7 @@
  * 系统调用车险接口日志 实体类
  * VERSION          DATE                 BY              REASON
  * -------- -------------------  ---------------------- ------------------------------------------
- * 1.00     2014-03-24 14:21:26             wuxiaogang              程序.发布
+ * 1.00     2014-03-24 14:21:26             wangzi              程序发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  */
@@ -14,7 +14,7 @@ import cn.com.softvan.dao.entity.IEntity;
 
 /**
  * <p> 系统调用车险接口日志 实体类 <p>
- * @author wuxiaogang
+ * @author wangzi
  *
  */
 public class TcSysInterfaceLog implements IEntity{

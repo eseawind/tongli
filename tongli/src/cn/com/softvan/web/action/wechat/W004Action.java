@@ -22,6 +22,7 @@ import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.sys.INewsManager;
 import cn.com.softvan.web.action.BaseAction;
+import cn.com.softvan.web.tag.PageInfo;
 
 /**
  * 素材管理_文章消息 ActionClass
@@ -61,10 +62,60 @@ public class W004Action extends BaseAction {
 	 */
 	public String init() {
 		log.info("W004Action init.........");
-		TcSysNewsBean bean1=new TcSysNewsBean();
+		int offset = 0;
+		// 分页偏移量
+		if (!Validator.isNullEmpty(request.getParameter("offset"))
+				&& Validator.isNum(request.getParameter("offset"))) {
+			offset = Integer.parseInt(request.getParameter("offset"));
+		}
+		PageInfo page = new PageInfo(); 
+		//当前页
+		page.setCurrOffset(offset);
+		//每页显示条数
+		page.setPageRowCount(15);
+		TcSysNewsBean bean1 = new TcSysNewsBean();
+		bean1.setPageInfo(page);
 		bean1.setInfo_source(info_source);
-		beans=newsManager.findDataIsList(bean1);
+		//栏目资讯列表
+		List<TcSysNewsBean> beans=newsManager.findDataIsPage(bean1);
+		request.setAttribute("beans",beans);
+		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "init";
+	}
+	/**
+	 * <p>
+	 * 信息选择页面
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>选择页面。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String list1() {
+		log.info("W004Action list1.........");
+		int offset = 0;
+		// 分页偏移量
+		if (!Validator.isNullEmpty(request.getParameter("offset"))
+				&& Validator.isNum(request.getParameter("offset"))) {
+			offset = Integer.parseInt(request.getParameter("offset"));
+		}
+		//关键字
+		String keyword=request.getParameter("keyword");
+		
+		PageInfo page = new PageInfo(); 
+		//当前页
+		page.setCurrOffset(offset);
+		//每页显示条数
+		page.setPageRowCount(5);
+		TcSysNewsBean bean1 = new TcSysNewsBean();
+		bean1.setPageInfo(page);
+		bean1.setInfo_source(info_source);
+		bean1.setKeyword(keyword);
+		//栏目资讯列表
+		List<TcSysNewsBean> beans=newsManager.findDataIsPage(bean1);
+		request.setAttribute("beans",beans);
+		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
+		return "list1";
 	}
 	/**
 	 * <p>

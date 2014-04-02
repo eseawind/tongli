@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.wechat.TcWxMenuBean;
 import cn.com.softvan.bean.wechat.TcWxPublicUserBean;
+import cn.com.softvan.bean.wechat.TcWxUserBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.JedisHelper;
@@ -104,7 +105,9 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 					}
 					if(insert_falg){
 						//新增
-						dto.setId(IdUtils.createUUID(32));
+						if(Validator.isEmpty(dto.getId())){
+							dto.setId(IdUtils.createUUID(32));
+						}
 						tcWxMenuDao.insert(dto);
 					}
 				}
@@ -217,12 +220,6 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 	public String uploadMenu(){
 		String msg="1";
 		try {
-			//公共账号信息
-			TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
-			if((publicUserBean==null) || (publicUserBean.getId()==null)){
-				publicUserBean=tcWxPublicUserManager.findDataById(null);
-				jedisHelper.set(CommonConstant.SESSION_WECHAT_BEAN,publicUserBean);
-			}
 			//TODO 设置菜单
 			TcWxMenuBean bean=new TcWxMenuBean();
 			bean.setInfo_source("0");
@@ -271,9 +268,9 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 				}
 				menu.append("]");
 				menu.append("}");
-				String appid=publicUserBean.getAppid();
+				String appid=getPublicUserBean().getAppid();
 //				System.out.println("----------1---------------");
-				String secret=publicUserBean.getAppsecret();
+				String secret=getPublicUserBean().getAppsecret();
 //				System.out.println("----------2---------------");
 				String access_token=new WxApiUtil().getAccess_token(false,jedisHelper,appid, secret);
 //				System.out.println("----------3---------------");
@@ -299,8 +296,55 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 	 * @return 处理结果
 	 */
 	public String downMenu(){
-		String msg="";
-		
+		String msg="1";
+		//TODO 下载菜单
+		try {
+			WxApiUtil api=new WxApiUtil();
+			List<TcWxMenuBean> beans=api.getMenu(api.getAccess_token(false,jedisHelper,getPublicUserBean().getAppid(), getPublicUserBean().getAppsecret()));
+			if(beans!=null && beans.size()>0){
+				TcWxMenuBean bean1=beans.get(0);
+				//40001获取access_token时AppSecret错误，或者access_token无效
+				//40014不合法的access_token
+				//42001access_token超时
+				if(api.isErrAccessToken(bean1.getErrcode())){
+					//重新获取access_token 并重新调用接口
+					beans=api.getMenu(api.getAccess_token(true,jedisHelper,getPublicUserBean().getAppid(), getPublicUserBean().getAppsecret()));
+				}
+			}
+			
+			//数据清空标记
+			boolean clear_all_menu_flag=false;
+			
+			if(beans!=null && beans.size()>0){
+				for(TcWxMenuBean bean:beans){
+					if(bean!=null && bean.getErrcode()==null){
+						if(!clear_all_menu_flag){
+							TcWxMenu dto=new TcWxMenu();
+							dto.setInfo_source("0");
+							tcWxMenuDao.deleteAllByInfoSource(dto);
+							clear_all_menu_flag=true;
+						}
+						bean.setInfo_source("0");
+						saveOrUpdateData(bean);
+						//2级菜单
+						if(bean.getBeans()!=null && bean.getBeans().size()>0){
+							for(TcWxMenuBean bean2:bean.getBeans()){
+								bean2.setInfo_source("0");
+								saveOrUpdateData(bean2);
+							}
+						}
+					}else{
+						msg=bean.getErrmsg();
+					}
+				}
+			}else{
+				msg="下载微信菜单(保存入库) 处理异常!";
+			}
+	    	if(beans!=null && beans.size()>0){
+	    	}
+    	} catch (Exception e) {
+			log.error("微信菜单下载失败!", e);
+		}
 		return msg;
 	}
 	/**
@@ -366,5 +410,14 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 	 */
 	public void setTcWxPublicUserManager(ITcWxPublicUserManager tcWxPublicUserManager) {
 	    this.tcWxPublicUserManager = tcWxPublicUserManager;
+	}
+	/**微信 公共号 信息*/
+	private TcWxPublicUserBean getPublicUserBean(){
+		TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
+		if((publicUserBean==null) || (publicUserBean.getId()==null)){
+			publicUserBean=tcWxPublicUserManager.findDataById(null);
+			jedisHelper.set(CommonConstant.SESSION_WECHAT_BEAN,publicUserBean);
+		}
+		return publicUserBean;
 	}
 }

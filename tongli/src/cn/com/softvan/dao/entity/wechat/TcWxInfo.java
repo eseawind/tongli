@@ -17,7 +17,7 @@ import cn.com.softvan.dao.entity.BaseEntity;
  * 微信关键字自动回复
  * <p>
  * 
- * @author wuxiaogang
+ * @author wangzi
  * 
  */
 public class TcWxInfo extends BaseEntity {

@@ -15,7 +15,7 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-</head>
+<%@ taglib prefix="customtag" uri="/custom-tags"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -25,12 +25,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8" />
-<title>微信服务-自动回复-图片【车主管家】</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta content="" name="description" />
-<meta content="" name="author" />
-<meta name="MobileOptimized" content="320">
+<%@include file="../include/admin_title.jsp" %>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet"
@@ -100,7 +95,7 @@
 							</c:choose>
 						</c:if>
 						<div class="col-md-6 message-size">
-							<div class="new-msg center" style="height: 300px;line-height: 300px;">
+							<div class="new-msg center" style="height: 260px;line-height: 260px;">
 								<a href="${basePath}/h/w003_edit.ac"
 									class="btn btn-link" style="margin-top: 100px;"><div>
 										<i class="icon-comments-alt icon-5"></i>
@@ -132,7 +127,7 @@
 							</form>
 							</div>
 						</c:forEach>
-						
+						<customtag:pagingext func="loadUrlPage" params="'h/w003_','init'" />
 				</div>
 			</div>
 			<!-- END PAGE CONTENT-->
@@ -169,4 +164,7 @@
 			});
 		});
 });
+	function loadUrlPage(offset, url, event) {
+		location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
+	}
 </script>

@@ -5,7 +5,7 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.26  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 jfq  System. - All Rights Reserved.
+ * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.web.action.sys;
@@ -111,30 +111,6 @@ public class S003Action extends BaseAction {
 		String msg="1";
 		try {
 			msg=parterManager.deleteDataById(bean1);
-		} catch (Exception e) {
-			msg=e.getMessage();
-		}
-		request.setAttribute("msg",msg);
-		
-		return SUCCESS;
-	}
-	/**
-	 * <p>
-	 * 删除。
-	 * </p>
-	 * <ol>
-	 * [功能概要] <div>物理删除。</div>
-	 * </ol>
-	 * @return 转发字符串
-	 */
-	public String delxx() {
-		log.info("S003Action delxx.........");
-		String id=request.getParameter("id");
-		TcSysParterBean bean1=new TcSysParterBean();
-		bean1.setId(id);
-		String msg="1";
-		try {
-			msg=parterManager.deleteData(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}

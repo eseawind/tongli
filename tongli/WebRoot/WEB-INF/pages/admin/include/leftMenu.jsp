@@ -166,6 +166,17 @@
 						<li id="sys3_sub_menu_l1_sub_menu_l2"><a href="${basePath }/h/s003_recycle.ac">信息回收站</a></li>
 					</ul>
 				</li>
+				<li id="sys4" class="">
+					<a class="active" href="javascript:;">
+					<i class="fa fa-bullhorn"></i> 
+					<span class="title">投诉建议</span>
+					<span id="sys4_arrow" class="arrow"></span>
+					</a>
+					<ul id="sys3_sub_menu" style="display: none;" class="sub-menu">
+						<li id="sys4_sub_menu_l1_sub_menu_l1"><a href="${basePath }/h/t001_init.ac">信息管理</a></li>
+						<li id="sys4_sub_menu_l1_sub_menu_l2"><a href="${basePath }/h/t001_recycle.ac">信息回收站</a></li>
+					</ul>
+				</li>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

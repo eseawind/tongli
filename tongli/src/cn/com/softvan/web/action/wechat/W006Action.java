@@ -15,8 +15,11 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.wechat.TcWxInfoBean;
+import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.wechat.ITcWxInfoManager;
 import cn.com.softvan.web.action.BaseAction;
+import cn.com.softvan.web.tag.PageInfo;
 
 /**
  * 微信服务_自动回复(关键字)_视频消息 ActionClass
@@ -38,6 +41,10 @@ public class W006Action extends BaseAction {
 	private List<TcWxInfoBean> beans;
 	/**微信服务_资源信息管理 业务处理*/
 	private ITcWxInfoManager tcWxInfoManager;
+	/** 信息类型 */
+	private final String msgType="video";
+	/**信息来源0微信文章1系统资讯*/
+	private final String info_source="0";
 	//
 	public W006Action() {
 		log.info("默认构造器......W006Action");
@@ -54,6 +61,25 @@ public class W006Action extends BaseAction {
 	 */
 	public String init() {
 		log.info("W006Action init.........");
+		int offset = 0;
+		// 分页偏移量
+		if (!Validator.isNullEmpty(request.getParameter("offset"))
+				&& Validator.isNum(request.getParameter("offset"))) {
+			offset = Integer.parseInt(request.getParameter("offset"));
+		}
+		PageInfo page = new PageInfo(); 
+		//当前页
+		page.setCurrOffset(offset);
+		//每页显示条数
+		page.setPageRowCount(15);
+		TcWxInfoBean bean1=new TcWxInfoBean();
+		bean1.setMsgtype(msgType);
+		bean1.setPageInfo(page);
+		bean1.setInfo_source(info_source);
+		//栏目资讯列表
+		List<TcWxInfoBean> beans=tcWxInfoManager.findDataIsPage(bean1);
+		request.setAttribute("beans",beans);
+		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "init";
 	}
 	/**

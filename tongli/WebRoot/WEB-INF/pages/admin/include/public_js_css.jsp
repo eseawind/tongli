@@ -22,7 +22,7 @@
 <link href="${basePath}/plugins/editor/themes/default/default.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/editor/plugins/code/prettify.css" rel="stylesheet" type="text/css"/>
 
-
+<link href="${basePath}/css/boxy.css"  rel="stylesheet" type="text/css"  />
 
 <style type="text/css">
 ul{
@@ -32,3 +32,5 @@ ul{
 	list-style: none;
 }
 </style>
+
+<script src="${basePath}/js/jquery.boxy.js" type="text/javascript" ></script>

@@ -3,7 +3,7 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.02.25  wuxiaogang          程序・发布
+ * 1.00     2014.02.25  wangzi          程序・发布
  * 1.01     2014.03.05  wuxiaogang      程序・更新
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家 System. - All Rights Reserved.
@@ -24,7 +24,11 @@ public interface ITcWxMenuDao {
      * 根据主键id删除信息
      */
     int deleteByPrimaryKey(IEntity dto) throws Exception;
-
+    /**
+     * 根据菜单来源类型 删除所有菜单信息
+     */
+    int deleteAllByInfoSource(IEntity dto) throws Exception;
+    
     /**
      * 新增信息(全字段)
      */

@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-24  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 jfq System. - All Rights Reserved.
+ * Copyright 2014 车主管家 System. - All Rights Reserved.
  *
  */
 --%>
@@ -48,7 +48,7 @@ ol,ul{list-style-position:inside;}
 			<c:choose>
 				<c:when test="${bean!=null}">
 				<h1>${bean.title}</h1>
-				<div>==${sessionScope.SESSION_KEY_USER_WECHAR_OPENID}==</div>
+				<div>==${sessionScope.SESSION_KEY_USER_WECHAT_OPENID}==</div>
                 <div class="text">
 					${bean.detail_info}
 				 </div>

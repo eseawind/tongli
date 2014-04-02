@@ -15,7 +15,7 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-</head>
+<%@ taglib prefix="customtag" uri="/custom-tags"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -25,12 +25,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8" />
-<title>微信服务-素材管理-文章【车主管家】</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta content="" name="description" />
-<meta content="" name="author" />
-<meta name="MobileOptimized" content="320">
+<%@include file="../include/admin_title.jsp" %>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -105,7 +100,7 @@
 							  <a href="#" class="list-group-item active">
 							   <i class="fa fa-check"></i> 未分组 (${fn:length(beans)})
 							  </a>
-							  <a class="list-group-item" href="#myModal1"data-toggle="modal"><i class="fa fa-bolt"></i> 新建分组</a>
+							  <a class="list-group-item" href="#myModal1" data-toggle="modal"><i class="fa fa-bolt"></i> 新建分组</a>
 							</div>
 						</div>
 						<div class="col-md-10">
@@ -151,6 +146,7 @@
 									</c:forEach>
 								</tbody>
 							</table>
+							<customtag:pagingext func="loadUrlPage" params="'h/w004_','init'" />
 						</div>
 					</div>
 				</div>
@@ -166,6 +162,11 @@
 </body>
 <!-- END BODY -->
 </html>
+<script type="text/javascript">
+function loadUrlPage(offset, url, event) {
+	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
+}
+</script>
 <!-- Modal -->
 <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 	<div class="modal-dialog">

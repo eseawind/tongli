@@ -3,7 +3,7 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.02.26  wuxiaogang           程序.发布
+ * 1.00     2014.02.26  wangzi           程序.发布
  * 1.01     2014.03.07  wuxiaogang       程序.修改  新增 password, appid, appsecret
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
@@ -18,7 +18,7 @@ import cn.com.softvan.dao.entity.BaseEntity;
  * 微信公共号信息
  * <p>
  * 
- * @author wuxiaogang
+ * @author wangzi
  * 
  */
 public class TcWxPublicUser extends BaseEntity {

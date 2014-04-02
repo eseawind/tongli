@@ -35,21 +35,33 @@
 <div class="c10"></div>
 <div class="w">
 
-<div class="body fl" style=" width:770px;">
+<div class="body fr" style=" width:770px;">
 <h1> ${bean.title}信息标题</h1>
 <h3>发布日期：${bean.last_updated} &nbsp;&nbsp;&nbsp;&nbsp;发布人：${bean.create_id}</h3>
 <div class="content" style="min-height:290px;">
   ${bean.detail_info}
 </div>
 </div>
-<div class="body fr" style=" width:197px;">
+<div class="body fl" style="width: 197px;">
+	<div class="title">
+		<a href="javascript:void(0);" class="ico_aboutus">童励介绍</a>
+	</div>
+	<div class="content">
+		<ul>
+			<li><a href="#" title="童励介绍">• 童励介绍</a></li>
+			<li><a href="#" title="童励在上海">• 童励在上海</a></li>
+			<li><a href="#" title="联系方式">• 联系方式</a></li>
+		</ul>
+	</div>
+</div>
+<div class="body fl mt10" style=" width:197px;">
 <div class="title"><a href="#" class="ico_recommend">预约参观</a></div>
 <div class="content" style="height:150px;">
 <img src="images/img4.jpg" width="177" height="150">
 </div>
 </div>
 
-<div class="body fr mt10" style=" width:197px;">
+<div class="body fl mt10" style=" width:197px;">
 <div class="content" style="height:177px;">
 <img src="images/erweima.jpg" width="177" height="177">
 </div>

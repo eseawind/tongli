@@ -60,7 +60,7 @@ public class NewsTypeManager extends BaseManager implements INewsTypeManager {
 				dto.setName(bean.getName());//name
 				dto.setParent_id(bean.getParent_id());//父级分类id
 				dto.setVersion(bean.getVersion());//VERSION
-				dto.setSort_num(Validator.isEmpty(bean.getSort_num())?"0":bean.getSort_num());//序号
+				dto.setSort_num(bean.getSort_num()==null?"0":bean.getSort_num());//序号
 				if(Validator.notEmpty(bean.getDetail_info())){
 				IOHelper.deleteFile(bean.getDetail_info());//TODO=删除文件
 				dto.setDetail_info(IOHelper.writeHtml("html",bean.getDetail_info()));//内容

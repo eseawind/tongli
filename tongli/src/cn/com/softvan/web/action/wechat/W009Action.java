@@ -23,6 +23,7 @@ import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.wechat.ITcWxInfoManager;
 import cn.com.softvan.web.action.BaseAction;
+import cn.com.softvan.web.tag.PageInfo;
 
 /**
  * 微信服务_自动回复(关键字)_文本消息 ActionClass
@@ -45,6 +46,8 @@ public class W009Action extends BaseAction {
 	private ITcWxInfoManager tcWxInfoManager;
 	/** 信息类型 */
 	private final String msgType="text";
+	/**信息来源0微信文章1系统资讯*/
+	private final String info_source="0";
 	//
 	public W009Action() {
 		log.info("默认构造器......W009Action");
@@ -61,10 +64,25 @@ public class W009Action extends BaseAction {
 	 */
 	public String init() {
 		log.info("W009Action init.........");
+		int offset = 0;
+		// 分页偏移量
+		if (!Validator.isNullEmpty(request.getParameter("offset"))
+				&& Validator.isNum(request.getParameter("offset"))) {
+			offset = Integer.parseInt(request.getParameter("offset"));
+		}
+		PageInfo page = new PageInfo(); 
+		//当前页
+		page.setCurrOffset(offset);
+		//每页显示条数
+		page.setPageRowCount(15);
 		TcWxInfoBean bean1=new TcWxInfoBean();
-		bean1.setInfo_source("0");
 		bean1.setMsgtype(msgType);
-		beans=tcWxInfoManager.findDataIsList(bean1);
+		bean1.setPageInfo(page);
+		bean1.setInfo_source(info_source);
+		//栏目资讯列表
+		List<TcWxInfoBean> beans=tcWxInfoManager.findDataIsPage(bean1);
+		request.setAttribute("beans",beans);
+		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "init";
 	}
 	/**

@@ -41,13 +41,35 @@
 				</div>
 			</div>
 			<div class="nav">
-				<ul>
-					<li class="home"><a href="${basePath}/index.ac">首 页</a></li>
-					<li class="about"><a href="${basePath}/c002_init.ac?id=cc273bdf05ff466cbbaddedb8071dda4">关于我们</a></li>
-					<li class="course"><a href="${basePath}/c002_init.ac?id=30b7f89148054a94801ce579df68e78c">课 程</a></li>
-					<li class="camp"><a href="${basePath}/c002_init.ac?id=e90ac273a9534c90bc725112125b83ff">冬夏令营</a></li>
-					<li class="contact"><a href="${basePath}/c002_init.ac?id=47d9cbde8f104c97b7e963548fa59ea5">联系我们</a></li>
-				</ul>
+				<div id="navmenu">
+					<ul>
+						<li class="home"><a href="${basePath}/index.ac">首 页</a></li>
+						<li class="about"><a href="${basePath}/c002_init.ac?id=cc273bdf05ff466cbbaddedb8071dda4">关于我们</a>
+							<ul>
+								<li><a href="#">• 俱乐部历史介绍</a></li>
+							</ul></li>
+						<li class="course"><a href="${basePath}/c002_init.ac?id=30b7f89148054a94801ce579df68e78c">课 程</a>
+							<ul>
+								<li><a href="#">• 游泳</a></li>
+								<li><a href="#">• 网球</a></li>
+								<li><a href="#">• 篮球</a></li>
+								<li><a href="#">• 羽毛球</a></li>
+								<li><a href="#">• 空手道</a></li>
+								<li><a href="#">• 乒乓球</a></li>
+								<li><a href="#">• 轮滑</a></li>
+								<li><a href="#">• 舞蹈</a></li>
+							</ul></li>
+						<li class="camp"><a href="${basePath}/c002_init.ac?id=e90ac273a9534c90bc725112125b83ff">冬夏令营</a>
+							<ul>
+								<li><a href="#">• 夏令营</a></li>
+								<li><a href="#">• 冬令营</a></li>
+							</ul></li>
+						<li class="contact"><a href="${basePath}/c002_init.ac?id=47d9cbde8f104c97b7e963548fa59ea5">联系我们</a>
+							<ul>
+								<li><a href="#">• 中心查询</a></li>
+							</ul></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

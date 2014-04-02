@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-26  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 jfq System. - All Rights Reserved.
+ * Copyright 2014 车主管家 System. - All Rights Reserved.
  *
  */
 --%>
@@ -15,7 +15,6 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-</head>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -26,11 +25,7 @@
 <head>
 <meta charset="utf-8" />
 <%@include file="../include/admin_title.jsp" %>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta content="" name="description" />
-<meta content="" name="author" />
-<meta name="MobileOptimized" content="320">
+
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet"
@@ -90,21 +85,21 @@
 						<s:token></s:token>
 						<input name="bean.id" type="hidden" value="${bean.id}">
 						<div class="well form-inline">
-							合作商类型:
-							<label title="积分发行商">
+							连接类型:
+							<label title="图片">
 							<input name="bean.type" value="0"
 							<c:if test="${bean.type=='0'}">
 							 	checked="checked"
 							 </c:if>
 							 type="radio">
-							 积分发行商</label>
-							 <label title="市场合作商">
+							 图片</label>
+							 <label title="文字">
 							<input name="bean.type" value="1"
 							<c:if test="${bean.type=='1'}">
 							 	checked="checked"
 							 </c:if>
 							 type="radio">
-							 市场合作商</label>
+							 文字</label>
 						</div>
 						<div class="form-group">
 							<label for="article_name">名称</label> <input class="form-control"

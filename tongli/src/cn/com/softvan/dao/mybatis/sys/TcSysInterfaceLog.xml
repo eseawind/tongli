@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.sys.ITcSysInterfaceLogDao" >
+  
+  <select id="selectByPrimaryKey" resultType="tcSysInterfaceLogBean" parameterType="tcSysInterfaceLog" >
+    select 
+    id ,
+	log_description as logDescription,
+	date_created as dateCreated
+    from tc_sys_interface_log
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcSysInterfaceLog" >
+    delete from tc_sys_interface_log
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="tcSysInterfaceLog" >
+    insert into tc_sys_interface_log (
+	    id ,
+		log_description ,
+		date_created 
+      ) values (
+	    #{id},
+		#{logDescription},
+		now()
+    )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcSysInterfaceLog" >
+    update tc_sys_interface_log 
+    <set>
+		<if test="logDescription != null" >log_description=#{logDescription}</if>
+    </set>
+	where id=#{id}
+  </update>
+ 
+  <select id="findDataIsPage" resultType="tcSysInterfaceLogBean" parameterType="tcSysInterfaceLog" >
+    select 
+    id ,
+	log_description as logDescription,
+	date_created as dateCreated
+    from tc_sys_interface_log
+    <where>
+     <if test="logDescription != null" >  log_description=#{logDescription}</if>
+    </where> 
+   
+    order by date_created desc
+  </select>
+	<!-- 
+	 * <p>信息列表。</p>
+	public List<TcSysNewsBean> findDataIsList(IEntity dto); -->
+	<select id="findDataIsList" resultType="tcSysInterfaceLogBean" parameterType="tcSysInterfaceLog" >
+    select 
+    id ,
+	log_description as logDescription,
+	date_created as dateCreated
+    from tc_sys_interface_log
+    <where>
+     <if test="logDescription != null" >  log_description=#{logDescription}</if>
+    </where> 
+   
+    order by date_created desc
+   </select>
+  
+</mapper>

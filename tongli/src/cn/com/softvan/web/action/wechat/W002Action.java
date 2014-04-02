@@ -19,11 +19,13 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.sys.TcSysNewsBean;
 import cn.com.softvan.bean.wechat.TcWxInfoBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.wechat.ITcWxInfoManager;
 import cn.com.softvan.web.action.BaseAction;
+import cn.com.softvan.web.tag.PageInfo;
 
 /**
  * 微信服务_自动回复(关键字)_图文消息 ActionClass
@@ -46,7 +48,8 @@ public class W002Action extends BaseAction {
 	private ITcWxInfoManager tcWxInfoManager;
 	/** 信息类型 */
 	private final String msgType="news";
-	//
+	/**信息来源0微信文章1系统资讯*/
+	private final String info_source="0";
 	public W002Action() {
 		log.info("默认构造器......W002Action");
 	}
@@ -64,7 +67,7 @@ public class W002Action extends BaseAction {
 		log.info("W002Action init.........");
 		
 		TcWxInfoBean bean1=new TcWxInfoBean();
-		bean1.setInfo_source("0");
+		bean1.setInfo_source(info_source);
 		bean1.setMsgtype(msgType);
 		List<TcWxInfoBean> beans=tcWxInfoManager.findDataIsList(bean1);
 		
@@ -100,7 +103,7 @@ public class W002Action extends BaseAction {
 		if(articles_id!=null){
 			TcWxInfoBean bean1=new TcWxInfoBean();
 			bean1.setArticles_id(articles_id);
-			bean1.setInfo_source("0");
+			bean1.setInfo_source(info_source);
 			bean1.setMsgtype(msgType);
 			beans=tcWxInfoManager.findDataIsList(bean1);
 			if(beans!=null){
@@ -141,7 +144,7 @@ public class W002Action extends BaseAction {
 				bean1.setMsgtype(msgType);//图文
 				bean1.setDefault_flag(bean.getDefault_flag());
 				bean1.setSubscribe_flag(bean.getSubscribe_flag());
-				bean1.setInfo_source("0");
+				bean1.setInfo_source(info_source);
 				bean1.setKeyword(bean.getKeyword());
 				bean1.setCreatetime(""+System.currentTimeMillis());
 				bean1.setArticlecount(""+ids.length);//图文消息个数，限制为10条以内
@@ -154,6 +157,7 @@ public class W002Action extends BaseAction {
 					bean2.setPicurl(request.getParameter("picurl"+ids[i]));//图片链接，支持JPG、PNG格式，较好的效果为大图360*200，小图200*200
 					bean2.setUrl(request.getParameter("url"+ids[i]));//点击图文消息跳转链接
 					bean2.setDel_flag(request.getParameter("del_flag"+ids[i]));
+					bean2.setDescription(request.getParameter("description"+ids[i]));//简介
 					bean2.setSort_num(""+i);
 					//list add
 					if(Validator.notEmpty(bean2.getTitle())
@@ -194,7 +198,7 @@ public class W002Action extends BaseAction {
 		String articles_id=request.getParameter("aid");
 		TcWxInfoBean bean1=new TcWxInfoBean();
 		bean1.setArticles_id(articles_id);
-		bean1.setInfo_source("0");
+		bean1.setInfo_source(info_source);
 		bean1.setMsgtype(msgType);
 		String msg="1";
 		try {

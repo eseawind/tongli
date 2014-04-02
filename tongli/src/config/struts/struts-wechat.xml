@@ -15,6 +15,7 @@
 			<result name="init">/WEB-INF/pages/admin/wechat/W004.jsp</result>
 			<result name="edit">/WEB-INF/pages/admin/wechat/W004_01.jsp</result>
 			<result name="view">/WEB-INF/pages/admin/wechat/W004_02.jsp</result>
+			<result name="list1">/WEB-INF/pages/admin/wechat/W004_03.jsp</result>
 			<result name="success" type="chain">w004_init</result>
 		</action>
 		<!-- 素材管理 begin -->
@@ -60,9 +61,13 @@
 			<result name="list">/WEB-INF/pages/admin/wechat/W012_01.jsp</result>
 		</action>
 	</package>
-	<!-- 微信api验证 与 消息接收  -->
+	<!--   -->
 	<package name="wechat_api" extends="wechat-default" >
-		<action name="wxapi" class="weChatApiAction" method="init">
+		<!-- 微信api验证 与 消息接收 -->
+		<action name="wxapi" class="weChatApiAction" method="init" />
+		<!-- 微信文章 -->
+		<action name="w004_a_*" class="w004Action" method="{1}">
+			<result name="view">/WEB-INF/pages/admin/wechat/W004_02.jsp</result>
 		</action>
 	</package>
 </struts>

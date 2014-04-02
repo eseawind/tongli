@@ -15,7 +15,6 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-</head>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -48,7 +47,6 @@ ol,ul{list-style-position:inside;}
 			<c:choose>
 				<c:when test="${bean!=null}">
 				<h1>${bean.title}</h1>
-				<div>==${sessionScope.SESSION_KEY_USER_WECHAT_OPENID}==</div>
                 <div class="text">
 					${bean.detail_info}
 				 </div>

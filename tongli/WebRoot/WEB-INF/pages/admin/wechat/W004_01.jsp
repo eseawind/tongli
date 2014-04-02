@@ -15,7 +15,6 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-</head>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -25,12 +24,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8" />
-<title>微信服务-素材管理-文章【车主管家】</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta content="" name="description" />
-<meta content="" name="author" />
-<meta name="MobileOptimized" content="320">
+<%@include file="../include/admin_title.jsp" %>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet"	type="text/css" />
@@ -95,6 +89,25 @@
 							<label for="article_title">标题</label> <input class="form-control"
 								id="article_title" name="bean.title" size="30" type="text" value="${bean.title}">
 						</div>
+						<div class="portlet box btn default btn-block">
+							<div class="portlet-title">
+								<div class="caption"  id="select-image-modal"><i class="fa fa-anchor"></i><font color="#000">点击上传[标题图片]</font></div>
+								<div class="tools">
+									<a href="javascript:;" class="collapse"></a>
+									<a href="javascript:;" class="remove"></a>
+								</div>
+							</div>
+							<div class="portlet-body" style="display: block; ">
+								<input id="input_pic_url"  name="bean.pic_url" size="30" type="hidden" value="${bean.pic_url}">
+								<img id="img_pic_url" alt="" src="${bean.pic_url}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="article_brief_info">简介</label>
+							<div class="qeditor_border">
+								<textarea class="form-control" name="bean.brief_info" style="height: 100px;width: 100%;" id="article_brief_info" >${bean.brief_info}</textarea>
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="article_description">内容</label>
 							<div class="qeditor_border">
@@ -130,6 +143,25 @@ jQuery(document).ready(function() {
 	         uploadJson : '${basePath}/uploadFile?isrich=1',
 	         fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
 			 allowFileManager : true
+		});
+		//--图片
+		var editor = K.editor({
+			resizeType : 2,
+			uploadJson : '${basePath}/uploadFile?isrich=1',
+			fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
+			allowFileManager : true
+		});
+		K('#select-image-modal').click(function() {
+			editor.loadPlugin('image',function() {
+				editor.plugin.imageDialog({
+					imageUrl : $('#img_pic_url').attr('src'),clickFn : function(
+						url,title,width,height,border,align) {
+							$('#img_pic_url').attr('src',url);
+							$('#input_pic_url').val(url);
+							editor.hideDialog();
+						}
+				});
+			});
 		});
 	});
 });

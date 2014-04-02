@@ -137,15 +137,22 @@ public class W007Action extends BaseAction {
 	 */
 	public String downMenu() {
 		log.info("W007Action downMenu.........");
+//		
+//		BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
+//		if(user!=null){
+//			bean.setCreate_id(user.getUser_id());
+//			bean.setCreate_ip(getIpAddr());
+//			bean.setUpdate_id(user.getUser_id());
+//			bean.setUpdate_ip(getIpAddr());
+//		}
+//		bean.setInfo_source("0");
+//		
+		String msg=tcWxMenuManager.downMenu();
+		request.setAttribute("msg",msg);
 		
 		
-//		List<TcWxMenuBean> beans=new WxApiUtil().getMenu(access_token);
 		
-		
-		
-		
-		
-		return null;
+		return SUCCESS;
 	}
 	/**
 	 * <p>

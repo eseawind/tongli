@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/jee 
+		http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
+	<!-- 微信后台dao begin -->
+	<bean id="tcWxMenuDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.wechat.ITcWxMenuDao"></property>
+	</bean>
+	<bean id="tcWxPublicUserDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.wechat.ITcWxPublicUserDao"></property>
+	</bean>
+	<bean id="tcWxInfoDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.wechat.ITcWxInfoDao"></property>
+	</bean>
+	<bean id="tcWxUserDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.wechat.ITcWxUserDao"></property>
+	</bean>
+	<bean id="tcWxUserGroupsDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.wechat.ITcWxUserGroupsDao"></property>
+	</bean>
+	<!-- 微信后台dao end -->
+	<!-- ************************业务处理类************************************* -->
+	<!-- 微信后台 service begin -->
+	<!-- 公共账号 -->
+	<bean id="tcWxPublicUserManager" class="cn.com.softvan.service.wechat.impl.TcWxPublicUserManager" init-method="initCache" scope="prototype">
+		<property name="tcWxPublicUserDao" ref="tcWxPublicUserDao"></property>
+		<property name="jedisHelper" ref="jedisHelper"></property>
+	</bean>
+	<!-- 自定义菜单 -->
+	<bean id="tcWxMenuManager" class="cn.com.softvan.service.wechat.impl.TcWxMenuManager" scope="prototype">
+		<property name="tcWxMenuDao" ref="tcWxMenuDao"></property>
+		<property name="jedisHelper" ref="jedisHelper"></property>
+		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
+	</bean>
+	<!-- 信息资源管理 -->
+	<bean id="tcWxInfoManager" class="cn.com.softvan.service.wechat.impl.TcWxInfoManager" init-method="init" scope="prototype">
+		<property name="tcWxInfoDao" ref="tcWxInfoDao"></property>
+		<property name="jedisHelper" ref="jedisHelper"></property>
+		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
+	</bean>
+	<!-- 微信关注者管理 -->
+	<bean id="tcWxUserManager" class="cn.com.softvan.service.wechat.impl.TcWxUserManager" scope="prototype">
+		<property name="tcWxUserDao" ref="tcWxUserDao"></property>
+		<property name="jedisHelper" ref="jedisHelper"></property>
+		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
+	</bean>
+	<!-- 微信后台 service end -->
+</beans>

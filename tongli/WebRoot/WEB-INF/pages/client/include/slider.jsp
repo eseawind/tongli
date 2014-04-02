@@ -41,21 +41,30 @@
 					opacity : 1
 				}, 500);
 			})
-		});
-		/*鼠标移过，左右按钮显示*/
-		jQuery(".focusBox").hover(
-				function() {
-					jQuery(this).find(".prev,.next").stop(true, true).fadeTo(
-							"show", 0.2)
-				}, function() {
-					jQuery(this).find(".prev,.next").fadeOut()
+			/*鼠标移过，左右按钮显示*/
+			jQuery(".focusBox").hover(
+					function() {
+						jQuery(this).find(".prev,.next").stop(true, true).fadeTo(
+								"show", 0.2)
+					}, function() {
+						jQuery(this).find(".prev,.next").fadeOut()
+					});
+			/*SuperSlide图片切换*/
+			jQuery(".focusBox").slide({
+				mainCell : ".pic",
+				effect : "left",
+				autoPlay : true,
+				delayTime : 600,
+				trigger : "click"
+			});
+			//nav menu
+			$("#navmenu ul li:has(ul)").hover(function() {
+				$(this).children("a").css({color:"#3e7900"});
+				if($(this).find("li").length > 0){
+				$(this).children("ul").stop(true, true).slideDown(200)} 
+			},function() {
+				$(this).children("a").css({color:"#333"});
+				$(this).children("ul").stop(true, true).slideUp(200)
 				});
-		/*SuperSlide图片切换*/
-		jQuery(".focusBox").slide({
-			mainCell : ".pic",
-			effect : "left",
-			autoPlay : true,
-			delayTime : 600,
-			trigger : "click"
 		});
 	</script>

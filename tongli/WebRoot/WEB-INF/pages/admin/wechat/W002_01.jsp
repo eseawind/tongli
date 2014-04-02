@@ -17,7 +17,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-</head>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -27,12 +26,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8" />
-<title>微信服务-自动回复-图文【车主管家】</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta content="" name="description" />
-<meta content="" name="author" />
-<meta name="MobileOptimized" content="320">
+<%@include file="../include/admin_title.jsp" %>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet"
@@ -138,6 +132,7 @@
 															 <img src="${bean1.picurl }" alt="">
 														</div>
 														<h4 class="title">${bean1.title }</h4>
+														<input type="hidden" class="description"  name="description${bean1.id }" value="${bean1.description}">
 														<div class="pos-abs article-actions">
 															<a href="javascript:void(0)" class="btn edit green"
 																title="修改" onclick="edit_message_article(this)"><i class="icon-pencil"></i> 修改</a>
@@ -163,6 +158,7 @@
 													 <img src="" alt="" style="display: none">
 												</div>
 												<h4 class="title">标题</h4>
+												<input type="hidden" class="description"  name="description${uuid}">
 												<div class="pos-abs article-actions">
 													<a href="javascript:void(0)" class="btn edit green"
 														title="修改" onclick="edit_message_article(this)"><i class="icon-pencil"></i> 修改</a>
@@ -180,6 +176,7 @@
 													<img src="" alt="" style="display: none">
 												</div>
 												<h4 class="title">标题</h4>
+												<input type="hidden" class="description" name="description${uuid}">
 												<div class="pos-abs article-actions">
 													<a href="javascript:void(0)" class="btn edit green" title="修改"  onclick="edit_message_article(this)"><i class="icon-pencil"></i> 修改</a> 
 														<input id="del_flag" name="del_flag${uuid}" type="hidden" value="0">
@@ -217,12 +214,17 @@
 										</div>
 									</div>
 									<!-- js in edit.js rel obj_id and file_queue_id -->
-	
+									<label>简介</label>
+									<div class="controls">
+										<div class="input-append">
+											<textarea class="col-md-12 form-control placeholder-no-fix" data-target=".resource-url" id="description" name="" placeholder="信息简介">${bean0.description}</textarea>										
+										</div>
+									</div>
 									<label>链接</label>
 									<div class="controls">
 										<div class="input-append">
 											<input class="col-md-12 form-control placeholder-no-fix" data-target=".resource-url" id="url" name="" placeholder="如果是外链地址,请直接输入" type="text" value="${bean0.url}"> 
-											<a class="btn btn-info" data-toggle="modal" href="#linkModal">选链接</a>
+											<a class="btn btn-info" data-toggle="modal" href="#myModal1">选链接</a>
 										</div>
 									</div>
 									</c:when>
@@ -243,12 +245,17 @@
 										</div>
 									</div>
 									<!-- js in edit.js rel obj_id and file_queue_id -->
-	
+									<label>简介</label>
+									<div class="controls">
+										<div class="input-append">
+											<textarea class="col-md-12 form-control placeholder-no-fix" data-target=".resource-url" id="description" name="" placeholder="信息简介">${bean0.description}</textarea>										
+										</div>
+									</div>
 									<label>链接</label>
 									<div class="controls">
 										<div class="input-append">
 											<input class="col-md-12 form-control placeholder-no-fix" data-target=".resource-url" id="url" name="" placeholder="如果是外链地址,请直接输入" type="text" value=""> 
-											<a class="btn btn-info" data-toggle="modal" href="#linkModal">选链接</a>
+											<a class="btn btn-info" data-toggle="modal" href="#myModal1">选链接</a>
 										</div>
 									</div>
 									</c:otherwise>
@@ -276,8 +283,78 @@
 </body>
 <!-- END BODY -->
 </html>
+<!-- Modal -->
+<div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+				<h4 class="modal-title">选择文章</h4>
+			</div>
+			<div class="modal-body">
+				<p></p>
+				<div class="form-group" id="list1_article_div">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn default" data-dismiss="modal" aria-hidden="true">关闭</button>
+				<button class="btn blue" data-dismiss="modal" aria-hidden="true" onclick="onCheckedArticleInfo()">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
 <script type="text/javascript">
+	//选择文章
+	function onCheckedArticleInfo(){
+		var data_rid=$('.msg-edit').find('.rid').val();
+		var id=$('input[name="w004_03_article_id"]:checked').val();
+		//标题
+		$('.msg-edit').find('#title').val($('#title_'+id).val());
+		$('#'+data_rid).find('.title').html($('#title_'+id).val());
+		$('#'+data_rid).find('#title').val($('#title_'+id).val());
+		//标题图
+		var pic_url=$('#pic_url_'+id).val();
+		if(pic_url){
+			$('.msg-edit').find('#new_picurl').attr('src',pic_url);
+			$('.msg-edit').find('#article-info-filequeue').show();
+			$('#'+data_rid).find('#picurl').val(pic_url);
+			$('#'+data_rid).find('.pic-url').find('img').attr('src',pic_url);
+			$('#'+data_rid).find('.pic-url').find('.default-tip').remove();
+			$('#'+data_rid).find('.pic-url').find('img').show();
+		}else{
+			$('.msg-edit').find('#new_picurl').attr('src','');
+			$('.msg-edit').find('#article-info-filequeue').hide();
+		}
+		//简介
+		//alert($('#brief_'+id).val());
+		$('.msg-edit').find('#description').val($('#brief_'+id).val());
+		$('#'+data_rid).find('.description').val($('#brief_'+id).val());
+		//链接
+		$('.msg-edit').find('#url').val($('#url_'+id).val());
+		$('#'+data_rid).find('#url').val($('#url_'+id).val());
+	}
+	//分页查询
+	function loadUrlPage(offset, url, event, divId) {
+		if (url == null || url == "" || divId == null || divId == "") {
+			return;
+		}
+		var load = "<a class='loading' >信息努力加载中...</a>";
+		jQuery("#" + divId).html(load);
+		jQuery.ajax({
+			url : '${basePath}/' + url + event+'.ac?offset='
+					+ offset + '&time=' + new Date().getTime(),
+			success : function(req) {
+				jQuery("#" + divId).html(req);
+			},
+			error : function() {
+				jQuery("#" + divId).html("信息加载发生错误");
+			}
+		});
+	}
 	jQuery(document).ready(function() {
+		//TODO 分页
+		loadUrlPage(0, 'h/w004_', 'list1', 'list1_article_div');
+		//
 		KindEditor.ready(function(K) {
 			var editor = K.editor({
 						resizeType : 2,
@@ -317,29 +394,36 @@
 			var data_rid=$('.msg-edit').find('.rid').val();
 			$('#'+data_rid).find('#url').val($(this).val());
 		});
+		$('.msg-edit').find('.description').blur(function(){
+			var data_rid=$('.msg-edit').find('.rid').val();
+			$('#'+data_rid).find('.description').val($(this).val());
+		});
 	});
 	function edit_message_article(obj){
 		var data_rid=$(obj).parent().parent().attr('id');
 		$('.msg-edit').find('.rid').val(data_rid);
 		
-		$('.msg-edit').find('#title').val($(obj).parent().parent().find('#title').val());
-		var picurl=$(obj).parent().parent().find('#picurl').val();
+		$('.msg-edit').find('#title').val($('#'+data_rid).find('#title').val());
+		var picurl=$('#'+data_rid).find('#picurl').val();
 		if(picurl){
-			$('.msg-edit').find('#new_picurl').attr('src',$(obj).parent().parent().find('#picurl').val());
+			$('.msg-edit').find('#new_picurl').attr('src',$('#'+data_rid).find('#picurl').val());
 			$('.msg-edit').find('#article-info-filequeue').show();
 		}else{
 			$('.msg-edit').find('#new_picurl').attr('src','');
 			$('.msg-edit').find('#article-info-filequeue').hide();
 		}
-		$('.msg-edit').find('#url').val($(obj).parent().parent().find('#url').val());
-		$('.msg-edit').css({"margin-top":($(obj).parent().parent().offset().top-270)+'px'});
+		
+		$('.msg-edit').find('#description').val($('#'+data_rid).find('.description').val());
+		
+		$('.msg-edit').find('#url').val($('#'+data_rid).find('#url').val());
+		$('.msg-edit').css({"margin-top":($('#'+data_rid).offset().top-270)+'px'});
 		$('.msg-edit').show();
 	}
 	function add_message_article(obj){
 		var length=$(obj).parent().parent().parent().find('li').length-1;
 		if(length<=9){
 			var uuid=guid();
-			$(obj).before("<li id='"+uuid+"' data-new-id='-1' data-img-version='metro.menu' class='article pos-rel '> <input class='title' id='title' name='title"+uuid+"' type='hidden' /><input class='pic-url' id='picurl' name='picurl"+uuid+"' type='hidden' /><input class='idx' id='id' name='id' type='hidden' value='"+uuid+"' /><input class='url' id='url' name='url"+uuid+"' type='hidden' /> <div class='pic-url'> <span class='default-tip' style=''>缩略图</span> <img src='' alt='' style='display:none'> </div> <h4 class='title'>标题</h4> <div class='pos-abs article-actions'> <a href='javascript:void(0)' class='btn edit green' title='修改' onclick='edit_message_article(this)' ><i class='icon-pencil'></i> 修改</a> <input id='del_flag' name='del_flag"+uuid+"' type='hidden' /> <a href='javascript:void(0)' class='btn btn-danger destroy' title='删除' onclick='del_message_article(this)'><i class='icon-trash'></i> 删除</a></div> </li>");
+			$(obj).before("<li id='"+uuid+"' data-new-id='-1' data-img-version='metro.menu' class='article pos-rel '> <input class='title' id='title' name='title"+uuid+"' type='hidden' /><input class='pic-url' id='picurl' name='picurl"+uuid+"' type='hidden' /><input class='idx' id='id' name='id' type='hidden' value='"+uuid+"' /><input class='url' id='url' name='url"+uuid+"' type='hidden' /> <div class='pic-url'> <span class='default-tip' style=''>缩略图</span> <img src='' alt='' style='display:none'> </div> <h4 class='title'>标题</h4> <input type='hidden' class='description'  name='description"+uuid+" value=''><div class='pos-abs article-actions'> <a href='javascript:void(0)' class='btn edit green' title='修改' onclick='edit_message_article(this)' ><i class='icon-pencil'></i> 修改</a> <input id='del_flag' name='del_flag"+uuid+"' type='hidden' /> <a href='javascript:void(0)' class='btn btn-danger destroy' title='删除' onclick='del_message_article(this)'><i class='icon-trash'></i> 删除</a></div> </li>");
 		}else{
 			myAlert_error('图文信息最多10条!');
 		}
@@ -354,7 +438,4 @@
 		}
 		$('.msg-edit').hide();
 	}
-	
-	
-	
 </script>

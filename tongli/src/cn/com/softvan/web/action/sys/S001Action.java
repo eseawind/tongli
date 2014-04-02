@@ -5,7 +5,7 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.24  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 jfq  System. - All Rights Reserved.
+ * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.web.action.sys;
@@ -45,8 +45,8 @@ public class S001Action extends BaseAction {
 	private INewsManager newsManager;
 	/**资讯栏目信息管理 业务处理*/
 	private INewsTypeManager newsTypeManager;
-	//
-	private String info_source="1";
+	/**信息来源0微信文章1系统资讯*/
+	private final String info_source="1";
 	public S001Action() {
 		log.info("默认构造器......S001Action");
 	}
@@ -97,6 +97,7 @@ public class S001Action extends BaseAction {
 		if(id!=null){
 			TcSysNewsBean bean1=new TcSysNewsBean();
 			bean1.setId(id);
+			bean1.setInfo_source(info_source);
 			bean=newsManager.findDataById(bean1);
 			//当前资讯所在栏目
 			request.setAttribute("news_type_array",newsManager.findTypeDataByIdIsList(bean1));
@@ -121,31 +122,8 @@ public class S001Action extends BaseAction {
 		bean1.setId(id);
 		String msg="1";
 		try {
+			bean1.setInfo_source(info_source);
 			msg=newsManager.deleteDataById(bean1);
-		} catch (Exception e) {
-			msg=e.getMessage();
-		}
-		request.setAttribute("msg",msg);
-		
-		return SUCCESS;
-	}
-	/**
-	 * <p>
-	 * 删除。
-	 * </p>
-	 * <ol>
-	 * [功能概要] <div>物理删除。</div>
-	 * </ol>
-	 * @return 转发字符串
-	 */
-	public String delxx() {
-		log.info("S001Action delxx.........");
-		String id=request.getParameter("id");
-		TcSysNewsBean bean1=new TcSysNewsBean();
-		bean1.setId(id);
-		String msg="1";
-		try {
-			msg=newsManager.deleteData(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -258,6 +236,7 @@ public class S001Action extends BaseAction {
 		bean1.setId(id);
 		String msg="1";
 		try {
+			bean1.setInfo_source(info_source);
 			msg=newsManager.recoveryDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
@@ -328,5 +307,13 @@ public class S001Action extends BaseAction {
 	 */
 	public void setNewsTypeManager(INewsTypeManager newsTypeManager) {
 	    this.newsTypeManager = newsTypeManager;
+	}
+
+	/**
+	 * 信息来源0微信文章1系统资讯取得
+	 * @return 信息来源0微信文章1系统资讯
+	 */
+	public String getInfo_source() {
+	    return info_source;
 	}
 }

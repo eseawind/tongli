@@ -70,7 +70,7 @@
 
 /* home pics slide*/
 .img_slide{ position:relative;}
-.img_slide ul{margin-left:10px;height: 120px;}
+.img_slide ul{margin-left:10px;}
 .img_slide li{ width:176px; height:120px; display:block; float:left; }
 
 .img_slide a.prev{width:15px;height:44px;position:absolute;top:50px;left:0;background: url(images/scroll_btn.gif) no-repeat;}
@@ -82,7 +82,7 @@
 
 /* home video slide*/
 .video_slide{ position:relative;}
-.video_slide ul{margin-left:10px;height: 120px;}
+.video_slide ul{margin-left:10px;}
 .video_slide li{ width:176px; height:120px; display:block; float:left; }
 .video_slide a.prev{width:15px;height:44px;position:absolute;top:50px;left:0;background: url(images/scroll_btn.gif) no-repeat;}
 .video_slide a.next{width:15px;height:44px;position:absolute;top:50px;right:0;background: url(images/scroll_btn.gif) -15px 0 no-repeat;}
@@ -189,25 +189,6 @@ vertical-align: baseline;line-height: 38px;outline:0;background: url(images/spri
 
 
 
-
-
-
-
-.focusBox { position: relative; width:1000px; height:270px; overflow: hidden; margin:0 auto }
-.focusBox .pic{ position:relative; z-index:0; }
-.focusBox .pic img { width:1000px; height:270px; display: block; }
-.focusBox .hd { width:100%; position: absolute; bottom: 10px; text-align: center; font-size:0; z-index:1; }
-.focusBox .hd li{margin: 0 5px; background: url(../images/dot.png) no-repeat 0 -16px; height: 16px; overflow: hidden; width: 16px; cursor: pointer;
-	display:inline-block; *display:inline; zoom:1;  _background: url(../images/dot8.png) no-repeat 0 -16px;
-}
-.focusBox .hd .on{ background-position:0 0; }
-
-.focusBox .prev,
-.focusBox .next { width: 60px; height: 90px; margin: -60px 0 0; display: none; background: url(../images/ad_ctr.png) no-repeat 0 0; position: absolute; top: 50%; z-index: 10; cursor: pointer; text-indent: -9999px; filter:alpha(opacity=20);opacity:0.2;  }
-.focusBox .prev { left: 0; }
-.focusBox .next { background-position: 0 -90px; right: 0; }
-.focusBox .prev:hover,
-.focusBox .next:hover { filter:alpha(opacity=50) !important;opacity:0.5 !important;  }
 
 
 
