@@ -7,7 +7,7 @@
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL STYLES --> 
-<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2_metro.css" />
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2_metro.css"  rel="stylesheet" type="text/css"  />
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME STYLES --> 
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>

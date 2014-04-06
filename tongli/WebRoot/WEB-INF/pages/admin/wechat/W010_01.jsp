@@ -28,10 +28,7 @@ link:链接
 event:事件推送 --%>
 <ul class="timeline">
 <c:forEach items="${beans}" var="bean" varStatus="i">
-	<li 
-		class="timeline-blue"
-	>
-		
+	<li class="timeline-blue">
 		<div class="timeline-icon"><img onerror="this.src='${basePath}/images/getheadimg.jpg'" 
 		<c:choose>
 			<c:when test="${bean.headimgurl!=null && bean.headimgurl!=''}">
@@ -45,14 +42,14 @@ event:事件推送 --%>
 		<div class=" timeline-body">
 			<p class="userInfo">
 				<span class="name">${bean.nickname}</span>
-				<span class="date">${bean.date_created}</span>
+				<span class="date">${bean.createtime}</span>
 			</p>
-			<div class="timeline-content alert">
+			<div class="timeline-content alert" style="color: #468847">
 				<c:if test="${bean.msgtype=='text'}">
 					${bean.content}
 				</c:if>
 				<c:if test="${bean.msgtype=='image'}">
-					<a href="${basePath}${bean.picurl}" target="_blank"><img  onerror="this.src='${basePath}/images/error/165_110px.gif'"  src="${basePath}${bean.picurl}" style="height: 100px;"></a>
+					<a href="${basePath}${bean.picurl}" target="_blank"><img  onerror="this.src='${basePath}/images/error/404.jpg'"  src="${basePath}${bean.picurl}" style="height: 100px;"></a>
 				</c:if>
 				<c:if test="${bean.msgtype=='voice'}">
 					${bean.url}
@@ -89,7 +86,7 @@ event:事件推送 --%>
 				</c:if>
 			</div>
 			<div class="timeline-footer">
-				<span class="btn green pull-right">
+				<span class="btn pull-right">
 				<c:if test="${bean.msgtype=='text'}">
 					文字
 				</c:if>

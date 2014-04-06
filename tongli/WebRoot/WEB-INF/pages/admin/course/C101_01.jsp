@@ -37,9 +37,9 @@
 		<%@ include file="../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#course,#course_sub_menu_l1_sub_menu_l1').addClass('active');
-				$('#course_arrow,#course_sub_menu_l1_arrow').addClass('open');
-				$('#course_sub_menu,#course_sub_menu_l1_sub_menu').show();
+				$('#course,#course_sub_menu_l1').addClass('active');
+				$('#course_arrow').addClass('open');
+				$('#course_sub_menu').show();
 			});
 		</script>
 		<!-- END SIDEBAR -->
@@ -85,7 +85,7 @@
 							 	checked="checked"
 							 </c:if>
 							 type="checkbox">
-							 是否室内</label>
+							 室内</label>
 							 &nbsp; 
 							 <label title="是否包含场地费">
 							<input name="bean.is_site_fee" value="1"
@@ -93,7 +93,7 @@
 							 	checked="checked"
 							 </c:if>
 							 type="checkbox">
-							 是否包含场地费</label>
+							 含场地费</label>
 						</div>
 						<div class="portlet box btn default btn-block">
 						<div class="portlet-title">

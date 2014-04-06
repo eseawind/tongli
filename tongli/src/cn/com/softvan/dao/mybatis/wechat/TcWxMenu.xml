@@ -17,6 +17,10 @@
 		delete from tc_wx_menu
 		where id = #{id,jdbcType=VARCHAR}
 	</delete>
+	<delete id="deleteAllByInfoSource" parameterType="tcWxMenu">
+		delete from tc_wx_menu
+		where info_source = #{info_source,jdbcType=VARCHAR}
+	</delete>
 	<insert id="insert" parameterType="tcWxMenu">
 		insert into tc_wx_menu (id, menu_key, menu_type,
 		menu_name, menu_url, note,

@@ -1,5 +1,5 @@
 /*
- * BEAN    学员意向运动项目
+ * 基础Entity类   学员意向运动项目
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
@@ -8,9 +8,9 @@
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
-package cn.com.softvan.bean.member;
+package cn.com.softvan.dao.entity.student;
 
-import cn.com.softvan.bean.BaseBean;
+import cn.com.softvan.dao.entity.BaseEntity;
 
 /**
  * <p>
@@ -20,7 +20,7 @@ import cn.com.softvan.bean.BaseBean;
  * @author wuxiaogang
  * 
  */
-public class TcMemberStudentHobbyItemsBean extends BaseBean {
+public class TcStudentHobbyItems extends BaseEntity {
 	/** id */
 	private String id;
 	/** 学员id */

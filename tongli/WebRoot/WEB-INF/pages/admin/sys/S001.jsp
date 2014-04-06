@@ -99,7 +99,44 @@
 					</style>
 
 					<div class="row-fluid">
-						<div class="col-md-12">
+					<div class="col-md-12">
+						<div class=" well btn-toolbar col-md-12">
+							<div class="col-md-2">
+							</div>
+								&nbsp; 
+								<label>标题
+									<input class="upload-wrapper" id="message_keyword" name="" size="20" value="${k}" placeholder="关键字" title="关键字" type="text">
+								</label>
+								&nbsp; 
+								&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+								<label>
+								<input class="btn default" name="commit" value="检索" type="button" onclick="loadUrlPage(0, 'h/s001_','init','${tid}');">
+								</label>
+						</div>
+					</div>
+						<div class="col-md-2">
+							<div class="list-group">
+							  <a href="javascript:void(0);" class="list-group-item <c:if test="${tid==null || tid==''}"> active </c:if>" onclick="loadUrlPage(0, 'h/s001_','init','');">
+							   <i class="fa <c:choose><c:when test="${tid==null || tid==''}">fa-folder-open</c:when><c:otherwise>fa-folder-o</c:otherwise></c:choose>"></i> 所有资讯
+							  </a>
+							<c:forEach items="${tree}" var="tree">
+							  <a class="list-group-item <c:if test="${tree.id==tid}"> active </c:if>" href="javascript:void(0);" onclick="loadUrlPage(0, 'h/s001_','init','${tree.id}');">
+							    <i class="fa <c:choose><c:when test="${tree.id==tid}">fa-folder-open</c:when><c:otherwise>fa-folder-o</c:otherwise></c:choose>"></i> ${tree.name}
+							  </a>
+							<c:forEach items="${tree.beans}" var="tree1">
+							 <a class="list-group-item <c:if test="${tree1.id==tid}"> active </c:if>" href="javascript:void(0);" onclick="loadUrlPage(0, 'h/s001_','init','${tree1.id}');">
+							    <i class="fa <c:choose><c:when test="${tree1.id==tid}">fa-folder-open</c:when><c:otherwise>fa-folder-o</c:otherwise></c:choose>"></i> |--${tree1.name}
+							  </a>
+								<c:forEach items="${tree1.beans}" var="tree2">
+								 <a class="list-group-item <c:if test="${tree2.id==tid}"> active </c:if>" href="javascript:void(0);" onclick="loadUrlPage(0, 'h/s001_','init','${tree2.id}');">
+							    <i class="fa <c:choose><c:when test="${tree2.id==tid}">fa-folder-open</c:when><c:otherwise>fa-folder-o</c:otherwise></c:choose>"></i> |--|--${tree2.name}
+							  </a>
+								</c:forEach>
+							</c:forEach>
+						</c:forEach>
+							</div>
+						</div>
+						<div class="col-md-10">
 							<c:if test="${msg!=null}">
 							<c:choose>
 								<c:when test="${msg!='1'}">
@@ -116,10 +153,9 @@
 								</c:otherwise>
 							</c:choose>
 						</c:if>
-							<div class="btn-toolbar">
-								<a href="${basePath}/h/s001_edit.ac" class="btn btn-primary">新建资讯</a>
+							<div class="btn-toolbar col-md-2">
+								<a href="${basePath}/h/s001_edit.ac" class="btn btn-primary"><i class="fa "></i> 新建资讯</a>
 							</div>
-
 							<table class="table table-condensed table-striped">
 								<tbody>
 									<tr>
@@ -140,13 +176,9 @@
 											rel="nofollow">删除</a></td>
 									</tr>
 									</c:forEach>
-									<tr>
-										<td colspan="3">
-											<customtag:pagingext func="loadUrlPage" params="'h/s001_','init'" />
-										</td>
-									</tr>
 								</tbody>
 							</table>
+							<customtag:pagingext func="loadUrlPage" params="'h/s001_','init','${tid}'" />
 						</div>
 					</div>
 				</div>
@@ -164,7 +196,11 @@
 <!-- END BODY -->
 </html>
 <script type="text/javascript">
-function loadUrlPage(offset, url, event) {
-	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
+function loadUrlPage(offset, url, event,tid) {
+	var k='';
+	if($('#message_keyword').val()){
+		k='&k='+encodeURI(encodeURI($('#message_keyword').val()));
+	}
+	location.href='${basePath}/' + url + event+'.ac?offset=' + offset+'&tid='+tid+k;
 }
 </script>

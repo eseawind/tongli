@@ -7,7 +7,7 @@
 		msgtype,
 		tousername,
 		fromusername,
-		createtime,
+		FROM_UNIXTIME(createtime,'%Y-%m-%d %h:%i:%s') as createtime,
 		content,
 		mediaid,
 		title,
@@ -280,7 +280,7 @@
     	<if test="note=='notNews'">
     	and msgtype!='news'
     	</if>
-    	order by last_updated desc,sort_num asc
+    	order by createtime desc,sort_num asc
     </select>
     <!--  查询信息 分页
     List<TcWxInfoBean> findDataIsPage(IEntity dto) throws Exception; --> 
@@ -291,7 +291,7 @@
 			t.msgtype,
 			t.tousername,
 			t.fromusername,
-			t.createtime,
+			FROM_UNIXTIME(t.createtime,'%Y-%m-%d %h:%i:%s') as createtime,
 			t.content,
 			t.title,
 			t.description,
@@ -309,7 +309,8 @@
 			t.location_precision,
 			t.event,
 			t.eventkey,
-			t.ticket,
+			t.ticket
+			,
 			t2.nickname, 
 			t2.remarkname, 
 			t2.sex, 
@@ -321,17 +322,17 @@
     	left join tc_wx_user t2 on (t.fromusername=t2.openid)
     	where 1=1 
     	<if test="articles_id!= null">
-			and articles_id=#{articles_id}
+			and t.articles_id=#{articles_id}
 		</if>
-    	and del_flag='0'
-    	and info_source=#{info_source}
+    	and t.del_flag='0'
+    	and t.info_source=#{info_source}
     	<if test="msgtype!=null">
-    	and msgtype=#{msgtype}
+    	and t.msgtype=#{msgtype}
     	</if>
     	<if test="note=='notNews'">
-    	and msgtype!='news'
+    	and t.msgtype!='news'
     	</if>
-    	order by last_updated desc,sort_num asc
+    	order by t.createtime desc,t.sort_num asc
     </select>
     <!-- 
      * 根据aid 逻辑删除信息
@@ -371,4 +372,15 @@
     	where articles_id=#{articles_id}
     	limit 0,1
     </select>
+    <!-- 根据openId获取最新的经纬度 -->
+    <select id="queryLocation" resultType="tcWxInfoBean"  parameterType="tcWxInfoBean">
+		select
+		<include refid="Base_Column_List" />
+		from tc_wx_info
+		where (fromusername = #{fromusername}
+		and msgtype='location')
+		or (fromusername= #{fromusername} and msgtype='event' and event='LOCATION')
+		order by createtime desc
+		limit 0,1
+	</select>
 </mapper>

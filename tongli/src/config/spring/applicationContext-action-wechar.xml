@@ -58,5 +58,9 @@
 	<bean id="w012Action" class="cn.com.softvan.web.action.wechat.W012Action" scope="prototype">
 		<property name="tcWxUserManager" ref="tcWxUserManager"></property>
 	</bean>
+	<!-- 微信服务_微信关注者_(粉丝)  展示 -->
+	<bean id="w013Action" class="cn.com.softvan.web.action.wechat.W013Action" scope="prototype">
+		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+	</bean>
 	<!--========================= 微信服务 end=================================== -->
 </beans>

@@ -121,7 +121,7 @@
 														<div class="msg-date">${bean.last_updated}</div>
 														<input class="pic-url" id="picurl" name="bean.picurl" value="${bean.picurl }" type="hidden">
 														<div class="pic-url">
-															 <img id="new_picurl" src="${bean.picurl }" alt="">
+															 <img  onerror="this.src='${basePath}/images/error/404.jpg'"  id="new_picurl" src="${bean.picurl }" alt="">
 														</div>
 														<div class="pos-abs article-actions">
 															<a id="link-select-image-modal" href="javascript:void(0)" class="btn edit green"

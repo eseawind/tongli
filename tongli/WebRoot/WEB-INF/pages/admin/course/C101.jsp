@@ -40,9 +40,9 @@
 		<%@ include file="../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#course,#course_sub_menu_l1_sub_menu_l1').addClass('active');
-				$('#course_arrow,#course_sub_menu_l1_arrow').addClass('open');
-				$('#course_sub_menu,#course_sub_menu_l1_sub_menu').show();
+				$('#course,#course_sub_menu_l1').addClass('active');
+				$('#course,#course_sub_menu').addClass('open');
+				$('#course_sub_menu').show();
 			});
 		</script>
 		<!-- END SIDEBAR -->
@@ -107,7 +107,7 @@
 							</c:choose>
 						</c:if>
 							<div class="btn-toolbar">
-								<a href="${basePath}/h/c101_edit.ac" class="btn btn-primary">新建资讯</a>
+								<a href="${basePath}/h/c101_edit.ac" class="btn btn-primary">新建课程</a>
 							</div>
 							<table class="table table-condensed table-striped">
 								<tbody>
@@ -129,13 +129,9 @@
 											rel="nofollow">删除</a></td>
 									</tr>
 									</c:forEach>
-									<tr>
-										<td colspan="3">
-											<customtag:pagingext func="loadUrlPage" params="'h/c101_','init'" />
-										</td>
-									</tr>
 								</tbody>
 							</table>
+							<customtag:pagingext func="loadUrlPage" params="'h/c101_','init'" />
 						</div>
 					</div>
 				</div>

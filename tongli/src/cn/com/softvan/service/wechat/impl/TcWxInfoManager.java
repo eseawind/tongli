@@ -119,6 +119,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 					//新增
 					if(Validator.isEmpty(dto.getId())){
 						dto.setId(IdUtils.createUUID(32));
+						bean.setId(dto.getId());
 					}
 					tcWxInfoDao.insert(dto);
 				}
@@ -396,7 +397,30 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	public void setTcWxInfoDao(ITcWxInfoDao tcWxInfoDao) {
 	    this.tcWxInfoDao = tcWxInfoDao;
 	}
-	
+	/**
+	 * 删除或修改_首次关注和默认回复
+	 * @param bean
+	 */
+	private void setMsgCacheSubscribeXDefault(TcWxInfoBean bean){
+			try {
+				//首次关注回复信息
+				String u1=(String) jedisHelper.get("key_flag_subscribe");
+				if(bean.getId().equals(u1)
+						&&!"1".equals(bean.getSubscribe_flag())){
+					jedisHelper.del("key_flag_subscribe");
+				}
+			} catch (Exception e) {
+			}
+			try {
+				//默认回复信息
+				String u2=(String) jedisHelper.get("key_flag_default");
+				if(bean.getId().equals(u2)
+						&&!"1".equals(bean.getDefault_flag())){
+					jedisHelper.del("key_flag_default");
+				}
+			} catch (Exception e) {
+			}
+	}
 	/**
 	 * 信息放入 缓存
 	 * @param beans
@@ -457,6 +481,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 						newsMsg.addItem(bean1.getTitle(),bean1.getDescription(),Validator.isUrl(bean1.getPicurl())?bean1.getPicurl():basePath+bean1.getPicurl(), bean1.getUrl());
 					}
 				}
+				setMsgCacheSubscribeXDefault(bean);
 				//自动回复对象
 				WxReplyMsg replyMsg=newsMsg;
 				//首次关注回复信息
@@ -469,6 +494,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 				}
 				//缓存信息
 				jedisHelper.set(uuid, replyMsg);
+				
 			}else{
 				//非图文消息
 				if(beans!=null){
@@ -541,6 +567,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 								}
 								replyMsg = new WxReplyMusicMsg(bean1.getTitle(),bean1.getDescription(),bean1.getMusicurl(),bean1.getHqmusicurl());
 							}
+							setMsgCacheSubscribeXDefault(bean1);
 							//首次关注回复信息
 							if("1".equals(bean1.getSubscribe_flag())){
 								jedisHelper.set("key_flag_subscribe", uuid);

@@ -1,5 +1,5 @@
 /*
- * BEAN    学员信息
+ * 基础Entity类   学员信息
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
@@ -8,9 +8,9 @@
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
-package cn.com.softvan.bean.member;
+package cn.com.softvan.dao.entity.student;
 
-import cn.com.softvan.bean.BaseBean;
+import cn.com.softvan.dao.entity.BaseEntity;
 
 /**
  * <p>
@@ -20,7 +20,7 @@ import cn.com.softvan.bean.BaseBean;
  * @author wuxiaogang
  * 
  */
-public class TcMemberStudentBean extends BaseBean {
+public class TcStudent extends BaseEntity {
 
 	/** 学员id */
 	private String id;

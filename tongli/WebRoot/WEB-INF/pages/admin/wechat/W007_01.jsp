@@ -147,11 +147,11 @@
 					</div>
 					<div class="form-group">
 						<label class="col-md-2 control-label">VIEW链接</label>
-						<div class="col-md-8">
-								<input class="form-control input-lg" placeholder="如果是外链地址,请直接输入" id="bean.menu_url" name="bean.menu_url" size="30" type="text" value="${bean.menu_url}">
+						<div class="col-md-9">
+								<textarea style="height: 150px;" class="form-control input-lg" placeholder="如果是外链地址,请直接输入" id="bean.menu_url" name="bean.menu_url">${bean.menu_url}</textarea>
 						</div>
-						<button class="btn btn-info" data-toggle="modal" href="#linkModal">选链接</button>
 					</div>
+					<div style="clear: both;"></div>
 					<div class="form-actions fluid">
 						<div class="col-md-offset-4 col-md-4">
 							<input class="btn btn-large btn-primary" name="commit"

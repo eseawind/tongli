@@ -32,7 +32,11 @@
 <style type="text/css">
 .timeline div.timeline-icon,.timeline .timeline-blue{left: 20px;}
 .timeline:before{left: 40px;}
-.timeline div.timeline-body{margin:0px 0px 15px 60px;}
+.timeline .timeline-blue div.timeline-body {
+    background: none repeat scroll 0% 0% #eee;
+}
+.timeline .timeline-blue div.timeline-body:after{border-right-color: #eee;}
+.timeline div.timeline-body{margin:0px 0px 15px 60px;color: #333;}
 .userInfo{
 	width:100%;
 	margin-top: 0px;
@@ -40,12 +44,13 @@
 	border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 	font-size: 14px;
 	height: 25px;
+	color: #333;
 }
 .userInfo .name{
 
 }
 .userInfo .date{
-	float: right;
+	float: right;color: #333;
 }
 </style>
 </head>

@@ -98,8 +98,8 @@
 							</ul>
 						</li>
 						 -->
-						<li class="">
-							<a href="#" onclick="myAlert('功能即将开放')">
+						<li id="w013_init">
+							<a href="${basePath}/h/w013_init.ac">
 							客服响应
 							</a>
 						</li>
@@ -117,28 +117,67 @@
 				</li>
 				<li id="course" class="">
 					<a class="active" href="javascript:;">
-					<i class="fa fa-cogs"></i> 
+					<i class="fa fa-flag"></i> 
 					<span class="title">课程管理</span>
 					<span id="course_arrow" class="arrow "></span>
 					</a>
 					<ul id="course_sub_menu" style="display: none;" class="sub-menu">
-						<li>
-							<a  id="course_sub_menu_l1" href="${basePath}/h/c101_init.ac" onclick="myAlert('功能即将开放')">
-							功能1
+						<li id="course_sub_menu_l1">
+							<a   href="${basePath}/h/c101_init.ac">
+							课程管理
+							</a>
+						</li>
+						<li id="course_sub_menu_l2">
+							<a  href="${basePath}/h/c101_recycle.ac">
+							课程回收站
+							</a>
+						</li>
+						<li id="course_sub_menu_l3">
+							<a   href="${basePath}/h/c102_init.ac">
+							课程表管理
+							</a>
+						</li>
+						<li id="course_sub_menu_l4">
+							<a  href="${basePath}/h/c102_recycle.ac">
+							课程表回收站
 							</a>
 						</li>
 					</ul>
 				</li>
-				<li id="user" class="">
+				<li id="menber" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-cogs"></i> 
 					<span class="title">会员管理</span>
-					<span id="car_arrow" class="arrow "></span>
+					<span id="menber_arrow" class="arrow "></span>
 					</a>
-					<ul id="car_sub_menu" style="display: none;" class="sub-menu">
-						<li>
-							<a  id="car_sub_menu_l1" href="#" onclick="myAlert('功能即将开放')">
-							功能1
+					<ul id="menber_sub_menu" style="display: none;" class="sub-menu">
+						<li id="menber_sub_menu_l1" >
+							<a href="${basePath}/h/m001_init.ac" >
+							会员管理
+							</a>
+						</li>
+						<li id="menber_sub_menu_l1" >
+							<a href="${basePath}/h/m001_init.ac" >
+							会员回收站
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li id="student" class="">
+					<a class="active" href="javascript:;">
+					<i class="fa fa-cogs"></i> 
+					<span class="title">学员管理</span>
+					<span id="student_arrow" class="arrow "></span>
+					</a>
+					<ul id="student_sub_menu" style="display: none;" class="sub-menu">
+						<li id="student_sub_menu_l1" >
+							<a href="${basePath}/h/s101_init.ac" >
+							学员管理
+							</a>
+						</li>
+						<li id="student_sub_menu_l1" >
+							<a href="${basePath}/h/s101_init.ac" >
+							学员回收站
 							</a>
 						</li>
 					</ul>
@@ -157,7 +196,7 @@
 				</li>
 				<li id="sys3" class="">
 					<a class="active" href="javascript:;">
-					<i class="fa fa-bullhorn"></i> 
+					<i class="fa fa-coffee"></i> 
 					<span class="title">友情链接</span>
 					<span id="sys3_arrow" class="arrow"></span>
 					</a>
@@ -180,3 +219,4 @@
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
+

@@ -60,6 +60,11 @@
 			<result name="init">/WEB-INF/pages/admin/wechat/W012.jsp</result>
 			<result name="list">/WEB-INF/pages/admin/wechat/W012_01.jsp</result>
 		</action>
+		<!-- 客服  界面 -->
+		<action name="w013_*" class="w013Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W013.jsp</result>
+			<result name="list">/WEB-INF/pages/admin/wechat/W013_01.jsp</result>
+		</action>
 	</package>
 	<!--   -->
 	<package name="wechat_api" extends="wechat-default" >

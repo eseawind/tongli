@@ -37,8 +37,13 @@
 			<!-- END RESPONSIVE MENU TOGGLER -->
 			<!-- BEGIN TOP NAVIGATION MENU -->
 			<ul class="nav navbar-nav pull-right">
-				<li class="dropdown user">
-					<a href="${basePath}/h/w001_init.ac">
+				<li class="dropdown">
+					<a class="dropdown-toggle" href="${basePath}/index.ac">
+					<i class="fa fa-home"></i>首页
+					</a>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" href="${basePath}/h/w001_init.ac">
 					<i class="fa fa-user"></i>微信公共号绑定
 					</a>
 				</li>

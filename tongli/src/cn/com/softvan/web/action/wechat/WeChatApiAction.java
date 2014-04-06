@@ -121,7 +121,7 @@ public class WeChatApiAction extends BaseAction {
 		response.setCharacterEncoding("UTF-8");
         try {
         	xml=StrUtil.convertStreamToString(request.getInputStream());
-        	log.error("==收到信息=="+xml);
+        	log.debug("==收到信息=="+xml);
         	//接收信息
 			WxRecvMsg msg = WeChatUtil.recv(new ByteArrayInputStream(xml.getBytes()));
 			//回复信息
@@ -151,7 +151,7 @@ public class WeChatApiAction extends BaseAction {
 			bean=getTcWxInfoBean(msg,request);
 			//TODO ----事件---
 			if(msg instanceof WxRecvEventMsg) {
-				log.error("==收到一个事件==");
+				log.debug("==收到一个事件==");
 				WxRecvEventMsg m = (WxRecvEventMsg) msg;
 				String event = m.getEvent();
 				//TODO 首次关注
@@ -391,6 +391,7 @@ public class WeChatApiAction extends BaseAction {
 		bean.setTousername(msg.getToUser());//开发者微信号
 		bean.setCreate_ip(IpUtils.getIpAddr(request));
 		bean.setCreate_id("system");
+		bean.setCreatetime(msg.getCreateDt());
 		return bean;
 	}
 	/**
