@@ -1143,7 +1143,7 @@
 		forceParse: true,
 		format: 'mm/dd/yyyy',
 		keyboardNavigation: true,
-		language: 'en',
+		language: 'zh-CN',
 		minViewMode: 0,
 		orientation: "auto",
 		rtl: false,

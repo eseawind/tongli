@@ -79,16 +79,14 @@ public class StudentManager extends BaseManager implements IStudentManager {
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//VERSION
-
+				dto.setBirthdate(bean.getBirthdate());//生日
 				//判断数据是否存在
 				if(tcStudentDao.isDataYN(dto)!=0){
 					//数据存在
 					tcStudentDao.updateByPrimaryKeySelective(dto);
 				}else{
 					//新增
-					if(Validator.isEmpty(dto.getId())){
-						dto.setId(IdUtils.createUUID(32));
-					}
+					dto.setId(IdUtils.createUUID(32));
 					tcStudentDao.insert(dto);
 				}
 			} catch (Exception e) {

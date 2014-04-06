@@ -24,6 +24,10 @@
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 <link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/less/datepicker.less" />
+
+
 </head>
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
@@ -94,6 +98,18 @@
 							 type="radio">
 							 女</label>
 							 &nbsp; 
+							 <label>年龄
+								<input class="upload-wrapper" id="message_age" name="bean.age" size="3" value="${bean.age}" placeholder="年龄" type="number">
+							</label>
+							&nbsp; 
+							<label>生日
+									<div style="margin: -25px 0px 0px 30px;" class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+										<input id="bean_birthdate" type="text" name="bean.birthdate" value="${bean.birthdate}" class="form-control" readonly="">
+										<span class="input-group-btn">
+										<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+										</span>
+									</div>
+							</label> 
 						</div>
 						<div class="portlet box btn default btn-block">
 						<div class="portlet-title">
@@ -108,9 +124,9 @@
 							<img id="img_pic_url" alt="" src="${bean.pic_url}">
 						</div>
 					</div>
-						<div class="form-group"> <label for="article_age">年龄</label> <input class="form-control" id="article_age" name="bean.age" type="text" value="${bean.age}"> </div>
 						<div class="form-group"> <label for="article_hobby">爱好</label> <input class="form-control" id="article_hobby" name="bean.hobby" type="text" value="${bean.hobby}"> </div>
-
+						<div class="form-group">
+						</div>
 						<div class="form-group">
 							<label for="article_description">详情</label>
 							<div class="qeditor_border">
@@ -134,12 +150,17 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+	
 	<!-- END FOOTER -->
 </body>
 <!-- END BODY -->
 </html>
 <script type="text/javascript">
 jQuery(document).ready(function() {
+	$('.date-picker').datepicker();
+	//
 	KindEditor.ready(function(K) {
 		//--编辑框
 		K.create('#article_description', {

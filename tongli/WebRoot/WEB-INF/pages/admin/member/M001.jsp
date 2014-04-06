@@ -103,7 +103,7 @@
 									<c:forEach items="${beans}" var="bean">
 									<tr>
 										<td>${bean.last_updated}</td>
-										<td>${bean.title}</td>
+										<td>${bean.user_name}</td>
 										<td><a
 											href="${basePath}/h/m001_view.ac?id=${bean.id}"
 											class="btn  btn-info" target="_blank">预览</a> <a

@@ -70,12 +70,26 @@ public class TcMemberBean extends BaseBean {
 	private String job;
 	/** 收入水平 */
 	private String income_level;
-	/** 省 */
-	private String province_id;
-	/** 市 */
+	/** 行政区划_市级 */
 	private String city_id;
-	/** 县 */
+	/** 行政区划_村级 */
+	private String village_id;
+	/** 行政区划_镇级 */
+	private String town_id;
+	/** 行政区划_县级 */
 	private String county_id;
+	/** 行政区划_省级 */
+	private String province_id;
+	/** 行政区划_市级 */
+	private String city_name;
+	/** 行政区划_村级 */
+	private String village_name;
+	/** 行政区划_镇级 */
+	private String town_name;
+	/** 行政区划_县级 */
+	private String county_name;
+	/** 行政区划_省级 */
+	private String province_name;
 	/** 详细地址 */
 	private String address;
 	/** 邮政编码 */
@@ -417,32 +431,46 @@ public class TcMemberBean extends BaseBean {
 	    this.income_level = income_level;
 	}
 	/**
-	 * 省取得
-	 * @return 省
-	 */
-	public String getProvince_id() {
-	    return province_id;
-	}
-	/**
-	 * 省设定
-	 * @param province_id 省
-	 */
-	public void setProvince_id(String province_id) {
-	    this.province_id = province_id;
-	}
-	/**
-	 * 市取得
-	 * @return 市
+	 * 行政区划_市级取得
+	 * @return 行政区划_市级
 	 */
 	public String getCity_id() {
 	    return city_id;
 	}
 	/**
-	 * 市设定
-	 * @param city_id 市
+	 * 行政区划_市级设定
+	 * @param city_id 行政区划_市级
 	 */
 	public void setCity_id(String city_id) {
 	    this.city_id = city_id;
+	}
+	/**
+	 * 行政区划_村级取得
+	 * @return 行政区划_村级
+	 */
+	public String getVillage_id() {
+	    return village_id;
+	}
+	/**
+	 * 行政区划_村级设定
+	 * @param village_id 行政区划_村级
+	 */
+	public void setVillage_id(String village_id) {
+	    this.village_id = village_id;
+	}
+	/**
+	 * 行政区划_镇级取得
+	 * @return 行政区划_镇级
+	 */
+	public String getTown_id() {
+	    return town_id;
+	}
+	/**
+	 * 行政区划_镇级设定
+	 * @param town_id 行政区划_镇级
+	 */
+	public void setTown_id(String town_id) {
+	    this.town_id = town_id;
 	}
 	/**
 	 * 县取得
@@ -457,6 +485,90 @@ public class TcMemberBean extends BaseBean {
 	 */
 	public void setCounty_id(String county_id) {
 	    this.county_id = county_id;
+	}
+	/**
+	 * 行政区划_省级取得
+	 * @return 行政区划_省级
+	 */
+	public String getProvince_id() {
+	    return province_id;
+	}
+	/**
+	 * 行政区划_省级设定
+	 * @param province_id 行政区划_省级
+	 */
+	public void setProvince_id(String province_id) {
+	    this.province_id = province_id;
+	}
+	/**
+	 * 行政区划_市级取得
+	 * @return 行政区划_市级
+	 */
+	public String getCity_name() {
+	    return city_name;
+	}
+	/**
+	 * 行政区划_市级设定
+	 * @param city_name 行政区划_市级
+	 */
+	public void setCity_name(String city_name) {
+	    this.city_name = city_name;
+	}
+	/**
+	 * 行政区划_村级取得
+	 * @return 行政区划_村级
+	 */
+	public String getVillage_name() {
+	    return village_name;
+	}
+	/**
+	 * 行政区划_村级设定
+	 * @param village_name 行政区划_村级
+	 */
+	public void setVillage_name(String village_name) {
+	    this.village_name = village_name;
+	}
+	/**
+	 * 行政区划_镇级取得
+	 * @return 行政区划_镇级
+	 */
+	public String getTown_name() {
+	    return town_name;
+	}
+	/**
+	 * 行政区划_镇级设定
+	 * @param town_name 行政区划_镇级
+	 */
+	public void setTown_name(String town_name) {
+	    this.town_name = town_name;
+	}
+	/**
+	 * 行政区划_县级取得
+	 * @return 行政区划_县级
+	 */
+	public String getCounty_name() {
+	    return county_name;
+	}
+	/**
+	 * 行政区划_县级设定
+	 * @param county_name 行政区划_县级
+	 */
+	public void setCounty_name(String county_name) {
+	    this.county_name = county_name;
+	}
+	/**
+	 * 行政区划_省级取得
+	 * @return 行政区划_省级
+	 */
+	public String getProvince_name() {
+	    return province_name;
+	}
+	/**
+	 * 行政区划_省级设定
+	 * @param province_name 行政区划_省级
+	 */
+	public void setProvince_name(String province_name) {
+	    this.province_name = province_name;
 	}
 	/**
 	 * 详细地址取得

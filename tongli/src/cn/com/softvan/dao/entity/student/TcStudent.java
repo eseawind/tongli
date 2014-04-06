@@ -3,7 +3,7 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.04.01  wuxiaogang      程序.发布
+ * 1.00     2014.04.06  wuxiaogang      程序.发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
@@ -40,6 +40,8 @@ public class TcStudent extends BaseEntity {
 	private String pic_url;
 	/** 详情 */
 	private String detail_info;
+	/** 生日 */
+	private String birthdate;
 	/**
 	 * 学员id取得
 	 * @return 学员id
@@ -165,6 +167,20 @@ public class TcStudent extends BaseEntity {
 	 */
 	public void setDetail_info(String detail_info) {
 	    this.detail_info = detail_info;
+	}
+	/**
+	 * 生日取得
+	 * @return 生日
+	 */
+	public String getBirthdate() {
+	    return birthdate;
+	}
+	/**
+	 * 生日设定
+	 * @param birthdate 生日
+	 */
+	public void setBirthdate(String birthdate) {
+	    this.birthdate = birthdate;
 	}
 
 }

@@ -100,7 +100,7 @@
 									<c:forEach items="${beans}" var="bean">
 									<tr>
 										<td>${bean.last_updated}</td>
-										<td>${bean.title}</td>
+										<td>${bean.user_name}</td>
 										<td><a href="javascript:void(0)"   class="btn btn-danger" 
 											onclick="if(confirm('确认恢复吗?')){location.href='${basePath}/h/m001_recovery.ac?id=${bean.id}'};"
 											rel="nofollow">恢复</a></td>

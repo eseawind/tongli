@@ -17,7 +17,8 @@
 	update_ip,
 	del_flag,
 	version,
-	pic_url
+	pic_url,
+	birthdate
   </sql>
   <select id="selectByPrimaryKey" resultType="tcStudentBean" parameterType="tcStudent" >
     select 
@@ -44,13 +45,14 @@
 		last_updated,
 		del_flag,
 		version,
-		pic_url
+		pic_url,
+		birthdate
       ) values (
-	    id,
-		name,
-		age,
-		sex,
-		hobby,
+	    #{id},
+		#{name},
+		#{age},
+		#{sex},
+		#{hobby},
 		#{detail_info},
 		#{note},
 		now(),
@@ -59,7 +61,8 @@
 		now(),
 		'0',
 		 0,
-		#{pic_url}
+		#{pic_url},
+		#{birthdate}
     )
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tcStudent" >
@@ -75,6 +78,7 @@
 	<if test="note!= null" >,note=#{note}</if>
 	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
 	<if test="pic_url!= null" >,pic_url=#{pic_url}</if>
+	<if test="birthdate!= null" >,birthdate=#{birthdate}</if>
 	
 	where id=#{id}
   </update>
@@ -119,7 +123,8 @@
 			t1.last_updated,
 			t1.del_flag,
 			t1.version,
-			t1.pic_url
+			t1.pic_url,
+			t1.birthdate
 	</sql>
 	<select id="findDataIsList" resultType="tcStudentBean" parameterType="tcStudent" >
 		 select

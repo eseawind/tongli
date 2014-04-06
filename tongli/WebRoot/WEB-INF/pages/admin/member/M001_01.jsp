@@ -26,8 +26,8 @@
 <link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet"/>
 
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/css/datepicker.css" />
-
-	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/less/datepicker.less" />
+<script type="text/javascript" src="${basePath}/js/area.js"></script>
 
 </head>
 <!-- BEGIN BODY -->
@@ -80,10 +80,14 @@
 						<input name="bean.id" type="hidden" value="${bean.id}">
 						<div class="well form-inline">
 							 &nbsp; 
-							<label>姓名
-								<input class="upload-wrapper" id="message_user_name" name="bean.user_name" size="30" value="${bean.user_name }" placeholder="姓名" title="姓名" type="text">
+							<label>会员名
+								<input class="upload-wrapper" id="message_user_name" name="bean.user_name" size="30" value="${bean.user_name }" placeholder="会员登录名"  type="text">
 							</label>
-							&nbsp; 
+							 &nbsp; 
+							 <label>密码
+								<input class="upload-wrapper" id="message_passwd" name="bean.passwd" size="30" value="${bean.passwd }" placeholder="登录密码"  type="text">
+							</label>
+							&nbsp; 性别
 							 <label title="男">
 							<input name="bean.sex" value="0"
 							<c:if test="${bean.sex=='0'}">
@@ -99,6 +103,34 @@
 							 type="radio">
 							 女</label>
 							 &nbsp; 
+							 <label title="是否可用">
+							<input name="bean.is_enabled" value="1"
+							<c:if test="${bean.is_enabled=='1'}">
+							 	checked="checked"
+							 </c:if>
+							 type="checkbox">
+							 是否可用</label>
+							  &nbsp; 
+							  会员类型
+							 <label title="老师">
+							<input name="bean.user_type" value="0"
+							<c:if test="${bean.user_type=='0'}">
+							 	checked="checked"
+							 </c:if>
+							 type="radio">
+							 老师</label>
+							 <label title="家长">
+							<input name="bean.user_type" value="1"
+							<c:if test="${bean.user_type=='1'}">
+							 	checked="checked"
+							 </c:if>
+							 type="radio">
+							 家长</label>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4">最后修改时间${bean.last_update_date}</label>
+							<label class="col-md-4">最后登入时间 ${bean.last_login}</label>
+							<label class="col-md-4">最后登录IP${bean.last_login_ip}</label>
 						</div>
 						<div class="portlet box btn default btn-block">
 						<div class="portlet-title">
@@ -114,22 +146,9 @@
 						</div>
 					</div>
 						<div class="form-group">
-							<label for="article_passwd">密码</label> <input
-								class="form-control" id="article_passwd" name="bean.passwd"
-								type="text" value="${bean.passwd}">
-						</div>
-						<div class="form-group">
-							<label for="article_user_type">会员类型</label> <input
-								class="form-control" id="article_user_type"
-								name="bean.user_type" type="text" value="${bean.user_type}">
-						</div>
-						<div class="form-group">
 							<label for="article_nickname">用户昵称</label> <input
 								class="form-control" id="article_nickname" name="bean.nickname"
 								type="text" value="${bean.nickname}">
-						</div>
-						<div class="form-group">
-							<label for="article_last_login">最后登入时间</label> ${bean.last_login}
 						</div>
 						<div class="form-group">
 							<label for="article_bind_mobile">绑定手机</label> <input
@@ -150,21 +169,11 @@
 								class="form-control" id="article_real_name"
 								name="bean.real_name" type="text" value="${bean.real_name}">
 						</div>
-						<div class="form-group">
-							<label for="article_is_enabled">是否可用</label> <input
-								class="form-control" id="article_is_enabled"
-								name="bean.is_enabled" type="text" value="${bean.is_enabled}">
-						</div>
-						<div class="form-group">
-							<label for="article_last_login_ip">最后登录IP</label> <input
-								class="form-control" id="article_last_login_ip"
-								name="bean.last_login_ip" type="text"
-								value="${bean.last_login_ip}">
-						</div>
+						
 						<div class="form-group">
 							<label for="article_birthdate">生日</label> 
-									<div class="input-group input-medium date date-picker" data-date-format="dd-mm-yyyy" data-date-start-date="+0d">
-										<input type="text" name="bean.birthdate" value="${bean.birthdate}" class="form-control" readonly="">
+									<div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+										<input id="bean_birthdate" type="text" name="bean.birthdate" value="${bean.birthdate}" class="form-control" readonly="">
 										<span class="input-group-btn">
 										<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
 										</span>
@@ -195,20 +204,33 @@
 								name="bean.income_level" type="text"
 								value="${bean.income_level}">
 						</div>
-						<div class="form-group">
-							<label for="article_province_id">省</label> <input
-								class="form-control" id="article_province_id"
-								name="bean.province_id" type="text" value="${bean.province_id}">
-						</div>
-						<div class="form-group">
-							<label for="article_city_id">市</label> <input
-								class="form-control" id="article_city_id" name="bean.city_id"
-								type="text" value="${bean.city_id}">
-						</div>
-						<div class="form-group">
-							<label for="article_county_id">县</label> <input
-								class="form-control" id="article_county_id"
-								name="bean.county_id" type="text" value="${bean.county_id}">
+						<div  class="form-group">
+							<label class="control-label">行政区划</label>
+							<label class="control-label ">
+								<select class="form-control" onchange="areaB(this.value, null,null, null, 'bean_city_id','bean_county_id');" name="bean.province_id" id="bean_province_id" style="width: 180px;">
+									<option value="">请选择</option>
+								</select>
+							</label>
+							<label class="control-label">
+								<select class="form-control" onchange="areaC(this.value, null,null,null, 'bean_county_id');" name="bean.city_id" id="bean_city_id" style="width: 180px;">
+									<option value="">请选择</option>
+								</select>
+							</label>
+							<label class="control-label">
+								<select class="form-control" name="bean.county_id" id="bean_county_id" style="width: 180px;">
+									<option value="">请选择</option>
+								</select>
+							</label>
+							<script type="text/javascript">
+							jQuery(document).ready(function() {
+								//省
+								areaA('${bean.province_id}', '${bean.province_name}', 'bean_province_id');
+								//市
+								areaB('${bean.province_id}', '${bean.city_id}', '${bean.city_name}', 'true', 'bean_city_id','bean_county_id'); 
+								//县
+								areaC('${bean.city_id}', '${bean.county_id}', '${bean.county_name}','true', 'bean_county_id'); 
+							});
+							</script>
 						</div>
 						<div class="form-group">
 							<label for="article_address">详细地址</label> <input
@@ -221,9 +243,14 @@
 								type="text" value="${bean.zipcode}">
 						</div>
 						<div class="form-group">
-							<label for="article_credential">证件类型</label> <input
-								class="form-control" id="article_credential"
-								name="bean.credential" type="text" value="${bean.credential}">
+							<label for="article_credential">证件类型</label>
+								<label>
+								<input name="bean.credential" value="0"
+								<c:if test="${bean.credential=='0'}">
+								 	checked="checked"
+								 </c:if>
+								 type="radio">
+								 身份证</label>
 						</div>
 						<div class="form-group">
 							<label for="article_credential_code">证件号码</label> <input
@@ -244,10 +271,7 @@
 								id="article_hobby" name="bean.hobby" type="text"
 								value="${bean.hobby}">
 						</div>
-						<div class="form-group">
-							<label for="article_last_update_date">最后修改时间</label>
-							${bean.last_update_date}
-						</div>
+						
 						<div class="form-group">
 							<label for="article_description">详情</label>
 							<div class="qeditor_border">
@@ -271,12 +295,17 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+	
 	<!-- END FOOTER -->
 </body>
 <!-- END BODY -->
 </html>
 <script type="text/javascript">
 jQuery(document).ready(function() {
+	$('.date-picker').datepicker();
+	//
 	KindEditor.ready(function(K) {
 		//--编辑框
 		K.create('#article_description', {
