@@ -42,6 +42,8 @@ public class TcStudentBean extends BaseBean {
 	private String note;
 	/** 详情 */
 	private String detail_info;
+	/** 头像 */
+	private String pic_url;
 	/**
 	 * 学员id取得
 	 * @return 学员id
@@ -153,6 +155,20 @@ public class TcStudentBean extends BaseBean {
 	 */
 	public void setDetail_info(String detail_info) {
 	    this.detail_info = detail_info;
+	}
+	/**
+	 * 头像取得
+	 * @return 头像
+	 */
+	public String getPic_url() {
+	    return pic_url;
+	}
+	/**
+	 * 头像设定
+	 * @param pic_url 头像
+	 */
+	public void setPic_url(String pic_url) {
+	    this.pic_url = pic_url;
 	}
 
 }

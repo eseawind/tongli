@@ -70,34 +70,6 @@
 							信息接收
 							</a>
 						</li>
-						<!-- 
-						<li class="">
-							<a href="javascript:;">
-							消息接收(普通消息)
-							<span class="arrow"></span>
-							</a>
-							<ul style="display: none;" class="sub-menu">
-								<li><a href="#" onclick="myAlert('功能即将开放')">文本</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">图片</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">语音</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">视频</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">地理位置</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">链接</a></li>
-							</ul>
-						</li>
-						<li class="">
-							<a href="javascript:;">
-							消息接收(事件推送)
-							<span class="arrow"></span>
-							</a>
-							<ul style="display: none;" class="sub-menu">
-								<li><a href="#" onclick="myAlert('功能即将开放')">关注/取消事件</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">扫描带参数二维码事件</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">上报地理位置事件</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">自定义菜单事件</a></li>
-							</ul>
-						</li>
-						 -->
 						<li id="w013_init">
 							<a href="${basePath}/h/w013_init.ac">
 							客服响应
@@ -144,19 +116,19 @@
 						</li>
 					</ul>
 				</li>
-				<li id="menber" class="">
+				<li id="member" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-cogs"></i> 
 					<span class="title">会员管理</span>
-					<span id="menber_arrow" class="arrow "></span>
+					<span id="member_arrow" class="arrow "></span>
 					</a>
-					<ul id="menber_sub_menu" style="display: none;" class="sub-menu">
-						<li id="menber_sub_menu_l1" >
+					<ul id="member_sub_menu" style="display: none;" class="sub-menu">
+						<li id="member_sub_menu_l1" >
 							<a href="${basePath}/h/m001_init.ac" >
 							会员管理
 							</a>
 						</li>
-						<li id="menber_sub_menu_l1" >
+						<li id="member_sub_menu_l2" >
 							<a href="${basePath}/h/m001_init.ac" >
 							会员回收站
 							</a>
@@ -165,18 +137,18 @@
 				</li>
 				<li id="student" class="">
 					<a class="active" href="javascript:;">
-					<i class="fa fa-cogs"></i> 
+					<i class="fa fa-pagelines"></i> 
 					<span class="title">学员管理</span>
 					<span id="student_arrow" class="arrow "></span>
 					</a>
 					<ul id="student_sub_menu" style="display: none;" class="sub-menu">
 						<li id="student_sub_menu_l1" >
-							<a href="${basePath}/h/s101_init.ac" >
+							<a href="${basePath}/h/s201_init.ac" >
 							学员管理
 							</a>
 						</li>
-						<li id="student_sub_menu_l1" >
-							<a href="${basePath}/h/s101_init.ac" >
+						<li id="student_sub_menu_l2" >
+							<a href="${basePath}/h/s201_init.ac" >
 							学员回收站
 							</a>
 						</li>

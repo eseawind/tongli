@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.course.TcCourseBean;
+import cn.com.softvan.bean.sys.TcSysNewsBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.course.ICourseManager;
@@ -215,6 +216,30 @@ public class C101Action extends BaseAction {
 		}else{
 			request.setAttribute("msg", "信息保存失败!");
 		}
+		return SUCCESS;
+	}
+	/**
+	 * <p>
+	 * 恢复。
+	 * </p>
+	 * <ol>[功能概要] 
+	 * <div>恢复逻辑删除的数据。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String recovery() {
+		log.info("C101Action recovery.........");
+		String id=request.getParameter("id");
+		TcCourseBean bean1=new TcCourseBean();
+		bean1.setId(id);
+		String msg="1";
+		try {
+			msg=courseManager.recoveryDataById(bean1);
+		} catch (Exception e) {
+			msg=e.getMessage();
+		}
+		request.setAttribute("msg",msg);
+		
 		return SUCCESS;
 	}
 	/**

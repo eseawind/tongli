@@ -1,56 +1,49 @@
 /*
- * 系统管理_资讯管理 ActionClass
+ * 系统管理_会员管理 ActionClass
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.03.24  wuxiaogang      程序・发布
+ * 1.00     2014.04.06  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
-package cn.com.softvan.web.action.sys;
+package cn.com.softvan.web.action.member;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
-import cn.com.softvan.bean.sys.TcSysNewsBean;
+import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.service.sys.INewsManager;
-import cn.com.softvan.service.sys.INewsTypeManager;
+import cn.com.softvan.service.member.IMemberManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
 /**
- * 系统管理_资讯管理 ActionClass
+ * 系统管理_会员管理 ActionClass
  * 
  * @author wuxiaogang
  * 
  */
-public class S001Action extends BaseAction {
+public class M001Action extends BaseAction {
 
 	/**
 	 * 序列号
 	 */
 	private static final long serialVersionUID = -3061791975484213551L;
-	private static final transient Logger log = Logger.getLogger(S001Action.class);
+	private static final transient Logger log = Logger.getLogger(M001Action.class);
 	
-	/**BEAN类  资讯信息*/
-	private TcSysNewsBean bean;
-	/**BEAN类  资讯信息 集合*/
-	private List<TcSysNewsBean> beans;
-	/**资讯信息管理 业务处理*/
-	private INewsManager newsManager;
-	/**资讯栏目信息管理 业务处理*/
-	private INewsTypeManager newsTypeManager;
-	/**信息来源0微信文章1系统资讯*/
-	private final String info_source="1";
-	public S001Action() {
-		log.info("默认构造器......S001Action");
+	/**BEAN类  会员信息*/
+	private TcMemberBean bean;
+	/**BEAN类  会员信息 集合*/
+	private List<TcMemberBean> beans;
+	/**会员信息管理 业务处理*/
+	private IMemberManager memberManager;
+	public M001Action() {
+		log.info("默认构造器......M001Action");
 	}
 
 	/**
@@ -63,18 +56,7 @@ public class S001Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String init() {
-		log.info("S001Action init.........");
-		String tid=request.getParameter("tid");
-		request.setAttribute("tid",tid);
-		String k=request.getParameter("k");
-		try {
-			if(Validator.notEmpty(k)){
-				k=URLDecoder.decode(k, "UTF-8");
-			}
-		} catch (Exception e) {
-			log.error("字符编码转化异常", e);
-		}
-		request.setAttribute("k",k);
+		log.info("M001Action init.........");
 		int offset = 0;
 		// 分页偏移量
 		if (!Validator.isNullEmpty(request.getParameter("offset"))
@@ -86,22 +68,12 @@ public class S001Action extends BaseAction {
 		page.setCurrOffset(offset);
 		//每页显示条数
 		page.setPageRowCount(15);
-		TcSysNewsBean bean1 = new TcSysNewsBean();
+		TcMemberBean bean1 = new TcMemberBean();
 		bean1.setPageInfo(page);
-		bean1.setInfo_source(info_source);
-		//资讯分类
-		if(Validator.notEmpty(tid)){
-			bean1.setType_id(tid);
-		}
-		if(Validator.notEmpty(k)){
-			bean1.setKeyword(k);
-		}
-		//栏目资讯列表
-		List<TcSysNewsBean> beans=newsManager.findDataIsPage(bean1);
+		//会员列表
+		List<TcMemberBean> beans=memberManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
-		//栏目树
-		request.setAttribute("tree",newsTypeManager.findDataIsTree(null));
 		return "init";
 	}
 	/**
@@ -114,18 +86,13 @@ public class S001Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String edit() {
-		log.info("S001Action edit.........");
+		log.info("M001Action edit.........");
 		String id=request.getParameter("id");
 		if(id!=null){
-			TcSysNewsBean bean1=new TcSysNewsBean();
+			TcMemberBean bean1=new TcMemberBean();
 			bean1.setId(id);
-			bean1.setInfo_source(info_source);
-			bean=newsManager.findDataById(bean1);
-			//当前资讯所在栏目
-			request.setAttribute("news_type_array",newsManager.findTypeDataByIdIsList(bean1));
+			bean=memberManager.findDataById(bean1);
 		}
-		//栏目树
-		request.setAttribute("tree",newsTypeManager.findDataIsTree(null));
 		return "edit";
 	}
 	/**
@@ -138,14 +105,13 @@ public class S001Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String del() {
-		log.info("S001Action del.........");
+		log.info("M001Action del.........");
 		String id=request.getParameter("id");
-		TcSysNewsBean bean1=new TcSysNewsBean();
+		TcMemberBean bean1=new TcMemberBean();
 		bean1.setId(id);
 		String msg="1";
 		try {
-			bean1.setInfo_source(info_source);
-			msg=newsManager.deleteDataById(bean1);
+			msg=memberManager.deleteDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -164,11 +130,11 @@ public class S001Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String save() {
-		log.info("S001Action edit.........");
+		log.info("M001Action edit.........");
 		if(bean!=null){
 			String msg="1";
 			try {
-				if(Validator.isEmpty(bean.getTitle())||Validator.isEmpty(bean.getDetail_info())){
+				if(Validator.isEmpty(bean.getUser_name())){
 					msg="保存失败!信息为空!";
 				}else{
 					BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
@@ -178,8 +144,7 @@ public class S001Action extends BaseAction {
 						bean.setUpdate_ip(getIpAddr());
 						bean.setUpdate_id(user.getUser_id());
 					}
-					bean.setInfo_source(info_source);
-					msg=newsManager.saveOrUpdateData(bean);
+					msg=memberManager.saveOrUpdateData(bean);
 				}
 			} catch (Exception e) {
 				msg=e.getMessage();
@@ -200,12 +165,12 @@ public class S001Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String view() {
-		log.info("S001Action view.........");
+		log.info("M001Action view.........");
 		String id=request.getParameter("id");
 		if(id!=null){
-			TcSysNewsBean bean1=new TcSysNewsBean();
+			TcMemberBean bean1=new TcMemberBean();
 			bean1.setId(id);
-			bean=newsManager.findDataById(bean1);
+			bean=memberManager.findDataById(bean1);
 		}
 		return "view";
 	}
@@ -219,7 +184,7 @@ public class S001Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String recycle() {
-		log.info("S001Action recycle.........");
+		log.info("M001Action recycle.........");
 		int offset = 0;
 		// 分页偏移量
 		if (!Validator.isNullEmpty(request.getParameter("offset"))
@@ -231,13 +196,12 @@ public class S001Action extends BaseAction {
 		page.setCurrOffset(offset);
 		//每页显示条数
 		page.setPageRowCount(15);
-		TcSysNewsBean bean1 = new TcSysNewsBean();
+		TcMemberBean bean1 = new TcMemberBean();
 		bean1.setPageInfo(page);
 		//已删除
 		bean1.setDel_flag("1");
-		bean1.setInfo_source(info_source);
-		//栏目资讯列表
-		List<TcSysNewsBean> beans=newsManager.findDataIsPage(bean1);
+		//会员列表
+		List<TcMemberBean> beans=memberManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "recycle";
@@ -252,14 +216,13 @@ public class S001Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String recovery() {
-		log.info("S001Action recovery.........");
+		log.info("M001Action recovery.........");
 		String id=request.getParameter("id");
-		TcSysNewsBean bean1=new TcSysNewsBean();
+		TcMemberBean bean1=new TcMemberBean();
 		bean1.setId(id);
 		String msg="1";
 		try {
-			bean1.setInfo_source(info_source);
-			msg=newsManager.recoveryDataById(bean1);
+			msg=memberManager.recoveryDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -267,75 +230,52 @@ public class S001Action extends BaseAction {
 		
 		return SUCCESS;
 	}
+
 	/**
-	 * BEAN类  资讯信息取得
-	 * @return BEAN类  资讯信息
+	 * BEAN类  会员信息取得
+	 * @return BEAN类  会员信息
 	 */
-	public TcSysNewsBean getBean() {
+	public TcMemberBean getBean() {
 	    return bean;
 	}
 
 	/**
-	 * BEAN类  资讯信息设定
-	 * @param bean BEAN类  资讯信息
+	 * BEAN类  会员信息设定
+	 * @param bean BEAN类  会员信息
 	 */
-	public void setBean(TcSysNewsBean bean) {
+	public void setBean(TcMemberBean bean) {
 	    this.bean = bean;
 	}
 
 	/**
-	 * BEAN类  资讯信息 集合取得
-	 * @return BEAN类  资讯信息 集合
+	 * BEAN类  会员信息 集合取得
+	 * @return BEAN类  会员信息 集合
 	 */
-	public List<TcSysNewsBean> getBeans() {
+	public List<TcMemberBean> getBeans() {
 	    return beans;
 	}
 
 	/**
-	 * BEAN类  资讯信息 集合设定
-	 * @param beans BEAN类  资讯信息 集合
+	 * BEAN类  会员信息 集合设定
+	 * @param beans BEAN类  会员信息 集合
 	 */
-	public void setBeans(List<TcSysNewsBean> beans) {
+	public void setBeans(List<TcMemberBean> beans) {
 	    this.beans = beans;
 	}
 
 	/**
-	 * 资讯信息管理 业务处理取得
-	 * @return 资讯信息管理 业务处理
+	 * 会员信息管理 业务处理取得
+	 * @return 会员信息管理 业务处理
 	 */
-	public INewsManager getNewsManager() {
-	    return newsManager;
+	public IMemberManager getMemberManager() {
+	    return memberManager;
 	}
 
 	/**
-	 * 资讯信息管理 业务处理设定
-	 * @param newsManager 资讯信息管理 业务处理
+	 * 会员信息管理 业务处理设定
+	 * @param memberManager 会员信息管理 业务处理
 	 */
-	public void setNewsManager(INewsManager newsManager) {
-	    this.newsManager = newsManager;
-	}
-
-	/**
-	 * 资讯栏目信息管理 业务处理取得
-	 * @return 资讯栏目信息管理 业务处理
-	 */
-	public INewsTypeManager getNewsTypeManager() {
-	    return newsTypeManager;
-	}
-
-	/**
-	 * 资讯栏目信息管理 业务处理设定
-	 * @param newsTypeManager 资讯栏目信息管理 业务处理
-	 */
-	public void setNewsTypeManager(INewsTypeManager newsTypeManager) {
-	    this.newsTypeManager = newsTypeManager;
-	}
-
-	/**
-	 * 信息来源0微信文章1系统资讯取得
-	 * @return 信息来源0微信文章1系统资讯
-	 */
-	public String getInfo_source() {
-	    return info_source;
+	public void setMemberManager(IMemberManager memberManager) {
+	    this.memberManager = memberManager;
 	}
 }

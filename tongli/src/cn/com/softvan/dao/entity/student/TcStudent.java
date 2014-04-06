@@ -36,6 +36,10 @@ public class TcStudent extends BaseEntity {
 	private String hobby;
 	/** 备注 */
 	private String note;
+	/** 头像 */
+	private String pic_url;
+	/** 详情 */
+	private String detail_info;
 	/**
 	 * 学员id取得
 	 * @return 学员id
@@ -133,6 +137,34 @@ public class TcStudent extends BaseEntity {
 	 */
 	public void setNote(String note) {
 	    this.note = note;
+	}
+	/**
+	 * 头像取得
+	 * @return 头像
+	 */
+	public String getPic_url() {
+	    return pic_url;
+	}
+	/**
+	 * 头像设定
+	 * @param pic_url 头像
+	 */
+	public void setPic_url(String pic_url) {
+	    this.pic_url = pic_url;
+	}
+	/**
+	 * 详情取得
+	 * @return 详情
+	 */
+	public String getDetail_info() {
+	    return detail_info;
+	}
+	/**
+	 * 详情设定
+	 * @param detail_info 详情
+	 */
+	public void setDetail_info(String detail_info) {
+	    this.detail_info = detail_info;
 	}
 
 }

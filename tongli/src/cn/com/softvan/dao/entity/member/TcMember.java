@@ -49,6 +49,8 @@ public class TcMember extends BaseEntity {
 	private String is_enabled;
 	/** 最后登录IP */
 	private String last_login_ip;
+	/** 头像 */
+	private String pic_url;
 	/**
 	 * id取得
 	 * @return id
@@ -244,6 +246,20 @@ public class TcMember extends BaseEntity {
 	 */
 	public void setLast_login_ip(String last_login_ip) {
 	    this.last_login_ip = last_login_ip;
+	}
+	/**
+	 * 头像取得
+	 * @return 头像
+	 */
+	public String getPic_url() {
+	    return pic_url;
+	}
+	/**
+	 * 头像设定
+	 * @param pic_url 头像
+	 */
+	public void setPic_url(String pic_url) {
+	    this.pic_url = pic_url;
 	}
 
 }

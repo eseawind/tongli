@@ -218,6 +218,30 @@ public class C102Action extends BaseAction {
 		return SUCCESS;
 	}
 	/**
+	 * <p>
+	 * 恢复。
+	 * </p>
+	 * <ol>[功能概要] 
+	 * <div>恢复逻辑删除的数据。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String recovery() {
+		log.info("C101Action recovery.........");
+		String id=request.getParameter("id");
+		TcCourseBean bean1=new TcCourseBean();
+		bean1.setId(id);
+		String msg="1";
+		try {
+			msg=courseManager.recoveryDataById(bean1);
+		} catch (Exception e) {
+			msg=e.getMessage();
+		}
+		request.setAttribute("msg",msg);
+		
+		return SUCCESS;
+	}
+	/**
 	 * 课程管理 业务处理取得
 	 * @return 课程管理 业务处理
 	 */

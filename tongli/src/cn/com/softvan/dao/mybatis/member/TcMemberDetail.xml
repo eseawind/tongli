@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.member.ITcMemberDetailDao" >
+  <sql id="Base_Column_List" >
+	user_id,
+	birthdate,
+	blood_type,
+	edu_level,
+	trade,
+	job,
+	income_level,
+	province_id,
+	city_id,
+	county_id,
+	address,
+	zipcode,
+	credential,
+	credential_code,
+	qq,
+	msn,
+	hobby,
+	date_created,
+	create_id,
+	create_ip,
+	last_updated,
+	update_id,
+	update_ip,
+	del_flag,
+	version,
+	detail_info
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcMemberBean" parameterType="tcMemberDetail" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_member_detail
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcMemberDetail" >
+    delete from tc_member_detail
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="tcMemberDetail" >
+    insert into tc_member_detail (
+	    user_id,
+		birthdate,
+		blood_type,
+		edu_level,
+		trade,
+		job,
+		income_level,
+		province_id,
+		city_id,
+		county_id,
+		address,
+		zipcode,
+		credential,
+		credential_code,
+		qq,
+		msn,
+		hobby,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		del_flag,
+		version,
+		detail_info
+      ) values (
+	    #{user_id},
+		#{birthdate},
+		#{blood_type},
+		#{edu_level},
+		#{trade},
+		#{job},
+		#{income_level},
+		#{province_id},
+		#{city_id},
+		#{county_id},
+		#{address},
+		#{zipcode},
+		#{credential},
+		#{credential_code},
+		#{qq},
+		#{msn},
+		#{hobby},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		'0',
+		 0,
+		 #{detail_info}
+    )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcMemberDetail" >
+    update tc_member_detail set version=version+1
+    ,last_updated=now()
+	,update_id=#{update_id}
+	,update_ip=#{update_ip}
+	<if test="birthdate!= null" >,birthdate=#{birthdate}</if>
+	<if test="blood_type!= null" >,blood_type=#{blood_type}</if>
+	<if test="edu_level!= null" >,edu_level=#{edu_level}</if>
+	<if test="trade!= null" >,trade=#{trade}</if>
+	<if test="job!= null" >,job=#{job}</if>
+	<if test="income_level!= null" >,income_level=#{income_level}</if>
+	<if test="province_id!= null" >,province_id=#{province_id}</if>
+	<if test="city_id!= null" >,city_id=#{city_id}</if>
+	<if test="county_id!= null" >,county_id=#{county_id}</if>
+	<if test="address!= null" >,address=#{address}</if>
+	<if test="zipcode!= null" >,zipcode=#{zipcode}</if>
+	<if test="credential!= null" >,credential=#{credential}</if>
+	<if test="credential_code!= null" >,credential_code=#{credential_code}</if>
+	<if test="qq!= null" >,qq=#{qq}</if>
+	<if test="msn!= null" >,msn=#{msn}</if>
+	<if test="hobby!= null" >,hobby=#{hobby}</if>
+	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+	<if test="detail_info!= null" >,detail_info=#{detail_info}</if>
+	where user_id=#{user_id}
+  </update>
+  	<!--判断是否存在-->
+    <select id="isDataYN" parameterType="tcMemberDetail" resultType="int">
+    select count(0) from tc_member_detail where user_id=#{user_id}
+    </select>
+    <!--
+	 * <p>信息列表 分页。</p>
+	 */
+	public List<TcMemberBean> findDataIsPage(IEntity dto);
+	-->
+	<select id="findDataIsPage" resultType="tcMemberBean" parameterType="tcMemberDetail" >
+    select
+	<include refid="Base_Column_List"/>
+	from tc_member_detail t1
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+    order by t1.last_updated desc
+    </select>
+	<!-- 
+	 * <p>信息列表。</p>
+	public List<TcMemberBean> findDataIsList(IEntity dto); -->
+	<select id="findDataIsList" resultType="tcMemberBean" parameterType="tcMemberDetail" >
+		 select
+		<include refid="Base_Column_List"/>
+		from tc_member_detail t1
+	    where 1=1
+	    <choose>
+	    	<when test="del_flag!=null">
+	    		and t1.del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and t1.del_flag='0'
+	    	</otherwise>
+	    </choose>
+	    order by t1.last_updated desc
+	    <if test="limit_s!=null and limit_e!=null">
+	     limit #{limit_s},#{limit_e}
+	    </if>
+   </select>
+   <!-- 逻辑删除 -->
+   <update id="deleteById" parameterType="tcMemberDetail">
+	  	update tc_member_detail set version=version+1,last_updated=now(),del_flag='1',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where user_id=#{user_id}
+   </update>
+   <!-- 恢复逻辑删除的数据 -->
+   <update id="recoveryDataById" parameterType="tcMemberDetail">
+	  	update tc_member_detail set version=version+1,last_updated=now(),del_flag='0',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where user_id=#{user_id}
+   </update>
+</mapper>

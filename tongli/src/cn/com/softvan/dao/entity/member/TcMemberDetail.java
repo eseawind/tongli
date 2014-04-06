@@ -55,8 +55,8 @@ public class TcMemberDetail extends BaseEntity {
 	private String msn;
 	/** 爱好 */
 	private String hobby;
-	/** ��后修改时间 */
-	private String last_update_date;
+	/** 详情 */
+	private String detail_info;
 	/**
 	 * 用户名取得
 	 * @return 用户名
@@ -296,18 +296,17 @@ public class TcMemberDetail extends BaseEntity {
 	    this.hobby = hobby;
 	}
 	/**
-	 * ��后修改时间取得
-	 * @return ��后修改时间
+	 * 详情取得
+	 * @return 详情
 	 */
-	public String getLast_update_date() {
-	    return last_update_date;
+	public String getDetail_info() {
+	    return detail_info;
 	}
 	/**
-	 * ��后修改时间设定
-	 * @param last_update_date ��后修改时间
+	 * 详情设定
+	 * @param detail_info 详情
 	 */
-	public void setLast_update_date(String last_update_date) {
-	    this.last_update_date = last_update_date;
+	public void setDetail_info(String detail_info) {
+	    this.detail_info = detail_info;
 	}
-
 }

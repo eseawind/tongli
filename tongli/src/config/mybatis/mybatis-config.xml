@@ -62,6 +62,22 @@
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseSyllabus" alias="tcCourseSyllabus"/>
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseSyllabusItems" alias="tcCourseSyllabusItems"/>
 		<!-- 课程管理 eng -->
+		<!-- 会员管理 begin -->
+		<!-- bean class -->
+		<typeAlias type="cn.com.softvan.bean.member.TcMemberBean" alias="tcMemberBean"/>
+		<!-- entity class -->
+		<typeAlias type="cn.com.softvan.dao.entity.member.TcMember" alias="tcMember"/>
+		<typeAlias type="cn.com.softvan.dao.entity.member.TcMemberDetail" alias="tcMemberDetail"/>
+		<typeAlias type="cn.com.softvan.dao.entity.member.TcMemberVsStudent" alias="tcMemberVsStudent"/>
+		<!-- 会员管理 end -->
+		<!-- 学员管理 begin -->
+		<!-- bean class -->
+		<typeAlias type="cn.com.softvan.bean.student.TcStudentBean" alias="tcStudentBean"/>
+		<typeAlias type="cn.com.softvan.bean.student.TcStudentHobbyItemsBean" alias="tcStudentHobbyItemsBean"/>
+		<!-- entity class -->
+		<typeAlias type="cn.com.softvan.dao.entity.student.TcStudent" alias="tcStudent"/>
+		<typeAlias type="cn.com.softvan.dao.entity.student.TcStudentHobbyItems" alias="tcStudentHobbyItems"/>
+		<!-- 学员管理 end -->
 	</typeAliases>
 	<!-- 插件 -->
 	<plugins>
@@ -112,5 +128,13 @@
 		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseSyllabus.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseSyllabusItems.xml"/>
 		<!-- 课程管理 end -->
+		<!-- 会员管理 begin -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/member/TcMember.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/member/TcMemberDetail.xml"/>
+		<!-- 会员管理 end -->
+		<!-- 学员管理 begin -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/student/TcStudent.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/student/TcStudentHobbyItems.xml"/>
+		<!-- 学员管理 end -->
 	</mappers>
 </configuration>

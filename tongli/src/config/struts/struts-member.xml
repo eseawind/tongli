@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="member_info" namespace="/h" extends="wechat-default" >
+    	<default-interceptor-ref name="wechat-auth" /> 
+		<!-- 会员管理 -->
+		<action name="m001_*" class="m001Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/member/M001.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/member/M001_01.jsp</result>
+			<result name="view">/WEB-INF/pages/admin/member/M001_02.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/member/M001_03.jsp</result>
+			<result name="success" type="chain">m001_init</result>
+		</action>
+	</package>
+</struts>

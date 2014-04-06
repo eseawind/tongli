@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.student.ITcStudentDetailDao" >
+  <sql id="Base_Column_List" >
+	id,
+	student_id,
+	name,
+	familiarity,
+	date_created,
+	create_id,
+	create_ip,
+	last_updated,
+	update_id,
+	update_ip,
+	del_flag,
+	version
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcStudentHobbyItemsBean" parameterType="tcStudentHobbyItems" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_student_hobby_items
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcStudentHobbyItems" >
+    delete from tc_student_hobby_items
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="tcStudentHobbyItems" >
+    insert into tc_student_hobby_items (
+	    id,
+		student_id,
+		name,
+		familiarity,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		del_flag,
+		version
+      ) values (
+	    #{id},
+		#{student_id},
+		#{name},
+		#{familiarity},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		'0',
+		 0
+    )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcStudentHobbyItems" >
+    update tc_student_hobby_items set version=version+1
+    ,last_updated=now()
+	,update_id=#{update_id}
+	,update_ip=#{update_ip}
+	<if test="student_id!= null" >,student_id=#{student_id}</if>
+	<if test="name!= null" >,name=#{name}</if>
+	<if test="familiarity!= null" >,familiarity=#{familiarity}</if>
+	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+	where id=#{id}
+  </update>
+  	<!--判断是否存在-->
+    <select id="isDataYN" parameterType="tcStudentHobbyItems" resultType="int">
+    select count(0) from tc_student_hobby_items where id=#{id}
+    </select>
+    <!--
+	 * <p>信息列表 分页。</p>
+	 */
+	public List<TcStudentHobbyItemsBean> findDataIsPage(IEntity dto);
+	-->
+	<select id="findDataIsPage" resultType="tcStudentHobbyItemsBean" parameterType="tcStudentHobbyItems" >
+    select
+	<include refid="Base_Column_List"/>
+	from tc_student_hobby_items t1
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+    order by t1.last_updated desc
+    </select>
+	<!-- 
+	 * <p>信息列表。</p>
+	public List<TcStudentHobbyItemsBean> findDataIsList(IEntity dto); -->
+	<select id="findDataIsList" resultType="tcStudentHobbyItemsBean" parameterType="tcStudentHobbyItems" >
+		 select
+		<include refid="Base_Column_List"/>
+		from tc_student_hobby_items t1
+	    where 1=1
+	    <choose>
+	    	<when test="del_flag!=null">
+	    		and t1.del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and t1.del_flag='0'
+	    	</otherwise>
+	    </choose>
+	    order by t1.last_updated desc
+	    <if test="limit_s!=null and limit_e!=null">
+	     limit #{limit_s},#{limit_e}
+	    </if>
+   </select>
+   <!-- 逻辑删除 -->
+   <update id="deleteById" parameterType="tcStudentHobbyItems">
+	  	update tc_student_hobby_items set version=version+1,last_updated=now(),del_flag='1',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+   <!-- 恢复逻辑删除的数据 -->
+   <update id="recoveryDataById" parameterType="tcStudentHobbyItems">
+	  	update tc_student_hobby_items set version=version+1,last_updated=now(),del_flag='0',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+</mapper>
