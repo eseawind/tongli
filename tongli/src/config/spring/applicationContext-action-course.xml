@@ -17,6 +17,8 @@
 	</bean>
 	<!-- 课程表管理ACTION -->
 	<bean id="c102Action" class="cn.com.softvan.web.action.course.C102Action" scope="prototype">
-		<property name="courseManager" ref="courseManager"></property>
+		<property name="courseSyllabusManager" ref="courseSyllabusManager"></property>
+		<property name="memberManager" ref="memberManager"></property>
+		<property name="studentManager" ref="studentManager"></property>
 	</bean>
 </beans>

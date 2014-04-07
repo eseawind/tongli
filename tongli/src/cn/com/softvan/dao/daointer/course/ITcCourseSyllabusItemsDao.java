@@ -69,4 +69,13 @@ public interface ITcCourseSyllabusItemsDao {
 	 * @return 处理结果
 	 */
 	public List<TcCourseSyllabusItemsBean> findDataIsList(IEntity dto);
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>当前课程关联的学员列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcCourseSyllabusItemsBean> findDataIsListStudent(IEntity dto);
 }

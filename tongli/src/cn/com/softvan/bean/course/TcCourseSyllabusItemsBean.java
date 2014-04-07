@@ -21,16 +21,26 @@ import cn.com.softvan.bean.BaseBean;
  * 
  */
 public class TcCourseSyllabusItemsBean extends BaseBean {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1685246538649834728L;
 	/** id */
 	private String id;
-	/** 课程表id */
-	private String syllabus_id;
-	/** 开始时间 */
-	private String begin_time;
-	/** 结束时间 */
-	private String end_time;
-	/** 备注 */
-	private String note;
+	/** 学员id */
+	private String student_id;
+	/** 课程id */
+	private String course_id;
+	/** 教师id */
+	private String teacher_id;
+	/** 教师得分 */
+	private String teacher_score;
+	/** 教师得分描述 */
+	private String teacher_score_note;
+	/** 学员状态 */
+	private String student_status;
+	/** 学员状态描述 */
+	private String student_status_note;
 	/**
 	 * id取得
 	 * @return id
@@ -46,60 +56,102 @@ public class TcCourseSyllabusItemsBean extends BaseBean {
 	    this.id = id;
 	}
 	/**
-	 * 课程表id取得
-	 * @return 课程表id
+	 * 学员id取得
+	 * @return 学员id
 	 */
-	public String getSyllabus_id() {
-	    return syllabus_id;
+	public String getStudent_id() {
+	    return student_id;
 	}
 	/**
-	 * 课程表id设定
-	 * @param syllabus_id 课程表id
+	 * 学员id设定
+	 * @param student_id 学员id
 	 */
-	public void setSyllabus_id(String syllabus_id) {
-	    this.syllabus_id = syllabus_id;
+	public void setStudent_id(String student_id) {
+	    this.student_id = student_id;
 	}
 	/**
-	 * 开始时间取得
-	 * @return 开始时间
+	 * 课程id取得
+	 * @return 课程id
 	 */
-	public String getBegin_time() {
-	    return begin_time;
+	public String getCourse_id() {
+	    return course_id;
 	}
 	/**
-	 * 开始时间设定
-	 * @param begin_time 开始时间
+	 * 课程id设定
+	 * @param course_id 课程id
 	 */
-	public void setBegin_time(String begin_time) {
-	    this.begin_time = begin_time;
+	public void setCourse_id(String course_id) {
+	    this.course_id = course_id;
 	}
 	/**
-	 * 结束时间取得
-	 * @return 结束时间
+	 * 教师id取得
+	 * @return 教师id
 	 */
-	public String getEnd_time() {
-	    return end_time;
+	public String getTeacher_id() {
+	    return teacher_id;
 	}
 	/**
-	 * 结束时间设定
-	 * @param end_time 结束时间
+	 * 教师id设定
+	 * @param teacher_id 教师id
 	 */
-	public void setEnd_time(String end_time) {
-	    this.end_time = end_time;
+	public void setTeacher_id(String teacher_id) {
+	    this.teacher_id = teacher_id;
 	}
 	/**
-	 * 备注取得
-	 * @return 备注
+	 * 教师得分取得
+	 * @return 教师得分
 	 */
-	public String getNote() {
-	    return note;
+	public String getTeacher_score() {
+	    return teacher_score;
 	}
 	/**
-	 * 备注设定
-	 * @param note 备注
+	 * 教师得分设定
+	 * @param teacher_score 教师得分
 	 */
-	public void setNote(String note) {
-	    this.note = note;
+	public void setTeacher_score(String teacher_score) {
+	    this.teacher_score = teacher_score;
+	}
+	/**
+	 * 教师得分描述取得
+	 * @return 教师得分描述
+	 */
+	public String getTeacher_score_note() {
+	    return teacher_score_note;
+	}
+	/**
+	 * 教师得分描述设定
+	 * @param teacher_score_note 教师得分描述
+	 */
+	public void setTeacher_score_note(String teacher_score_note) {
+	    this.teacher_score_note = teacher_score_note;
+	}
+	/**
+	 * 学员状态取得
+	 * @return 学员状态
+	 */
+	public String getStudent_status() {
+	    return student_status;
+	}
+	/**
+	 * 学员状态设定
+	 * @param student_status 学员状态
+	 */
+	public void setStudent_status(String student_status) {
+	    this.student_status = student_status;
+	}
+	/**
+	 * 学员状态描述取得
+	 * @return 学员状态描述
+	 */
+	public String getStudent_status_note() {
+	    return student_status_note;
+	}
+	/**
+	 * 学员状态描述设定
+	 * @param student_status_note 学员状态描述
+	 */
+	public void setStudent_status_note(String student_status_note) {
+	    this.student_status_note = student_status_note;
 	}
 
 }

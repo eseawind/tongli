@@ -26,8 +26,6 @@
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 <link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
-<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
-
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -64,7 +62,7 @@
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="${basePath }/h/c101_init.ac">课程管理</a> <i class="fa fa-angle-right"></i></li>
+						<li><a href="${basePath }/h/c102_init.ac">课程管理</a> <i class="fa fa-angle-right"></i></li>
 						<li>课程表</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
@@ -92,36 +90,32 @@
 								</c:otherwise>
 							</c:choose>
 						</c:if>
-							<div class="portlet box blue calendar">
-								<div class="portlet-title">
-									<div class="caption"><i class="fa fa-reorder"></i>课程表管理</div>
-								</div>
-								<div class="portlet-body light-grey">
-									<div class="row">
-										<div class="col-md-3 col-sm-12">
-											<!-- BEGIN DRAGGABLE EVENTS PORTLET-->    
-											<h3 class="event-form-title">Draggable Events</h3>
-											<div id="external-events">
-												<form class="inline-form">
-													<input type="text" value="" class="form-control" placeholder="Event Title..." id="event_title" /><br />
-													<a href="javascript:;" id="event_add" class="btn green">Add Event</a>
-												</form>
-												<hr />
-												<div id="event_box"></div>
-												<label for="drop-remove">
-												<input type="checkbox" id="drop-remove" />remove after drop                         
-												</label>
-												<hr class="visible-xs" />
-											</div>
-											<!-- END DRAGGABLE EVENTS PORTLET-->            
-										</div>
-										<div class="col-md-9 col-sm-9">
-											<div id="calendar" class="has-toolbar"></div>
-										</div>
-									</div>
-									<!-- END CALENDAR PORTLET-->
-								</div>
+							<div class="btn-toolbar">
+								<a href="${basePath}/h/c102_edit.ac" class="btn btn-primary">新建课程</a>
 							</div>
+								<table class="table table-condensed table-striped">
+								<tbody>
+									<tr>
+										<th class="col-md-3">时间</th>
+										<th class="col-md-6">课程名称</th>
+										<th class="col-md-3"></th>
+									</tr>
+									<c:forEach items="${beans}" var="bean">
+									<tr>
+										<td>${bean.last_updated}</td>
+										<td>${bean.title}</td>
+										<td><a
+											href="${basePath}/h/c102_view.ac?id=${bean.id}"
+											class="btn  btn-info" target="_blank">预览</a> <a
+											href="${basePath}/h/c102_edit.ac?id=${bean.id}"
+											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
+											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/c102_del.ac?id=${bean.id}'};"
+											rel="nofollow">删除</a></td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<customtag:pagingext func="loadUrlPage" params="'h/c102_','init'" />
 						</div>
 					</div>
 				</div>
@@ -134,10 +128,6 @@
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<!-- END FOOTER -->
-	<!-- <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script> -->
-	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>      
-	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
-	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/scripts/calendar.js"></script> 
 </body>
 <!-- END BODY -->
 </html>
@@ -145,7 +135,4 @@
 function loadUrlPage(offset, url, event) {
 	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
 }
-jQuery(document).ready(function() {       
-	   Calendar.init();
-});
 </script>

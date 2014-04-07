@@ -10,8 +10,6 @@
  */
 package cn.com.softvan.dao.entity;
 
-import java.util.Date;
-
 import cn.com.softvan.web.tag.PageInfo;
 
 /**
@@ -31,13 +29,13 @@ public class BaseEntity implements IEntity {
 	/** 备注 */
 	private String note;
 	/** 数据输入日期 */
-	private Date date_created;
+	private String date_created;
 	/** 建立者id */
 	private String create_id;
 	/** 建立者ip */
 	private String create_ip;
 	/** 资料更新日期 */
-	private Date last_updated;
+	private String last_updated;
 	/** 修改者ip */
 	private String update_ip;
 	/** 修改者id */
@@ -114,14 +112,14 @@ public class BaseEntity implements IEntity {
 	 * 数据输入日期取得
 	 * @return 数据输入日期
 	 */
-	public Date getDate_created() {
+	public String getDate_created() {
 	    return date_created;
 	}
 	/**
 	 * 数据输入日期设定
 	 * @param date_created 数据输入日期
 	 */
-	public void setDate_created(Date date_created) {
+	public void setDate_created(String date_created) {
 	    this.date_created = date_created;
 	}
 	/**
@@ -156,14 +154,14 @@ public class BaseEntity implements IEntity {
 	 * 资料更新日期取得
 	 * @return 资料更新日期
 	 */
-	public Date getLast_updated() {
+	public String getLast_updated() {
 	    return last_updated;
 	}
 	/**
 	 * 资料更新日期设定
 	 * @param last_updated 资料更新日期
 	 */
-	public void setLast_updated(Date last_updated) {
+	public void setLast_updated(String last_updated) {
 	    this.last_updated = last_updated;
 	}
 	/**
@@ -277,5 +275,16 @@ public class BaseEntity implements IEntity {
 	 */
 	public void setLimit_e(Integer limit_e) {
 	    this.limit_e = limit_e;
+	}
+	/**
+	 * 对象克隆
+	 */
+	public Object clone() {
+		Object o = null;
+		try {
+			o = super.clone();
+		} catch (CloneNotSupportedException e) {
+		}
+		return o;
 	}
 }

@@ -19,8 +19,21 @@
 		<bean id="tcCourseDao" parent="baseDao">
 			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.course.ITcCourseDao"></property>
 		</bean>
+		<bean id="tcCourseSyllabusDao" parent="baseDao">
+			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.course.ITcCourseSyllabusDao"></property>
+		</bean>
+		<bean id="tcCourseSyllabusItemsDao" parent="baseDao">
+			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.course.ITcCourseSyllabusItemsDao"></property>
+		</bean>
 		<!-- ************************业务处理类************************************* -->
 		<bean id="courseManager" class="cn.com.softvan.service.course.impl.CourseManager" scope="prototype">
 			<property name="tcCourseDao" ref="tcCourseDao"></property>
+		</bean>
+		<bean id="courseSyllabusManager" class="cn.com.softvan.service.course.impl.CourseSyllabusManager" scope="prototype">
+			<property name="tcCourseSyllabusDao" ref="tcCourseSyllabusDao"></property>
+			<property name="tcCourseSyllabusItemsDao" ref="tcCourseSyllabusItemsDao"></property>
+		</bean>
+		<bean id="courseSyllabusItemsManager" class="cn.com.softvan.service.course.impl.CourseSyllabusItemsManager" scope="prototype">
+			<property name="tcCourseSyllabusItemsDao" ref="tcCourseSyllabusItemsDao"></property>
 		</bean>
 </beans>

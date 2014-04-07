@@ -4,7 +4,7 @@
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
- * 1.00     2014-04-01  wuxiaogang   程序・发布
+ * 1.00     2014-04-07  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 jfq System. - All Rights Reserved.
  *
@@ -40,8 +40,8 @@
 		<%@ include file="../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#course,#course_sub_menu_l1').addClass('active');
-				$('#course,#course_sub_menu').addClass('open');
+				$('#course,#course_sub_menu_l4').addClass('active');
+				$('#course_arrow').addClass('open');
 				$('#course_sub_menu').show();
 			});
 		</script>
@@ -62,7 +62,7 @@
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="${basePath }/h/c101_init.ac">课程管理</a> <i class="fa fa-angle-right"></i></li>
+						<li><a href="${basePath }/h/c102_init.ac">课程管理</a> <i class="fa fa-angle-right"></i></li>
 						<li>课程列表</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
@@ -72,6 +72,22 @@
 			<!-- BEGIN PAGE CONTENT-->
 			<div class="row">
 				<div class="col-md-12">
+					<style>
+					.nav-list li {
+						position: relative;
+					}
+					
+					.nav-list span.oper {
+						position: absolute;
+						right: 0;
+						top: 0;
+					}
+					
+					.nav-list span.oper,li#add-grp-btn {
+						font-size: 18px;
+					}
+					</style>
+
 					<div class="row-fluid">
 						<div class="col-md-12">
 							<c:if test="${msg!=null}">
@@ -90,9 +106,6 @@
 								</c:otherwise>
 							</c:choose>
 						</c:if>
-							<div class="btn-toolbar">
-								<a href="${basePath}/h/c101_edit.ac" class="btn btn-primary">新建课程</a>
-							</div>
 							<table class="table table-condensed table-striped">
 								<tbody>
 									<tr>
@@ -104,18 +117,14 @@
 									<tr>
 										<td>${bean.last_updated}</td>
 										<td>${bean.title}</td>
-										<td><a
-											href="${basePath}/h/c101_view.ac?id=${bean.id}"
-											class="btn  btn-info" target="_blank">预览</a> <a
-											href="${basePath}/h/c101_edit.ac?id=${bean.id}"
-											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
-											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/c101_del.ac?id=${bean.id}'};"
-											rel="nofollow">删除</a></td>
+										<td><a href="javascript:void(0)"   class="btn btn-danger" 
+											onclick="if(confirm('确认恢复吗?')){location.href='${basePath}/h/c102_recovery.ac?id=${bean.id}'};"
+											rel="nofollow">恢复</a></td>
 									</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<customtag:pagingext func="loadUrlPage" params="'h/c101_','init'" />
+							<customtag:pagingext func="loadUrlPage" params="'h/c102_','init'" />
 						</div>
 					</div>
 				</div>
@@ -128,7 +137,7 @@
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<!-- END FOOTER -->
-
+	
 </body>
 <!-- END BODY -->
 </html>

@@ -3,12 +3,11 @@
 <mapper namespace="cn.com.softvan.dao.daointer.course.ITcCourseSyllabusDao" >
   <sql id="Base_Column_List" >
 	id,
-	student_id,
 	course_id,
-	user_id,
+	teacher_id,
 	day,
-	truancy_status,
-	truancy_note,
+	begin_time,
+	end_time,
 	note,
 	date_created,
 	create_id,
@@ -32,12 +31,11 @@
   <insert id="insert" parameterType="tcCourse" >
     insert into tc_course_syllabus (
 	    id,
-		student_id,
 		course_id,
-		user_id,
+		teacher_id,
 		day,
-		truancy_status,
-		truancy_note,
+		begin_time,
+		end_time,
 		note,
 		date_created,
 		create_id,
@@ -47,12 +45,11 @@
 		version
       ) values (
 	    #{id},
-		#{student_id},
 		#{course_id},
-		#{user_id},
+		#{teacher_id},
 		#{day},
-		#{truancy_status},
-		#{truancy_note},
+		#{begin_time},
+		#{end_time},
 		#{note},
 		now(),
 		#{create_id},
@@ -67,12 +64,11 @@
     ,last_updated=now()
 	,update_id=#{update_id}
 	,update_ip=#{update_ip}
-	<if test="student_id!= null" >,student_id=#{student_id}</if>
 	<if test="course_id!= null" >,course_id=#{course_id}</if>
-	<if test="user_id!= null" >,user_id=#{user_id}</if>
+	<if test="teacher_id!= null" >,teacher_id=#{teacher_id}</if>
 	<if test="day!= null" >,day=#{day}</if>
-	<if test="truancy_status!= null" >,truancy_status=#{truancy_status}</if>
-	<if test="truancy_note!= null" >,truancy_note=#{truancy_note}</if>
+	<if test="begin_time!= null" >,begin_time=#{begin_time}</if>
+	<if test="end_time!= null" >,end_time=#{end_time}</if>
 	<if test="note!= null" >,note=#{note}</if>
 	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
 	where id=#{id}
@@ -83,7 +79,7 @@
     </select>
     <!--
 	 * <p>信息列表 分页。</p>
-	public List<TcCourseBean> findDataIsPage(IEntity dto);
+	public List<TcCourseSyllabusBean> findDataIsPage(IEntity dto);
 	-->
 	<select id="findDataIsPage" resultType="tcCourseBean" parameterType="tcCourse" >
     select
@@ -102,7 +98,7 @@
     </select>
 	<!-- 
 	 * <p>信息列表。</p>
-	public List<TcCourseBean> findDataIsList(IEntity dto); -->
+	public List<TcCourseSyllabusBean> findDataIsList(IEntity dto); -->
 	<select id="findDataIsList" resultType="tcCourseBean" parameterType="tcCourse" >
 	select
 	<include refid="Base_Column_List"/>

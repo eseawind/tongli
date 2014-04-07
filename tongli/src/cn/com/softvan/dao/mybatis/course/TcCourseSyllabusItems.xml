@@ -2,63 +2,149 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.com.softvan.dao.daointer.course.ITcCourseSyllabusItemsDao" >
   <sql id="Base_Column_List" >
-	id,
-	syllabus_id,
-	begin_time,
-	end_time,
-	note
+	t1.id,
+	t1.student_id,
+	t1.course_id,
+	t1.teacher_id,
+	t1.teacher_score,
+	t1.teacher_score_note,
+	t1.student_status,
+	t1.student_status_note,
+	t1.note,
+	t1.date_created,
+	t1.create_id,
+	t1.create_ip,
+	t1.last_updated,
+	t1.update_id,
+	t1.update_ip,
+	t1.del_flag,
+	t1.version
   </sql>
-  <select id="selectByPrimaryKey" resultType="tcCourseBean" parameterType="tcCourse" >
+  <select id="selectByPrimaryKey" resultType="tcCourseSyllabusItemsBean" parameterType="tcCourseSyllabusItems" >
     select 
     <include refid="Base_Column_List" />
     from tc_course_syllabus_items
     where id = #{id}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="tcCourse" >
+  <delete id="deleteByPrimaryKey" parameterType="tcCourseSyllabusItems" >
     delete from tc_course_syllabus_items
     where id = #{id}
   </delete>
-  <insert id="insert" parameterType="tcCourse" >
+  <insert id="insert" parameterType="tcCourseSyllabusItems" >
     insert into tc_course_syllabus_items (
 	    id,
-		syllabus_id,
-		begin_time,
-		end_time,
-		note
+		student_id,
+		course_id,
+		teacher_id,
+		teacher_score,
+		teacher_score_note,
+		student_status,
+		student_status_note,
+		note,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		del_flag,
+		version
       ) values (
 	    #{id},
-		#{syllabus_id},
-		#{begin_time},
-		#{end_time},
-		#{note}
+		#{student_id},
+		#{course_id},
+		#{teacher_id},
+		#{teacher_score},
+		#{teacher_score_note},
+		#{student_status},
+		#{student_status_note},
+		#{note},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		'0',
+		 0
     )
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="tcCourse" >
-    update tc_course_syllabus_items set note=#{note}
-	<if test="syllabus_id!= null" >,syllabus_id=#{syllabus_id}</if>
-	<if test="begin_time!= null" >,begin_time=#{begin_time}</if>
-	<if test="end_time!= null" >,end_time=#{end_time}</if>
+  <update id="updateByPrimaryKeySelective" parameterType="tcCourseSyllabusItems" >
+    update tc_course_syllabus_items set version=version+1
+    ,last_updated=now()
+	,update_id=#{update_id}
+	,update_ip=#{update_ip}
+	<if test="student_id!= null" >,student_id=#{student_id}</if>
+	<if test="course_id!= null" >,course_id=#{course_id}</if>
+	<if test="teacher_id!= null" >,teacher_id=#{teacher_id}</if>
+	<if test="teacher_score!= null" >,teacher_score=#{teacher_score}</if>
+	<if test="teacher_score_note!= null" >,teacher_score_note=#{teacher_score_note}</if>
+	<if test="student_status!= null" >,student_status=#{student_status}</if>
+	<if test="student_status_note!= null" >,student_status_note=#{student_status_note}</if>
+	<if test="note!= null" >,note=#{note}</if>
+	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
 	where id=#{id}
   </update>
   	<!--判断是否存在-->
-    <select id="isDataYN" parameterType="tcCourse" resultType="int">
+    <select id="isDataYN" parameterType="tcCourseSyllabusItems" resultType="int">
     select count(0) from tc_course_syllabus_items where id=#{id}
     </select>
     <!--
 	 * <p>信息列表 分页。</p>
-	public List<TcCourseBean> findDataIsPage(IEntity dto);
+	public List<TcCourseSyllabusItemsBean> findDataIsPage(IEntity dto);
 	-->
-	<select id="findDataIsPage" resultType="tcCourseBean" parameterType="tcCourse" >
+	<select id="findDataIsPage" resultType="tcCourseSyllabusItemsBean" parameterType="tcCourseSyllabusItems" >
     select
 	<include refid="Base_Column_List"/>
 	from tc_course_syllabus_items t1
+	where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
     </select>
 	<!-- 
 	 * <p>信息列表。</p>
-	public List<TcCourseBean> findDataIsList(IEntity dto); -->
-	<select id="findDataIsList" resultType="tcCourseBean" parameterType="tcCourse" >
+	public List<TcCourseSyllabusItemsBean> findDataIsList(IEntity dto); -->
+	<select id="findDataIsList" resultType="tcCourseSyllabusItemsBean" parameterType="tcCourseSyllabusItems" >
 	select
 	<include refid="Base_Column_List"/>
 	from tc_course_syllabus_items t1
+	where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+   </select>
+    <!-- <当前会员关联的学员列表
+	public List<TcStudentBean> findDataIsListStudent(TcCourseSyllabusItemsBean bean);
+	-->
+	<select id="findDataIsListStudent" resultType="tcStudentBean" parameterType="tcCourseSyllabusItems" >
+		select
+			t2.id,
+			t2.name,
+			t2.age,
+			t2.sex,
+			t2.hobby,
+			t2.pic_url,
+			t2.birthdate
+		from tc_course_syllabus_items t1
+		left join tc_student t2 on (t2.id=t1.student_id)
+	    where t1.course_id=#{course_id}
+	    <choose>
+	    	<when test="del_flag!=null">
+	    		and t2.del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and t2.del_flag='0'
+	    	</otherwise>
+	    </choose>
+	    <if test="limit_s!=null and limit_e!=null">
+	     limit #{limit_s},#{limit_e}
+	    </if>
    </select>
 </mapper>

@@ -3,7 +3,7 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.04.01  wuxiaogang      程序.发布
+ * 1.00     2014.04.07  wuxiaogang      程序.发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
@@ -24,115 +24,129 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/** id */
 	private String id;
-	/** 学员id */
-	private String student_id;
 	/** 课程id */
 	private String course_id;
 	/** 教师id */
-	private String user_id;
+	private String teacher_id;
 	/** 课程日期 */
 	private String day;
-	/** 学员旷课状态 */
-	private String truancy_status;
-	/** 学员未到原因 */
-	private String truancy_note;
+	/** 开始时间 */
+	private String begin_time;
+	/** 结束时间 */
+	private String end_time;
+
 	/**
 	 * id取得
+	 * 
 	 * @return id
 	 */
 	public String getId() {
-	    return id;
+		return id;
 	}
+
 	/**
 	 * id设定
-	 * @param id id
+	 * 
+	 * @param id
+	 *            id
 	 */
 	public void setId(String id) {
-	    this.id = id;
+		this.id = id;
 	}
-	/**
-	 * 学员id取得
-	 * @return 学员id
-	 */
-	public String getStudent_id() {
-	    return student_id;
-	}
-	/**
-	 * 学员id设定
-	 * @param student_id 学员id
-	 */
-	public void setStudent_id(String student_id) {
-	    this.student_id = student_id;
-	}
+
 	/**
 	 * 课程id取得
+	 * 
 	 * @return 课程id
 	 */
 	public String getCourse_id() {
-	    return course_id;
+		return course_id;
 	}
+
 	/**
 	 * 课程id设定
-	 * @param course_id 课程id
+	 * 
+	 * @param course_id
+	 *            课程id
 	 */
 	public void setCourse_id(String course_id) {
-	    this.course_id = course_id;
+		this.course_id = course_id;
 	}
+
 	/**
 	 * 教师id取得
+	 * 
 	 * @return 教师id
 	 */
-	public String getUser_id() {
-	    return user_id;
+	public String getTeacher_id() {
+		return teacher_id;
 	}
+
 	/**
 	 * 教师id设定
-	 * @param user_id 教师id
+	 * 
+	 * @param teacher_id
+	 *            教师id
 	 */
-	public void setUser_id(String user_id) {
-	    this.user_id = user_id;
+	public void setTeacher_id(String teacher_id) {
+		this.teacher_id = teacher_id;
 	}
+
 	/**
 	 * 课程日期取得
+	 * 
 	 * @return 课程日期
 	 */
 	public String getDay() {
-	    return day;
+		return day;
 	}
+
 	/**
 	 * 课程日期设定
-	 * @param day 课程日期
+	 * 
+	 * @param day
+	 *            课程日期
 	 */
 	public void setDay(String day) {
-	    this.day = day;
+		this.day = day;
 	}
+
 	/**
-	 * 学员旷课状态取得
-	 * @return 学员旷课状态
+	 * 开始时间取得
+	 * 
+	 * @return 开始时间
 	 */
-	public String getTruancy_status() {
-	    return truancy_status;
+	public String getBegin_time() {
+		return begin_time;
 	}
+
 	/**
-	 * 学员旷课状态设定
-	 * @param truancy_status 学员旷课状态
+	 * 开始时间设定
+	 * 
+	 * @param begin_time
+	 *            开始时间
 	 */
-	public void setTruancy_status(String truancy_status) {
-	    this.truancy_status = truancy_status;
+	public void setBegin_time(String begin_time) {
+		this.begin_time = begin_time;
 	}
+
 	/**
-	 * 学员未到原因取得
-	 * @return 学员未到原因
+	 * 结束时间取得
+	 * 
+	 * @return 结束时间
 	 */
-	public String getTruancy_note() {
-	    return truancy_note;
+	public String getEnd_time() {
+		return end_time;
 	}
+
 	/**
-	 * 学员未到原因设定
-	 * @param truancy_note 学员未到原因
+	 * 结束时间设定
+	 * 
+	 * @param end_time
+	 *            结束时间
 	 */
-	public void setTruancy_note(String truancy_note) {
-	    this.truancy_note = truancy_note;
+	public void setEnd_time(String end_time) {
+		this.end_time = end_time;
 	}
 
 }

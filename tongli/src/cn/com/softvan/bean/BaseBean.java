@@ -243,17 +243,6 @@ public class BaseBean implements Serializable,IBean,Cloneable {
 	    this.version = version;
 	}
 	/**
-	 * 对象克隆
-	 */
-	public Object clone() {
-		Object o = null;
-		try {
-			o = super.clone();
-		} catch (CloneNotSupportedException e) {
-		}
-		return o;
-	}
-	/**
 	 * 错误代码取得
 	 * @return 错误代码
 	 */
@@ -308,5 +297,16 @@ public class BaseBean implements Serializable,IBean,Cloneable {
 	 */
 	public void setLimit_e(Integer limit_e) {
 	    this.limit_e = limit_e;
+	}
+	/**
+	 * 对象克隆
+	 */
+	public Object clone() {
+		Object o = null;
+		try {
+			o = super.clone();
+		} catch (CloneNotSupportedException e) {
+		}
+		return o;
 	}
 }
