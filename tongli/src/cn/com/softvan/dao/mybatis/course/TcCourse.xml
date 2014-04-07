@@ -13,7 +13,7 @@
 	member_price,
 	is_indoor,
 	is_site_fee,
-	addrs,
+	addres,
 	note,
 	date_created,
 	create_id,
@@ -50,7 +50,7 @@
 		member_price,
 		is_indoor,
 		is_site_fee,
-		addrs,
+		addres,
 		note,
 		date_created,
 		create_id,
@@ -73,7 +73,7 @@
 		#{member_price},
 		#{is_indoor},
 		#{is_site_fee},
-		#{addrs},
+		#{addres},
 		#{note},
 		now(),
 		#{create_id},
@@ -101,7 +101,7 @@
 	<if test="member_price!= null" >,member_price=#{member_price}</if>
 	<if test="is_indoor!= null" >,is_indoor=#{is_indoor}</if>
 	<if test="is_site_fee!= null" >,is_site_fee=#{is_site_fee}</if>
-	<if test="addrs!= null" >,addrs=#{addrs}</if>
+	<if test="addres!= null" >,addres=#{addres}</if>
 	<if test="note!= null" >,note=#{note}</if>
 	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
 	<if test="pic_url!= null" >,pic_url=#{pic_url}</if>

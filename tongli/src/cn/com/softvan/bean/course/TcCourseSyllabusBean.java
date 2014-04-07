@@ -40,6 +40,10 @@ public class TcCourseSyllabusBean extends BaseBean {
 	private String begin_time;
 	/** 结束时间 */
 	private String end_time;
+	/** 详细地址 */
+	private String addres;
+	/** 课程详情 */
+	private String detail_info;
 	/** 学员id集合 */
 	private List<String> sids;
 	/**
@@ -125,6 +129,34 @@ public class TcCourseSyllabusBean extends BaseBean {
 	 */
 	public void setEnd_time(String end_time) {
 	    this.end_time = end_time;
+	}
+	/**
+	 * 详细地址取得
+	 * @return 详细地址
+	 */
+	public String getAddres() {
+	    return addres;
+	}
+	/**
+	 * 详细地址设定
+	 * @param addres 详细地址
+	 */
+	public void setAddres(String addres) {
+	    this.addres = addres;
+	}
+	/**
+	 * 课程详情取得
+	 * @return 课程详情
+	 */
+	public String getDetail_info() {
+	    return detail_info;
+	}
+	/**
+	 * 课程详情设定
+	 * @param detail_info 课程详情
+	 */
+	public void setDetail_info(String detail_info) {
+	    this.detail_info = detail_info;
 	}
 	/**
 	 * 学员id集合取得

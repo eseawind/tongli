@@ -17,6 +17,7 @@ import org.apache.log4j.Logger;
 import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
+import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.course.ICourseSyllabusItemsManager;
@@ -176,6 +177,10 @@ public class C102Action extends BaseAction {
 		}
 		//-------------学员集合-all------
 		request.setAttribute("student_beans", studentManager.findDataIsList(null));
+		//-------------教师--all-----
+		TcMemberBean memberBean=new TcMemberBean();
+		memberBean.setUser_type("0");//教师
+		request.setAttribute("teacher_beans", memberManager.findDataIsList(memberBean));
 		return "edit";
 	}
 	/**

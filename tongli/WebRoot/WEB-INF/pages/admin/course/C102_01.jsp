@@ -136,7 +136,25 @@
 							 家长</label>
 						</div>
 						<div class="well form-inline">
-							 &nbsp;  <label class="control-label">上课学员</label>
+							 &nbsp;  <label class="control-label">教练</label>
+							 <label class="control-label col-md-12">
+								<select name="bean.sids" id="student_select2_sample2" class="form-control select2" multiple>
+										<optgroup label="教练列表">
+											<c:forEach items="${teacher_beans_beans}" var="teacher">
+												<c:set var="xxcc" value='' />
+												<c:forEach items="${member_student_beans}" var="the_student">
+													<c:if test="${teacher.id==teacher.id}">
+													<c:set var="xxcc" value='selected="selected"' />
+													</c:if>
+												</c:forEach>
+												<option ${xxcc} value="${teacher.id}">${teacher.name }</option>
+											</c:forEach>
+										</optgroup>
+									</select>
+							</label>
+						</div>
+						<div class="well form-inline">
+							 &nbsp;  <label class="control-label">学员</label>
 							 <label class="control-label col-md-12">
 								<select name="bean.sids" id="student_select2_sample2" class="form-control select2" multiple>
 										<optgroup label="学员列表">
@@ -158,7 +176,6 @@
 								class="form-control" id="article_nickname" name="bean.nickname"
 								type="text" value="${bean.nickname}">
 						</div>
-						
 						<div class="form-group">
 							<label for="article_birthdate">生日</label> 
 									<div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="-100y">
@@ -167,6 +184,10 @@
 										<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
 										</span>
 									</div>
+						</div>
+						<div class="form-group">
+							<label for="article_addres">地址</label> <input class="form-control"
+								id="article_addres" name="bean.addres" size="150" type="text" value="${bean.addres}">
 						</div>
 						<div class="form-group">
 							<label for="article_description">详情</label>

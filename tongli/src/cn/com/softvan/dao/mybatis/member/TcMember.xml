@@ -181,6 +181,7 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
+    <if test="user_type!= null" > and user_type=#{user_type}</if>
     order by t1.user_name asc
     </select>
 	<!-- 
@@ -217,6 +218,7 @@
 	    	    and t1.del_flag='0'
 	    	</otherwise>
 	    </choose>
+	    <if test="user_type!= null" > and user_type=#{user_type}</if>
 	    order by t1.user_name asc
 	    <if test="limit_s!=null and limit_e!=null">
 	     limit #{limit_s},#{limit_e}

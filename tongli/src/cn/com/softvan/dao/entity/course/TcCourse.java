@@ -46,7 +46,7 @@ public class TcCourse extends BaseEntity {
 	/** 是否包含场地费 */
 	private String is_site_fee;
 	/** 课程地址 */
-	private String addrs;
+	private String addres;
 	/** 标题图 */
 	private String pic_url;
 	/** 课程详情 */
@@ -223,15 +223,15 @@ public class TcCourse extends BaseEntity {
 	 * 课程地址取得
 	 * @return 课程地址
 	 */
-	public String getAddrs() {
-	    return addrs;
+	public String getAddres() {
+	    return addres;
 	}
 	/**
 	 * 课程地址设定
 	 * @param addrs 课程地址
 	 */
-	public void setAddrs(String addrs) {
-	    this.addrs = addrs;
+	public void setAddres(String addres) {
+	    this.addres = addres;
 	}
 	/**
 	 * 标题图取得

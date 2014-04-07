@@ -67,7 +67,7 @@ public class CourseManager extends BaseManager implements ICourseManager {
 				dto.setMember_price(bean.getMember_price());//会员价
 				dto.setIs_indoor(Validator.isEmpty(bean.getIs_indoor())?"0":"1");//是否室内
 				dto.setIs_site_fee(Validator.isEmpty(bean.getIs_site_fee())?"0":"1");//是否包含场地费
-				dto.setAddrs(bean.getAddrs());//课程地址
+				dto.setAddres(bean.getAddres());//课程地址
 				dto.setNote(bean.getNote());//备注
 //				dto.setDate_created(bean.getDate_created());//数据输入日期
 				dto.setCreate_id(bean.getCreate_id());//建立者ID
@@ -169,7 +169,7 @@ public class CourseManager extends BaseManager implements ICourseManager {
 			dto.setMember_price(bean.getMember_price());//会员价
 			dto.setIs_indoor(bean.getIs_indoor());//是否室内
 			dto.setIs_site_fee(bean.getIs_site_fee());//是否包含场地费
-			dto.setAddrs(bean.getAddrs());//课程地址
+			dto.setAddres(bean.getAddres());//课程地址
 			dto.setNote(bean.getNote());//备注
 //			dto.setDate_created(bean.getDate_created());//数据输入日期
 			dto.setCreate_id(bean.getCreate_id());//建立者ID
@@ -214,7 +214,7 @@ public class CourseManager extends BaseManager implements ICourseManager {
 					dto.setMember_price(bean.getMember_price());//会员价
 					dto.setIs_indoor(bean.getIs_indoor());//是否室内
 					dto.setIs_site_fee(bean.getIs_site_fee());//是否包含场地费
-					dto.setAddrs(bean.getAddrs());//课程地址
+					dto.setAddres(bean.getAddres());//课程地址
 					dto.setNote(bean.getNote());//备注
 //					dto.setDate_created(bean.getDate_created());//数据输入日期
 					dto.setCreate_id(bean.getCreate_id());//建立者ID

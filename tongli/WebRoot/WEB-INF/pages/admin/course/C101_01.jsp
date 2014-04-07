@@ -141,6 +141,10 @@
 								id="article_market_price" name="bean.market_price" size="50" type="text" value="${bean.market_price}">
 						</div>
 						<div class="form-group">
+							<label for="article_addres">地址</label> <input class="form-control"
+								id="article_addres" name="bean.addres" size="150" type="text" value="${bean.addres}">
+						</div>
+						<div class="form-group">
 							<label for="article_member_price">会员价</label> <input class="form-control"
 								id="article_member_price" name="bean.member_price" size="50" type="text" value="${bean.member_price}">
 						</div>
