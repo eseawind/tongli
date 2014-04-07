@@ -22,12 +22,16 @@
 	<bean id="tcMemberDetailDao" parent="baseDao">
 		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.member.ITcMemberDetailDao"></property>
 	</bean>
+	<bean id="tcMemberVsStudentDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.member.ITcMemberVsStudentDao"></property>
+	</bean>
 	<!-- 会员管理 dao end -->
 	<!-- ************************业务处理类************************************* -->
 	<!-- 会员管理 begin -->
 	<bean id="memberManager" class="cn.com.softvan.service.member.impl.MemberManager" scope="prototype">
 		<property name="tcMemberDao" ref="tcMemberDao"></property>
 		<property name="tcMemberDetailDao" ref="tcMemberDetailDao"></property>
+		<property name="tcMemberVsStudentDao" ref="tcMemberVsStudentDao"></property>
 	</bean>
 	<!-- 会员管理 end -->
 </beans>

@@ -13,6 +13,7 @@ package cn.com.softvan.service.member;
 import java.util.List;
 
 import cn.com.softvan.bean.member.TcMemberBean;
+import cn.com.softvan.bean.student.TcStudentBean;
 
 
 /**
@@ -81,4 +82,22 @@ public interface IMemberManager {
 	 * @return 处理结果
 	 */
 	public TcMemberBean findDataById(TcMemberBean bean);
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>当前会员关联的学员列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcStudentBean> findDataIsListStudent(TcMemberBean bean);
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>当前学员关联的会员列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcMemberBean> findDataIsListMember(TcStudentBean bean);
 }

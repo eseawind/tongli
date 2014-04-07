@@ -19,6 +19,7 @@ import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.member.IMemberManager;
+import cn.com.softvan.service.student.IStudentManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
@@ -42,6 +43,8 @@ public class M001Action extends BaseAction {
 	private List<TcMemberBean> beans;
 	/**会员信息管理 业务处理*/
 	private IMemberManager memberManager;
+	/**学员信息管理 业务处理*/
+	private IStudentManager studentManager;
 	public M001Action() {
 		log.info("默认构造器......M001Action");
 	}
@@ -92,7 +95,11 @@ public class M001Action extends BaseAction {
 			TcMemberBean bean1=new TcMemberBean();
 			bean1.setId(id);
 			bean=memberManager.findDataById(bean1);
+			//当前会员关联的学员
+			request.setAttribute("member_student_beans", memberManager.findDataIsListStudent(bean1));
 		}
+		//所有学员信息
+		request.setAttribute("student_beans",studentManager.findDataIsList(null));
 		return "edit";
 	}
 	/**
@@ -277,5 +284,21 @@ public class M001Action extends BaseAction {
 	 */
 	public void setMemberManager(IMemberManager memberManager) {
 	    this.memberManager = memberManager;
+	}
+
+	/**
+	 * 学员信息管理 业务处理取得
+	 * @return 学员信息管理 业务处理
+	 */
+	public IStudentManager getStudentManager() {
+	    return studentManager;
+	}
+
+	/**
+	 * 学员信息管理 业务处理设定
+	 * @param studentManager 学员信息管理 业务处理
+	 */
+	public void setStudentManager(IStudentManager studentManager) {
+	    this.studentManager = studentManager;
 	}
 }

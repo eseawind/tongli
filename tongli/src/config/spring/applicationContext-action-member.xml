@@ -14,6 +14,7 @@
 	<!--========================= 会员管理 begin=================================== -->
 	<bean id="m001Action" class="cn.com.softvan.web.action.member.M001Action" scope="prototype">
 		<property name="memberManager" ref="memberManager"></property>
+		<property name="studentManager" ref="studentManager"></property>
 	</bean>
 	<!--========================= 会员管理  end=================================== -->
 </beans>

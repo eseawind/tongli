@@ -103,7 +103,7 @@
 							</label>
 							&nbsp; 
 							<label>生日
-									<div style="margin: -25px 0px 0px 30px;" class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+									<div style="margin: -25px 0px 0px 30px;" class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="-100y">
 										<input id="bean_birthdate" type="text" name="bean.birthdate" value="${bean.birthdate}" class="form-control" readonly="">
 										<span class="input-group-btn">
 										<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>

@@ -28,6 +28,8 @@
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/less/datepicker.less" />
 <script type="text/javascript" src="${basePath}/js/area.js"></script>
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/assets/plugins/select2/select2_metro.css" />
+	<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/css/multi-select.css" />
 
 </head>
 <!-- BEGIN BODY -->
@@ -81,7 +83,14 @@
 						<div class="well form-inline">
 							 &nbsp; 
 							<label>会员名
-								<input class="upload-wrapper" id="message_user_name" name="bean.user_name" size="30" value="${bean.user_name }" placeholder="会员登录名"  type="text">
+								<c:choose>
+									<c:when test="${bean.user_name!=null && fn:length(bean.user_name)>0}">
+										<input class="upload-wrapper" readonly="readonly" style="background-color: #eee;" id="message_user_name" name="bean.user_name" size="30" value="${bean.user_name }" placeholder="会员登录名"  type="text">
+									</c:when>
+									<c:otherwise>
+										<input class="upload-wrapper" id="message_user_name" name="bean.user_name" size="30" placeholder="会员登录名"  type="text">
+									</c:otherwise>
+								</c:choose>
 							</label>
 							 &nbsp; 
 							 <label>密码
@@ -126,6 +135,24 @@
 							 </c:if>
 							 type="radio">
 							 家长</label>
+						</div>
+						<div class="well form-inline">
+							 &nbsp;  <label class="control-label">关联学员</label>
+							 <label class="control-label col-md-12">
+								<select name="bean.sids" id="student_select2_sample2" class="form-control select2" multiple>
+										<optgroup label="学员列表">
+											<c:forEach items="${student_beans}" var="student">
+												<c:set var="xxcc" value='' />
+												<c:forEach items="${member_student_beans}" var="the_student">
+													<c:if test="${the_student.id==student.id}">
+													<c:set var="xxcc" value='selected="selected"' />
+													</c:if>
+												</c:forEach>
+												<option ${xxcc} value="${student.id}">${student.name }</option>
+											</c:forEach>
+										</optgroup>
+									</select>
+							</label>
 						</div>
 						<div class="form-group">
 							<label class="col-md-4">最后修改时间${bean.last_update_date}</label>
@@ -172,7 +199,7 @@
 						
 						<div class="form-group">
 							<label for="article_birthdate">生日</label> 
-									<div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+									<div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="-100y">
 										<input id="bean_birthdate" type="text" name="bean.birthdate" value="${bean.birthdate}" class="form-control" readonly="">
 										<span class="input-group-btn">
 										<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
@@ -297,6 +324,9 @@
 	<%@ include file="../include/footer.jsp"%>
 	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/js/jquery.quicksearch.js"></script>   
 	
 	<!-- END FOOTER -->
 </body>
@@ -305,6 +335,11 @@
 <script type="text/javascript">
 jQuery(document).ready(function() {
 	$('.date-picker').datepicker();
+	//
+	$('#student_select2_sample2').select2({
+        placeholder: "点击选择关联学员",
+        allowClear: true
+    });
 	//
 	KindEditor.ready(function(K) {
 		//--编辑框

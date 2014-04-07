@@ -140,7 +140,7 @@
     ,last_updated=now()
 	,update_id=#{update_id}
 	,update_ip=#{update_ip}
-	<if test="user_name!= null" >,user_name=#{user_name}</if>
+	<!-- <if test="user_name!= null" >,user_name=#{user_name}</if> -->
 	<if test="passwd!= null" >,passwd=#{passwd}</if>
 	<if test="user_type!= null" >,user_type=#{user_type}</if>
 	<if test="nickname!= null" >,nickname=#{nickname}</if>
@@ -181,7 +181,7 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
-    order by t1.last_updated desc
+    order by t1.user_name asc
     </select>
 	<!-- 
 	 * <p>信息列表。</p>
@@ -217,7 +217,7 @@
 	    	    and t1.del_flag='0'
 	    	</otherwise>
 	    </choose>
-	    order by t1.last_updated desc
+	    order by t1.user_name asc
 	    <if test="limit_s!=null and limit_e!=null">
 	     limit #{limit_s},#{limit_e}
 	    </if>

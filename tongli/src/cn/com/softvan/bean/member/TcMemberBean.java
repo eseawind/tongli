@@ -10,6 +10,8 @@
  */
 package cn.com.softvan.bean.member;
 
+import java.util.List;
+
 import cn.com.softvan.bean.BaseBean;
 
 /**
@@ -108,6 +110,9 @@ public class TcMemberBean extends BaseBean {
 	private String last_update_date;
 	/** 详情 */
 	private String detail_info;
+	//-----------------------------------------------------------------------------------------------
+	/** 学员id集合*/
+	private List<String> sids;
 	/**
 	 * id取得
 	 * @return id
@@ -473,15 +478,15 @@ public class TcMemberBean extends BaseBean {
 	    this.town_id = town_id;
 	}
 	/**
-	 * 县取得
-	 * @return 县
+	 * 行政区划_县级取得
+	 * @return 行政区划_县级
 	 */
 	public String getCounty_id() {
 	    return county_id;
 	}
 	/**
-	 * 县设定
-	 * @param county_id 县
+	 * 行政区划_县级设定
+	 * @param county_id 行政区划_县级
 	 */
 	public void setCounty_id(String county_id) {
 	    this.county_id = county_id;
@@ -681,6 +686,20 @@ public class TcMemberBean extends BaseBean {
 	 */
 	public void setLast_update_date(String last_update_date) {
 	    this.last_update_date = last_update_date;
+	}
+	/**
+	 * 学员id集合取得
+	 * @return 学员id集合
+	 */
+	public List<String> getSids() {
+	    return sids;
+	}
+	/**
+	 * 学员id集合设定
+	 * @param sids 学员id集合
+	 */
+	public void setSids(List<String> sids) {
+	    this.sids = sids;
 	}
 
 }

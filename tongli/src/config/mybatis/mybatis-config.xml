@@ -131,6 +131,7 @@
 		<!-- 会员管理 begin -->
 		<mapper resource="/cn/com/softvan/dao/mybatis/member/TcMember.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/member/TcMemberDetail.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/member/TcMemberVsStudent.xml"/>
 		<!-- 会员管理 end -->
 		<!-- 学员管理 begin -->
 		<mapper resource="/cn/com/softvan/dao/mybatis/student/TcStudent.xml"/>
