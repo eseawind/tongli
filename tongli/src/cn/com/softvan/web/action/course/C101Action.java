@@ -1,5 +1,5 @@
 /*
- * 前台首页 ActionClass
+ * 课程管理 ActionClass
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
@@ -16,7 +16,6 @@ import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.course.TcCourseBean;
-import cn.com.softvan.bean.sys.TcSysNewsBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.course.ICourseManager;
@@ -24,7 +23,7 @@ import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
 /**
- * 前台首页 ActionClass
+ * 课程管理 ActionClass
  * 
  * @author wuxiaogang
  * 

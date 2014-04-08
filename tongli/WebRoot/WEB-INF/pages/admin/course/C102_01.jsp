@@ -28,8 +28,9 @@
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/css/datepicker.css" />
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/less/datepicker.less" />
 
-<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/assets/plugins/select2/select2_metro.css" />
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/css/multi-select.css" />
+
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/clockface/css/clockface.css" />
 </head>
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
@@ -79,88 +80,60 @@
 					<form accept-charset="UTF-8"  action="${basePath}/h/c102_save.ac" class="edit_article" id="edit_article_13632" method="post">
 						<s:token></s:token>
 						<input name="bean.id" type="hidden" value="${bean.id}">
-						<div class="well form-inline">
-							 &nbsp; 
-							<label>会员名
-								<c:choose>
-									<c:when test="${bean.user_name!=null && fn:length(bean.user_name)>0}">
-										<input class="upload-wrapper" readonly="readonly" style="background-color: #eee;" id="message_user_name" name="bean.user_name" size="30" value="${bean.user_name }" placeholder="会员登录名"  type="text">
-									</c:when>
-									<c:otherwise>
-										<input class="upload-wrapper" id="message_user_name" name="bean.user_name" size="30" placeholder="会员登录名"  type="text">
-									</c:otherwise>
-								</c:choose>
+						<div class="form-group">
+							 &nbsp;  <label class="control-label">课程</label>
+							 <label class="control-label col-md-12">
+							 <div class="input-group">
+							 <span class="input-group-addon">
+								<i class="fa fa-flag"></i>
+								</span>
+								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" data-placeholder="选择课程..">
+									<optgroup label="课程列表">
+									<c:forEach items="${course_beans}" var="course">
+										<c:set var="xxcc" value='' />
+											<c:if test="${bean.course_id==course.id}">
+												<c:set var="xxcc" value='selected="selected"' />
+											</c:if>
+										<option ${xxcc} value="${course.id}">${course.title}</option>
+									</c:forEach>
+									</optgroup>
+								</select>
+							</div>
 							</label>
-							 &nbsp; 
-							 <label>密码
-								<input class="upload-wrapper" id="message_passwd" name="bean.passwd" size="30" value="${bean.passwd }" placeholder="登录密码"  type="text">
-							</label>
-							&nbsp; 性别
-							 <label title="男">
-							<input name="bean.sex" value="0"
-							<c:if test="${bean.sex=='0'}">
-							 	checked="checked"
-							 </c:if>
-							 type="radio">
-							 男</label>
-							 <label title="女">
-							<input name="bean.sex" value="1"
-							<c:if test="${bean.sex=='1'}">
-							 	checked="checked"
-							 </c:if>
-							 type="radio">
-							 女</label>
-							 &nbsp; 
-							 <label title="是否可用">
-							<input name="bean.is_enabled" value="1"
-							<c:if test="${bean.is_enabled=='1'}">
-							 	checked="checked"
-							 </c:if>
-							 type="checkbox">
-							 是否可用</label>
-							  &nbsp; 
-							  会员类型
-							 <label title="老师">
-							<input name="bean.user_type" value="0"
-							<c:if test="${bean.user_type=='0'}">
-							 	checked="checked"
-							 </c:if>
-							 type="radio">
-							 老师</label>
-							 <label title="家长">
-							<input name="bean.user_type" value="1"
-							<c:if test="${bean.user_type=='1'}">
-							 	checked="checked"
-							 </c:if>
-							 type="radio">
-							 家长</label>
 						</div>
-						<div class="well form-inline">
+						<div class="form-group">
 							 &nbsp;  <label class="control-label">教练</label>
 							 <label class="control-label col-md-12">
-								<select name="bean.sids" id="student_select2_sample2" class="form-control select2" multiple>
-										<optgroup label="教练列表">
-											<c:forEach items="${teacher_beans_beans}" var="teacher">
-												<c:set var="xxcc" value='' />
-												<c:forEach items="${member_student_beans}" var="the_student">
-													<c:if test="${teacher.id==teacher.id}">
-													<c:set var="xxcc" value='selected="selected"' />
-													</c:if>
-												</c:forEach>
-												<option ${xxcc} value="${teacher.id}">${teacher.name }</option>
-											</c:forEach>
-										</optgroup>
-									</select>
+							 <div class="input-group">
+								<span class="input-group-addon">
+								<i class="fa fa-user"></i>
+								</span>
+								<select name="bean.teacher_id" id="teacher_select2_sample2"  class="form-control select2me" data-placeholder="选择教练..">
+									<optgroup label="教练列表">
+									<c:forEach items="${teacher_beans}" var="teacher">
+										<c:set var="xxcc" value='' />
+											<c:if test="${bean.teacher_id==teacher.id}">
+												<c:set var="xxcc" value='selected="selected"' />
+											</c:if>
+										<option ${xxcc} value="${teacher.id}">${teacher.nickname }</option>
+									</c:forEach>
+									</optgroup>
+								</select>
+							</div>
 							</label>
 						</div>
-						<div class="well form-inline">
+						<div class="form-group">
 							 &nbsp;  <label class="control-label">学员</label>
 							 <label class="control-label col-md-12">
-								<select name="bean.sids" id="student_select2_sample2" class="form-control select2" multiple>
+							 <div class="input-group">
+							 	<span class="input-group-addon">
+								<i class="fa fa-female"></i>
+								</span>
+								<select name="bean.sids" id="student_select2_sample2" class="form-control select2 select2me" multiple>
 										<optgroup label="学员列表">
 											<c:forEach items="${student_beans}" var="student">
 												<c:set var="xxcc" value='' />
-												<c:forEach items="${member_student_beans}" var="the_student">
+												<c:forEach items="${course_student_beans}" var="the_student">
 													<c:if test="${the_student.id==student.id}">
 													<c:set var="xxcc" value='selected="selected"' />
 													</c:if>
@@ -169,21 +142,31 @@
 											</c:forEach>
 										</optgroup>
 									</select>
+								</div>
 							</label>
 						</div>
-						<div class="form-group">
-							<label for="article_nickname">用户昵称</label> <input
-								class="form-control" id="article_nickname" name="bean.nickname"
-								type="text" value="${bean.nickname}">
-						</div>
-						<div class="form-group">
-							<label for="article_birthdate">生日</label> 
-									<div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="-100y">
-										<input id="bean_birthdate" type="text" name="bean.birthdate" value="${bean.birthdate}" class="form-control" readonly="">
-										<span class="input-group-btn">
-										<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-										</span>
-									</div>
+						<div class="well form-inline form-group">
+							<div class="col-md-1"><label>上课时间</label></div> 
+							<div id="article_day" style="margin-top: -8px;" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+								<input type="text" name="bean.day" value="${bean.day}" class="form-control" readonly="">
+								<span class="input-group-btn">
+								<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div>
+							
+							<div  class="input-group bootstrap-timepicker col-md-2" id="article_begin_time_toggle" style="margin-top: -8px;" >                                       
+								<input id="article_begin_time" name="bean.begin_time" value="${bean.begin_time}" type="text" class="form-control" readonly="" />
+								<span class="input-group-btn">
+								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
+								</span>
+							</div>
+							<div  class="input-group bootstrap-timepicker col-md-2" id="article_end_time_toggle" style="margin-top: -8px;" >                                       
+								<input id="article_end_time" type="text" name="bean.end_time" value="${bean.end_time}" class="form-control" readonly="" >
+								<span class="input-group-btn">
+								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
+								</span>
+							</div>
+							&nbsp; 
 						</div>
 						<div class="form-group">
 							<label for="article_addres">地址</label> <input class="form-control"
@@ -217,18 +200,49 @@
 	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2.min.js"></script>
 	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
 	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/js/jquery.quicksearch.js"></script>   
+	
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/clockface/js/clockface.js"></script>
 	<!-- END FOOTER -->
 </body>
 <!-- END BODY -->
 </html>
 <script type="text/javascript">
 jQuery(document).ready(function() {
-	$('.date-picker').datepicker();
+	$('#article_day').datepicker();
+	//
+	 $('#article_begin_time').clockface({
+         format: 'HH:mm',
+         trigger: 'manual'
+     });
+	  $('#article_begin_time_toggle').click(function (e) {
+          e.stopPropagation();
+          $('#article_begin_time').clockface('toggle');
+      });
+	//
+	$('#article_end_time').clockface({
+        format: 'HH:mm',
+        trigger: 'manual'
+    });
+	$('#article_end_time_toggle').click(function (e) {
+        e.stopPropagation();
+        $('#article_end_time').clockface('toggle');
+    });
+	//$('#course_select2_sample2').select2({
+     //   placeholder: "点击选择课程",
+     //   allowClear: true
+    //});
+	
+	//
+	//$('#teacher_select2_sample2').select2({
+   //     placeholder: "点击选择教练",
+   //     allowClear: true
+   // });
 	//
 	$('#student_select2_sample2').select2({
-        placeholder: "点击选择关联学员",
+        placeholder: "点击选择学员",
         allowClear: true
     });
+	
 	KindEditor.ready(function(K) {
 		//--编辑框
 		K.create('#article_description', {
@@ -236,26 +250,6 @@ jQuery(document).ready(function() {
 	         uploadJson : '${basePath}/uploadFile?isrich=1',
 	         fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
 			 allowFileManager : true
-		});
-		//--图片
-		var editor = K.editor({
-			resizeType : 2,
-			uploadJson : '${basePath}/uploadFile?isrich=1',
-			fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
-			allowFileManager : true
-		});
-		//--
-		K('#select-image-modal').click(function() {
-			editor.loadPlugin('image',function() {
-				editor.plugin.imageDialog({
-					imageUrl : $('#img_pic_url').attr('src'),clickFn : function(
-						url,title,width,height,border,align) {
-							$('#img_pic_url').attr('src',url);
-							$('#input_pic_url').val(url);
-							editor.hideDialog();
-						}
-				});
-			});
 		});
 	});
 });

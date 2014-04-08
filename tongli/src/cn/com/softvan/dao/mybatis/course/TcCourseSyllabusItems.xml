@@ -4,7 +4,7 @@
   <sql id="Base_Column_List" >
 	t1.id,
 	t1.student_id,
-	t1.course_id,
+	t1.course_syllabus_id,
 	t1.teacher_id,
 	t1.teacher_score,
 	t1.teacher_score_note,
@@ -28,13 +28,13 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="tcCourseSyllabusItems" >
     delete from tc_course_syllabus_items
-    where id = #{id}
+    where course_syllabus_id = #{course_syllabus_id}
   </delete>
   <insert id="insert" parameterType="tcCourseSyllabusItems" >
     insert into tc_course_syllabus_items (
 	    id,
 		student_id,
-		course_id,
+		course_syllabus_id,
 		teacher_id,
 		teacher_score,
 		teacher_score_note,
@@ -50,7 +50,7 @@
       ) values (
 	    #{id},
 		#{student_id},
-		#{course_id},
+		#{course_syllabus_id},
 		#{teacher_id},
 		#{teacher_score},
 		#{teacher_score_note},
@@ -71,7 +71,7 @@
 	,update_id=#{update_id}
 	,update_ip=#{update_ip}
 	<if test="student_id!= null" >,student_id=#{student_id}</if>
-	<if test="course_id!= null" >,course_id=#{course_id}</if>
+	<if test="course_syllabus_id!= null" >,course_syllabus_id=#{course_syllabus_id}</if>
 	<if test="teacher_id!= null" >,teacher_id=#{teacher_id}</if>
 	<if test="teacher_score!= null" >,teacher_score=#{teacher_score}</if>
 	<if test="teacher_score_note!= null" >,teacher_score_note=#{teacher_score_note}</if>
@@ -134,7 +134,7 @@
 			t2.birthdate
 		from tc_course_syllabus_items t1
 		left join tc_student t2 on (t2.id=t1.student_id)
-	    where t1.course_id=#{course_id}
+	    where t1.course_syllabus_id=#{course_syllabus_id}
 	    <choose>
 	    	<when test="del_flag!=null">
 	    		and t2.del_flag=#{del_flag}

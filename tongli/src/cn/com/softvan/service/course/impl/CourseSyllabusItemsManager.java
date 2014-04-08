@@ -57,7 +57,7 @@ public class CourseSyllabusItemsManager extends BaseManager implements ICourseSy
 				TcCourseSyllabusItems dto=new TcCourseSyllabusItems();
 				dto.setId(bean.getId());//id
 				dto.setStudent_id(bean.getStudent_id());//学员id
-				dto.setCourse_id(bean.getCourse_id());//课程id
+				dto.setCourse_syllabus_id(bean.getCourse_syllabus_id());//课程表id
 				dto.setTeacher_id(bean.getTeacher_id());//教师id
 				dto.setTeacher_score(bean.getTeacher_score());//教师得分
 				dto.setTeacher_score_note(bean.getTeacher_score_note());//教师得分描述
@@ -152,7 +152,7 @@ public class CourseSyllabusItemsManager extends BaseManager implements ICourseSy
     	   if(bean!=null){
     		   dto.setId(bean.getId());//id
     		   dto.setStudent_id(bean.getStudent_id());//学员id
-    		   dto.setCourse_id(bean.getCourse_id());//课程id
+    		   dto.setCourse_syllabus_id(bean.getCourse_syllabus_id());//课程表id
     		   dto.setTeacher_id(bean.getTeacher_id());//教师id
     		   dto.setTeacher_score(bean.getTeacher_score());//教师得分
     		   dto.setTeacher_score_note(bean.getTeacher_score_note());//教师得分描述
@@ -190,7 +190,7 @@ public class CourseSyllabusItemsManager extends BaseManager implements ICourseSy
 	    	   if(bean!=null){
 	    		   dto.setId(bean.getId());//id
 	    		   dto.setStudent_id(bean.getStudent_id());//学员id
-	    		   dto.setCourse_id(bean.getCourse_id());//课程id
+	    		   dto.setCourse_syllabus_id(bean.getCourse_syllabus_id());//课程表id
 	    		   dto.setTeacher_id(bean.getTeacher_id());//教师id
 	    		   dto.setTeacher_score(bean.getTeacher_score());//教师得分
 	    		   dto.setTeacher_score_note(bean.getTeacher_score_note());//教师得分描述
@@ -273,7 +273,7 @@ public class CourseSyllabusItemsManager extends BaseManager implements ICourseSy
 	    	   if(bean!=null){
 	    		   dto.setId(bean.getId());//id
 	    		   dto.setStudent_id(bean.getStudent_id());//学员id
-	    		   dto.setCourse_id(bean.getCourse_id());//课程id
+	    		   dto.setCourse_syllabus_id(bean.getCourse_syllabus_id());//课程表id
 	    		   dto.setTeacher_id(bean.getTeacher_id());//教师id
 	    		   dto.setTeacher_score(bean.getTeacher_score());//教师得分
 	    		   dto.setTeacher_score_note(bean.getTeacher_score_note());//教师得分描述

@@ -19,11 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.IOHelper;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.dao.daointer.course.ITcCourseSyllabusDao;
 import cn.com.softvan.dao.daointer.course.ITcCourseSyllabusItemsDao;
 import cn.com.softvan.dao.entity.course.TcCourseSyllabus;
+import cn.com.softvan.dao.entity.course.TcCourseSyllabusItems;
 import cn.com.softvan.service.BaseManager;
 import cn.com.softvan.service.course.ICourseSyllabusManager;
 /**
@@ -73,17 +75,55 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//VERSION
-
+				if(Validator.notEmpty(bean.getDetail_info())){
+					IOHelper.deleteFile(bean.getDetail_info());//TODO=删除文件
+					dto.setDetail_info(IOHelper.writeHtml("html",bean.getDetail_info()));//内容
+				}
 				//判断数据是否存在
 				if(tcCourseSyllabusDao.isDataYN(dto)!=0){
-					//数据存在
-					tcCourseSyllabusDao.updateByPrimaryKeySelective(dto);
+					//TODO----------------------------------------
+					TcCourseSyllabusItems itemDto=new TcCourseSyllabusItems();
+					itemDto.setCourse_syllabus_id(dto.getId());//课程表id
+					TcCourseSyllabusBean bean1=tcCourseSyllabusDao.selectByPrimaryKey(dto);
+					// 必须 课程状态未完成==0  已完成的课程不许修改
+					if("0".equals(bean1.getCourse_status())){
+						//数据存在 课程表修改
+						tcCourseSyllabusDao.updateByPrimaryKeySelective(dto);
+						//清空详情表 
+						tcCourseSyllabusItemsDao.deleteByPrimaryKey(itemDto);
+					}
 				}else{
 					//新增
 					if(Validator.isEmpty(dto.getId())){
 						dto.setId(IdUtils.createUUID(32));
 					}
 					tcCourseSyllabusDao.insert(dto);
+				}
+				//===============保存课程 学员信息======
+				if(bean.getSids()!=null){
+					TcCourseSyllabusItems itemDto=null;
+					for(String sid:bean.getSids()){
+						itemDto=new TcCourseSyllabusItems();
+						itemDto.setId(IdUtils.createUUID(32));//id
+						itemDto.setStudent_id(sid);//学员id
+						itemDto.setCourse_syllabus_id(dto.getId());//课程表id
+						itemDto.setTeacher_id(bean.getTeacher_id());//教师id
+//						itemDto.setTeacher_score(bean.getTeacher_score());//教师得分
+//						itemDto.setTeacher_score_note(bean.getTeacher_score_note());//教师得分描述
+//						itemDto.setStudent_status(bean.getStudent_status());//学员状态
+//						itemDto.setStudent_status_note(bean.getStudent_status_note());//学员状态描述
+//						itemDto.setNote(bean.getNote());//备注
+//						itemDto.setDate_created(bean.getDate_created());//数据输入日期
+//						itemDto.setCreate_id(bean.getCreate_id());//建立者id
+//						itemDto.setCreate_ip(bean.getCreate_ip());//建立者ip
+//						itemDto.setLast_updated(bean.getLast_updated());//资料更新日期
+//						itemDto.setUpdate_id(bean.getUpdate_id());//修改者id
+//						itemDto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
+//						itemDto.setDel_flag(bean.getDel_flag());//是否删除
+//						itemDto.setVersion(bean.getVersion());//version
+						//insert
+						tcCourseSyllabusItemsDao.insert(itemDto);
+					}
 				}
 			} catch (Exception e) {
 				msg="信息保存失败,数据库处理错误!";
@@ -228,6 +268,9 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
     		    dto.setId(bean.getId());//ID
     	   }
 			bean1=tcCourseSyllabusDao.selectByPrimaryKey(dto);
+			if(bean1!=null){
+				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
+			}
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

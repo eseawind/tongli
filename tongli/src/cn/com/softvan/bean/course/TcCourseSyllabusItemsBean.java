@@ -29,8 +29,8 @@ public class TcCourseSyllabusItemsBean extends BaseBean {
 	private String id;
 	/** 学员id */
 	private String student_id;
-	/** 课程id */
-	private String course_id;
+	/** 课程表id */
+	private String course_syllabus_id;
 	/** 教师id */
 	private String teacher_id;
 	/** 教师得分 */
@@ -70,18 +70,18 @@ public class TcCourseSyllabusItemsBean extends BaseBean {
 	    this.student_id = student_id;
 	}
 	/**
-	 * 课程id取得
-	 * @return 课程id
+	 * 课程表id取得
+	 * @return 课程表id
 	 */
-	public String getCourse_id() {
-	    return course_id;
+	public String getCourse_syllabus_id() {
+	    return course_syllabus_id;
 	}
 	/**
-	 * 课程id设定
-	 * @param course_id 课程id
+	 * 课程表id设定
+	 * @param course_syllabus_id 课程表id
 	 */
-	public void setCourse_id(String course_id) {
-	    this.course_id = course_id;
+	public void setCourse_syllabus_id(String course_syllabus_id) {
+	    this.course_syllabus_id = course_syllabus_id;
 	}
 	/**
 	 * 教师id取得

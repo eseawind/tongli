@@ -2,33 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.com.softvan.dao.daointer.course.ITcCourseSyllabusDao" >
   <sql id="Base_Column_List" >
-	id,
-	course_id,
-	teacher_id,
-	day,
-	begin_time,
-	end_time,
-	note,
-	date_created,
-	create_id,
-	create_ip,
-	last_updated,
-	update_id,
-	update_ip,
-	del_flag,
-	version
+	t1.id,
+	t1.course_id,
+	t1.teacher_id,
+	t1.day,
+	t1.begin_time,
+	t1.end_time,
+	t1.note,
+	t1.date_created,
+	t1.create_id,
+	t1.create_ip,
+	t1.last_updated,
+	t1.update_id,
+	t1.update_ip,
+	t1.del_flag,
+	t1.version,
+	t1.course_status,
+	t1.detail_info
   </sql>
-  <select id="selectByPrimaryKey" resultType="tcCourseBean" parameterType="tcCourse" >
+  <select id="selectByPrimaryKey" resultType="tcCourseSyllabusBean" parameterType="tcCourseSyllabus" >
     select 
     <include refid="Base_Column_List" />
-    from tc_course_syllabus
-    where id = #{id}
+    from tc_course_syllabus t1
+    where t1.id = #{id}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="tcCourse" >
+  <delete id="deleteByPrimaryKey" parameterType="tcCourseSyllabus" >
     delete from tc_course_syllabus
     where id = #{id}
   </delete>
-  <insert id="insert" parameterType="tcCourse" >
+  <insert id="insert" parameterType="tcCourseSyllabus" >
     insert into tc_course_syllabus (
 	    id,
 		course_id,
@@ -42,7 +44,9 @@
 		create_ip,
 		last_updated,
 		del_flag,
-		version
+		version,
+		course_status,
+		detail_info
       ) values (
 	    #{id},
 		#{course_id},
@@ -56,10 +60,12 @@
 		#{create_ip},
 		now(),
 		'0',
-		 0
+		 0,
+		'0',
+		#{detail_info}
     )
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="tcCourse" >
+  <update id="updateByPrimaryKeySelective" parameterType="tcCourseSyllabus" >
     update tc_course_syllabus set version=version+1
     ,last_updated=now()
 	,update_id=#{update_id}
@@ -71,20 +77,25 @@
 	<if test="end_time!= null" >,end_time=#{end_time}</if>
 	<if test="note!= null" >,note=#{note}</if>
 	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+	<if test="course_status!= null" >,course_status=#{course_status}</if>
+	<if test="detail_info!= null" >,detail_info=#{detail_info}</if>
 	where id=#{id}
   </update>
   	<!--判断是否存在-->
-    <select id="isDataYN" parameterType="tcCourse" resultType="int">
+    <select id="isDataYN" parameterType="tcCourseSyllabus" resultType="int">
     select count(0) from tc_course_syllabus where id=#{id}
     </select>
     <!--
 	 * <p>信息列表 分页。</p>
 	public List<TcCourseSyllabusBean> findDataIsPage(IEntity dto);
 	-->
-	<select id="findDataIsPage" resultType="tcCourseBean" parameterType="tcCourse" >
+	<select id="findDataIsPage" resultType="tcCourseSyllabusBean" parameterType="tcCourseSyllabus" >
     select
 	<include refid="Base_Column_List"/>
+	,
+	t2.title
 	from tc_course_syllabus t1
+	left join tc_course t2 on (t1.course_id=t2.id)
     where 1=1
     <choose>
     	<when test="del_flag!=null">
@@ -94,15 +105,19 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
+     <if test="course_status!=null"> and t1.course_status=#{course_status}</if>
     order by t1.day asc
     </select>
 	<!-- 
 	 * <p>信息列表。</p>
 	public List<TcCourseSyllabusBean> findDataIsList(IEntity dto); -->
-	<select id="findDataIsList" resultType="tcCourseBean" parameterType="tcCourse" >
+	<select id="findDataIsList" resultType="tcCourseSyllabusBean" parameterType="tcCourseSyllabus" >
 	select
 	<include refid="Base_Column_List"/>
+	,
+	t2.title
 	from tc_course_syllabus t1
+	left join tc_course t2 on (t1.course_id=t2.id)
     where 1=1
     <choose>
     	<when test="del_flag!=null">
@@ -112,16 +127,17 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
+    <if test="course_status!=null"> and t1.course_status=#{course_status}</if>
     order by t1.day asc
    </select>
    <!-- 逻辑删除 -->
-   <update id="deleteById" parameterType="tcCourse">
+   <update id="deleteById" parameterType="tcCourseSyllabus">
 	  	update tc_course_syllabus set version=version+1,last_updated=now(),del_flag='1',update_id=#{update_id}
 	   ,update_ip=#{update_ip}
 	  	where id=#{id}
    </update>
    <!-- 恢复逻辑删除的数据 -->
-   <update id="recoveryDataById" parameterType="tcCourse">
+   <update id="recoveryDataById" parameterType="tcCourseSyllabus">
 	  	update tc_course_syllabus set version=version+1,last_updated=now(),del_flag='0',update_id=#{update_id}
 	   ,update_ip=#{update_ip}
 	  	where id=#{id}

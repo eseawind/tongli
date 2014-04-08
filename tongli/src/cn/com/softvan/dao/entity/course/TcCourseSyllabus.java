@@ -34,10 +34,12 @@ public class TcCourseSyllabus extends BaseEntity {
 	private String begin_time;
 	/** 结束时间 */
 	private String end_time;
-
+	/** 详情 */
+	private String detail_info;
+	/** 课程状态 0未完成 1 已完成*/
+	private String course_status;
 	/**
 	 * id取得
-	 * 
 	 * @return id
 	 */
 	public String getId() {
@@ -46,9 +48,7 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * id设定
-	 * 
-	 * @param id
-	 *            id
+	 * @param id id
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -56,7 +56,6 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * 课程id取得
-	 * 
 	 * @return 课程id
 	 */
 	public String getCourse_id() {
@@ -65,9 +64,7 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * 课程id设定
-	 * 
-	 * @param course_id
-	 *            课程id
+	 * @param course_id 课程id
 	 */
 	public void setCourse_id(String course_id) {
 		this.course_id = course_id;
@@ -75,7 +72,6 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * 教师id取得
-	 * 
 	 * @return 教师id
 	 */
 	public String getTeacher_id() {
@@ -84,9 +80,7 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * 教师id设定
-	 * 
-	 * @param teacher_id
-	 *            教师id
+	 * @param teacher_id 教师id
 	 */
 	public void setTeacher_id(String teacher_id) {
 		this.teacher_id = teacher_id;
@@ -94,7 +88,6 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * 课程日期取得
-	 * 
 	 * @return 课程日期
 	 */
 	public String getDay() {
@@ -103,9 +96,7 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * 课程日期设定
-	 * 
-	 * @param day
-	 *            课程日期
+	 * @param day 课程日期
 	 */
 	public void setDay(String day) {
 		this.day = day;
@@ -113,7 +104,6 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * 开始时间取得
-	 * 
 	 * @return 开始时间
 	 */
 	public String getBegin_time() {
@@ -122,9 +112,7 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * 开始时间设定
-	 * 
-	 * @param begin_time
-	 *            开始时间
+	 * @param begin_time 开始时间
 	 */
 	public void setBegin_time(String begin_time) {
 		this.begin_time = begin_time;
@@ -132,7 +120,6 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * 结束时间取得
-	 * 
 	 * @return 结束时间
 	 */
 	public String getEnd_time() {
@@ -141,12 +128,42 @@ public class TcCourseSyllabus extends BaseEntity {
 
 	/**
 	 * 结束时间设定
-	 * 
-	 * @param end_time
-	 *            结束时间
+	 * @param end_time 结束时间
 	 */
 	public void setEnd_time(String end_time) {
 		this.end_time = end_time;
+	}
+
+	/**
+	 * 详情取得
+	 * @return 详情
+	 */
+	public String getDetail_info() {
+	    return detail_info;
+	}
+
+	/**
+	 * 详情设定
+	 * @param detail_info 详情
+	 */
+	public void setDetail_info(String detail_info) {
+	    this.detail_info = detail_info;
+	}
+
+	/**
+	 * 课程状态 0未完成 1 已完成取得
+	 * @return 课程状态 0未完成 1 已完成
+	 */
+	public String getCourse_status() {
+	    return course_status;
+	}
+
+	/**
+	 * 课程状态 0未完成 1 已完成设定
+	 * @param course_status 课程状态 0未完成 1 已完成
+	 */
+	public void setCourse_status(String course_status) {
+	    this.course_status = course_status;
 	}
 
 }

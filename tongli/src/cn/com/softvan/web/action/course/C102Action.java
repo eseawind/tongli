@@ -1,5 +1,5 @@
 /*
- * 前台首页 ActionClass
+ * 课程表管理 ActionClass
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
@@ -20,6 +20,7 @@ import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
 import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
+import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.course.ICourseSyllabusItemsManager;
 import cn.com.softvan.service.course.ICourseSyllabusManager;
 import cn.com.softvan.service.member.IMemberManager;
@@ -28,7 +29,7 @@ import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
 /**
- * 前台首页 ActionClass
+ * 课程表管理 ActionClass
  * 
  * @author wuxiaogang
  * 
@@ -52,6 +53,9 @@ public class C102Action extends BaseAction {
 	private IMemberManager memberManager;
 	/**学员信息管理 业务处理*/
 	private IStudentManager studentManager;
+	/**课程信息管理 业务处理*/
+	private ICourseManager courseManager;
+	
 	public C102Action() {
 		log.info("默认构造器......C102Action");
 	}
@@ -172,15 +176,22 @@ public class C102Action extends BaseAction {
 			bean=courseSyllabusManager.findDataById(bean1);
 			//--当前学员集合---
 			TcCourseSyllabusItemsBean bean2=new TcCourseSyllabusItemsBean();
-			bean2.setCourse_id(bean1.getCourse_id());
-			request.setAttribute("course_student_beans", courseSyllabusItemsManager.findDataIsListStudent(bean2));
+			bean2.setCourse_syllabus_id(bean1.getId());
+			try {
+				request.setAttribute("course_student_beans", courseSyllabusItemsManager.findDataIsListStudent(bean2));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		//-------------学员集合-all------
 		request.setAttribute("student_beans", studentManager.findDataIsList(null));
-		//-------------教师--all-----
+		//--------------教师--all-----
 		TcMemberBean memberBean=new TcMemberBean();
 		memberBean.setUser_type("0");//教师
 		request.setAttribute("teacher_beans", memberManager.findDataIsList(memberBean));
+		//--------------课程--all----------
+		request.setAttribute("course_beans", courseManager.findDataIsList(null));
 		return "edit";
 	}
 	/**
@@ -386,6 +397,22 @@ public class C102Action extends BaseAction {
 	 */
 	public void setStudentManager(IStudentManager studentManager) {
 	    this.studentManager = studentManager;
+	}
+
+	/**
+	 * 课程信息管理 业务处理取得
+	 * @return 课程信息管理 业务处理
+	 */
+	public ICourseManager getCourseManager() {
+	    return courseManager;
+	}
+
+	/**
+	 * 课程信息管理 业务处理设定
+	 * @param courseManager 课程信息管理 业务处理
+	 */
+	public void setCourseManager(ICourseManager courseManager) {
+	    this.courseManager = courseManager;
 	}
 
 }
