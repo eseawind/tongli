@@ -35,11 +35,11 @@ public class AuthInterceptor extends AbstractInterceptor {
 		request.setAttribute("basePath", basePath);
 //		log.info("basePath值："+ basePath);
 		String actionName=invocation.getInvocationContext().getName();
-		//用户信息
-		BaseUserBean userBean=new BaseUserBean();
-		//用户名
-		userBean.setUser_id("admin");
-		request.getSession().setAttribute(CommonConstant.SESSION_KEY_USER, userBean);
+//		//用户信息
+//		BaseUserBean userBean=new BaseUserBean();
+//		//用户名
+//		userBean.setUser_id("admin");
+//		request.getSession().setAttribute(CommonConstant.SESSION_KEY_USER, userBean);
 		//判断用户是否登陆 
 		if(request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER)==null
 				&&!"home_login".equals(actionName)

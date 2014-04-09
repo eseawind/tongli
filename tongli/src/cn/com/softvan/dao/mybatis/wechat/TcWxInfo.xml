@@ -216,7 +216,6 @@
 		<if test="msgtype!= null">,msgtype=#{msgtype}</if>
 		<if test="tousername!= null">,tousername=#{tousername}</if>
 		<if test="fromusername!= null">,fromusername=#{fromusername}</if>
-		<if test="createtime!= null">,createtime=#{createtime}</if>
 		<if test="content!= null">,content=#{content}</if>
 		<if test="mediaid!= null">,mediaid=#{mediaid}</if>
 		<if test="title!= null">,title=#{title}</if>

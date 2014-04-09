@@ -23,12 +23,7 @@
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>管理主页【车主管家】</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<meta content="" name="description" />
-	<meta content="" name="author" />
-	<meta name="MobileOptimized" content="320">
+	<%@include file="../include/admin_title.jsp" %>
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->      
 	<%@ include file="../include/public_js_css.jsp"%>  
 </head>
@@ -59,7 +54,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						车主管家系统V1.0 <small>后台</small>
+						童励俱乐部V1.0 <small>后台</small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
