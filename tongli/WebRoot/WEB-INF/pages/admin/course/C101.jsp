@@ -96,7 +96,7 @@
 							<table class="table table-condensed table-striped">
 								<tbody>
 									<tr>
-										<th class="col-md-3">时间</th>
+										<th class="col-md-3">更新时间</th>
 										<th class="col-md-6">课程名称</th>
 										<th class="col-md-3"></th>
 									</tr>
@@ -106,7 +106,7 @@
 										<td>${bean.title}</td>
 										<td><a
 											href="${basePath}/h/c101_view.ac?id=${bean.id}"
-											class="btn  btn-info" target="_blank">预览</a> <a
+											class="btn  btn-info" target="_blank">详情</a> <a
 											href="${basePath}/h/c101_edit.ac?id=${bean.id}"
 											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
 											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/c101_del.ac?id=${bean.id}'};"

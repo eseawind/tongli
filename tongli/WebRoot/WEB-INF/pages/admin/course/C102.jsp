@@ -96,17 +96,23 @@
 								<table class="table table-condensed table-striped">
 								<tbody>
 									<tr>
-										<th class="col-md-3">时间</th>
-										<th class="col-md-6">课程名称</th>
+										<th class="col-md-1">课程日期</th>
+										<th class="col-md-1">开始时间</th>
+										<th class="col-md-1">结束时间</th>
+										<th class="col-md-3">课程名称</th>
+										<th class="col-md-3">上课地点</th>
 										<th class="col-md-3"></th>
 									</tr>
 									<c:forEach items="${beans}" var="bean">
 									<tr>
-										<td>${bean.last_updated}</td>
+										<td>${bean.day}</td>
+										<td>${bean.begin_time}</td>
+										<td>${bean.end_time}</td>
 										<td>${bean.title}</td>
+										<td>${bean.addres}</td>
 										<td><a
 											href="${basePath}/h/c102_view.ac?id=${bean.id}"
-											class="btn  btn-info" target="_blank">预览</a> <a
+											class="btn  btn-info" target="_blank">详情</a> <a
 											href="${basePath}/h/c102_edit.ac?id=${bean.id}"
 											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
 											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/c102_del.ac?id=${bean.id}'};"

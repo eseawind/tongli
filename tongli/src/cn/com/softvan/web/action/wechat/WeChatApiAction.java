@@ -23,6 +23,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,6 +52,7 @@ import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.Resources;
 import cn.com.softvan.common.StrUtil;
 import cn.com.softvan.common.WebUtils;
+import cn.com.softvan.common.lucene.LuceneUtil;
 import cn.com.softvan.common.wechat.WeChatUtil;
 import cn.com.softvan.common.wechat.WxApiUtil;
 import cn.com.softvan.service.wechat.ITcWxInfoManager;
@@ -341,13 +343,27 @@ public class WeChatApiAction extends BaseAction {
 			text = text.trim();
 		}
 		//--------------判断数据是否缓存--------------
-		if(!"1".equals(jedisHelper.get("tc_wechat_info_cache_flag"))){
+		if(!("1".equals(jedisHelper.get("tc_wechat_info_cache_flag")))){
 			tcWxInfoManager.updateAllMsgCache();
 		}
 		WxReplyMsg replyMsg2=null;
 		log.debug("==0==uuid_flag_key="+"key_flag_"+text);
+		String uuid="";
 		//根据关键字获取 回复对象id
-		String uuid=(String) jedisHelper.get("key_flag_"+text);
+		if(!("default".equals(text))&&!("subscribe".equals(text))){
+			List<String> keys=LuceneUtil.getKeys(null, text);
+			//TODO 根据关键字获取 回复对象id
+			if(keys!=null){
+				for(String key:keys){
+					uuid=(String) jedisHelper.get("key_flag_"+key);
+					if(uuid!=null){
+						break ;
+					}
+				}
+			}
+		}else{
+			uuid=(String) jedisHelper.get("key_flag_"+text);
+		}
 		log.debug("==1==uuid="+uuid);
 		//根据对象id 获取回复对象
 		try {
@@ -454,7 +470,7 @@ public class WeChatApiAction extends BaseAction {
         return strDigest;
     }
     /**
-     * 下载微信图片
+     * 下载微信图片  如果微信号没有多媒体接口权限   替换方案
      * @param remote_url 图片远程路径
      * @return
      */

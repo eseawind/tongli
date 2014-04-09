@@ -103,8 +103,8 @@
 	</welcome-file-list>
 	
 	
-	<!-- 短信  线程监听器 -->
+	<!-- 短信  线程监听器 
   <listener>
     <listener-class>cn.com.softvan.listenner.ThreadListener</listener-class>
-  </listener>
+  </listener>-->
 </web-app>

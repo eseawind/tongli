@@ -250,6 +250,7 @@ public final class WxApiUtil {
 		//---------beans-------------
 		List<TcWxMenuBean> beans=new ArrayList<TcWxMenuBean>();
 		String url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + access_token;
+		log.debug(url);
 		// 构建http构建[使用HttpClient的jar,怎么获得自己百度]
 		boolean error_flag=false;
 		// 构建http构建[使用HttpClient的jar,怎么获得自己百度]
@@ -261,7 +262,7 @@ public final class WxApiUtil {
 		try {
 			client.executeMethod(mothod);
 			respStr = mothod.getResponseBodyAsString();
-			log.debug(respStr);
+			log.debug("================================="+respStr);
 			JSONObject dataJson = JSONObject.fromObject(respStr);
 			try {
 				if(dataJson!=null && null!=dataJson.getString("errcode")){
@@ -281,6 +282,7 @@ public final class WxApiUtil {
 					//1.获取一级菜单
 					for(int i=0;i<jsonArray.size();i++){
 						String s1=jsonArray.getString(i);
+						log.debug("==s1=="+s1);
 						JSONObject j1=JSONObject.fromObject(s1);
 						String uuid=IdUtils.createUUID(32);
 						//TODO--
@@ -289,24 +291,46 @@ public final class WxApiUtil {
 						bean.setMenu_name(j1.getString("name"));
 						JSONArray j2Array=j1.getJSONArray("sub_button");
 						bean.setBeans(new ArrayList<TcWxMenuBean>());
+						bean.setSort_num((i+1)*10);
 						//判断是否有子菜单
 						if(j2Array!=null && j2Array.size()>0){
-							for(int n=0;n<jsonArray.size();n++){
-								String s2=jsonArray.getString(n);
+							for(int n=0;n<j2Array.size();n++){
+								String s2=j2Array.getString(n);
+								log.debug("==s2=="+s2);
 								JSONObject j2=JSONObject.fromObject(s2);
 								//TODO--
 								TcWxMenuBean bean2=new TcWxMenuBean();
 								bean2.setId(IdUtils.createUUID(32));//主键id
-								bean2.setParent_id(uuid);//父菜单id
+								bean2.setParent_id(bean.getId());//父菜单id
 								bean2.setMenu_name(j2.getString("name"));
-								bean2.setMenu_type(j2.getString("type"));
-								bean2.setMenu_key(j2.getString("key"));
+								try {
+									bean2.setMenu_type(j2.getString("type"));
+								} catch (Exception e1) {
+								}
+								try {
+									bean2.setMenu_key(j2.getString("key"));
+								} catch (Exception e) {
+								}
+								try {
+									bean2.setMenu_url(j2.getString("url"));
+								} catch (Exception e) {
+								}
+								bean2.setSort_num(n+1);
 								bean.getBeans().add(bean2);
-//								xx
 							}
 						}else{
-							bean.setMenu_type(j1.getString("type"));
-							bean.setMenu_key(j1.getString("key"));
+							try {
+								bean.setMenu_type(j1.getString("type"));
+							} catch (Exception e) {
+							}
+							try {
+								bean.setMenu_key(j1.getString("key"));
+							} catch (Exception e) {
+							}
+							try {
+								bean.setMenu_url(j1.getString("url"));
+							} catch (Exception e) {
+							}
 						}
 						//add
 						beans.add(bean);

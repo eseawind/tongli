@@ -12,6 +12,6 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" session="false"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>欢迎光临积分交易中心</title>
-<meta name="description" content="积分交易中心,积分桥" />
+<title>童励儿童俱乐部</title>
+<meta name="description" content="夏令营,儿童俱乐部,童励" />
 

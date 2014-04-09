@@ -79,6 +79,7 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 					IOHelper.deleteFile(bean.getDetail_info());//TODO=删除文件
 					dto.setDetail_info(IOHelper.writeHtml("html",bean.getDetail_info()));//内容
 				}
+				dto.setAddres(bean.getAddres());//地址
 				//判断数据是否存在
 				if(tcCourseSyllabusDao.isDataYN(dto)!=0){
 					//TODO----------------------------------------
@@ -206,6 +207,7 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//VERSION
+				dto.setAddres(bean.getAddres());//地址
 				dto.setPageInfo(bean.getPageInfo());//分页
     	   }
 			beans=tcCourseSyllabusDao.findDataIsPage(dto);
@@ -241,6 +243,7 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 					dto.setUpdate_id(bean.getUpdate_id());//修改者ID
 					dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 					dto.setDel_flag(bean.getDel_flag());//是否删除
+					dto.setAddres(bean.getAddres());//地址
 					dto.setVersion(bean.getVersion());//VERSION
 	    		    
 		   			dto.setLimit_s(bean.getLimit_s());

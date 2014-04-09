@@ -106,7 +106,7 @@
 										<td>${bean.name}</td>
 										<td><a
 											href="${basePath}/h/s201_view.ac?id=${bean.id}"
-											class="btn  btn-info" target="_blank">预览</a> <a
+											class="btn  btn-info" target="_blank">详情</a> <a
 											href="${basePath}/h/s201_edit.ac?id=${bean.id}"
 											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
 											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/s201_del.ac?id=${bean.id}'};"

@@ -18,7 +18,8 @@
 	t1.del_flag,
 	t1.version,
 	t1.course_status,
-	t1.detail_info
+	t1.detail_info,
+	t1.addres
   </sql>
   <select id="selectByPrimaryKey" resultType="tcCourseSyllabusBean" parameterType="tcCourseSyllabus" >
     select 
@@ -46,7 +47,8 @@
 		del_flag,
 		version,
 		course_status,
-		detail_info
+		detail_info,
+		addres
       ) values (
 	    #{id},
 		#{course_id},
@@ -62,7 +64,8 @@
 		'0',
 		 0,
 		'0',
-		#{detail_info}
+		#{detail_info},
+		#{addres}
     )
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tcCourseSyllabus" >
@@ -79,6 +82,8 @@
 	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
 	<if test="course_status!= null" >,course_status=#{course_status}</if>
 	<if test="detail_info!= null" >,detail_info=#{detail_info}</if>
+	<if test="addres!= null" >,addres=#{addres}</if>
+	
 	where id=#{id}
   </update>
   	<!--判断是否存在-->
@@ -106,7 +111,7 @@
     	</otherwise>
     </choose>
      <if test="course_status!=null"> and t1.course_status=#{course_status}</if>
-    order by t1.day asc
+    order by t1.day asc,t1.begin_time asc,t1.end_time asc
     </select>
 	<!-- 
 	 * <p>信息列表。</p>
@@ -128,7 +133,7 @@
     	</otherwise>
     </choose>
     <if test="course_status!=null"> and t1.course_status=#{course_status}</if>
-    order by t1.day asc
+    order by t1.day asc,t1.begin_time asc,t1.end_time asc
    </select>
    <!-- 逻辑删除 -->
    <update id="deleteById" parameterType="tcCourseSyllabus">

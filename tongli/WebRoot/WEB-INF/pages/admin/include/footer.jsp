@@ -15,7 +15,7 @@
 <div style="clear: both;"></div>
 <div class="footer">
 	<div class="footer-inner">
-		Copyright 2014 car steward System. - All Rights Reserved.
+		Copyright 2014 car tongli System. - All Rights Reserved.
 	</div>
 	<div class="footer-tools">
 		<span class="go-top">

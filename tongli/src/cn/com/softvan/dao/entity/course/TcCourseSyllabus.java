@@ -38,6 +38,8 @@ public class TcCourseSyllabus extends BaseEntity {
 	private String detail_info;
 	/** 课程状态 0未完成 1 已完成*/
 	private String course_status;
+	/** 地址 */
+	private String addres;
 	/**
 	 * id取得
 	 * @return id
@@ -164,6 +166,22 @@ public class TcCourseSyllabus extends BaseEntity {
 	 */
 	public void setCourse_status(String course_status) {
 	    this.course_status = course_status;
+	}
+
+	/**
+	 * 地址取得
+	 * @return 地址
+	 */
+	public String getAddres() {
+	    return addres;
+	}
+
+	/**
+	 * 地址设定
+	 * @param addres 地址
+	 */
+	public void setAddres(String addres) {
+	    this.addres = addres;
 	}
 
 }

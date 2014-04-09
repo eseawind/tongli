@@ -27,7 +27,7 @@
 		<div class="header-inner">
 			<!-- BEGIN LOGO -->
 			<a class="navbar-brand" href="${basePath}/h/home_init.ac">
-			车主管家V1.0
+			童励俱乐部V1.0
 			</a>
 			<!-- END LOGO -->
 			<!-- BEGIN RESPONSIVE MENU TOGGLER -->

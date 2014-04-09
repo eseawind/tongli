@@ -248,7 +248,7 @@
 									<label>简介</label>
 									<div class="controls">
 										<div class="input-append">
-											<textarea class="col-md-12 form-control placeholder-no-fix" data-target=".resource-url" id="description" name="" placeholder="信息简介">${bean0.description}</textarea>										
+											<textarea class="col-md-12 form-control placeholder-no-fix" data-target=".resource-url" id="description" name="" placeholder="信息简介"></textarea>										
 										</div>
 									</div>
 									<label>链接</label>
