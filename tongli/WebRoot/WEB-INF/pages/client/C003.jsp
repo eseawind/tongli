@@ -37,7 +37,7 @@
 
 <div class="body fr" style=" width:770px;">
 <h1> ${bean.title}信息标题</h1>
-<h3>发布日期：${bean.last_updated} &nbsp;&nbsp;&nbsp;&nbsp;发布人：${bean.create_id}</h3>
+<!--<h3>发布日期：${bean.last_updated} &nbsp;&nbsp;&nbsp;&nbsp;发布人：${bean.create_id}</h3>-->
 <div class="content" style="min-height:290px;">
   ${bean.detail_info}
 </div>

@@ -1,11 +1,7 @@
 package cn.com.softvan.test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import java.util.Date;
+
 
 public class TestXX {
 
@@ -14,46 +10,7 @@ public class TestXX {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		List<TestBean> beans=new ArrayList<TestBean>();
-		for(int i=0;i<5;i++){
-			TestBean bean=new TestBean();
-			bean.setA("a1");
-			bean.setB("b1");
-			bean.setC("c1");
-			bean.setD("d1");
-			bean.setE("e1");
-			bean.setNum(10);
-			beans.add(bean);
-		}
-		for(int i=0;i<2;i++){
-			TestBean bean=new TestBean();
-			bean.setA("a2");
-			bean.setB("b2");
-			bean.setC("c2");
-			bean.setD("d2");
-			bean.setE("e2");
-			bean.setNum(2);
-			beans.add(bean);
-		}
-		Map<String,TestBean> m=new HashMap<String,TestBean>();
-		String t=null;
-		TestBean bean2=null;
-		for(TestBean bean:beans){
-			t=bean.getA()+bean.getB()+bean.getC()+bean.getD()+bean.getE();
-			bean2=m.get(t);
-			if(bean2!=null){
-				bean2.setNum(bean2.getNum()+bean.getNum());
-			}else{
-				m.put(t, bean);
-			}
-		}
-		
-		for(TestBean bean:m.values()){
-			System.out.println(bean.getNum());
-		}
-		
-		
-		
+		System.out.println((new Date()).getTime());
 	}
 
 }

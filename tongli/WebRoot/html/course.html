@@ -27,6 +27,15 @@ $(function(){
 		var index = $(this).index();
 		$(".themes").animate({left:-mw*index,opacity:1},500);
 	})
+		//nav menu
+$("#navmenu ul li:has(ul)").hover(function() {
+	$(this).children("a").css({color:"#3e7900"});
+	if($(this).find("li").length > 0){
+	$(this).children("ul").stop(true, true).slideDown(200)} 
+},function() {
+	$(this).children("a").css({color:"#333"});
+	$(this).children("ul").stop(true, true).slideUp(200)
+	});
 });
 </script>
 </head>
@@ -51,13 +60,39 @@ $(function(){
 </div>
 </div>
 <div class="nav">
+<div id="navmenu">
 <ul>
 <li class="home"><a href="index.html">首 页</a></li>
-<li class="about"><a href="aboutus.html">关于我们</a></li>
-<li class="course"><a href="course.html">课 程</a></li>
-<li class="camp"><a href="camp.html">冬夏令营</a></li>
-<li class="contact"><a href="contact.html">联系我们</a></li>
+<li class="about"><a href="aboutus.html">关于我们</a>
+<ul>
+<li><a href="#">• 俱乐部历史介绍</a></li>
 </ul>
+</li>
+<li class="course"><a href="course.html">课 程</a>
+<ul>
+<li><a href="#">• 游泳</a></li>
+<li><a href="#">• 网球</a></li>
+<li><a href="#">• 篮球</a></li>
+<li><a href="#">• 羽毛球</a></li>
+<li><a href="#">• 空手道</a></li>
+<li><a href="#">• 乒乓球</a></li>
+<li><a href="#">• 轮滑</a></li>
+<li><a href="#">• 舞蹈</a></li>
+</ul>
+</li>
+<li class="camp"><a href="camp.html">冬夏令营</a>
+<ul>
+<li><a href="#">• 夏令营</a></li>
+<li><a href="#">• 冬令营</a></li>
+</ul>
+</li>
+<li class="contact"><a href="contact.html">联系我们</a>
+<ul>
+<li><a href="#">• 中心查询</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>

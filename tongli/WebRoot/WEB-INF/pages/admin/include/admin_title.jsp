@@ -17,3 +17,4 @@
 <meta content="" name="description" />
 <meta content="" name="author" />
 <meta name="MobileOptimized" content="320">
+<script type="text/javascript">var basePath='${basePath}';</script>

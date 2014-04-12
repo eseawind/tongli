@@ -1,9 +1,9 @@
 /*
- * 前台首页 ActionClass
+ * 夏令营 ActionClass
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.03.30  wuxiaogang      程序・发布
+ * 1.00     2014.04.12  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 jfq  System. - All Rights Reserved.
  *
@@ -15,15 +15,12 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.sys.TcSysNewsBean;
-import cn.com.softvan.common.CommonConstant;
-import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.sys.INewsManager;
 import cn.com.softvan.service.sys.INewsTypeManager;
 import cn.com.softvan.web.action.BaseAction;
-import cn.com.softvan.web.tag.PageInfo;
 
 /**
- * 前台首页 ActionClass
+ * 夏令营 ActionClass
  * 
  * @author wuxiaogang
  * 
@@ -44,7 +41,6 @@ public class C004Action extends BaseAction {
 	private INewsManager newsManager;
 	/**资讯栏目信息管理 业务处理*/
 	private INewsTypeManager newsTypeManager;
-	private String info_source="1";
 	//
 	public C004Action() {
 		log.info("默认构造器......S001Action");

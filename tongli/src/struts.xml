@@ -37,15 +37,25 @@
 				<interceptor-ref name="exceptionAndExecuteTimeInterceptor" />
 			</interceptor-stack>
 			
-			<!-- 权限拦截器 -->
+			<!-- 后台权限拦截器 -->
 			<interceptor name="authInterceptor"
 				class="cn.com.softvan.filter.AuthInterceptor">
+			</interceptor>
+			<!-- 前台会员权限拦截器 -->
+			<interceptor name="teacherAndMemberAuthInterceptor"
+				class="cn.com.softvan.filter.TeacherAndMemberAuthInterceptor">
 			</interceptor>
 			
 			<!-- 定义权限拦截器栈 -->
 			<interceptor-stack name="wechat-auth">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="authInterceptor" />
+			</interceptor-stack>
+			
+			<!-- 定义前台会员权限拦截器栈 -->
+			<interceptor-stack name="wechat-teacher-member-auth">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="teacherAndMemberAuthInterceptor" />
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="wechat-default" />

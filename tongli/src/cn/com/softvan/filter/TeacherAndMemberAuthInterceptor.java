@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.common.CommonConstant;
 
 import com.opensymphony.xwork2.ActionInvocation;
@@ -14,7 +13,7 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
  * @author {wuxiaogang}
  *
  */
-public class MemberAuthInterceptor extends AbstractInterceptor {
+public class TeacherAndMemberAuthInterceptor extends AbstractInterceptor {
 	private static final long serialVersionUID = 5006910018523878858L;
 
 	@Override
