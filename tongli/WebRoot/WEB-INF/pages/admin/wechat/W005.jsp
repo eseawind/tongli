@@ -29,10 +29,14 @@
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 
-<link href="/js/prettify/prettify-jPlayer.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="../skin/circle.skin/circle.player.css">
+<link rel="stylesheet" href="${basePath}/plugins/jPlayer/skin/circle.skin/circle.player.css" type="text/css"  />
 
-
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jplayer/jquery.jplayer.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.jplayer.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.transform.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.grab.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/mod.csstransforms.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/circle.player.js"></script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -114,24 +118,39 @@
 										<div class="msg-date">关键字:${bean1.keyword}</div>
 										<div class="msg-date">${bean1.last_updated}</div>
 										<div class="pic-url">
-											<script type="text/javascript">
-												 $(document).ready(function(){
-												  $("#jquery_jplayer_1").jPlayer({
-												   ready: function () {
-												    $(this).jPlayer("setMedia", {
-												     m4a: "/media/mysound.mp4",
-												     oga: "/media/mysound.ogg"
-												    });
-												   },
-												   swfPath: "${basePath}/plugins/jplayer",
-												   supplied: "m4a, oga"
-												  });
-												 });
-												</script>
-												<div id="jquery_jplayer_1"></div>
-												<div id="jp_container_1">
-												 <a href="#" class="jp-play">Play</a>
-												 <a href="#" class="jp-pause">Pause</a>
+											<img onerror="this.src='${basePath}/images/error/404.jpg'" src="${bean1.picurl}"
+												alt="" style="">
+												<div style="float: left;width: 30px;height:30px;">
+													<div id="${bean1.id}_player" class="cp-jplayer"></div>
+													<div id="${bean1.id}_cp_container" class="cp-container">
+														<div class="cp-buffer-holder"> <!-- .cp-gt50 only needed when buffer is > than 50% -->
+															<div class="cp-buffer-1"></div>
+															<div class="cp-buffer-2"></div>
+														</div>
+														<div class="cp-progress-holder"> <!-- .cp-gt50 only needed when progress is > than 50% -->
+															<div class="cp-progress-1"></div>
+															<div class="cp-progress-2"></div>
+														</div>
+														<div class="cp-circle-control"></div>
+														<ul class="cp-controls">
+															<li><a href="#" class="cp-play" tabindex="1">play</a></li>
+															<li><a href="#" class="cp-pause" style="display:none;" tabindex="1">pause</a></li> <!-- Needs the inline style here, or jQuery.show() uses display:inline instead of display:block -->
+														</ul>
+													</div>
+													<script type="text/javascript">
+													$(document).ready(function() {
+														//var myCirclePlayer=
+														new CirclePlayer("#${bean1.id}_player",
+														{
+															mp3 : "${bean1.musicurl}"
+														}, {
+															cssSelectorAncestor: "#${bean1.id}_cp_container",
+															swfPath: "${basePath}/plugins/jPlayer/js",
+															supplied: "mp3,webma, m4a, oga,fla,wav",
+															wmode: "window"
+														});
+													});
+													</script>
 												</div>
 										</div>
 									</li>

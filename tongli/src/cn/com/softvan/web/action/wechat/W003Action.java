@@ -138,7 +138,6 @@ public class W003Action extends BaseAction {
 					}
 					bean.setMsgtype(msgType);
 					bean.setInfo_source("0");
-					bean.setCreatetime(""+System.currentTimeMillis());
 					bean.setSort_num(""+0);
 					beans.add(bean);
 					msg=tcWxInfoManager.saveOrUpdateData(beans);

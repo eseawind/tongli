@@ -24,6 +24,10 @@
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 <link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/css/multi-select.css" />
+
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/clockface/css/clockface.css" />
 </head>
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
@@ -113,8 +117,27 @@
 								id="article_title" name="bean.title" size="30" type="text" value="${bean.title}">
 						</div>
 						<div class="form-group">
-							<label for="article_subject_id">主题</label> <input class="form-control"
-								id="article_subject_id" name="bean.subject_id" size="50" type="text" value="${bean.subject_id}">
+							 &nbsp;  <label class="control-label">课程主题</label>
+							 <label class="control-label col-md-12">
+							 <div class="input-group">
+								<span class="input-group-addon">
+								<i class="fa fa-align-center"></i>
+								</span>
+								<select name="bean.subject_id" id="teacher_select2_sample2"  class="form-control select2me" data-placeholder="选择课程主题..">
+									<optgroup label="课程主题列表">
+										<option value="0">游泳</option>
+										<option value="1">网球</option>
+										<option value="2">羽毛球</option>
+										<option value="3">篮球</option>
+										<option value="4">球类私教</option>
+										<option value="5">空手道</option>
+										<option value="6">形体芭蕾</option>
+										<option value="7">爵士街舞</option>
+										<option value="8">轮滑</option>
+									</optgroup>
+								</select>
+							</div>
+							</label>
 						</div>
 						<div class="form-group">
 							<label for="article_course_type">课种</label> <input class="form-control"
@@ -171,6 +194,11 @@
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
+		<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/js/jquery.quicksearch.js"></script>   
+	
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/clockface/js/clockface.js"></script>
 	<!-- END FOOTER -->
 </body>
 <!-- END BODY -->

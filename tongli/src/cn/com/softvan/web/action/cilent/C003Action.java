@@ -15,6 +15,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.sys.TcSysNewsBean;
+import cn.com.softvan.bean.sys.TcSysNewsTypeBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.sys.INewsManager;
@@ -65,9 +66,51 @@ public class C003Action extends BaseAction {
 		TcSysNewsBean bean1=new TcSysNewsBean();
 		bean1.setId(id);
 		bean=newsManager.findDataById(bean1);
+		String tid=request.getParameter("tid");//栏目id
+		String pid=request.getParameter("pid");//栏目父级id
+		//栏目树
+		TcSysNewsTypeBean bean2=new TcSysNewsTypeBean();
+		bean2.setParent_id(pid);
+		request.setAttribute("tree_array",newsTypeManager.findDataIsTree(bean2));
+		//当前栏目id
+		request.setAttribute("tid",tid);
+		//当前栏目详情
+		TcSysNewsTypeBean typeBean=new TcSysNewsTypeBean();
+		typeBean.setId(tid);
+		request.setAttribute("typeBean", newsTypeManager.findDataById(typeBean));
+		//当前父栏目id
+		request.setAttribute("pid",pid);
+		//当前 父级 栏目详情
+		TcSysNewsTypeBean typeBeanP=new TcSysNewsTypeBean();
+		typeBeanP.setId(pid);
+		request.setAttribute("typeBeanP", newsTypeManager.findDataById(typeBeanP));
+		
+		
 		return "init";
 	}
+	/**
+	 * <p>
+	 * 焦点图信息。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>信息列表。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String list1() {
+		log.info("C001Action list1.........");
+		
+//		6fba86e8436049e5b30123c538b7fc83	焦点图资讯 ==
 
+		TcSysNewsBean bean1=new TcSysNewsBean();
+		bean1.setInfo_source(info_source);
+		bean1.setLimit_s(0);
+		bean1.setLimit_e(5);
+		bean1.setType_id("6fba86e8436049e5b30123c538b7fc83");
+		beans=newsManager.findDataIsList(bean1);
+		
+		return "list1";
+	}
 	/**
 	 * BEAN类  资讯信息取得
 	 * @return BEAN类  资讯信息

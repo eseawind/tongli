@@ -5,6 +5,7 @@
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-14  wuxiaogang   程序・发布
+ * 1.01     2014-04-11  wuxiaogang   程序・更新
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 车主管家 System. - All Rights Reserved.
  *
@@ -116,10 +117,12 @@
 										<c:when test="${bean!=null}">
 											<li id="data_rid_0" data-img-version="circle.header" class="article pos-rel cover">
 												<div class="msg-date">${bean.last_updated}</div>
-												<input class="idx" id="id" name="id" type="hidden" value="${bean.id }">
-												<input class="title" id="title" name="title${bean.id }" value="${bean.title }" type="hidden">
-												<input class="pic-url" id="picurl" name="picurl${bean.id }" value="${bean.picurl }" type="hidden">
-												<input class="url" id="url" name="url${bean.id }" value="${bean.url }" type="hidden">
+												<input class="title" name="bean.title" value="${bean.title }" type="hidden">
+												<input class="pic-url" id="picurl" name="bean.picurl" value="${bean.picurl }" type="hidden">
+												<input class="description" id="description" name="bean.description" value="${bean.description}" type="hidden">
+												<input class="musicurl" id="musicurl" name="bean.musicurl" value="${bean.musicurl}" type="hidden">
+												<input class="hqmusicurl" id="hqmusicurl" name="bean.hqmusicurl" value="${bean.hqmusicurl}" type="hidden">
+												
 												<div class="pic-url">
 													 <img src="${bean.picurl }" alt="">
 												</div>
@@ -129,11 +132,12 @@
 										<c:otherwise>
 											<li id="data_rid_0" data-img-version="circle.header" class="article pos-rel cover">
 												<div class="msg-date">${date}</div> 
-												<c:set var="uuid" value="<%=IdUtils.createUUID(32)%>"></c:set>
-												<input class="idx" id="id" name="id" type="hidden" value="${uuid}">
-												<input class="title" id="title" name="title${uuid}" type="hidden">
-												<input class="pic-url" id="picurl" name="picurl${uuid}" type="hidden">
-												<input class="url" id="url" name="url${uuid}" type="hidden">
+												<input class="title" id="title" name="bean.title" type="hidden">
+												<input class="description" id="description" name="bean.description" type="hidden">
+												<input class="musicurl" id="musicurl" name="bean.musicurl" type="hidden">
+												<input class="hqmusicurl" id="hqmusicurl" name="bean.hqmusicurl" type="hidden">
+												<input class="pic-url" id="picurl" name="bean.picurl" type="hidden">
+												
 												<div class="pic-url">
 													<span class="default-tip" style="">封面图片</span>
 													 <img src="" alt="" style="display: none">
@@ -148,14 +152,14 @@
 							<!--  -->
 							<div class="col-md-6 msg-edit pos-rel" style="margin-top: 0px;">
 								<input class="rid" id="" name="" type="hidden" value="data_rid_0">
-								<c:choose>
-									<c:when test="${bean!=null && bean!='null'}">
 										<label>音乐标题</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" id="title" name="" type="text" value="${bean.title }"> 
+										<input class="col-md-12 form-control placeholder-no-fix" placeholder="歌曲名称" id="title" name="" type="text" value="${bean.title}"> 
+										<label>音乐描述</label> 
+										<input class="col-md-12 form-control placeholder-no-fix" placeholder="音乐描述" id="description" name="" type="text" value="${bean.description}"> 
 										<label>封面(最佳大小: 700 x 400)</label>
 										<div class="upload-wrapper">
 											<a id="link-select-image-modal" class="btn btn-info" href="#selectImageModal"
-												data-img-version="circle.header" data-toggle="modal">选图片</a> 
+												data-img-version="circle.header" data-toggle="modal">上传音乐图片</a> 
 												
 											<div id="article-info-filequeue" class="filequeue" <c:if test="${bean.picurl==null}">style="display: none;"</c:if>>
 												<div class="uploadifyQueueItem item">
@@ -165,35 +169,13 @@
 												<div class="clearfix"></div>
 											</div>
 										</div>
-										<!-- js in edit.js rel obj_id and file_queue_id -->
-		
-										<label>链接</label>
-										<div class="controls">
-											<div class="input-append">
-												<input class="col-md-12 form-control placeholder-no-fix" data-target=".resource-url" id="url" name="" placeholder="如果是外链地址,请直接输入" type="text" value="${bean.url}"> 
-												<a class="btn btn-info" data-toggle="modal" href="#linkModal">选链接</a>
-											</div>
-										</div>
-									</c:when>
-									<c:otherwise>
-										<label>音乐标题</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="歌曲名称" id="title" name="" type="text" value=""> 
-										<label>音乐描述</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="音乐描述" id="description" name="" type="text" value=""> 
-										<div class="controls">
-											<div class="input-append">
-												<a id="link-select-file-modal" class="btn btn-info" data-toggle="modal" >上传音乐文件</a>
-												<a id="link-select-image-modal" class="btn btn-info" data-toggle="modal" >上传音乐图片</a>
-											</div>
-										</div>
 										<label>音乐链接</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="如果是外链地址,请直接输入" id="musicurl" name="" type="text" value=""> 
+										<input class="col-md-12 form-control placeholder-no-fix musicurl" placeholder="如果是外链地址,请直接输入" name="" type="text" value="${bean.musicurl}"> 
 										<label>高品质音乐链接，wifi环境优先使用该链接播放音乐</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="如果是外链地址,请直接输入" id="hqmusicurl" name="" type="text" value=""> 
-									</c:otherwise>
-								</c:choose>
-								<span class="msg-arrow arrow-out pos-abs"></span> 
-								<span class="msg-arrow arrow-in pos-abs"></span>
+										<input class="col-md-12 form-control placeholder-no-fix hqmusicurl" placeholder="如果是外链地址,请直接输入" name="" type="text" value="${bean.hqmusicurl}"> 
+										<a id="link-select-file-modal" class="btn btn-info" data-toggle="modal" >上传音乐文件</a>
+									<span class="msg-arrow arrow-out pos-abs"></span> 
+									<span class="msg-arrow arrow-in pos-abs"></span>
 							</div>
 						</div>
 						<div style="clear: both;"></div>
@@ -227,9 +209,12 @@
 			K('#link-select-file-modal').click(function() {
 				editor.loadPlugin('insertfile', function() {
 					editor.plugin.fileDialog({
-						fileUrl : K('#url').val(),
+						fileUrl : $('#musicurl').val(),
 						clickFn : function(url, title) {
-							K('#url').val(url);
+							$('#musicurl').val(basePath+url);
+							$('.musicurl').val(basePath+url);
+							$('#hqmusicurl').val(basePath+url);
+							$('.hqmusicurl').val(basePath+url);
 							editor.hideDialog();
 						}
 					});
@@ -263,9 +248,17 @@
 			$('#'+data_rid).find('#title').val($(this).val());
 			//myAlert(data_rid);
 		});
-		$('.msg-edit').find('#url').blur(function(){
+		$('.msg-edit').find('#description').blur(function(){
 			var data_rid=$('.msg-edit').find('.rid').val();
-			$('#'+data_rid).find('#url').val($(this).val());
+			$('#'+data_rid).find('#description').val($(this).val());
+		});
+		$('.msg-edit').find('.musicurl').blur(function(){
+			var data_rid=$('.msg-edit').find('.rid').val();
+			$('#'+data_rid).find('#musicurl').val($(this).val());
+		});
+		$('.msg-edit').find('.hqmusicurl').blur(function(){
+			var data_rid=$('.msg-edit').find('.rid').val();
+			$('#'+data_rid).find('#hqmusicurl').val($(this).val());
 		});
 	});
 </script>

@@ -43,6 +43,18 @@
 			<result name="edit">/WEB-INF/pages/admin/wechat/W005_01.jsp</result>
 			<result name="success" type="chain">w005_init</result>
 		</action>
+		<!-- 语音消息 -->
+		<action name="w014_*" class="w014Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W014.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechat/W014_01.jsp</result>
+			<result name="success" type="chain">w014_init</result>
+		</action>
+		<!-- 视频消息 -->
+		<action name="w006_*" class="w006Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/wechat/W006.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/wechat/W006_01.jsp</result>
+			<result name="success" type="chain">w006_init</result>
+		</action>
 		<!-- 素材管理 end -->
 		<!-- 自定义菜单 -->
 		<action name="w007_*" class="w007Action" method="{1}">

@@ -227,16 +227,6 @@ jQuery(document).ready(function() {
         e.stopPropagation();
         $('#article_end_time').clockface('toggle');
     });
-	//$('#course_select2_sample2').select2({
-     //   placeholder: "点击选择课程",
-     //   allowClear: true
-    //});
-	
-	//
-	//$('#teacher_select2_sample2').select2({
-   //     placeholder: "点击选择教练",
-   //     allowClear: true
-   // });
 	//
 	$('#student_select2_sample2').select2({
         placeholder: "点击选择学员",

@@ -15,12 +15,8 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-</head>
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!--> <html lang="zh-CN" class="no-js"> <!--<![endif]-->
-<!-- BEGIN HEAD -->
+<html lang="zh-CN" class="no-js">
 <head>
 	<meta charset="utf-8" />
 	<%@include file="../include/admin_title.jsp" %>

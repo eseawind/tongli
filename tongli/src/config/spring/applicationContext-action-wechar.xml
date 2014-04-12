@@ -62,5 +62,13 @@
 	<bean id="w013Action" class="cn.com.softvan.web.action.wechat.W013Action" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
+	<!-- 微信服务_自动回复_语音消息 -->
+	<bean id="w014Action" class="cn.com.softvan.web.action.wechat.W014Action" scope="prototype">
+		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+	</bean>
+	<!-- 微信服务_自动回复_视频消息 -->
+	<bean id="w006Action" class="cn.com.softvan.web.action.wechat.W006Action" scope="prototype">
+		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
+	</bean>
 	<!--========================= 微信服务 end=================================== -->
 </beans>
