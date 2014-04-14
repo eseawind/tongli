@@ -30,9 +30,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="format-detection" content="telephone=no">
-
-<!-- BEGIN GLOBAL MANDATORY STYLES -->
-<link  href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <style>
 body{ -webkit-touch-callout: none; -webkit-text-size-adjust: none; }
 ol,ul{list-style-position:inside;}
@@ -41,28 +38,19 @@ ol,ul{list-style-position:inside;}
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
-	<div class="container-fluid">
-		<div class="row-fluid">
-			<div class="col-md-12">
-			<c:choose>
-				<c:when test="${bean!=null}">
-				<h1>${bean.title}</h1>
-                <div class="text">
-					${bean.detail_info}
-				 </div>
-				</c:when>
-				<c:otherwise>
-				<h1>信息不存在或已删除</h1>
-				</c:otherwise>
-			</c:choose>
-			</div>
-		</div>
+	<div class="col-md-12">
+	<c:choose>
+		<c:when test="${bean!=null}">
+		<h3>${bean.title}</h3>
+         <div class="text">
+			${bean.detail_info}
+		 </div>
+		</c:when>
+		<c:otherwise>
+		<h1>信息不存在或已删除</h1>
+		</c:otherwise>
+	</c:choose>
 	</div>
-	<!-- BEGIN FOOTER -->
-	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
-	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<!-- END FOOTER -->
-
 </body>
 <!-- END BODY -->
 </html>

@@ -5,6 +5,7 @@
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-04-11  wuxiaogang   程序・发布
+ * 1.01     2014-04-14  wuxiaogang   程序・更新  完善
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 车主管家 System. - All Rights Reserved.
  *
@@ -15,6 +16,7 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="customtag" uri="/custom-tags"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -29,10 +31,9 @@
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 
-<link href="/js/prettify/prettify-jPlayer.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="../skin/circle.skin/circle.player.css">
+<link href="${basePath}/plugins/jPlayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
 
-
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.jplayer.min.js"></script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -98,30 +99,100 @@
 							</c:choose>
 						</c:if>
 						<div class="btn-toolbar">
-								<a href="${basePath}/h/w006_edit.ac" class="btn btn-primary"><i class="fa fa-book"></i> 新建文章</a>
+								<a href="${basePath}/h/w006_edit.ac" class="btn btn-primary"><i class="fa fa-book"></i> 新建视频</a>
 							</div>
-
-							<table class="table table-condensed table-striped">
-								<tbody>
-									<tr>
-										<th class="col-md-3">时间</th>
-										<th class="col-md-6">标题</th>
-										<th class="col-md-3"></th>
-									</tr>
-									<c:forEach items="${beans}" var="bean">
-									<tr>
-										<td>${bean.last_updated}</td>
-										<td>${bean.title}</td>
-										<td><a
-											href="${basePath}/h/w006_edit.ac?id=${bean.id}"
-											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
-											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/w006_del.ac?id=${bean.id}'};"
-											rel="nofollow">删除</a></td>
-									</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							<customtag:pagingext func="loadUrlPage" params="'h/w006_','init'" />
+							<c:forEach items="${beans}" var="bean">
+							<div class="col-md-9">
+							<ul id="message-info" class="unstyled">
+								<li class="article pos-rel cover">
+									<div class="msg-date">关键字:${bean.keyword}</div>
+									<div class="msg-date">${bean.last_updated}</div>
+									<div class="well alert alert-success" style="padding-left: 30px;">
+										<div id="jp_container_1${bean.id}" class="jp-video jp-video-360p">
+											<div class="jp-type-single">
+												<div id="jquery_jplayer_1${bean.id}" class="jp-jplayer"></div>
+												<div class="jp-gui">
+													<div class="jp-video-play">
+														<a href="javascript:;" class="jp-video-play-icon" tabindex="1">play</a>
+													</div>
+													<div class="jp-interface">
+														<div class="jp-progress">
+															<div class="jp-seek-bar">
+																<div class="jp-play-bar"></div>
+															</div>
+														</div>
+														<div class="jp-current-time"></div>
+														<div class="jp-duration"></div>
+														<div class="jp-controls-holder">
+															<ul class="jp-controls">
+																<li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+																<li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+																<li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+																<li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+																<li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+																<li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+															</ul>
+															<div class="jp-volume-bar">
+																<div class="jp-volume-bar-value"></div>
+															</div>
+															<ul class="jp-toggles">
+																<li><a href="javascript:;" class="jp-full-screen" tabindex="1" title="full screen">full screen</a></li>
+																<li><a href="javascript:;" class="jp-restore-screen" tabindex="1" title="restore screen">restore screen</a></li>
+																<li><a href="javascript:;" class="jp-repeat" tabindex="1" title="repeat">repeat</a></li>
+																<li><a href="javascript:;" class="jp-repeat-off" tabindex="1" title="repeat off">repeat off</a></li>
+															</ul>
+														</div>
+														<div class="jp-details">
+															<ul>
+																<li><span class="jp-title">${bean.title}</span></li>
+															</ul>
+														</div>
+													</div>
+												</div>
+												<div class="jp-no-solution">
+													<span>Update Required</span>
+													To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+												</div>
+											</div>
+										</div>
+										<script type="text/javascript">
+										$(document).ready(function(){
+											$("#jquery_jplayer_1${bean.id}").jPlayer({
+												ready: function () {
+													$(this).jPlayer("setMedia", {
+														title: "${bean.title}",
+														m4v: "${bean.url}",
+														poster: "${bean.picurl}"
+													});
+												},
+												swfPath: "${basePath}/plugins/jPlayer/js",
+												supplied: "m4v,webmv,ogv,flv",
+												size: {
+													width: "640px",
+													height: "360px",
+													cssClass: "jp-video-360p"
+												},
+												smoothPlayBar: true,
+												keyEnabled: true,
+												remainingDuration: true,
+												toggleDuration: true
+											});
+										});
+										</script>
+										</div>
+									</li>
+									<li class="msg-actions center">
+										<a href="${basePath}/h/w006_edit.ac?id=${bean.id}" class="btn green">
+											<i class="icon-pencil"></i> 编辑
+										</a> 
+										<a href="javascript:void(0)" class="btn btn-danger" onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/w006_del.ac?id=${bean.id}'};" rel="nofollow">
+											<i class="icon-trash"></i>删除
+										</a>
+									</li>
+								</ul>
+							</div>
+						</c:forEach>
+					<customtag:pagingext func="loadUrlPage" params="'h/w006_','init'" />
 				</div>
 			</div>
 			<!-- END PAGE CONTENT-->
@@ -137,27 +208,6 @@
 <!-- END BODY -->
 </html>
 <script type="text/javascript">
-jQuery(document).ready(function() {
-	KindEditor.ready(function(K) {
-		var editor = K.editor({
-					resizeType : 2,
-					uploadJson : '${basePath}/uploadFile?isrich=1',
-					fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
-					allowFileManager : true
-		});
-		K('#add_image1').click(function() {
-			editor.loadPlugin('image',function() {
-				editor.plugin.imageDialog({
-					imageUrl : $('#qe-new-attachment').val(),clickFn : function(
-						url,title,width,height,border,align) {
-							$('#qe-new-attachment').val(url);
-							editor.hideDialog();
-						}
-				});
-			});
-		});
-	});
-});
 function loadUrlPage(offset, url, event) {
 	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
 }

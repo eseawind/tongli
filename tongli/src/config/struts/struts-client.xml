@@ -3,7 +3,7 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
     "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-    <package name="cilent_info" extends="wechat-default" >
+    <package name="client_info" extends="wechat-default" >
 		<!-- 前台首页 -->
 		<action name="index" class="c001Action" method="init">
 			<result name="init">/WEB-INF/pages/client/C001.jsp</result>

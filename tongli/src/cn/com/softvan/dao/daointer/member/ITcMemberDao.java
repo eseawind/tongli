@@ -69,4 +69,12 @@ public interface ITcMemberDao {
 	 * @return 处理结果
 	 */
 	public List<TcMemberBean> findDataIsList(IEntity dto);
+	/**
+	 * <p>登录验证。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息验证。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public TcMemberBean checkMemberPWD(IEntity dto);
 }

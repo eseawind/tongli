@@ -15,6 +15,7 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="customtag" uri="/custom-tags"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -29,9 +30,8 @@
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 
-<link rel="stylesheet" href="${basePath}/plugins/jPlayer/skin/circle.skin/circle.player.css" type="text/css"  />
+<link rel="stylesheet" href="${basePath}/plugins/jPlayer/skin/circle.skin2/circle.player.css" type="text/css"  />
 
-<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jplayer/jquery.jplayer.min.js"></script>
 <script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.jplayer.min.js"></script>
 <script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.transform.js"></script>
 <script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.grab.js"></script>
@@ -111,8 +111,6 @@
 						</div>
 						<c:forEach items="${beans}" var="bean1" varStatus="n">
 							<div class="col-md-6 message-size">
-							<form accept-charset="UTF-8" action="${basePath}/h/w005_edit.ac?id=${bean1.id}" class="edit_message" method="post">
-								<s:token></s:token>
 								<ul id="message-info" class="unstyled">
 									<li class="article pos-rel cover">
 										<div class="msg-date">关键字:${bean1.keyword}</div>
@@ -146,13 +144,14 @@
 														}, {
 															cssSelectorAncestor: "#${bean1.id}_cp_container",
 															swfPath: "${basePath}/plugins/jPlayer/js",
-															supplied: "mp3,webma, m4a, oga,fla,wav",
+															supplied: "mp3,m4a,webma,oga,fla,wav",
 															wmode: "window"
 														});
 													});
 													</script>
 												</div>
 										</div>
+										<h4 class="title">${bean1.title}</h4>
 									</li>
 									<li class="msg-actions center">
 										<a href="${basePath}/h/w005_edit.ac?id=${bean1.id}" class="btn green">
@@ -163,10 +162,9 @@
 										</a>
 									</li>
 								</ul>
-							</form>
 							</div>
 						</c:forEach>
-						
+						<customtag:pagingext func="loadUrlPage" params="'h/w005_','init'" />
 				</div>
 			</div>
 			<!-- END PAGE CONTENT-->
@@ -182,25 +180,7 @@
 <!-- END BODY -->
 </html>
 <script type="text/javascript">
-	jQuery(document).ready(function() {
-		KindEditor.ready(function(K) {
-			var editor = K.editor({
-						resizeType : 2,
-						uploadJson : '${basePath}/uploadFile?isrich=1',
-						fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
-						allowFileManager : true
-			});
-			K('#add_image1').click(function() {
-				editor.loadPlugin('image',function() {
-					editor.plugin.imageDialog({
-						imageUrl : $('#qe-new-attachment').val(),clickFn : function(
-							url,title,width,height,border,align) {
-								$('#qe-new-attachment').val(url);
-								editor.hideDialog();
-							}
-					});
-				});
-			});
-		});
-});
+function loadUrlPage(offset, url, event) {
+	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
+}
 </script>

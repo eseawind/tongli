@@ -1,5 +1,5 @@
 /*
- * 栏目页 ActionClass
+ * 前台首页 ActionClass
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
@@ -8,7 +8,7 @@
  * Copyright 2014 jfq  System. - All Rights Reserved.
  *
  */
-package cn.com.softvan.web.action.cilent;
+package cn.com.softvan.web.action.client;
 
 import java.util.List;
 
@@ -24,18 +24,18 @@ import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
 /**
- * 栏目页 ActionClass
+ * 前台首页 ActionClass
  * 
  * @author wuxiaogang
  * 
  */
-public class C002Action extends BaseAction {
+public class C003Action extends BaseAction {
 
 	/**
 	 * 序列号
 	 */
 	private static final long serialVersionUID = -3061791975484213551L;
-	private static final transient Logger log = Logger.getLogger(C002Action.class);
+	private static final transient Logger log = Logger.getLogger(C003Action.class);
 	
 	/**BEAN类  资讯信息*/
 	private TcSysNewsBean bean;
@@ -45,10 +45,10 @@ public class C002Action extends BaseAction {
 	private INewsManager newsManager;
 	/**资讯栏目信息管理 业务处理*/
 	private INewsTypeManager newsTypeManager;
-	//
 	private String info_source="1";
-	public C002Action() {
-		log.info("默认构造器......S002Action");
+	//
+	public C003Action() {
+		log.info("默认构造器......S001Action");
 	}
 
 	/**
@@ -61,29 +61,13 @@ public class C002Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String init() {
-		log.info("S002Action init.........");
+		log.info("S001Action init.........");
+		String id=request.getParameter("id");
+		TcSysNewsBean bean1=new TcSysNewsBean();
+		bean1.setId(id);
+		bean=newsManager.findDataById(bean1);
 		String tid=request.getParameter("tid");//栏目id
 		String pid=request.getParameter("pid");//栏目父级id
-		
-		int offset = 0;
-		// 分页偏移量
-		if (!Validator.isNullEmpty(request.getParameter("offset"))
-				&& Validator.isNum(request.getParameter("offset"))) {
-			offset = Integer.parseInt(request.getParameter("offset"));
-		}
-		PageInfo page = new PageInfo(); 
-		//当前页
-		page.setCurrOffset(offset);
-		//每页显示条数
-		page.setPageRowCount(15);
-		TcSysNewsBean bean1 = new TcSysNewsBean();
-		bean1.setPageInfo(page);
-		bean1.setType_id(tid);
-		bean1.setInfo_source(info_source);
-		//栏目资讯列表
-		List<TcSysNewsBean> beans=newsManager.findDataIsPage(bean1);
-		request.setAttribute("beans",beans);
-		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		//栏目树
 		TcSysNewsTypeBean bean2=new TcSysNewsTypeBean();
 		bean2.setParent_id(pid);
@@ -100,9 +84,33 @@ public class C002Action extends BaseAction {
 		TcSysNewsTypeBean typeBeanP=new TcSysNewsTypeBean();
 		typeBeanP.setId(pid);
 		request.setAttribute("typeBeanP", newsTypeManager.findDataById(typeBeanP));
+		
+		
 		return "init";
 	}
+	/**
+	 * <p>
+	 * 焦点图信息。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>信息列表。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String list1() {
+		log.info("C001Action list1.........");
+		
+//		6fba86e8436049e5b30123c538b7fc83	焦点图资讯 ==
 
+		TcSysNewsBean bean1=new TcSysNewsBean();
+		bean1.setInfo_source(info_source);
+		bean1.setLimit_s(0);
+		bean1.setLimit_e(5);
+		bean1.setType_id("6fba86e8436049e5b30123c538b7fc83");
+		beans=newsManager.findDataIsList(bean1);
+		
+		return "list1";
+	}
 	/**
 	 * BEAN类  资讯信息取得
 	 * @return BEAN类  资讯信息

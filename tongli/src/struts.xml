@@ -41,21 +41,32 @@
 			<interceptor name="authInterceptor"
 				class="cn.com.softvan.filter.AuthInterceptor">
 			</interceptor>
-			<!-- 前台会员权限拦截器 -->
-			<interceptor name="teacherAndMemberAuthInterceptor"
-				class="cn.com.softvan.filter.TeacherAndMemberAuthInterceptor">
-			</interceptor>
-			
-			<!-- 定义权限拦截器栈 -->
+				<!-- 定义权限拦截器栈 -->
 			<interceptor-stack name="wechat-auth">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="authInterceptor" />
 			</interceptor-stack>
 			
+			
+			<!-- 前台会员权限拦截器 -->
+			<interceptor name="memberAuthInterceptor"
+				class="cn.com.softvan.filter.MemberAuthInterceptor">
+			</interceptor>
 			<!-- 定义前台会员权限拦截器栈 -->
-			<interceptor-stack name="wechat-teacher-member-auth">
+			<interceptor-stack name="member-auth">
 				<interceptor-ref name="defaultStack" />
-				<interceptor-ref name="teacherAndMemberAuthInterceptor" />
+				<interceptor-ref name="memberAuthInterceptor" />
+			</interceptor-stack>
+			
+			
+			<!-- 前台教师权限拦截器 -->
+			<interceptor name="teacherAuthInterceptor"
+				class="cn.com.softvan.filter.TeacherAuthInterceptor">
+			</interceptor>
+			<!-- 定义前台教师权限拦截器栈 -->
+			<interceptor-stack name="teacher-auth">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="teacherAuthInterceptor" />
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="wechat-default" />
@@ -65,7 +76,8 @@
 		    <result name="exception">/WEB-INF/pages/error/exception.jsp</result>
 			<result name="error">/WEB-INF/pages/error/500.jsp</result>
 			<result name="login">/WEB-INF/pages/admin/login.jsp</result>
-			<result name="blindCar">/WEB-INF/pages/carmanager/C005_02.jsp</result>
+			<result name="tlogin">/WEB-INF/pages/client/teacher/login.jsp</result>
+			<result name="mlogin">/WEB-INF/pages/client/member/login.jsp</result>
 		</global-results>
 		 <global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.Exception" />

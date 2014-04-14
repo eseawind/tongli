@@ -3,17 +3,21 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.03.04  wuxiaogang      程序・发布
+ * 1.00     2014.04.14  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.web.action.wechat;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.wechat.TcWxInfoBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
@@ -93,38 +97,87 @@ public class W006Action extends BaseAction {
 	 */
 	public String edit() {
 		log.info("W006Action edit.........");
-		
+		String id=request.getParameter("id");
+		if(id!=null){
+			TcWxInfoBean bean1=new TcWxInfoBean();
+			bean1.setId(id);
+			bean1.setInfo_source("0");
+			bean1.setMsgtype(msgType);
+			bean=tcWxInfoManager.findDataById(bean1);
+		}else{
+			SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日");
+			request.setAttribute("date", sdf.format(new Date()));
+		}
 		return "edit";
+	}
+	/**
+	 * <p>
+	 * 信息保存
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>新增。</div>
+	 * <div>修改。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String save() {
+		log.info("W006Action edit.........");
+		if(bean!=null){
+			String msg="1";
+			try {
+				if(Validator.isNullEmpty(bean.getTitle())
+					|| Validator.isNullEmpty(bean.getUrl())){
+					msg="保存失败!信息为空!";
+				}else{
+					List<TcWxInfoBean> beans=new ArrayList<TcWxInfoBean>();
+					BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
+					if(user!=null){
+						bean.setCreate_ip(getIpAddr());
+						bean.setCreate_id(user.getUser_id());
+						bean.setUpdate_ip(getIpAddr());
+						bean.setUpdate_id(user.getUser_id());
+					}
+					bean.setMsgtype(msgType);
+					bean.setInfo_source("0");
+					bean.setSort_num(""+0);
+					beans.add(bean);
+					msg=tcWxInfoManager.saveOrUpdateData(beans);
+				}
+			} catch (Exception e) {
+				msg=e.getMessage();
+			}
+			request.setAttribute("msg",msg);
+		}else{
+			request.setAttribute("msg", "信息保存失败!");
+		}
+		return SUCCESS;
 	}
 	/**
 	 * <p>
 	 * 删除。
 	 * </p>
 	 * <ol>
-	 * [功能概要] <div>逻辑删除。</div>
+	 * [功能概要] <div>删除。</div>
 	 * </ol>
 	 * @return 转发字符串
 	 */
 	public String del() {
 		log.info("W006Action del.........");
 		
-		
+		String id=request.getParameter("id");
+		TcWxInfoBean bean1=new TcWxInfoBean();
+		bean1.setId(id);
+		bean1.setInfo_source("0");
+		bean1.setMsgtype(msgType);
+		String msg="1";
+		try {
+			msg=tcWxInfoManager.deleteDataById(bean1);
+		} catch (Exception e) {
+			msg=e.getMessage();
+		}
+		request.setAttribute("msg",msg);
 		return SUCCESS;
 	}
-	/**
-	 * <p>
-	 * 预览。
-	 * </p>
-	 * <ol>
-	 * [功能概要] <div>预览。</div>
-	 * </ol>
-	 * @return 转发字符串
-	 */
-	public String view() {
-		log.info("W006Action view.........");
-		return "view";
-	}
-
 	/**
 	 * BEAN类  微信资源信息取得
 	 * @return BEAN类  微信资源信息
@@ -171,5 +224,13 @@ public class W006Action extends BaseAction {
 	 */
 	public void setTcWxInfoManager(ITcWxInfoManager tcWxInfoManager) {
 	    this.tcWxInfoManager = tcWxInfoManager;
+	}
+
+	/**
+	 * 信息类型取得
+	 * @return 信息类型
+	 */
+	public String getMsgType() {
+	    return msgType;
 	}
 }

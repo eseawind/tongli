@@ -12,7 +12,7 @@
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- ************************ACTION类************************************* -->
 	<!-- ==前台首页== 
-	<bean id="c001Action" class="cn.com.softvan.web.action.cilent.C001Action" scope="prototype">
+	<bean id="c001Action" class="cn.com.softvan.web.action.client.C001Action" scope="prototype">
 		<property name="newsManager" ref="newsManager"></property>
 		<property name="newsTypeManager" ref="newsTypeManager"></property>
 	</bean>-->

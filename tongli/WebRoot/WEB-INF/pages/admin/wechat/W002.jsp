@@ -106,8 +106,6 @@
 						<c:set var="map_flag" value="0" />
 						<c:forEach items="${map }" var="map" varStatus="i">
 							<div class="col-md-6 message-size">
-							<form accept-charset="UTF-8" action="${basePath}/h/w002_edit.ac?aid=${map.key}" class="edit_message" method="post">
-								<s:token></s:token>
 								<ul id="message-info" class="unstyled">
 									<c:forEach items="${map.value}" var="bean1" varStatus="n">
 										<li class="article pos-rel <c:if test="${n.index==0 }">cover</c:if>">
@@ -132,7 +130,6 @@
 										</a>
 									</li>
 								</ul>
-							</form>
 							</div>
 						</c:forEach>
 				</div>

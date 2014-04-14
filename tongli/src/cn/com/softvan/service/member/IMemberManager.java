@@ -100,4 +100,15 @@ public interface IMemberManager {
 	 * @return 处理结果
 	 */
 	public List<TcMemberBean> findDataIsListMember(TcStudentBean bean);
+	
+	/**
+	 * <p>用户登录。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>密码验证。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public TcMemberBean checkMemberPWD(TcMemberBean bean);
+	
 }

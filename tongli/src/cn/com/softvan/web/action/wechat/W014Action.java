@@ -126,7 +126,7 @@ public class W014Action extends BaseAction {
 			String msg="1";
 			try {
 				if(Validator.isNullEmpty(bean.getTitle())
-					|| Validator.isNullEmpty(bean.getMusicurl())){
+					|| Validator.isNullEmpty(bean.getUrl())){
 					msg="保存失败!信息为空!";
 				}else{
 					List<TcWxInfoBean> beans=new ArrayList<TcWxInfoBean>();

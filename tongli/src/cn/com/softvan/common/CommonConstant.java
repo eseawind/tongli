@@ -66,4 +66,10 @@ public class CommonConstant {
 
 	/** 存放 微信公共账号的Access_token */
 	public static final String SESSION_KEY_USER_WECHAT_ACCESS_TOKEN = "SESSION_KEY_USER_WECHAT_ACCESS_TOKEN";
+	
+	
+	/** 存放会员登录信息 */
+	public static final String SESSION_KEY_USER_MEMBER_INFO = "SESSION_KEY_USER_MEMBER_INFO";
+	/** 存放教师登录信息 */
+	public static final String SESSION_KEY_USER_TEACHER_INFO = "SESSION_KEY_USER_TEACHER_INFO";
 }

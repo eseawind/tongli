@@ -3,11 +3,12 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
     "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
-    <package name="cilent_teacher_info" extends="wechat-default" >
-   		<default-interceptor-ref name="wechat-teacher-member-auth" /> 
-		<!-- 前台首页 
-		<action name="index" class="c001Action" method="init">
-			<result name="init">/WEB-INF/pages/client/C001.jsp</result>
-		</action>-->
+    <package name="client_teacher_info" extends="wechat-default" >
+   		<default-interceptor-ref name="teacher-auth" /> 
+		<!-- 教师首页 -->
+		<action name="t001_*" class="t001Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client/teacher/T001.jsp</result>
+			<result name="success" type="chain">t001_init</result>
+		</action>
 	</package>
 </struts>

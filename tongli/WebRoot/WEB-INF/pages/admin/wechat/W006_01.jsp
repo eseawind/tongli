@@ -116,10 +116,10 @@
 										<c:when test="${bean!=null}">
 											<li id="data_rid_0" data-img-version="circle.header" class="article pos-rel cover">
 												<div class="msg-date">${bean.last_updated}</div>
-												<input class="idx" id="id" name="id" type="hidden" value="${bean.id }">
-												<input class="title" id="title" name="title${bean.id }" value="${bean.title }" type="hidden">
-												<input class="pic-url" id="picurl" name="picurl${bean.id }" value="${bean.picurl }" type="hidden">
-												<input class="url" id="url" name="url${bean.id }" value="${bean.url }" type="hidden">
+												<input class="title"  id="title" name="bean.title" value="${bean.title}" type="hidden">
+												<input class="pic-url" id="picurl" name="bean.picurl" value="${bean.picurl }" type="hidden">
+												<input class="description" id="description" name="bean.description" value="${bean.description}" type="hidden">
+												<input class="url" id="url" name="bean.url" value="${bean.url }" type="hidden">
 												<div class="pic-url">
 													 <img src="${bean.picurl }" alt="">
 												</div>
@@ -129,11 +129,10 @@
 										<c:otherwise>
 											<li id="data_rid_0" data-img-version="circle.header" class="article pos-rel cover">
 												<div class="msg-date">${date}</div> 
-												<c:set var="uuid" value="<%=IdUtils.createUUID(32)%>"></c:set>
-												<input class="idx" id="id" name="id" type="hidden" value="${uuid}">
-												<input class="title" id="title" name="title${uuid}" type="hidden">
-												<input class="pic-url" id="picurl" name="picurl${uuid}" type="hidden">
-												<input class="url" id="url" name="url${uuid}" type="hidden">
+												<input class="title" id="title" name="bean.title"  type="hidden">
+												<input class="pic-url" id="picurl" name="bean.picurl"  type="hidden">
+												<input class="description" id="description" name="bean.description"  type="hidden">
+												<input class="url" id="url" name="bean.url"  type="hidden">
 												<div class="pic-url">
 													<span class="default-tip" style="">封面图片</span>
 													 <img src="" alt="" style="display: none">
@@ -148,50 +147,35 @@
 							<!--  -->
 							<div class="col-md-6 msg-edit pos-rel" style="margin-top: 0px;">
 								<input class="rid" id="" name="" type="hidden" value="data_rid_0">
-								<c:choose>
-									<c:when test="${bean!=null && bean!='null'}">
-										<label>视频标题</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" id="title" name="" type="text" value="${bean.title }"> 
-										<label>封面(最佳大小: 700 x 400)</label>
-										<div class="upload-wrapper">
-											<a id="link-select-image-modal" class="btn btn-info" href="#selectImageModal"
-												data-img-version="circle.header" data-toggle="modal">选图片</a> 
-												
-											<div id="article-info-filequeue" class="filequeue" <c:if test="${bean.picurl==null}">style="display: none;"</c:if>>
-												<div class="uploadifyQueueItem item">
-													<img class="pic-url" id="new_picurl"  src="${bean.picurl}">
-												</div>
-												<!--TODO fix to span_xx -->
-												<div class="clearfix"></div>
-											</div>
+								<label>视频标题</label> 
+								<input class="col-md-12 form-control placeholder-no-fix" id="title" name="" type="text" value="${bean.title }"> 
+								<label>封面(最佳大小: 700 x 400)</label>
+								<div class="upload-wrapper">
+									<a id="link-select-image-modal" class="btn btn-info" href="#selectImageModal"
+										data-img-version="circle.header" data-toggle="modal">选视频图片</a> 
+										
+									<div id="article-info-filequeue" class="filequeue" <c:if test="${bean.picurl==null}">style="display: none;"</c:if>>
+										<div class="uploadifyQueueItem item">
+											<img class="pic-url" id="new_picurl"  src="${bean.picurl}">
 										</div>
-										<!-- js in edit.js rel obj_id and file_queue_id -->
-		
-										<label>链接</label>
-										<div class="controls">
-											<div class="input-append">
-												<input class="col-md-12 form-control placeholder-no-fix" data-target=".resource-url" id="url" name="" placeholder="如果是外链地址,请直接输入" type="text" value="${bean.url}"> 
-												<a class="btn btn-info" data-toggle="modal" href="#linkModal">选链接</a>
-											</div>
-										</div>
-									</c:when>
-									<c:otherwise>
-										<label>视频标题</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="歌曲名称" id="title" name="" type="text" value=""> 
-										<label>视频描述</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="视频描述" id="description" name="" type="text" value=""> 
-										<div class="controls">
-											<div class="input-append">
-												<a id="link-select-file-modal" class="btn btn-info" data-toggle="modal" >上传视频文件</a>
-												<a id="link-select-image-modal" class="btn btn-info" data-toggle="modal" >上传视频图片</a>
-											</div>
-										</div>
-										<label>视频链接</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="如果是外链地址,请直接输入" id="musicurl" name="" type="text" value=""> 
-										<label>高品质视频链接，wifi环境优先使用该链接播放视频</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="如果是外链地址,请直接输入" id="hqmusicurl" name="" type="text" value=""> 
-									</c:otherwise>
-								</c:choose>
+										<!--TODO fix to span_xx -->
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<!-- js in edit.js rel obj_id and file_queue_id -->
+								<label>简介</label>
+								<div class="controls">
+									<div class="input-append">
+										<textarea class="col-md-12 form-control placeholder-no-fix" data-target=".resource-url" id="description" name="" placeholder="信息简介">${bean.description}</textarea>										
+									</div>
+								</div>
+								<label>视频地址(视频20M内)</label>
+								<div class="controls">
+									<div class="input-append">
+										<input class="col-md-12 form-control placeholder-no-fix url" id="url" data-target=".resource-url" name="" readonly="readonly" placeholder="暂不支持外链" type="text" value="${bean.url}"> 
+										<a id="link-select-file-modal" class="btn btn-info" data-toggle="modal" >上传视频文件</a>
+									</div>
+								</div>
 								<span class="msg-arrow arrow-out pos-abs"></span> 
 								<span class="msg-arrow arrow-in pos-abs"></span>
 							</div>
@@ -229,7 +213,8 @@
 					editor.plugin.fileDialog({
 						fileUrl : K('#url').val(),
 						clickFn : function(url, title) {
-							K('#url').val(url);
+							//$('#url').val(url);
+							$('.url').val(url);
 							editor.hideDialog();
 						}
 					});
@@ -263,9 +248,13 @@
 			$('#'+data_rid).find('#title').val($(this).val());
 			//myAlert(data_rid);
 		});
-		$('.msg-edit').find('#url').blur(function(){
+		$('.msg-edit').find('#description').blur(function(){
+			var data_rid=$('.msg-edit').find('.rid').val();
+			$('#'+data_rid).find('#description').val($(this).val());
+		});
+		/* $('.msg-edit').find('#url').blur(function(){
 			var data_rid=$('.msg-edit').find('.rid').val();
 			$('#'+data_rid).find('#url').val($(this).val());
-		});
+		}); */
 	});
 </script>

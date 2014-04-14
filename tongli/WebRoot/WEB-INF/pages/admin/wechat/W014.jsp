@@ -15,6 +15,7 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="customtag" uri="/custom-tags"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -29,10 +30,13 @@
 <%@ include file="../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 
-<link href="/js/prettify/prettify-jPlayer.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="../skin/circle.skin/circle.player.css">
+<link rel="stylesheet" href="${basePath}/plugins/jPlayer/skin/circle.skin/circle.player.css" type="text/css"  />
 
-
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.jplayer.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.transform.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.grab.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/mod.csstransforms.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/circle.player.js"></script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -107,33 +111,45 @@
 						</div>
 						<c:forEach items="${beans}" var="bean1" varStatus="n">
 							<div class="col-md-6 message-size">
-							<form accept-charset="UTF-8" action="${basePath}/h/w014_edit.ac?id=${bean1.id}" class="edit_message" method="post">
-								<s:token></s:token>
 								<ul id="message-info" class="unstyled">
 									<li class="article pos-rel cover">
 										<div class="msg-date">关键字:${bean1.keyword}</div>
 										<div class="msg-date">${bean1.last_updated}</div>
 										<div class="pic-url">
-											<script type="text/javascript">
-												 $(document).ready(function(){
-												  $("#jquery_jplayer_1").jPlayer({
-												   ready: function () {
-												    $(this).jPlayer("setMedia", {
-												     m4a: "/media/mysound.mp4",
-												     oga: "/media/mysound.ogg"
-												    });
-												   },
-												   swfPath: "${basePath}/plugins/jplayer",
-												   supplied: "m4a, oga"
-												  });
-												 });
-												</script>
-												<div id="jquery_jplayer_1"></div>
-												<div id="jp_container_1">
-												 <a href="#" class="jp-play">Play</a>
-												 <a href="#" class="jp-pause">Pause</a>
+												<div style="margin-left: 30px;padding-bottom:0px;">
+													<div id="${bean1.id}_player" class="cp-jplayer"></div>
+													<div id="${bean1.id}_cp_container" class="cp-container">
+														<div class="cp-buffer-holder"> <!-- .cp-gt50 only needed when buffer is > than 50% -->
+															<div class="cp-buffer-1"></div>
+															<div class="cp-buffer-2"></div>
+														</div>
+														<div class="cp-progress-holder"> <!-- .cp-gt50 only needed when progress is > than 50% -->
+															<div class="cp-progress-1"></div>
+															<div class="cp-progress-2"></div>
+														</div>
+														<div class="cp-circle-control"></div>
+														<ul class="cp-controls">
+															<li><a href="#" class="cp-play" tabindex="1">play</a></li>
+															<li><a href="#" class="cp-pause" style="display:none;" tabindex="1">pause</a></li> <!-- Needs the inline style here, or jQuery.show() uses display:inline instead of display:block -->
+														</ul>
+													</div>
+													<script type="text/javascript">
+													$(document).ready(function() {
+														//var myCirclePlayer=
+														new CirclePlayer("#${bean1.id}_player",
+														{
+															mp3 : "${bean1.url}"
+														}, {
+															cssSelectorAncestor: "#${bean1.id}_cp_container",
+															swfPath: "${basePath}/plugins/jPlayer/js",
+															supplied: "mp3,webma, m4a, oga,fla,wav",
+															wmode: "window"
+														});
+													});
+													</script>
 												</div>
 										</div>
+										<h4 class="title">${bean1.title}</h4>
 									</li>
 									<li class="msg-actions center">
 										<a href="${basePath}/h/w014_edit.ac?id=${bean1.id}" class="btn green">
@@ -144,10 +160,9 @@
 										</a>
 									</li>
 								</ul>
-							</form>
 							</div>
 						</c:forEach>
-						
+						<customtag:pagingext func="loadUrlPage" params="'h/w014_','init'" />
 				</div>
 			</div>
 			<!-- END PAGE CONTENT-->
@@ -163,25 +178,7 @@
 <!-- END BODY -->
 </html>
 <script type="text/javascript">
-	jQuery(document).ready(function() {
-		KindEditor.ready(function(K) {
-			var editor = K.editor({
-						resizeType : 2,
-						uploadJson : '${basePath}/uploadFile?isrich=1',
-						fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
-						allowFileManager : true
-			});
-			K('#add_image1').click(function() {
-				editor.loadPlugin('image',function() {
-					editor.plugin.imageDialog({
-						imageUrl : $('#qe-new-attachment').val(),clickFn : function(
-							url,title,width,height,border,align) {
-								$('#qe-new-attachment').val(url);
-								editor.hideDialog();
-							}
-					});
-				});
-			});
-		});
-});
+function loadUrlPage(offset, url, event) {
+	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
+}
 </script>

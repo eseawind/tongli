@@ -455,4 +455,36 @@ public class MemberManager extends BaseManager implements IMemberManager {
 		}
 		return beans;
 	}
+	/**
+	 * <p>用户登录。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>密码验证。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public TcMemberBean checkMemberPWD(TcMemberBean bean){
+		 TcMemberBean bean1=null;
+	       try {
+	    	   TcMember dto=new TcMember();
+	    	   if(bean!=null){
+					dto.setUser_name(bean.getUser_name());//用户名
+					dto.setPasswd(bean.getPasswd());//密码
+					dto.setUser_type(bean.getUser_type());//会员类型
+					
+					bean1=tcMemberDao.checkMemberPWD(dto);
+					
+					if(bean1!=null){
+						if(bean1!=null){
+							bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
+						}
+						//登录次数+1 更新最后登录时间 更新最后登录ip
+						//TODO 待续
+					}
+	    	   }
+			} catch (Exception e) {
+				log.error("信息详情查询失败,数据库错误!", e);
+			}
+			return bean1;
+	}
 }

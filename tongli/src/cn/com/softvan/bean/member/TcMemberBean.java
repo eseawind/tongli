@@ -33,7 +33,7 @@ public class TcMemberBean extends BaseBean {
 	private String user_name;
 	/** 密码 */
 	private String passwd;
-	/** 会员类型 */
+	/** 会员类型 0教练 1家长(会员) */
 	private String user_type;
 	/** 用��昵称 */
 	private String nickname;

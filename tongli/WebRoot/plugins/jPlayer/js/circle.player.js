@@ -2,12 +2,12 @@
  * CirclePlayer for the jPlayer Plugin (jQuery)
  * http://www.jplayer.org
  *
- * Copyright (c) 2009 - 2011 Happyworm Ltd
+ * Copyright (c) 2009 - 2012 Happyworm Ltd
  * Dual licensed under the MIT and GPL licenses.
  *  - http://www.opensource.org/licenses/mit-license.php
  *  - http://www.gnu.org/copyleft/gpl.html
  *
- * Version: 1.0.1 (jPlayer 2.0.9)
+ * Version: 1.0.1 (jPlayer 2.1.0+)
  * Date: 30th May 2011
  *
  * Author: Mark J Panaghiston @thepag
@@ -34,7 +34,7 @@ var CirclePlayer = function(jPlayerSelector, media, options) {
 
 		defaults = {
 			// solution: "flash, html", // For testing Flash with CSS3
-			supplied: "mp3",
+			supplied: "m4a, oga",
 			// Android 2.3 corrupts media element if preload:"none" is used.
 			// preload: "none", // No point preloading metadata since no times are displayed. It helps keep the buffer state correct too.
 			cssSelectorAncestor: "#cp_container_1",
@@ -59,7 +59,7 @@ var CirclePlayer = function(jPlayerSelector, media, options) {
 		fallback: "cp-fallback"
 	};
 
-	this.spritePitch = 30;
+	this.spritePitch = 104;
 	this.spriteRatio = 0.24; // Number of steps / 100
 
 	this.player = $(jPlayerSelector);

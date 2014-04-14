@@ -11,9 +11,12 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- ************************ACTION类************************************* -->
-	<!-- ==前台首页== 
-	<bean id="c001Action" class="cn.com.softvan.web.action.cilent.C001Action" scope="prototype">
-		<property name="newsManager" ref="newsManager"></property>
-		<property name="newsTypeManager" ref="newsTypeManager"></property>
-	</bean>-->
+	<!-- ==教师首页== -->
+	<bean id="t001Action" class="cn.com.softvan.web.action.client.teacher.T001Action" scope="prototype">
+		<property name="memberManager" ref="memberManager"></property>
+		<property name="studentManager" ref="studentManager"></property>
+		<property name="courseManager" ref="courseManager"></property>
+		<property name="courseSyllabusManager" ref="courseSyllabusManager"></property>
+		<property name="courseSyllabusItemsManager" ref="courseSyllabusItemsManager"></property>
+	</bean>
 </beans>

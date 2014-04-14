@@ -105,8 +105,6 @@
 						</div>
 						<c:forEach items="${beans}" var="bean1" varStatus="n">
 							<div class="col-md-6 message-size">
-							<form accept-charset="UTF-8" action="${basePath}/h/w009_edit.ac?id=${bean1.id}" class="edit_message" method="post">
-								<s:token></s:token>
 								<ul id="message-info" class="unstyled">
 									<li class="article pos-rel cover">
 										<div class="msg-date">关键字:${bean1.keyword}</div>
@@ -126,7 +124,6 @@
 										</a>
 									</li>
 								</ul>
-							</form>
 							</div>
 						</c:forEach>
 						<customtag:pagingext func="loadUrlPage" params="'h/w009_','init'" />
@@ -144,27 +141,6 @@
 <!-- END BODY -->
 </html>
 <script type="text/javascript">
-	jQuery(document).ready(function() {
-		KindEditor.ready(function(K) {
-			var editor = K.editor({
-						resizeType : 2,
-						uploadJson : '${basePath}/uploadFile?isrich=1',
-						fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
-						allowFileManager : true
-			});
-			K('#add_image1').click(function() {
-				editor.loadPlugin('image',function() {
-					editor.plugin.imageDialog({
-						imageUrl : $('#qe-new-attachment').val(),clickFn : function(
-							url,title,width,height,border,align) {
-								$('#qe-new-attachment').val(url);
-								editor.hideDialog();
-							}
-					});
-				});
-			});
-		});
-});
 function loadUrlPage(offset, url, event) {
 	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
 }

@@ -34,6 +34,15 @@
 
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
+
+<link rel="stylesheet" href="${basePath}/plugins/jPlayer/skin/circle.skin/circle.player.css" type="text/css"  />
+
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.jplayer.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.transform.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/jquery.grab.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/mod.csstransforms.min.js"></script>
+<script charset="utf-8" type="text/javascript" src="${basePath}/plugins/jPlayer/js/circle.player.js"></script>
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -52,6 +61,20 @@
 				$('#wechat_arrow,#wechat_sub_menu_li_arrow').addClass('open');
 				$('#wechat_sub_menu,#wechat_sub_menu_li_sub_menu').show();
 			});
+			var myCirclePlayer;
+			// 音频播放
+			function voicePlay(url){
+				myCirclePlayer=new CirclePlayer("#jquery_jplayer_1",
+				{
+					wav: url
+				}, {
+					cssSelectorAncestor: "#cp_container_1",
+					swfPath: "${basePath}/plugins/jPlayer/js",
+					supplied: "mp3,webma, m4a, oga,fla,wav",
+					wmode: "window"
+				});
+			}
+			
 		</script>
 		<!-- END SIDEBAR -->
 		<!-- BEGIN PAGE -->
@@ -116,12 +139,38 @@
 										<c:when test="${bean!=null}">
 											<li id="data_rid_0" data-img-version="circle.header" class="article pos-rel cover">
 												<div class="msg-date">${bean.last_updated}</div>
-												<input class="idx" id="id" name="id" type="hidden" value="${bean.id }">
-												<input class="title" id="title" name="title${bean.id }" value="${bean.title }" type="hidden">
-												<input class="pic-url" id="picurl" name="picurl${bean.id }" value="${bean.picurl }" type="hidden">
-												<input class="url" id="url" name="url${bean.id }" value="${bean.url }" type="hidden">
-												<div class="pic-url">
-													 <img src="${bean.picurl }" alt="">
+												<input class="title" name="bean.title" value="${bean.title }" type="hidden">
+												<input class="url" id="url" name="bean.url" value="${bean.url}" type="hidden">
+												<div class="pic-url" style="margin-left: 30px;padding-bottom:20px;">
+														<div id="jquery_jplayer_1" class="cp-jplayer"></div>
+														<div id="cp_container_1" class="cp-container">
+															<div class="cp-buffer-holder"> <!-- .cp-gt50 only needed when buffer is > than 50% -->
+																<div class="cp-buffer-1"></div>
+																<div class="cp-buffer-2"></div>
+															</div>
+															<div class="cp-progress-holder"> <!-- .cp-gt50 only needed when progress is > than 50% -->
+																<div class="cp-progress-1"></div>
+																<div class="cp-progress-2"></div>
+															</div>
+															<div class="cp-circle-control"></div>
+															<ul class="cp-controls">
+																<li><a class="cp-play" tabindex="1">play</a></li>
+																<li><a class="cp-pause" style="display:none;" tabindex="1">pause</a></li> <!-- Needs the inline style here, or jQuery.show() uses display:inline instead of display:block -->
+															</ul>
+														</div>
+														<script type="text/javascript">
+														jQuery(document).ready(function() {
+															new CirclePlayer("#jquery_jplayer_1",
+																{
+																	wav: '${bean.url}'
+																}, {
+																	cssSelectorAncestor: "#cp_container_1",
+																	swfPath: "${basePath}/plugins/jPlayer/js",
+																	supplied: "mp3,webma, m4a, oga,fla,wav",
+																	wmode: "window"
+																});
+														});
+													</script>
 												</div>
 												<h4 class="title">${bean.title }</h4>
 											</li>
@@ -129,19 +178,29 @@
 										<c:otherwise>
 											<li id="data_rid_0" data-img-version="circle.header" class="article pos-rel cover">
 												<div class="msg-date">${date}</div> 
-												<c:set var="uuid" value="<%=IdUtils.createUUID(32)%>"></c:set>
-												<input class="idx" id="id" name="id" type="hidden" value="${uuid}">
-												<input class="title" id="title" name="title${uuid}" type="hidden">
-												<input class="pic-url" id="picurl" name="picurl${uuid}" type="hidden">
-												<input class="url" id="url" name="url${uuid}" type="hidden">
-												<div class="pic-url">
-													<span class="default-tip" style="">封面图片</span>
-													 <img src="" alt="" style="display: none">
+												<input class="title" id="title" name="bean.title" type="hidden">
+												<input class="url" id="url" name="bean.url" type="hidden">
+												<div class="pic-url" style="margin-left: 30px;padding-bottom:20px;">
+														<div id="jquery_jplayer_1" class="cp-jplayer"></div>
+														<div id="cp_container_1" class="cp-container">
+															<div class="cp-buffer-holder"> <!-- .cp-gt50 only needed when buffer is > than 50% -->
+																<div class="cp-buffer-1"></div>
+																<div class="cp-buffer-2"></div>
+															</div>
+															<div class="cp-progress-holder"> <!-- .cp-gt50 only needed when progress is > than 50% -->
+																<div class="cp-progress-1"></div>
+																<div class="cp-progress-2"></div>
+															</div>
+															<div class="cp-circle-control"></div>
+															<ul class="cp-controls">
+																<li><a class="cp-play" tabindex="1">play</a></li>
+																<li><a class="cp-pause" style="display:none;" tabindex="1">pause</a></li> <!-- Needs the inline style here, or jQuery.show() uses display:inline instead of display:block -->
+															</ul>
+														</div>
 												</div>
 												<h4 class="title">语音标题</h4>
 											</li>
 											</c:otherwise>
-											
 									</c:choose>
 								</ul>
 							</div>
@@ -152,20 +211,6 @@
 									<c:when test="${bean!=null && bean!='null'}">
 										<label>语音标题</label> 
 										<input class="col-md-12 form-control placeholder-no-fix" id="title" name="" type="text" value="${bean.title }"> 
-										<label>封面(最佳大小: 700 x 400)</label>
-										<div class="upload-wrapper">
-											<a id="link-select-image-modal" class="btn btn-info" href="#selectImageModal"
-												data-img-version="circle.header" data-toggle="modal">选图片</a> 
-												
-											<div id="article-info-filequeue" class="filequeue" <c:if test="${bean.picurl==null}">style="display: none;"</c:if>>
-												<div class="uploadifyQueueItem item">
-													<img class="pic-url" id="new_picurl"  src="${bean.picurl}">
-												</div>
-												<!--TODO fix to span_xx -->
-												<div class="clearfix"></div>
-											</div>
-										</div>
-										<!-- js in edit.js rel obj_id and file_queue_id -->
 		
 										<label>链接</label>
 										<div class="controls">
@@ -178,18 +223,10 @@
 									<c:otherwise>
 										<label>语音标题</label> 
 										<input class="col-md-12 form-control placeholder-no-fix" placeholder="歌曲名称" id="title" name="" type="text" value=""> 
-										<label>语音描述</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="语音描述" id="description" name="" type="text" value=""> 
-										<div class="controls">
-											<div class="input-append">
-												<a id="link-select-file-modal" class="btn btn-info" data-toggle="modal" >上传语音文件</a>
-												<a id="link-select-image-modal" class="btn btn-info" data-toggle="modal" >上传语音图片</a>
-											</div>
+										<label><a id="link-select-file-modal" class="btn btn-info" data-toggle="modal" >上传音乐文件</a></label>
+										<div id="article-info-filequeue" class="filequeue" >
+											<input class="col-md-12 form-control placeholder-no-fix url" readonly="readonly" placeholder="暂不支持外链" name="" type="text" value="${bean.url}"> 
 										</div>
-										<label>语音链接</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="如果是外链地址,请直接输入" id="musicurl" name="" type="text" value=""> 
-										<label>高品质语音链接，wifi环境优先使用该链接播放语音</label> 
-										<input class="col-md-12 form-control placeholder-no-fix" placeholder="如果是外链地址,请直接输入" id="hqmusicurl" name="" type="text" value=""> 
 									</c:otherwise>
 								</c:choose>
 								<span class="msg-arrow arrow-out pos-abs"></span> 
@@ -230,27 +267,11 @@
 						fileUrl : K('#url').val(),
 						clickFn : function(url, title) {
 							K('#url').val(url);
+							K('.url').val(url);
+							//音频
+							voicePlay(url);
 							editor.hideDialog();
 						}
-					});
-				});
-			});
-			K('#link-select-image-modal').click(function() {
-				editor.loadPlugin('image',function() {
-					editor.plugin.imageDialog({
-						imageUrl : $('#new_picurl').attr('src'),clickFn : function(
-							url,title,width,height,border,align) {
-								url=url.replace('/n3/','/n2/');
-								$('#new_picurl').attr('src',url);
-								editor.hideDialog();
-								$('.msg-edit').find('#article-info-filequeue').show();
-								
-								var data_rid=$('.msg-edit').find('.rid').val();
-								$('#'+data_rid).find('.pic-url').find('img').attr('src',url);
-								$('#'+data_rid).find('#picurl').val(url);
-								$('#'+data_rid).find('.pic-url').find('.default-tip').remove();
-								$('#'+data_rid).find('.pic-url').find('img').show();
-							}
 					});
 				});
 			});
@@ -263,9 +284,9 @@
 			$('#'+data_rid).find('#title').val($(this).val());
 			//myAlert(data_rid);
 		});
-		$('.msg-edit').find('#url').blur(function(){
+		/* $('.msg-edit').find('#url').blur(function(){
 			var data_rid=$('.msg-edit').find('.rid').val();
 			$('#'+data_rid).find('#url').val($(this).val());
-		});
+		}); */
 	});
 </script>
