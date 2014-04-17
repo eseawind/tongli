@@ -37,32 +37,36 @@
 
 			<div class="body fl" style="width: 770px;">
 				<div class="content" style="min-height: 390px;">
-
-					<div class="login_box">
-						<div class="login_header">
-							<div class="login_title">登 录</div>
-						</div>
-						<div class="login_body">
-							<div class="login_row">
-								<div class="login_lable">用户名：</div>
-								<div class="login_input">
-									<input name="" type="text" class="input" />
+					<form accept-charset="UTF-8"  action="${basePath}/t001_login.ac" class="edit_article" id="edit_article_13632" method="post">
+						<s:token></s:token>
+						<div class="login_box">
+							<div class="login_header">
+								<div class="login_title">登 录</div>
+							</div>
+							<div class="login_body">
+								<div class="login_row" style="color:red;">
+								<div class="login_lable"></div>${msg}
 								</div>
-							</div>
-							<div class="login_row">
-								<div class="login_lable">密 &nbsp;&nbsp;码：</div>
-								<div class="login_input">
-									<input name="" type="password" class="input" />
+								<div class="login_row">
+									<div class="login_lable">用户名：</div>
+									<div class="login_input">
+										<input name="uid" type="text" class="input" />
+									</div>
 								</div>
+								<div class="login_row">
+									<div class="login_lable">密 &nbsp;&nbsp;码：</div>
+									<div class="login_input">
+										<input name="pwd" type="password" class="input" />
+									</div>
+								</div>
+								<div class="login_forget">
+									<a href="#">忘记密码？</a>
+								</div>
+								<input type="submit" class="login_btn" value="登 录" />
+								<div class="clear"></div>
 							</div>
-							<div class="login_forget">
-								<a href="#">忘记密码？</a>
-							</div>
-							<div class="login_btn">登 录</div>
-							<div class="clear"></div>
 						</div>
-					</div>
-
+					</form>
 				</div>
 			</div>
 

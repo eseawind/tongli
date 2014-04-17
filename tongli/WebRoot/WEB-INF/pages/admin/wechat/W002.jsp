@@ -99,7 +99,7 @@
 								<a href="${basePath}/h/w002_edit.ac"
 									class="btn btn-link"><div>
 										<i class="icon-comments-alt icon-5"></i>
-									</div>新建图文消息</a>
+									</div>新增图文消息</a>
 							</div>
 						</div>
 						<c:set var="map_length" value="${fn:length(map)}" />

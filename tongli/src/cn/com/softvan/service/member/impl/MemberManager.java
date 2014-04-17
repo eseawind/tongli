@@ -24,10 +24,8 @@ import cn.com.softvan.common.IOHelper;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.dao.daointer.member.ITcMemberDao;
-import cn.com.softvan.dao.daointer.member.ITcMemberDetailDao;
 import cn.com.softvan.dao.daointer.member.ITcMemberVsStudentDao;
 import cn.com.softvan.dao.entity.member.TcMember;
-import cn.com.softvan.dao.entity.member.TcMemberDetail;
 import cn.com.softvan.dao.entity.member.TcMemberVsStudent;
 import cn.com.softvan.service.BaseManager;
 import cn.com.softvan.service.member.IMemberManager;
@@ -45,8 +43,6 @@ public class MemberManager extends BaseManager implements IMemberManager {
 	
 	/**信息DAO 接口类*/
 	private ITcMemberDao tcMemberDao;
-	/**信息详情 DAO*/
-	private ITcMemberDetailDao tcMemberDetailDao;
 	/**会员与学员关联表信息 Dao类 */
 	private ITcMemberVsStudentDao tcMemberVsStudentDao;
 	/**
@@ -66,10 +62,10 @@ public class MemberManager extends BaseManager implements IMemberManager {
 			try {
 				TcMember dto=new TcMember();
 				dto.setId(bean.getId());//id
-				dto.setUser_name(bean.getUser_name());//用户名
+				dto.setUser_id(bean.getUser_id());//用户名
 				dto.setPasswd(bean.getPasswd());//密码
 				dto.setUser_type(bean.getUser_type());//会员类型
-				dto.setNickname(bean.getNickname());//用��昵称
+				dto.setName(bean.getName());//姓名
 				dto.setLogin_count(bean.getLogin_count());//登录次数
 				dto.setLast_login(bean.getLast_login());//最后登入时间
 				dto.setBind_mobile(bean.getBind_mobile());//绑定手机
@@ -77,14 +73,15 @@ public class MemberManager extends BaseManager implements IMemberManager {
 				dto.setSex(bean.getSex());//性别
 				dto.setTel(bean.getTel());//电话
 				dto.setPic_url(bean.getPic_url());//头像
-				dto.setReal_name(bean.getReal_name());//真实姓名
 				dto.setIs_enabled(bean.getIs_enabled());//是否可用
 				dto.setLast_login_ip(bean.getLast_login_ip());//最后登录IP
 				dto.setNote(bean.getNote());//备注
-//				dto.setDate_created(bean.getDate_created());//数据输入日期
+				dto.setBrief_info(bean.getBrief_info());//简介
+				dto.setDetail_info(bean.getDetail_info());//详情
+				dto.setDate_created(bean.getDate_created());//数据输入日期
 				dto.setCreate_id(bean.getCreate_id());//建立者ID
 				dto.setCreate_ip(bean.getCreate_ip());//建立者IP
-//				dto.setLast_updated(bean.getLast_updated());//资料更新日期
+				dto.setLast_updated(bean.getLast_updated());//资料更新日期
 				dto.setUpdate_id(bean.getUpdate_id());//修改者ID
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 				dto.setDel_flag(bean.getDel_flag());//是否删除
@@ -99,40 +96,6 @@ public class MemberManager extends BaseManager implements IMemberManager {
 						dto.setId(IdUtils.createUUID(32));
 					}
 					tcMemberDao.insert(dto);
-				}
-				//会员详情
-				TcMemberDetail dto1=new TcMemberDetail();
-				dto1.setUser_id(dto.getId());//用户id
-				dto1.setBirthdate(bean.getBirthdate());//生日
-				dto1.setBlood_type(bean.getBlood_type());//血型
-				dto1.setEdu_level(bean.getEdu_level());//文化程度
-				dto1.setTrade(bean.getTrade());//从事行业
-				dto1.setJob(bean.getJob());//从事职业
-				dto1.setIncome_level(bean.getIncome_level());//收入水平
-				dto1.setProvince_id(bean.getProvince_id());//省
-				dto1.setCity_id(bean.getCity_id());//市
-				dto1.setCounty_id(bean.getCounty_id());//县
-				dto1.setAddress(bean.getAddress());//详细地址
-				dto1.setZipcode(bean.getZipcode());//邮政编码
-				dto1.setCredential(bean.getCredential());//证件类型
-				dto1.setCredential_code(bean.getCredential_code());//证件号码
-				dto1.setQq(bean.getQq());//QQ
-				dto1.setMsn(bean.getMsn());//MSN
-				dto1.setHobby(bean.getHobby());//爱好
-				if(Validator.notEmpty(bean.getDetail_info())){
-					IOHelper.deleteFile(bean.getDetail_info());//TODO=删除文件
-					dto1.setDetail_info(IOHelper.writeHtml("html",bean.getDetail_info()));//内容
-				}
-				//判断数据是否存在
-				if(tcMemberDetailDao.isDataYN(dto1)!=0){
-					//数据存在
-					tcMemberDetailDao.updateByPrimaryKeySelective(dto1);
-				}else{
-					//新增
-					if(Validator.isEmpty(dto1.getUser_id())){
-						throw new Exception("会员详情信息保存失败!会员id获取失败!");
-					}
-					tcMemberDetailDao.insert(dto1);
 				}
 				//TODO ------保存会员与学员关系-------
 				//会员类型为家长 user_type==1
@@ -220,31 +183,31 @@ public class MemberManager extends BaseManager implements IMemberManager {
 		try {
     	   TcMember dto=new TcMember();
     	   if(bean!=null){
-    		dto.setId(bean.getId());//id
-			dto.setUser_name(bean.getUser_name());//用户名
-			dto.setPasswd(bean.getPasswd());//密码
-			dto.setUser_type(bean.getUser_type());//会员类型
-			dto.setNickname(bean.getNickname());//用��昵称
-			dto.setLogin_count(bean.getLogin_count());//登录次数
-			dto.setLast_login(bean.getLast_login());//最后登入时间
-			dto.setBind_mobile(bean.getBind_mobile());//绑定手机
-			dto.setBind_email(bean.getBind_email());//绑定邮箱
-			dto.setSex(bean.getSex());//性别
-			dto.setTel(bean.getTel());//电话
-			dto.setPic_url(bean.getPic_url());//头像
-			dto.setReal_name(bean.getReal_name());//真实姓名
-			dto.setIs_enabled(bean.getIs_enabled());//是否可用
-			dto.setLast_login_ip(bean.getLast_login_ip());//最后登录IP
-			dto.setNote(bean.getNote());//备注
-//			dto.setDate_created(bean.getDate_created());//数据输入日期
-			dto.setCreate_id(bean.getCreate_id());//建立者ID
-			dto.setCreate_ip(bean.getCreate_ip());//建立者IP
-//			dto.setLast_updated(bean.getLast_updated());//资料更新日期
-			dto.setUpdate_id(bean.getUpdate_id());//修改者ID
-			dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
-			dto.setDel_flag(bean.getDel_flag());//是否删除
-			dto.setVersion(bean.getVersion());//VERSION
-			dto.setPageInfo(bean.getPageInfo());//分页对象
+    		   dto.setId(bean.getId());//id
+    		   dto.setUser_id(bean.getUser_id());//用户名
+    		   dto.setPasswd(bean.getPasswd());//密码
+    		   dto.setUser_type(bean.getUser_type());//会员类型
+    		   dto.setName(bean.getName());//姓名
+    		   dto.setLogin_count(bean.getLogin_count());//登录次数
+    		   dto.setLast_login(bean.getLast_login());//最后登入时间
+    		   dto.setBind_mobile(bean.getBind_mobile());//绑定手机
+    		   dto.setBind_email(bean.getBind_email());//绑定邮箱
+    		   dto.setSex(bean.getSex());//性别
+    		   dto.setTel(bean.getTel());//电话
+    		   dto.setPic_url(bean.getPic_url());//头像
+    		   dto.setIs_enabled(bean.getIs_enabled());//是否可用
+    		   dto.setLast_login_ip(bean.getLast_login_ip());//最后登录IP
+    		   dto.setNote(bean.getNote());//备注
+    		   dto.setBrief_info(bean.getBrief_info());//简介
+    		   dto.setDetail_info(bean.getDetail_info());//详情
+    		   dto.setDate_created(bean.getDate_created());//数据输入日期
+    		   dto.setCreate_id(bean.getCreate_id());//建立者ID
+    		   dto.setCreate_ip(bean.getCreate_ip());//建立者IP
+    		   dto.setLast_updated(bean.getLast_updated());//资料更新日期
+    		   dto.setUpdate_id(bean.getUpdate_id());//修改者ID
+    		   dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
+    		   dto.setDel_flag(bean.getDel_flag());//是否删除
+    		   dto.setVersion(bean.getVersion());//VERSION
     	   }
 			beans=tcMemberDao.findDataIsPage(dto);
 		} catch (Exception e) {
@@ -265,30 +228,31 @@ public class MemberManager extends BaseManager implements IMemberManager {
 		try {
 	    	   TcMember dto=new TcMember();
 	    	   if(bean!=null){
-	    		    dto.setId(bean.getId());//id
-					dto.setUser_name(bean.getUser_name());//用户名
-					dto.setPasswd(bean.getPasswd());//密码
-					dto.setUser_type(bean.getUser_type());//会员类型
-					dto.setNickname(bean.getNickname());//用��昵称
-					dto.setLogin_count(bean.getLogin_count());//登录次数
-					dto.setLast_login(bean.getLast_login());//最后登入时间
-					dto.setBind_mobile(bean.getBind_mobile());//绑定手机
-					dto.setBind_email(bean.getBind_email());//绑定邮箱
-					dto.setSex(bean.getSex());//性别
-					dto.setTel(bean.getTel());//电话
-					dto.setPic_url(bean.getPic_url());//头像
-					dto.setReal_name(bean.getReal_name());//真实姓名
-					dto.setIs_enabled(bean.getIs_enabled());//是否可用
-					dto.setLast_login_ip(bean.getLast_login_ip());//最后登录IP
-					dto.setNote(bean.getNote());//备注
-//					dto.setDate_created(bean.getDate_created());//数据输入日期
-					dto.setCreate_id(bean.getCreate_id());//建立者ID
-					dto.setCreate_ip(bean.getCreate_ip());//建立者IP
-//					dto.setLast_updated(bean.getLast_updated());//资料更新日期
-					dto.setUpdate_id(bean.getUpdate_id());//修改者ID
-					dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
-					dto.setDel_flag(bean.getDel_flag());//是否删除
-					dto.setVersion(bean.getVersion());//VERSION
+	    		   dto.setId(bean.getId());//id
+	    		   dto.setUser_id(bean.getUser_id());//用户名
+	    		   dto.setPasswd(bean.getPasswd());//密码
+	    		   dto.setUser_type(bean.getUser_type());//会员类型
+	    		   dto.setName(bean.getName());//姓名
+	    		   dto.setLogin_count(bean.getLogin_count());//登录次数
+	    		   dto.setLast_login(bean.getLast_login());//最后登入时间
+	    		   dto.setBind_mobile(bean.getBind_mobile());//绑定手机
+	    		   dto.setBind_email(bean.getBind_email());//绑定邮箱
+	    		   dto.setSex(bean.getSex());//性别
+	    		   dto.setTel(bean.getTel());//电话
+	    		   dto.setPic_url(bean.getPic_url());//头像
+	    		   dto.setIs_enabled(bean.getIs_enabled());//是否可用
+	    		   dto.setLast_login_ip(bean.getLast_login_ip());//最后登录IP
+	    		   dto.setNote(bean.getNote());//备注
+	    		   dto.setBrief_info(bean.getBrief_info());//简介
+	    		   dto.setDetail_info(bean.getDetail_info());//详情
+	    		   dto.setDate_created(bean.getDate_created());//数据输入日期
+	    		   dto.setCreate_id(bean.getCreate_id());//建立者ID
+	    		   dto.setCreate_ip(bean.getCreate_ip());//建立者IP
+	    		   dto.setLast_updated(bean.getLast_updated());//资料更新日期
+	    		   dto.setUpdate_id(bean.getUpdate_id());//修改者ID
+	    		   dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
+	    		   dto.setDel_flag(bean.getDel_flag());//是否删除
+	    		   dto.setVersion(bean.getVersion());//VERSION
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
@@ -311,30 +275,31 @@ public class MemberManager extends BaseManager implements IMemberManager {
        try {
     	   TcMember dto=new TcMember();
     	   if(bean!=null){
-    		    dto.setId(bean.getId());//id
-				dto.setUser_name(bean.getUser_name());//用户名
-				dto.setPasswd(bean.getPasswd());//密码
-				dto.setUser_type(bean.getUser_type());//会员类型
-				dto.setNickname(bean.getNickname());//用��昵称
-				dto.setLogin_count(bean.getLogin_count());//登录次数
-				dto.setLast_login(bean.getLast_login());//最后登入时间
-				dto.setBind_mobile(bean.getBind_mobile());//绑定手机
-				dto.setBind_email(bean.getBind_email());//绑定邮箱
-				dto.setSex(bean.getSex());//性别
-				dto.setTel(bean.getTel());//电话
-				dto.setPic_url(bean.getPic_url());//头像
-				dto.setReal_name(bean.getReal_name());//真实姓名
-				dto.setIs_enabled(bean.getIs_enabled());//是否可用
-				dto.setLast_login_ip(bean.getLast_login_ip());//最后登录IP
-				dto.setNote(bean.getNote());//备注
-//				dto.setDate_created(bean.getDate_created());//数据输入日期
-				dto.setCreate_id(bean.getCreate_id());//建立者ID
-				dto.setCreate_ip(bean.getCreate_ip());//建立者IP
-//				dto.setLast_updated(bean.getLast_updated());//资料更新日期
-				dto.setUpdate_id(bean.getUpdate_id());//修改者ID
-				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
-				dto.setDel_flag(bean.getDel_flag());//是否删除
-				dto.setVersion(bean.getVersion());//VERSION
+    		   dto.setId(bean.getId());//id
+    		   dto.setUser_id(bean.getUser_id());//用户名
+    		   dto.setPasswd(bean.getPasswd());//密码
+    		   dto.setUser_type(bean.getUser_type());//会员类型
+    		   dto.setName(bean.getName());//姓名
+    		   dto.setLogin_count(bean.getLogin_count());//登录次数
+    		   dto.setLast_login(bean.getLast_login());//最后登入时间
+    		   dto.setBind_mobile(bean.getBind_mobile());//绑定手机
+    		   dto.setBind_email(bean.getBind_email());//绑定邮箱
+    		   dto.setSex(bean.getSex());//性别
+    		   dto.setTel(bean.getTel());//电话
+    		   dto.setPic_url(bean.getPic_url());//头像
+    		   dto.setIs_enabled(bean.getIs_enabled());//是否可用
+    		   dto.setLast_login_ip(bean.getLast_login_ip());//最后登录IP
+    		   dto.setNote(bean.getNote());//备注
+    		   dto.setBrief_info(bean.getBrief_info());//简介
+    		   dto.setDetail_info(bean.getDetail_info());//详情
+    		   dto.setDate_created(bean.getDate_created());//数据输入日期
+    		   dto.setCreate_id(bean.getCreate_id());//建立者ID
+    		   dto.setCreate_ip(bean.getCreate_ip());//建立者IP
+    		   dto.setLast_updated(bean.getLast_updated());//资料更新日期
+    		   dto.setUpdate_id(bean.getUpdate_id());//修改者ID
+    		   dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
+    		   dto.setDel_flag(bean.getDel_flag());//是否删除
+    		   dto.setVersion(bean.getVersion());//VERSION
     	   }
 			bean1=tcMemberDao.selectByPrimaryKey(dto);
 			if(bean1!=null){
@@ -380,20 +345,6 @@ public class MemberManager extends BaseManager implements IMemberManager {
 			}
 		}
 		return msg;
-	}
-	/**
-	 * 信息详情 DAO取得
-	 * @return 信息详情 DAO
-	 */
-	public ITcMemberDetailDao getTcMemberDetailDao() {
-	    return tcMemberDetailDao;
-	}
-	/**
-	 * 信息详情 DAO设定
-	 * @param tcMemberDetailDao 信息详情 DAO
-	 */
-	public void setTcMemberDetailDao(ITcMemberDetailDao tcMemberDetailDao) {
-	    this.tcMemberDetailDao = tcMemberDetailDao;
 	}
 	/**
 	 * 会员与学员关联表信息 Dao类取得
@@ -468,7 +419,8 @@ public class MemberManager extends BaseManager implements IMemberManager {
 	       try {
 	    	   TcMember dto=new TcMember();
 	    	   if(bean!=null){
-					dto.setUser_name(bean.getUser_name());//用户名
+	    		    dto.setId(bean.getId());//id
+	    		    dto.setUser_id(bean.getUser_id());//用户名
 					dto.setPasswd(bean.getPasswd());//密码
 					dto.setUser_type(bean.getUser_type());//会员类型
 					

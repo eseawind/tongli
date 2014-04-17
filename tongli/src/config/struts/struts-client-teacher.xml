@@ -8,7 +8,8 @@
 		<!-- 教师首页 -->
 		<action name="t001_*" class="t001Action" method="{1}">
 			<result name="init">/WEB-INF/pages/client/teacher/T001.jsp</result>
-			<result name="success" type="chain">t001_init</result>
+			<result name="list1">/WEB-INF/pages/client/teacher/T001_01.jsp</result>
+			<result name="success" type="redirect" >/t001_init.ac</result>
 		</action>
 	</package>
 </struts>

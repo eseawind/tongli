@@ -112,7 +112,7 @@
 						</c:if>
 						<div id="msg"></div>
 						<div class="btn btn-toolbar">
-							<a href="${basePath}/h/w007_edit.ac" class="btn btn-primary">新建</a>
+							<a href="${basePath}/h/w007_edit.ac" class="btn btn-primary">新增</a>
 						</div>
 						<form action="${basePath}/h/w007_downMenu.ac" class="btn" method="post">
 						<button id="download" class="btn" type="submit">从微信下载</button>

@@ -154,7 +154,7 @@
 							</c:choose>
 						</c:if>
 							<div class="btn-toolbar col-md-2">
-								<a href="${basePath}/h/s001_edit.ac" class="btn btn-primary"><i class="fa "></i> 新建资讯</a>
+								<a href="${basePath}/h/s001_edit.ac" class="btn btn-primary"><i class="fa "></i> 新增资讯</a>
 							</div>
 							<table class="table table-condensed table-striped">
 								<tbody>

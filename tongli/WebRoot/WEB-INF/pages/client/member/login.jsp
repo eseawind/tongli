@@ -44,6 +44,9 @@
 								<div class="login_title">登 录</div>
 							</div>
 							<div class="login_body">
+								<div class="login_row" style="color:red;">
+								<div class="login_lable"></div>${msg}
+								</div>
 								<div class="login_row">
 									<div class="login_lable">用户名：</div>
 									<div class="login_input">
@@ -60,7 +63,7 @@
 									<a href="#">忘记密码？</a>
 								</div>
 								<div class="login_register">注 册</div>
-								<input type="submit" class="login_btn" value="登 录" />
+								<input type="submit" class="login_btn" value="登 录" style="margin-top: -4px;" />
 								<div class="clear"></div>
 							</div>
 						</div>

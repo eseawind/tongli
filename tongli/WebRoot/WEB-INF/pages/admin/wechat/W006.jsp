@@ -99,7 +99,7 @@
 							</c:choose>
 						</c:if>
 						<div class="btn-toolbar">
-								<a href="${basePath}/h/w006_edit.ac" class="btn btn-primary"><i class="fa fa-book"></i> 新建视频</a>
+								<a href="${basePath}/h/w006_edit.ac" class="btn btn-primary"><i class="fa fa-book"></i> 新增视频</a>
 							</div>
 							<c:forEach items="${beans}" var="bean">
 							<div class="col-md-9">

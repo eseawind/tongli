@@ -1,10 +1,10 @@
 <%--
 /*
- * 会员-个人中心
+ * 教师-个人中心
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
- * 1.00     2014-04-14  wuxiaogang        程序・发布
+ * 1.00     2014-04-17  wuxiaogang        程序・发布
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 wechat System. - All Rights Reserved.
  *
@@ -54,7 +54,7 @@
 								<c:set var="student_id" value="${student.id}" />
 							</c:if>
 							<li>
-								<a href="javascript:;" onclick="loadUrlPage(0,'m201_','list1','course_info','${student.id}')">${student.name}</a>
+								<a href="javascript:;" onclick="loadUrlPage(0,'t001_','list1','course_info','${student.id}')">${student.name}</a>
 							</li>
 						</c:forEach>
 					</ul>
@@ -85,7 +85,7 @@
 </html>
 <script>
 	$(function() {
-		loadUrlPage(0,'m201_','list1','course_info','${student_id}');
+		//loadUrlPage(0,'t001_','list1','course_info','${student_id}');
 	});
 	function loadUrlPage(offset,url,event,divId,sid) {
 		var load = "<a class='loading' >信息加载中...</a>";

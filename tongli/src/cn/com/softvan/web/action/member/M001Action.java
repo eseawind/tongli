@@ -141,7 +141,7 @@ public class M001Action extends BaseAction {
 		if(bean!=null){
 			String msg="1";
 			try {
-				if(Validator.isEmpty(bean.getUser_name())){
+				if(Validator.isEmpty(bean.getUser_id())){
 					msg="保存失败!信息为空!";
 				}else{
 					BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);

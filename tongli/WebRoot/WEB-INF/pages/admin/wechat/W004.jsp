@@ -84,7 +84,7 @@
 							  <a href="#" class="list-group-item active">
 							   <i class="fa fa-check"></i> 未分组 (${fn:length(beans)})
 							  </a>
-							  <a class="list-group-item" href="#myModal1" data-toggle="modal"><i class="fa fa-bolt"></i> 新建分组</a>
+							  <a class="list-group-item" href="#myModal1" data-toggle="modal"><i class="fa fa-bolt"></i> 新增分组</a>
 							</div>
 						</div>
 						<div class="col-md-10">
@@ -105,7 +105,7 @@
 							</c:choose>
 						</c:if>
 							<div class="btn-toolbar">
-								<a href="${basePath}/h/w004_edit.ac" class="btn btn-primary"><i class="fa fa-book"></i> 新建文章</a>
+								<a href="${basePath}/h/w004_edit.ac" class="btn btn-primary"><i class="fa fa-book"></i> 新增文章</a>
 							</div>
 
 							<table class="table table-condensed table-striped">
@@ -157,7 +157,7 @@ function loadUrlPage(offset, url, event) {
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title">新建分组</h4>
+				<h4 class="modal-title">新增分组</h4>
 			</div>
 			<div class="modal-body">
 				<p></p>

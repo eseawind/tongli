@@ -91,7 +91,7 @@
 							</c:choose>
 						</c:if>
 							<div class="btn-toolbar">
-								<a href="${basePath}/h/m001_edit.ac" class="btn btn-primary">新建会员</a>
+								<a href="${basePath}/h/m001_edit.ac" class="btn btn-primary">新增会员</a>
 							</div>
 							<table class="table table-condensed table-striped">
 								<tbody>

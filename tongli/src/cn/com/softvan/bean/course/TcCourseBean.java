@@ -56,6 +56,8 @@ public class TcCourseBean extends BaseBean {
 	private String addres;
 	/** 课程详情 */
 	private String detail_info;
+	/** 教师名称 */
+	private String teacher_name;
 	/**
 	 * 课程编号取得
 	 * @return 课程编号
@@ -265,6 +267,20 @@ public class TcCourseBean extends BaseBean {
 	 */
 	public void setDetail_info(String detail_info) {
 	    this.detail_info = detail_info;
+	}
+	/**
+	 * 教师名称取得
+	 * @return 教师名称
+	 */
+	public String getTeacher_name() {
+	    return teacher_name;
+	}
+	/**
+	 * 教师名称设定
+	 * @param teacher_name 教师名称
+	 */
+	public void setTeacher_name(String teacher_name) {
+	    this.teacher_name = teacher_name;
 	}
 
 }

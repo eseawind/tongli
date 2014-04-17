@@ -106,7 +106,7 @@
 								<a href="${basePath}/h/w005_edit.ac"
 									class="btn btn-link" style="margin-top: 100px;"><div>
 										<i class="icon-comments-alt icon-5"></i>
-									</div>新建音乐消息</a>
+									</div>新增音乐消息</a>
 							</div>
 						</div>
 						<c:forEach items="${beans}" var="bean1" varStatus="n">

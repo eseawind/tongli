@@ -15,6 +15,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
+import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
 import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
@@ -40,6 +41,7 @@ public class T001Action extends BaseAction {
 	private static final long serialVersionUID = -3061791975484213551L;
 	private static final transient Logger log = Logger.getLogger(T001Action.class);
 	
+
 	/**BEAN类  会员信息*/
 	private TcMemberBean bean;
 	/**会员信息管理 业务处理*/
@@ -67,6 +69,22 @@ public class T001Action extends BaseAction {
 	 */
 	public String init() {
 		log.info("T001Action init.........");
+		TcMemberBean member=(TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO);
+		//当前会员关联的学员
+		request.setAttribute("student_beans", memberManager.findDataIsListStudent(member));
+		return "init";
+	}
+	/**
+	 * <p>
+	 * 初始化处理。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>初始化处理。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String list1() {
+		log.info("T001Action list1.........");
 		int offset = 0;
 		// 分页偏移量
 		if (!Validator.isNullEmpty(request.getParameter("offset"))
@@ -78,15 +96,15 @@ public class T001Action extends BaseAction {
 		page.setCurrOffset(offset);
 		//每页显示条数
 		page.setPageRowCount(15);
-		TcCourseSyllabusBean bean1 = new TcCourseSyllabusBean();
+		TcCourseSyllabusItemsBean bean1 = new TcCourseSyllabusItemsBean();
 		bean1.setPageInfo(page);
 		bean1.setDel_flag("0");
-		//列表
-		List<TcCourseSyllabusBean> beans=courseSyllabusManager.findDataIsPage(bean1);
+		bean1.setStudent_id(request.getParameter("sid"));//学员id
+		//课程列表
+		List<TcCourseSyllabusBean> beans=courseSyllabusItemsManager.findDataIsPageCourse(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
-		
-		return "init";
+		return "list1";
 	}
 	/**
 	 * <p>
@@ -103,15 +121,16 @@ public class T001Action extends BaseAction {
 		String pwd=request.getParameter("pwd");
 		if(Validator.notEmpty(uid)&&Validator.notEmpty(pwd)){
 			TcMemberBean bean1=new TcMemberBean();
-			bean1.setUser_name(uid);
+			bean1.setUser_id(uid);
 			bean1.setPasswd(pwd);
 			bean1.setUser_type("0");//
 			bean=memberManager.checkMemberPWD(bean1);
 			if(bean!=null){
-				request.getSession().setAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO, bean);
+				request.getSession().setAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO, bean);
 				return SUCCESS;
 			}
 		}
+		request.setAttribute("msg", "登录失败,用户名或密码错误!");
 		return "tlogin";
 	}
 

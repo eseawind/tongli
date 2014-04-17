@@ -18,7 +18,18 @@
 	del_flag,
 	version,
 	pic_url,
-	birthdate
+	birthdate,
+	height,
+	weight,
+	nationality,
+	tutor,
+	tel,
+	addres,
+	school,
+	like_sports,
+	once_in_motion,
+	injury_history,
+	parents_expectations
   </sql>
   <select id="selectByPrimaryKey" resultType="tcStudentBean" parameterType="tcStudent" >
     select 
@@ -46,7 +57,18 @@
 		del_flag,
 		version,
 		pic_url,
-		birthdate
+		birthdate,
+		height,
+		weight,
+		nationality,
+		tutor,
+		tel,
+		addres,
+		school,
+		like_sports,
+		once_in_motion,
+		injury_history,
+		parents_expectations
       ) values (
 	    #{id},
 		#{name},
@@ -62,7 +84,18 @@
 		'0',
 		 0,
 		#{pic_url},
-		#{birthdate}
+		#{birthdate},
+		#{height},
+		#{weight},
+		#{nationality},
+		#{tutor},
+		#{tel},
+		#{addres},
+		#{school},
+		#{like_sports},
+		#{once_in_motion},
+		#{injury_history},
+		#{parents_expectations}
     )
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tcStudent" >
@@ -79,7 +112,17 @@
 	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
 	<if test="pic_url!= null" >,pic_url=#{pic_url}</if>
 	<if test="birthdate!= null" >,birthdate=#{birthdate}</if>
-	
+	<if test="height!= null" >,height=#{height}</if>
+	<if test="weight!= null" >,weight=#{weight}</if>
+	<if test="nationality!= null" >,nationality=#{nationality}</if>
+	<if test="tutor!= null" >,tutor=#{tutor}</if>
+	<if test="tel!= null" >,tel=#{tel}</if>
+	<if test="addres!= null" >,addres=#{addres}</if>
+	<if test="school!= null" >,school=#{school}</if>
+	<if test="like_sports!= null" >,like_sports=#{like_sports}</if>
+	<if test="once_in_motion!= null" >,once_in_motion=#{once_in_motion}</if>
+	<if test="injury_history!= null" >,injury_history=#{injury_history}</if>
+	<if test="parents_expectations!= null" >,parents_expectations=#{parents_expectations}</if>
 	where id=#{id}
   </update>
   	<!--判断是否存在-->
@@ -93,53 +136,36 @@
 	-->
 	<select id="findDataIsPage" resultType="tcStudentBean" parameterType="tcStudent" >
     select
-	<include refid="findDataIsList_index_sql"/>
-	from tc_student t1
+	<include refid="Base_Column_List"/>
+	from tc_student 
     where 1=1
     <choose>
     	<when test="del_flag!=null">
-    		and t1.del_flag=#{del_flag}
+    		and del_flag=#{del_flag}
     	</when>
     	<otherwise>
-    	    and t1.del_flag='0'
+    	    and del_flag='0'
     	</otherwise>
     </choose>
-    order by t1.name asc
+    order by name asc
     </select>
 	<!-- 
 	 * <p>信息列表。</p>
-	public List<TcStudentBean> findDataIsList(IEntity dto); -->
-	<sql id="findDataIsList_index_sql" >
-			t1.id,
-			t1.name,
-			t1.age,
-			t1.sex,
-			t1.hobby,
-			t1.detail_info,
-			t1.note,
-			t1.date_created,
-			t1.create_id,
-			t1.create_ip,
-			t1.last_updated,
-			t1.del_flag,
-			t1.version,
-			t1.pic_url,
-			t1.birthdate
-	</sql>
+	-->
 	<select id="findDataIsList" resultType="tcStudentBean" parameterType="tcStudent" >
 		 select
-		<include refid="findDataIsList_index_sql"/>
-		from tc_student t1
+		<include refid="Base_Column_List"/>
+		from tc_student 
 	    where 1=1
 	    <choose>
 	    	<when test="del_flag!=null">
-	    		and t1.del_flag=#{del_flag}
+	    		and del_flag=#{del_flag}
 	    	</when>
 	    	<otherwise>
-	    	    and t1.del_flag='0'
+	    	    and del_flag='0'
 	    	</otherwise>
 	    </choose>
-	    order by t1.name asc
+	    order by name asc
 	    <if test="limit_s!=null and limit_e!=null">
 	     limit #{limit_s},#{limit_e}
 	    </if>

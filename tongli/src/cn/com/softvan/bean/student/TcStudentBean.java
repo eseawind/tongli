@@ -46,6 +46,28 @@ public class TcStudentBean extends BaseBean {
 	private String pic_url;
 	/** 生日 */
 	private String birthdate;
+	/** 身高 */
+	private String height;
+	/** 体重 */
+	private String weight;
+	/** 国籍 */
+	private String nationality;
+	/** 监护人姓名 */
+	private String tutor;
+	/** 紧急联系电话 */
+	private String tel;
+	/** 家庭住址 */
+	private String addres;
+	/** 所在学校或幼儿园 */
+	private String school;
+	/** 喜欢的运动 */
+	private String like_sports;
+	/** 曾经参加的运动 */
+	private String once_in_motion;
+	/** 伤病史 */
+	private String injury_history;
+	/** 家长的期许 */
+	private String parents_expectations;
 	/**
 	 * 学员id取得
 	 * @return 学员id
@@ -185,6 +207,160 @@ public class TcStudentBean extends BaseBean {
 	 */
 	public void setBirthdate(String birthdate) {
 	    this.birthdate = birthdate;
+	}
+	/**
+	 * 身高取得
+	 * @return 身高
+	 */
+	public String getHeight() {
+	    return height;
+	}
+	/**
+	 * 身高设定
+	 * @param height 身高
+	 */
+	public void setHeight(String height) {
+	    this.height = height;
+	}
+	/**
+	 * 体重取得
+	 * @return 体重
+	 */
+	public String getWeight() {
+	    return weight;
+	}
+	/**
+	 * 体重设定
+	 * @param weight 体重
+	 */
+	public void setWeight(String weight) {
+	    this.weight = weight;
+	}
+	/**
+	 * 国籍取得
+	 * @return 国籍
+	 */
+	public String getNationality() {
+	    return nationality;
+	}
+	/**
+	 * 国籍设定
+	 * @param nationality 国籍
+	 */
+	public void setNationality(String nationality) {
+	    this.nationality = nationality;
+	}
+	/**
+	 * 监护人姓名取得
+	 * @return 监护人姓名
+	 */
+	public String getTutor() {
+	    return tutor;
+	}
+	/**
+	 * 监护人姓名设定
+	 * @param tutor 监护人姓名
+	 */
+	public void setTutor(String tutor) {
+	    this.tutor = tutor;
+	}
+	/**
+	 * 紧急联系电话取得
+	 * @return 紧急联系电话
+	 */
+	public String getTel() {
+	    return tel;
+	}
+	/**
+	 * 紧急联系电话设定
+	 * @param tel 紧急联系电话
+	 */
+	public void setTel(String tel) {
+	    this.tel = tel;
+	}
+	/**
+	 * 家庭住址取得
+	 * @return 家庭住址
+	 */
+	public String getAddres() {
+	    return addres;
+	}
+	/**
+	 * 家庭住址设定
+	 * @param addres 家庭住址
+	 */
+	public void setAddres(String addres) {
+	    this.addres = addres;
+	}
+	/**
+	 * 所在学校或幼儿园取得
+	 * @return 所在学校或幼儿园
+	 */
+	public String getSchool() {
+	    return school;
+	}
+	/**
+	 * 所在学校或幼儿园设定
+	 * @param school 所在学校或幼儿园
+	 */
+	public void setSchool(String school) {
+	    this.school = school;
+	}
+	/**
+	 * 喜欢的运动取得
+	 * @return 喜欢的运动
+	 */
+	public String getLike_sports() {
+	    return like_sports;
+	}
+	/**
+	 * 喜欢的运动设定
+	 * @param like_sports 喜欢的运动
+	 */
+	public void setLike_sports(String like_sports) {
+	    this.like_sports = like_sports;
+	}
+	/**
+	 * 曾经参加的运动取得
+	 * @return 曾经参加的运动
+	 */
+	public String getOnce_in_motion() {
+	    return once_in_motion;
+	}
+	/**
+	 * 曾经参加的运动设定
+	 * @param once_in_motion 曾经参加的运动
+	 */
+	public void setOnce_in_motion(String once_in_motion) {
+	    this.once_in_motion = once_in_motion;
+	}
+	/**
+	 * 伤病史取得
+	 * @return 伤病史
+	 */
+	public String getInjury_history() {
+	    return injury_history;
+	}
+	/**
+	 * 伤病史设定
+	 * @param injury_history 伤病史
+	 */
+	public void setInjury_history(String injury_history) {
+	    this.injury_history = injury_history;
+	}
+	/**
+	 * 家长的期许取得
+	 * @return 家长的期许
+	 */
+	public String getParents_expectations() {
+	    return parents_expectations;
+	}
+	/**
+	 * 家长的期许设定
+	 * @param parents_expectations 家长的期许
+	 */
+	public void setParents_expectations(String parents_expectations) {
+	    this.parents_expectations = parents_expectations;
 	}
 
 }

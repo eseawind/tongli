@@ -67,7 +67,6 @@
 		<typeAlias type="cn.com.softvan.bean.member.TcMemberBean" alias="tcMemberBean"/>
 		<!-- entity class -->
 		<typeAlias type="cn.com.softvan.dao.entity.member.TcMember" alias="tcMember"/>
-		<typeAlias type="cn.com.softvan.dao.entity.member.TcMemberDetail" alias="tcMemberDetail"/>
 		<typeAlias type="cn.com.softvan.dao.entity.member.TcMemberVsStudent" alias="tcMemberVsStudent"/>
 		<!-- 会员管理 end -->
 		<!-- 学员管理 begin -->
@@ -130,7 +129,6 @@
 		<!-- 课程管理 end -->
 		<!-- 会员管理 begin -->
 		<mapper resource="/cn/com/softvan/dao/mybatis/member/TcMember.xml"/>
-		<mapper resource="/cn/com/softvan/dao/mybatis/member/TcMemberDetail.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/member/TcMemberVsStudent.xml"/>
 		<!-- 会员管理 end -->
 		<!-- 学员管理 begin -->

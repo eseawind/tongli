@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.com.softvan.bean.course.TcCourseBean;
+import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
@@ -311,5 +313,43 @@ public class CourseSyllabusItemsManager extends BaseManager implements ICourseSy
 	 */
 	public void setTcCourseSyllabusItemsDao(ITcCourseSyllabusItemsDao tcCourseSyllabusItemsDao) {
 	    this.tcCourseSyllabusItemsDao = tcCourseSyllabusItemsDao;
+	}
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>当前学员关联的课程列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcCourseSyllabusBean> findDataIsPageCourse(TcCourseSyllabusItemsBean bean){
+		List<TcCourseSyllabusBean> beans=null;
+		try {
+			TcCourseSyllabusItems dto=new TcCourseSyllabusItems();
+	    	   if(bean!=null){
+	    		   dto.setId(bean.getId());//id
+	    		   dto.setStudent_id(bean.getStudent_id());//学员id
+	    		   dto.setCourse_syllabus_id(bean.getCourse_syllabus_id());//课程表id
+	    		   dto.setTeacher_id(bean.getTeacher_id());//教师id
+	    		   dto.setTeacher_score(bean.getTeacher_score());//教师得分
+	    		   dto.setTeacher_score_note(bean.getTeacher_score_note());//教师得分描述
+	    		   dto.setStudent_status(bean.getStudent_status());//学员状态
+	    		   dto.setStudent_status_note(bean.getStudent_status_note());//学员状态描述
+	    		   dto.setNote(bean.getNote());//备注
+	    		   dto.setDate_created(bean.getDate_created());//数据输入日期
+	    		   dto.setCreate_id(bean.getCreate_id());//建立者ID
+	    		   dto.setCreate_ip(bean.getCreate_ip());//建立者IP
+	    		   dto.setLast_updated(bean.getLast_updated());//资料更新日期
+	    		   dto.setUpdate_id(bean.getUpdate_id());//修改者ID
+	    		   dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
+	    		   dto.setDel_flag(bean.getDel_flag());//是否删除
+	    		   dto.setVersion(bean.getVersion());//VERSION
+	    		   dto.setPageInfo(bean.getPageInfo());//分页
+	    	   }
+				beans=tcCourseSyllabusItemsDao.findDataIsPageCourse(dto);
+		} catch (Exception e) {
+			log.error("信息查询失败,数据库错误!", e);
+		}
+		return beans;
 	}
 }

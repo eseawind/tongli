@@ -3,20 +3,22 @@
 <mapper namespace="cn.com.softvan.dao.daointer.member.ITcMemberDao" >
   <sql id="Base_Column_List" >
 	id,
-	user_name,
+	user_id,
 	passwd,
 	user_type,
-	nickname,
+	name,
 	login_count,
 	last_login,
 	bind_mobile,
 	bind_email,
 	sex,
 	tel,
-	real_name,
+	pic_url,
 	is_enabled,
 	last_login_ip,
 	note,
+	brief_info,
+	detail_info,
 	date_created,
 	create_id,
 	create_ip,
@@ -24,63 +26,37 @@
 	update_id,
 	update_ip,
 	del_flag,
-	version,
-	pic_url
+	version
   </sql>
   <select id="selectByPrimaryKey" resultType="tcMemberBean" parameterType="tcMember" >
     select 
-    t1.id,
-	t1.user_name,
-	t1.passwd,
-	t1.user_type,
-	t1.nickname,
-	t1.login_count,
-	t1.last_login,
-	t1.bind_mobile,
-	t1.bind_email,
-	t1.sex,
-	t1.tel,
-	t1.real_name,
-	t1.is_enabled,
-	t1.last_login_ip,
-	t1.note,
-	t1.date_created,
-	t1.create_id,
-	t1.create_ip,
-	t1.last_updated,
-	t1.update_id,
-	t1.update_ip,
-	t1.del_flag,
-	t1.version,
-	t1.pic_url
-    ,
-    t2.user_id,
-	t2.birthdate,
-	t2.blood_type,
-	t2.edu_level,
-	t2.trade,
-	t2.job,
-	t2.income_level,
-	t2.province_id,
-	t2.city_id,
-	t2.county_id,
-	t2.address,
-	t2.zipcode,
-	t2.credential,
-	t2.credential_code,
-	t2.qq,
-	t2.msn,
-	t2.hobby,
-	t2.detail_info,
-	t4.province_name,
-	t5.city_name,
-	t6.county_name
-    from tc_member t1
-    left join tc_member_detail t2 on (t2.user_id =id) 
-     left join tc_adi_province t4 on (t4.province_id=t2.province_id)
-    left join tc_adi_city t5 on (t5.city_id=t2.city_id)
-    left join tc_adi_county t6 on (t6.county_id=t2.county_id)
-    where t1.id = #{id}
+    id,
+	user_id,
+	passwd,
+	user_type,
+	name,
+	login_count,
+	last_login,
+	bind_mobile,
+	bind_email,
+	sex,
+	tel,
+	pic_url,
+	is_enabled,
+	last_login_ip,
+	note,
+	brief_info,
+	detail_info,
+	date_created,
+	create_id,
+	create_ip,
+	last_updated,
+	update_id,
+	update_ip,
+	del_flag,
+	version
+    from tc_member 
+    where id = #{id}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="tcMember" >
     delete from tc_member
@@ -89,50 +65,52 @@
   <insert id="insert" parameterType="tcMember" >
     insert into tc_member (
 	    id,
-		user_name,
+		user_id,
 		passwd,
 		user_type,
-		nickname,
+		name,
 		login_count,
 		last_login,
 		bind_mobile,
 		bind_email,
 		sex,
 		tel,
-		real_name,
+		pic_url,
 		is_enabled,
 		last_login_ip,
 		note,
+		brief_info,
+		detail_info,
 		date_created,
 		create_id,
 		create_ip,
 		last_updated,
 		del_flag,
-		version,
-		pic_url
+		version
       ) values (
 	    #{id},
-		#{user_name},
+		#{user_id},
 		#{passwd},
 		#{user_type},
-		#{nickname},
-		0,
-		now(),
+		#{name},
+		#{login_count},
+		#{last_login},
 		#{bind_mobile},
 		#{bind_email},
 		#{sex},
 		#{tel},
-		#{real_name},
+		#{pic_url},
 		#{is_enabled},
 		#{last_login_ip},
 		#{note},
+		#{brief_info},
+		#{detail_info},
 		now(),
 		#{create_id},
 		#{create_ip},
 		now(),
 		'0',
-		 0,
-		 #{pic_url}
+		 0
     )
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tcMember" >
@@ -140,23 +118,22 @@
     ,last_updated=now()
 	,update_id=#{update_id}
 	,update_ip=#{update_ip}
-	<!-- <if test="user_name!= null" >,user_name=#{user_name}</if> -->
 	<if test="passwd!= null" >,passwd=#{passwd}</if>
 	<if test="user_type!= null" >,user_type=#{user_type}</if>
-	<if test="nickname!= null" >,nickname=#{nickname}</if>
-	<if test="login_count!= null" >,login_count=#{login_count}</if>
-	<if test="last_login!= null" >,last_login=#{last_login}</if>
+	<if test="name!= null" >,name=#{name}</if>
+	<if test="login_count!= null" >,login_count=${login_count}</if>
+	<if test="last_login!= null" >,last_login=now()</if>
 	<if test="bind_mobile!= null" >,bind_mobile=#{bind_mobile}</if>
 	<if test="bind_email!= null" >,bind_email=#{bind_email}</if>
 	<if test="sex!= null" >,sex=#{sex}</if>
 	<if test="tel!= null" >,tel=#{tel}</if>
-	<if test="real_name!= null" >,real_name=#{real_name}</if>
+	<if test="pic_url!= null" >,pic_url=#{pic_url}</if>
 	<if test="is_enabled!= null" >,is_enabled=#{is_enabled}</if>
 	<if test="last_login_ip!= null" >,last_login_ip=#{last_login_ip}</if>
 	<if test="note!= null" >,note=#{note}</if>
+	<if test="brief_info!= null" >,brief_info=#{brief_info}</if>
+	<if test="detail_info!= null" >,detail_info=#{detail_info}</if>
 	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
-	<if test="pic_url!= null" >,pic_url=#{pic_url}</if>
-	
 	where id=#{id}
   </update>
   	<!--判断是否存在-->
@@ -165,61 +142,41 @@
     </select>
     <!--
 	 * <p>信息列表 分页。</p>
-	 */
-	public List<TcMemberBean> findDataIsPage(IEntity dto);
 	-->
 	<select id="findDataIsPage" resultType="tcMemberBean" parameterType="tcMember" >
     select
-	<include refid="findDataIsList_index_sql"/>
-	from tc_member t1
+	<include refid="Base_Column_List"/>
+	from tc_member 
     where 1=1
     <choose>
     	<when test="del_flag!=null">
-    		and t1.del_flag=#{del_flag}
+    		and del_flag=#{del_flag}
     	</when>
     	<otherwise>
-    	    and t1.del_flag='0'
+    	    and del_flag='0'
     	</otherwise>
     </choose>
     <if test="user_type!= null" > and user_type=#{user_type}</if>
-    order by t1.user_name asc
+    order by user_id asc
     </select>
 	<!-- 
 	 * <p>信息列表。</p>
 	public List<TcMemberBean> findDataIsList(IEntity dto); -->
-	<sql id="findDataIsList_index_sql" >
-			t1.id,
-			t1.user_name,
-			t1.passwd,
-			t1.user_type,
-			t1.nickname,
-			t1.login_count,
-			t1.last_login,
-			t1.bind_mobile,
-			t1.bind_email,
-			t1.sex,
-			t1.tel,
-			t1.real_name,
-			t1.is_enabled,
-			t1.last_login_ip,
-			t1.pic_url,
-			t1.last_updated
-	</sql>
 	<select id="findDataIsList" resultType="tcMemberBean" parameterType="tcMember" >
 		 select
-		<include refid="findDataIsList_index_sql"/>
-		from tc_member t1
+		<include refid="Base_Column_List"/>
+		from tc_member 
 	    where 1=1
 	    <choose>
 	    	<when test="del_flag!=null">
-	    		and t1.del_flag=#{del_flag}
+	    		and del_flag=#{del_flag}
 	    	</when>
 	    	<otherwise>
-	    	    and t1.del_flag='0'
+	    	    and del_flag='0'
 	    	</otherwise>
 	    </choose>
 	    <if test="user_type!= null" > and user_type=#{user_type}</if>
-	    order by t1.user_name asc
+	    order by user_id asc
 	    <if test="limit_s!=null and limit_e!=null">
 	     limit #{limit_s},#{limit_e}
 	    </if>
@@ -239,57 +196,8 @@
    <!-- 登录验证 -->
    <select id="checkMemberPWD" resultType="tcMemberBean" parameterType="tcMember" >
     select 
-    t1.id,
-	t1.user_name,
-	t1.passwd,
-	t1.user_type,
-	t1.nickname,
-	t1.login_count,
-	t1.last_login,
-	t1.bind_mobile,
-	t1.bind_email,
-	t1.sex,
-	t1.tel,
-	t1.real_name,
-	t1.is_enabled,
-	t1.last_login_ip,
-	t1.note,
-	t1.date_created,
-	t1.create_id,
-	t1.create_ip,
-	t1.last_updated,
-	t1.update_id,
-	t1.update_ip,
-	t1.del_flag,
-	t1.version,
-	t1.pic_url
-    ,
-    t2.user_id,
-	t2.birthdate,
-	t2.blood_type,
-	t2.edu_level,
-	t2.trade,
-	t2.job,
-	t2.income_level,
-	t2.province_id,
-	t2.city_id,
-	t2.county_id,
-	t2.address,
-	t2.zipcode,
-	t2.credential,
-	t2.credential_code,
-	t2.qq,
-	t2.msn,
-	t2.hobby,
-	t2.detail_info,
-	t4.province_name,
-	t5.city_name,
-	t6.county_name
-    from tc_member t1
-    left join tc_member_detail t2 on (t2.user_id =id) 
-     left join tc_adi_province t4 on (t4.province_id=t2.province_id)
-    left join tc_adi_city t5 on (t5.city_id=t2.city_id)
-    left join tc_adi_county t6 on (t6.county_id=t2.county_id)
-    where t1.user_name = #{user_name} and t1.passwd=#{passwd} and t1.user_type=#{user_type}
+    <include refid="Base_Column_List"/>
+    from tc_member 
+    where user_id = #{user_id} and passwd=#{passwd} and user_type=#{user_type}
    </select>
 </mapper>

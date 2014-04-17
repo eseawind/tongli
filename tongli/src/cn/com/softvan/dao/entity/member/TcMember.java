@@ -24,13 +24,13 @@ public class TcMember extends BaseEntity {
 	/** id */
 	private String id;
 	/** 用户名 */
-	private String user_name;
+	private String user_id;
 	/** 密码 */
 	private String passwd;
 	/** 会员类型 */
 	private String user_type;
-	/** 用��昵称 */
-	private String nickname;
+	/** 姓名 */
+	private String name;
 	/** 登录次数 */
 	private String login_count;
 	/** 最后登入时间 */
@@ -43,14 +43,18 @@ public class TcMember extends BaseEntity {
 	private String sex;
 	/** 电话 */
 	private String tel;
-	/** 真实姓名 */
-	private String real_name;
+	/** 头像 */
+	private String pic_url;
 	/** 是否可用 */
 	private String is_enabled;
 	/** 最后登录IP */
 	private String last_login_ip;
-	/** 头像 */
-	private String pic_url;
+	/** 备注 */
+	private String note;
+	/** 简介 */
+	private String brief_info;
+	/** 详情 */
+	private String detail_info;
 	/**
 	 * id取得
 	 * @return id
@@ -69,15 +73,15 @@ public class TcMember extends BaseEntity {
 	 * 用户名取得
 	 * @return 用户名
 	 */
-	public String getUser_name() {
-	    return user_name;
+	public String getUser_id() {
+	    return user_id;
 	}
 	/**
 	 * 用户名设定
-	 * @param user_name 用户名
+	 * @param user_id 用户名
 	 */
-	public void setUser_name(String user_name) {
-	    this.user_name = user_name;
+	public void setUser_id(String user_id) {
+	    this.user_id = user_id;
 	}
 	/**
 	 * 密码取得
@@ -108,18 +112,18 @@ public class TcMember extends BaseEntity {
 	    this.user_type = user_type;
 	}
 	/**
-	 * 用��昵称取得
-	 * @return 用��昵称
+	 * 姓名取得
+	 * @return 姓名
 	 */
-	public String getNickname() {
-	    return nickname;
+	public String getName() {
+	    return name;
 	}
 	/**
-	 * 用��昵称设定
-	 * @param nickname 用��昵称
+	 * 姓名设定
+	 * @param name 姓名
 	 */
-	public void setNickname(String nickname) {
-	    this.nickname = nickname;
+	public void setName(String name) {
+	    this.name = name;
 	}
 	/**
 	 * 登录次数取得
@@ -206,18 +210,18 @@ public class TcMember extends BaseEntity {
 	    this.tel = tel;
 	}
 	/**
-	 * 真实姓名取得
-	 * @return 真实姓名
+	 * 头像取得
+	 * @return 头像
 	 */
-	public String getReal_name() {
-	    return real_name;
+	public String getPic_url() {
+	    return pic_url;
 	}
 	/**
-	 * 真实姓名设定
-	 * @param real_name 真实姓名
+	 * 头像设定
+	 * @param pic_url 头像
 	 */
-	public void setReal_name(String real_name) {
-	    this.real_name = real_name;
+	public void setPic_url(String pic_url) {
+	    this.pic_url = pic_url;
 	}
 	/**
 	 * 是否可用取得
@@ -248,18 +252,46 @@ public class TcMember extends BaseEntity {
 	    this.last_login_ip = last_login_ip;
 	}
 	/**
-	 * 头像取得
-	 * @return 头像
+	 * 备注取得
+	 * @return 备注
 	 */
-	public String getPic_url() {
-	    return pic_url;
+	public String getNote() {
+	    return note;
 	}
 	/**
-	 * 头像设定
-	 * @param pic_url 头像
+	 * 备注设定
+	 * @param note 备注
 	 */
-	public void setPic_url(String pic_url) {
-	    this.pic_url = pic_url;
+	public void setNote(String note) {
+	    this.note = note;
+	}
+	/**
+	 * 简介取得
+	 * @return 简介
+	 */
+	public String getBrief_info() {
+	    return brief_info;
+	}
+	/**
+	 * 简介设定
+	 * @param brief_info 简介
+	 */
+	public void setBrief_info(String brief_info) {
+	    this.brief_info = brief_info;
+	}
+	/**
+	 * 详情取得
+	 * @return 详情
+	 */
+	public String getDetail_info() {
+	    return detail_info;
+	}
+	/**
+	 * 详情设定
+	 * @param detail_info 详情
+	 */
+	public void setDetail_info(String detail_info) {
+	    this.detail_info = detail_info;
 	}
 
 }

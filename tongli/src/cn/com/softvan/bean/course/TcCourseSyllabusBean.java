@@ -34,6 +34,8 @@ public class TcCourseSyllabusBean extends BaseBean {
 	private String course_id;
 	/** 教师id */
 	private String teacher_id;
+	/** 教师名称 */
+	private String teacher_name;
 	/** 课程日期 */
 	private String day;
 	/** 开始时间 */
@@ -114,6 +116,20 @@ public class TcCourseSyllabusBean extends BaseBean {
 	 */
 	public void setTeacher_id(String teacher_id) {
 	    this.teacher_id = teacher_id;
+	}
+	/**
+	 * 教师名称取得
+	 * @return 教师名称
+	 */
+	public String getTeacher_name() {
+	    return teacher_name;
+	}
+	/**
+	 * 教师名称设定
+	 * @param teacher_name 教师名称
+	 */
+	public void setTeacher_name(String teacher_name) {
+	    this.teacher_name = teacher_name;
 	}
 	/**
 	 * 课程日期取得

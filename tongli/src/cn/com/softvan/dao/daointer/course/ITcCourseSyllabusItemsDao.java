@@ -12,6 +12,7 @@ package cn.com.softvan.dao.daointer.course;
 
 import java.util.List;
 
+import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
 import cn.com.softvan.dao.entity.IEntity;
 /**
@@ -78,4 +79,13 @@ public interface ITcCourseSyllabusItemsDao {
 	 * @return 处理结果
 	 */
 	public List<TcCourseSyllabusItemsBean> findDataIsListStudent(IEntity dto);
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>当前学员关联的课程列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcCourseSyllabusBean> findDataIsPageCourse(IEntity dto);
 }

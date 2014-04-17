@@ -80,6 +80,17 @@ public class StudentManager extends BaseManager implements IStudentManager {
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//VERSION
 				dto.setBirthdate(bean.getBirthdate());//生日
+				dto.setHeight(bean.getHeight());//身高
+				dto.setWeight(bean.getWeight());//体重
+				dto.setNationality(bean.getNationality());//国籍
+				dto.setTutor(bean.getTutor());//监护人姓名
+				dto.setTel(bean.getTel());//紧急联系电话
+				dto.setAddres(bean.getAddres());//家庭住址
+				dto.setSchool(bean.getSchool());//所在学校或幼儿园
+				dto.setLike_sports(bean.getLike_sports());//喜欢的运动
+				dto.setOnce_in_motion(bean.getOnce_in_motion());//曾经参加的运动
+				dto.setInjury_history(bean.getInjury_history());//伤病史
+				dto.setParents_expectations(bean.getParents_expectations());//家长的期许
 				//判断数据是否存在
 				if(tcStudentDao.isDataYN(dto)!=0){
 					//数据存在

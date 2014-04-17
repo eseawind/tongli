@@ -82,13 +82,13 @@
 						<input name="bean.id" type="hidden" value="${bean.id}">
 						<div class="well form-inline">
 							 &nbsp; 
-							<label>会员名
+							<label>会员登录ID
 								<c:choose>
-									<c:when test="${bean.user_name!=null && fn:length(bean.user_name)>0}">
-										<input class="upload-wrapper" readonly="readonly" style="background-color: #eee;" id="message_user_name" name="bean.user_name" size="30" value="${bean.user_name }" placeholder="会员登录名"  type="text">
+									<c:when test="${bean.user_id!=null && fn:length(bean.user_id)>0}">
+										<input class="upload-wrapper" readonly="readonly" style="background-color: #eee;" id="message_user_id" name="bean.user_id" size="30" value="${bean.user_id }" placeholder="会员登录ID"  type="text">
 									</c:when>
 									<c:otherwise>
-										<input class="upload-wrapper" id="message_user_name" name="bean.user_name" size="30" placeholder="会员登录名"  type="text">
+										<input class="upload-wrapper" id="message_user_id" name="bean.user_id" size="30" placeholder="会员登录ID"  type="text">
 									</c:otherwise>
 								</c:choose>
 							</label>
@@ -112,13 +112,13 @@
 							 type="radio">
 							 女</label>
 							 &nbsp; 
-							 <label title="是否可用">
+							 <label title="可用">
 							<input name="bean.is_enabled" value="1"
 							<c:if test="${bean.is_enabled=='1'}">
 							 	checked="checked"
 							 </c:if>
 							 type="checkbox">
-							 是否可用</label>
+							 可用</label>
 							  &nbsp; 
 							  会员类型
 							 <label title="老师">
@@ -173,9 +173,9 @@
 						</div>
 					</div>
 						<div class="form-group">
-							<label for="article_nickname">用户昵称</label> <input
-								class="form-control" id="article_nickname" name="bean.nickname"
-								type="text" value="${bean.nickname}">
+							<label for="article_name">姓名</label> <input
+								class="form-control" id="article_name" name="bean.name"
+								type="text" value="${bean.name}">
 						</div>
 						<div class="form-group">
 							<label for="article_bind_mobile">绑定手机</label> <input
@@ -192,113 +192,9 @@
 								id="article_tel" name="bean.tel" type="text" value="${bean.tel}">
 						</div>
 						<div class="form-group">
-							<label for="article_real_name">真实姓名</label> <input
-								class="form-control" id="article_real_name"
-								name="bean.real_name" type="text" value="${bean.real_name}">
+							<label for="article_brief_info">简介</label> 
+							<textarea class="form-control" id="article_brief_info" name="bean.brief_info" >${bean.brief_info}</textarea>
 						</div>
-						
-						<div class="form-group">
-							<label for="article_birthdate">生日</label> 
-									<div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="-100y">
-										<input id="bean_birthdate" type="text" name="bean.birthdate" value="${bean.birthdate}" class="form-control" readonly="">
-										<span class="input-group-btn">
-										<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-										</span>
-									</div>
-						</div>
-						<div class="form-group">
-							<label for="article_blood_type">血型</label> <input
-								class="form-control" id="article_blood_type"
-								name="bean.blood_type" type="text" value="${bean.blood_type}">
-						</div>
-						<div class="form-group">
-							<label for="article_edu_level">文化程度</label> <input
-								class="form-control" id="article_edu_level"
-								name="bean.edu_level" type="text" value="${bean.edu_level}">
-						</div>
-						<div class="form-group">
-							<label for="article_trade">从事行业</label> <input
-								class="form-control" id="article_trade" name="bean.trade"
-								type="text" value="${bean.trade}">
-						</div>
-						<div class="form-group">
-							<label for="article_job">从事职业</label> <input class="form-control"
-								id="article_job" name="bean.job" type="text" value="${bean.job}">
-						</div>
-						<div class="form-group">
-							<label for="article_income_level">收入水平</label> <input
-								class="form-control" id="article_income_level"
-								name="bean.income_level" type="text"
-								value="${bean.income_level}">
-						</div>
-						<div  class="form-group">
-							<label class="control-label">行政区划</label>
-							<label class="control-label ">
-								<select class="form-control" onchange="areaB(this.value, null,null, null, 'bean_city_id','bean_county_id');" name="bean.province_id" id="bean_province_id" style="width: 180px;">
-									<option value="">请选择</option>
-								</select>
-							</label>
-							<label class="control-label">
-								<select class="form-control" onchange="areaC(this.value, null,null,null, 'bean_county_id');" name="bean.city_id" id="bean_city_id" style="width: 180px;">
-									<option value="">请选择</option>
-								</select>
-							</label>
-							<label class="control-label">
-								<select class="form-control" name="bean.county_id" id="bean_county_id" style="width: 180px;">
-									<option value="">请选择</option>
-								</select>
-							</label>
-							<script type="text/javascript">
-							jQuery(document).ready(function() {
-								//省
-								areaA('${bean.province_id}', '${bean.province_name}', 'bean_province_id');
-								//市
-								areaB('${bean.province_id}', '${bean.city_id}', '${bean.city_name}', 'true', 'bean_city_id','bean_county_id'); 
-								//县
-								areaC('${bean.city_id}', '${bean.county_id}', '${bean.county_name}','true', 'bean_county_id'); 
-							});
-							</script>
-						</div>
-						<div class="form-group">
-							<label for="article_address">详细地址</label> <input
-								class="form-control" id="article_address" name="bean.address"
-								type="text" value="${bean.address}">
-						</div>
-						<div class="form-group">
-							<label for="article_zipcode">邮政编码</label> <input
-								class="form-control" id="article_zipcode" name="bean.zipcode"
-								type="text" value="${bean.zipcode}">
-						</div>
-						<div class="form-group">
-							<label for="article_credential">证件类型</label>
-								<label>
-								<input name="bean.credential" value="0"
-								<c:if test="${bean.credential=='0'}">
-								 	checked="checked"
-								 </c:if>
-								 type="radio">
-								 身份证</label>
-						</div>
-						<div class="form-group">
-							<label for="article_credential_code">证件号码</label> <input
-								class="form-control" id="article_credential_code"
-								name="bean.credential_code" type="text"
-								value="${bean.credential_code}">
-						</div>
-						<div class="form-group">
-							<label for="article_qq">QQ</label> <input class="form-control"
-								id="article_qq" name="bean.qq" type="text" value="${bean.qq}">
-						</div>
-						<div class="form-group">
-							<label for="article_msn">MSN</label> <input class="form-control"
-								id="article_msn" name="bean.msn" type="text" value="${bean.msn}">
-						</div>
-						<div class="form-group">
-							<label for="article_hobby">爱好</label> <input class="form-control"
-								id="article_hobby" name="bean.hobby" type="text"
-								value="${bean.hobby}">
-						</div>
-						
 						<div class="form-group">
 							<label for="article_description">详情</label>
 							<div class="qeditor_border">

@@ -125,6 +125,17 @@
 						</div>
 					</div>
 						<div class="form-group"> <label for="article_hobby">爱好</label> <input class="form-control" id="article_hobby" name="bean.hobby" type="text" value="${bean.hobby}"> </div>
+						<div class="form-group"> <label for="article_height">身高</label> <input class="form-control" id="article_height" name="bean.height" type="text" value="${bean.height}"> </div>
+						<div class="form-group"> <label for="article_weight">体重</label> <input class="form-control" id="article_weight" name="bean.weight" type="text" value="${bean.weight}"> </div>
+						<div class="form-group"> <label for="article_nationality">国籍</label> <input class="form-control" id="article_nationality" name="bean.nationality" type="text" value="${bean.nationality}"> </div>
+						<div class="form-group"> <label for="article_tutor">监护人姓名</label> <input class="form-control" id="article_tutor" name="bean.tutor" type="text" value="${bean.tutor}"> </div>
+						<div class="form-group"> <label for="article_tel">紧急联系电话</label> <input class="form-control" id="article_tel" name="bean.tel" type="text" value="${bean.tel}"> </div>
+						<div class="form-group"> <label for="article_addres">家庭住址</label> <input class="form-control" id="article_addres" name="bean.addres" type="text" value="${bean.addres}"> </div>
+						<div class="form-group"> <label for="article_school">所在学校或幼儿园</label> <input class="form-control" id="article_school" name="bean.school" type="text" value="${bean.school}"> </div>
+						<div class="form-group"> <label for="article_like_sports">喜欢的运动</label> <input class="form-control" id="article_like_sports" name="bean.like_sports" type="text" value="${bean.like_sports}"> </div>
+						<div class="form-group"> <label for="article_once_in_motion">曾经参加的运动</label> <input class="form-control" id="article_once_in_motion" name="bean.once_in_motion" type="text" value="${bean.once_in_motion}"> </div>
+						<div class="form-group"> <label for="article_injury_history">伤病史</label> <input class="form-control" id="article_injury_history" name="bean.injury_history" type="text" value="${bean.injury_history}"> </div>
+						<div class="form-group"> <label for="article_parents_expectations">家长的期许</label> <input class="form-control" id="article_parents_expectations" name="bean.parents_expectations" type="text" value="${bean.parents_expectations}"> </div>
 						<div class="form-group">
 						</div>
 						<div class="form-group">

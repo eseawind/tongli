@@ -100,7 +100,7 @@
 								<a href="${basePath}/h/w009_edit.ac"
 									class="btn btn-link" ><div>
 										<i class="icon-comments-alt icon-5"></i>
-									</div>新建文本消息</a>
+									</div>新增文本消息</a>
 							</div>
 						</div>
 						<c:forEach items="${beans}" var="bean1" varStatus="n">

@@ -8,7 +8,8 @@
 		<!-- 会员首页 -->
 		<action name="m201_*" class="m201Action" method="{1}">
 			<result name="init">/WEB-INF/pages/client/member/M201.jsp</result>
-			<result name="success" type="chain">m201_init</result>
+			<result name="list1">/WEB-INF/pages/client/member/M201_01.jsp</result>
+			<result name="success" type="redirect" >/m201_init.ac</result>
 		</action>
 	</package>
 </struts>

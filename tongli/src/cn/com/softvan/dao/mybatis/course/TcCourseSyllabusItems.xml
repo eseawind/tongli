@@ -120,9 +120,7 @@
     	</otherwise>
     </choose>
    </select>
-    <!-- <当前会员关联的学员列表
-	public List<TcStudentBean> findDataIsListStudent(TcCourseSyllabusItemsBean bean);
-	-->
+    <!--当前课程关联的学员列表	-->
 	<select id="findDataIsListStudent" resultType="tcStudentBean" parameterType="tcCourseSyllabusItems" >
 		select
 			t2.id,
@@ -146,5 +144,42 @@
 	    <if test="limit_s!=null and limit_e!=null">
 	     limit #{limit_s},#{limit_e}
 	    </if>
+   </select>
+     <!--当前学员关联的课程列表	-->
+	<select id="findDataIsPageCourse" resultType="tcCourseSyllabusBean" parameterType="tcCourseSyllabusItems" >
+		select
+			t2.id,
+			t2.course_id,
+			t2.teacher_id,
+			t2.day,
+			t2.begin_time,
+			t2.end_time,
+			t2.note,
+			t2.date_created,
+			t2.create_id,
+			t2.create_ip,
+			t2.last_updated,
+			t2.update_id,
+			t2.update_ip,
+			t2.del_flag,
+			t2.version,
+			t2.course_status,
+			t2.detail_info,
+			t2.addres,
+			t3.title,
+			t4.nickname as teacher_name
+		from tc_course_syllabus_items t1
+		left join tc_course_syllabus t2 on (t2.id=t1.course_syllabus_id)
+		left join tc_course t3 on (t3.id=t2.course_id)
+		left join tc_member t4 on (t4.id=t2.teacher_id)
+		where t1.student_id=#{student_id}
+	    <choose>
+	    	<when test="del_flag!=null">
+	    		and t3.del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and t3.del_flag='0'
+	    	</otherwise>
+	    </choose>
    </select>
 </mapper>
