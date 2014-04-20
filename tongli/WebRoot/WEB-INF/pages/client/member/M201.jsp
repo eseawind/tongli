@@ -88,6 +88,7 @@
 		loadUrlPage(0,'m201_','list1','course_info','${student_id}');
 	});
 	function loadUrlPage(offset,url,event,divId,sid) {
+		loginCheck();
 		var load = "<a class='loading' >信息加载中...</a>";
 		jQuery("#" + divId).html(load);
 		jQuery.ajax({
@@ -97,6 +98,21 @@
 			},
 			error : function() {
 				jQuery("#"+divId).html('信息加载失败!');
+			}
+		});
+	}
+	function loginCheck() {
+		jQuery.ajax({
+			async : false,
+			url : '${basePath}/mcheck.ac?time=' + new Date().getTime(),
+			success : function(req) {
+				if(req!='1'){
+					alert('未登录或登录超时!请重新登录!');
+					location.href='${basePath}/m201_login.ac';
+				}
+			},
+			error : function() {
+				alert("页面发生错误");
 			}
 		});
 	}

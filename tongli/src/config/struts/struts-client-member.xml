@@ -12,4 +12,9 @@
 			<result name="success" type="redirect" >/m201_init.ac</result>
 		</action>
 	</package>
+	<package name="client_member_info_check" extends="wechat-default" >
+		<!-- 登录验证 -->
+		<action name="mcheck" class="m201Action" method="check">
+		</action>
+	</package>
 </struts>

@@ -155,7 +155,7 @@
 							</label>
 						</div>
 						<div class="form-group">
-							<label class="col-md-4">最后修改时间${bean.last_update_date}</label>
+							<label class="col-md-4">最后修改时间${bean.last_updated}</label>
 							<label class="col-md-4">最后登入时间 ${bean.last_login}</label>
 							<label class="col-md-4">最后登录IP${bean.last_login_ip}</label>
 						</div>

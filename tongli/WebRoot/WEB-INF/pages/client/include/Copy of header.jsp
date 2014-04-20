@@ -28,8 +28,8 @@
 		<div class="nav_con">
 			<div class="login">
 				<div class="loglink">
-					<a href="${basePath}/html/login.html" target="_blank">登录</a> | <a
-						href="${basePath}/html/register.html" target="_blank">注册</a>
+					<a href="${basePath}/html/login.html" >登录</a> | <a
+						href="${basePath}/html/register.html" >注册</a>
 				</div>
 				<div class="shortcut">
 					<select>

@@ -30,7 +30,7 @@
 	<c:forEach items="${beans}" var="bean">
 	<tr>
 		<td><img src="${bean.headimgurl}" style="width: 40px;height: 40px;"  onerror="this.src='${basePath}/images/getheadimg.jpg'" ></td>
-		<td>${bean.nickname}</td>
+		<td>${bean.name}</td>
 		<td>${bean.remarkname}</td>
 		<td>
 		<c:choose>

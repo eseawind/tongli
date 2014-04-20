@@ -41,7 +41,7 @@ event:事件推送 --%>
 		 style="width: 40px;height: 40px;box-shadow: 0px 0px 0px 8px #CCC;border-radius: 30px !important;" class="avatar img-circle"></i></div>
 		<div class=" timeline-body">
 			<p class="userInfo">
-				<span class="name">${bean.nickname}</span>
+				<span class="name">${bean.name}</span>
 				<span class="date">${bean.createtime}</span>
 			</p>
 			<div class="timeline-content alert" style="color: #468847">

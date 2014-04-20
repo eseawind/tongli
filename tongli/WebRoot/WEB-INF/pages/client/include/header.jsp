@@ -28,8 +28,7 @@
 		<div class="nav_con">
 			<div class="login">
 				<div class="loglink">
-					<a href="${basePath}/m201_init.ac" target="_blank">个人中心</a> | <a
-						href="${basePath}/html/register.html" target="_blank">注册</a>
+					<a href="${basePath}/m201_init.ac" >会员</a> | <a href="${basePath}/t001_init.ac" >员工</a>
 				</div>
 				<div class="shortcut">
 					<select>

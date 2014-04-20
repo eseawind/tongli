@@ -208,6 +208,7 @@ public class MemberManager extends BaseManager implements IMemberManager {
     		   dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
     		   dto.setDel_flag(bean.getDel_flag());//是否删除
     		   dto.setVersion(bean.getVersion());//VERSION
+    		   dto.setPageInfo(bean.getPageInfo());
     	   }
 			beans=tcMemberDao.findDataIsPage(dto);
 		} catch (Exception e) {

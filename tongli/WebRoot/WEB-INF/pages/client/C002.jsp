@@ -42,9 +42,10 @@
 	<c:choose>
 		<c:when test="${beans!=null && fn:length(beans)>0 }">
 		<ul>
+			
 			<c:forEach items="${beans}" var="bean">
 			<li>
-			<a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=${bean.parent_id}" target="_blank">• ${bean.title}</a>
+			<a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=${pid}" >• ${bean.title}</a>
 			<em>
 			${fn:substring(bean.last_updated,0,10)}
 			</em>

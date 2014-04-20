@@ -52,6 +52,8 @@
 .body .title em{ width:20px; height:20px; display:block; background:url(images/nav_bg.png) -7px -580px no-repeat; position:absolute; right:10px; top:8px; cursor:pointer;}
 .body .title em a{width:20px; height:20px; display:block;}
 .body .content{ clear:both; display:block; padding:10px;background:#f9f9f9;font-size:14px;}
+.body .content  .on{font-weight:bolder;color:#3e7900;}
+.body .content  .on a{color:#3e7900;}
 .body .content p{ font-size:14px; text-indent:2em;}
 .body .content li{ height:30px; line-height:30px; border-bottom:1px solid #eee;}
 .body  h1{ font-size:20px; line-height:30px; margin:20px; text-align:center; color:#3e7900;}

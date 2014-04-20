@@ -71,12 +71,12 @@
 			<c:forEach items="${map.value}" var="bean">
 			<li>
 				<div class="img_box">
-					<a target="_blank" href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b">
+					<a  href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b">
 						<img src="${bean.pic_url}" width="148" height="90" title="${bean.title}" />
 					</a>
 				</div>
 				<div class="txt_box">
-			        <a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b" target="_blank" title="2011创意网站后台登陆界面设计">
+			        <a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b"  title="2011创意网站后台登陆界面设计">
 			        ${bean.title}
 			        </a>
 		        </div>
@@ -97,12 +97,12 @@
 				<c:forEach items="${map.value}" var="bean">
 				<li>
 					<div class="img_box">
-						<a target="_blank" href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b">
+						<a  href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b">
 							<img src="${bean.pic_url}" width="148" height="90" title="${bean.title}" />
 						</a>
 					</div>
 					<div class="txt_box">
-				        <a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b" target="_blank" title="${bean.title}">
+				        <a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b"  title="${bean.title}">
 				        ${bean.title}
 				        </a>
 			        </div>

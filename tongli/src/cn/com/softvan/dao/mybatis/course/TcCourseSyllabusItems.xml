@@ -102,6 +102,7 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
+    <if test="course_syllabus_id!= null" > and course_syllabus_id=#{course_syllabus_id}</if>
     </select>
 	<!-- 
 	 * <p>信息列表。</p>
@@ -119,6 +120,7 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
+      <if test="course_syllabus_id!= null" > and course_syllabus_id=#{course_syllabus_id}</if>
    </select>
     <!--当前课程关联的学员列表	-->
 	<select id="findDataIsListStudent" resultType="tcStudentBean" parameterType="tcCourseSyllabusItems" >
@@ -148,6 +150,12 @@
      <!--当前学员关联的课程列表	-->
 	<select id="findDataIsPageCourse" resultType="tcCourseSyllabusBean" parameterType="tcCourseSyllabusItems" >
 		select
+			t1.student_id,
+			t1.id as course_syllabus_item_id,
+			t1.teacher_score,
+			t1.teacher_score_note,
+			t1.student_status,
+			t1.student_status_note,
 			t2.id,
 			t2.course_id,
 			t2.teacher_id,
@@ -167,7 +175,8 @@
 			t2.detail_info,
 			t2.addres,
 			t3.title,
-			t4.nickname as teacher_name
+			t4.name as teacher_name,
+			t4.brief_info
 		from tc_course_syllabus_items t1
 		left join tc_course_syllabus t2 on (t2.id=t1.course_syllabus_id)
 		left join tc_course t3 on (t3.id=t2.course_id)
@@ -179,6 +188,128 @@
 	    	</when>
 	    	<otherwise>
 	    	    and t3.del_flag='0'
+	    	</otherwise>
+	    </choose>
+	    order by t2.day desc,t2.begin_time asc
+   </select>
+   <!-- 教师给学员打分 -->
+   <update id="updateDataByStudent" parameterType="tcCourseSyllabusItems" >
+    update tc_course_syllabus_items set version=version+1
+    ,last_updated=now()
+	,update_id=#{update_id}
+	,update_ip=#{update_ip}
+	,student_status=#{student_status}
+	,student_status_note=#{student_status_note}
+	where id=#{id} 
+	and student_status is null 
+	and student_id=#{student_id} 
+	and course_syllabus_id=#{course_syllabus_id}
+	and teacher_id=#{teacher_id}
+  </update>
+   <!-- 学员给教师打分 -->
+   <update id="updateDataByTeacher" parameterType="tcCourseSyllabusItems" >
+    update tc_course_syllabus_items set version=version+1
+    ,last_updated=now()
+	,update_id=#{update_id}
+	,update_ip=#{update_ip}
+	,teacher_score=#{teacher_score}
+	,teacher_score_note=#{teacher_score_note}
+	where id=#{id} 
+	and teacher_score is null
+	and student_id=#{student_id} 
+	and course_syllabus_id=#{course_syllabus_id}
+	and teacher_id=#{teacher_id}
+  </update>
+   <!--教师课程表 同时查询 当前课程关联的学员列表2-->
+   <resultMap type="tcCourseSyllabusBean" id="findDataIsListStudent2Maps">
+   		<result property="id" column="id" />
+		<result property="course_id" column="course_id" />
+		<result property="teacher_id" column="teacher_id" />
+		<result property="day" column="day" />
+		<result property="begin_time" column="begin_time" />
+		<result property="end_time" column="end_time" />
+		<result property="note" column="note" />
+		<result property="date_created" column="date_created" />
+		<result property="create_id" column="create_id" />
+		<result property="create_ip" column="create_ip" />
+		<result property="last_updated" column="last_updated" />
+		<result property="update_id" column="update_id" />
+		<result property="update_ip" column="update_ip" />
+		<result property="del_flag" column="del_flag" />
+		<result property="version" column="version" />
+		<result property="course_status" column="course_status" />
+		<result property="detail_info" column="detail_info" />
+		<result property="addres" column="addres" />
+		<result property="title" column="title" />
+		<result property="teacher_name" column="teacher_name" />
+		<result property="brief_info" column="brief_info" />
+	  <collection property="itemBeans"
+			column="course_syllabus_id=id}"
+			javaType="java.util.List" select="findDataIsListStudent2"
+			ofType="cn.com.softvan.bean.course.TcCourseSyllabusItemsBean">
+		</collection>
+   </resultMap>
+   <select id="findDataIsPageCourse2" resultMap="findDataIsListStudent2Maps"  parameterType="tcCourseSyllabusItems" >
+		select
+			t2.id,
+			t2.course_id,
+			t2.teacher_id,
+			t2.day,
+			t2.begin_time,
+			t2.end_time,
+			t2.note,
+			t2.date_created,
+			t2.create_id,
+			t2.create_ip,
+			t2.last_updated,
+			t2.update_id,
+			t2.update_ip,
+			t2.del_flag,
+			t2.version,
+			t2.course_status,
+			t2.detail_info,
+			t2.addres,
+			t3.title,
+			t4.name as teacher_name,
+			t4.brief_info
+		from tc_course_syllabus t2
+		left join tc_course_syllabus_items t1 on (t2.id=t1.course_syllabus_id)
+		left join tc_course t3 on (t3.id=t2.course_id)
+		left join tc_member t4 on (t4.id=t2.teacher_id)
+		where t1.teacher_id=#{teacher_id}
+	    <choose>
+	    	<when test="del_flag!=null">
+	    		and t3.del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and t3.del_flag='0'
+	    	</otherwise>
+	    </choose>
+	    group by t1.teacher_id
+	    order by t2.day desc,t2.begin_time asc
+   </select>
+	<select id="findDataIsListStudent2" resultType="tcCourseSyllabusItemsBean" parameterType="java.util.HashMap" >
+		select
+			t1.student_id,
+			t1.id,
+			t1.teacher_score,
+			t1.teacher_score_note,
+			t1.student_status,
+			t1.student_status_note,
+			t2.name,
+			t2.age,
+			t2.sex,
+			t2.pic_url,
+			t2.birthdate
+		from tc_course_syllabus_items t1
+		left join tc_student t2 on (t2.id=t1.student_id)
+	    where t1.course_syllabus_id=#{course_syllabus_id}
+	    <choose>
+	    	<when test="del_flag!=null">
+	    		and t2.del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and t2.del_flag='0'
 	    	</otherwise>
 	    </choose>
    </select>

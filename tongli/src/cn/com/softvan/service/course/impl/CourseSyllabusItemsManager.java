@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.com.softvan.bean.course.TcCourseBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
 import cn.com.softvan.common.CommonConstant;
@@ -347,6 +346,93 @@ public class CourseSyllabusItemsManager extends BaseManager implements ICourseSy
 	    		   dto.setPageInfo(bean.getPageInfo());//分页
 	    	   }
 				beans=tcCourseSyllabusItemsDao.findDataIsPageCourse(dto);
+		} catch (Exception e) {
+			log.error("信息查询失败,数据库错误!", e);
+		}
+		return beans;
+	}/**
+	 * <p>信息编辑。</p>
+	 * <ol>[功能概要] 
+	 * <div>教师给学员打分。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public String updateDataByStudent(TcCourseSyllabusItemsBean bean) throws Exception{
+		String msg="1";
+		if(bean!=null){
+			try {
+				TcCourseSyllabusItems dto=new TcCourseSyllabusItems();
+				dto.setId(bean.getId());//id
+				dto.setStudent_id(bean.getStudent_id());//学员id
+				dto.setCourse_syllabus_id(bean.getCourse_syllabus_id());//课程表id
+				dto.setTeacher_id(bean.getTeacher_id());//教师id
+				dto.setStudent_status(bean.getStudent_status());//学员状态
+				dto.setStudent_status_note(bean.getStudent_status_note());//学员状态描述
+				dto.setLast_updated(bean.getLast_updated());//资料更新日期
+				dto.setUpdate_id(bean.getUpdate_id());//修改者ID
+				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
+				//数据存在
+				tcCourseSyllabusItemsDao.updateDataByStudent(dto);
+			} catch (Exception e) {
+				msg="信息保存失败,数据库处理错误!";
+				log.error(msg, e);
+				throw new Exception(msg);
+			}
+		}
+		return msg;
+	}
+	/**
+	 * <p>信息编辑。</p>
+	 * <ol>[功能概要] 
+	 * <div>学员给教师打分。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public String updateDataByTeacher(TcCourseSyllabusItemsBean bean) throws Exception{
+		String msg="1";
+		if(bean!=null){
+			try {
+				TcCourseSyllabusItems dto=new TcCourseSyllabusItems();
+				dto.setId(bean.getId());//id
+				dto.setStudent_id(bean.getStudent_id());//学员id
+				dto.setCourse_syllabus_id(bean.getCourse_syllabus_id());//课程表id
+				dto.setTeacher_id(bean.getTeacher_id());//教师id
+				dto.setTeacher_score(bean.getTeacher_score());//教师得分
+				dto.setTeacher_score_note(bean.getTeacher_score_note());//教师得分描述
+				dto.setLast_updated(bean.getLast_updated());//资料更新日期
+				dto.setUpdate_id(bean.getUpdate_id());//修改者ID
+				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
+
+				//数据存在
+				tcCourseSyllabusItemsDao.updateDataByTeacher(dto);
+			} catch (Exception e) {
+				msg="信息保存失败,数据库处理错误!";
+				log.error(msg, e);
+				throw new Exception(msg);
+			}
+		}
+		return msg;
+	}
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>教师课程表 同时查询 当前课程关联的学员列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcCourseSyllabusBean> findDataIsPageCourse2(TcCourseSyllabusItemsBean bean){
+		List<TcCourseSyllabusBean> beans=null;
+		try {
+			TcCourseSyllabusItems dto=new TcCourseSyllabusItems();
+	    	   if(bean!=null){
+	    		   dto.setId(bean.getId());//id
+	    		   dto.setCourse_syllabus_id(bean.getCourse_syllabus_id());//课程表id
+	    		   dto.setTeacher_id(bean.getTeacher_id());//教师id
+	    		   dto.setDel_flag(bean.getDel_flag());//是否删除
+	    		   dto.setPageInfo(bean.getPageInfo());//分页
+	    	   }
+				beans=tcCourseSyllabusItemsDao.findDataIsPageCourse2(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}

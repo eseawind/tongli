@@ -16,6 +16,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
+<script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <c:forEach items="${beans}" var="bean" varStatus="i">
 	<div class="item_li">${i.index+1}. ${bean.title}</div>
 	<div class="item_con">
@@ -24,8 +25,65 @@
 		<p>地点:${bean.addres}</p>
 		<p>&nbsp;</p>
 		<p>
-			<strong>${bean.teacher_name}</strong>老师信息老师信息老师信息老师信息老师信息
+			学员上课情况
 		</p>
+		<form id="${bean.id}" accept-charset="UTF-8"  action="${basePath}/t001_save.ac"  method="post">
+		<input type="hidden" name="course_syllabus_id" value="${bean.id}">
+		<c:set var="num" value="0"/>
+		<c:forEach items="${bean.itemBeans}" var="s_bean">
+			<p>学员名称:${s_bean.name}</p>
+			<p>对我的评价:
+			<c:choose>
+				<c:when test="${ s_bean.teacher_score!=null}">
+					<p>
+					<c:if test="${s_bean.teacher_score=='0'}">差</c:if>
+					<c:if test="${s_bean.teacher_score=='1'}">良</c:if>
+					<c:if test="${s_bean.teacher_score=='2'}">优</c:if>
+					</p>
+					<p>
+						备注:
+						${s_bean.teacher_score_note}
+					</p>
+				</c:when>
+				<c:otherwise>
+					暂未评价
+				</c:otherwise>
+			</c:choose>
+			</p>
+			<p>${s_bean.name}上课情况:
+			<c:choose>
+				<c:when test="${s_bean.student_status!=null}">
+					<p>
+					<c:if test="${s_bean.student_status=='0'}">签到完成</c:if>
+					<c:if test="${s_bean.student_status=='1'}">旷课</c:if>
+					<c:if test="${s_bean.student_status=='2'}">请假</c:if>
+					</p>
+					<p>
+						备注:
+						${s_bean.student_status_note}
+					</p>
+					<c:set var="num" value="${num+1}"/>
+				</c:when>
+				<c:otherwise>
+					<p>
+						<input type="hidden" name="item_ids" value="${s_bean.id}">
+						<input type="hidden" name="sid${s_bean.id}" value="${s_bean.student_id}">
+						<label><input type="radio" class="xx2${bean.id}" checked="checked" name="sstatus${s_bean.id}" value="0">签到完成</label>
+						<label><input type="radio" class="xx2${bean.id}" name="sstatus${s_bean.id}" value="1">旷课</label>
+						<label><input type="radio" class="xx2${bean.id}" name="sstatus${s_bean.id}" value="2">请假</label>
+					</p>
+					<p>备注:
+						<textarea style="width: 100%;height: 100%;" class="xx2${bean.id}" name="sstatus_note${s_bean.id}"></textarea>
+					</p>
+				</c:otherwise>
+			</c:choose>
+	</c:forEach>
+	<c:if test="${num!=fn:length(bean.itemBeans)}">
+	<p>
+		<input id="b_${bean.id}" type="button" value="提交" onclick="if(confirm('确认提交吗?')){submitFrom2('${bean.id}');}">
+	</p>
+	</c:if>
+	</form>
 	</div>
 </c:forEach>
 <customtag:pagingext func="loadUrlPage" params="'t001_','list1','course_info'" />
@@ -38,4 +96,20 @@
 		}
 		$(this).next(".item_con").slideToggle();
 	});
+	// 提交from
+	function submitFrom2(from_id) {
+		//登录认证
+		loginCheck();
+		//提交
+		jQuery("#"+from_id).ajaxSubmit(function(data) {
+			if (data == "1") {
+				$('.xx2'+from_id).attr('readonly','readonly');
+				$('.xx2'+from_id).attr('disabled','disabled');
+				jQuery("#b_"+from_id).remove();
+				alert('提交成功!');
+			} else {
+				alert(data);
+			}
+		});
+	}
 </script>

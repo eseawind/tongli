@@ -19,7 +19,7 @@
 	<ul class="pic">
 		<c:forEach items="${beans}" var="bean">
 		<li>
-		<a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b" target="_blank">
+		<a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b" >
 		<img src="${bean.pic_url}" />
 		</a>
 		</li>

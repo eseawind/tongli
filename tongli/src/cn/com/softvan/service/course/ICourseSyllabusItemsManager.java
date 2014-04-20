@@ -100,4 +100,30 @@ public interface ICourseSyllabusItemsManager {
 	 * @return 处理结果
 	 */
 	public List<TcCourseSyllabusBean> findDataIsPageCourse(TcCourseSyllabusItemsBean bean1);
+	/**
+	 * <p>信息编辑。</p>
+	 * <ol>[功能概要] 
+	 * <div>教师给学员打分。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public String updateDataByStudent(TcCourseSyllabusItemsBean bean) throws Exception;
+	/**
+	 * <p>信息编辑。</p>
+	 * <ol>[功能概要] 
+	 * <div>学员给教师打分。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public String updateDataByTeacher(TcCourseSyllabusItemsBean bean) throws Exception;
+	
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>教师课程表 同时查询 当前课程关联的学员列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcCourseSyllabusBean> findDataIsPageCourse2(TcCourseSyllabusItemsBean bean);
 }

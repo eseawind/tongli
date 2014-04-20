@@ -10,6 +10,7 @@
  */
 package cn.com.softvan.web.action.client.teacher;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -44,6 +45,8 @@ public class T001Action extends BaseAction {
 
 	/**BEAN类  会员信息*/
 	private TcMemberBean bean;
+	/**BEAN类 课程详情*/
+	private TcCourseSyllabusItemsBean item_bean;
 	/**会员信息管理 业务处理*/
 	private IMemberManager memberManager;
 	/**学员信息管理 业务处理*/
@@ -54,6 +57,8 @@ public class T001Action extends BaseAction {
 	private ICourseSyllabusManager courseSyllabusManager;
 	/** 课程表-详情管理 业务处理*/
 	private ICourseSyllabusItemsManager courseSyllabusItemsManager;
+	/**ID集合*/
+	private List<String> item_ids;
 	public T001Action() {
 		log.info("默认构造器......T001Action");
 	}
@@ -69,7 +74,7 @@ public class T001Action extends BaseAction {
 	 */
 	public String init() {
 		log.info("T001Action init.........");
-		TcMemberBean member=(TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO);
+		TcMemberBean member=(TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO);
 		//当前会员关联的学员
 		request.setAttribute("student_beans", memberManager.findDataIsListStudent(member));
 		return "init";
@@ -99,9 +104,10 @@ public class T001Action extends BaseAction {
 		TcCourseSyllabusItemsBean bean1 = new TcCourseSyllabusItemsBean();
 		bean1.setPageInfo(page);
 		bean1.setDel_flag("0");
-		bean1.setStudent_id(request.getParameter("sid"));//学员id
+		TcMemberBean member=(TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO);
+		bean1.setTeacher_id(member.getId());//教师id
 		//课程列表
-		List<TcCourseSyllabusBean> beans=courseSyllabusItemsManager.findDataIsPageCourse(bean1);
+		List<TcCourseSyllabusBean> beans=courseSyllabusItemsManager.findDataIsPageCourse2(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "list1";
@@ -133,7 +139,45 @@ public class T001Action extends BaseAction {
 		request.setAttribute("msg", "登录失败,用户名或密码错误!");
 		return "tlogin";
 	}
-
+	/**
+	 * <p>
+	 * 信息保存
+	 * </p>
+	 * <ol>
+	 * [功能概要] 
+	 * <div>教练给学员评分。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws IOException 
+	 */
+	public String save() throws IOException {
+		log.info("T001Action save.........");
+		String msg="1";
+		if(item_ids!=null){
+			try {
+				TcMemberBean user = (TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO);
+				TcCourseSyllabusItemsBean s_bean=null;
+				for(String item_id:item_ids){
+					s_bean=new TcCourseSyllabusItemsBean();
+					s_bean.setId(item_id);
+					s_bean.setTeacher_id(user.getId());
+					s_bean.setUpdate_ip(getIpAddr());
+					s_bean.setUpdate_id(user.getUser_id());
+					s_bean.setStudent_status(request.getParameter("sstatus"+item_id));
+					s_bean.setStudent_status_note(request.getParameter("sstatus_note"+item_id));
+					s_bean.setStudent_id(request.getParameter("sid"+item_id));
+					s_bean.setCourse_syllabus_id(request.getParameter("course_syllabus_id"));
+					msg=courseSyllabusItemsManager.updateDataByStudent(s_bean);
+				}
+			} catch (Exception e) {
+				msg=e.getMessage();
+			}
+		}else{
+			msg="信息保存失败!";
+		}
+		getWriter().print(msg);
+		return null;
+	}
 	/**
 	 * BEAN类  会员信息取得
 	 * @return BEAN类  会员信息
@@ -148,6 +192,22 @@ public class T001Action extends BaseAction {
 	 */
 	public void setBean(TcMemberBean bean) {
 	    this.bean = bean;
+	}
+
+	/**
+	 * BEAN类 课程详情取得
+	 * @return BEAN类 课程详情
+	 */
+	public TcCourseSyllabusItemsBean getItem_bean() {
+	    return item_bean;
+	}
+
+	/**
+	 * BEAN类 课程详情设定
+	 * @param item_bean BEAN类 课程详情
+	 */
+	public void setItem_bean(TcCourseSyllabusItemsBean item_bean) {
+	    this.item_bean = item_bean;
 	}
 
 	/**
@@ -228,6 +288,58 @@ public class T001Action extends BaseAction {
 	 */
 	public void setCourseSyllabusItemsManager(ICourseSyllabusItemsManager courseSyllabusItemsManager) {
 	    this.courseSyllabusItemsManager = courseSyllabusItemsManager;
+	}
+	/**
+	 * <p>
+	 * 用户登出
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>登出。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String logout() throws Exception {
+		log.info("T001Action logout");
+		//清空用户登录信息
+		request.getSession().removeAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO);
+		request.getSession().invalidate();
+		return "tlogin";
+	}
+	/**
+	 * <p>
+	 * 验证是否登录
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>验证是否登录。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String check() throws Exception {
+		log.info("T001Action check");
+		String msg="1";
+		if(request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO)==null){
+			msg="0";
+		}
+		
+		getWriter().print(msg);
+		
+		return null;
+	}
+
+	/**
+	 * ID集合取得
+	 * @return ID集合
+	 */
+	public List<String> getItem_ids() {
+	    return item_ids;
+	}
+
+	/**
+	 * ID集合设定
+	 * @param item_ids ID集合
+	 */
+	public void setItem_ids(List<String> item_ids) {
+	    this.item_ids = item_ids;
 	}
 
 }

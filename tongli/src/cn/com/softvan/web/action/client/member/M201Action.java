@@ -10,6 +10,7 @@
  */
 package cn.com.softvan.web.action.client.member;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -43,6 +44,8 @@ public class M201Action extends BaseAction {
 	
 	/**BEAN类  会员信息*/
 	private TcMemberBean bean;
+	/**BEAN类 课程详情*/
+	private TcCourseSyllabusItemsBean item_bean;
 	/**会员信息管理 业务处理*/
 	private IMemberManager memberManager;
 	/**学员信息管理 业务处理*/
@@ -132,7 +135,35 @@ public class M201Action extends BaseAction {
 		request.setAttribute("msg", "登录失败,用户名或密码错误!");
 		return "mlogin";
 	}
-
+	/**
+	 * <p>
+	 * 信息保存
+	 * </p>
+	 * <ol>
+	 * [功能概要] 
+	 * <div>学员给教练评分。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws IOException 
+	 */
+	public String save() throws IOException {
+		log.info("M201Action save.........");
+		String msg="1";
+		if(item_bean!=null){
+			try {
+				TcMemberBean user = (TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO);
+				item_bean.setUpdate_ip(getIpAddr());
+				item_bean.setUpdate_id(user.getUser_id());
+				msg=courseSyllabusItemsManager.updateDataByTeacher(item_bean);
+			} catch (Exception e) {
+				msg=e.getMessage();
+			}
+		}else{
+			msg="信息保存失败!";
+		}
+		getWriter().print(msg);
+		return null;
+	}
 	/**
 	 * BEAN类  会员信息取得
 	 * @return BEAN类  会员信息
@@ -147,6 +178,22 @@ public class M201Action extends BaseAction {
 	 */
 	public void setBean(TcMemberBean bean) {
 	    this.bean = bean;
+	}
+
+	/**
+	 * BEAN类 课程详情取得
+	 * @return BEAN类 课程详情
+	 */
+	public TcCourseSyllabusItemsBean getItem_bean() {
+	    return item_bean;
+	}
+
+	/**
+	 * BEAN类 课程详情设定
+	 * @param item_bean BEAN类 课程详情
+	 */
+	public void setItem_bean(TcCourseSyllabusItemsBean item_bean) {
+	    this.item_bean = item_bean;
 	}
 
 	/**
@@ -228,5 +275,40 @@ public class M201Action extends BaseAction {
 	public void setCourseSyllabusItemsManager(ICourseSyllabusItemsManager courseSyllabusItemsManager) {
 	    this.courseSyllabusItemsManager = courseSyllabusItemsManager;
 	}
-
+	/**
+	 * <p>
+	 * 用户登出
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>登出。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String logout() throws Exception {
+		log.info("M201Action logout");
+		//清空用户登录信息
+		request.getSession().removeAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO);
+		request.getSession().invalidate();
+		return "mlogin";
+	}
+	/**
+	 * <p>
+	 * 验证是否登录
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>验证是否登录。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String check() throws Exception {
+		log.info("M201Action check");
+		String msg="1";
+		if(request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO)==null){
+			msg="0";
+		}
+		
+		getWriter().print(msg);
+		
+		return null;
+	}
 }

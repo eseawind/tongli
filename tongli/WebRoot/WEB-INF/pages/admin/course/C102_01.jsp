@@ -115,7 +115,7 @@
 											<c:if test="${bean.teacher_id==teacher.id}">
 												<c:set var="xxcc" value='selected="selected"' />
 											</c:if>
-										<option ${xxcc} value="${teacher.id}">${teacher.nickname }</option>
+										<option ${xxcc} value="${teacher.id}">${teacher.name }</option>
 									</c:forEach>
 									</optgroup>
 								</select>

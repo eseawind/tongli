@@ -44,10 +44,12 @@ public class TcCourseSyllabusBean extends BaseBean {
 	private String end_time;
 	/** 详细地址 */
 	private String addres;
-	/** 课程详情 */
+	/** 详情 */
 	private String detail_info;
 	/** 课程状态 0未完成 1 已完成*/
 	private String course_status;
+	/** 简介 */
+	private String brief_info;
 	//--------------------------------------------------------------
 	/** 标题 */
 	private String title;
@@ -75,6 +77,22 @@ public class TcCourseSyllabusBean extends BaseBean {
 	private String pic_url;
 	/** 学员id集合 */
 	private List<String> sids;
+	//--------------------------------------------------------
+	/**学员id*/
+	private String student_id;
+	/**课程表详情ID*/
+	private String course_syllabus_item_id;
+	/** 教师得分 */
+	private String teacher_score;
+	/** 教师得分描述 */
+	private String teacher_score_note;
+	/** 学员状态 */
+	private String student_status;
+	/** 学员状态描述 */
+	private String student_status_note;
+	//--------------------------------------------------------
+	/**课程表详情 集合*/
+	private List<TcCourseSyllabusItemsBean> itemBeans;
 	/**
 	 * id取得
 	 * @return id
@@ -188,15 +206,15 @@ public class TcCourseSyllabusBean extends BaseBean {
 	    this.addres = addres;
 	}
 	/**
-	 * 课程详情取得
-	 * @return 课程详情
+	 * 详情取得
+	 * @return 详情
 	 */
 	public String getDetail_info() {
 	    return detail_info;
 	}
 	/**
-	 * 课程详情设定
-	 * @param detail_info 课程详情
+	 * 详情设定
+	 * @param detail_info 详情
 	 */
 	public void setDetail_info(String detail_info) {
 	    this.detail_info = detail_info;
@@ -214,6 +232,20 @@ public class TcCourseSyllabusBean extends BaseBean {
 	 */
 	public void setCourse_status(String course_status) {
 	    this.course_status = course_status;
+	}
+	/**
+	 * 简介取得
+	 * @return 简介
+	 */
+	public String getBrief_info() {
+	    return brief_info;
+	}
+	/**
+	 * 简介设定
+	 * @param brief_info 简介
+	 */
+	public void setBrief_info(String brief_info) {
+	    this.brief_info = brief_info;
 	}
 	/**
 	 * 标题取得
@@ -397,5 +429,102 @@ public class TcCourseSyllabusBean extends BaseBean {
 	public void setSids(List<String> sids) {
 	    this.sids = sids;
 	}
-
+	/**
+	 * 学员id取得
+	 * @return 学员id
+	 */
+	public String getStudent_id() {
+	    return student_id;
+	}
+	/**
+	 * 学员id设定
+	 * @param student_id 学员id
+	 */
+	public void setStudent_id(String student_id) {
+	    this.student_id = student_id;
+	}
+	/**
+	 * 课程表详情ID取得
+	 * @return 课程表详情ID
+	 */
+	public String getCourse_syllabus_item_id() {
+	    return course_syllabus_item_id;
+	}
+	/**
+	 * 课程表详情ID设定
+	 * @param course_syllabus_item_id 课程表详情ID
+	 */
+	public void setCourse_syllabus_item_id(String course_syllabus_item_id) {
+	    this.course_syllabus_item_id = course_syllabus_item_id;
+	}
+	/**
+	 * 教师得分取得
+	 * @return 教师得分
+	 */
+	public String getTeacher_score() {
+	    return teacher_score;
+	}
+	/**
+	 * 教师得分设定
+	 * @param teacher_score 教师得分
+	 */
+	public void setTeacher_score(String teacher_score) {
+	    this.teacher_score = teacher_score;
+	}
+	/**
+	 * 教师得分描述取得
+	 * @return 教师得分描述
+	 */
+	public String getTeacher_score_note() {
+	    return teacher_score_note;
+	}
+	/**
+	 * 教师得分描述设定
+	 * @param teacher_score_note 教师得分描述
+	 */
+	public void setTeacher_score_note(String teacher_score_note) {
+	    this.teacher_score_note = teacher_score_note;
+	}
+	/**
+	 * 学员状态取得
+	 * @return 学员状态
+	 */
+	public String getStudent_status() {
+	    return student_status;
+	}
+	/**
+	 * 学员状态设定
+	 * @param student_status 学员状态
+	 */
+	public void setStudent_status(String student_status) {
+	    this.student_status = student_status;
+	}
+	/**
+	 * 学员状态描述取得
+	 * @return 学员状态描述
+	 */
+	public String getStudent_status_note() {
+	    return student_status_note;
+	}
+	/**
+	 * 学员状态描述设定
+	 * @param student_status_note 学员状态描述
+	 */
+	public void setStudent_status_note(String student_status_note) {
+	    this.student_status_note = student_status_note;
+	}
+	/**
+	 * 课程表详情 集合取得
+	 * @return 课程表详情 集合
+	 */
+	public List<TcCourseSyllabusItemsBean> getItemBeans() {
+	    return itemBeans;
+	}
+	/**
+	 * 课程表详情 集合设定
+	 * @param itemBeans 课程表详情 集合
+	 */
+	public void setItemBeans(List<TcCourseSyllabusItemsBean> itemBeans) {
+	    this.itemBeans = itemBeans;
+	}
 }
