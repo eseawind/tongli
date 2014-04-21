@@ -17,9 +17,5 @@
 			<result name="init">/WEB-INF/pages/client/C003.jsp</result>
 			<result name="list1">/WEB-INF/pages/client/C003_01.jsp</result>
 		</action>
-		<!-- 夏利营页 -->
-		<action name="c004_*" class="c004Action" method="{1}">
-			<result name="init">/WEB-INF/pages/client/C004.jsp</result>
-		</action>
 	</package>
 </struts>

@@ -56,5 +56,9 @@
 	<bean id="parterManager" class="cn.com.softvan.service.sys.impl.ParterManager" scope="prototype">
 		<property name="tcSysParterDao" ref="tcSysParterDao"></property>
 	</bean>
+	<!-- 数据字典 管理 -->
+	<bean id="variableManager" class="cn.com.softvan.service.sys.impl.VariableManager" scope="prototype">
+		<property name="tcSysVariableDao" ref="tcSysVariableDao"></property>
+	</bean>
 	<!-- 系统管理 end -->
 </beans>

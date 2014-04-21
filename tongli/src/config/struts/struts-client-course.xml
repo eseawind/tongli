@@ -4,9 +4,10 @@
     "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
     <package name="client_course_info" extends="wechat-default" >
-		<!-- 前台首页 
-		<action name="index" class="c001Action" method="init">
-			<result name="init">/WEB-INF/pages/client/C001.jsp</result>
-		</action>-->
+		<!-- 课程-->
+		<action name="c201_*" class="c201Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client/course/C201.jsp</result>
+			<result name="view">/WEB-INF/pages/client/course/C201_01.jsp</result>
+		</action>
 	</package>
 </struts>

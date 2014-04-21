@@ -46,11 +46,13 @@
 		<typeAlias type="cn.com.softvan.bean.sys.TcSysNewsBean" alias="tcSysNewsBean"/>
 		<typeAlias type="cn.com.softvan.bean.sys.TcSysNewsTypeBean" alias="tcSysNewsTypeBean"/>
 		<typeAlias type="cn.com.softvan.bean.sys.TcSysParterBean" alias="tcSysParterBean"/>
+		<typeAlias type="cn.com.softvan.bean.sys.TcSysVariableBean" alias="tcSysVariableBean"/>
 		<!-- entity class -->
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNews" alias="tcSysNews"/>
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNewsType" alias="tcSysNewsType"/>
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNewsVsType" alias="tcSysNewsVsType"/>
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysParter" alias="tcSysParter"/>
+		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysVariable" alias="tcSysVariable"/>
 		<!-- 系统管理模块 end -->
 		<!-- 课程管理 begin -->
 		<!-- bean class -->

@@ -16,9 +16,11 @@ import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.course.TcCourseBean;
+import cn.com.softvan.bean.sys.TcSysVariableBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.course.ICourseManager;
+import cn.com.softvan.service.sys.IVariableManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
@@ -35,8 +37,10 @@ public class C101Action extends BaseAction {
 	 */
 	private static final long serialVersionUID = -3061791975484213551L;
 	private static final transient Logger log = Logger.getLogger(C101Action.class);
-	/** 课程管理 业务处理*/
+	/** 课程管理  业务处理*/
 	private ICourseManager courseManager;
+	/** 数据字典管理 service  业务处理 */
+	private IVariableManager variableManager;
 	/**课程信息BEAN*/
 	private TcCourseBean bean;
 	/**课程信息BEAN集合*/
@@ -129,8 +133,10 @@ public class C101Action extends BaseAction {
 			bean1.setId(id);
 			bean=courseManager.findDataById(bean1);
 		}
-		//栏目树
-//		request.setAttribute("tree",courseManager.findDataIsTree(null));
+		//数据字典中获取课程类型
+		TcSysVariableBean bean1=new TcSysVariableBean();
+		bean1.setVariable_id("course_subject");//课程主题
+		request.setAttribute("course_subject",variableManager.findDataIsList(bean1));
 		return "edit";
 	}
 	/**
@@ -242,19 +248,35 @@ public class C101Action extends BaseAction {
 		return SUCCESS;
 	}
 	/**
-	 * 课程管理 业务处理取得
-	 * @return 课程管理 业务处理
+	 * 课程管理  业务处理取得
+	 * @return 课程管理  业务处理
 	 */
 	public ICourseManager getCourseManager() {
 	    return courseManager;
 	}
 
 	/**
-	 * 课程管理 业务处理设定
-	 * @param courseManager 课程管理 业务处理
+	 * 课程管理  业务处理设定
+	 * @param courseManager 课程管理  业务处理
 	 */
 	public void setCourseManager(ICourseManager courseManager) {
 	    this.courseManager = courseManager;
+	}
+
+	/**
+	 * 数据字典管理 service  业务处理取得
+	 * @return 数据字典管理 service  业务处理
+	 */
+	public IVariableManager getVariableManager() {
+	    return variableManager;
+	}
+
+	/**
+	 * 数据字典管理 service  业务处理设定
+	 * @param variableManager 数据字典管理 service  业务处理
+	 */
+	public void setVariableManager(IVariableManager variableManager) {
+	    this.variableManager = variableManager;
 	}
 
 	/**

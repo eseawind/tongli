@@ -32,10 +32,7 @@
 				</div>
 				<div class="shortcut">
 					<select>
-						<option selected value="我的俱乐部">我的俱乐部</option>
 						<option value="我的课程表">我的课程表</option>
-						<option value="我的评语">我的评语</option>
-						<option value="我的记录">我的记录</option>
 					</select>
 				</div>
 			</div>

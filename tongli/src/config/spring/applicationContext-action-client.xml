@@ -16,18 +16,13 @@
 		<property name="newsManager" ref="newsManager"></property>
 		<property name="newsTypeManager" ref="newsTypeManager"></property>
 	</bean>
-	<!-- ==栏目页== -->
+	<!-- ==资讯栏目页== -->
 	<bean id="c002Action" class="cn.com.softvan.web.action.client.C002Action" scope="prototype">
 		<property name="newsManager" ref="newsManager"></property>
 		<property name="newsTypeManager" ref="newsTypeManager"></property>
 	</bean>
-	<!-- ==内容页== -->
+	<!-- ==资讯内容页== -->
 	<bean id="c003Action" class="cn.com.softvan.web.action.client.C003Action" scope="prototype">
-		<property name="newsManager" ref="newsManager"></property>
-		<property name="newsTypeManager" ref="newsTypeManager"></property>
-	</bean>
-	<!-- ==夏令营页== -->
-	<bean id="c004Action" class="cn.com.softvan.web.action.client.C004Action" scope="prototype">
 		<property name="newsManager" ref="newsManager"></property>
 		<property name="newsTypeManager" ref="newsTypeManager"></property>
 	</bean>

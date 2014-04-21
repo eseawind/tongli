@@ -125,15 +125,9 @@
 								</span>
 								<select name="bean.subject_id" id="teacher_select2_sample2"  class="form-control select2me" data-placeholder="选择课程主题..">
 									<optgroup label="课程主题列表">
-										<option value="0">游泳</option>
-										<option value="1">网球</option>
-										<option value="2">羽毛球</option>
-										<option value="3">篮球</option>
-										<option value="4">球类私教</option>
-										<option value="5">空手道</option>
-										<option value="6">形体芭蕾</option>
-										<option value="7">爵士街舞</option>
-										<option value="8">轮滑</option>
+									<c:forEach items="${course_subject}" var="c_subject">
+										<option <c:if test="${c_subject.variable_sub_id==bean.subject_id}">selected="selected"</c:if> value="${c_subject.variable_sub_id}">${c_subject.variable_sub_name}</option>
+									</c:forEach>
 									</optgroup>
 								</select>
 							</div>

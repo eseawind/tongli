@@ -1,5 +1,5 @@
 /*
- * 栏目页 ActionClass
+ * 资讯栏目页 ActionClass
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
@@ -24,7 +24,7 @@ import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
 /**
- * 栏目页 ActionClass
+ * 资讯栏目页 ActionClass
  * 
  * @author wuxiaogang
  * 
