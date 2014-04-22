@@ -13,20 +13,22 @@ public class WxReplyMusicMsg extends WxReplyMsg {
 	private String description;
 	private String title;
 	private String ThumbMediaId;
-	public WxReplyMusicMsg(String title,String description,String musicUrl,String hqMusicUrl) {
+	public WxReplyMusicMsg(String title,String description,String musicUrl,String hqMusicUrl,String ThumbMediaId) {
 		setMsgType("music");
 		this.title = title;
 		this.description = description;
 		this.musicUrl = musicUrl;
 		this.hqMusicUrl = hqMusicUrl;
+		this.ThumbMediaId=ThumbMediaId;
 	}
-	public WxReplyMusicMsg(WxReplyMsg msg,String title,String description,String musicUrl,String hqMusicUrl) {
+	public WxReplyMusicMsg(WxReplyMsg msg,String title,String description,String musicUrl,String hqMusicUrl,String ThumbMediaId) {
 		super(msg);
 		setMsgType("music");
 		this.title = title;
 		this.description = description;
 		this.musicUrl = musicUrl;
 		this.hqMusicUrl = hqMusicUrl;
+		this.ThumbMediaId=ThumbMediaId;
 	}
 	
 	/**
@@ -79,6 +81,7 @@ public class WxReplyMusicMsg extends WxReplyMsg {
 		createElement(music, "Title", getTitle());
 		createElement(music, "MusicUrl", getMusicUrl());
 		createElement(music, "HQMusicUrl", getHqMusicUrl());
+		createElement(music, "ThumbMediaId", getThumbMediaId());
 		return doc;
 	}
 	/**

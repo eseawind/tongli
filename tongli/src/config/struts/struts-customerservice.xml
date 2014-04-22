@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="customerservice_info" namespace="/h" extends="wechat-default" >
+    	<default-interceptor-ref name="wechat-auth" /> 
+		<!-- 客服管理 -->
+		<action name="cs101_*" class="cs101Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/customerservice/CS101.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/customerservice/CS101_01.jsp</result>
+			<result name="view">/WEB-INF/pages/admin/customerservice/CS101_02.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/customerservice/CS101_03.jsp</result>
+			<result name="success" type="chain">cs101_init</result>
+		</action>
+	</package>
+</struts>

@@ -4,8 +4,9 @@
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.10  wuxiaogang      程序.发布
+ * 1.01     2014.04.15  wuxiaogang      程序.更新  新增资讯信息标记
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家  System. - All Rights Reserved.
+ * Copyright 2014 童励  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.dao.entity.wechat;
@@ -85,6 +86,8 @@ public class TcWxInfo extends BaseEntity {
 	private String eventkey;
 	/**二维码的ticket，可用来换取二维码图片*/
 	private String ticket;
+	/** 咨询信息标记 */
+	private String consult_flag;
 	/**
 	 * id取得
 	 * @return id
@@ -504,6 +507,20 @@ public class TcWxInfo extends BaseEntity {
 	 */
 	public void setTicket(String ticket) {
 	    this.ticket = ticket;
+	}
+	/**
+	 * 咨询信息标记取得
+	 * @return 咨询信息标记
+	 */
+	public String getConsult_flag() {
+	    return consult_flag;
+	}
+	/**
+	 * 咨询信息标记设定
+	 * @param consult_flag 咨询信息标记
+	 */
+	public void setConsult_flag(String consult_flag) {
+	    this.consult_flag = consult_flag;
 	}
 
 }

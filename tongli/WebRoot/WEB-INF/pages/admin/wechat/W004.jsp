@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-04  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 车主管家 System. - All Rights Reserved.
+ * Copyright 2014 童励 System. - All Rights Reserved.
  *
  */
 --%>
@@ -45,8 +45,8 @@
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
 				$('#wechat,#w004_init').addClass('active');
-				$('#wechat_arrow,#wechat_sub_menu_li_arrow').addClass('open');
-				$('#wechat_sub_menu,#wechat_sub_menu_li_sub_menu').show();
+				$('#wechat_arrow').addClass('open');
+				$('#wechat_sub_menu').show();
 			});
 		</script>
 		<!-- END SIDEBAR -->

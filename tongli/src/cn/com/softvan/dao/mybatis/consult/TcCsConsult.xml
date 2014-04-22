@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.consult.ITcCsConsultDao" >
+  <sql id="Base_Column_List" >
+    t1.id,
+	t1.user_id,
+	t1.cs_id,
+	t1.consult_status,
+	t1.finish_time,
+	t1.date_created,
+	t1.create_id,
+	t1.create_ip,
+	t1.last_updated,
+	t1.update_id,
+	t1.update_ip,
+	t1.version,
+	t1.del_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcCsConsultBean" parameterType="tcCsConsult" >
+    select 
+    <include refid="Base_Column_List" />
+    ,t2.nickname as user_name
+    ,t2.remarkname
+    ,t3.name as cs_name
+    from tc_cs_consult t1
+    left join tc_wx_user t2 on (t1.user_id=t2.openid)
+    left join tc_cs_customer_service t3 on (t3.id=t1.cs_id)
+    where t1.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcCsConsult" >
+    delete from tc_cs_consult
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tcCsConsult" >
+    insert into tc_cs_consult (
+	    id,
+		user_id,
+		cs_id,
+		consult_status,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		version,
+		del_flag
+	) values (
+   		#{id},
+		#{user_id},
+		#{cs_id},
+		'0',
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		0,
+		'0'
+     )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcCsConsult" >
+    update tc_cs_consult set version=version+1,last_updated=now(),update_id=#{update_id},update_ip=#{update_ip}
+		<if test="cs_id!= null" >,cs_id=#{cs_id}</if>
+		<if test="consult_status!= null" >,consult_status=#{consult_status}</if>
+		<if test="finish_time!= null" >,finish_time=now()</if>
+		<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <!-- 判断信息是否存在
+    int isDataYN(IEntity dto) throws Exception; -->
+    <select id="isDataYN" parameterType="tcCsConsult" resultType="int">
+    	select count(0) from tc_cs_consult where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <!-- 
+     * 查询信息 分页
+    List<TcWxUserBean> findDataIsPage(IEntity dto) throws Exception;
+     -->
+     <select id="findDataIsPage" parameterType="tcCsConsult" resultType="tcCsConsultBean">
+    	 select 
+			<include refid="Base_Column_List"/>
+		 ,t2.nickname as user_name
+		 from tc_cs_consult t1
+		 left join tc_wx_user t2 on (t2.openid=t1.user_id)
+		 where 1=1
+		 <if test="cs_id!= null" > and t1.cs_id=#{cs_id}</if>
+		 <if test="consult_status!= null" > and t1.consult_status=#{consult_status}</if>
+		 order by t1.date_created desc
+     </select>
+    <!-- 
+     * 查询信息 列表
+    List<TcWxUserBean> findDataIsList(IEntity dto) throws Exception; -->
+    <select id="findDataIsList" parameterType="tcCsConsult" resultType="tcCsConsultBean">
+    	 select 
+			<include refid="Base_Column_List"/>
+		 from tc_cs_consult t1
+		 where 1=1
+		 <if test="cs_id!= null" > and t1.cs_id=#{cs_id}</if>
+		 <if test="consult_status!= null" > and t1.consult_status=#{consult_status}</if>
+		 order by t1.date_created desc
+     </select>
+      <!-- 恢复逻辑删除的数据 -->
+   <update id="recoveryDataById" parameterType="tcCsCustomerService">
+	  	update tc_cs_consult set version=version+1,last_updated=now(),del_flag='0',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+   <!-- 信息检索 根据客服openid和最近修改时间查询咨询详情。 -->
+   <select id="findDataByUserIdAndLastDate" resultType="tcCsConsultBean" parameterType="tcCsConsult" >
+    select 
+    <include refid="Base_Column_List" />
+    ,t2.nickname as user_name
+    ,t2.remarkname
+    ,t3.name as cs_name
+    from tc_cs_consult t1
+    left join tc_wx_user t2 on (t1.user_id=t2.openid)
+    left join tc_cs_customer_service t3 on (t3.id=t1.cs_id)
+    where user_id=#{user_id}
+    and  consult_status !='2'
+	order by last_updated desc
+	limit 0,1
+  </select>
+</mapper>

@@ -3,6 +3,10 @@ package cn.com.softvan.bean.wechat.reply;
 import org.jdom.Document;
 
 public class WxReplyTextMsg extends WxReplyMsg {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1289441151764222007L;
 	private String content;
 	public WxReplyTextMsg(String content) {
 		setMsgType("text");

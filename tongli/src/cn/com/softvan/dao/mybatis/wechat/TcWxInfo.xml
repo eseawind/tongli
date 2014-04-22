@@ -39,7 +39,8 @@
 		location_precision,
 		event,
 		eventkey,
-		ticket
+		ticket,
+		consult_flag
 	</sql>
 	<select id="selectByPrimaryKey" resultType="tcWxInfoBean"  parameterType="tcWxInfoBean">
 		select
@@ -88,7 +89,8 @@
 		location_precision,
 		event,
 		eventkey,
-		ticket
+		ticket,
+		consult_flag
 		) values (
 		#{id},
 		#{keyword},
@@ -125,7 +127,8 @@
 		#{location_precision},
 		#{event},
 		#{eventkey},
-		#{ticket}
+		#{ticket},
+		#{consult_flag}
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="tcWxInfoBean">
@@ -167,6 +170,7 @@
 			 , info_source 
 			 ,last_updated
 			 ,sort_num
+			 ,consult_flag
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			 #{id}, 
@@ -205,6 +209,7 @@
 			#{info_source},
 			now(),
 			${sort_num}
+			,#{consult_flag}
 		</trim>
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="tcWxInfoBean">
@@ -238,6 +243,7 @@
 		<if test="event != null"> ,event=#{event}</if>
 		<if test="eventkey != null">,eventkey #{eventkey}</if>
 		<if test="ticket != null"> ,ticket=#{ticket}</if>
+		<if test="consult_flag != null"> ,consult_flag=#{consult_flag}</if>
 		,default_flag=#{default_flag}
 		,subscribe_flag=#{subscribe_flag}
 		,sort_num=${sort_num}
@@ -267,6 +273,7 @@
 			,subscribe_flag
 			,last_updated
 			,description
+			,consult_flag
     	from tc_wx_info 
     	where 1=1 
     	<if test="articles_id!= null">
@@ -310,6 +317,7 @@
 			t.event,
 			t.eventkey,
 			t.ticket
+			,t.consult_flag
 			,
 			t2.nickname, 
 			t2.remarkname, 

@@ -62,7 +62,7 @@
 								<div class="login_forget">
 									<a href="#">忘记密码？</a>
 								</div>
-								<div class="login_register">注 册</div>
+								<!-- <div class="login_register">注 册</div> -->
 								<input type="submit" class="login_btn" value="登 录" style="margin-top: -4px;" />
 								<div class="clear"></div>
 							</div>

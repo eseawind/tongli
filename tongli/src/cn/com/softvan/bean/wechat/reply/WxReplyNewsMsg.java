@@ -7,6 +7,10 @@ import org.jdom.Document;
 import org.jdom.Element;
 
 public class WxReplyNewsMsg extends WxReplyMsg {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6209993194160198832L;
 	private List<WxReplyNewsMsgItem> items = new LinkedList<WxReplyNewsMsgItem>();
 	public WxReplyNewsMsg() {
 		setMsgType("news");

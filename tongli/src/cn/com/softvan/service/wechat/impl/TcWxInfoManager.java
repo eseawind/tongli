@@ -5,22 +5,28 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.10  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家 System. - All Rights Reserved.
+ * Copyright 2014 童励 System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.service.wechat.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.apache.lucene.document.Field.Index;
+import org.apache.lucene.document.Field.Store;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import sun.security.action.GetLongAction;
 
 import cn.com.softvan.bean.wechat.TcWxInfoBean;
 import cn.com.softvan.bean.wechat.TcWxPublicUserBean;
@@ -34,7 +40,9 @@ import cn.com.softvan.bean.wechat.reply.WxReplyVoiceMsg;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.JedisHelper;
+import cn.com.softvan.common.Resources;
 import cn.com.softvan.common.Validator;
+import cn.com.softvan.common.lucene.LuceneUtil;
 import cn.com.softvan.common.wechat.WxApiUtil;
 import cn.com.softvan.dao.daointer.wechat.ITcWxInfoDao;
 import cn.com.softvan.dao.entity.wechat.TcWxInfo;
@@ -79,7 +87,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 				dto.setMsgtype(bean.getMsgtype());//消息类型
 				dto.setTousername(bean.getTousername());//接收方帐号（收到的OpenID）
 				dto.setFromusername(bean.getFromusername());//开发者微信号
-				dto.setCreatetime(""+System.currentTimeMillis());//消息创建时间 （整型）
+				dto.setCreatetime(Validator.notEmpty(bean.getCreatetime())?bean.getCreatetime():""+System.currentTimeMillis()/1000);//消息创建时间 （整型）
 				dto.setContent(bean.getContent());//消息内容（换行：在content中能够换行，微信客户端就支持换行显示）
 				dto.setMediaid(bean.getMediaid());//通过上传多媒体文件，得到的id。
 				dto.setTitle(bean.getTitle());//消息的标题
@@ -111,6 +119,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 				dto.setEvent(bean.getEvent());
 				dto.setEventkey(bean.getEventkey());
 				dto.setTicket(bean.getTicket());
+				dto.setConsult_flag(bean.getConsult_flag());//
 				//判断数据是否存在
 				if(tcWxInfoDao.isDataYN(dto)!=0){
 					//数据存在
@@ -280,6 +289,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 				dto.setSubscribe_flag(bean.getSubscribe_flag());
 				dto.setSort_num(bean.getSort_num());
 				dto.setNote(bean.getNote());
+				dto.setConsult_flag(bean.getConsult_flag());//
 				dto.setPageInfo(bean.getPageInfo());
     	   }
 			beans=tcWxInfoDao.findDataIsPage(dto);
@@ -334,6 +344,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 					dto.setDefault_flag(bean.getDefault_flag());
 					dto.setSubscribe_flag(bean.getSubscribe_flag());
 					dto.setSort_num(bean.getSort_num());
+					dto.setConsult_flag(bean.getConsult_flag());//
 					dto.setNote(bean.getNote());
 	    	   }
 				beans=tcWxInfoDao.findDataIsList(dto);
@@ -402,6 +413,19 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	 * @param bean
 	 */
 	private void setMsgCacheSubscribeXDefault(TcWxInfoBean bean){
+			try{
+				String keyword=(String) jedisHelper.get("key_flag_uuid_"+bean.getId());
+				if(Validator.notEmpty(keyword)){
+					String[] keys=keyword.split(" ");
+					for(String s:keys){
+						if(Validator.notEmpty(s)){
+							//删除关键字对象的数据id
+							jedisHelper.del("key_flag_"+s);
+						}
+					}
+				}
+			} catch (Exception e) {
+			}
 			try {
 				//首次关注回复信息
 				String u1=(String) jedisHelper.get("key_flag_subscribe");
@@ -420,6 +444,36 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 				}
 			} catch (Exception e) {
 			}
+	}
+	/**
+	 * 设置索引
+	 * @param bean
+	 */
+	private void addLuceneIndex(TcWxInfoBean bean){
+//		try {
+//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.fff");
+//			//delte
+//			deleteLuceneIndex(bean);
+//			//create
+//			LuceneUtil.creatIndex(Resources.getData("lucene.wechat_index_path"),
+//					new String[]{"id","keyword","last_updated"},
+//					new String[]{bean.getId(),bean.getKeyword(),Validator.isEmpty(bean.getLast_updated())?sdf.format(new Date()):bean.getLast_updated()},
+//					null, new Store[]{org.apache.lucene.document.Field.Store.YES,org.apache.lucene.document.Field.Store.YES,org.apache.lucene.document.Field.Store.YES},
+//					new Index[]{org.apache.lucene.document.Field.Index.NOT_ANALYZED,org.apache.lucene.document.Field.Index.ANALYZED,org.apache.lucene.document.Field.Index.NOT_ANALYZED});
+//		} catch (Exception e) {
+//			log.error("关键字放入索引失败!", e);
+//		}
+	}
+	/**
+	 * 删除索引
+	 * @param bean
+	 */
+	private void deleteLuceneIndex(TcWxInfoBean bean){
+//		try {
+//			LuceneUtil.delete(Resources.getData("lucene.wechat_index_path"),"id", bean.getId());
+//		} catch (Exception e) {
+//			log.error("关键字放入缓存失败!", e);
+//		}
 	}
 	/**
 	 * 信息放入 缓存
@@ -444,7 +498,12 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 			}
 		}
 		if(msgType!=null){
-			if(bean.getKeyword()!=null){
+			setMsgCacheSubscribeXDefault(bean);
+			if(Validator.notEmpty(bean.getKeyword())){
+				addLuceneIndex(bean);//TODO=========将关键字放入索引============
+				//TODO 存放原始 关键字信息 用于更新关键字时清理旧缓存信息
+				jedisHelper.set("key_flag_uuid_"+bean.getId(),bean.getKeyword());
+				//TODO 
 				String[] keys=bean.getKeyword().split(" ");
 				for(String s:keys){
 					if(Validator.notEmpty(s)){
@@ -459,6 +518,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 						
 					}
 				}
+				
 			}
 			//图文消息
 			if("news".equals(msgType)){
@@ -481,7 +541,6 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 						newsMsg.addItem(bean1.getTitle(),bean1.getDescription(),Validator.isUrl(bean1.getPicurl())?bean1.getPicurl():basePath+bean1.getPicurl(), bean1.getUrl());
 					}
 				}
-				setMsgCacheSubscribeXDefault(bean);
 				//自动回复对象
 				WxReplyMsg replyMsg=newsMsg;
 				//首次关注回复信息
@@ -544,7 +603,10 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 							if("music".equals(msgType)){
 								uuid=bean1.getId();
 //								//音乐图片
-//								String MediaId=WxApiUtil.uploadMedia(appid, secret, msgType, bean1.getPicurl());
+								String MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(false, jedisHelper,appid, secret), msgType, bean1.getPicurl());
+								if(wxApiUtil.isErrAccessToken(MediaId)){
+									MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, jedisHelper,appid, secret), msgType, bean1.getPicurl());
+								}
 								//TODO 需要判断音乐是否为本地音乐 需要加上项目http详细地址  
 								if(!Validator.isUrl(bean1.getMusicurl())||!Validator.isUrl(bean1.getHqmusicurl())){
 									HttpServletRequest request = ServletActionContext.getRequest(); // 获取客户端发过来的HTTP请求
@@ -565,9 +627,8 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 							        	bean1.setHqmusicurl(basePath+bean1.getHqmusicurl());
 							        }
 								}
-								replyMsg = new WxReplyMusicMsg(bean1.getTitle(),bean1.getDescription(),bean1.getMusicurl(),bean1.getHqmusicurl());
+								replyMsg = new WxReplyMusicMsg(bean1.getTitle(),bean1.getDescription(),bean1.getMusicurl(),bean1.getHqmusicurl(),MediaId);
 							}
-							setMsgCacheSubscribeXDefault(bean1);
 							//首次关注回复信息
 							if("1".equals(bean1.getSubscribe_flag())){
 								jedisHelper.set("key_flag_subscribe", uuid);

@@ -4,6 +4,10 @@ import cn.com.softvan.bean.BaseBean;
 
 
 public class WxReplyNewsMsgItem extends BaseBean{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -55217010421239040L;
 	private String title;
 	private String description;
 	private String picUrl;

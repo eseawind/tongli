@@ -5,7 +5,7 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.20  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家 System. - All Rights Reserved.
+ * Copyright 2014 童励 System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.service.wechat.impl;
@@ -64,7 +64,7 @@ public class TcWxUserManager extends BaseManager implements ITcWxUserManager {
 		dto.setProvince(bean.getProvince());//省份
 		dto.setCity(bean.getCity());//城市
 		dto.setHeadimgurl(bean.getHeadimgurl());//头像url
-		dto.setSubscribe_time(bean.getSubscribe_time());//用户关注时间
+		dto.setSubscribe_time(Validator.notEmpty(bean.getSubscribe_time())?bean.getSubscribe_time():""+(System.currentTimeMillis()/1000));//用户关注时间
 		dto.setGroupid(bean.getGroupid());//用户所属的groupid
 		//判断数据是否存在
 		if(tcWxUserDao.isDataYN(dto)!=0){

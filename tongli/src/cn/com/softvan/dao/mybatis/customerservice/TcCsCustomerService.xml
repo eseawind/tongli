@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.customerservice.ITcCsCustomerServiceDao" >
+  <sql id="Base_Column_List" >
+    id,
+	uid,
+	pwd,
+	name,
+	cs_state,
+	login_state,
+	login_date,
+	cs_count,
+	date_created,
+	create_id,
+	create_ip,
+	last_updated,
+	update_id,
+	update_ip,
+	version,
+	del_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcCsCustomerServiceBean" parameterType="tcCsCustomerService" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_cs_customer_service
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcCsCustomerService" >
+    delete from tc_cs_customer_service
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tcCsCustomerService" >
+    insert into tc_cs_customer_service (
+	    id,
+		uid,
+		pwd,
+		name,
+		cs_state,
+		login_state,
+		login_date,
+		cs_count,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		version,
+		del_flag
+	) values (
+   		#{id},
+		#{uid},
+		#{pwd},
+		#{name},
+		#{cs_state},
+		#{login_state},
+		#{login_date},
+		0,
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		 0,
+		'0'
+     )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcCsCustomerService" >
+    update tc_cs_customer_service set version=version+1,last_updated=now(),update_id=#{update_id},update_ip=#{update_ip}
+		<if test="pwd!= null" >,pwd=#{pwd}</if>
+		<if test="name!= null" >,name=#{name}</if>
+		<if test="cs_state!= null" >,cs_state=#{cs_state}</if>
+		<if test="login_state!= null" >,login_state=#{login_state}</if>
+		<if test="login_date!= null" >,login_date=#{login_date}</if>
+		<if test="cs_count!= null" >,cs_count=${cs_count}</if>
+		<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <!-- 判断信息是否存在
+    int isDataYN(IEntity dto) throws Exception; -->
+    <select id="isDataYN" parameterType="tcCsCustomerService" resultType="int">
+    	select count(0) from tc_cs_customer_service where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <!-- 
+     * 查询信息 分页
+    List<TcWxUserBean> findDataIsPage(IEntity dto) throws Exception;
+     -->
+     <select id="findDataIsPage" parameterType="tcCsCustomerService" resultType="tcCsCustomerServiceBean">
+    	 select 
+			<include refid="Base_Column_List"/>
+		 from tc_cs_customer_service 
+		 order by date_created desc
+     </select>
+    <!-- 
+     * 查询信息 列表
+    List<TcWxUserBean> findDataIsList(IEntity dto) throws Exception; -->
+    <select id="findDataIsList" parameterType="tcCsCustomerService" resultType="tcCsCustomerServiceBean">
+    	 select 
+			<include refid="Base_Column_List"/>
+		 from tc_cs_customer_service 
+		 order by date_created desc
+     </select>
+    <!-- 恢复逻辑删除的数据 -->
+   <update id="recoveryDataById" parameterType="tcCsCustomerService">
+	  	update tc_cs_customer_service set version=version+1,last_updated=now(),del_flag='0',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+   <!-- 客服认证 -->
+   <select id="checkPWD" parameterType="tcCsCustomerService" resultType="tcCsCustomerServiceBean">
+    select 
+    <include refid="Base_Column_List" />
+    from tc_cs_customer_service
+    where uid=#{uid} and pwd=#{pwd} and cs_state='0' and del_flag='0'
+   </select>
+</mapper>

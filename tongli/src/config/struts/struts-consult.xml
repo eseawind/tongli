@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="consult_info" namespace="/h" extends="wechat-default" >
+    	<default-interceptor-ref name="wechat-auth-customer-service" /> 
+		<!-- 咨询列表 -->
+		<action name="c301_*" class="c301Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/consult/C301.jsp</result>
+			<result name="list1">/WEB-INF/pages/admin/consult/C301_01.jsp</result>
+			<!-- <result name="recycle">/WEB-INF/pages/admin/consult/C301_03.jsp</result>
+			<result name="success" type="chain">c301_init</result> -->
+			<result type="redirect" name="success">/h/c301_init.ac</result>
+		</action>
+		<!-- 咨询详细 -->
+		<action name="c302_*" class="c302Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/consult/C302.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/consult/C302_01.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/consult/C302_03.jsp</result>
+			<result name="success" type="chain">c302_init</result>
+		</action>
+	</package>
+</struts>

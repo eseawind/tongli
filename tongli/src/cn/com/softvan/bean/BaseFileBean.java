@@ -5,7 +5,7 @@
  * -------- ------------- --------------- ------------------------------------------
  * 1.00     2013.08.16    wuxiaogang           程序・发布
  * -------- ------------- --------------- ------------------------------------------
- * Copyright 2014 车主管家  System. - All Rights Reserved.
+ * Copyright 2014 童励  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.bean;

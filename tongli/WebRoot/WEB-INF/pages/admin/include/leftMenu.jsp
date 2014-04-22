@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-03  wuxiaogang        程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 车主管家 System. - All Rights Reserved.
+ * Copyright 2014 童励 System. - All Rights Reserved.
  *
  */
 --%>
@@ -60,9 +60,9 @@
 								<li id="wechat_sub_menu_li_sub_menu_1"><a href="${basePath}/h/w002_init.ac">图文</a></li>
 								<li id="wechat_sub_menu_li_sub_menu_2"><a href="${basePath}/h/w003_init.ac">图片</a></li>
 								<li id="wechat_sub_menu_li_sub_menu_3"><a href="${basePath}/h/w009_init.ac">文本</a></li>
-								<li id="wechat_sub_menu_li_sub_menu_4"><a href="${basePath}/h/w005_init.ac">音乐</a></li>
-								<li id="wechat_sub_menu_li_sub_menu_10"><a href="${basePath}/h/w014_init.ac">语音</a></li>
-								<li id="wechat_sub_menu_li_sub_menu_5"><a href="${basePath}/h/w006_init.ac">视频</a></li>
+								<li id="wechat_sub_menu_li_sub_menu_4"><a href="${basePath}/h/w005_init.ac" >音乐</a></li>
+								<li id="wechat_sub_menu_li_sub_menu_10"><a href="#" onclick="myAlert('功能即将开放')">语音</a></li><!-- ${basePath}/h/w014_init.ac -->
+								<li id="wechat_sub_menu_li_sub_menu_5"><a href="#" onclick="myAlert('功能即将开放')">视频</a></li><!-- ${basePath}/h/w006_init.ac -->
 							</ul>
 						</li>
 						<li id="w010_init">
@@ -70,11 +70,34 @@
 							信息接收
 							</a>
 						</li>
-						<li id="w013_init">
-							<a href="${basePath}/h/w013_init.ac">
-							客服响应
+						<!-- 
+						<li class="">
+							<a href="javascript:;">
+							消息接收(普通消息)
+							<span class="arrow"></span>
 							</a>
+							<ul style="display: none;" class="sub-menu">
+								<li><a href="#" onclick="myAlert('功能即将开放')">文本</a></li>
+								<li><a href="#" onclick="myAlert('功能即将开放')">图片</a></li>
+								<li><a href="#" onclick="myAlert('功能即将开放')">语音</a></li>
+								<li><a href="#" onclick="myAlert('功能即将开放')">视频</a></li>
+								<li><a href="#" onclick="myAlert('功能即将开放')">地理位置</a></li>
+								<li><a href="#" onclick="myAlert('功能即将开放')">链接</a></li>
+							</ul>
 						</li>
+						<li class="">
+							<a href="javascript:;">
+							消息接收(事件推送)
+							<span class="arrow"></span>
+							</a>
+							<ul style="display: none;" class="sub-menu">
+								<li><a href="#" onclick="myAlert('功能即将开放')">关注/取消事件</a></li>
+								<li><a href="#" onclick="myAlert('功能即将开放')">扫描带参数二维码事件</a></li>
+								<li><a href="#" onclick="myAlert('功能即将开放')">上报地理位置事件</a></li>
+								<li><a href="#" onclick="myAlert('功能即将开放')">自定义菜单事件</a></li>
+							</ul>
+						</li>
+						 -->
 						<li id="w012_init">
 							<a href="${basePath}/h/w012_init.ac">
 							粉丝列表
@@ -87,6 +110,49 @@
 						</li>
 					</ul>
 				</li>
+				<li id="CustomerService">
+					<a class="active" href="javascript:;">
+					<i class="fa  fa-sitemap"></i> 
+					<span class="title">客服管理</span>
+					<span id="CustomerService_arrow" class="arrow "></span>
+					</a>
+					<ul id="CustomerService_sub_menu" style="display: none;" class="sub-menu">
+						<li id="CustomerService_sub_menu_l0">
+							<a  href="#" onclick="myAlert('功能即将开放')"><!-- ${basePath}/h/cs101_key.ac -->
+								关键字设置
+							</a>
+						</li>
+						<li id="CustomerService_sub_menu_l1">
+							<a   href="${basePath}/h/cs101_init.ac">
+								客服列表
+							</a>
+						</li>
+						<li id="CustomerService_sub_menu_l2">
+							<a  href="#" onclick="myAlert('功能即将开放')"><!-- ${basePath}/h/c303_init.ac -->
+								咨询统计
+							</a>
+						</li>
+					</ul>
+				</li>
+				<%-- <li id="consult">
+					<a class="active" href="javascript:;">
+					<i class="fa fa-comment-o"></i> 
+					<span class="title">客服响应</span>
+					<span id="consult_arrow" class="arrow "></span>
+					</a>
+					<ul id="consult_sub_menu" style="display: none;" class="sub-menu">
+						<li id="consult_sub_menu_l1">
+							<a  href="${basePath}/h/c301_init.ac">
+								咨询队列
+							</a>
+						</li>
+						<li id="consult_sub_menu_l2">
+							<a  href="${basePath}/h/c301_list1.ac">
+								我的咨询
+							</a>
+						</li>
+					</ul>
+				</li> --%>
 				<li id="course" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-flag"></i> 

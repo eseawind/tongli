@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-19  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 车主管家 System. - All Rights Reserved.
+ * Copyright 2014 童励 System. - All Rights Reserved.
  *
  */
 --%>
@@ -41,7 +41,7 @@ event:事件推送 --%>
 		 style="width: 40px;height: 40px;box-shadow: 0px 0px 0px 8px #CCC;border-radius: 30px !important;" class="avatar img-circle"></i></div>
 		<div class=" timeline-body">
 			<p class="userInfo">
-				<span class="name">${bean.name}</span>
+				<span class="name">${bean.nickname}</span>
 				<span class="date">${bean.createtime}</span>
 			</p>
 			<div class="timeline-content alert" style="color: #468847">
@@ -49,7 +49,7 @@ event:事件推送 --%>
 					${bean.content}
 				</c:if>
 				<c:if test="${bean.msgtype=='image'}">
-					<a href="${basePath}${bean.picurl}" target="_blank"><img  onerror="this.src='${basePath}/images/error/404.jpg'"  src="${basePath}${bean.picurl}" style="height: 100px;"></a>
+					<a href="${basePath}/${bean.picurl}" target="_blank"><img  onerror="this.src='${basePath}/images/error/404.jpg'"  src="${basePath}/${bean.picurl}" style="height: 100px;"></a>
 				</c:if>
 				<c:if test="${bean.msgtype=='voice'}">
 					${bean.url}

@@ -79,6 +79,16 @@
 		<typeAlias type="cn.com.softvan.dao.entity.student.TcStudent" alias="tcStudent"/>
 		<typeAlias type="cn.com.softvan.dao.entity.student.TcStudentHobbyItems" alias="tcStudentHobbyItems"/>
 		<!-- 学员管理 end -->
+		<!-- 客服咨询 begin -->
+		<!-- bean class  -->
+		<typeAlias type="cn.com.softvan.bean.consult.TcCsConsultBean" alias="tcCsConsultBean"/>
+		<typeAlias type="cn.com.softvan.bean.consult.TcCsConsultMsgBean" alias="tcCsConsultMsgBean"/>
+		<typeAlias type="cn.com.softvan.bean.customerservice.TcCsCustomerServiceBean" alias="tcCsCustomerServiceBean"/>
+		<!-- entity class -->
+		<typeAlias type="cn.com.softvan.dao.entity.consult.TcCsConsult" alias="tcCsConsult"/>
+		<typeAlias type="cn.com.softvan.dao.entity.consult.TcCsConsultMsg" alias="tcCsConsultMsg"/>
+		<typeAlias type="cn.com.softvan.dao.entity.customerservice.TcCsCustomerService" alias="tcCsCustomerService"/>
+		<!-- 客服咨询    end -->
 	</typeAliases>
 	<!-- 插件 -->
 	<plugins>
@@ -137,5 +147,10 @@
 		<mapper resource="/cn/com/softvan/dao/mybatis/student/TcStudent.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/student/TcStudentHobbyItems.xml"/>
 		<!-- 学员管理 end -->
+		<!-- 客服咨询 begin -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/consult/TcCsConsult.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/consult/TcCsConsultMsg.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/customerservice/TcCsCustomerService.xml"/>
+		<!-- 客服咨询 end -->
 	</mappers>
 </configuration>

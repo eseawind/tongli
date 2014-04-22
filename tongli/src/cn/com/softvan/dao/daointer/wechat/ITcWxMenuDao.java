@@ -6,7 +6,7 @@
  * 1.00     2014.02.25  wangzi          程序・发布
  * 1.01     2014.03.05  wuxiaogang      程序・更新
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家 System. - All Rights Reserved.
+ * Copyright 2014 童励 System. - All Rights Reserved.
  *
  */package cn.com.softvan.dao.daointer.wechat;
 

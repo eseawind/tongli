@@ -1,11 +1,11 @@
 /*
- * 接口Dao类   车主管家附件关联 Dao类
+ * 接口Dao类   童励附件关联 Dao类
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.02.26  wuxiaogang           程序.发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家  System. - All Rights Reserved.
+ * Copyright 2014 童励  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.dao.daointer;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import cn.com.softvan.dao.entity.TcFileLink;
 /**
- * <p> 车主管家附件关联 Dao类 <p>
+ * <p> 童励附件关联 Dao类 <p>
  * @author wuxiaogang
  *
  */

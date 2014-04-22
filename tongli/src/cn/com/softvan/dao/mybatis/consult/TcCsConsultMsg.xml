@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.consult.ITcCsConsultMsgDao" >
+  <sql id="Base_Column_List" >
+    id,
+	consult_id,
+	user_id,
+	content,
+	pic_url,
+	cs_id,
+	date_created,
+	create_id,
+	create_ip,
+	last_updated,
+	update_id,
+	update_ip,
+	version,
+	del_flag,
+	info_source
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcCsConsultMsgBean" parameterType="tcCsConsultMsg" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_cs_consult_msg
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcCsConsultMsg" >
+    delete from tc_cs_consult_msg
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tcCsConsultMsg" >
+    insert into tc_cs_consult_msg (
+	    id,
+		consult_id,
+		user_id,
+		content,
+		pic_url,
+		cs_id,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		version,
+		del_flag,
+		info_source
+	) values (
+   		#{id},
+		#{consult_id},
+		#{user_id},
+		#{content},
+		#{pic_url},
+		#{cs_id},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		 0,
+		'0',
+		#{info_source}
+     )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcCsConsultMsg" >
+    update tc_cs_consult_msg set version=version+1,last_updated=now(),update_id=#{update_id},update_ip=#{update_ip}
+		<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <!-- 判断信息是否存在
+    int isDataYN(IEntity dto) throws Exception; -->
+    <select id="isDataYN" parameterType="tcCsConsultMsg" resultType="int">
+    	select count(0) from tc_cs_consult_msg where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <!-- 
+     * 查询信息 分页
+    List<TcWxUserBean> findDataIsPage(IEntity dto) throws Exception;
+     -->
+     <select id="findDataIsPage" parameterType="tcCsConsultMsg" resultType="tcCsConsultMsgBean">
+    	 select 
+			<include refid="Base_Column_List"/>
+		 from tc_cs_consult_msg 
+		 where user_id=#{user_id} and consult_id=#{consult_id}
+		 order by date_created desc
+     </select>
+    <!-- 
+     * 查询信息 列表
+    List<TcWxUserBean> findDataIsList(IEntity dto) throws Exception; -->
+    <select id="findDataIsList" parameterType="tcCsConsultMsg" resultType="tcCsConsultMsgBean">
+    	 select 
+			<include refid="Base_Column_List"/>
+		 from tc_cs_consult_msg 
+		  where cs_id=#{cs_id} and consult_id=#{consult_id}
+		 order by date_created asc
+     </select>
+     <!-- 刚接入咨询信息时  如果存在交互信息  同时接入交互信息(数据库中加入客服id) -->
+     <update id="updateData" parameterType="tcCsConsultMsg" >
+      update tc_cs_consult_msg set version=version+1,last_updated=now(),update_id=#{update_id},update_ip=#{update_ip}
+		,cs_id=#{cs_id}
+  	  where consult_id=#{consult_id} and (cs_id is null or cs_id='')
+     </update>
+</mapper>

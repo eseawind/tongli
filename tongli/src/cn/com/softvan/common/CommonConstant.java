@@ -72,4 +72,7 @@ public class CommonConstant {
 	public static final String SESSION_KEY_USER_MEMBER_INFO = "SESSION_KEY_USER_MEMBER_INFO";
 	/** 存放教师登录信息 */
 	public static final String SESSION_KEY_USER_TEACHER_INFO = "SESSION_KEY_USER_TEACHER_INFO";
+	
+	/** SESSION里面存放 用户客服登录信息 */
+	public static final String SESSION_KEY_USER_CUSTOMER_SERVICE = "SESSION_KEY_USER_CUSTOMER_SERVICE";
 }

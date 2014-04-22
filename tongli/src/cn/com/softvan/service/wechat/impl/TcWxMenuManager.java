@@ -5,7 +5,7 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.20  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家 System. - All Rights Reserved.
+ * Copyright 2014 童励 System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.service.wechat.impl;
@@ -219,13 +219,13 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 	 */
 	public String uploadMenu(){
 		String msg="1";
+		StringBuffer menu=new StringBuffer("");
 		try {
 			//TODO 设置菜单
 			TcWxMenuBean bean=new TcWxMenuBean();
 			bean.setInfo_source("0");
 	    	List<TcWxMenuBean> beans=findDataIsTree(bean);
 	    	if(beans!=null && beans.size()>0){
-				StringBuffer menu=new StringBuffer("");
 				menu.append("{");
 				menu.append("\"button\":[");
 				for(int i=0;i<beans.size();i++){
@@ -283,6 +283,7 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 //				System.out.println("----------4---------------");
 	    	}
     	} catch (Exception e) {
+    		log.error(menu.toString());
 			log.error("微信菜单生成失败!", e);
 		}
 		return msg;

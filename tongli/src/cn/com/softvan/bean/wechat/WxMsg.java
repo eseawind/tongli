@@ -5,7 +5,7 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2013.08.16  wuxiaogang           程序发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家  System. - All Rights Reserved.
+ * Copyright 2014 童励  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.bean.wechat;
@@ -39,7 +39,10 @@ public class WxMsg extends BaseBean{
 		this.createDt = createDt;
 		this.msgType = msgType;
 	}
-	
+	public WxMsg(String toUser,String msgType) {
+		this.toUser=toUser;
+		this.msgType=msgType;
+	}
 	public String getToUser() {
 		return toUser;
 	}

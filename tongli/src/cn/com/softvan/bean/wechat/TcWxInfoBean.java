@@ -5,7 +5,7 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.20  wuxiaogang      程序.发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 车主管家  System. - All Rights Reserved.
+ * Copyright 2014 童励  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.bean.wechat;
@@ -103,6 +103,8 @@ public class TcWxInfoBean extends BaseBean {
 	private String city;
 	/** 头像url **/
 	private String headimgurl;
+	/** 咨询信息标记 */
+	private String consult_flag;
 	/**
 	 * id取得
 	 * @return id
@@ -620,6 +622,20 @@ public class TcWxInfoBean extends BaseBean {
 	 */
 	public void setHeadimgurl(String headimgurl) {
 	    this.headimgurl = headimgurl;
+	}
+	/**
+	 * 咨询信息标记取得
+	 * @return 咨询信息标记
+	 */
+	public String getConsult_flag() {
+	    return consult_flag;
+	}
+	/**
+	 * 咨询信息标记设定
+	 * @param consult_flag 咨询信息标记
+	 */
+	public void setConsult_flag(String consult_flag) {
+	    this.consult_flag = consult_flag;
 	}
 
 }

@@ -20,7 +20,9 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.wechat.TcWxMenuBean;
@@ -229,7 +231,7 @@ public final class WxApiUtil {
 	public String getAccessToken(String appid, String secret) {
 		String url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid="
 				+ appid + "&secret=" + secret;
-		// 构建http构建[使用HttpClient的jar,怎么获得自己百度]
+		
 		HttpClient client = new HttpClient();
 		GetMethod method = new GetMethod(url);
 		method.getParams().setContentCharset("utf-8");
@@ -251,9 +253,9 @@ public final class WxApiUtil {
 		List<TcWxMenuBean> beans=new ArrayList<TcWxMenuBean>();
 		String url = "https://api.weixin.qq.com/cgi-bin/menu/get?access_token=" + access_token;
 		log.debug(url);
-		// 构建http构建[使用HttpClient的jar,怎么获得自己百度]
+		
 		boolean error_flag=false;
-		// 构建http构建[使用HttpClient的jar,怎么获得自己百度]
+		
 		HttpClient client = new HttpClient();
 		GetMethod mothod = new GetMethod(url);
 		mothod.getParams().setContentCharset("utf-8");
@@ -399,7 +401,7 @@ public final class WxApiUtil {
 		 * data	            列表数据，OPENID的列表
 		 * next_openid	 拉取列表的后一个用户的OPENID
 		 */
-		// 构建http构建[使用HttpClient的jar,怎么获得自己百度]
+		
 		HttpClient client = new HttpClient();
 		GetMethod mothod = new GetMethod(url);
 		mothod.getParams().setContentCharset("utf-8");
@@ -462,7 +464,7 @@ public final class WxApiUtil {
 			openid	 是	 普通用户的标识，对当前公众号唯一
 			lang	 否	 返回国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语
 		 */
-		// 构建http构建[使用HttpClient的jar,怎么获得自己百度]
+		
 		HttpClient client = new HttpClient();
 		GetMethod mothod = new GetMethod(url);
 		mothod.getParams().setContentCharset("utf-8");
@@ -530,6 +532,42 @@ public final class WxApiUtil {
 			return true;
 		}
 		return false;
+	}
+	/**
+	 *	通过POST一个JSON数据包来发送消息给普通用户，在48小时内不限制发送次数。此接口主要用于客服等有人工消息处理环节的功能，方便开发者为用户提供更加优质的服务。
+	 * @param access_token	 是	 调用接口凭证
+	 * @param openid	            是	 普通用户的标识，对当前公众号唯一
+	 * @return
+	 */
+	public String sendCustomerService(String access_token,String openid,String json){
+		String msg="1";
+		String url="https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="+access_token;
+		HttpClient client = new HttpClient();
+		PostMethod mothod = new PostMethod(url);
+		mothod.getParams().setContentCharset("utf-8");
+		// 发送http请求
+		String respStr = "";
+		boolean error_flag=false;
+		try {
+//			NameValuePair[] data = { new NameValuePair("body",json)};
+			mothod.setRequestBody(json);
+			client.executeMethod(mothod);
+			respStr = mothod.getResponseBodyAsString();
+			JSONObject dataJson = JSONObject.fromObject(respStr);
+			try {
+				if(dataJson!=null && null!=dataJson.getString("errcode")){
+					error_flag=true;
+					msg=dataJson.getString("errcode");
+				}
+			} catch (Exception e) {
+			}
+			if(!error_flag){
+				log.debug("信息发送完成!");
+			}
+		} catch (Exception e) {
+			log.error("客服信息发送信息时异常", e);
+		}
+		return msg;
 	}
 	// test
 	public static void main(String[] args) throws Exception {

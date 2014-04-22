@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-20  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 车主管家 System. - All Rights Reserved.
+ * Copyright 2014 童励 System. - All Rights Reserved.
  *
  */
 --%>
@@ -30,7 +30,7 @@
 	<c:forEach items="${beans}" var="bean">
 	<tr>
 		<td><img src="${bean.headimgurl}" style="width: 40px;height: 40px;"  onerror="this.src='${basePath}/images/getheadimg.jpg'" ></td>
-		<td>${bean.name}</td>
+		<td>${bean.nickname}</td>
 		<td>${bean.remarkname}</td>
 		<td>
 		<c:choose>
