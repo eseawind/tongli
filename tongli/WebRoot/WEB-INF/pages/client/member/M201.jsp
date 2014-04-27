@@ -48,12 +48,12 @@
 					<a href="javascript:void(0);" class="ico_aboutus">学员列表</a>
 				</div>
 				<div class="content">
-					<ul>
+					<ul id="s_">
 						<c:forEach items="${student_beans}" var="student" varStatus="i">
 							<c:if test="${i.index==0}">
 								<c:set var="student_id" value="${student.id}" />
 							</c:if>
-							<li>
+							<li id="s_${student.id}">
 								<a href="javascript:;" onclick="loadUrlPage(0,'m201_','list1','course_info','${student.id}')">${student.name}</a>
 							</li>
 						</c:forEach>
@@ -88,6 +88,10 @@
 		loadUrlPage(0,'m201_','list1','course_info','${student_id}');
 	});
 	function loadUrlPage(offset,url,event,divId,sid) {
+		try{
+			$('#s_').find('li').removeClass('on');
+			$('#s_'+sid).addClass('on');
+		}catch(e){}
 		loginCheck();
 		var load = "<a class='loading' >信息加载中...</a>";
 		jQuery("#" + divId).html(load);
