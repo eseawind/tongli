@@ -12,6 +12,9 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" session="false"%>
+<%@page import="cn.com.softvan.common.CommonConstant"%>
+<%@page import="cn.com.softvan.bean.member.TcMemberBean"%>
+
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -28,12 +31,45 @@
 		<div class="nav_con">
 			<div class="login">
 				<div class="loglink">
-					<a href="${basePath}/m201_init.ac" >会员</a> | <a href="${basePath}/t001_init.ac" >员工</a>
+				 	<%
+				 	TcMemberBean member=(TcMemberBean)request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO);
+				 	TcMemberBean teacher=(TcMemberBean)request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO);
+						if ( member!= null) {
+					%>
+						<a href="${basePath}/m201_init.ac" >会员个人中心</a>
+					<%
+						}else
+						if (teacher != null) {
+					%>
+						<a href="${basePath}/t001_init.ac" >会员个人中心</a>
+					<%		
+						}else{
+					%>
+						<a href="${basePath}/m201_init.ac" >会员个人中心</a>
+					<%
+						}
+					%>
 				</div>
-				<div class="shortcut">
-					<select>
-						<option value="我的课程表">我的课程表</option>
-					</select>
+				<div class="loglink">
+					<%
+						if ( member!= null) {
+					%>
+						<a href="${basePath}/m201_logout.ac" ><%=member.getUser_id()%>安全退出</a>
+					<%
+						}else
+						if (teacher != null) {
+					%>
+						<a href="${basePath}/t001_logout.ac" ><%=teacher.getUser_id()%>安全退出</a>
+					<%		
+						}else{
+					%>
+						<select>
+							<option value="我的课程表">我的课程表</option>
+						</select>
+					<%
+						}
+					%>
+					
 				</div>
 			</div>
 			<div class="nav">

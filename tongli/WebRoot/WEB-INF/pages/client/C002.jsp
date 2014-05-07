@@ -38,7 +38,7 @@
 
 <div class="body fr" style=" width:770px;">
 <div class="title">&nbsp; <c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if>-->${typeBean.name}</div>
-<div class="content home_news pr" style="min-height:500px;">
+<div class="content home_news pr" style="min-height:600px;">
 	<c:choose>
 		<c:when test="${beans!=null && fn:length(beans)>0 }">
 		<ul>
