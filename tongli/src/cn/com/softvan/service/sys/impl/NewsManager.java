@@ -97,12 +97,12 @@ public class NewsManager extends BaseManager implements INewsManager {
 					}
 					tcSysNewsDao.insert(dto);
 				}
+				//TODO ---清空资讯栏目关联关系----
+				TcSysNewsVsType typeDto1=new TcSysNewsVsType();
+				typeDto1.setNew_id(dto.getId());//资讯id
+				tcSysNewsVsTypeDao.deleteByPrimaryKey(typeDto1);
 				//增加资讯 栏目 关联关系
 				if(bean.getNews_type()!=null){
-					//TODO ---清空资讯栏目关联关系----
-					TcSysNewsVsType typeDto1=new TcSysNewsVsType();
-					typeDto1.setNew_id(dto.getId());//资讯id
-					tcSysNewsVsTypeDao.deleteByPrimaryKey(typeDto1);
 					//==================================================
 					for(String type:bean.getNews_type()){
 						TcSysNewsVsType typeDto2=new TcSysNewsVsType();

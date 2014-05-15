@@ -5,7 +5,7 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.25  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 童励  System. - All Rights Reserved.
+ * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.web.action.sys;
@@ -15,8 +15,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.customerservice.TcCsCustomerServiceBean;
 import cn.com.softvan.bean.sys.TcSysNewsTypeBean;
 import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.sys.INewsTypeManager;
 import cn.com.softvan.web.action.BaseAction;
@@ -79,6 +81,10 @@ public class S002Action extends BaseAction {
 		bean=newsTypeManager.findDataById(bean1);
 		//栏目树
 		beans=newsTypeManager.findDataIsTree(null);
+		if(bean==null){
+			bean=new TcSysNewsTypeBean();
+			bean.setId(IdUtils.createUUID(32));
+		}
 		return "edit";
 	}
 	/**

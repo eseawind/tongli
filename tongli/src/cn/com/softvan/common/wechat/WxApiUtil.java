@@ -549,7 +549,7 @@ public final class WxApiUtil {
 		String respStr = "";
 		boolean error_flag=false;
 		try {
-//			NameValuePair[] data = { new NameValuePair("body",json)};
+
 			mothod.setRequestBody(json);
 			client.executeMethod(mothod);
 			respStr = mothod.getResponseBodyAsString();
@@ -563,6 +563,80 @@ public final class WxApiUtil {
 			}
 			if(!error_flag){
 				log.debug("信息发送完成!");
+			}
+		} catch (Exception e) {
+			log.error("客服信息发送信息时异常", e);
+		}
+		return msg;
+	}
+	/**
+	 * 生成带参数的二维码 临时二维码
+	 * @param access_token 该二维码有效时间，以秒为单位。 最大不超过1800。
+	 * @param expire_seconds
+	 * @param scene_id 场景值ID，临时二维码时为32位非0整型
+	 * @return
+	 */
+	public String getQR_SCENE(String access_token,int expire_seconds,String scene_id){
+		String msg=null;
+		String json="{\"expire_seconds\": "+expire_seconds+", \"action_name\": \"QR_SCENE\", \"action_info\": {\"scene\": {\"scene_id\": "+scene_id+"}}}";
+		String url="https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token="+access_token;
+		HttpClient client = new HttpClient();
+		PostMethod mothod = new PostMethod(url);
+		mothod.getParams().setContentCharset("utf-8");
+		// 发送http请求
+		String respStr = "";
+		boolean error_flag=false;
+		try {
+			mothod.setRequestBody(json);
+			client.executeMethod(mothod);
+			respStr = mothod.getResponseBodyAsString();
+			JSONObject dataJson = JSONObject.fromObject(respStr);
+			try {
+				if(dataJson!=null && null!=dataJson.getString("errcode")){
+					error_flag=true;
+					msg=dataJson.getString("errcode");
+				}
+			} catch (Exception e) {
+			}
+			if(!error_flag){
+				msg=dataJson.getString("ticket");
+			}
+		} catch (Exception e) {
+			log.error("客服信息发送信息时异常", e);
+		}
+		return msg;
+	}
+	/**
+	 * 生成带参数的二维码  永久二维码
+	 * @param access_token
+	 * @param scene_id 永久二维码时最大值为100000（目前参数只支持1--100000）
+	 * @return
+	 */
+	public String getQR_LIMIT_SCENE(String access_token,String scene_id){
+		String msg=null;
+		String json="{\"action_name\": \"QR_LIMIT_SCENE\", \"action_info\": {\"scene\": {\"scene_id\": "+scene_id+"}}}";
+		String url="https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token="+access_token;
+		HttpClient client = new HttpClient();
+		PostMethod mothod = new PostMethod(url);
+		mothod.getParams().setContentCharset("utf-8");
+		// 发送http请求
+		String respStr = "";
+		boolean error_flag=false;
+		try {
+
+			mothod.setRequestBody(json);
+			client.executeMethod(mothod);
+			respStr = mothod.getResponseBodyAsString();
+			JSONObject dataJson = JSONObject.fromObject(respStr);
+			try {
+				if(dataJson!=null && null!=dataJson.getString("errcode")){
+					error_flag=true;
+					msg=dataJson.getString("errcode");
+				}
+			} catch (Exception e) {
+			}
+			if(!error_flag){
+				msg=dataJson.getString("ticket");
 			}
 		} catch (Exception e) {
 			log.error("客服信息发送信息时异常", e);
@@ -620,5 +694,21 @@ public final class WxApiUtil {
 		
 //		System.out.println(api.uploadMedia("xxxxx","image", "D:/Pictures/2009131731654_2.jpg"));
 //		System.out.println(Validator.isUrl("http://www.xx.com"));
+		String url="http://localhost/ws_setBInfo.ac";
+		HttpClient client = new HttpClient();
+		PostMethod mothod = new PostMethod(url);
+		mothod.getParams().setContentCharset("utf-8");
+		// 发送http请求
+		String respStr = "";
+
+		mothod.setRequestBody("{\"appid\": \"com.ihotels.wifi\",\"item\":[" +
+				"{\"code\":\"CH005432942\",\"status\":\"0\"}," +
+				"{\"code\":\"CH005432935\",\"status\":\"1\"}," +
+				"{\"code\":\"CH005432940\",\"status\":\"0\"}," +
+				"{\"code\":\"CH005432941\",\"status\":\"2\"}," +
+				"{\"code\":\"CH005432937\",\"status\":\"2\"}]}");
+		client.executeMethod(mothod);
+		respStr = mothod.getResponseBodyAsString();
+		System.out.println(respStr);
 	}
 }

@@ -5,7 +5,7 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.04  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 童励  System. - All Rights Reserved.
+ * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.web.action.wechat;
@@ -16,8 +16,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.customerservice.TcCsCustomerServiceBean;
 import cn.com.softvan.bean.wechat.TcWxMenuBean;
 import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.wechat.WxApiUtil;
 import cn.com.softvan.service.wechat.ITcWxMenuManager;
 import cn.com.softvan.web.action.BaseAction;
@@ -80,6 +82,10 @@ public class W007Action extends BaseAction {
 		bean=tcWxMenuManager.findDataById(this.bean);
 		//顶级菜单列表
 		beans=tcWxMenuManager.findDataIsList(null);
+		if(bean==null){
+			bean=new TcWxMenuBean();
+			bean.setId(IdUtils.createUUID(32));
+		}
 		return "edit";
 	}
 	/**

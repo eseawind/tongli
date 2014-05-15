@@ -5,20 +5,21 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.24  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 童励  System. - All Rights Reserved.
+ * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.web.action.sys;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.customerservice.TcCsCustomerServiceBean;
 import cn.com.softvan.bean.sys.TcSysNewsBean;
 import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.sys.INewsManager;
 import cn.com.softvan.service.sys.INewsTypeManager;
@@ -123,6 +124,10 @@ public class S001Action extends BaseAction {
 			bean=newsManager.findDataById(bean1);
 			//当前资讯所在栏目
 			request.setAttribute("news_type_array",newsManager.findTypeDataByIdIsList(bean1));
+		}
+		if(bean==null){
+			bean=new TcSysNewsBean();
+			bean.setId(IdUtils.createUUID(32));
 		}
 		//栏目树
 		request.setAttribute("tree",newsTypeManager.findDataIsTree(null));

@@ -110,7 +110,7 @@
 						</li>
 					</ul>
 				</li>
-				<li id="CustomerService">
+				<%-- <li id="CustomerService">
 					<a class="active" href="javascript:;">
 					<i class="fa  fa-sitemap"></i> 
 					<span class="title">客服管理</span>
@@ -133,7 +133,7 @@
 							</a>
 						</li>
 					</ul>
-				</li>
+				</li> --%>
 				<%-- <li id="consult">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-comment-o"></i> 

@@ -6,7 +6,7 @@
  * 1.00     2013.08.16  wuxiaogang           程序・发布
  * 1.01     2014.03.19  wuxiaogang           程序・更新
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 童励  System. - All Rights Reserved.
+ * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.web.action.wechat;
@@ -23,9 +23,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,8 +31,6 @@ import org.apache.log4j.Logger;
 import org.jdom.JDOMException;
 import org.springframework.core.task.TaskExecutor;
 
-import cn.com.softvan.bean.consult.TcCsConsultBean;
-import cn.com.softvan.bean.consult.TcCsConsultMsgBean;
 import cn.com.softvan.bean.wechat.TcWxInfoBean;
 import cn.com.softvan.bean.wechat.TcWxPublicUserBean;
 import cn.com.softvan.bean.wechat.TcWxUserBean;
@@ -56,11 +51,8 @@ import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.Resources;
 import cn.com.softvan.common.StrUtil;
 import cn.com.softvan.common.WebUtils;
-import cn.com.softvan.common.lucene.LuceneUtil;
 import cn.com.softvan.common.wechat.WeChatUtil;
 import cn.com.softvan.common.wechat.WxApiUtil;
-import cn.com.softvan.service.consult.IConsultManager;
-import cn.com.softvan.service.consult.IConsultMsgManager;
 import cn.com.softvan.service.wechat.ITcWxInfoManager;
 import cn.com.softvan.service.wechat.ITcWxPublicUserManager;
 import cn.com.softvan.service.wechat.ITcWxUserManager;
@@ -80,10 +72,6 @@ public class WeChatApiAction extends BaseAction {
 	protected JedisHelper jedisHelper;
 	/**微信api工具类*/
 	WxApiUtil api=new WxApiUtil();
-	/** 咨询管理 业务处理*/
-	private IConsultManager consultManager;
-	/** 咨询交互信息管理 业务处理*/
-	private IConsultMsgManager consultMsgManager;
 	/**收到的xml信息 */
 	private String xml=null;
 	/**微信 公共号 信息*/
@@ -160,9 +148,6 @@ public class WeChatApiAction extends BaseAction {
 			//
 			String keyword="default";
 			//
-			String text_type=null;
-			String text=null;
-			//
 			bean=getTcWxInfoBean(msg,request);
 			//TODO ----事件---
 			if(msg instanceof WxRecvEventMsg) {
@@ -237,8 +222,6 @@ public class WeChatApiAction extends BaseAction {
 				WxRecvTextMsg m = (WxRecvTextMsg) msg;
 				//自动回复关键字
 				keyword=m.getContent();
-				text_type="text";
-				text=keyword;
 				//-----------封装信息--------------
 				bean.setContent(m.getContent());
 			}else 
@@ -247,8 +230,6 @@ public class WeChatApiAction extends BaseAction {
 				WxRecvPicMsg m=(WxRecvPicMsg)msg;
 				//自动回复关键字
 				keyword="key_flag_pic";
-				text_type="image";
-				text=m.getPicUrl();
 				media_flag=false;
 				media_reply_text=Resources.getData("wx.media_reply_text_pic");
 //				-------------下载图片-----------
@@ -273,8 +254,6 @@ public class WeChatApiAction extends BaseAction {
 				bean.setTitle(m.getTitle());
 				bean.setDescription(m.getDescription());
 				bean.setUrl(m.getUrl());
-				text_type="text";
-				text=m.getTitle()+m.getUrl();
 			}else
 			//TODO ----- 地理位置消息
 			if(msg instanceof WxRecvGeoMsg){
@@ -330,65 +309,8 @@ public class WeChatApiAction extends BaseAction {
 				bean.setDescription("接收到未知类型消息!");
 			}
 			//TODO--自动回复--
-			if(media_flag||"1".equals(jedisHelper.get(bean.getFromusername()+"_consult_flag"))){
-				Set<String> keyworkds = new HashSet<String>();
-				keyworkds.add("event_rgzx");
-				keyworkds.add("咨询");
-				keyworkds.add("请问");
-				keyworkds.add("0");
-				//TODO--触发人工咨询事件--
-				if(text!=null && keyworkds.contains(text)){
-					TcCsConsultBean consultBean=new TcCsConsultBean();
-					
-					consultBean.setUser_id(bean.getFromusername());//用户微信号openid
-					consultManager.saveOrUpdateData(consultBean);
-					//人工咨询标记
-					jedisHelper.set(bean.getFromusername()+"_consult_flag", "1",48*60*60);
-				}
-				//是人工咨询
-				if("1".equals(jedisHelper.get(bean.getFromusername()+"_consult_flag"))
-						&& text_type!=null
-						){
-					//人工咨询标记 缓存时间再次延长
-					jedisHelper.set(bean.getFromusername()+"_consult_flag", "1",48*60*60);
-					//咨询交互信息
-					SimpleDateFormat sdf=new SimpleDateFormat("MM/dd HH:mm:ss");
-					
-					String _consult_info=(String) jedisHelper.get(bean.getFromusername()+"_consult_info");
-					StringBuffer c_info=new StringBuffer();
-					if(_consult_info!=null){
-						c_info.append(_consult_info+",");
-					}
-					c_info.append("{");
-					c_info.append("\"type\":\""+text_type+"\",");
-					c_info.append("\"d\":\""+sdf.format(new Date())+"\",");
-					c_info.append("\"t\":\""+text+"\"");
-					c_info.append("}");
-					
-					jedisHelper.set(bean.getFromusername()+"_consult_info", c_info.toString(),48*60*60);
-					
-					//获取当前咨询信息 获取未完结且 修改时间为最新的
-					TcCsConsultBean consultbean=new TcCsConsultBean();
-					consultbean.setUser_id(bean.getFromusername());
-					consultbean=consultManager.findDataByUserIdAndLastDate(consultbean);
-					if(consultbean!=null){
-						TcCsConsultMsgBean consultmsgbean=new TcCsConsultMsgBean();
-						
-						if("image".equals(text_type)){
-							consultmsgbean.setPic_url(text);
-						}else{
-							consultmsgbean.setContent(keyword);
-						}
-						consultmsgbean.setConsult_id(consultbean.getId());//咨询id
-						consultmsgbean.setCs_id(consultbean.getCs_id());//客服id
-						//consultmsgbean.setX  //信息读取标记..暂无此字段 待补
-						consultmsgbean.setInfo_source("1");//信息接收
-						consultMsgManager.saveOrUpdateData(consultmsgbean);
-					}
-				}else{
-					//--自动回复
-					reply(keyword, response, replyMsg);
-				}
+			if(media_flag){
+				reply(keyword, response, replyMsg);
 			}else{
 				WxReplyMsg replyMsg2 = new WxReplyTextMsg(replyMsg, media_reply_text);
 				WeChatUtil.send(replyMsg2, response.getOutputStream());
@@ -419,27 +341,13 @@ public class WeChatApiAction extends BaseAction {
 			text = text.trim();
 		}
 		//--------------判断数据是否缓存--------------
-		if(!("1".equals(jedisHelper.get("tc_wechat_info_cache_flag")))){
+		if(!"1".equals(jedisHelper.get("tc_wechat_info_cache_flag"))){
 			tcWxInfoManager.updateAllMsgCache();
 		}
 		WxReplyMsg replyMsg2=null;
 		log.debug("==0==uuid_flag_key="+"key_flag_"+text);
-		String uuid="";
 		//根据关键字获取 回复对象id
-		if(!("default".equals(text))&&!("subscribe".equals(text))){
-			List<String> keys=LuceneUtil.getKeys(null, text);
-			//TODO 根据关键字获取 回复对象id
-			if(keys!=null){
-				for(String key:keys){
-					uuid=(String) jedisHelper.get("key_flag_"+key);
-					if(uuid!=null){
-						break ;
-					}
-				}
-			}
-		}else{
-			uuid=(String) jedisHelper.get("key_flag_"+text);
-		}
+		String uuid=(String) jedisHelper.get("key_flag_"+text);
 		log.debug("==1==uuid="+uuid);
 		//根据对象id 获取回复对象
 		try {
@@ -546,7 +454,7 @@ public class WeChatApiAction extends BaseAction {
         return strDigest;
     }
     /**
-     * 下载微信图片  如果微信号没有多媒体接口权限   替换方案
+     * 下载微信图片
      * @param remote_url 图片远程路径
      * @return
      */
@@ -684,34 +592,6 @@ public class WeChatApiAction extends BaseAction {
 	 */
 	public void setApi(WxApiUtil api) {
 	    this.api = api;
-	}
-	/**
-	 * 咨询管理 业务处理取得
-	 * @return 咨询管理 业务处理
-	 */
-	public IConsultManager getConsultManager() {
-	    return consultManager;
-	}
-	/**
-	 * 咨询管理 业务处理设定
-	 * @param consultManager 咨询管理 业务处理
-	 */
-	public void setConsultManager(IConsultManager consultManager) {
-	    this.consultManager = consultManager;
-	}
-	/**
-	 * 咨询交互信息管理 业务处理取得
-	 * @return 咨询交互信息管理 业务处理
-	 */
-	public IConsultMsgManager getConsultMsgManager() {
-	    return consultMsgManager;
-	}
-	/**
-	 * 咨询交互信息管理 业务处理设定
-	 * @param consultMsgManager 咨询交互信息管理 业务处理
-	 */
-	public void setConsultMsgManager(IConsultMsgManager consultMsgManager) {
-	    this.consultMsgManager = consultMsgManager;
 	}
 	/**
 	 * 收到的xml信息取得

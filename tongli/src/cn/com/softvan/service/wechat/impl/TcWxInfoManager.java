@@ -5,28 +5,22 @@
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2014.03.10  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 童励 System. - All Rights Reserved.
+ * Copyright 2014 车主管家 System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.service.wechat.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.apache.lucene.document.Field.Index;
-import org.apache.lucene.document.Field.Store;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import sun.security.action.GetLongAction;
 
 import cn.com.softvan.bean.wechat.TcWxInfoBean;
 import cn.com.softvan.bean.wechat.TcWxPublicUserBean;
@@ -40,9 +34,7 @@ import cn.com.softvan.bean.wechat.reply.WxReplyVoiceMsg;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.JedisHelper;
-import cn.com.softvan.common.Resources;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.common.lucene.LuceneUtil;
 import cn.com.softvan.common.wechat.WxApiUtil;
 import cn.com.softvan.dao.daointer.wechat.ITcWxInfoDao;
 import cn.com.softvan.dao.entity.wechat.TcWxInfo;
