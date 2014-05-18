@@ -62,7 +62,7 @@
 			</div>
 			<div class="body fl mt10" style="width: 197px;">
 				<div class="title">
-					<a href="#" class="ico_recommend">预约参观</a>
+					<a href="${basePath}/c202_init.ac" class="ico_recommend">预约参观</a>
 				</div>
 				<div class="content" style="height: 150px;">
 					<img src="images/img4.jpg" width="177" height="150" />

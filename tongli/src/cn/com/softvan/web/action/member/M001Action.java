@@ -16,7 +16,9 @@ import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.member.TcMemberBean;
+import cn.com.softvan.bean.sys.TcSysNewsBean;
 import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.member.IMemberManager;
 import cn.com.softvan.service.student.IStudentManager;
@@ -97,6 +99,10 @@ public class M001Action extends BaseAction {
 			bean=memberManager.findDataById(bean1);
 			//当前会员关联的学员
 			request.setAttribute("member_student_beans", memberManager.findDataIsListStudent(bean1));
+		}
+		if(bean==null){
+			bean=new TcMemberBean();
+			bean.setId(IdUtils.createUUID(32));
 		}
 		//所有学员信息
 		request.setAttribute("student_beans",studentManager.findDataIsList(null));

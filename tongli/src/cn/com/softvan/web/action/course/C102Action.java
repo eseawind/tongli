@@ -19,6 +19,7 @@ import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
 import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.course.ICourseSyllabusItemsManager;
@@ -184,6 +185,10 @@ public class C102Action extends BaseAction {
 				e.printStackTrace();
 			}
 		}
+		if(bean==null){
+			bean=new TcCourseSyllabusBean();
+			bean.setId(IdUtils.createUUID(32));
+		}
 		//-------------学员集合-all------
 		request.setAttribute("student_beans", studentManager.findDataIsList(null));
 		//--------------教师--all-----
@@ -253,7 +258,7 @@ public class C102Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String save() {
-		log.info("C102Action edit.........");
+		log.info("C102Action save.........");
 		if(bean!=null){
 			String msg="1";
 			try {

@@ -15,8 +15,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.bean.student.TcStudentBean;
 import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.student.IStudentManager;
 import cn.com.softvan.web.action.BaseAction;
@@ -92,6 +94,10 @@ public class S201Action extends BaseAction {
 			TcStudentBean bean1=new TcStudentBean();
 			bean1.setId(id);
 			bean=studentManager.findDataById(bean1);
+		}
+		if(bean==null){
+			bean=new TcStudentBean();
+			bean.setId(IdUtils.createUUID(32));
 		}
 		return "edit";
 	}

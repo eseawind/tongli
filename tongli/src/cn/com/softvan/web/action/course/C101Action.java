@@ -16,8 +16,10 @@ import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.course.TcCourseBean;
+import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.bean.sys.TcSysVariableBean;
 import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.sys.IVariableManager;
@@ -132,6 +134,10 @@ public class C101Action extends BaseAction {
 			TcCourseBean bean1=new TcCourseBean();
 			bean1.setId(id);
 			bean=courseManager.findDataById(bean1);
+		}
+		if(bean==null){
+			bean=new TcCourseBean();
+			bean.setId(IdUtils.createUUID(32));
 		}
 		//数据字典中获取课程类型
 		TcSysVariableBean bean1=new TcSysVariableBean();
