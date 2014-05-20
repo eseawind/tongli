@@ -116,7 +116,7 @@
 									<td>
 									${bean.name}
 									</td>
-									<td c><a href="${basePath}/h/s002_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
+									<td><a href="${basePath}/h/s002_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
 									</td>
 								</tr>
 									<c:forEach items="${bean.beans}" var="bean1">

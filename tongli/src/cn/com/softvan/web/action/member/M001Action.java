@@ -16,7 +16,6 @@ import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.member.TcMemberBean;
-import cn.com.softvan.bean.sys.TcSysNewsBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;

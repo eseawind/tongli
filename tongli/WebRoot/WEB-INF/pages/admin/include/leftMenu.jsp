@@ -61,8 +61,8 @@
 								<li id="wechat_sub_menu_li_sub_menu_2"><a href="${basePath}/h/w003_init.ac">图片</a></li>
 								<li id="wechat_sub_menu_li_sub_menu_3"><a href="${basePath}/h/w009_init.ac">文本</a></li>
 								<li id="wechat_sub_menu_li_sub_menu_4"><a href="${basePath}/h/w005_init.ac" >音乐</a></li>
-								<li id="wechat_sub_menu_li_sub_menu_10"><a href="#" onclick="myAlert('功能即将开放')">语音</a></li><!-- ${basePath}/h/w014_init.ac -->
-								<li id="wechat_sub_menu_li_sub_menu_5"><a href="#" onclick="myAlert('功能即将开放')">视频</a></li><!-- ${basePath}/h/w006_init.ac -->
+								<!-- <li id="wechat_sub_menu_li_sub_menu_10"><a href="#" onclick="myAlert('功能即将开放')">语音</a></li>${basePath}/h/w014_init.ac
+								<li id="wechat_sub_menu_li_sub_menu_5"><a href="#" onclick="myAlert('功能即将开放')">视频</a></li>${basePath}/h/w006_init.ac -->
 							</ul>
 						</li>
 						<li id="w010_init">
@@ -70,34 +70,6 @@
 							信息接收
 							</a>
 						</li>
-						<!-- 
-						<li class="">
-							<a href="javascript:;">
-							消息接收(普通消息)
-							<span class="arrow"></span>
-							</a>
-							<ul style="display: none;" class="sub-menu">
-								<li><a href="#" onclick="myAlert('功能即将开放')">文本</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">图片</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">语音</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">视频</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">地理位置</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">链接</a></li>
-							</ul>
-						</li>
-						<li class="">
-							<a href="javascript:;">
-							消息接收(事件推送)
-							<span class="arrow"></span>
-							</a>
-							<ul style="display: none;" class="sub-menu">
-								<li><a href="#" onclick="myAlert('功能即将开放')">关注/取消事件</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">扫描带参数二维码事件</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">上报地理位置事件</a></li>
-								<li><a href="#" onclick="myAlert('功能即将开放')">自定义菜单事件</a></li>
-							</ul>
-						</li>
-						 -->
 						<li id="w012_init">
 							<a href="${basePath}/h/w012_init.ac">
 							粉丝列表
@@ -238,7 +210,7 @@
 						<li id="sys3_sub_menu_l1_sub_menu_l2"><a href="${basePath }/h/s003_recycle.ac">信息回收站</a></li>
 					</ul>
 				</li>
-				<li id="sys4" class="">
+				<%-- <li id="sys4" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-bullhorn"></i> 
 					<span class="title">投诉建议</span>
@@ -247,15 +219,28 @@
 					<ul id="sys4_sub_menu" style="display: none;" class="sub-menu">
 						<li id="sys4_sub_menu_l1_sub_menu_l1"><a href="${basePath }/h/t001_init.ac">信息管理</a></li>
 					</ul>
-				</li>
-				<li id="sys4" class="">
+				</li> --%>
+				<li id="sys5" class="">
 					<a class="active" href="javascript:;">
-					<i class="fa fa-bullhorn"></i> 
-					<span class="title">投诉建议</span>
-					<span id="sys4_arrow" class="arrow"></span>
+					<i class="fa  fa-check-square-o"></i> 
+					<span class="title">预约参观</span>
+					<span id="sys5_arrow" class="arrow"></span>
 					</a>
-					<ul id="sys4_sub_menu" style="display: none;" class="sub-menu">
-						<li id="sys4_sub_menu_l1_sub_menu_l1"><a href="${basePath }/h/t001_init.ac">信息管理</a></li>
+					<ul id="sys5_sub_menu" style="display: none;" class="sub-menu">
+						<li id="sys5_sub_menu_l1"><a href="${basePath }/h/c103_init.ac">信息管理</a></li>
+						<li id="sys5_sub_menu_l2"><a href="${basePath }/h/c103_recycle.ac">回收站</a></li>
+					</ul>
+				</li>
+				<li id="sys6" class="">
+					<a class="active" href="javascript:;">
+					<i class="fa  fa-comment"></i> 
+					<span class="title">短信管理</span>
+					<span id="sys6_arrow" class="arrow"></span>
+					</a>
+					<ul id="sys6_sub_menu" style="display: none;" class="sub-menu">
+						<li id="sys6_sub_menu_l1_sub_menu_l1"><a href="${basePath }/h/s004_init.ac">通讯录</a></li>
+						<li id="sys6_sub_menu_l1_sub_menu_l2"><a href="${basePath }/h/s004_recycle.ac">通讯录回收站</a></li>
+						<li id="sys6_sub_menu_l1_sub_menu_l3"><a href="${basePath }/h/s005_init.ac">短信管理</a></li>
 					</ul>
 				</li>
 			</ul>

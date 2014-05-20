@@ -154,9 +154,9 @@
 											</td>
 										</c:otherwise>
 									</c:choose>
-									<td c><a href="${basePath}/h/w007_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
-										<a href="${basePath}/h/w007_del.ac?id=${bean.id}" class="btn btn-danger"
-										data-confirm="确定删除吗?" data-method="delete" rel="nofollow">删除</a>
+									<td><a href="${basePath}/h/w007_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
+										<a href="javascript:void(0)" class="btn btn-danger"
+										onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/w007_del.ac?id=${bean.id}'};">删除</a>
 									</td>
 								</tr>
 									<c:forEach items="${bean.beans}" var="bean1">
@@ -177,8 +177,8 @@
 										</c:if>
 										</td>
 										<td><a href="${basePath}/h/w007_edit.ac?id=${bean1.id}" class="btn edit green">编辑</a>
-											<a href="${basePath}/h/w007_del.ac?id=${bean1.id}" class="btn btn-danger"
-											data-confirm="确定删除吗?" data-method="delete" rel="nofollow">删除</a>
+											<a href="javascript:void(0)" class="btn btn-danger"
+											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/w007_del.ac?id=${bean.id}'};">删除</a>
 										</td>
 									</tr>
 									</c:forEach>

@@ -20,5 +20,12 @@
 			<result name="init2">/WEB-INF/pages/admin/course/C102_04.jsp</result>
 			<result name="success" type="chain">c102_init</result>
 		</action>
+		<!-- 预约参观管理 -->
+		<action name="c103_*" class="c103Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/course/C103.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/course/C103_01.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/course/C103_03.jsp</result>
+			<result name="success" type="chain">c103_init</result>
+		</action>
 	</package>
 </struts>

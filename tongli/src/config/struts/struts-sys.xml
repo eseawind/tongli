@@ -27,5 +27,20 @@
 			<result name="recycle">/WEB-INF/pages/admin/sys/S003_03.jsp</result>
 			<result name="success" type="chain">s003_init</result>
 		</action>
+		<!-- 通讯录 管理 -->
+		<action name="s004_*" class="s004Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/sys/S004.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/sys/S004_01.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/sys/S004_03.jsp</result>
+			<result name="success" type="chain">s004_init</result>
+		</action>
+		<!-- 短信 管理 -->
+		<action name="s005_*" class="s005Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/sys/S005.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/sys/S005_01.jsp</result>
+			<result name="view">/WEB-INF/pages/admin/sys/S005_02.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/sys/S005_03.jsp</result>
+			<result name="success" type="chain">s005_init</result>
+		</action>
 	</package>
 </struts>

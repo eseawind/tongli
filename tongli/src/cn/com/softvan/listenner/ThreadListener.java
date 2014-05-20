@@ -30,7 +30,7 @@ public class ThreadListener implements ServletContextListener {
 	// 开启tomcat前执行线程
 	public void contextInitialized(ServletContextEvent arg0) {
 		// 定时从数据库取得短消息，执行发送动作。
-//		exec.execute(smsAutoSendBatch);
+		exec.execute(smsAutoSendBatch);
 	}
 
 	

@@ -4,17 +4,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import cn.com.softvan.common.Validator;
 import cn.com.softvan.common.WebUtils;
 import cn.com.softvan.common.sms.SmsConstant;
 import cn.com.softvan.common.sms.SmsInfo;
-
-import cn.com.softvan.common.Validator;
 import cn.com.softvan.dao.sms.base.BaseDao;
 import cn.com.softvan.dao.sms.base.ConnectionManager;
 import cn.com.softvan.dao.sms.base.ProcessSql;
@@ -133,6 +133,28 @@ public class SmsInfoDao extends BaseDao {
 				new Object[]{SmsConstant.SMS_STATUS_NO, SmsConstant.SMS_RESEND_COUNT}, 0, 0, SmsInfo.class);
 	}
 	
+	
+	public static List querySmsList(String sms_target_id,String sms_target_type,Date sms_target_time) throws Exception {
+		
+		StringBuilder sqlb = new StringBuilder();
+		sqlb.append("SELECT ");
+		sqlb.append("  sms_id ");
+		sqlb.append(" FROM ");
+		sqlb.append(TABLE_NAME);
+		sqlb.append(" WHERE ");
+		if(sms_target_type.equals("1")){
+			sqlb.append("  sms_target_id = ?  and  sms_target_type= ");
+			return executeQuery(sqlb.toString(), 
+					new Object[]{sms_target_id,sms_target_type}, 0, 0, SmsInfo.class);
+		}else if(sms_target_type.equals("2")){//违章
+			sqlb.append("  sms_target_id = ?  and  sms_target_type=? and sms_target_time=? ");
+			return executeQuery(sqlb.toString(), 
+					new Object[]{sms_target_id,sms_target_type,sms_target_time}, 0, 0, SmsInfo.class);
+		}
+		return null;
+		
+	}
+	
 	/*
 	 *  向表里面插入数据
 	 *  data集合数据
@@ -242,5 +264,15 @@ public class SmsInfoDao extends BaseDao {
 		sqlb.append("  sms_id in "+ parmaStr.toString());
 		
 		executeUpdate(sqlb.toString(), new Object[]{SmsConstant.SMS_STATUS_SENDING});
+	}
+	
+	public static void main(String[] args) throws Exception{
+		List<SmsInfo> l=queryNoSendInfo();
+		if(l!=null){
+			for(SmsInfo m:l){
+				System.out.println(m);
+				m.getBody();
+			}
+		}
 	}
 }

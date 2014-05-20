@@ -27,7 +27,7 @@ import cn.com.softvan.common.Validator;
  * <li>短消息信息。
  * </ol>
  *
- * @author Huyunlin
+ * @author admin
  */
 public class SmsInfo {
 	
@@ -44,22 +44,32 @@ public class SmsInfo {
 	private Date sendDate;
 	
 	/** 短信ID(操作DB数据用) */
-	private String SMS_ID;
+	private String sms_id;
 	/** 发信人(操作DB数据用) */
-	private String SMS_SRC_ID;
+	private String sms_src_id;
 	/** 收信人(操作DB数据用) */
-	private String SMS_DST_ID;
+	private String sms_dst_id;
 	/** 短信内容(操作DB数据用) */
-	private String SMS_CONTENT;
+	private String sms_content;
 	/** 发送时间(操作DB数据用) */
-	private Timestamp SMS_SEND_TIME;
+	private Timestamp sms_send_time;
 	/** 实际发送时间(操作DB数据用) */
-	private Timestamp SMS_SENDED_TIME;
+	private Timestamp sms_sended_time;
 	/** 实际发送次数(操作DB数据用) */
-	private String SMS_SEND_COUNT;
+	private String sms_send_count;
 	/** 状态(操作DB数据用) */
-	private String SMS_STATUS;
+	private String sms_status;
+	
+	/**
+	 * 业务数据主键Id
+	 */
+	private String sms_target_id;
+	/**
+	 * 业务数据类型  1、保单 2、违章 3、注册
+	 */
+	private String sms_target_type;
 
+	private Date sms_target_time;
 	
 	/**
 	 * 转换从数据库中取得数据
@@ -67,21 +77,21 @@ public class SmsInfo {
 	public void copyValue() {
 		
 		// 发信人
-		this.srcTermId = this.SMS_SRC_ID;
+		this.srcTermId = this.sms_src_id;
 		// 内容
-		this.body = this.SMS_CONTENT;
+		this.body = this.sms_content;
 		// 发送时间
-		if (!Validator.isNullEmpty(this.SMS_SEND_TIME)) {
-			this.sendDate = DateUtil.timestampToDate(this.SMS_SEND_TIME);
+		if (!Validator.isNullEmpty(this.sms_send_time)) {
+			this.sendDate = DateUtil.timestampToDate(this.sms_send_time);
 		}
 		
 		// 收件人
-		if (!Validator.isNullEmpty(this.SMS_DST_ID)) {
-			if (this.SMS_DST_ID.indexOf(SmsConstant.SMS_SEPRATE_TO) != -1) {
-				String[] to = this.SMS_DST_ID.split(SmsConstant.SMS_SEPRATE_TO);
+		if (!Validator.isNullEmpty(this.sms_dst_id)) {
+			if (this.sms_dst_id.indexOf(SmsConstant.SMS_SEPRATE_TO) != -1) {
+				String[] to = this.sms_dst_id.split(SmsConstant.SMS_SEPRATE_TO);
 				this.dstTermId = Arrays.asList(to);
 			} else {
-				this.dstTermId = Arrays.asList(new String[]{this.SMS_DST_ID});
+				this.dstTermId = Arrays.asList(new String[]{this.sms_dst_id});
 			}
 		}
 	}
@@ -100,77 +110,63 @@ public class SmsInfo {
 
 
 	/**
-	 * 发信号码取得
+	 * 发信号码取得。
 	 * @return 发信号码
 	 */
 	public String getSrcTermId() {
 	    return srcTermId;
 	}
 
-
-
 	/**
-	 * 发信号码设定
+	 * 发信号码设定。
 	 * @param srcTermId 发信号码
 	 */
 	public void setSrcTermId(String srcTermId) {
 	    this.srcTermId = srcTermId;
 	}
 
-
-
 	/**
-	 * 内容取得
+	 * 内容取得。
 	 * @return 内容
 	 */
 	public String getBody() {
 	    return body;
 	}
 
-
-
 	/**
-	 * 内容设定
+	 * 内容设定。
 	 * @param body 内容
 	 */
 	public void setBody(String body) {
 	    this.body = body;
 	}
 
-
-
 	/**
-	 * 收信人取得
+	 * 收信人取得。
 	 * @return 收信人
 	 */
 	public List<String> getDstTermId() {
 	    return dstTermId;
 	}
 
-
-
 	/**
-	 * 收信人设定
+	 * 收信人设定。
 	 * @param dstTermId 收信人
 	 */
 	public void setDstTermId(List<String> dstTermId) {
 	    this.dstTermId = dstTermId;
 	}
 
-
-
 	/**
-	 * 发送时间取得
+	 * 发送时间取得。
 	 * @return 发送时间
 	 */
 	public Date getSendDate() {
 	    return sendDate;
 	}
 
-
-
 	/**
-	 * 发送时间设定
+	 * 发送时间设定。
 	 * @param sendDate 发送时间
 	 */
 	public void setSendDate(Date sendDate) {
@@ -178,132 +174,184 @@ public class SmsInfo {
 	}
 
 	/**
-	 * 短信ID(操作DB数据用)取得
+	 * 短信ID(操作DB数据用)取得。
 	 * @return 短信ID(操作DB数据用)
 	 */
-	public String getSMS_ID() {
-	    return SMS_ID;
+	public String getSms_id() {
+	    return sms_id;
 	}
 
 	/**
-	 * 短信ID(操作DB数据用)设定
-	 * @param SMS_ID 短信ID(操作DB数据用)
+	 * 短信ID(操作DB数据用)设定。
+	 * @param sms_id 短信ID(操作DB数据用)
 	 */
-	public void setSMS_ID(String SMS_ID) {
-	    this.SMS_ID = SMS_ID;
+	public void setSms_id(String sms_id) {
+	    this.sms_id = sms_id;
 	}
 
 	/**
-	 * 发信人(操作DB数据用)取得
+	 * 发信人(操作DB数据用)取得。
 	 * @return 发信人(操作DB数据用)
 	 */
-	public String getSMS_SRC_ID() {
-	    return SMS_SRC_ID;
+	public String getSms_src_id() {
+	    return sms_src_id;
 	}
 
 	/**
-	 * 发信人(操作DB数据用)设定
-	 * @param SMS_SRC_ID 发信人(操作DB数据用)
+	 * 发信人(操作DB数据用)设定。
+	 * @param sms_src_id 发信人(操作DB数据用)
 	 */
-	public void setSMS_SRC_ID(String SMS_SRC_ID) {
-	    this.SMS_SRC_ID = SMS_SRC_ID;
+	public void setSms_src_id(String sms_src_id) {
+	    this.sms_src_id = sms_src_id;
 	}
 
 	/**
-	 * 收信人(操作DB数据用)取得
+	 * 收信人(操作DB数据用)取得。
 	 * @return 收信人(操作DB数据用)
 	 */
-	public String getSMS_DST_ID() {
-	    return SMS_DST_ID;
+	public String getSms_dst_id() {
+	    return sms_dst_id;
 	}
 
 	/**
-	 * 收信人(操作DB数据用)设定
-	 * @param SMS_DST_ID 收信人(操作DB数据用)
+	 * 收信人(操作DB数据用)设定。
+	 * @param sms_dst_id 收信人(操作DB数据用)
 	 */
-	public void setSMS_DST_ID(String SMS_DST_ID) {
-	    this.SMS_DST_ID = SMS_DST_ID;
+	public void setSms_dst_id(String sms_dst_id) {
+	    this.sms_dst_id = sms_dst_id;
 	}
 
 	/**
-	 * 短信内容(操作DB数据用)取得
+	 * 短信内容(操作DB数据用)取得。
 	 * @return 短信内容(操作DB数据用)
 	 */
-	public String getSMS_CONTENT() {
-	    return SMS_CONTENT;
+	public String getSms_content() {
+	    return sms_content;
 	}
 
 	/**
-	 * 短信内容(操作DB数据用)设定
-	 * @param SMS_CONTENT 短信内容(操作DB数据用)
+	 * 短信内容(操作DB数据用)设定。
+	 * @param sms_content 短信内容(操作DB数据用)
 	 */
-	public void setSMS_CONTENT(String SMS_CONTENT) {
-	    this.SMS_CONTENT = SMS_CONTENT;
+	public void setSms_content(String sms_content) {
+	    this.sms_content = sms_content;
 	}
 
 	/**
-	 * 发送时间(操作DB数据用)取得
+	 * 发送时间(操作DB数据用)取得。
 	 * @return 发送时间(操作DB数据用)
 	 */
-	public Timestamp getSMS_SEND_TIME() {
-	    return SMS_SEND_TIME;
+	public Timestamp getSms_send_time() {
+	    return sms_send_time;
 	}
 
 	/**
-	 * 发送时间(操作DB数据用)设定
-	 * @param SMS_SEND_TIME 发送时间(操作DB数据用)
+	 * 发送时间(操作DB数据用)设定。
+	 * @param sms_send_time 发送时间(操作DB数据用)
 	 */
-	public void setSMS_SEND_TIME(Timestamp SMS_SEND_TIME) {
-	    this.SMS_SEND_TIME = SMS_SEND_TIME;
+	public void setSms_send_time(Timestamp sms_send_time) {
+	    this.sms_send_time = sms_send_time;
 	}
 
 	/**
-	 * 实际发送时间(操作DB数据用)取得
+	 * 实际发送时间(操作DB数据用)取得。
 	 * @return 实际发送时间(操作DB数据用)
 	 */
-	public Timestamp getSMS_SENDED_TIME() {
-	    return SMS_SENDED_TIME;
+	public Timestamp getSms_sended_time() {
+	    return sms_sended_time;
 	}
 
 	/**
-	 * 实际发送时间(操作DB数据用)设定
-	 * @param SMS_SENDED_TIME 实际发送时间(操作DB数据用)
+	 * 实际发送时间(操作DB数据用)设定。
+	 * @param sms_sended_time 实际发送时间(操作DB数据用)
 	 */
-	public void setSMS_SENDED_TIME(Timestamp SMS_SENDED_TIME) {
-	    this.SMS_SENDED_TIME = SMS_SENDED_TIME;
+	public void setSms_sended_time(Timestamp sms_sended_time) {
+	    this.sms_sended_time = sms_sended_time;
 	}
 
 	/**
-	 * 实际发送次数(操作DB数据用)取得
+	 * 实际发送次数(操作DB数据用)取得。
 	 * @return 实际发送次数(操作DB数据用)
 	 */
-	public String getSMS_SEND_COUNT() {
-	    return SMS_SEND_COUNT;
+	public String getSms_send_count() {
+	    return sms_send_count;
 	}
 
 	/**
-	 * 实际发送次数(操作DB数据用)设定
-	 * @param SMS_SEND_COUNT 实际发送次数(操作DB数据用)
+	 * 实际发送次数(操作DB数据用)设定。
+	 * @param sms_send_count 实际发送次数(操作DB数据用)
 	 */
-	public void setSMS_SEND_COUNT(String SMS_SEND_COUNT) {
-	    this.SMS_SEND_COUNT = SMS_SEND_COUNT;
+	public void setSms_send_count(String sms_send_count) {
+	    this.sms_send_count = sms_send_count;
 	}
 
+	 
 	/**
-	 * 状态(操作DB数据用)取得
+	 * 状态(操作DB数据用)取得。
 	 * @return 状态(操作DB数据用)
 	 */
-	public String getSMS_STATUS() {
-	    return SMS_STATUS;
+	public String getSms_status() {
+	    return sms_status;
 	}
 
 	/**
-	 * 状态(操作DB数据用)设定
-	 * @param SMS_STATUS 状态(操作DB数据用)
+	 * 状态(操作DB数据用)设定。
+	 * @param sms_status 状态(操作DB数据用)
 	 */
-	public void setSMS_STATUS(String SMS_STATUS) {
-	    this.SMS_STATUS = SMS_STATUS;
+	public void setSms_status(String sms_status) {
+	    this.sms_status = sms_status;
 	}
+
+	/**
+	 * 业务数据主键Id取得。
+	 * @return 业务数据主键Id
+	 */
+	public String getSms_target_id() {
+	    return sms_target_id;
+	}
+
+	/**
+	 * 业务数据主键Id设定。
+	 * @param sms_target_id 业务数据主键Id
+	 */
+	public void setSms_target_id(String sms_target_id) {
+	    this.sms_target_id = sms_target_id;
+	}
+
+	/**
+	 * 业务数据类型  1、保单 2、违章 3、注册取得。
+	 * @return 业务数据类型  1、保单 2、违章 3、注册
+	 */
+	public String getSms_target_type() {
+	    return sms_target_type;
+	}
+
+	/**
+	 * 业务数据类型  1、保单 2、违章 3、注册设定。
+	 * @param sms_target_type 业务数据类型  1、保单 2、违章 3、注册
+	 */
+	public void setSms_target_type(String sms_target_type) {
+	    this.sms_target_type = sms_target_type;
+	}
+
+	/**
+	 * sms_target_time取得。
+	 * @return sms_target_time
+	 */
+	public Date getSms_target_time() {
+	    return sms_target_time;
+	}
+
+	/**
+	 * sms_target_time设定。
+	 * @param sms_target_time sms_target_time
+	 */
+	public void setSms_target_time(Date sms_target_time) {
+	    this.sms_target_time = sms_target_time;
+	}
+
+	 
+	 
 
 
 

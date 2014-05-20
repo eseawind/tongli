@@ -25,5 +25,13 @@
 	<bean id="s003Action" class="cn.com.softvan.web.action.sys.S003Action" scope="prototype">
 		<property name="parterManager" ref="parterManager"></property>
 	</bean>
+	<!-- 通讯录 管理 -->
+	<bean id="s004Action" class="cn.com.softvan.web.action.sys.S004Action" scope="prototype">
+		<property name="telBookManager" ref="telBookManager"></property>
+	</bean>
+	<!-- 短信 管理 -->
+	<bean id="s005Action" class="cn.com.softvan.web.action.sys.S005Action" scope="prototype">
+		<property name="smsManager" ref="smsManager"></property>
+	</bean>
 	<!--========================= 系统管理  end=================================== -->
 </beans>

@@ -40,6 +40,9 @@
 	<bean id="tcSysParterDao" parent="baseDao">
 		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.sys.ITcSysParterDao"></property>
 	</bean>
+	<bean id="tcSysTelBookDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.sys.ITcSysTelBookDao"></property>
+	</bean>
 	<!-- 系统管理 dao end -->
 	<!-- ************************业务处理类************************************* -->
 	<!-- 系统管理 begin -->
@@ -59,6 +62,14 @@
 	<!-- 数据字典 管理 -->
 	<bean id="variableManager" class="cn.com.softvan.service.sys.impl.VariableManager" scope="prototype">
 		<property name="tcSysVariableDao" ref="tcSysVariableDao"></property>
+	</bean>
+	<!-- 通讯录 管理 -->
+	<bean id="telBookManager" class="cn.com.softvan.service.sys.impl.TelBookManager" scope="prototype">
+		<property name="tcSysTelBookDao" ref="tcSysTelBookDao"></property>
+	</bean>
+	<!-- 短信 管理 -->
+	<bean id="smsManager" class="cn.com.softvan.service.sys.impl.SmsManager" scope="prototype">
+		<property name="tcSysSmsDao" ref="tcSysSmsDao"></property>
 	</bean>
 	<!-- 系统管理 end -->
 </beans>

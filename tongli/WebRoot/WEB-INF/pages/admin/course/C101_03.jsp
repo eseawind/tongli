@@ -117,14 +117,17 @@
 									<tr>
 										<td>${bean.last_updated}</td>
 										<td>${bean.title}</td>
-										<td><a href="javascript:void(0)"   class="btn btn-danger" 
+										<td><a href="javascript:void(0)"   class="btn purple" 
 											onclick="if(confirm('确认恢复吗?')){location.href='${basePath}/h/c101_recovery.ac?id=${bean.id}'};"
-											rel="nofollow">恢复</a></td>
+											rel="nofollow">恢复</a>
+											<a href="javascript:void(0)" class="btn btn-danger"
+										onclick="if(confirm('确认删除吗?删除后不可恢复!')){location.href='${basePath}/h/c101_delxx.ac?id=${bean.id}'};">删除</a>
+											</td>
 									</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<customtag:pagingext func="loadUrlPage" params="'h/c101_','init'" />
+							<customtag:pagingext func="loadUrlPage" params="'h/c101_','recycle'" />
 						</div>
 					</div>
 				</div>

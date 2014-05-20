@@ -207,7 +207,7 @@ public class SmsSenderHelper {
 	public boolean changeStatus(SmsInfo info, boolean isOk) {
 		
 		Map data = new HashMap();
-		data.put(SmsInfoDao.PK_NAME, info.getSMS_ID());
+		data.put(SmsInfoDao.PK_NAME, info.getSms_id());
 		if (isOk) {
 			// 预定发送时间
 			data.put("SMS_SENDED_TIME", DateUtil.getDateTimeStr(new Date()));
@@ -217,7 +217,7 @@ public class SmsSenderHelper {
 //			// 发送失败
 //			data.put("SMS_STATUS", SmsConstant.SMS_STATUS_NO);
 //		}
-		int count = info.getSMS_SEND_COUNT() == null?0:Integer.parseInt(info.getSMS_SEND_COUNT());
+		int count = info.getSms_send_count() == null?0:Integer.parseInt(info.getSms_send_count());
 		data.put("SMS_SEND_COUNT", (count + 1) + "");
 		try {
 			SmsInfoDao.updateById(data);
@@ -296,7 +296,7 @@ public class SmsSenderHelper {
 		//s.setBody("01234567890123456789012345678901234567890123456789012345678901234567012345670123456701234567测试");
 		//s.setBody("012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567测试145字符");
 		s.addDstTermId("13681818031");
-		s.addDstTermId("13681818031");
+//		s.addDstTermId("13681818031");
 //		s.addDstTermId("13681818031");
 //		s.addDstTermId("13681818031");
 //		s.addDstTermId("13681818031");
@@ -321,104 +321,105 @@ public class SmsSenderHelper {
 							"utf-8", false);
  	*/				
 					
-    String x = new SmsSenderHelper().doGet("http://210.13.105.244:1117/sendsms.aspx", "account=itravels_qf&psw=123456&phonestr=13641601853&content=测试测试",
-			"utf-8", false);				
+    String x = new SmsSender().doGet("http://sms.5ikh.com:81/SmsService/UnicomWdslRec.asmx/SendMessage", "Sd_UserName=201401131151&Sd_UserPsd=123456&Sd_Phones=15021522231&Sd_MsgContent=test2这是一条测试信息&Sd_SchTime=&Sd_ExNumber=&Sd_SeqNum=",
+			"utf-8", false);			
+    System.out.println("=============="+x+"=================");
 	 }
 	
 	
-	/**
-	 * 执行一个HTTP POST请求，返回请求响应的HTML
-	 * 
-	 * @param url
-	 *            请求的URL地址
-	 * @param params
-	 *            请求的查询参数,可以为null
-	 * @param charset
-	 *            字符集
-	 * @param pretty
-	 *            是否美化
-	 * @return 返回请求响应的HTML
-	 */
-	public  String doPost(String url, Map<String, String> params,
-			String charset, boolean pretty) {
-		StringBuffer response = new StringBuffer();
-		final MultiThreadedHttpConnectionManager manager = new MultiThreadedHttpConnectionManager();
-        final HttpClient client = new HttpClient(manager);
-
-		client.setConnectionTimeout(1000*3);
-		client.setTimeout(1000*3);
-		final  PostMethod method = new PostMethod(url);
-		
-		//method.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset="+charset);  
-		// 设置Http Post数据
-		 if (params != null) {
-			for (Map.Entry<String, String> entry : params.entrySet()) {
-				method.addParameter(entry.getKey(), entry.getValue());  
-				System.out.println(entry.getKey()+"="+entry.getValue());
-			}
-			
-		}
-		System.out.println(url);
-		Thread t = new Thread(new Runnable() {
-            public void run() {
-                try {
-                    client.executeMethod(method);
-                    String result = method.getResponseBodyAsString();
-                	System.out.println(result);
-                } catch (Exception e) {
-                	System.out.println("短信发送失败--时间--"+new Date()+"---");
-                }
-            }
-        }, "Timeout guard");
-        t.setDaemon(true);
-        t.start();
-        try {
-            t.join(1000*3);  //等待3s后结束
-        } catch (InterruptedException e) {
-            ((MultiThreadedHttpConnectionManager) client.getHttpConnectionManager()).shutdown();
-        }
-        if (t.isAlive()) {
-            ((MultiThreadedHttpConnectionManager) client.getHttpConnectionManager()).shutdown();
-            t.interrupt();
-        }
-        return response.toString();
-	}
-	/**
-	 * 执行一个HTTP GET请求，返回请求响应的HTML
-	 * 
-	 * @param url
-	 *            请求的URL地址
-	 * @param queryString
-	 *            请求的查询参数,可以为null
-	 * @param charset
-	 *            字符集
-	 * @param pretty
-	 *            是否美化
-	 * @return 返回请求响应的HTML
-	 */
-	
-	public  String doGet(String url, String queryString, String charset,boolean pretty) {
-		StringBuffer response = new StringBuffer();
-		HttpClient client = new HttpClient();
-		HttpMethod method = new GetMethod(url);
-		try {
-			if (queryString != null && !queryString.equals(""))
-				// 对get请求参数做了http请求默认编码，好像没有任何问题，汉字编码后，就成为%式样的字符串
-				method.setQueryString(URIUtil.encodeQuery(queryString));
-			client.executeMethod(method);
-			if (method.getStatusCode() == HttpStatus.SC_OK) {
-		 String result = method.getResponseBodyAsString();
-		 System.out.println(result);
-	}else{
-		return "短信接口无法访问!";
-	}
-} catch (IOException e) {
-	e.printStackTrace();
-} finally {
-	method.releaseConnection();
-}
-return response.toString();
-}
+//	/**
+//	 * 执行一个HTTP POST请求，返回请求响应的HTML
+//	 * 
+//	 * @param url
+//	 *            请求的URL地址
+//	 * @param params
+//	 *            请求的查询参数,可以为null
+//	 * @param charset
+//	 *            字符集
+//	 * @param pretty
+//	 *            是否美化
+//	 * @return 返回请求响应的HTML
+//	 */
+//	public  String doPost(String url, Map<String, String> params,
+//			String charset, boolean pretty) {
+//		StringBuffer response = new StringBuffer();
+//		final MultiThreadedHttpConnectionManager manager = new MultiThreadedHttpConnectionManager();
+//        final HttpClient client = new HttpClient(manager);
+//
+//		client.setConnectionTimeout(1000*3);
+//		client.setTimeout(1000*3);
+//		final  PostMethod method = new PostMethod(url);
+//		
+//		//method.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset="+charset);  
+//		// 设置Http Post数据
+//		 if (params != null) {
+//			for (Map.Entry<String, String> entry : params.entrySet()) {
+//				method.addParameter(entry.getKey(), entry.getValue());  
+//				System.out.println(entry.getKey()+"="+entry.getValue());
+//			}
+//			
+//		}
+//		System.out.println(url);
+//		Thread t = new Thread(new Runnable() {
+//            public void run() {
+//                try {
+//                    client.executeMethod(method);
+//                    String result = method.getResponseBodyAsString();
+//                	System.out.println(result);
+//                } catch (Exception e) {
+//                	System.out.println("短信发送失败--时间--"+new Date()+"---");
+//                }
+//            }
+//        }, "Timeout guard");
+//        t.setDaemon(true);
+//        t.start();
+//        try {
+//            t.join(1000*3);  //等待3s后结束
+//        } catch (InterruptedException e) {
+//            ((MultiThreadedHttpConnectionManager) client.getHttpConnectionManager()).shutdown();
+//        }
+//        if (t.isAlive()) {
+//            ((MultiThreadedHttpConnectionManager) client.getHttpConnectionManager()).shutdown();
+//            t.interrupt();
+//        }
+//        return response.toString();
+//	}
+//	/**
+//	 * 执行一个HTTP GET请求，返回请求响应的HTML
+//	 * 
+//	 * @param url
+//	 *            请求的URL地址
+//	 * @param queryString
+//	 *            请求的查询参数,可以为null
+//	 * @param charset
+//	 *            字符集
+//	 * @param pretty
+//	 *            是否美化
+//	 * @return 返回请求响应的HTML
+//	 */
+//	
+//	public  String doGet(String url, String queryString, String charset,boolean pretty) {
+//		StringBuffer response = new StringBuffer();
+//		HttpClient client = new HttpClient();
+//		HttpMethod method = new GetMethod(url);
+//		try {
+//			if (queryString != null && !queryString.equals(""))
+//				// 对get请求参数做了http请求默认编码，好像没有任何问题，汉字编码后，就成为%式样的字符串
+//				method.setQueryString(URIUtil.encodeQuery(queryString));
+//			client.executeMethod(method);
+//			if (method.getStatusCode() == HttpStatus.SC_OK) {
+//		 String result = method.getResponseBodyAsString();
+//		 System.out.println(result);
+//	}else{
+//		return "短信接口无法访问!";
+//	}
+//} catch (IOException e) {
+//	e.printStackTrace();
+//} finally {
+//	method.releaseConnection();
+//}
+//return response.toString();
+//}
 	
 	 
 }

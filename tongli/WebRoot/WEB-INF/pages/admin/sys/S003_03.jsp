@@ -93,9 +93,13 @@
 									<td>
 									${bean.name}
 									</td>
-									<td c><a href="${basePath}/h/s003_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
-										<a href="${basePath}/h/s003_del.ac?id=${bean.id}" class="btn btn-danger"
-										data-confirm="确定删除吗?" data-method="delete" rel="nofollow">删除</a>
+									<td><a href="${basePath}/h/s003_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
+										<a href="javascript:void(0)"   class="btn purple" 
+											onclick="if(confirm('确认恢复吗?')){location.href='${basePath}/h/s003_recovery.ac?id=${bean.id}'};"
+											rel="nofollow">恢复</a>
+											<a href="javascript:void(0)" class="btn btn-danger"
+										onclick="if(confirm('确认删除吗?删除后不可恢复!')){location.href='${basePath}/h/s003_delxx.ac?id=${bean.id}'};">删除</a>
+										
 									</td>
 								</tr>
 								</c:forEach>

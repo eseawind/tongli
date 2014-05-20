@@ -47,12 +47,16 @@
 		<typeAlias type="cn.com.softvan.bean.sys.TcSysNewsTypeBean" alias="tcSysNewsTypeBean"/>
 		<typeAlias type="cn.com.softvan.bean.sys.TcSysParterBean" alias="tcSysParterBean"/>
 		<typeAlias type="cn.com.softvan.bean.sys.TcSysVariableBean" alias="tcSysVariableBean"/>
+		<typeAlias type="cn.com.softvan.bean.sys.TcSysTelBookBean" alias="tcSysTelBookBean"/>
+		<typeAlias type="cn.com.softvan.bean.sys.TcSysSmsBean" alias="tcSysSmsBean"/>
 		<!-- entity class -->
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNews" alias="tcSysNews"/>
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNewsType" alias="tcSysNewsType"/>
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysNewsVsType" alias="tcSysNewsVsType"/>
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysParter" alias="tcSysParter"/>
 		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysVariable" alias="tcSysVariable"/>
+		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysTelBook" alias="tcSysTelBook"/>
+		<typeAlias type="cn.com.softvan.dao.entity.sys.TcSysSms" alias="tcSysSms"/>
 		<!-- 系统管理模块 end -->
 		<!-- 课程管理 begin -->
 		<!-- bean class -->
@@ -134,6 +138,7 @@
 		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysNewsType.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysNewsVsType.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysParter.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/sys/TcSysTelBook.xml"/>
 		<!-- 系统管理模块 end -->
 		
 		<!-- 课程管理 begin -->

@@ -59,13 +59,13 @@ public class SmsAutoSendBatch implements Runnable{
 								info.copyValue();
 								boolean result = helper.synSend(info);
 								if(!result) {
-									log.info("短信编号【"+ info.getSMS_ID() +"】发送失败");
+									log.info("短信编号【"+ info.getSms_id() +"】发送失败");
 								}
 								
 								// 更新短信的状态
 								boolean dbResult = helper.changeStatus(info, result);
 								if(!dbResult) {
-									log.info("短信编号【"+ info.getSMS_ID() +"】状态更新失败");
+									log.info("短信编号【"+ info.getSms_id() +"】状态更新失败");
 								}
 							}
 						}
