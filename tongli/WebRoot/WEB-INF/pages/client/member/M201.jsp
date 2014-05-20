@@ -65,7 +65,7 @@
 					<a href="${basePath}/c202_init.ac" class="ico_recommend">预约参观</a>
 				</div>
 				<div class="content" style="height: 150px;">
-					<img src="images/img4.jpg" width="177" height="150" />
+					<a href="${basePath}/c202_init.ac"><img src="images/img4.jpg" width="177" height="150" /></a>
 				</div>
 			</div>
 

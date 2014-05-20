@@ -18,6 +18,8 @@ import org.apache.log4j.Logger;
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
 import cn.com.softvan.bean.member.TcMemberBean;
+import cn.com.softvan.bean.student.TcStudentBean;
+import cn.com.softvan.bean.sys.TcSysSmsBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.course.ICourseManager;
@@ -25,6 +27,7 @@ import cn.com.softvan.service.course.ICourseSyllabusItemsManager;
 import cn.com.softvan.service.course.ICourseSyllabusManager;
 import cn.com.softvan.service.member.IMemberManager;
 import cn.com.softvan.service.student.IStudentManager;
+import cn.com.softvan.service.sys.ISmsManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
@@ -57,6 +60,8 @@ public class T001Action extends BaseAction {
 	private ICourseSyllabusManager courseSyllabusManager;
 	/** 课程表-详情管理 业务处理*/
 	private ICourseSyllabusItemsManager courseSyllabusItemsManager;
+	/** 短信 业务处理*/
+	private ISmsManager smsManager;
 	/**ID集合*/
 	private List<String> item_ids;
 	public T001Action() {
@@ -152,6 +157,16 @@ public class T001Action extends BaseAction {
 	 */
 	public String save() throws IOException {
 		log.info("T001Action save.........");
+		String token=request.getParameter("token");
+		String token2=(String) request.getSession().getAttribute("token");
+		if(token!=null && token.equals(token2)){
+			getWriter().print("请不要重复提交!");
+			return null;
+		}else{
+			if(token!=null){
+				request.getSession().setAttribute("token",token);
+			}
+		}
 		String msg="1";
 		if(item_ids!=null){
 			try {
@@ -168,6 +183,51 @@ public class T001Action extends BaseAction {
 					s_bean.setStudent_id(request.getParameter("sid"+item_id));
 					s_bean.setCourse_syllabus_id(request.getParameter("course_syllabus_id"));
 					msg=courseSyllabusItemsManager.updateDataByStudent(s_bean);
+					
+					try {
+						if(s_bean.getStudent_id()!=null){
+						//TODO 获取学员家长联系方式
+						TcStudentBean studentBean=new TcStudentBean();
+						studentBean.setId(s_bean.getStudent_id());
+						List<TcMemberBean> memberBeans=memberManager.findDataIsListMember(studentBean);
+							if(memberBeans!=null){
+								String course_title=request.getParameter("course_title");//课程名称
+								for(TcMemberBean memberBean:memberBeans){
+									String tel=null;
+									if(Validator.notEmpty(memberBean.getBind_mobile())){
+										tel=memberBean.getBind_mobile();
+									}else if(Validator.notEmpty(memberBean.getTel())){
+										tel=memberBean.getTel();
+									}
+									if(tel!=null){
+										if(Validator.isMobile(tel)){
+											//---------短信通知--教师打分情况----------
+											TcSysSmsBean smsBean=new TcSysSmsBean();
+											smsBean.setSms_dst_id(tel);
+											String text="学员["+request.getParameter("sname"+item_id)+"]";
+											if("0".equals(s_bean.getStudent_status())){
+												text+="已完成";
+											}
+											if("1".equals(s_bean.getStudent_status())||"2".equals(s_bean.getStudent_status())){
+												text+="缺席";
+											}
+											text+="课程["+course_title+"]";
+											if("1".equals(s_bean.getStudent_status())){
+												text+=",原因[旷课]";
+											}
+											if("2".equals(s_bean.getStudent_status())){
+												text+=",原因[请假]";
+											}
+											smsBean.setSms_content(text);
+											smsManager.saveOrUpdateData(smsBean);
+										}
+									}
+								}
+							}
+						}
+					} catch (Exception e) {
+						log.error("课程签到!发送短信系统错误!",e);
+					}
 				}
 			} catch (Exception e) {
 				msg=e.getMessage();
@@ -324,6 +384,22 @@ public class T001Action extends BaseAction {
 		getWriter().print(msg);
 		
 		return null;
+	}
+
+	/**
+	 * 短信 业务处理取得
+	 * @return 短信 业务处理
+	 */
+	public ISmsManager getSmsManager() {
+	    return smsManager;
+	}
+
+	/**
+	 * 短信 业务处理设定
+	 * @param smsManager 短信 业务处理
+	 */
+	public void setSmsManager(ISmsManager smsManager) {
+	    this.smsManager = smsManager;
 	}
 
 	/**

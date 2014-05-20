@@ -15,6 +15,7 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <c:forEach items="${beans}" var="bean" varStatus="i">

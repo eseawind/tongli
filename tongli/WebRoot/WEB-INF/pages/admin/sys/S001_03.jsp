@@ -138,13 +138,9 @@
 											</td>
 									</tr>
 									</c:forEach>
-									<tr>
-										<td colspan="3">
-											<customtag:pagingext func="loadUrlPage" params="'h/s001_','recycle'" />
-										</td>
-									</tr>
 								</tbody>
 							</table>
+							<customtag:pagingext func="loadUrlPage" params="'h/s001_','recycle'" />
 						</div>
 					</div>
 				</div>

@@ -55,9 +55,9 @@
 </div>
 
 <div class="body fr" style=" width:567px;">
-<div class="title"><a href="#" class="ico_order">预约参观</a><em><a href="news.html"></a></em></div>
+<div class="title"><a href="${basePath}/c202_init.ac" class="ico_order">预约参观</a><em><a href="${basePath}/c202_init.ac"></a></em></div>
 <div class="content" style="height:170px;">
-<a href="#"><img src="images/img1.jpg" width="547" height="170"/></a>
+<a href="${basePath}/c202_init.ac"><img src="images/img1.jpg" width="547" height="170"/></a>
 </div>
 </div>
 

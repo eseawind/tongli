@@ -32,6 +32,8 @@
 	<!-- 短信 管理 -->
 	<bean id="s005Action" class="cn.com.softvan.web.action.sys.S005Action" scope="prototype">
 		<property name="smsManager" ref="smsManager"></property>
+		<property name="telBookManager" ref="telBookManager"></property>
+		<property name="memberManager" ref="memberManager"></property>
 	</bean>
 	<!--========================= 系统管理  end=================================== -->
 </beans>

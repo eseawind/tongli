@@ -15,7 +15,9 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
+
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <c:forEach items="${beans}" var="bean" varStatus="i">
 	<div class="item_li">${i.index+1}. ${bean.title}</div>
@@ -38,13 +40,15 @@
 			<tr>
 				<td align="left" colspan="2">
 					<form id="${bean.id}" accept-charset="UTF-8"  action="${basePath}/t001_save.ac"  method="post">
+						<s:token></s:token>
+						<input type="hidden" name="course_title" value="${bean.title}">
 						<input type="hidden" name="course_syllabus_id" value="${bean.id}">
 						<c:set var="num" value="0"/>
 						<table width="600" border="0" cellspacing="0" cellpadding="2">
 						<c:forEach items="${bean.itemBeans}" var="s_bean">
 							<tr>
 								<td width="118" height="30" align="right"><strong>学员名称：</strong></td>
-								<td width="474">${s_bean.name}</td>
+								<td width="474"> ${s_bean.name}</td>
 							</tr>
 							<tr>
 								<td width="118" height="30" align="right">对我的评价:
@@ -89,6 +93,7 @@
 										<p>
 											<input type="hidden" name="item_ids" value="${s_bean.id}">
 											<input type="hidden" name="sid${s_bean.id}" value="${s_bean.student_id}">
+											<input type="hidden" name="sname${s_bean.id}" value="${s_bean.name}">
 											<label><input type="radio" class="xx2${bean.id}" checked="checked" name="sstatus${s_bean.id}" value="0">签到完成</label>
 											<label><input type="radio" class="xx2${bean.id}" name="sstatus${s_bean.id}" value="1">旷课</label>
 											<label><input type="radio" class="xx2${bean.id}" name="sstatus${s_bean.id}" value="2">请假</label>

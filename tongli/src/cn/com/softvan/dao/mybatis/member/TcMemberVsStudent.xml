@@ -52,33 +52,33 @@
 	 -->
 	 <select id="findDataIsListMember" resultType="tcMemberBean" parameterType="tcMemberVsStudent" >
 		select
-			t2.id
-			t2.user_id
-			t2.passwd
-			t2.user_type
-			t2.name
-			t2.login_count
-			t2.last_login
-			t2.bind_mobile
-			t2.bind_email
-			t2.sex
-			t2.tel
-			t2.pic_url
-			t2.is_enabled
-			t2.last_login_ip
-			t2.note
-			t2.brief_info
-			t2.detail_info
-			t2.date_created
-			t2.create_id
-			t2.create_ip
-			t2.last_updated
-			t2.update_id
-			t2.update_ip
-			t2.del_flag
+			t2.id,
+			t2.user_id,
+			t2.passwd,
+			t2.user_type,
+			t2.name,
+			t2.login_count,
+			t2.last_login,
+			t2.bind_mobile,
+			t2.bind_email,
+			t2.sex,
+			t2.tel,
+			t2.pic_url,
+			t2.is_enabled,
+			t2.last_login_ip,
+			t2.note,
+			t2.brief_info,
+			t2.detail_info,
+			t2.date_created,
+			t2.create_id,
+			t2.create_ip,
+			t2.last_updated,
+			t2.update_id,
+			t2.update_ip,
+			t2.del_flag,
 			t2.version
 		from tc_member_vs_student t1
-		left join tc_member t2 on (t2.id=t2.user_id)
+		left join tc_member t2 on (t2.id=t1.user_id)
 	    where t1.student_id=#{student_id}
 	    <choose>
 	    	<when test="del_flag!=null">
