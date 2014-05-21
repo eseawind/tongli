@@ -17,7 +17,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
-
+<style>
+.grade p{float: left;text-align: left;color: red;}
+</style>
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <c:forEach items="${beans}" var="bean" varStatus="i">
 	<div class="item_li">${i.index+1}. ${bean.title}</div>

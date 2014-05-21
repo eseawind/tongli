@@ -23,6 +23,7 @@ import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.course.ICourseSyllabusItemsManager;
 import cn.com.softvan.service.course.ICourseSyllabusManager;
+import cn.com.softvan.service.course.ICourseSyllabusPhotoManager;
 import cn.com.softvan.service.member.IMemberManager;
 import cn.com.softvan.service.student.IStudentManager;
 import cn.com.softvan.web.action.BaseAction;
@@ -56,6 +57,8 @@ public class M201Action extends BaseAction {
 	private ICourseSyllabusManager courseSyllabusManager;
 	/** 课程表-详情管理 业务处理*/
 	private ICourseSyllabusItemsManager courseSyllabusItemsManager;
+	/** 课程表管理-相册 业务处理*/
+	private ICourseSyllabusPhotoManager courseSyllabusPhotoManager;
 	public M201Action() {
 		log.info("默认构造器......M201Action");
 	}
@@ -310,5 +313,21 @@ public class M201Action extends BaseAction {
 		getWriter().print(msg);
 		
 		return null;
+	}
+
+	/**
+	 * 课程表管理-相册 业务处理取得
+	 * @return 课程表管理-相册 业务处理
+	 */
+	public ICourseSyllabusPhotoManager getCourseSyllabusPhotoManager() {
+	    return courseSyllabusPhotoManager;
+	}
+
+	/**
+	 * 课程表管理-相册 业务处理设定
+	 * @param courseSyllabusPhotoManager 课程表管理-相册 业务处理
+	 */
+	public void setCourseSyllabusPhotoManager(ICourseSyllabusPhotoManager courseSyllabusPhotoManager) {
+	    this.courseSyllabusPhotoManager = courseSyllabusPhotoManager;
 	}
 }

@@ -6,8 +6,8 @@
 	sms_src_id,
 	sms_dst_id,
 	sms_content,
-	DATE_FORMAT(sms_send_time, '%Y-%m-%d %k:%i:%s' ) as sms_send_time,
-	DATE_FORMAT(sms_sended_time, '%Y-%m-%d %k:%i:%s' ) as sms_sended_time,
+	sms_send_time,
+	sms_sended_time,
 	sms_send_count,
 	sms_status
   </sql>

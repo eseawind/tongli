@@ -19,5 +19,6 @@
 		<property name="courseSyllabusManager" ref="courseSyllabusManager"></property>
 		<property name="courseSyllabusItemsManager" ref="courseSyllabusItemsManager"></property>
 		<property name="smsManager" ref="smsManager"></property>
+		<property name="courseSyllabusPhotoManager" ref="courseSyllabusPhotoManager"></property>
 	</bean>
 </beans>

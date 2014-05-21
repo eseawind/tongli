@@ -161,53 +161,61 @@ public class S005Action extends BaseAction {
 			String type=request.getParameter("type");
 			try {
 				if("0".equals(type)){
-					//TODO 群发短信 
-					Set<String> telSet=new HashSet<String>();
-					//----1---获取通讯录---
-					List<TcSysTelBookBean> telBookBeans=telBookManager.findDataIsList(null);
-					if(telBookBeans!=null){
-						for(TcSysTelBookBean telBookBean:telBookBeans){
-							if(Validator.notEmpty(telBookBean.getTel())){
-								telSet.add(telBookBean.getTel());
-							}
-							
-						}
-					}
-					//----2---获取所有会员----
-					TcMemberBean memberBean=new TcMemberBean();
-					memberBean.setUser_type("1");//家长
-					List<TcMemberBean> memberBeans=memberManager.findDataIsList(memberBean);
-						if(memberBeans!=null){
-							for(TcMemberBean memberBean2:memberBeans){
-								if(Validator.notEmpty(memberBean2.getTel())){
-									telSet.add(memberBean2.getTel());
+					
+					if(Validator.notEmpty(bean.getSms_content())){
+						//TODO 群发短信 
+						Set<String> telSet=new HashSet<String>();
+						//----1---获取通讯录---
+						List<TcSysTelBookBean> telBookBeans=telBookManager.findDataIsList(null);
+						if(telBookBeans!=null){
+							for(TcSysTelBookBean telBookBean:telBookBeans){
+								if(Validator.notEmpty(telBookBean.getTel())){
+									telSet.add(telBookBean.getTel());
 								}
-								if(Validator.notEmpty(memberBean2.getBind_mobile())){
-									telSet.add(memberBean2.getBind_mobile());
-								}
+								
 							}
 						}
-					//----4---短信入库----
-					if(telSet!=null){
-						for(String tel:telSet){
-							if(tel!=null && Validator.isMobile(tel)){
-								try {
-									TcSysSmsBean smsBean=new TcSysSmsBean();
-									smsBean.setSms_dst_id(tel);
-									smsBean.setSms_content(bean.getSms_content());
-									msg=smsManager.saveOrUpdateData(smsBean);
-								} catch (Exception e) {
-									log.error("短信入库失败!号码["+tel+"],内容["+bean.getSms_content()+"]",e);
+						//----2---获取所有会员----
+						TcMemberBean memberBean=new TcMemberBean();
+						memberBean.setUser_type("1");//家长
+						List<TcMemberBean> memberBeans=memberManager.findDataIsList(memberBean);
+							if(memberBeans!=null){
+								for(TcMemberBean memberBean2:memberBeans){
+									if(Validator.notEmpty(memberBean2.getTel())){
+										telSet.add(memberBean2.getTel());
+									}
+									if(Validator.notEmpty(memberBean2.getBind_mobile())){
+										telSet.add(memberBean2.getBind_mobile());
+									}
+								}
+							}
+						//----4---短信入库----
+						if(telSet!=null){
+							for(String tel:telSet){
+								if(tel!=null && Validator.isMobile(tel)){
+									try {
+										TcSysSmsBean smsBean=new TcSysSmsBean();
+										smsBean.setSms_dst_id(tel);
+										smsBean.setSms_content(bean.getSms_content());
+										msg=smsManager.saveOrUpdateData(smsBean);
+									} catch (Exception e) {
+										log.error("短信入库失败!号码["+tel+"],内容["+bean.getSms_content()+"]",e);
+									}
 								}
 							}
 						}
+					}else{
+						msg="处理失败!发送内容不能为空!";
 					}
 				}else{
-					if(Validator.isEmpty(bean.getSms_dst_id())&&Validator.isMobile(bean.getSms_dst_id())){
+					if(Validator.isEmpty(bean.getSms_dst_id())||!Validator.isMobile(bean.getSms_dst_id())){
 						msg="处理失败!手机号格式问题!";
-					}else{
-						msg=smsManager.saveOrUpdateData(bean);
-					}
+					}else
+						if(Validator.isEmpty(bean.getSms_content())){
+							msg="处理失败!发送内容不能为空!";
+						}else{
+							msg=smsManager.saveOrUpdateData(bean);
+						}
 				}
 			} catch (Exception e) {
 				msg=e.getMessage();

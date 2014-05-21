@@ -28,6 +28,9 @@
 		<bean id="tcCourseBespeakDao" parent="baseDao">
 			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.course.ITcCourseBespeakDao"></property>
 		</bean>
+		<bean id="tcCourseSyllabusPhotoDao" parent="baseDao">
+			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.course.ITcCourseSyllabusPhotoDao"></property>
+		</bean>
 		<!-- ************************业务处理类************************************* -->
 		<bean id="courseManager" class="cn.com.softvan.service.course.impl.CourseManager" scope="prototype">
 			<property name="tcCourseDao" ref="tcCourseDao"></property>
@@ -41,5 +44,8 @@
 		</bean>
 		<bean id="courseBespeakManager" class="cn.com.softvan.service.course.impl.CourseBespeakManager" scope="prototype">
 			<property name="tcCourseBespeakDao" ref="tcCourseBespeakDao"></property>
+		</bean>
+		<bean id="courseSyllabusPhotoManager" class="cn.com.softvan.service.course.impl.CourseSyllabusPhotoManager" scope="prototype">
+			<property name="tcCourseSyllabusPhotoDao" ref="tcCourseSyllabusPhotoDao"></property>
 		</bean>
 </beans>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.course.ITcCourseSyllabusPhotoDao" >
+  <sql id="Base_Column_List" >
+	t1.id,
+	t1.course_syllabus_id,
+	t1.pic_url,
+	t1.pic_title,
+	t1.sort_num,
+	t1.note,
+	t1.date_created,
+	t1.create_id,
+	t1.create_ip,
+	t1.last_updated,
+	t1.update_id,
+	t1.update_ip,
+	t1.del_flag,
+	t1.version
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcCourseSyllabusPhotoBean" parameterType="tcCourseSyllabusPhoto" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_course_syllabus_photo_photo t1
+    where t1.id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcCourseSyllabusPhoto" >
+    delete from tc_course_syllabus_photo
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="tcCourseSyllabusPhoto" >
+    insert into tc_course_syllabus_photo (
+	    id,
+		course_syllabus_id,
+		pic_url,
+		pic_title,
+		sort_num,
+		note,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		del_flag,
+		version
+      ) values (
+	    #{id},
+		#{course_syllabus_id},
+		#{pic_url},
+		#{pic_title},
+		${sort_num},
+		#{note},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		'0',
+		 0
+    )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcCourseSyllabusPhoto" >
+    update tc_course_syllabus_photo set version=version+1
+    ,last_updated=now()
+	,update_id=#{update_id}
+	,update_ip=#{update_ip}
+	<!-- <if test="course_syllabus_id!= null" >,course_syllabus_id=#{course_syllabus_id}</if> -->
+	<if test="pic_url!= null" >,pic_url=#{pic_url}</if>
+	<if test="pic_title!= null" >,pic_title=#{pic_title}</if>
+	<if test="sort_num!= null" >,sort_num=${sort_num}</if>
+	<if test="note!= null" >,note=#{note}</if>
+	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+	where id=#{id}
+  </update>
+  	<!--判断是否存在-->
+    <select id="isDataYN" parameterType="tcCourseSyllabusPhoto" resultType="int">
+    select count(0) from tc_course_syllabus_photo where id=#{id}
+    </select>
+    <!--
+	 * <p>信息列表 分页。</p>
+	public List<TcCourseSyllabusPhotoBean> findDataIsPage(IEntity dto);
+	-->
+	<select id="findDataIsPage" resultType="tcCourseSyllabusPhotoBean" parameterType="tcCourseSyllabusPhoto" >
+    select
+	<include refid="Base_Column_List"/>
+	from tc_course_syllabus_photo t1
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+    order by t1.sort_num asc,t1.date_created asc
+    </select>
+	<!-- 
+	 * <p>信息列表。</p>
+	public List<TcCourseSyllabusPhotoBean> findDataIsList(IEntity dto); -->
+	<select id="findDataIsList" resultType="tcCourseSyllabusPhotoBean" parameterType="tcCourseSyllabusPhoto" >
+	select
+	<include refid="Base_Column_List"/>
+	,
+	t2.title
+	from tc_course_syllabus_photo t1
+	left join tc_course t2 on (t1.course_id=t2.id)
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+     order by t1.sort_num asc,t1.date_created asc
+   </select>
+   <!-- 逻辑删除 -->
+   <update id="deleteById" parameterType="tcCourseSyllabusPhoto">
+	  	update tc_course_syllabus_photo set version=version+1,last_updated=now(),del_flag='1',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+   <!-- 恢复逻辑删除的数据 -->
+   <update id="recoveryDataById" parameterType="tcCourseSyllabusPhoto">
+	  	update tc_course_syllabus_photo set version=version+1,last_updated=now(),del_flag='0',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+</mapper>

@@ -15,6 +15,7 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="customtag" uri="/custom-tags"%>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="zh-CN" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="zh-CN" class="ie9 no-js"> <![endif]-->
@@ -121,6 +122,7 @@
 								</c:forEach>
 							</tbody>
 						</table>
+						<customtag:pagingext func="loadUrlPage" params="'h/s003_','init'" />
 					</div>
 				</div>
 			</div>
@@ -136,3 +138,8 @@
 </body>
 <!-- END BODY -->
 </html>
+<script type="text/javascript">
+	function loadUrlPage(offset, url, event) {
+		location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
+	}
+</script>

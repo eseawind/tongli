@@ -25,6 +25,7 @@ import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.course.ICourseSyllabusItemsManager;
 import cn.com.softvan.service.course.ICourseSyllabusManager;
+import cn.com.softvan.service.course.ICourseSyllabusPhotoManager;
 import cn.com.softvan.service.member.IMemberManager;
 import cn.com.softvan.service.student.IStudentManager;
 import cn.com.softvan.service.sys.ISmsManager;
@@ -62,6 +63,8 @@ public class T001Action extends BaseAction {
 	private ICourseSyllabusItemsManager courseSyllabusItemsManager;
 	/** 短信 业务处理*/
 	private ISmsManager smsManager;
+	/** 课程表管理-相册 业务处理*/
+	private ICourseSyllabusPhotoManager courseSyllabusPhotoManager;
 	/**ID集合*/
 	private List<String> item_ids;
 	public T001Action() {
@@ -400,6 +403,22 @@ public class T001Action extends BaseAction {
 	 */
 	public void setSmsManager(ISmsManager smsManager) {
 	    this.smsManager = smsManager;
+	}
+
+	/**
+	 * 课程表管理-相册 业务处理取得
+	 * @return 课程表管理-相册 业务处理
+	 */
+	public ICourseSyllabusPhotoManager getCourseSyllabusPhotoManager() {
+	    return courseSyllabusPhotoManager;
+	}
+
+	/**
+	 * 课程表管理-相册 业务处理设定
+	 * @param courseSyllabusPhotoManager 课程表管理-相册 业务处理
+	 */
+	public void setCourseSyllabusPhotoManager(ICourseSyllabusPhotoManager courseSyllabusPhotoManager) {
+	    this.courseSyllabusPhotoManager = courseSyllabusPhotoManager;
 	}
 
 	/**

@@ -10,8 +10,6 @@
  */
 package cn.com.softvan.dao.entity.sys;
 
-import java.util.Date;
-
 import cn.com.softvan.dao.entity.BaseEntity;
 /**
  * <p> 短信息表 <p>
@@ -42,12 +40,12 @@ public class TcSysSms extends BaseEntity {
     /**
      * 预定发送时间
      */
-    private Date sms_send_time;
+    private String sms_send_time;
 
     /**
      * 实际发送时间
      */
-    private Date sms_sended_time;
+    private String sms_sended_time;
 
     /**
      * 重复最多发送次数
@@ -127,7 +125,7 @@ public class TcSysSms extends BaseEntity {
 	 * 预定发送时间取得
 	 * @return 预定发送时间
 	 */
-	public Date getSms_send_time() {
+	public String getSms_send_time() {
 	    return sms_send_time;
 	}
 
@@ -135,7 +133,7 @@ public class TcSysSms extends BaseEntity {
 	 * 预定发送时间设定
 	 * @param sms_send_time 预定发送时间
 	 */
-	public void setSms_send_time(Date sms_send_time) {
+	public void setSms_send_time(String sms_send_time) {
 	    this.sms_send_time = sms_send_time;
 	}
 
@@ -143,7 +141,7 @@ public class TcSysSms extends BaseEntity {
 	 * 实际发送时间取得
 	 * @return 实际发送时间
 	 */
-	public Date getSms_sended_time() {
+	public String getSms_sended_time() {
 	    return sms_sended_time;
 	}
 
@@ -151,7 +149,7 @@ public class TcSysSms extends BaseEntity {
 	 * 实际发送时间设定
 	 * @param sms_sended_time 实际发送时间
 	 */
-	public void setSms_sended_time(Date sms_sended_time) {
+	public void setSms_sended_time(String sms_sended_time) {
 	    this.sms_sended_time = sms_sended_time;
 	}
 
