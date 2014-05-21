@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.course.ITcCourseBespeakDao" >
+  <sql id="Base_Column_List" >
+	t1.id,	
+	t1.name,
+	t1.sex,
+	t1.tel,
+	t1.day,
+	t1.addres,
+	t1.course,
+	t1.detail_info,
+	t1.note,
+	t1.date_created,
+	t1.create_id,
+	t1.create_ip,
+	t1.last_updated,
+	t1.update_id,
+	t1.update_ip,
+	t1.del_flag,
+	t1.version,
+	t1.status
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcCourseBespeakBean" parameterType="tcCourseBespeak" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_course_bespeak t1
+    where t1.id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcCourseBespeak" >
+    delete from tc_course_bespeak
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="tcCourseBespeak" >
+    insert into tc_course_bespeak (
+	    id,
+		name,
+		sex,
+		tel,
+		day,
+		addres,
+		course,
+		detail_info,
+		note,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		del_flag,
+		version,
+		status
+      ) values (
+	    #{id},
+		#{name},
+		#{sex},
+		#{tel},
+		#{day},
+		#{addres},
+		#{course},
+		#{detail_info},
+		#{note},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		'0',
+		0,
+		#{status}
+    )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcCourseBespeak" >
+    update tc_course_bespeak set version=version+1
+    ,last_updated=now()
+	,update_id=#{update_id}
+	,update_ip=#{update_ip}
+	<if test="name!= null" >,name=#{name}</if>
+	<if test="sex!= null" >,sex=#{sex}</if>
+	<if test="tel!= null" >,tel=#{tel}</if>
+	<if test="day!= null" >,day=#{day}</if>
+	<if test="addres!= null" >,addres=#{addres}</if>
+	<if test="course!= null" >,course=#{course}</if>
+	<if test="detail_info!= null" >,detail_info=#{detail_info}</if>
+	<if test="note!= null" >,note=#{note}</if>
+	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+	<if test="status!= null" >,status=#{status}</if>
+	where id=#{id}
+  </update>
+  	<!--判断是否存在-->
+    <select id="isDataYN" parameterType="tcCourseBespeak" resultType="int">
+    select count(0) from tc_course_bespeak where id=#{id}
+    </select>
+    <!--
+	 * <p>信息列表 分页。</p>
+	public List<TcCourseBespeakBean> findDataIsPage(IEntity dto);
+	-->
+	<select id="findDataIsPage" resultType="tcCourseBespeakBean" parameterType="tcCourseBespeak" >
+    select
+	<include refid="Base_Column_List"/>
+	from tc_course_bespeak t1
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+    order by t1.date_created desc
+    </select>
+	<!-- 
+	 * <p>信息列表。</p>
+	public List<TcCourseBespeakBean> findDataIsList(IEntity dto); -->
+	<select id="findDataIsList" resultType="tcCourseBespeakBean" parameterType="tcCourseBespeak" >
+	select
+	<include refid="Base_Column_List"/>
+	from tc_course_bespeak t1
+    where 1=1
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+    order by t1.date_created desc
+   </select>
+   <!-- 逻辑删除 -->
+   <update id="deleteById" parameterType="tcCourseBespeak">
+	  	update tc_course_bespeak set version=version+1,last_updated=now(),del_flag='1',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+   <!-- 恢复逻辑删除的数据 -->
+   <update id="recoveryDataById" parameterType="tcCourseBespeak">
+	  	update tc_course_bespeak set version=version+1,last_updated=now(),del_flag='0',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+</mapper>
