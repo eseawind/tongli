@@ -24,6 +24,8 @@
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
 <script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
+<link href="${basePath}/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="${basePath}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 
 <body class="page-header-fixed">
@@ -37,8 +39,25 @@
 			<div class="body fr" style="width: 770px;">
 				<div class="title">&nbsp; 我的课程表</div>
 				<div class="content" style="min-height: 500px;">
-					<div class="course_info" id="course_info">
-						
+					<ul class="nav nav-tabs" style="height:40px; ">
+							<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
+							<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="tab_0">
+							<!-- BEGIN FORM-->
+							<div class="course_info" id="course_info1">
+								1
+							</div>
+							<!-- END FORM--> 
+						</div>
+						<div class="tab-pane" id="tab_1">
+							<!-- BEGIN FORM-->
+							<div class="course_info" id="course_info2">
+								2
+							</div>
+							<!-- END FORM--> 
+						</div>
 					</div>
 				</div>
 			</div>
@@ -54,7 +73,7 @@
 								<c:set var="student_id" value="${student.id}" />
 							</c:if>
 							<li id="s_${student.id}">
-								<a href="javascript:;" onclick="loadUrlPage(0,'m201_','list1','course_info','${student.id}')">${student.name}</a>
+								<a href="javascript:;" onclick="loadUrlPage(0,'m201_','list1','course_info1','${student.id}')">${student.name}</a>
 							</li>
 						</c:forEach>
 					</ul>
@@ -85,7 +104,7 @@
 </html>
 <script>
 	$(function() {
-		loadUrlPage(0,'m201_','list1','course_info','${student_id}');
+		loadUrlPage(0,'m201_','list1','course_info1','${student_id}');
 	});
 	function loadUrlPage(offset,url,event,divId,sid) {
 		try{

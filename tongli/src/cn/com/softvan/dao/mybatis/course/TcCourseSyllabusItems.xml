@@ -285,6 +285,20 @@
 	    	    and t3.del_flag='0'
 	    	</otherwise>
 	    </choose>
+	    <!-- 已完成课程 -->
+	    <if test="note!=null and note==0">
+	   		<![CDATA[
+	    	and TO_DAYS(t2.day)<TO_DAYS(now())
+			and TO_SECONDS(t2.end_time)<TO_SECONDS(now())
+			]]>
+	    </if>
+	    <!-- 未完成课程 -->
+	    <if test="note!=null and note==1">
+	    	<![CDATA[
+	    	and TO_DAYS(t2.day)>=TO_DAYS(now())
+			and TO_SECONDS(t2.end_time)>=TO_SECONDS(now())
+			]]>
+	    </if>
 	    group by t1.teacher_id
 	    order by t2.day desc,t2.begin_time asc
    </select>

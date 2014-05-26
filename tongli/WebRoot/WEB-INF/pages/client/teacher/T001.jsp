@@ -24,6 +24,8 @@
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
 <script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
+<link href="${basePath}/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="${basePath}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 </head>
 
 <body class="page-header-fixed">
@@ -36,9 +38,26 @@
 		<div class="w">
 			<div class="body fr" style="width: 770px;">
 				<div class="title">&nbsp; 我的课程表</div>
-				<div class="content" style="min-height: 500px;">
-					<div class="course_info" id="course_info">
-						
+				<div class="content " style="min-height: 500px;">
+					<ul class="nav nav-tabs" style="height:40px; ">
+							<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
+							<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="tab_0">
+							<!-- BEGIN FORM-->
+							<div class="course_info" id="course_info1">
+								
+							</div>
+							<!-- END FORM--> 
+						</div>
+						<div class="tab-pane" id="tab_1">
+							<!-- BEGIN FORM-->
+							<div class="course_info" id="course_info2">
+								
+							</div>
+							<!-- END FORM--> 
+						</div>
 					</div>
 				</div>
 			</div>
@@ -54,7 +73,7 @@
 								<c:set var="student_id" value="${student.id}" />
 							</c:if>
 							<li>
-								<a href="javascript:;" onclick="loadUrlPage(0,'t001_','list1','course_info','${student.id}')">${student.name}</a>
+								<a href="javascript:;" onclick="loadInfo('${student.id}');">${student.name}</a>
 							</li>
 						</c:forEach>
 					</ul>
@@ -85,14 +104,20 @@
 </html>
 <script>
 	$(function() {
-		loadUrlPage(0,'t001_','list1','course_info','${student_id}');
+		loadUrlPage(0,'t001_','list1','course_info1','${student_id}','&status=0');
+		loadUrlPage(0,'t001_','list2','course_info2','${student_id}','&status=1');
 	});
-	function loadUrlPage(offset,url,event,divId,sid) {
+	function loadInfo(sid) {
+		loginCheck();
+		loadUrlPage(0,'t001_','list1','course_info1',sid,'&status=0');
+		loadUrlPage(0,'t001_','list2','course_info2',sid,'&status=1');
+	}
+	function loadUrlPage(offset,url,event,divId,sid,obj) {
 		loginCheck();
 		var load = "<a class='loading' >信息加载中...</a>";
 		jQuery("#" + divId).html(load);
 		jQuery.ajax({
-			url : '/' + url + event+'.ac?offset='+offset+"&sid="+ sid + '&time=' + new Date(),
+			url : '/' + url + event+'.ac?offset='+offset+"&sid="+ sid + obj + '&time=' + new Date(),
 			success : function(req) {
 				jQuery("#"+divId).html(req);
 			},

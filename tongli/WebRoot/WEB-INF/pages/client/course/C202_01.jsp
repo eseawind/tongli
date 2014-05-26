@@ -48,22 +48,9 @@
 					<div class="user_info">
 							<ul>
 								<li>
-									<div class="tit">姓 &nbsp;&nbsp;名：</div>
+									<div class="tit">参观课程：</div>
 									<div class="con">
-										${bean.name }
-									</div>
-								</li>
-								<li>
-									<div class="tit">性 &nbsp;&nbsp;别：</div>
-									<div class="con">
-									<c:if test="${bean.sex=='0'}">男</c:if>
-									<c:if test="${bean.sex=='1'}">女</c:if>
-									</div>
-								</li>
-								<li>
-									<div class="tit">电 &nbsp;&nbsp;话：</div>
-									<div class="con">
-										${bean.tel }
+										${bean.course} 
 									</div>
 								</li>
 								<li>
@@ -79,9 +66,28 @@
 									</div>
 								</li>
 								<li>
-									<div class="tit">参观课程：</div>
+									<div class="tit">孩子姓名：</div>
 									<div class="con">
-										${bean.course} 
+										${bean.name }
+									</div>
+								</li>
+								<li>
+									<div class="tit">孩子性别：</div>
+									<div class="con">
+									<c:if test="${bean.sex=='0'}">男</c:if>
+									<c:if test="${bean.sex=='1'}">女</c:if>
+									</div>
+								</li>
+								<li>
+									<div class="tit">孩子年龄：</div>
+									<div class="con">
+										${bean.age}
+									</div>
+								</li>
+								<li>
+									<div class="tit">手机号码：</div>
+									<div class="con">
+										${bean.tel }
 									</div>
 								</li>
 								<li style="height: 100px;">

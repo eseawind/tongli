@@ -44,6 +44,8 @@ public class TcCourseBespeakBean extends BaseBean {
 	private String detail_info;
 	/** 状态0未完成1已完成 */
 	private String status;
+	/** 年龄 */
+	private String age;
 	/**
 	 * id取得
 	 * @return id
@@ -169,6 +171,20 @@ public class TcCourseBespeakBean extends BaseBean {
 	 */
 	public void setStatus(String status) {
 	    this.status = status;
+	}
+	/**
+	 * 年龄取得
+	 * @return 年龄
+	 */
+	public String getAge() {
+	    return age;
+	}
+	/**
+	 * 年龄设定
+	 * @param age 年龄
+	 */
+	public void setAge(String age) {
+	    this.age = age;
 	}
 
 }

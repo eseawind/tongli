@@ -45,25 +45,10 @@
 							<input type="hidden" name="bean.id" value="${bean.id}" />
 							<ul>
 								<li>
-									<div class="tit">姓 &nbsp;&nbsp;名：</div>
+									<div class="tit">参观课程：</div>
 									<div class="con">
-										<input type="text" name="bean.name" class="input" value="">
-											<em>* 你的名称</em>
-									</div>
-								</li>
-								<li>
-									<div class="tit">性 &nbsp;&nbsp;别：</div>
-									<div class="con">
-										<input type="radio" name="bean.sex" value="0" id="sex_0">
-											男 &nbsp; &nbsp; <input type="radio" name="bean.sex" value="1"
-											id="sex_1"> 女 <em>* 请选择</em>
-									</div>
-								</li>
-								<li>
-									<div class="tit">电 &nbsp;&nbsp;话：</div>
-									<div class="con">
-										<input name="bean.tel" type="text" class="input"> <em>*
-												联系电话</em>
+										<input name="bean.course" type="text" class="input"> <em>*
+												你要参观的课程</em>
 									</div>
 								</li>
 								<li>
@@ -81,10 +66,32 @@
 									</div>
 								</li>
 								<li>
-									<div class="tit">参观课程：</div>
+									<div class="tit">孩子姓名：</div>
 									<div class="con">
-										<input name="bean.course" type="text" class="input"> <em>*
-												你要参观的课程</em>
+										<input type="text" name="bean.name" class="input" value="">
+											<em>* 孩子姓名</em>
+									</div>
+								</li>
+								<li>
+									<div class="tit">孩子性别：</div>
+									<div class="con">
+										<input type="radio" name="bean.sex" value="0" id="sex_0">
+											男 &nbsp; &nbsp; <input type="radio" name="bean.sex" value="1"
+											id="sex_1"> 女 <em>* 请选择</em>
+									</div>
+								</li>
+								<li>
+									<div class="tit">孩子年龄：</div>
+									<div class="con">
+										<input name="bean.age" type="text" class="input"> <em>*
+												年龄</em>
+									</div>
+								</li>
+								<li>
+									<div class="tit">手机号码：</div>
+									<div class="con">
+										<input name="bean.tel" type="text" class="input"> <em>*
+												联系电话</em>
 									</div>
 								</li>
 								<li style="height: 100px;">

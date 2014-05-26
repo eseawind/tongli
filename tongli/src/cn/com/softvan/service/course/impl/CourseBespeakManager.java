@@ -73,7 +73,7 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//version
 				dto.setStatus(bean.getStatus());//状态0未完成1已完成
-
+				dto.setAge(bean.getAge());//年龄
 				//判断数据是否存在
 				if(tcCourseBespeakDao.isDataYN(dto)!=0){
 					//数据存在
@@ -169,6 +169,7 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//version
 				dto.setStatus(bean.getStatus());//状态0未完成1已完成
+				dto.setAge(bean.getAge());//年龄
 			dto.setPageInfo(bean.getPageInfo());//分页
     	   }
 			beans=tcCourseBespeakDao.findDataIsPage(dto);
@@ -208,7 +209,8 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 					dto.setDel_flag(bean.getDel_flag());//是否删除
 					dto.setVersion(bean.getVersion());//version
 					dto.setStatus(bean.getStatus());//状态0未完成1已完成
-	    		    
+					dto.setAge(bean.getAge());//年龄
+					
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
