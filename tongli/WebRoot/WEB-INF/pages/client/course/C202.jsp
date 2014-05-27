@@ -94,7 +94,7 @@
 												联系电话</em>
 									</div>
 								</li>
-								<li style="height: 100px;">
+								<li class="li_0" style="height: 100px;">
 									<div class="tit">其它：</div>
 									<div class="con" style="height: 80px;">
 										<textarea name="bean.detail_info" cols="5" rows="3"

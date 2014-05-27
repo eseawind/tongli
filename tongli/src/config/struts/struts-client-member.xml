@@ -9,6 +9,7 @@
 		<action name="m201_*" class="m201Action" method="{1}">
 			<result name="init">/WEB-INF/pages/client/member/M201.jsp</result>
 			<result name="list1">/WEB-INF/pages/client/member/M201_01.jsp</result>
+			<result name="list2">/WEB-INF/pages/client/member/M201_02.jsp</result>
 			<result name="success" type="redirect" >/m201_init.ac</result>
 		</action>
 	</package>

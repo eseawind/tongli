@@ -55,7 +55,7 @@
 .body .content  .on{font-weight:bolder;color:#3e7900;}
 .body .content  .on a{color:#3e7900;}
 .body .content p{ font-size:14px; text-indent:2em;}
-.body .content li{ height:30px; line-height:30px; border-bottom:1px solid #eee;}
+.body .content li{ min-height:30px; line-height:30px; border-bottom:1px solid #eee;}
 .body  h1{ font-size:20px; line-height:30px; margin:20px; text-align:center; color:#3e7900;}
 .body  h3{ font-size:12px; line-height:20px; margin:10px; text-align:center;color:#999;}
 

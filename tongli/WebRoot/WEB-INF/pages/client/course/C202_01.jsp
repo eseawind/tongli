@@ -90,7 +90,7 @@
 										${bean.tel }
 									</div>
 								</li>
-								<li style="height: 100px;">
+								<li class="li_0" style="height: 100px;">
 									<div class="tit">其它：</div>
 									<div class="con" style="height: 80px;">
 										${bean.detail_info}

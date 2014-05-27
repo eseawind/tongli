@@ -1,6 +1,6 @@
 <%--
 /*
- * 会员-课程列表
+ * 会员-课程列表--已完成
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
@@ -17,10 +17,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
+<c:if test="${beans!=null && fn:length(beans)>0 }">
+
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <c:forEach items="${beans}" var="bean" varStatus="i">
-	<div class="item_li">${i.index+1}. ${bean.title}</div>
-	<div class="item_con">
+	<div class="item_li item_li_0">${i.index+1}. ${bean.title}</div>
+	<div class="item_con item_con_0">
 		<div class="grade">
 			<table width="600" border="0" cellspacing="0" cellpadding="2">
 				<tr>
@@ -98,13 +100,13 @@
 </c:forEach>
 <customtag:pagingext func="loadUrlPage" params="'m201_','list1','course_info'" />
 <script>
-	$(".item_li").click(function() {
+	$(".item_li_0").click(function() {
 		if ($(this).hasClass("on")) {
 			$(this).removeClass("on");
 		} else {
 			$(this).addClass("on");
 		}
-		$(this).next(".item_con").slideToggle();
+		$(this).next(".item_con_0").slideToggle();
 	});
 	// 提交from
 	function submitFrom2(from_id) {
@@ -121,4 +123,8 @@
 			}
 		});
 	}
+	try{
+		$('._struts_0').html('${PAGEROW_OBJECT_KEY.recordCount}');
+	}catch(e){}
 </script>
+</c:if>

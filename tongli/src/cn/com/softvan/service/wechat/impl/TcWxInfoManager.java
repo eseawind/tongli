@@ -520,17 +520,19 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 				WxReplyNewsMsg newsMsg = new WxReplyNewsMsg();
 				if(beans!=null){
 					for(TcWxInfoBean bean1:beans){
-						HttpServletRequest request = ServletActionContext.getRequest(); // 获取客户端发过来的HTTP请求
-						 String path = request.getContextPath();
-					     String basePath = null;
-				        if (request.getServerPort() != 80) {
-				    		basePath = request.getScheme() + "://" + request.getServerName() 
-									+ ":" + request.getServerPort() + path;	
-				        } else {
-				        	basePath = request.getScheme() + "://" + request.getServerName() + path;
-				        }
-						//TODO 需要判断图片是否为本地图片 需要加上项目http详细地址
-						newsMsg.addItem(bean1.getTitle(),bean1.getDescription(),Validator.isUrl(bean1.getPicurl())?bean1.getPicurl():basePath+bean1.getPicurl(), bean1.getUrl());
+						if(!("1".equals(bean1.getDel_flag()))){
+							HttpServletRequest request = ServletActionContext.getRequest(); // 获取客户端发过来的HTTP请求
+							 String path = request.getContextPath();
+						     String basePath = null;
+					        if (request.getServerPort() != 80) {
+					    		basePath = request.getScheme() + "://" + request.getServerName() 
+										+ ":" + request.getServerPort() + path;	
+					        } else {
+					        	basePath = request.getScheme() + "://" + request.getServerName() + path;
+					        }
+							//TODO 需要判断图片是否为本地图片 需要加上项目http详细地址
+							newsMsg.addItem(bean1.getTitle(),bean1.getDescription(),Validator.isUrl(bean1.getPicurl())?bean1.getPicurl():basePath+bean1.getPicurl(), bean1.getUrl());
+						}
 					}
 				}
 				//自动回复对象

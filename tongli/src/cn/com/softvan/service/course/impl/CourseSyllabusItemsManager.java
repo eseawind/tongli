@@ -343,6 +343,7 @@ public class CourseSyllabusItemsManager extends BaseManager implements ICourseSy
 	    		   dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 	    		   dto.setDel_flag(bean.getDel_flag());//是否删除
 	    		   dto.setVersion(bean.getVersion());//VERSION
+	    		   
 	    		   dto.setPageInfo(bean.getPageInfo());//分页
 	    	   }
 				beans=tcCourseSyllabusItemsDao.findDataIsPageCourse(dto);

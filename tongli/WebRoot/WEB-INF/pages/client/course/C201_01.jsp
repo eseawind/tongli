@@ -49,16 +49,16 @@
 	<div class="content">
 		<ul>
 			<c:forEach items="${tree_array}" var="tree">
-		      	<li <c:if test="${tree.id==tid}">class="on"</c:if>>
+		      	<li class="li_0" <c:if test="${tree.id==tid}">class="on"</c:if>>
 		      	<a <a href="${basePath}/c002_init.ac?tid=${tree.id}&pid=<c:choose><c:when test='${tree.parent_id!=null && tree.parent_id!=""}'>${tree.parent_id}</c:when><c:otherwise>${tree.id}</c:otherwise></c:choose>">${tree.name}</a>
 		      	<c:if test="${tree.beans!=null && fn:length(tree.beans)>0}">
 		      		<c:forEach items="${tree.beans}" var="bean">
-		      		     <li <c:if test="${bean.id==tid}">class="on"</c:if>>
+		      		     <li class="li_0" <c:if test="${bean.id==tid}">class="on"</c:if>>
 		      		     	|-<a href="${basePath}/c002_init.ac?tid=${bean.id}&pid=<c:choose><c:when test='${bean.parent_id!=null && bean.parent_id!=""}'>${bean.parent_id}</c:when><c:otherwise>${bean.id}</c:otherwise></c:choose>">${bean.name }</a>
 		      		     </li>
 		      		     <c:if test="${bean.beans!=null && fn:length(bean.beans)>0}">
 				      		<c:forEach items="${bean.beans}" var="bean2">
-				      		     <li <c:if test="${bean2.id==tid}">class="on"</c:if>>
+				      		     <li class="li_0" <c:if test="${bean2.id==tid}">class="on"</c:if>>
 				      		     	|-|-<a href="${basePath}/c002_init.ac?tid=${bean2.id}&pid=<c:choose><c:when test='${bean2.parent_id!=null && bean2.parent_id!=""}'>${bean2.parent_id}</c:when><c:otherwise>${bean2.id}</c:otherwise></c:choose>">${bean2.name }</a>
 				      		     </li>
 		           			</c:forEach>

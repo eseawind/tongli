@@ -41,7 +41,7 @@
 				<div class="content" style="min-height: 500px;">
 					<ul class="nav nav-tabs" style="height:40px; ">
 							<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
-							<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程</a></li>
+							<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab_0">
@@ -73,7 +73,7 @@
 								<c:set var="student_id" value="${student.id}" />
 							</c:if>
 							<li id="s_${student.id}">
-								<a href="javascript:;" onclick="loadUrlPage(0,'m201_','list1','course_info1','${student.id}')">${student.name}</a>
+								<a href="javascript:;" onclick="loadInfo('${student.id}');">${student.name}</a>
 							</li>
 						</c:forEach>
 					</ul>
@@ -104,9 +104,15 @@
 </html>
 <script>
 	$(function() {
-		loadUrlPage(0,'m201_','list1','course_info1','${student_id}');
+		loadUrlPage(0,'m201_','list1','course_info1','${student_id}','&status=0');
+		loadUrlPage(0,'m201_','list2','course_info2','${student_id}','&status=1');
 	});
-	function loadUrlPage(offset,url,event,divId,sid) {
+	function loadInfo(sid) {
+		loginCheck();
+		loadUrlPage(0,'m201_','list1','course_info1',sid,'&status=0');
+		loadUrlPage(0,'m201_','list2','course_info2',sid,'&status=1');
+	}
+	function loadUrlPage(offset,url,event,divId,sid,obj) {
 		try{
 			$('#s_').find('li').removeClass('on');
 			$('#s_'+sid).addClass('on');
@@ -115,7 +121,7 @@
 		var load = "<a class='loading' >信息加载中...</a>";
 		jQuery("#" + divId).html(load);
 		jQuery.ajax({
-			url : '/' + url + event+'.ac?offset='+offset+"&sid="+ sid + '&time=' + new Date(),
+			url : '/' + url + event+'.ac?offset='+offset+"&sid="+ sid + obj + '&time=' + new Date(),
 			success : function(req) {
 				jQuery("#"+divId).html(req);
 			},

@@ -26,6 +26,12 @@
 <script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
 <link href="${basePath}/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="${basePath}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+<link href="${basePath}/plugins/editor/themes/default/default.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/editor/plugins/code/prettify.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="${basePath}/plugins/editor/kindeditor.js" charset="utf-8" ></script>
+<script type="text/javascript" src="${basePath}/plugins/editor/lang/zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="${basePath}/plugins/editor/plugins/code/prettify.js" charset="utf-8"></script>
 </head>
 
 <body class="page-header-fixed">
@@ -103,9 +109,14 @@
 </body>
 </html>
 <script>
+	var editor;
 	$(function() {
 		loadUrlPage(0,'t001_','list1','course_info1','${student_id}','&status=0');
 		loadUrlPage(0,'t001_','list2','course_info2','${student_id}','&status=1');
+		
+		KindEditor.ready(function(K) {
+			editor=K;
+		});
 	});
 	function loadInfo(sid) {
 		loginCheck();
