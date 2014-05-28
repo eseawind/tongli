@@ -32,6 +32,13 @@
 <script type="text/javascript" src="${basePath}/plugins/editor/kindeditor.js" charset="utf-8" ></script>
 <script type="text/javascript" src="${basePath}/plugins/editor/lang/zh_CN.js" charset="utf-8"></script>
 <script type="text/javascript" src="${basePath}/plugins/editor/plugins/code/prettify.js" charset="utf-8"></script>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+	<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+
+	
 </head>
 
 <body class="page-header-fixed">
@@ -106,6 +113,29 @@
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<!-- END FOOTER -->
+
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+	<!-- The Templates plugin is included to render the upload/download listings -->
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/vendor/tmpl.min.js"></script>
+	<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/vendor/load-image.min.js"></script>
+	<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/vendor/canvas-to-blob.min.js"></script>
+	<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+	<!-- The basic File Upload plugin -->
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+	<!-- The File Upload processing plugin -->
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
+	<!-- The File Upload image preview & resize plugin -->
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/jquery.fileupload-image.js"></script>
+	<!-- The File Upload validation plugin -->
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+	<!-- The File Upload user interface plugin -->
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/scripts/app.js"></script>      
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/scripts/form-fileupload.js"></script>
+	
 </body>
 </html>
 <script>
