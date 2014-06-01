@@ -107,7 +107,7 @@ public class ConsultMsgManager extends BaseManager implements IConsultMsgManager
 			dto.setVersion(bean.getVersion());//VERSION
 			dto.setDel_flag(bean.getDel_flag());//del_flag
 			dto.setInfo_source(bean.getInfo_source());//消息来源1,信息接收,2,客服回复
-			beans=tcCsConsultMsgDao.findDataIsList(dto);
+			beans=(List<TcCsConsultMsgBean>) tcCsConsultMsgDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息列表查询失败,数据库错误!", e);
 		}
@@ -141,7 +141,7 @@ public class ConsultMsgManager extends BaseManager implements IConsultMsgManager
 			dto.setDel_flag(bean.getDel_flag());//del_flag
 			dto.setInfo_source(bean.getInfo_source());//消息来源1,信息接收,2,客服回复
 			dto.setPageInfo(bean.getPageInfo());
-			beans=tcCsConsultMsgDao.findDataIsPage(dto);
+			beans=(List<TcCsConsultMsgBean>) tcCsConsultMsgDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息分页查询失败,数据库错误!", e);
 		}
@@ -162,7 +162,7 @@ public class ConsultMsgManager extends BaseManager implements IConsultMsgManager
 			if(bean!=null){
 				dto.setId(bean.getId());//消息id
 			}
-			bean1=tcCsConsultMsgDao.selectByPrimaryKey(dto);
+			bean1=(TcCsConsultMsgBean) tcCsConsultMsgDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

@@ -113,7 +113,7 @@ public class CustomerServiceManager extends BaseManager implements ICustomerServ
 			dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 			dto.setVersion(bean.getVersion());//VERSION
 			dto.setDel_flag(bean.getDel_flag());//del_flag
-			beans=tcCsCustomerServiceDao.findDataIsList(dto);
+			beans=(List<TcCsCustomerServiceBean>) tcCsCustomerServiceDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息列表查询失败,数据库错误!", e);
 		}
@@ -148,7 +148,7 @@ public class CustomerServiceManager extends BaseManager implements ICustomerServ
 			dto.setVersion(bean.getVersion());//VERSION
 			dto.setDel_flag(bean.getDel_flag());//del_flag
 			dto.setPageInfo(bean.getPageInfo());
-			beans=tcCsCustomerServiceDao.findDataIsPage(dto);
+			beans=(List<TcCsCustomerServiceBean>) tcCsCustomerServiceDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息分页查询失败,数据库错误!", e);
 		}
@@ -184,7 +184,7 @@ public class CustomerServiceManager extends BaseManager implements ICustomerServ
 				dto.setVersion(bean.getVersion());//VERSION
 				dto.setDel_flag(bean.getDel_flag());//del_flag
 			}
-			bean1=tcCsCustomerServiceDao.selectByPrimaryKey(dto);
+			bean1=(TcCsCustomerServiceBean) tcCsCustomerServiceDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}
@@ -219,7 +219,7 @@ public class CustomerServiceManager extends BaseManager implements ICustomerServ
 				dto.setVersion(bean.getVersion());//VERSION
 				dto.setDel_flag(bean.getDel_flag());//del_flag
 			}
-			bean1=tcCsCustomerServiceDao.selectByPrimaryKey(dto);
+			bean1=(TcCsCustomerServiceBean) tcCsCustomerServiceDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

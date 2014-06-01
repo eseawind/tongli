@@ -85,7 +85,7 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 					//TODO----------------------------------------
 					TcCourseSyllabusItems itemDto=new TcCourseSyllabusItems();
 					itemDto.setCourse_syllabus_id(dto.getId());//课程表id
-					TcCourseSyllabusBean bean1=tcCourseSyllabusDao.selectByPrimaryKey(dto);
+					TcCourseSyllabusBean bean1=(TcCourseSyllabusBean) tcCourseSyllabusDao.selectByPrimaryKey(dto);
 					// 必须 课程状态未完成==0  已完成的课程不许修改
 					if("0".equals(bean1.getCourse_status())){
 						//数据存在 课程表修改
@@ -210,7 +210,7 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 				dto.setAddres(bean.getAddres());//地址
 				dto.setPageInfo(bean.getPageInfo());//分页
     	   }
-			beans=tcCourseSyllabusDao.findDataIsPage(dto);
+			beans=(List<TcCourseSyllabusBean>) tcCourseSyllabusDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -249,7 +249,7 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=tcCourseSyllabusDao.findDataIsList(dto);
+				beans=(List<TcCourseSyllabusBean>) tcCourseSyllabusDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -270,7 +270,7 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
     	   if(bean!=null){
     		    dto.setId(bean.getId());//ID
     	   }
-			bean1=tcCourseSyllabusDao.selectByPrimaryKey(dto);
+			bean1=(TcCourseSyllabusBean) tcCourseSyllabusDao.selectByPrimaryKey(dto);
 			if(bean1!=null){
 				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 			}

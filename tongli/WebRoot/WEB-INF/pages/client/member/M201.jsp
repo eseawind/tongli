@@ -26,6 +26,14 @@
 <script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
 <link href="${basePath}/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="${basePath}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="${basePath}/css/blueimp-gallery.min.css">
+<%-- <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/dropzone/css/dropzone.css" rel="stylesheet"/> --%>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/pages/blog.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/pages/news.css" rel="stylesheet" type="text/css"/>
+
 </head>
 
 <body class="page-header-fixed">
@@ -47,14 +55,14 @@
 						<div class="tab-pane active" id="tab_0">
 							<!-- BEGIN FORM-->
 							<div class="course_info" id="course_info1">
-								1
+								
 							</div>
 							<!-- END FORM--> 
 						</div>
 						<div class="tab-pane" id="tab_1">
 							<!-- BEGIN FORM-->
 							<div class="course_info" id="course_info2">
-								2
+								
 							</div>
 							<!-- END FORM--> 
 						</div>
@@ -99,6 +107,7 @@
 	</div>
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
+		<script src="${basePath}/js/jquery.blueimp-gallery.min.js"></script>
 	<!-- END FOOTER -->
 </body>
 </html>
@@ -118,10 +127,10 @@
 			$('#s_'+sid).addClass('on');
 		}catch(e){}
 		loginCheck();
-		var load = "<a class='loading' >信息加载中...</a>";
-		jQuery("#" + divId).html(load);
+		//var load = "<a class='loading' >信息加载中...</a>";
+		//jQuery("#" + divId).html(load);
 		jQuery.ajax({
-			url : '/' + url + event+'.ac?offset='+offset+"&sid="+ sid + obj + '&time=' + new Date(),
+			url : '${basePath}/' + url + event+'.ac?offset='+offset+"&sid="+ sid + obj + '&time=' + new Date(),
 			success : function(req) {
 				jQuery("#"+divId).html(req);
 			},
@@ -142,6 +151,21 @@
 			},
 			error : function() {
 				alert("页面发生错误");
+			}
+		});
+	}
+	//--加载评论信息--
+	function loadUrlPageComment(offset,url,event,divId,obj) {
+		loginCheck();
+		//var load = "<a class='loading' >信息加载中...</a>";
+		//jQuery("#" + divId).html(load);
+		jQuery.ajax({
+			url : '${basePath}/' + url + event+'.ac?offset='+offset+'&did='+divId+ obj + '&time=' + new Date(),
+			success : function(req) {
+				jQuery("#"+divId).html(req);
+			},
+			error : function() {
+				jQuery("#"+divId).html('信息加载失败!');
 			}
 		});
 	}

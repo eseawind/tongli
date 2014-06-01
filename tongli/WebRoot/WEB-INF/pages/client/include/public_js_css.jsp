@@ -4,3 +4,5 @@
 
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="${basePath}/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="${basePath}/js/global.js"></script>
+

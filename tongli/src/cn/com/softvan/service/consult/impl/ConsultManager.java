@@ -134,7 +134,7 @@ public class ConsultManager extends BaseManager implements IConsultManager {
 			dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 			dto.setVersion(bean.getVersion());//VERSION
 			dto.setDel_flag(bean.getDel_flag());//del_flag
-			beans=tcCsConsultDao.findDataIsList(dto);
+			beans=(List<TcCsConsultBean>) tcCsConsultDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息列表查询失败,数据库错误!", e);
 		}
@@ -166,7 +166,7 @@ public class ConsultManager extends BaseManager implements IConsultManager {
 			dto.setVersion(bean.getVersion());//VERSION
 			dto.setDel_flag(bean.getDel_flag());//del_flag
 			dto.setPageInfo(bean.getPageInfo());
-			beans=tcCsConsultDao.findDataIsPage(dto);
+			beans=(List<TcCsConsultBean>) tcCsConsultDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息分页查询失败,数据库错误!", e);
 		}
@@ -199,7 +199,7 @@ public class ConsultManager extends BaseManager implements IConsultManager {
 				dto.setVersion(bean.getVersion());//VERSION
 				dto.setDel_flag(bean.getDel_flag());//del_flag
 			}
-			bean1=tcCsConsultDao.selectByPrimaryKey(dto);
+			bean1=(TcCsConsultBean) tcCsConsultDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

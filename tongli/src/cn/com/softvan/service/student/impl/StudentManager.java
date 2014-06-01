@@ -175,7 +175,7 @@ public class StudentManager extends BaseManager implements IStudentManager {
 			dto.setPageInfo(bean.getPageInfo());//分页对象
 			dto.setDel_flag(bean.getDel_flag());//删除标记
     	   }
-			beans=tcStudentDao.findDataIsPage(dto);
+			beans=(List<TcStudentBean>) tcStudentDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -204,7 +204,7 @@ public class StudentManager extends BaseManager implements IStudentManager {
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=tcStudentDao.findDataIsList(dto);
+				beans=(List<TcStudentBean>) tcStudentDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -227,7 +227,7 @@ public class StudentManager extends BaseManager implements IStudentManager {
 	   			dto.setKeyword(bean.getKeyword());//关键字
 	   			dto.setDel_flag(bean.getDel_flag());//是否删除
     	   }
-			bean1=tcStudentDao.selectByPrimaryKey(dto);
+			bean1=(TcStudentBean) tcStudentDao.selectByPrimaryKey(dto);
 			if(bean1!=null){
 				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 			}

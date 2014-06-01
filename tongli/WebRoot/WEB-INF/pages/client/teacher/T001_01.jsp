@@ -30,13 +30,13 @@
 </style>
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <c:forEach items="${beans}" var="bean" varStatus="i">
-	<div class="item_li item_li_0">${i.index+1}. ${bean.title}</div>
-	<div class="item_con item_con_0">
+<div class="item_li item_li_0">${i.index+1}. ${bean.title}</div>
+<div class="item_con item_con_0">
 	<div class="grade">
 		<table  class="table table-striped table-condensed" >
 			<tr>
-				<td width="118" height="30" align="right"><strong>时间：</strong></td>
-				<td width="474">${bean.day}&nbsp;${bean.begin_time}&nbsp;${bean.end_time}</td>
+				<td width="90" height="30" align="right"><strong>时间：</strong></td>
+				<td>日期<font color="blue">${bean.day}</font>&nbsp;上课时间<font color="blue">${bean.begin_time}</font>&nbsp;下课时间<font color="blue">${bean.end_time}</font></td>
 			</tr>
 			<tr class="alert alert-success">
 				<td height="30" align="right"><strong>地点：</strong></td>
@@ -107,7 +107,7 @@
 					<c:if test="${num!=fn:length(bean.itemBeans)}">
 					<div class="panel panel-success">
 						<div class="panel-heading">
-							<button style="margin-left:300px;" type="submit" id="b_${bean.id}"class="btn blue"  onclick="if(confirm('确认提交学员签到情况吗?')){submitFrom2('${bean.id}');}">签到完成</button></h3>
+							<a style="margin-left:300px;" type="submit" id="b_${bean.id}"class="btn blue"  onclick="if(confirm('确认提交学员签到情况吗?')){submitFrom2('${bean.id}');}">签到完成</a></h3>
 						</div>
 					</div>
 					</c:if>
@@ -117,13 +117,13 @@
 		</table>
 		<table  class="table table-striped table-condensed" >
 			<tr>
-				<td height="30" align="center" colspan="2">
+				<td height="30" align="center" >
 					============课堂详情==========
 				</td>
 			</tr>
 			<tr>
-				<td align="left" colspan="2">
-					<form id="fileupload" action="${basePath}/uploadFile?isrich=1" method="POST" enctype="multipart/form-data">
+				<td align="left" >
+					<form id="fileupload${bean.id}" action="" method="POST" >
 						<s:token></s:token>
 						<input type="hidden" name="course_syllabus_id" value="${bean.id}">
 						<div class="row fileupload-buttonbar">
@@ -141,27 +141,89 @@
 								<i class="fa fa-ban"></i>
 								<span>取消上传</span>
 								</button>
-								<button type="button" class="btn red delete">
+								<%-- <button type="button" class="btn red delete">
 								<i class="fa fa-trash-o"></i>
 								<span>删除</span>
 								</button>
-								<input type="checkbox" class="toggle">
+								<input type="checkbox" class="toggle"> --%>
 								<span class="fileupload-loading"></span>
 							</div>
-							<div class="col-lg-10 fileupload-progress fade">
+							 <div class="col-lg-10 fileupload-progress fade">
 								<div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
 									<div class="progress-bar progress-bar-success" style="width:0%;"></div>
 								</div>
 								<div class="progress-extended">&nbsp;</div>
 							</div>
 						</div>
-						<table role="presentation" class="table table-striped clearfix">
+						<table role="presentation" class="table table-striped table-condensed col-md-12" style="text-align: center;">
+							<thead>
+								<tr style="height: 0px;">
+									<th style="width: 100px;">
+									</th>
+									<th class="col-md-6">
+									</th>
+									<th  class="col-md-1">
+									</th>
+									<th class="col-md-2">
+									</th>
+								</tr>
+								<c:forEach items="${bean.picBeans}" var="photoBean">
+									 <tr class="template-download">
+									        <td>
+									            <span class="preview">
+									                    <a href="${photoBean.pic_url}"  title="${photoBean.pic_title}" download="${photoBean.pic_title}" data-gallery>
+									                    <img style="height:100px;"  src="${fn:replace(photoBean.pic_url, "n3", "n0")}"></a>
+									            </span>
+									        </td>
+									        <td>
+									            <p class="name">
+														<input type="hidden" name="picid" value="${photoBean.id}" />
+														<input type="hidden" name="picurl${photoBean.id}" value="${photoBean.pic_url}" />
+														<textarea name="pictit${photoBean.id}" style="height:100px;width:95%;">${photoBean.pic_title}</textarea>
+									            </p>
+									        </td>
+									        <td>
+									            <span class="size"></span>
+									        </td>
+									        <td>
+								                <a class="btn btn-danger pdel_flag_a" onclick="delInfo(this)">
+								                	<input type="hidden" class="pdel_flag" name="delflag${photoBean.id}" value="0" />
+								                    <i class="glyphicon glyphicon-trash"></i>
+								                    <span>删除</span>
+								                </a>
+								                <a class="btn blue pdel_flag_b" onclick="recoveryInfo(this)" style="display: none;">
+								                    <i class="fa fa-mail-reply-all"></i>
+								                    <span>恢复</span>
+								                </a>
+									        </td>
+									   </tr>
+								</c:forEach>
+							</thead>
 							<tbody class="files"></tbody>
 						</table>
+							<script type="text/javascript">
+							var uploader${bean.id} = $('#fileupload${bean.id}');
+							$(function () {
+								'use strict';
+								uploader${bean.id}.fileupload({
+									'url': '${basePath}/jQueryFileUpload',
+									'method': 'POST',
+									'enctype':'multipart/form-data',
+									'autoUpload': false,
+									'limitMultiFileUploads': 2, // 限定最多两个文件
+									'limitConcurrentUploads': 1, // 限定同时上传N个文件
+									'maxFileSize': 5 * 1024 * 1024,
+									'maxNumberOfFiles': 40,
+									'acceptFileTypes': /(\.|\/)(gif|jpe?g|png)$/i,
+						        	'previewMaxWidth': 100,
+						        	'previewMaxHeight': 100
+								});
+							});
+						</script>
 						<div style="clear: both;"></div>
 						<div class="panel panel-success">
 							<div class="panel-heading">
-									<button style="margin-left:300px;" type="submit" id="c_${bean.id}"class="btn blue"  onclick="submitFrom3('${bean.id}');">相册保存</button></h3>
+									<a style="margin-left:300px;"  id="c_${bean.id}" class="btn blue"  onclick="submitFrom3('fileupload${bean.id}');">相册保存</a></h3>
 							</div>
 						</div>
 					</form>
@@ -169,106 +231,124 @@
 					<div class="panel panel-success">
 						<div class="panel-body">
 							<ul>
-								<li>The maximum file size for uploads in this demo is <strong>5 MB</strong> (default file size is unlimited).</li>
+								<li>The maximum file size for uploads in this  is <strong>5 MB</strong> (default file size is unlimited).</li>
 								<li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed in this demo (by default there is no file type restriction).</li>
-								<li>Uploaded files will be deleted automatically after <strong>5 minutes</strong> (demo setting).</li>
+								<li>Uploaded files will be deleted automatically after <strong>5 minutes</strong> ( setting).</li>
 							</ul>
 						</div>
 					</div>
 				</td>
 			</tr>
 	</table>
+	</div>
+</div>
 </c:forEach>
-<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-	<script id="template-upload" type="text/x-tmpl">
-		{% for (var i=0, file; file=o.files[i]; i++) { %}
-		    <tr class="template-upload fade">
-		        <td>
-		            <span class="preview"></span>
-		        </td>
-		        <td>
-		            <p class="name">{%=file.name%}</p>
-		            {% if (file.error) { %}
-		                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
-		            {% } %}
-		        </td>
-		        <td>
-		            <p class="size">{%=o.formatFileSize(file.size)%}</p>
-		            {% if (!o.files.error) { %}
-		                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-		                <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-		                </div>
-		            {% } %}
-		        </td>
-		        <td>
-		            {% if (!o.files.error && !i && !o.options.autoUpload) { %}
-		                <button class="btn blue start">
-		                    <i class="fa fa-upload"></i>
-		                    <span>开始</span>
-		                </button>
-		            {% } %}
-		            {% if (!i) { %}
-		                <button class="btn red cancel">
-		                    <i class="fa fa-ban"></i>
-		                    <span>取消</span>
-		                </button>
-		            {% } %}
-		        </td>
-		    </tr>
-		{% } %}
-	</script>
-	<!-- The template to display files available for download -->
-	<script id="template-download" type="text/x-tmpl">
-		{% for (var i=0, file; file=o.files[i]; i++) { %}
-		    <tr class="template-download fade">
-		        <td>
-		            <span class="preview">
-		                {% if (file.thumbnailUrl) { %}
-		                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-		                {% } %}
-		            </span>
-		        </td>
-		        <td>
-		            <p class="name">
-		                {% if (file.url) { %}
-		                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
-		                {% } else { %}
-		                    <span>{%=file.name%}</span>
-		                {% } %}
-		            </p>
-		            {% if (file.error) { %}
-		                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
-		            {% } %}
-		        </td>
-		        <td>
-		            <span class="size">{%=o.formatFileSize(file.size)%}</span>
-		        </td>
-		        <td>
-		            {% if (file.deleteUrl) { %}
-		                <button class="btn red delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-		                    <i class="fa fa-trash-o"></i>
-		                    <span>删除</span>
-		                </button>
-		                <input type="checkbox" name="delete" value="1" class="toggle">
-		            {% } else { %}
-		                <button class="btn yellow cancel">
-		                    <i class="fa fa-ban"></i>
-		                    <span>取消</span>
-		                </button>
-		            {% } %}
-		        </td>
-		    </tr>
-		{% } %}
-	</script>
-	<!-- BEGIN CORE PLUGINS -->   
+<!-- The blueimp Gallery widget data-filter=":even" -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" >
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
 <customtag:pagingext func="loadUrlPage" params="'t001_','list1','course_info','&status=0'" />
+
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">错误</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <p class="size">{%=o.formatFileSize(file.size)%}</p>
+            {% if (!o.files.error) { %}
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+            {% } %}
+        </td>
+        <td>
+            {% if (!o.files.error && !i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>开始</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>取消</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+	</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+	{% var uuid=guid(); %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img style="height:100px;" src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+				
+                    <!--<a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>-->
+					
+					<input type="hidden" name="picid" value="{%=uuid%}" />
+					<input type="hidden" name="picurl{%=uuid%}" value="{%=file.url%}" />
+					<textarea name="pictit{%=uuid%}" style="height:100px;width:95%;">{%=file.name%}</textarea>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">错误</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <a class="btn btn-danger pdel_flag_a" onclick="delInfo(this)">
+                    <input type="hidden" class="pdel_flag" name="delflag{%=uuid%}" value="0" />
+					<i class="glyphicon glyphicon-trash"></i>
+                    <span>删除</span>
+                </a>
+               <a class="btn blue pdel_flag_b" onclick="recoveryInfo(this)" style="display: none;">
+					<i class="fa fa-mail-reply-all"></i>
+					<span>恢复</span>
+			   </a>
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>取消</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-		try{
-		FormFileUpload.init();
-		}catch(e){alert(e);}
+	//	try{
+	//	}catch(e){alert(e);}
 	});
-
 
 	$(".item_li_0").click(function() {
 		$(".item_li").removeClass("on");
@@ -279,7 +359,7 @@
 		}
 		$(this).next(".item_con_0").slideToggle();
 	});
-	// 提交from
+	// 提交from 
 	function submitFrom2(from_id) {
 		//登录认证
 		loginCheck();
@@ -299,6 +379,10 @@
 	function submitFrom3(from_id) {
 		//登录认证
 		loginCheck();
+		jQuery("#"+from_id).attr('action','${basePath}/t001_savePic.ac');
+		jQuery("#"+from_id).attr('method','POST');
+		jQuery("#"+from_id).attr('accept-charset','UTF-8');
+		jQuery("#"+from_id).removeAttr('enctype');
 		//提交
 		jQuery("#"+from_id).ajaxSubmit(function(data) {
 			if (data == "1") {
@@ -314,7 +398,20 @@
 	try{
 		$('._struts_0').html('${PAGEROW_OBJECT_KEY.recordCount}');
 	}catch(e){}
-	
+	//删除信息
+	function delInfo(obj){
+		$(obj).find('.pdel_flag').val('1');
+		$(obj).hide();
+		$(obj).parent().find('.pdel_flag_b').show();
+	}
+
+	//恢复信息
+	function recoveryInfo(obj){
+		$(obj).parent().find('.pdel_flag').val('0');
+		$(obj).hide();
+		$(obj).parent().find('.pdel_flag_a').show();
+	}
+
 	
 </script>
 </c:if>

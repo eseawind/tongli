@@ -15,5 +15,13 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/jee 
 		http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">
-		
+	<!-- 评论信息 dao -->
+	<bean id="tcCommentDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.comment.ITcCommentDao"></property>
+	</bean>
+	<!-- ************************业务处理类************************************* -->
+	<!-- 评论信息 业务处理 -->
+	<bean id="commentManager" class="cn.com.softvan.service.comment.impl.CommentManager" scope="prototype">
+		<property name="tcCommentDao" ref="tcCommentDao"></property>
+	</bean>
 </beans>

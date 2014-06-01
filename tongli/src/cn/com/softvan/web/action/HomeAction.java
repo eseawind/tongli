@@ -43,6 +43,8 @@ public class HomeAction  extends BaseAction {
 			if("admin".equals(request.getParameter("username"))&&"admin-123".equals(request.getParameter("password"))){
 				//用户信息
 				BaseUserBean userBean=new BaseUserBean();
+				//
+				userBean.setId("xx123id");//
 				//用户名
 				userBean.setUser_id(request.getParameter("username"));
 				//用户密码

@@ -210,7 +210,7 @@ public class MemberManager extends BaseManager implements IMemberManager {
     		   dto.setVersion(bean.getVersion());//VERSION
     		   dto.setPageInfo(bean.getPageInfo());
     	   }
-			beans=tcMemberDao.findDataIsPage(dto);
+			beans=(List<TcMemberBean>) tcMemberDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -257,7 +257,7 @@ public class MemberManager extends BaseManager implements IMemberManager {
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=tcMemberDao.findDataIsList(dto);
+				beans=(List<TcMemberBean>) tcMemberDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -302,7 +302,7 @@ public class MemberManager extends BaseManager implements IMemberManager {
     		   dto.setDel_flag(bean.getDel_flag());//是否删除
     		   dto.setVersion(bean.getVersion());//VERSION
     	   }
-			bean1=tcMemberDao.selectByPrimaryKey(dto);
+			bean1=(TcMemberBean) tcMemberDao.selectByPrimaryKey(dto);
 			if(bean1!=null){
 				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 			}

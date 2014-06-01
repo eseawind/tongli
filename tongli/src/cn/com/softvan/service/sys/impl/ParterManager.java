@@ -169,7 +169,7 @@ public class ParterManager extends BaseManager implements IParterManager {
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setPageInfo(bean.getPageInfo());//分页
     	   }
-			beans=tcSysParterDao.findDataIsPage(dto);
+			beans=(List<TcSysParterBean>) tcSysParterDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -206,7 +206,7 @@ public class ParterManager extends BaseManager implements IParterManager {
 					dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 					dto.setDel_flag(bean.getDel_flag());//是否删除
 	    	   }
-				beans=tcSysParterDao.findDataIsList(dto);
+				beans=(List<TcSysParterBean>) tcSysParterDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -230,7 +230,7 @@ public class ParterManager extends BaseManager implements IParterManager {
 	   			dto.setType(bean.getType());//分类
 	   			dto.setDel_flag(bean.getDel_flag());//是否删除
     	   }
-			bean1=tcSysParterDao.selectByPrimaryKey(dto);
+			bean1=(TcSysParterBean) tcSysParterDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

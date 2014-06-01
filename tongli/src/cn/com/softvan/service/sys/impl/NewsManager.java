@@ -188,7 +188,7 @@ public class NewsManager extends BaseManager implements INewsManager {
 			dto.setDel_flag(bean.getDel_flag());//删除标记
 			dto.setInfo_source(bean.getInfo_source());//0微信1网站
     	   }
-			beans=tcSysNewsDao.findDataIsPage(dto);
+			beans=(List<TcSysNewsBean>) tcSysNewsDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -218,7 +218,7 @@ public class NewsManager extends BaseManager implements INewsManager {
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=tcSysNewsDao.findDataIsList(dto);
+				beans=(List<TcSysNewsBean>) tcSysNewsDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -245,7 +245,7 @@ public class NewsManager extends BaseManager implements INewsManager {
 	   			dto.setDel_flag(bean.getDel_flag());//是否删除
 	   			dto.setInfo_source(bean.getInfo_source());//0微信1网站
     	   }
-			bean1=tcSysNewsDao.selectByPrimaryKey(dto);
+			bean1=(TcSysNewsBean) tcSysNewsDao.selectByPrimaryKey(dto);
 			if(bean1!=null){
 				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 			}

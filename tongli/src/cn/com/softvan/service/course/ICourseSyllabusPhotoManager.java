@@ -33,6 +33,15 @@ public interface ICourseSyllabusPhotoManager {
 	/**
 	 * <p>信息编辑。</p>
 	 * <ol>[功能概要] 
+	 * <div>新增信息。</div>
+	 * <div>修改信息。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public String saveOrUpdateData(List<TcCourseSyllabusPhotoBean> beans) throws Exception;
+	/**
+	 * <p>信息编辑。</p>
+	 * <ol>[功能概要] 
 	 * <div>物理删除。</div>
 	 * </ol>
 	 * @return 处理结果

@@ -42,13 +42,16 @@
 				}, 500);
 			})
 			//nav menu
-			$("#navmenu ul li:has(ul)").hover(function() {
+			$("#navmenu ul li").hover(function() {
 				$(this).children("a").css({color:"#3e7900"});
-				if($(this).find("li").length > 0){
-				$(this).children("ul").stop(true, true).slideDown(200)} 
+				$(this).children(".subMenu").stop(true, true).slideDown(200);
+				$("#mask").slideDown(60);
+				return false;
 			},function() {
 				$(this).children("a").css({color:"#333"});
-				$(this).children("ul").stop(true, true).slideUp(200)
+				$(this).children(".subMenu").stop(true, true).slideUp(200);
+				$("#mask").slideUp(10);
+				 return false;
 				});
 		});
 	</script>

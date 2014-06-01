@@ -155,7 +155,7 @@ public class NewsTypeManager extends BaseManager implements INewsTypeManager {
 			dto.setParent_id(bean.getParent_id());//父级分类id
 			dto.setDel_flag(bean.getDel_flag());//是否删除
     	   }
-			beans=tcSysNewsDao.findDataIsPage(dto);
+			beans=(List<TcSysNewsTypeBean>) tcSysNewsDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -179,7 +179,7 @@ public class NewsTypeManager extends BaseManager implements INewsTypeManager {
 			   		dto.setParent_id(bean.getParent_id());//父级分类id
 			   		dto.setDel_flag(bean.getDel_flag());//是否删除
 	    	   }
-				beans=tcSysNewsDao.findDataIsList(dto);
+				beans=(List<TcSysNewsTypeBean>) tcSysNewsDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -227,7 +227,7 @@ public class NewsTypeManager extends BaseManager implements INewsTypeManager {
     			dto.setParent_id(bean.getParent_id());//父级分类id
     			dto.setDel_flag(bean.getDel_flag());//是否删除
     	   }
-			bean1=tcSysNewsDao.selectByPrimaryKey(dto);
+			bean1=(TcSysNewsTypeBean) tcSysNewsDao.selectByPrimaryKey(dto);
 			if(bean1!=null){
 				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 			}

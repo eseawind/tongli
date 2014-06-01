@@ -26,19 +26,14 @@
 <script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
 <link href="${basePath}/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="${basePath}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-
-<link href="${basePath}/plugins/editor/themes/default/default.css" rel="stylesheet" type="text/css"/>
-<link href="${basePath}/plugins/editor/plugins/code/prettify.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="${basePath}/plugins/editor/kindeditor.js" charset="utf-8" ></script>
-<script type="text/javascript" src="${basePath}/plugins/editor/lang/zh_CN.js" charset="utf-8"></script>
-<script type="text/javascript" src="${basePath}/plugins/editor/plugins/code/prettify.js" charset="utf-8"></script>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
-	<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
-	<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+<%-- <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" /> --%>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
 
-	
+<link rel="stylesheet" href="${basePath}/css/blueimp-gallery.min.css">
 </head>
 
 <body class="page-header-fixed">
@@ -133,20 +128,14 @@
 	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
 	<!-- The File Upload user interface plugin -->
 	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
-	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/scripts/app.js"></script>      
-	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/scripts/form-fileupload.js"></script>
+	<script src="${basePath}/js/jquery.blueimp-gallery.min.js"></script>
 	
 </body>
 </html>
 <script>
-	var editor;
 	$(function() {
 		loadUrlPage(0,'t001_','list1','course_info1','${student_id}','&status=0');
 		loadUrlPage(0,'t001_','list2','course_info2','${student_id}','&status=1');
-		
-		KindEditor.ready(function(K) {
-			editor=K;
-		});
 	});
 	function loadInfo(sid) {
 		loginCheck();
@@ -155,10 +144,10 @@
 	}
 	function loadUrlPage(offset,url,event,divId,sid,obj) {
 		loginCheck();
-		var load = "<a class='loading' >信息加载中...</a>";
-		jQuery("#" + divId).html(load);
+		//var load = "<a class='loading' >信息加载中...</a>";
+		//jQuery("#" + divId).html(load);
 		jQuery.ajax({
-			url : '/' + url + event+'.ac?offset='+offset+"&sid="+ sid + obj + '&time=' + new Date(),
+			url : '${basePath}/' + url + event+'.ac?offset='+offset+"&sid="+ sid + obj + '&time=' + new Date(),
 			success : function(req) {
 				jQuery("#"+divId).html(req);
 			},

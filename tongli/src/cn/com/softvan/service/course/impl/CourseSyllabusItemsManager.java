@@ -170,7 +170,7 @@ public class CourseSyllabusItemsManager extends BaseManager implements ICourseSy
     		   dto.setVersion(bean.getVersion());//VERSION
 				dto.setPageInfo(bean.getPageInfo());//分页
     	   }
-			beans=tcCourseSyllabusItemsDao.findDataIsPage(dto);
+			beans=(List<TcCourseSyllabusItemsBean>) tcCourseSyllabusItemsDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -210,7 +210,7 @@ public class CourseSyllabusItemsManager extends BaseManager implements ICourseSy
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=tcCourseSyllabusItemsDao.findDataIsList(dto);
+				beans=(List<TcCourseSyllabusItemsBean>) tcCourseSyllabusItemsDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -231,7 +231,7 @@ public class CourseSyllabusItemsManager extends BaseManager implements ICourseSy
     	   if(bean!=null){
     		    dto.setId(bean.getId());//ID
     	   }
-			bean1=tcCourseSyllabusItemsDao.selectByPrimaryKey(dto);
+			bean1=(TcCourseSyllabusItemsBean) tcCourseSyllabusItemsDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

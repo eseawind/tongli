@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.comment.ITcCommentDao" >
+  <sql id="Base_Column_List" >
+    t1.id,
+	t1.member_type,
+	t1.member_id,
+	t1.info_id,
+	t1.detail_info,
+	t1.note,
+	t1.date_created,
+	t1.create_id,
+	t1.create_ip,
+	t1.last_updated,
+	t1.update_id,
+	t1.update_ip,
+	t1.del_flag,
+	t1.version
+  </sql>
+  <select id="selectByPrimaryKey" resultType="tcCommentBean" parameterType="tcComment" >
+    select 
+    <include refid="Base_Column_List" />
+    from tc_comment t1
+    where t1.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="tcComment" >
+    delete from tc_comment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="tcComment" >
+    insert into tc_comment (
+	    id,
+		member_type,
+		member_id,
+		info_id,
+		detail_info,
+		note,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		update_id,
+		update_ip,
+		del_flag,
+		version
+	) values (
+   		#{id},
+		#{member_type},
+		#{member_id},
+		#{info_id},
+		#{detail_info},
+		#{note},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		#{update_id},
+		#{update_ip},
+		'0',
+		 0
+     )
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="tcComment" >
+    update tc_comment set version=version+1,last_updated=now(),update_id=#{update_id},update_ip=#{update_ip}
+		<if test="detail_info!= null" >,detail_info=#{detail_info}</if>
+		<if test="note!= null" >,note=#{note}</if>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <!-- 判断信息是否存在
+    int isDataYN(IEntity dto) throws Exception; -->
+    <select id="isDataYN" parameterType="tcComment" resultType="int">
+    	select count(0) from tc_comment where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <!-- 
+     * 查询信息 分页
+     -->
+     <select id="findDataIsPage" parameterType="tcComment" resultType="tcCommentBean">
+    	 select 
+			<include refid="Base_Column_List"/>
+		 from tc_comment t1
+		 where t1.info_id=#{info_id}
+		 <choose>
+	    	<when test="del_flag!=null">
+	    		and t1.del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and t1.del_flag='0'
+	    	</otherwise>
+	    </choose>
+		 order by t1.date_created desc
+     </select>
+    <!-- 查询信息 列表-->
+    <select id="findDataIsList" parameterType="tcComment" resultType="tcCommentBean">
+    	 select 
+			<include refid="Base_Column_List"/>
+		 from tc_comment t1
+		 where t1.info_id=#{info_id}
+		 <choose>
+	    	<when test="del_flag!=null">
+	    		and t1.del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and t1.del_flag='0'
+	    	</otherwise>
+	    </choose>
+		 order by t1.date_created desc
+     </select>
+      <!-- 恢复逻辑删除的数据 -->
+   <update id="recoveryDataById" parameterType="tcCsCustomerService">
+	  	update tc_comment set version=version+1,last_updated=now(),del_flag='0',update_id=#{update_id}
+	   ,update_ip=#{update_ip}
+	  	where id=#{id}
+   </update>
+</mapper>

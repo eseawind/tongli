@@ -133,7 +133,7 @@ public class SmsManager extends BaseManager implements ISmsManager {
 
 			dto.setPageInfo(bean.getPageInfo());//分页对象
     	   }
-			beans=tcSysSmsDao.findDataIsPage(dto);
+			beans=(List<TcSysSmsBean>) tcSysSmsDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -165,7 +165,7 @@ public class SmsManager extends BaseManager implements ISmsManager {
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=tcSysSmsDao.findDataIsList(dto);
+				beans=(List<TcSysSmsBean>) tcSysSmsDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -193,7 +193,7 @@ public class SmsManager extends BaseManager implements ISmsManager {
     		   dto.setSms_send_count(bean.getSms_send_count());//实际发送次数
     		   dto.setSms_status(bean.getSms_status());//短信状态
     	   }
-			bean1=tcSysSmsDao.selectByPrimaryKey(dto);
+			bean1=(TcSysSmsBean) tcSysSmsDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

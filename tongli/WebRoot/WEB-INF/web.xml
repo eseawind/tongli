@@ -86,6 +86,7 @@
 		<servlet-name>dwr-invoker</servlet-name>
 		<url-pattern>/dwr/*</url-pattern>
 	</servlet-mapping>
+	<!-- 富文本编辑器 文件上传 -->
 	<servlet>
 		<servlet-name>uploadFile</servlet-name>
 		<servlet-class>cn.com.softvan.web.servlet.UploadServlet</servlet-class>
@@ -94,7 +95,15 @@
 		<servlet-name>uploadFile</servlet-name>
 		<url-pattern>/uploadFile</url-pattern>
 	</servlet-mapping>
-	
+	<!-- jQueryFileUpload 文件上传 -->
+	<servlet>
+		<servlet-name>jQueryFileUpload</servlet-name>
+		<servlet-class>cn.com.softvan.web.servlet.jQueryFileUpload</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>jQueryFileUpload</servlet-name>
+		<url-pattern>/jQueryFileUpload</url-pattern>
+	</servlet-mapping>
 	<session-config>
 		<session-timeout>120</session-timeout>
 	</session-config>

@@ -11,12 +11,14 @@
 package cn.com.softvan.web.action.client.teacher;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
+import cn.com.softvan.bean.course.TcCourseSyllabusPhotoBean;
 import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.bean.student.TcStudentBean;
 import cn.com.softvan.bean.sys.TcSysSmsBean;
@@ -197,16 +199,16 @@ public class T001Action extends BaseAction {
 	 */
 	public String save() throws IOException {
 		log.info("T001Action save.........");
-		String token=request.getParameter("token");
-		String token2=(String) request.getSession().getAttribute("token");
-		if(token!=null && token.equals(token2)){
-			getWriter().print("请不要重复提交!");
-			return null;
-		}else{
-			if(token!=null){
-				request.getSession().setAttribute("token",token);
-			}
-		}
+//		String token=request.getParameter("token");
+//		String token2=(String) request.getSession().getAttribute("token");
+//		if(token!=null && token.equals(token2)){
+//			getWriter().print("请不要重复提交!");
+//			return null;
+//		}else{
+//			if(token!=null){
+//				request.getSession().setAttribute("token",token);
+//			}
+//		}
 		String msg="1";
 		if(item_ids!=null){
 			try {
@@ -269,6 +271,71 @@ public class T001Action extends BaseAction {
 						log.error("课程签到!发送短信系统错误!",e);
 					}
 				}
+			} catch (Exception e) {
+				msg=e.getMessage();
+			}
+		}else{
+			msg="信息保存失败!";
+		}
+		getWriter().print(msg);
+		return null;
+	}
+	/**
+	 * <p>
+	 * 信息保存 相册
+	 * </p>
+	 * <ol>
+	 * [功能概要] 
+	 * <div>保存课程相册。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws IOException 
+	 */
+	public String savePic() throws IOException {
+		log.info("T001Action savePic.........");
+//		String token=request.getParameter("token");
+//		String token2=(String) request.getSession().getAttribute("token");
+//		if(token!=null && token.equals(token2)){
+//			getWriter().print("请不要重复提交!");
+//			return null;
+//		}else{
+//			if(token!=null){
+//				request.getSession().setAttribute("token",token);
+//			}
+//		}
+		String msg="1";
+		String[] picids=request.getParameterValues("picid");
+		if(picids!=null){
+			try {
+				TcMemberBean user = (TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO);
+				//--相册信息集合--
+				List<TcCourseSyllabusPhotoBean> photoBeans=new ArrayList<TcCourseSyllabusPhotoBean>();
+				TcCourseSyllabusPhotoBean p_bean=null;
+				String course_syllabus_id=request.getParameter("course_syllabus_id");//课程表id
+				for(String picid:picids){
+					p_bean=new TcCourseSyllabusPhotoBean();
+					
+					p_bean.setCourse_syllabus_id(course_syllabus_id);//课程表id
+					
+					p_bean.setId(picid);//照片信息id
+					p_bean.setPic_url(request.getParameter("picurl"+picid));//照片链接
+					p_bean.setPic_title(request.getParameter("pictit"+picid));//照片链接
+					p_bean.setDel_flag(request.getParameter("delflag"+picid));//删除标记
+					
+					p_bean.setUpdate_ip(getIpAddr());
+					p_bean.setUpdate_id(user.getUser_id());
+					p_bean.setCreate_ip(getIpAddr());
+					p_bean.setCreate_id(user.getUser_id());
+					
+					if(Validator.notEmpty(p_bean.getSort_num())){
+						p_bean.setSort_num("0");//TODO--------
+					}else{
+						p_bean.setSort_num("0");
+					}
+					
+					photoBeans.add(p_bean);
+				}
+				msg=courseSyllabusPhotoManager.saveOrUpdateData(photoBeans);
 			} catch (Exception e) {
 				msg=e.getMessage();
 			}

@@ -172,7 +172,7 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 				dto.setAge(bean.getAge());//年龄
 			dto.setPageInfo(bean.getPageInfo());//分页
     	   }
-			beans=tcCourseBespeakDao.findDataIsPage(dto);
+			beans=(List<TcCourseBespeakBean>) tcCourseBespeakDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -214,7 +214,7 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=tcCourseBespeakDao.findDataIsList(dto);
+				beans=(List<TcCourseBespeakBean>) tcCourseBespeakDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -235,7 +235,7 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
     	   if(bean!=null){
     		    dto.setId(bean.getId());//ID
     	   }
-			bean1=tcCourseBespeakDao.selectByPrimaryKey(dto);
+			bean1=(TcCourseBespeakBean) tcCourseBespeakDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

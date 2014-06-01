@@ -183,7 +183,7 @@ public class CourseManager extends BaseManager implements ICourseManager {
 			dto.setDetail_info(bean.getDetail_info());//课程详情
 			dto.setPageInfo(bean.getPageInfo());//分页
     	   }
-			beans=tcCourseDao.findDataIsPage(dto);
+			beans=(List<TcCourseBean>) tcCourseDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -230,7 +230,7 @@ public class CourseManager extends BaseManager implements ICourseManager {
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=tcCourseDao.findDataIsList(dto);
+				beans=(List<TcCourseBean>) tcCourseDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -251,7 +251,7 @@ public class CourseManager extends BaseManager implements ICourseManager {
     	   if(bean!=null){
     		    dto.setId(bean.getId());//ID
     	   }
-			bean1=tcCourseDao.selectByPrimaryKey(dto);
+			bean1=(TcCourseBean) tcCourseDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

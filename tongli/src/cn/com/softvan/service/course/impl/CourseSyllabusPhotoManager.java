@@ -48,8 +48,8 @@ public class CourseSyllabusPhotoManager extends BaseManager implements ICourseSy
 	 * @return 处理结果
 	 * @throws Exception 
 	 */
-	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = CommonConstant.DB_DEFAULT_TIMEOUT, rollbackFor = {
-			Exception.class, RuntimeException.class })
+//	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = CommonConstant.DB_DEFAULT_TIMEOUT, rollbackFor = {
+//			Exception.class, RuntimeException.class })
 	public String saveOrUpdateData(TcCourseSyllabusPhotoBean bean) throws Exception{
 		String msg="1";
 		if(bean!=null){
@@ -59,6 +59,7 @@ public class CourseSyllabusPhotoManager extends BaseManager implements ICourseSy
 				dto.setCourse_syllabus_id(bean.getCourse_syllabus_id());//课程表id
 				dto.setPic_url(bean.getPic_url());//图片路径
 				dto.setPic_title(bean.getPic_title());//图片标题
+				dto.setSort_num(bean.getSort_num());//
 				dto.setNote(bean.getNote());//备注
 				dto.setDate_created(bean.getDate_created());//数据输入日期
 				dto.setCreate_id(bean.getCreate_id());//建立者id
@@ -85,6 +86,39 @@ public class CourseSyllabusPhotoManager extends BaseManager implements ICourseSy
 				log.error(msg, e);
 				throw new Exception(msg);
 			}
+		}
+		return msg;
+	}
+	/**
+	 * <p>信息编辑。</p>
+	 * <ol>[功能概要] 
+	 * <div>新增信息。</div>
+	 * <div>修改信息。</div>
+	 * </ol>
+	 * @return 处理结果
+	 * @throws Exception 
+	 */
+//	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = CommonConstant.DB_DEFAULT_TIMEOUT, rollbackFor = {
+//			Exception.class, RuntimeException.class })
+	public String saveOrUpdateData(List<TcCourseSyllabusPhotoBean> beans) throws Exception{
+		String msg="1";
+		if(beans!=null){
+			for(TcCourseSyllabusPhotoBean bean:beans){
+				try {
+					if("1".equals(bean.getDel_flag())){
+						deleteData(bean);//删除
+					}else{
+						saveOrUpdateData(bean);//新增/修改
+					}
+				} catch (Exception e) {
+					msg+=bean.getPic_title()+";";
+					log.error(msg, e);
+					//throw new Exception(msg);
+				}
+			}
+		}
+		if(!"1".equals(msg)){
+			msg+="信息保存失败,数据库处理错误!";
 		}
 		return msg;
 	}
@@ -162,7 +196,7 @@ public class CourseSyllabusPhotoManager extends BaseManager implements ICourseSy
 
 				dto.setPageInfo(bean.getPageInfo());//分页
     	   }
-			beans=tcCourseSyllabusPhotoDao.findDataIsPage(dto);
+			beans=(List<TcCourseSyllabusPhotoBean>) tcCourseSyllabusPhotoDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -198,7 +232,7 @@ public class CourseSyllabusPhotoManager extends BaseManager implements ICourseSy
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=tcCourseSyllabusPhotoDao.findDataIsList(dto);
+				beans=(List<TcCourseSyllabusPhotoBean>) tcCourseSyllabusPhotoDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -219,7 +253,7 @@ public class CourseSyllabusPhotoManager extends BaseManager implements ICourseSy
     	   if(bean!=null){
     		    dto.setId(bean.getId());//ID
     	   }
-			bean1=tcCourseSyllabusPhotoDao.selectByPrimaryKey(dto);
+			bean1=(TcCourseSyllabusPhotoBean) tcCourseSyllabusPhotoDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

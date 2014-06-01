@@ -10,17 +10,22 @@
  */
 package cn.com.softvan.web.action.course;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.comment.TcCommentBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
+import cn.com.softvan.bean.course.TcCourseSyllabusPhotoBean;
 import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
+import cn.com.softvan.service.comment.ICommentManager;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.course.ICourseSyllabusItemsManager;
 import cn.com.softvan.service.course.ICourseSyllabusManager;
@@ -49,6 +54,8 @@ public class C102Action extends BaseAction {
 	private ICourseSyllabusItemsManager courseSyllabusItemsManager;
 	/**课程信息BEAN*/
 	private TcCourseSyllabusBean bean;
+	/**BEAN类 评论信息*/
+	private TcCommentBean cbean;
 	/**课程信息BEAN集合*/
 	private List<TcCourseSyllabusBean> beans;
 	/**会员信息管理 业务处理*/
@@ -59,7 +66,8 @@ public class C102Action extends BaseAction {
 	private ICourseManager courseManager;
 	/** 课程表管理-相册 业务处理*/
 	private ICourseSyllabusPhotoManager courseSyllabusPhotoManager;
-	
+	/**评论信息 管理业务处理*/
+	private ICommentManager commentManager;
 	public C102Action() {
 		log.info("默认构造器......C102Action");
 	}
@@ -183,6 +191,11 @@ public class C102Action extends BaseAction {
 			bean2.setCourse_syllabus_id(bean1.getId());
 			try {
 				request.setAttribute("course_student_beans", courseSyllabusItemsManager.findDataIsListStudent(bean2));
+				if(bean!=null){
+					TcCourseSyllabusPhotoBean photoBean=new TcCourseSyllabusPhotoBean();
+					photoBean.setCourse_syllabus_id(bean1.getId());
+					bean.setPicBeans(courseSyllabusPhotoManager.findDataIsList(photoBean));
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -200,6 +213,9 @@ public class C102Action extends BaseAction {
 		request.setAttribute("teacher_beans", memberManager.findDataIsList(memberBean));
 		//--------------课程--all----------
 		request.setAttribute("course_beans", courseManager.findDataIsList(null));
+		
+		BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
+		request.setAttribute("uid", user.getUser_id());//
 		return "edit";
 	}
 	/**
@@ -360,6 +376,22 @@ public class C102Action extends BaseAction {
 	}
 
 	/**
+	 * BEAN类 评论信息取得
+	 * @return BEAN类 评论信息
+	 */
+	public TcCommentBean getCbean() {
+	    return cbean;
+	}
+
+	/**
+	 * BEAN类 评论信息设定
+	 * @param cbean BEAN类 评论信息
+	 */
+	public void setCbean(TcCommentBean cbean) {
+	    this.cbean = cbean;
+	}
+
+	/**
 	 * 课程信息BEAN集合取得
 	 * @return 课程信息BEAN集合
 	 */
@@ -438,5 +470,166 @@ public class C102Action extends BaseAction {
 	public void setCourseSyllabusPhotoManager(ICourseSyllabusPhotoManager courseSyllabusPhotoManager) {
 	    this.courseSyllabusPhotoManager = courseSyllabusPhotoManager;
 	}
+	/**
+	 * <p>
+	 * 信息保存 相册
+	 * </p>
+	 * <ol>
+	 * [功能概要] 
+	 * <div>保存课程相册。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws IOException 
+	 */
+	public String savePic() throws IOException {
+		log.info("C102Action savePic.........");
+//		String token=request.getParameter("token");
+//		String token2=(String) request.getSession().getAttribute("token");
+//		if(token!=null && token.equals(token2)){
+//			getWriter().print("请不要重复提交!");
+//			return null;
+//		}else{
+//			if(token!=null){
+//				request.getSession().setAttribute("token",token);
+//			}
+//		}
+		String msg="1";
+		String[] picids=request.getParameterValues("picid");
+		if(picids!=null){
+			try {
+				BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
+				//--相册信息集合--
+				List<TcCourseSyllabusPhotoBean> photoBeans=new ArrayList<TcCourseSyllabusPhotoBean>();
+				TcCourseSyllabusPhotoBean p_bean=null;
+				String course_syllabus_id=request.getParameter("course_syllabus_id");//课程表id
+				for(String picid:picids){
+					p_bean=new TcCourseSyllabusPhotoBean();
+					
+					p_bean.setCourse_syllabus_id(course_syllabus_id);//课程表id
+					
+					p_bean.setId(picid);//照片信息id
+					p_bean.setPic_url(request.getParameter("picurl"+picid));//照片链接
+					p_bean.setPic_title(request.getParameter("pictit"+picid));//照片链接
+					p_bean.setDel_flag(request.getParameter("delflag"+picid));//删除标记
+					
+					p_bean.setUpdate_ip(getIpAddr());
+					p_bean.setUpdate_id(user.getUser_id());
+					p_bean.setCreate_ip(getIpAddr());
+					p_bean.setCreate_id(user.getUser_id());
+					
+					if(Validator.notEmpty(p_bean.getSort_num())){
+						p_bean.setSort_num("0");//TODO--------
+					}else{
+						p_bean.setSort_num("0");
+					}
+					
+					photoBeans.add(p_bean);
+				}
+				msg=courseSyllabusPhotoManager.saveOrUpdateData(photoBeans);
+			} catch (Exception e) {
+				msg=e.getMessage();
+			}
+		}else{
+			msg="信息保存失败!";
+		}
+		getWriter().print(msg);
+		return null;
+	}
+	/**
+	 * <p>
+	 * 课程评论信息 。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>信息列表。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String clist1() {
+		log.info("C102Action clist1.........");
+		
+		String cid=request.getParameter("cid");
+		if(cid!=null){
+				
+			int offset = 0;
+			// 分页偏移量
+			if (!Validator.isNullEmpty(request.getParameter("offset"))
+					&& Validator.isNum(request.getParameter("offset"))) {
+				offset = Integer.parseInt(request.getParameter("offset"));
+			}
+			PageInfo page = new PageInfo(); 
+			//当前页
+			page.setCurrOffset(offset);
+			//每页显示条数
+			page.setPageRowCount(5);
+			TcCommentBean bean1 = new TcCommentBean();
+			bean1.setPageInfo(page);
+			bean1.setDel_flag("0");
+//			TcMemberBean user = (TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO);
+	//		bean1.setMember_id(user.getId());//会员id
+	//		bean1.setMember_type(user.getUser_type());//会员类型
+			bean1.setInfo_id(cid);//被评论信息id
+			//列表
+			List<TcCommentBean> beans=commentManager.findDataIsPage(bean1);
+			request.setAttribute("beans",beans);
+			request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
+			//---div id---
+			request.setAttribute("did",request.getParameter("did"));
+			//---div id---
+			request.setAttribute("cid",cid);
+		}
+		return "clist1";
+	}
+	/**
+	 * <p>
+	 * 评论信息保存
+	 * </p>
+	 * <ol>
+	 * [功能概要] 
+	 * <div>课程评论。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws IOException 
+	 */
+	public String csave() throws IOException {
+		log.info("C102Action csave.........");
+		String msg="1";
+		if(cbean!=null){
+			try {
+				if(Validator.isEmpty(cbean.getDetail_info())){
+					msg="信息保存失败!输入信息为空!";
+				}else{
+					BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
+					cbean.setUpdate_ip(getIpAddr());
+					cbean.setUpdate_id(user.getUser_id());
+					cbean.setCreate_ip(getIpAddr());
+					cbean.setCreate_id(user.getUser_id());
+					cbean.setMember_id(user.getId());//
+					cbean.setMember_type("3");//后台管理员
+					msg=commentManager.saveOrUpdateData(cbean);
+				}
+			} catch (Exception e) {
+				msg=e.getMessage();
+			}
+		}else{
+			msg="信息保存失败!";
+		}
+		getWriter().print(msg);
+		return null;
+	}
 
+	/**
+	 * 评论信息 管理业务处理取得
+	 * @return 评论信息 管理业务处理
+	 */
+	public ICommentManager getCommentManager() {
+	    return commentManager;
+	}
+
+	/**
+	 * 评论信息 管理业务处理设定
+	 * @param commentManager 评论信息 管理业务处理
+	 */
+	public void setCommentManager(ICommentManager commentManager) {
+	    this.commentManager = commentManager;
+	}
 }

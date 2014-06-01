@@ -64,11 +64,13 @@
 		<typeAlias type="cn.com.softvan.bean.course.TcCourseSyllabusBean" alias="tcCourseSyllabusBean"/>
 		<typeAlias type="cn.com.softvan.bean.course.TcCourseSyllabusItemsBean" alias="tcCourseSyllabusItemsBean"/>
 		<typeAlias type="cn.com.softvan.bean.course.TcCourseBespeakBean" alias="tcCourseBespeakBean"/>
+		<typeAlias type="cn.com.softvan.bean.course.TcCourseSyllabusPhotoBean" alias="tcCourseSyllabusPhotoBean"/>
 		<!-- entity class -->
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourse" alias="tcCourse"/>
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseSyllabus" alias="tcCourseSyllabus"/>
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseSyllabusItems" alias="tcCourseSyllabusItems"/>
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseBespeak" alias="tcCourseBespeak"/>
+		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseSyllabusPhoto" alias="tcCourseSyllabusPhoto"/>
 		<!-- 课程管理 eng -->
 		<!-- 会员管理 begin -->
 		<!-- bean class -->
@@ -95,6 +97,12 @@
 		<typeAlias type="cn.com.softvan.dao.entity.consult.TcCsConsultMsg" alias="tcCsConsultMsg"/>
 		<typeAlias type="cn.com.softvan.dao.entity.customerservice.TcCsCustomerService" alias="tcCsCustomerService"/>
 		<!-- 客服咨询    end -->
+		<!-- 评论管理 begin -->
+		<!-- bean class -->
+		<typeAlias type="cn.com.softvan.bean.comment.TcCommentBean" alias="tcCommentBean"/>
+		<!-- entity class -->
+		<typeAlias type="cn.com.softvan.dao.entity.comment.TcComment" alias="tcComment"/>
+		<!-- 评论管理 end -->
 	</typeAliases>
 	<!-- 插件 -->
 	<plugins>
@@ -146,6 +154,7 @@
 		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseSyllabus.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseSyllabusItems.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseBespeak.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseSyllabusPhoto.xml"/>
 		<!-- 课程管理 end -->
 		<!-- 会员管理 begin -->
 		<mapper resource="/cn/com/softvan/dao/mybatis/member/TcMember.xml"/>
@@ -160,5 +169,8 @@
 		<mapper resource="/cn/com/softvan/dao/mybatis/consult/TcCsConsultMsg.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/customerservice/TcCsCustomerService.xml"/>
 		<!-- 客服咨询 end -->
+		<!-- 评论管理 begin -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/comment/TcComment.xml"/>
+		<!-- 评论管理 end -->
 	</mappers>
 </configuration>

@@ -147,8 +147,43 @@
 	     limit #{limit_s},#{limit_e}
 	    </if>
    </select>
+   	
      <!--当前学员关联的课程列表	-->
-	<select id="findDataIsPageCourse" resultType="tcCourseSyllabusBean" parameterType="tcCourseSyllabusItems" >
+     <resultMap type="tcCourseSyllabusBean" id="findDataIsPageCourse1Maps">
+   		<result property="student_id" column="student_id" />
+		<result property="course_syllabus_item_id" column="course_syllabus_item_id" />
+		<result property="teacher_score" column="teacher_score" />
+		<result property="teacher_score_note" column="teacher_score_note" />
+		<result property="student_status" column="student_status" />
+		<result property="student_status_note" column="student_status_note" />
+		<result property="id" column="id" />
+		<result property="course_id" column="course_id" />
+		<result property="teacher_id" column="teacher_id" />
+		<result property="day" column="day" />
+		<result property="begin_time" column="begin_time" />
+		<result property="end_time" column="end_time" />
+		<result property="note" column="note" />
+		<result property="date_created" column="date_created" />
+		<result property="create_id" column="create_id" />
+		<result property="create_ip" column="create_ip" />
+		<result property="last_updated" column="last_updated" />
+		<result property="update_id" column="update_id" />
+		<result property="update_ip" column="update_ip" />
+		<result property="del_flag" column="del_flag" />
+		<result property="version" column="version" />
+		<result property="course_status" column="course_status" />
+		<result property="detail_info" column="detail_info" />
+		<result property="addres" column="addres" />
+		<result property="title" column="title" />
+		<result property="teacher_name" column="teacher_name" />
+		<result property="brief_info" column="brief_info" />
+		<collection property="picBeans"
+			column="{course_syllabus_id=id}"
+			javaType="java.util.List" select="findDataIsListPhoto2"
+			ofType="cn.com.softvan.bean.course.TcCourseSyllabusPhotoBean">
+		</collection>
+   </resultMap>
+	<select id="findDataIsPageCourse" resultMap="findDataIsPageCourse1Maps"  parameterType="tcCourseSyllabusItems" >
 		select
 			t1.student_id,
 			t1.id as course_syllabus_item_id,
@@ -190,18 +225,18 @@
 	    	    and t3.del_flag='0'
 	    	</otherwise>
 	    </choose>
-	     <!-- 已完成课程 -->
+	     <!-- 已完成课程 and TO_SECONDS(t2.end_time)<TO_SECONDS(now())-->
 	    <if test="note!=null and note==0">
 	   		<![CDATA[
 	    	and TO_DAYS(t2.day)<TO_DAYS(now())
-			and TO_SECONDS(t2.end_time)<TO_SECONDS(now())
+			
 			]]>
 	    </if>
-	    <!-- 未完成课程 -->
+	    <!-- 未完成课程 and TO_SECONDS(t2.end_time)>=TO_SECONDS(now())-->
 	    <if test="note!=null and note==1">
 	    	<![CDATA[
 	    	and TO_DAYS(t2.day)>=TO_DAYS(now())
-			and TO_SECONDS(t2.end_time)>=TO_SECONDS(now())
+			
 			]]>
 	    </if>
 	    order by t2.day desc,t2.begin_time asc
@@ -235,7 +270,7 @@
 	and teacher_id=#{teacher_id}
   </update>
    <!--教师课程表 同时查询 当前课程关联的学员列表2-->
-   <resultMap type="tcCourseSyllabusBean" id="findDataIsListStudent2Maps">
+   <resultMap type="tcCourseSyllabusBean" id="findDataIsPageCourse2Maps">
    		<result property="id" column="id" />
 		<result property="course_id" column="course_id" />
 		<result property="teacher_id" column="teacher_id" />
@@ -257,13 +292,18 @@
 		<result property="title" column="title" />
 		<result property="teacher_name" column="teacher_name" />
 		<result property="brief_info" column="brief_info" />
-	  <collection property="itemBeans"
-			column="course_syllabus_id=id}"
+	    <collection property="itemBeans"
+			column="{course_syllabus_id=id}"
 			javaType="java.util.List" select="findDataIsListStudent2"
 			ofType="cn.com.softvan.bean.course.TcCourseSyllabusItemsBean">
 		</collection>
+		<collection property="picBeans"
+			column="{course_syllabus_id=id}"
+			javaType="java.util.List" select="findDataIsListPhoto2"
+			ofType="cn.com.softvan.bean.course.TcCourseSyllabusPhotoBean">
+		</collection>
    </resultMap>
-   <select id="findDataIsPageCourse2" resultMap="findDataIsListStudent2Maps"  parameterType="tcCourseSyllabusItems" >
+   <select id="findDataIsPageCourse2" resultMap="findDataIsPageCourse2Maps"  parameterType="tcCourseSyllabusItems" >
 		select
 			t2.id,
 			t2.course_id,
@@ -303,17 +343,17 @@
 	    <if test="note!=null and note==0">
 	   		<![CDATA[
 	    	and TO_DAYS(t2.day)<TO_DAYS(now())
-			and TO_SECONDS(t2.end_time)<TO_SECONDS(now())
-			]]>
+			
+			]]><!-- and TO_SECONDS(t2.end_time)<TO_SECONDS(now()) -->
 	    </if>
 	    <!-- 未完成课程 -->
 	    <if test="note!=null and note==1">
 	    	<![CDATA[
 	    	and TO_DAYS(t2.day)>=TO_DAYS(now())
-			and TO_SECONDS(t2.end_time)>=TO_SECONDS(now())
-			]]>
+			
+			]]><!-- and TO_SECONDS(t2.end_time)>=TO_SECONDS(now()) -->
 	    </if>
-	    group by t1.teacher_id
+	    group by t1.teacher_id,t2.course_id
 	    order by t2.day desc,t2.begin_time asc
    </select>
 	<select id="findDataIsListStudent2" resultType="tcCourseSyllabusItemsBean" parameterType="java.util.HashMap" >
@@ -340,5 +380,24 @@
 	    	    and t2.del_flag='0'
 	    	</otherwise>
 	    </choose>
+   </select>
+   <select id="findDataIsListPhoto2" resultType="tcCourseSyllabusPhotoBean" parameterType="java.util.HashMap" >
+		select
+			id,
+			course_syllabus_id,
+			pic_url,
+			pic_title,
+			sort_num
+		from tc_course_syllabus_photo
+	    where course_syllabus_id=#{course_syllabus_id}
+	    <choose>
+	    	<when test="del_flag!=null">
+	    		and del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and del_flag='0'
+	    	</otherwise>
+	    </choose>
+	    order by date_created asc
    </select>
 </mapper>

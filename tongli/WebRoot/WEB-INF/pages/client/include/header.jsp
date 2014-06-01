@@ -26,6 +26,7 @@
 
 <div class="top_line"></div>
 <div class="nav_body">
+<div id="mask"></div>
 	<div class="w">
 		<div class="logo"></div>
 		<div class="nav_con">
@@ -75,14 +76,29 @@
 			<div class="nav">
 				<div id="navmenu">
 					<ul>
-						<li class="home"><a href="${basePath}/index.ac">首 页</a></li>
+						<li class="home"><a href="${basePath}/index.ac">首 页</a>
+							<div class="subMenu">
+							</div>
+						</li>
 						<li class="about"><a href="${basePath}/c002_init.ac?tid=966a13c753f34faa927510c610b5e0b6&pid=966a13c753f34faa927510c610b5e0b6">关于我们</a>
+							<div class="subMenu">
+								<p><a href="${basePath}/c202_init.ac">预约体验</a></p>
+							</div>
 						</li>
 						<li class="course"><a href="${basePath}/c002_init.ac?tid=6690aceda07a405a9428e6e02ba2d416&pid=6690aceda07a405a9428e6e02ba2d416">课 程</a>
+							<div class="subMenu">
+								<p><a href="${basePath}/c202_init.ac">预约体验</a></p>
+							</div>
 						</li>
 						<li class="camp"><a href="${basePath}/c002_init.ac?tid=26f1017792024a358c73639b08e74393&pid=26f1017792024a358c73639b08e74393">冬夏令营</a>
+							<div class="subMenu">
+								<p><a href="${basePath}/c202_init.ac">预约体验</a></p>
+							</div>
 						</li>
-						<li class="contact"><a href="${basePath}/c002_init.ac?tid=966a13c753f34faa927510c610b5e0b6&pid=966a13c753f34faa927510c610b5e0b6">联系我们</a>
+						<li class="contact"><a href="${basePath}/c202_init.ac">预约体验</a>
+							<div class="subMenu">
+								<p><a href="${basePath}/c202_init.ac">预约体验</a></p>
+							</div>
 						</li>
 					</ul>
 				</div>

@@ -93,6 +93,9 @@ public class TcCourseSyllabusBean extends BaseBean {
 	//--------------------------------------------------------
 	/**课程表详情 集合*/
 	private List<TcCourseSyllabusItemsBean> itemBeans;
+	//--------------------------------------------------------
+	/**课程表相册 集合*/
+	private List<TcCourseSyllabusPhotoBean> picBeans;
 	/**
 	 * id取得
 	 * @return id
@@ -526,5 +529,19 @@ public class TcCourseSyllabusBean extends BaseBean {
 	 */
 	public void setItemBeans(List<TcCourseSyllabusItemsBean> itemBeans) {
 	    this.itemBeans = itemBeans;
+	}
+	/**
+	 * 课程表相册 集合取得
+	 * @return 课程表相册 集合
+	 */
+	public List<TcCourseSyllabusPhotoBean> getPicBeans() {
+	    return picBeans;
+	}
+	/**
+	 * 课程表相册 集合设定
+	 * @param picBeans 课程表相册 集合
+	 */
+	public void setPicBeans(List<TcCourseSyllabusPhotoBean> picBeans) {
+	    this.picBeans = picBeans;
 	}
 }

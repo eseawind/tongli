@@ -163,7 +163,7 @@ public class TelBookManager extends BaseManager implements ITelBookManager {
 
 			dto.setPageInfo(bean.getPageInfo());//分页对象
     	   }
-			beans=tcSysTelBookDao.findDataIsPage(dto);
+			beans=(List<TcSysTelBookBean>) tcSysTelBookDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -200,7 +200,7 @@ public class TelBookManager extends BaseManager implements ITelBookManager {
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=tcSysTelBookDao.findDataIsList(dto);
+				beans=(List<TcSysTelBookBean>) tcSysTelBookDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -235,7 +235,7 @@ public class TelBookManager extends BaseManager implements ITelBookManager {
     		   dto.setVersion(bean.getVersion());//VERSION
 
     	   }
-			bean1=tcSysTelBookDao.selectByPrimaryKey(dto);
+			bean1=(TcSysTelBookBean) tcSysTelBookDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}

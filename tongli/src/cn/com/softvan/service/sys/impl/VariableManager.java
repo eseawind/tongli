@@ -160,7 +160,7 @@ public class VariableManager extends BaseManager implements IVariableManager {
     		    dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setPageInfo(bean.getPageInfo());//分页
     	   }
-			beans=tcSysVariableDao.findDataIsPage(dto);
+			beans=(List<TcSysVariableBean>) tcSysVariableDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -192,7 +192,7 @@ public class VariableManager extends BaseManager implements IVariableManager {
 	    		   dto.setVersion(bean.getVersion());//version
 	    		   dto.setDel_flag(bean.getDel_flag());//是否删除
 	    	   }
-				beans=tcSysVariableDao.findDataIsList(dto);
+				beans=(List<TcSysVariableBean>) tcSysVariableDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -215,7 +215,7 @@ public class VariableManager extends BaseManager implements IVariableManager {
 				dto.setVariable_sub_id(bean.getVariable_sub_id());//id2
 	   			dto.setDel_flag(bean.getDel_flag());//是否删除
     	   }
-			bean1=tcSysVariableDao.selectByPrimaryKey(dto);
+			bean1=(TcSysVariableBean) tcSysVariableDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}
