@@ -32,10 +32,14 @@
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet"
 	type="text/css" />
 
-<link href="${basePath}/css/font-awesome/css/font-awesome.css"
-	rel="stylesheet">
-<link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css"
-	rel="stylesheet">
+<link href="${basePath}/css/font-awesome/css/font-awesome.css"	rel="stylesheet">
+<link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
+<script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
+
+<link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
+<script type="text/javascript" src="${basePath}/js/bootstarp-date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${basePath}/js/bootstarp-date/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -100,43 +104,35 @@
 							</c:choose>
 						</c:if>
 						<div id="msg"></div>
+						<div class="well form-inline">
+							<form id="small_info_form_list1" accept-charset="UTF-8"  action="${basePath}/h/s005_list1.ac"  method="post">
+								<s:token></s:token>
+								<input type="hidden" id="offsetAA" name="offset" value="0">
+								<label>电话号码:
+								<input name="bean.sms_src_id" value=""   placeholder="输入需要搜索的手机号" 
+								 type="text">
+								 </label>
+								 <label>短信内容:
+								<input name="bean.keyword"  value=""  placeholder="关键字" 
+								 type="text">
+								 </label>
+								 <label>开始时间:
+								<input name="bean.date1" class="upload-wrapper date form_date1" value=""  readonly="readonly" placeholder="时间段" 
+								 type="text">
+								 </label>
+								 <label>结束时间:
+								<input name="bean.date2" class="upload-wrapper date form_date2" value=""   readonly="readonly" placeholder="时间段" 
+								 type="text">
+								 </label>
+								 <a onclick="submitFrom1(0,'small_info_form_list1');" class="reload btn btn-primary">检索</a>
+								 <button type="reset" class="reload btn blue">重置</button>
+							 </form>
+						</div>
 						<div class="btn btn-toolbar">
 							<a href="${basePath}/h/s005_edit.ac" class="btn btn-primary">发送短信</a>
 						</div>
-						<table class="table table-condensed table-striped">
-							<tbody>
-								<tr>
-									<th class="col-md-2">电话</th>
-									<th class="col-md-4">内容</th>
-									<th class="col-md-2">发送时间</th>
-									<th class="col-md-1">状态</th>
-									<th class="col-md-2"></th>
-								</tr>
-							    <c:forEach items="${beans}" var="bean">
-								<tr>
-									<td>
-									${bean.sms_dst_id}
-									</td>
-									<td>
-									${bean.sms_content}
-									</td>
-									<td>
-									${bean.sms_send_time}
-									</td>
-									<td>
-									<c:if test="${bean.sms_status=='1'}">未发送</c:if>
-									<c:if test="${bean.sms_status=='2'}">发送中</c:if>
-									<c:if test="${bean.sms_status=='3'}">已发送</c:if>
-									</td>
-									<td><a href="${basePath}/h/s005_view.ac?id=${bean.sms_id}" class="btn edit green">详情</a>
-										<%-- <a href="javascript:void(0)" class="btn btn-danger"
-										onclick="if(confirm('确认删除吗?删除后无法恢复!')){location.href='${basePath}/h/s005_delxx.ac?id=${bean.sms_id}'};">删除</a> --%>
-									</td>
-								</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-						<customtag:pagingext func="loadUrlPage" params="'h/s005_','init'" />
+						<div class="col-md-12" id="small_info_div_list1">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -153,7 +149,39 @@
 <!-- END BODY -->
 </html>
 <script type="text/javascript">
-function loadUrlPage(offset, url, event) {
+$('.form_date1').datetimepicker({
+    language:  'zh-CN',
+	format: "yyyy-mm-dd HH:ii:00",
+    weekStart: 1,
+    todayBtn:  1,
+	autoclose: 1,
+	todayHighlight: 1,
+	startView: 2,
+	minView: 0,
+	maxView: 3,
+	pickerPosition:"bottom-left"
+});
+$('.form_date2').datetimepicker({
+    language:  'zh-CN',
+	format: "yyyy-mm-dd HH:ii:00",
+    weekStart: 1,
+    todayBtn:  1,
+	autoclose: 1,
+	todayHighlight: 1,
+	startView: 2,
+	minView: 0,
+	maxView: 3,
+	pickerPosition:"bottom-left"
+});
+/* function loadUrlPage(offset, url, event) {
 	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
+} */
+//提交from
+function submitFrom1(offset,from_id) {
+	$('#offsetAA').val(offset);
+	jQuery("#"+from_id).ajaxSubmit(function(data) {
+		$('#small_info_div_list1').html(data);
+	});
 }
+submitFrom1(0,'small_info_form_list1');
 </script>

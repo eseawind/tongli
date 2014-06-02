@@ -96,7 +96,7 @@
 										<th class="col-md-1">姓名</th>
 										<th class="col-md-1">性别</th>
 										<th class="col-md-1">参观时间</th>
-										<th class="col-md-3">电话</th>
+										<%-- <th class="col-md-3">电话</th> --%>
 										<th class="col-md-3">参观场馆</th>
 										<th class="col-md-3"></th>
 									</tr>
@@ -108,7 +108,7 @@
 											<c:if test="${bean.sex=='1'}">女</c:if>
 										</td>
 										<td>${bean.day}</td>
-										<td>${bean.tel}</td>
+										<%-- <td>${bean.tel}</td> --%>
 										<td>${bean.addres}</td>
 										<td><a
 											href="${basePath}/h/c103_edit.ac?id=${bean.id}"

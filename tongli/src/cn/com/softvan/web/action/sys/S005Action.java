@@ -69,6 +69,19 @@ public class S005Action extends BaseAction {
 	 */
 	public String init() {
 		log.info("S005Action init.........");
+		return "init";
+	}
+	/**
+	 * <p>
+	 * 信息列表。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>列表。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String list1() {
+		log.info("S005Action list1.........");
 		int offset = 0;
 		// 分页偏移量
 		if (!Validator.isNullEmpty(request.getParameter("offset"))
@@ -80,13 +93,15 @@ public class S005Action extends BaseAction {
 		page.setCurrOffset(offset);
 		//每页显示条数
 		page.setPageRowCount(15);
-		TcSysSmsBean bean1 = new TcSysSmsBean();
-		bean1.setPageInfo(page);
+		if(bean==null){
+			bean=new TcSysSmsBean();
+		}
+		bean.setPageInfo(page);
 		//栏目资讯列表
-		List<TcSysSmsBean> beans=smsManager.findDataIsPage(bean1);
+		List<TcSysSmsBean> beans=smsManager.findDataIsPage(bean);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
-		return "init";
+		return "list1";
 	}
 	/**
 	 * <p>

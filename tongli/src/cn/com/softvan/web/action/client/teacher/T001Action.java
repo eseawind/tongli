@@ -199,16 +199,16 @@ public class T001Action extends BaseAction {
 	 */
 	public String save() throws IOException {
 		log.info("T001Action save.........");
-//		String token=request.getParameter("token");
-//		String token2=(String) request.getSession().getAttribute("token");
-//		if(token!=null && token.equals(token2)){
-//			getWriter().print("请不要重复提交!");
-//			return null;
-//		}else{
-//			if(token!=null){
-//				request.getSession().setAttribute("token",token);
-//			}
-//		}
+		String token=request.getParameter("token");
+		String token2=(String) request.getSession().getAttribute("token");
+		if(token!=null && token.equals(token2)){
+			getWriter().print("请不要重复提交!");
+			return null;
+		}else{
+			if(token!=null){
+				request.getSession().setAttribute("token",token);
+			}
+		}
 		String msg="1";
 		if(item_ids!=null){
 			try {

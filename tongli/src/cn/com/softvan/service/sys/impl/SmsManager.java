@@ -130,8 +130,11 @@ public class SmsManager extends BaseManager implements ISmsManager {
     		   dto.setSms_sended_time(bean.getSms_sended_time());//实际发送时间
     		   dto.setSms_send_count(bean.getSms_send_count());//实际发送次数
     		   dto.setSms_status(bean.getSms_status());//短信状态
-
-			dto.setPageInfo(bean.getPageInfo());//分页对象
+    		   dto.setKeyword(bean.getKeyword());
+    		   dto.setDate1(bean.getDate1());
+    		   dto.setDate2(bean.getDate2());
+    		   
+    		   dto.setPageInfo(bean.getPageInfo());//分页对象
     	   }
 			beans=(List<TcSysSmsBean>) tcSysSmsDao.findDataIsPage(dto);
 		} catch (Exception e) {

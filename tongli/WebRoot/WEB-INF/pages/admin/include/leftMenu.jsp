@@ -132,6 +132,11 @@
 					<span id="course_arrow" class="arrow "></span>
 					</a>
 					<ul id="course_sub_menu" style="display: none;" class="sub-menu">
+						<li id="course_sub_menu_l3">
+							<a   href="${basePath}/h/c102_init.ac">
+							课程表管理
+							</a>
+						</li>
 						<li id="course_sub_menu_l1">
 							<a   href="${basePath}/h/c101_init.ac">
 							课程管理
@@ -140,11 +145,6 @@
 						<li id="course_sub_menu_l2">
 							<a  href="${basePath}/h/c101_recycle.ac">
 							课程回收站
-							</a>
-						</li>
-						<li id="course_sub_menu_l3">
-							<a   href="${basePath}/h/c102_init.ac">
-							课程表管理
 							</a>
 						</li>
 					</ul>

@@ -37,6 +37,7 @@
 		<!-- 短信 管理 -->
 		<action name="s005_*" class="s005Action" method="{1}">
 			<result name="init">/WEB-INF/pages/admin/sys/S005.jsp</result>
+			<result name="list1">/WEB-INF/pages/admin/sys/S005_04.jsp</result>
 			<result name="edit">/WEB-INF/pages/admin/sys/S005_01.jsp</result>
 			<result name="view">/WEB-INF/pages/admin/sys/S005_02.jsp</result>
 			<result name="recycle">/WEB-INF/pages/admin/sys/S005_03.jsp</result>

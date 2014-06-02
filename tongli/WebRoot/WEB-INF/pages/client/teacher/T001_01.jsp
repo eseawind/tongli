@@ -107,7 +107,7 @@
 					<c:if test="${num!=fn:length(bean.itemBeans)}">
 					<div class="panel panel-success">
 						<div class="panel-heading">
-							<a style="margin-left:300px;" type="submit" id="b_${bean.id}"class="btn blue"  onclick="if(confirm('确认提交学员签到情况吗?')){submitFrom2('${bean.id}');}">签到完成</a></h3>
+							<a style="margin-left:300px;" type="submit" id="b_${bean.id}"class="btn blue"  onclick="if(confirm('确认提交学员签到情况吗?\n提交后不可更改!')){submitFrom2('${bean.id}');}">签到完成</a></h3>
 						</div>
 					</div>
 					</c:if>

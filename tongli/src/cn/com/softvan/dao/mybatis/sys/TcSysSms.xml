@@ -52,7 +52,20 @@
 	<select id="findDataIsPage" resultType="tcSysSmsBean" parameterType="tcSysSms" >
     select
 	<include refid="Base_Column_List"/>
-	from tc_sys_sms 
+	from tc_sys_sms
+	 where 1=1 
+	 <if test="sms_src_id!= null and sms_src_id!=''"> and sms_src_id like concat('%',#{sms_src_id},'%')</if>
+	<if test="keyword!= null and keyword!=''"> and sms_content like concat('%',#{keyword},'%')</if>
+	<if test="date1!= null and date1!=''"> 
+	<![CDATA[
+	and UNIX_TIMESTAMP(sms_send_time) >=UNIX_TIMESTAMP(#{date1})
+	]]>
+	</if>
+	<if test="date2!= null and date2!=''"> 
+	<![CDATA[
+	and UNIX_TIMESTAMP(sms_send_time) <=UNIX_TIMESTAMP(#{date2})
+	]]>
+	</if>
     order by sms_send_time desc
     </select>
 	<!-- 
@@ -61,7 +74,20 @@
 	<select id="findDataIsList" resultType="tcSysSmsBean" parameterType="tcSysSms" >
 		 select
 		<include refid="Base_Column_List"/>
-		from tc_sys_sms 
+		from tc_sys_sms
+		where  1=1 
+		<if test="sms_src_id!= null and sms_src_id!=''"> and sms_src_id like concat('%',#{sms_src_id},'%')</if>
+		<if test="keyword!= null and keyword!=''"> and sms_content like concat('%',#{keyword},'%')</if>
+		<if test="date1!= null and date1!=''"> 
+		<![CDATA[
+		and UNIX_TIMESTAMP(sms_send_time) >=UNIX_TIMESTAMP(#{date1})
+		]]>
+		</if>
+		<if test="date2!= null and date2!=''"> 
+		<![CDATA[
+		and UNIX_TIMESTAMP(sms_send_time) <=UNIX_TIMESTAMP(#{date2})
+		]]>
+		</if>
 	    order by sms_send_time asc
 	    <if test="limit_s!=null and limit_e!=null">
 	     limit #{limit_s},#{limit_e}

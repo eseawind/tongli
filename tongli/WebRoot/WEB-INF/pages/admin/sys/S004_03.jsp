@@ -87,7 +87,7 @@
 							<tbody>
 								<tr>
 									<th class="col-md-3">姓名</th>
-									<th class="col-md-3">电话</th>
+									<%-- <th class="col-md-3">电话</th> --%>
 									<th class="col-md-4">地址</th>
 									<th class="col-md-2"></th>
 								</tr>
@@ -96,9 +96,9 @@
 									<td>
 									${bean.name}
 									</td>
-									<td>
+									<%-- <td>
 									${bean.tel}
-									</td>
+									</td> --%>
 									<td>
 									${bean.addres}
 									</td>
