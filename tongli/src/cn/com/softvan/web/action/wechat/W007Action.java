@@ -16,11 +16,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
-import cn.com.softvan.bean.customerservice.TcCsCustomerServiceBean;
 import cn.com.softvan.bean.wechat.TcWxMenuBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
-import cn.com.softvan.common.wechat.WxApiUtil;
 import cn.com.softvan.service.wechat.ITcWxMenuManager;
 import cn.com.softvan.web.action.BaseAction;
 

@@ -12,7 +12,7 @@
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- ************************ACTION类************************************* -->
 	<!--========================= 会员管理 begin=================================== -->
-	<bean id="m001Action" class="cn.com.softvan.web.action.member.M001Action" scope="prototype">
+	<bean id="m001Action" class="cn.com.softvan.web.action.member.M001Action" parent="baseAction" scope="prototype">
 		<property name="memberManager" ref="memberManager"></property>
 		<property name="studentManager" ref="studentManager"></property>
 	</bean>

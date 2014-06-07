@@ -26,11 +26,11 @@
 	<!-- ************************业务处理类************************************* -->
 	<!-- 客服咨询 service begin -->
 	<!-- 咨询 -->
-	<bean id="consultManager" class="cn.com.softvan.service.consult.impl.ConsultManager" scope="prototype">
+	<bean id="consultManager" class="cn.com.softvan.service.consult.impl.ConsultManager" parent="baseManager" scope="prototype">
 		<property name="tcCsConsultDao" ref="tcCsConsultDao"></property>
 	</bean>
 	<!-- 咨询 记录信息 -->
-	<bean id="consultMsgManager" class="cn.com.softvan.service.consult.impl.ConsultMsgManager" scope="prototype">
+	<bean id="consultMsgManager" class="cn.com.softvan.service.consult.impl.ConsultMsgManager" parent="baseManager" scope="prototype">
 		<property name="tcCsConsultMsgDao" ref="tcCsConsultMsgDao"></property>
 	</bean>
 	<!-- 客服咨询 service end -->

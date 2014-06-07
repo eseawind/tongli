@@ -22,7 +22,6 @@ import cn.com.softvan.bean.customerservice.TcCsCustomerServiceBean;
 import cn.com.softvan.bean.wechat.TcWxPublicUserBean;
 import cn.com.softvan.bean.wechat.send.WxSendTextMsg;
 import cn.com.softvan.common.CommonConstant;
-import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.wechat.WxApiUtil;
 import cn.com.softvan.service.consult.IConsultManager;
 import cn.com.softvan.service.consult.IConsultMsgManager;
@@ -53,8 +52,6 @@ public class C302Action extends BaseAction {
 	private IConsultManager consultManager;
 	/** 咨询管理 业务处理*/
 	private IConsultMsgManager consultMsgManager;
-	/**redis缓存工具类*/
-	private JedisHelper jedisHelper;
 	/** 微信服务_公共账号 service 接口类*/
 	private TcWxPublicUserManager tcWxPublicUserManager;
 	//
@@ -105,10 +102,10 @@ public class C302Action extends BaseAction {
 		String msg="1";
 		try {
 			//公共账号信息
-			TcWxPublicUserBean publicUser=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
+			TcWxPublicUserBean publicUser=(TcWxPublicUserBean) getJedisHelper().get(CommonConstant.SESSION_WECHAT_BEAN);
 			if(publicUser==null){
 				tcWxPublicUserManager.initCache();
-				publicUser=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
+				publicUser=(TcWxPublicUserBean) getJedisHelper().get(CommonConstant.SESSION_WECHAT_BEAN);
 			}
 			String appid=publicUser.getAppid();
 			String secret=publicUser.getAppsecret();
@@ -116,9 +113,9 @@ public class C302Action extends BaseAction {
 			WxSendTextMsg sendText=new WxSendTextMsg(bean.getUser_id(), "text", bean.getContent());
 			
 			WxApiUtil wxApiUtil=new WxApiUtil();
-			msg=wxApiUtil.sendCustomerService(wxApiUtil.getAccess_token(false, jedisHelper,appid, secret), bean.getUser_id(), sendText.toJson());
+			msg=wxApiUtil.sendCustomerService(wxApiUtil.getAccess_token(false, getJedisHelper(),appid, secret), bean.getUser_id(), sendText.toJson());
 			if(wxApiUtil.isErrAccessToken(msg)){
-				msg=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, jedisHelper,appid, secret), bean.getUser_id(), sendText.toJson());
+				msg=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, getJedisHelper(),appid, secret), bean.getUser_id(), sendText.toJson());
 			}
 			
 			try {
@@ -156,10 +153,10 @@ public class C302Action extends BaseAction {
 			//用户openid
 			String oid=request.getParameter("oid");
 			
-			msg=(String) jedisHelper.get(oid+"_consult_info");
+			msg=(String) getJedisHelper().get(oid+"_consult_info");
 			getWriter().print(msg);
 			//清除缓存
-			jedisHelper.del(oid+"_consult_info");
+			getJedisHelper().del(oid+"_consult_info");
 			
 		} catch (Exception e) {
 			//msg=e.getMessage();
@@ -32282,22 +32279,6 @@ public class C302Action extends BaseAction {
 	 */
 	public void setConsultMsgManager(IConsultMsgManager consultMsgManager) {
 	    this.consultMsgManager = consultMsgManager;
-	}
-
-	/**
-	 * redis缓存工具类取得
-	 * @return redis缓存工具类
-	 */
-	public JedisHelper getJedisHelper() {
-	    return jedisHelper;
-	}
-
-	/**
-	 * redis缓存工具类设定
-	 * @param jedisHelper redis缓存工具类
-	 */
-	public void setJedisHelper(JedisHelper jedisHelper) {
-	    this.jedisHelper = jedisHelper;
 	}
 
 	/**

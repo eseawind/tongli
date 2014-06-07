@@ -35,26 +35,22 @@
 	<!-- ************************业务处理类************************************* -->
 	<!-- 微信后台 service begin -->
 	<!-- 公共账号 -->
-	<bean id="tcWxPublicUserManager" class="cn.com.softvan.service.wechat.impl.TcWxPublicUserManager" init-method="initCache" scope="prototype">
+	<bean id="tcWxPublicUserManager" class="cn.com.softvan.service.wechat.impl.TcWxPublicUserManager" parent="baseManager" init-method="initCache" scope="prototype">
 		<property name="tcWxPublicUserDao" ref="tcWxPublicUserDao"></property>
-		<property name="jedisHelper" ref="jedisHelper"></property>
 	</bean>
 	<!-- 自定义菜单 -->
-	<bean id="tcWxMenuManager" class="cn.com.softvan.service.wechat.impl.TcWxMenuManager" scope="prototype">
+	<bean id="tcWxMenuManager" class="cn.com.softvan.service.wechat.impl.TcWxMenuManager" parent="baseManager" scope="prototype">
 		<property name="tcWxMenuDao" ref="tcWxMenuDao"></property>
-		<property name="jedisHelper" ref="jedisHelper"></property>
 		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
 	</bean>
 	<!-- 信息资源管理 -->
-	<bean id="tcWxInfoManager" class="cn.com.softvan.service.wechat.impl.TcWxInfoManager" init-method="init" scope="prototype">
+	<bean id="tcWxInfoManager" class="cn.com.softvan.service.wechat.impl.TcWxInfoManager" parent="baseManager" init-method="init" scope="prototype">
 		<property name="tcWxInfoDao" ref="tcWxInfoDao"></property>
-		<property name="jedisHelper" ref="jedisHelper"></property>
 		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
 	</bean>
 	<!-- 微信关注者管理 -->
-	<bean id="tcWxUserManager" class="cn.com.softvan.service.wechat.impl.TcWxUserManager" scope="prototype">
+	<bean id="tcWxUserManager" class="cn.com.softvan.service.wechat.impl.TcWxUserManager" parent="baseManager" scope="prototype">
 		<property name="tcWxUserDao" ref="tcWxUserDao"></property>
-		<property name="jedisHelper" ref="jedisHelper"></property>
 		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
 	</bean>
 	<!-- 微信后台 service end -->

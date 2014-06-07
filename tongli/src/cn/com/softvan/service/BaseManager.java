@@ -12,6 +12,8 @@ package cn.com.softvan.service;
 
 import java.util.Observable;
 
+import org.springframework.core.task.TaskExecutor;
+
 import cn.com.softvan.common.JedisHelper;
 
 /**
@@ -22,7 +24,10 @@ import cn.com.softvan.common.JedisHelper;
 public abstract class BaseManager extends Observable {
 	/** 管理员操作日志  service类 */
 	protected IUserLogsManager userLogsManager;
-
+	/**线程池 */
+	private TaskExecutor taskExecutor;
+	/**redis缓存工具类*/
+	private JedisHelper jedisHelper;
 	/**
 	 * 管理员操作日志  service类取得
 	 * @return 管理员操作日志  service类
@@ -37,5 +42,37 @@ public abstract class BaseManager extends Observable {
 	 */
 	public void setUserLogsManager(IUserLogsManager userLogsManager) {
 	    this.userLogsManager = userLogsManager;
+	}
+
+	/**
+	 * 线程池取得
+	 * @return 线程池
+	 */
+	public TaskExecutor getTaskExecutor() {
+	    return taskExecutor;
+	}
+
+	/**
+	 * 线程池设定
+	 * @param taskExecutor 线程池
+	 */
+	public void setTaskExecutor(TaskExecutor taskExecutor) {
+	    this.taskExecutor = taskExecutor;
+	}
+
+	/**
+	 * redis缓存工具类取得
+	 * @return redis缓存工具类
+	 */
+	public JedisHelper getJedisHelper() {
+	    return jedisHelper;
+	}
+
+	/**
+	 * redis缓存工具类设定
+	 * @param jedisHelper redis缓存工具类
+	 */
+	public void setJedisHelper(JedisHelper jedisHelper) {
+	    this.jedisHelper = jedisHelper;
 	}
 }

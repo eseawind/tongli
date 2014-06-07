@@ -33,7 +33,6 @@ import cn.com.softvan.bean.wechat.reply.WxReplyVideoMsg;
 import cn.com.softvan.bean.wechat.reply.WxReplyVoiceMsg;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
-import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.common.wechat.WxApiUtil;
 import cn.com.softvan.dao.daointer.wechat.ITcWxInfoDao;
@@ -55,8 +54,6 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	
 	/**信息DAO 接口类*/
 	private ITcWxInfoDao tcWxInfoDao;
-	/**redis缓存工具类*/
-	private JedisHelper jedisHelper;
 	/** 微信服务_公共账号 service 接口类*/
 	private TcWxPublicUserManager tcWxPublicUserManager;
 	/**
@@ -406,13 +403,13 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	 */
 	private void setMsgCacheSubscribeXDefault(TcWxInfoBean bean){
 			try{
-				String keyword=(String) jedisHelper.get("key_flag_uuid_"+bean.getId());
+				String keyword=(String) getJedisHelper().get("key_flag_uuid_"+bean.getId());
 				if(Validator.notEmpty(keyword)){
 					String[] keys=keyword.split(" ");
 					for(String s:keys){
 						if(Validator.notEmpty(s)){
 							//删除关键字对象的数据id
-							jedisHelper.del("key_flag_"+s);
+							getJedisHelper().del("key_flag_"+s);
 						}
 					}
 				}
@@ -420,19 +417,19 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 			}
 			try {
 				//首次关注回复信息
-				String u1=(String) jedisHelper.get("key_flag_subscribe");
+				String u1=(String) getJedisHelper().get("key_flag_subscribe");
 				if(bean.getId().equals(u1)
 						&&!"1".equals(bean.getSubscribe_flag())){
-					jedisHelper.del("key_flag_subscribe");
+					getJedisHelper().del("key_flag_subscribe");
 				}
 			} catch (Exception e) {
 			}
 			try {
 				//默认回复信息
-				String u2=(String) jedisHelper.get("key_flag_default");
+				String u2=(String) getJedisHelper().get("key_flag_default");
 				if(bean.getId().equals(u2)
 						&&!"1".equals(bean.getDefault_flag())){
-					jedisHelper.del("key_flag_default");
+					getJedisHelper().del("key_flag_default");
 				}
 			} catch (Exception e) {
 			}
@@ -473,10 +470,10 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	 */
 	private void setMsgCache(List<TcWxInfoBean> beans){
 		//公共账号信息
-		TcWxPublicUserBean publicUser=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
+		TcWxPublicUserBean publicUser=(TcWxPublicUserBean) getJedisHelper().get(CommonConstant.SESSION_WECHAT_BEAN);
 		if(publicUser==null){
 			tcWxPublicUserManager.initCache();
-			publicUser=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
+			publicUser=(TcWxPublicUserBean) getJedisHelper().get(CommonConstant.SESSION_WECHAT_BEAN);
 		}
 		String appid=publicUser.getAppid();
 		String secret=publicUser.getAppsecret();
@@ -494,17 +491,17 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 			if(Validator.notEmpty(bean.getKeyword())){
 				addLuceneIndex(bean);//TODO=========将关键字放入索引============
 				//TODO 存放原始 关键字信息 用于更新关键字时清理旧缓存信息
-				jedisHelper.set("key_flag_uuid_"+bean.getId(),bean.getKeyword());
+				getJedisHelper().set("key_flag_uuid_"+bean.getId(),bean.getKeyword());
 				//TODO 
 				String[] keys=bean.getKeyword().split(" ");
 				for(String s:keys){
 					if(Validator.notEmpty(s)){
 						//保存关键字对象的数据id
 						if(!"news".equals(msgType)){
-							jedisHelper.set("key_flag_"+s,bean.getId());
+							getJedisHelper().set("key_flag_"+s,bean.getId());
 							log.debug("key_flag_"+s+"========"+bean.getId());
 						}else{
-							jedisHelper.set("key_flag_"+s,bean.getArticles_id());
+							getJedisHelper().set("key_flag_"+s,bean.getArticles_id());
 							log.debug("key_flag_"+s+"========"+bean.getArticles_id());
 						}
 						
@@ -539,14 +536,14 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 				WxReplyMsg replyMsg=newsMsg;
 				//首次关注回复信息
 				if("1".equals(bean.getSubscribe_flag())){
-					jedisHelper.set("key_flag_subscribe", uuid);
+					getJedisHelper().set("key_flag_subscribe", uuid);
 				}
 				//默认回复信息
 				if("1".equals(bean.getDefault_flag())){
-					jedisHelper.set("key_flag_default", uuid);
+					getJedisHelper().set("key_flag_default", uuid);
 				}
 				//缓存信息
-				jedisHelper.set(uuid, replyMsg);
+				getJedisHelper().set(uuid, replyMsg);
 				
 			}else{
 				//非图文消息
@@ -569,27 +566,27 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 							//图片消息
 							if("image".equals(msgType)){
 								uuid=bean1.getId();
-								String MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(false, jedisHelper,appid, secret), msgType, bean1.getPicurl());
+								String MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(false, getJedisHelper(),appid, secret), msgType, bean1.getPicurl());
 								if(wxApiUtil.isErrAccessToken(MediaId)){
-									MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, jedisHelper,appid, secret), msgType, bean1.getPicurl());
+									MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, getJedisHelper(),appid, secret), msgType, bean1.getPicurl());
 								}
 								replyMsg=new WxReplyPicMsg(MediaId);
 							}else
 							//语音消息
 							if("voice".equals(msgType)){
 								uuid=bean1.getId();
-								String MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(false, jedisHelper,appid, secret), msgType, bean1.getUrl());
+								String MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(false, getJedisHelper(),appid, secret), msgType, bean1.getUrl());
 								if(wxApiUtil.isErrAccessToken(MediaId)){
-									MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, jedisHelper,appid, secret), msgType, bean1.getUrl());
+									MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, getJedisHelper(),appid, secret), msgType, bean1.getUrl());
 								}
 								replyMsg=new WxReplyVoiceMsg(MediaId);
 							}else
 							//视频消息
 							if("video".equals(msgType)){
 								uuid=bean1.getId();
-								String MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(false, jedisHelper,appid, secret), msgType, bean1.getUrl());
+								String MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(false, getJedisHelper(),appid, secret), msgType, bean1.getUrl());
 								if(wxApiUtil.isErrAccessToken(MediaId)){
-									MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, jedisHelper,appid, secret), msgType, bean1.getUrl());
+									MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, getJedisHelper(),appid, secret), msgType, bean1.getUrl());
 								}
 								replyMsg=new WxReplyVideoMsg(MediaId,bean1.getTitle(),bean1.getDescription());
 							}else
@@ -597,9 +594,9 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 							if("music".equals(msgType)){
 								uuid=bean1.getId();
 //								//音乐图片
-								String MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(false, jedisHelper,appid, secret), msgType, bean1.getPicurl());
+								String MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(false, getJedisHelper(),appid, secret), msgType, bean1.getPicurl());
 								if(wxApiUtil.isErrAccessToken(MediaId)){
-									MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, jedisHelper,appid, secret), msgType, bean1.getPicurl());
+									MediaId=wxApiUtil.uploadMedia(wxApiUtil.getAccess_token(true, getJedisHelper(),appid, secret), msgType, bean1.getPicurl());
 								}
 								//TODO 需要判断音乐是否为本地音乐 需要加上项目http详细地址  
 								if(!Validator.isUrl(bean1.getMusicurl())||!Validator.isUrl(bean1.getHqmusicurl())){
@@ -625,14 +622,14 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 							}
 							//首次关注回复信息
 							if("1".equals(bean1.getSubscribe_flag())){
-								jedisHelper.set("key_flag_subscribe", uuid);
+								getJedisHelper().set("key_flag_subscribe", uuid);
 							}
 							//默认回复信息
 							if("1".equals(bean1.getDefault_flag())){
-								jedisHelper.set("key_flag_default", uuid);
+								getJedisHelper().set("key_flag_default", uuid);
 							}
 							//缓存信息
-							jedisHelper.set(uuid, replyMsg);
+							getJedisHelper().set(uuid, replyMsg);
 						}
 					}
 				}
@@ -643,7 +640,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	 * 将自动回复信息  放入缓存
 	 */
 	private void init(){
-		if(!"1".equals(jedisHelper.get("tc_wechat_info_cache_flag"))){
+		if(!"1".equals(getJedisHelper().get("tc_wechat_info_cache_flag"))){
 			log.debug("=======将所有自动回复信息放入缓存,任务启动!");
 			TcWxInfoBean bean1=new TcWxInfoBean();
 			bean1.setInfo_source("0");
@@ -678,7 +675,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 			setMsgCache(beans);
 			log.debug("=======将所有自动回复信息放入缓存,任务完成!");
 			//已存入缓存标记  数据缓存3天
-			jedisHelper.set("tc_wechat_info_cache_flag","1",3*23*60*60);
+			getJedisHelper().set("tc_wechat_info_cache_flag","1",3*23*60*60);
 		}
 	}
 	/**删除当前信息缓存
@@ -714,13 +711,13 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 						for(String s:keys){
 							if(Validator.notEmpty(s)){
 								//保存关键字对象的数据id
-									jedisHelper.del("key_flag_"+s);
+									getJedisHelper().del("key_flag_"+s);
 									log.debug("===del=cache====key_flag_"+s);
 							}
 						}
 					}
 				}
-				jedisHelper.del(uuid);
+				getJedisHelper().del(uuid);
 				log.debug("===del=cache====uuid="+uuid);
 			} catch (Exception e) {
 				log.error("删除缓存中-自动回复信息异常!", e);
@@ -730,22 +727,8 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	/**重新将所有信息放入缓存*/
 	public void updateAllMsgCache(){
 		log.debug("执行重新将所有信息放入缓存,操作!");
-		jedisHelper.set("tc_wechat_info_cache_flag","0");
+		getJedisHelper().set("tc_wechat_info_cache_flag","0");
 		init();
-	}
-	/**
-	 * redis缓存工具类取得
-	 * @return redis缓存工具类
-	 */
-	public JedisHelper getJedisHelper() {
-	    return jedisHelper;
-	}
-	/**
-	 * redis缓存工具类设定
-	 * @param jedisHelper redis缓存工具类
-	 */
-	public void setJedisHelper(JedisHelper jedisHelper) {
-	    this.jedisHelper = jedisHelper;
 	}
 	/**
 	 * 微信服务_公共账号 service 接口类取得

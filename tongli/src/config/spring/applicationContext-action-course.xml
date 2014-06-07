@@ -12,12 +12,12 @@
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- ************************ACTION类************************************* -->
 	 <!-- 课程管理ACTION -->
-	<bean id="c101Action" class="cn.com.softvan.web.action.course.C101Action" scope="prototype">
+	<bean id="c101Action" class="cn.com.softvan.web.action.course.C101Action" parent="baseAction" scope="prototype">
 		<property name="courseManager" ref="courseManager"></property>
 		<property name="variableManager" ref="variableManager"></property>
 	</bean>
 	<!-- 课程表管理ACTION -->
-	<bean id="c102Action" class="cn.com.softvan.web.action.course.C102Action" scope="prototype">
+	<bean id="c102Action" class="cn.com.softvan.web.action.course.C102Action" parent="baseAction" scope="prototype">
 		<property name="memberManager" ref="memberManager"></property>
 		<property name="studentManager" ref="studentManager"></property>
 		<property name="courseManager" ref="courseManager"></property>
@@ -27,7 +27,7 @@
 		<property name="commentManager" ref="commentManager"></property>
 	</bean>
 	<!-- 预约参观管理ACTION -->
-	<bean id="c103Action" class="cn.com.softvan.web.action.course.C103Action" scope="prototype">
+	<bean id="c103Action" class="cn.com.softvan.web.action.course.C103Action" parent="baseAction" scope="prototype">
 		<property name="courseBespeakManager" ref="courseBespeakManager"></property>
 	</bean>
 </beans>

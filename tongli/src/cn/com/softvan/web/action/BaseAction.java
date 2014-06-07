@@ -14,8 +14,10 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.apache.struts2.util.ServletContextAware;
+import org.springframework.core.task.TaskExecutor;
 
 import cn.com.softvan.common.IpUtils;
+import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.service.IUserLogsManager;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -28,6 +30,10 @@ public class BaseAction extends ActionSupport implements SessionAware, ServletRe
 	protected ServletContext servletContext;
 	/** 管理员操作日志  service类 */
 	protected IUserLogsManager userLogsManager;
+	/**线程池 */
+	private TaskExecutor taskExecutor;
+	/**redis缓存工具类*/
+	private JedisHelper jedisHelper;
 	/***
 	 * 返回上次访问链接
 	 * @return
@@ -130,6 +136,34 @@ public class BaseAction extends ActionSupport implements SessionAware, ServletRe
 	 */
 	public void setUserLogsManager(IUserLogsManager userLogsManager) {
 	    this.userLogsManager = userLogsManager;
+	}
+	/**
+	 * 线程池取得
+	 * @return 线程池
+	 */
+	public TaskExecutor getTaskExecutor() {
+	    return taskExecutor;
+	}
+	/**
+	 * 线程池设定
+	 * @param taskExecutor 线程池
+	 */
+	public void setTaskExecutor(TaskExecutor taskExecutor) {
+	    this.taskExecutor = taskExecutor;
+	}
+	/**
+	 * redis缓存工具类取得
+	 * @return redis缓存工具类
+	 */
+	public JedisHelper getJedisHelper() {
+	    return jedisHelper;
+	}
+	/**
+	 * redis缓存工具类设定
+	 * @param jedisHelper redis缓存工具类
+	 */
+	public void setJedisHelper(JedisHelper jedisHelper) {
+	    this.jedisHelper = jedisHelper;
 	}
 
 }

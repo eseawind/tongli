@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-04  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 童励 System. - All Rights Reserved.
+ * Copyright 2014 上海人保财险微信 System. - All Rights Reserved.
  *
  */
 --%>
@@ -65,7 +65,7 @@
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
-							href="${basePath }/home_init.ac">Home</a> <i
+							href="${basePath }/home_init.ac">主页</a> <i
 							class="fa fa-angle-right"></i></li>
 						<li><a href="#">微信服务</a> <i class="fa fa-angle-right"></i></li>
 						<li><a href="#">素材管理</a> <i class="fa fa-angle-right"></i></li>
@@ -79,14 +79,14 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row-fluid">
-						<div class="col-md-2">
+						<%-- <div class="col-md-2">
 							<div class="list-group">
 							  <a href="#" class="list-group-item active">
 							   <i class="fa fa-check"></i> 未分组 (${fn:length(beans)})
 							  </a>
 							  <a class="list-group-item" href="#myModal1" data-toggle="modal"><i class="fa fa-bolt"></i> 新增分组</a>
 							</div>
-						</div>
+						</div> --%>
 						<div class="col-md-10">
 							<c:if test="${msg!=null}">
 							<c:choose>
@@ -152,7 +152,7 @@ function loadUrlPage(offset, url, event) {
 }
 </script>
 <!-- Modal -->
-<div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+<!-- <div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -171,4 +171,4 @@ function loadUrlPage(offset, url, event) {
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->

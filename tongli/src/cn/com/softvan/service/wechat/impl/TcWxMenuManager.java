@@ -20,7 +20,6 @@ import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.wechat.TcWxMenuBean;
 import cn.com.softvan.bean.wechat.TcWxPublicUserBean;
-import cn.com.softvan.bean.wechat.TcWxUserBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.JedisHelper;
@@ -45,8 +44,6 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 			.getLogger(TcWxMenuManager.class);
 	/**微信服务_自定义菜单  数据库处理 DAO*/
 	private ITcWxMenuDao tcWxMenuDao;
-	/**redis缓存工具类*/
-	protected JedisHelper jedisHelper;
 	/**微信服务_公共账号 service */
 	private ITcWxPublicUserManager tcWxPublicUserManager;
 	/**
@@ -272,12 +269,12 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 //				System.out.println("----------1---------------");
 				String secret=getPublicUserBean().getAppsecret();
 //				System.out.println("----------2---------------");
-				String access_token=new WxApiUtil().getAccess_token(false,jedisHelper,appid, secret);
+				String access_token=new WxApiUtil().getAccess_token(false,getJedisHelper(),appid, secret);
 //				System.out.println("----------3---------------");
 				//set
 				msg=setMenu(access_token, menu.toString());
 				if(new WxApiUtil().isErrAccessToken(msg)){
-					access_token=new WxApiUtil().getAccess_token(true,jedisHelper,appid, secret);
+					access_token=new WxApiUtil().getAccess_token(true,getJedisHelper(),appid, secret);
 					msg=setMenu(access_token, menu.toString());
 				}
 //				System.out.println("----------4---------------");
@@ -301,7 +298,7 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 		//TODO 下载菜单
 		try {
 			WxApiUtil api=new WxApiUtil();
-			List<TcWxMenuBean> beans=api.getMenu(api.getAccess_token(false,jedisHelper,getPublicUserBean().getAppid(), getPublicUserBean().getAppsecret()));
+			List<TcWxMenuBean> beans=api.getMenu(api.getAccess_token(false,getJedisHelper(),getPublicUserBean().getAppid(), getPublicUserBean().getAppsecret()));
 			if(beans!=null && beans.size()>0){
 				TcWxMenuBean bean1=beans.get(0);
 				//40001获取access_token时AppSecret错误，或者access_token无效
@@ -309,7 +306,7 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 				//42001access_token超时
 				if(api.isErrAccessToken(bean1.getErrcode())){
 					//重新获取access_token 并重新调用接口
-					beans=api.getMenu(api.getAccess_token(true,jedisHelper,getPublicUserBean().getAppid(), getPublicUserBean().getAppsecret()));
+					beans=api.getMenu(api.getAccess_token(true,getJedisHelper(),getPublicUserBean().getAppid(), getPublicUserBean().getAppsecret()));
 				}
 			}
 			
@@ -385,20 +382,6 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
     	return dataJson.getString("errcode");
     }
 	/**
-	 * redis缓存工具类取得
-	 * @return redis缓存工具类
-	 */
-	public JedisHelper getJedisHelper() {
-	    return jedisHelper;
-	}
-	/**
-	 * redis缓存工具类设定
-	 * @param jedisHelper redis缓存工具类
-	 */
-	public void setJedisHelper(JedisHelper jedisHelper) {
-	    this.jedisHelper = jedisHelper;
-	}
-	/**
 	 * 微信服务_公共账号 service取得
 	 * @return 微信服务_公共账号 service
 	 */
@@ -414,10 +397,10 @@ public class TcWxMenuManager extends BaseManager implements ITcWxMenuManager {
 	}
 	/**微信 公共号 信息*/
 	private TcWxPublicUserBean getPublicUserBean(){
-		TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
+		TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) getJedisHelper().get(CommonConstant.SESSION_WECHAT_BEAN);
 		if((publicUserBean==null) || (publicUserBean.getId()==null)){
 			publicUserBean=tcWxPublicUserManager.findDataById(null);
-			jedisHelper.set(CommonConstant.SESSION_WECHAT_BEAN,publicUserBean);
+			getJedisHelper().set(CommonConstant.SESSION_WECHAT_BEAN,publicUserBean);
 		}
 		return publicUserBean;
 	}

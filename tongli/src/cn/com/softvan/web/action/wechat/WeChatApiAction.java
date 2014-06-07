@@ -29,7 +29,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.jdom.JDOMException;
-import org.springframework.core.task.TaskExecutor;
 
 import cn.com.softvan.bean.wechat.TcWxInfoBean;
 import cn.com.softvan.bean.wechat.TcWxPublicUserBean;
@@ -47,7 +46,6 @@ import cn.com.softvan.bean.wechat.reply.WxReplyNewsMsg;
 import cn.com.softvan.bean.wechat.reply.WxReplyTextMsg;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IpUtils;
-import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.Resources;
 import cn.com.softvan.common.StrUtil;
 import cn.com.softvan.common.WebUtils;
@@ -60,26 +58,23 @@ import cn.com.softvan.web.action.BaseAction;
 public class WeChatApiAction extends BaseAction {
 	private static final transient Logger log = Logger.getLogger(WeChatApiAction.class);
 	private static final long serialVersionUID = -4267408236898837036L;
-	/**线程池 */
-	private TaskExecutor taskExecutor;
 	/**微信服务_资源信息管理 业务处理*/
 	private ITcWxInfoManager tcWxInfoManager;
 	/**微信服务_公共账号 service */
 	private ITcWxPublicUserManager tcWxPublicUserManager;
 	/**微信服务_粉丝账号 service */
     private ITcWxUserManager tcWxUserManager;
-	/**redis缓存工具类*/
-	protected JedisHelper jedisHelper;
+	
 	/**微信api工具类*/
 	WxApiUtil api=new WxApiUtil();
 	/**收到的xml信息 */
 	private String xml=null;
 	/**微信 公共号 信息*/
 	private TcWxPublicUserBean getPublicUserBean(){
-		TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
+		TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) getJedisHelper().get(CommonConstant.SESSION_WECHAT_BEAN);
 		if((publicUserBean==null) || (publicUserBean.getId()==null)){
 			publicUserBean=tcWxPublicUserManager.findDataById(null);
-			jedisHelper.set(CommonConstant.SESSION_WECHAT_BEAN,publicUserBean);
+			getJedisHelper().set(CommonConstant.SESSION_WECHAT_BEAN,publicUserBean);
 		}
 		return publicUserBean;
 	}
@@ -326,7 +321,7 @@ public class WeChatApiAction extends BaseAction {
 		if(getPublicUserBean()==null){
 			log.error("===公共号信息为空===");
 		}
-		return api.getAccess_token(flag, jedisHelper, getPublicUserBean().getAppid(), getPublicUserBean().getAppsecret());
+		return api.getAccess_token(flag, getJedisHelper(), getPublicUserBean().getAppid(), getPublicUserBean().getAppsecret());
 	}
 	/**
 	 * 信息自动回复
@@ -341,28 +336,28 @@ public class WeChatApiAction extends BaseAction {
 			text = text.trim();
 		}
 		//--------------判断数据是否缓存--------------
-		if(!"1".equals(jedisHelper.get("tc_wechat_info_cache_flag"))){
+		if(!"1".equals(getJedisHelper().get("tc_wechat_info_cache_flag"))){
 			tcWxInfoManager.updateAllMsgCache();
 		}
 		WxReplyMsg replyMsg2=null;
 		log.debug("==0==uuid_flag_key="+"key_flag_"+text);
 		//根据关键字获取 回复对象id
-		String uuid=(String) jedisHelper.get("key_flag_"+text);
+		String uuid=(String) getJedisHelper().get("key_flag_"+text);
 		log.debug("==1==uuid="+uuid);
 		//根据对象id 获取回复对象
 		try {
-			replyMsg2=(WxReplyMsg) jedisHelper.get(uuid);
+			replyMsg2=(WxReplyMsg) getJedisHelper().get(uuid);
 		} catch (Exception e) {
 			log.error("缓存读取自动回复信息异常1,", e);
 		}
 		log.debug("==2==replyMsg2="+replyMsg2);
 		if(replyMsg2==null){
-			uuid=(String) jedisHelper.get("key_flag_default");
+			uuid=(String) getJedisHelper().get("key_flag_default");
 		}
 		if(uuid!=null){
 			try {
 				if(replyMsg2==null){
-					replyMsg2=(WxReplyMsg) jedisHelper.get(uuid);
+					replyMsg2=(WxReplyMsg) getJedisHelper().get(uuid);
 					if(replyMsg2 instanceof WxReplyNewsMsg){
 //						replyMsg2.get
 					}
@@ -510,20 +505,6 @@ public class WeChatApiAction extends BaseAction {
 		return local_path;
 	}
 	/**
-	 * 线程池取得
-	 * @return 线程池
-	 */
-	public TaskExecutor getTaskExecutor() {
-	    return taskExecutor;
-	}
-	/**
-	 * 线程池设定
-	 * @param taskExecutor 线程池
-	 */
-	public void setTaskExecutor(TaskExecutor taskExecutor) {
-	    this.taskExecutor = taskExecutor;
-	}
-	/**
 	 * 微信服务_资源信息管理 业务处理取得
 	 * @return 微信服务_资源信息管理 业务处理
 	 */
@@ -564,20 +545,6 @@ public class WeChatApiAction extends BaseAction {
 	 */
 	public void setTcWxUserManager(ITcWxUserManager tcWxUserManager) {
 	    this.tcWxUserManager = tcWxUserManager;
-	}
-	/**
-	 * redis缓存工具类取得
-	 * @return redis缓存工具类
-	 */
-	public JedisHelper getJedisHelper() {
-	    return jedisHelper;
-	}
-	/**
-	 * redis缓存工具类设定
-	 * @param jedisHelper redis缓存工具类
-	 */
-	public void setJedisHelper(JedisHelper jedisHelper) {
-	    this.jedisHelper = jedisHelper;
 	}
 	/**
 	 * 微信api工具类取得

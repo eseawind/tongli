@@ -13,24 +13,24 @@
 	<!-- ************************ACTION类************************************* -->
 	<!--========================= 系统管理 begin=================================== -->
 	<!-- 资讯管理 -->
-	<bean id="s001Action" class="cn.com.softvan.web.action.sys.S001Action" scope="prototype">
+	<bean id="s001Action" class="cn.com.softvan.web.action.sys.S001Action" parent="baseAction" scope="prototype">
 		<property name="newsManager" ref="newsManager"></property>
 		<property name="newsTypeManager" ref="newsTypeManager"></property>
 	</bean>
 	<!-- 资讯栏目管理 -->
-	<bean id="s002Action" class="cn.com.softvan.web.action.sys.S002Action" scope="prototype">
+	<bean id="s002Action" class="cn.com.softvan.web.action.sys.S002Action" parent="baseAction" scope="prototype">
 		<property name="newsTypeManager" ref="newsTypeManager"></property>
 	</bean>
 	<!-- 友情链接 管理 -->
-	<bean id="s003Action" class="cn.com.softvan.web.action.sys.S003Action" scope="prototype">
+	<bean id="s003Action" class="cn.com.softvan.web.action.sys.S003Action" parent="baseAction" scope="prototype">
 		<property name="parterManager" ref="parterManager"></property>
 	</bean>
 	<!-- 通讯录 管理 -->
-	<bean id="s004Action" class="cn.com.softvan.web.action.sys.S004Action" scope="prototype">
+	<bean id="s004Action" class="cn.com.softvan.web.action.sys.S004Action" parent="baseAction" scope="prototype">
 		<property name="telBookManager" ref="telBookManager"></property>
 	</bean>
 	<!-- 短信 管理 -->
-	<bean id="s005Action" class="cn.com.softvan.web.action.sys.S005Action" scope="prototype">
+	<bean id="s005Action" class="cn.com.softvan.web.action.sys.S005Action" parent="baseAction" scope="prototype">
 		<property name="smsManager" ref="smsManager"></property>
 		<property name="telBookManager" ref="telBookManager"></property>
 		<property name="memberManager" ref="memberManager"></property>

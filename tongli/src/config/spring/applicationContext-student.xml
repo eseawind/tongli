@@ -25,7 +25,7 @@
 	<!-- 学员管理 dao end -->
 	<!-- ************************业务处理类************************************* -->
 	<!-- 学员管理 begin -->
-	<bean id="studentManager" class="cn.com.softvan.service.student.impl.StudentManager" scope="prototype">
+	<bean id="studentManager" class="cn.com.softvan.service.student.impl.StudentManager" parent="baseManager" scope="prototype">
 		<property name="tcStudentDao" ref="tcStudentDao"></property>
 		<property name="tcStudentHobbyItemsDao" ref="tcStudentHobbyItemsDao"></property>
 	</bean>

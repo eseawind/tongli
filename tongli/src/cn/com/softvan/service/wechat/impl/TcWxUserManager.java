@@ -17,7 +17,6 @@ import org.apache.log4j.Logger;
 import cn.com.softvan.bean.wechat.TcWxPublicUserBean;
 import cn.com.softvan.bean.wechat.TcWxUserBean;
 import cn.com.softvan.common.CommonConstant;
-import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.common.wechat.WxApiUtil;
 import cn.com.softvan.dao.daointer.wechat.ITcWxUserDao;
@@ -39,8 +38,6 @@ public class TcWxUserManager extends BaseManager implements ITcWxUserManager {
 			.getLogger(TcWxUserManager.class);
 	/**微信服务_关注者账号  数据库处理 DAO*/
 	private ITcWxUserDao tcWxUserDao;
-	/**redis缓存工具类*/
-	protected JedisHelper jedisHelper;
 	/**微信服务_公共账号 service */
 	private ITcWxPublicUserManager tcWxPublicUserManager;
 	/**
@@ -75,7 +72,7 @@ public class TcWxUserManager extends BaseManager implements ITcWxUserManager {
 			tcWxUserDao.insert(dto);
 		}
 		//关注者openid放入缓存
-		jedisHelper.set(bean.getOpenid(), "1");
+		getJedisHelper().set(bean.getOpenid(), "1");
 	}
 	/**
 	 * <p>信息列表。</p>
@@ -161,20 +158,6 @@ public class TcWxUserManager extends BaseManager implements ITcWxUserManager {
 	    this.tcWxUserDao = tcWxUserDao;
 	}
 	/**
-	 * redis缓存工具类取得
-	 * @return redis缓存工具类
-	 */
-	public JedisHelper getJedisHelper() {
-	    return jedisHelper;
-	}
-	/**
-	 * redis缓存工具类设定
-	 * @param jedisHelper redis缓存工具类
-	 */
-	public void setJedisHelper(JedisHelper jedisHelper) {
-	    this.jedisHelper = jedisHelper;
-	}
-	/**
 	 * <p>下载关注者(粉丝信息)。</p>
 	 * <ol>[功能概要] 
 	 * <div>保存入库。</div>
@@ -184,13 +167,13 @@ public class TcWxUserManager extends BaseManager implements ITcWxUserManager {
 	public String downUser(){
 		String msg="1";
 		try {
-			TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) jedisHelper.get(CommonConstant.SESSION_WECHAT_BEAN);
+			TcWxPublicUserBean publicUserBean=(TcWxPublicUserBean) getJedisHelper().get(CommonConstant.SESSION_WECHAT_BEAN);
 			if((publicUserBean==null) || (publicUserBean.getId()==null)){
 				publicUserBean=tcWxPublicUserManager.findDataById(null);
-				jedisHelper.set(CommonConstant.SESSION_WECHAT_BEAN,publicUserBean);
+				getJedisHelper().set(CommonConstant.SESSION_WECHAT_BEAN,publicUserBean);
 			}
 			WxApiUtil api=new WxApiUtil();
-			String access_token=api.getAccess_token(false, jedisHelper,publicUserBean.getAppid(), publicUserBean.getAppsecret());
+			String access_token=api.getAccess_token(false, getJedisHelper(),publicUserBean.getAppid(), publicUserBean.getAppsecret());
 			String next_oid=null;
 			Long total=0L;
 			do{
@@ -203,7 +186,7 @@ public class TcWxUserManager extends BaseManager implements ITcWxUserManager {
 					//42001access_token超时
 					if(api.isErrAccessToken(bean.getErrcode())){
 						//重新获取access_token 并重新调用接口
-						beans=api.getUserList(api.getAccess_token(true, jedisHelper,publicUserBean.getAppid(), publicUserBean.getAppsecret()), next_oid);
+						beans=api.getUserList(api.getAccess_token(true, getJedisHelper(),publicUserBean.getAppid(), publicUserBean.getAppsecret()), next_oid);
 					}
 				}
 				if(beans!=null && beans.size()>0){

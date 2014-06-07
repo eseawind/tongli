@@ -13,61 +13,59 @@
 	<!-- ************************ACTION类************************************* -->
 	<!--========================= 微信服务 begin=================================== -->
 	<!-- 微信api验证 与 消息接收  -->
-	<bean id="weChatApiAction" class="cn.com.softvan.web.action.wechat.WeChatApiAction" scope="prototype">
+	<bean id="weChatApiAction" class="cn.com.softvan.web.action.wechat.WeChatApiAction" parent="baseAction" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
-		<property name="taskExecutor" ref="taskExecutor"></property>
-		<property name="jedisHelper" ref="jedisHelper"></property>
 		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
 		<property name="tcWxUserManager" ref="tcWxUserManager"></property>
 	</bean>
 	<!-- 系统登陆与系统首页 Action -->
-	<bean id="homeAction" class="cn.com.softvan.web.action.HomeAction" scope="prototype"/>
+	<bean id="homeAction" class="cn.com.softvan.web.action.HomeAction" parent="baseAction" scope="prototype"/>
 	<!-- 微信服务_微信号绑定 -->
-	<bean id="w001Action" class="cn.com.softvan.web.action.wechat.W001Action" scope="prototype">
+	<bean id="w001Action" class="cn.com.softvan.web.action.wechat.W001Action" parent="baseAction" scope="prototype">
 		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
 	</bean>
 	<!-- 微信服务_素材管理_文章消息 -->
-	<bean id="w004Action" class="cn.com.softvan.web.action.wechat.W004Action" scope="prototype">
+	<bean id="w004Action" class="cn.com.softvan.web.action.wechat.W004Action" parent="baseAction" scope="prototype">
 		<property name="newsManager" ref="newsManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_图文消息 -->
-	<bean id="w002Action" class="cn.com.softvan.web.action.wechat.W002Action" scope="prototype">
+	<bean id="w002Action" class="cn.com.softvan.web.action.wechat.W002Action" parent="baseAction" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_图片消息 -->
-	<bean id="w003Action" class="cn.com.softvan.web.action.wechat.W003Action" scope="prototype">
+	<bean id="w003Action" class="cn.com.softvan.web.action.wechat.W003Action" parent="baseAction" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_文本消息 -->
-	<bean id="w009Action" class="cn.com.softvan.web.action.wechat.W009Action" scope="prototype">
+	<bean id="w009Action" class="cn.com.softvan.web.action.wechat.W009Action" parent="baseAction" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_音乐消息 -->
-	<bean id="w005Action" class="cn.com.softvan.web.action.wechat.W005Action" scope="prototype">
+	<bean id="w005Action" class="cn.com.softvan.web.action.wechat.W005Action" parent="baseAction" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_自定义菜单 -->
-	<bean id="w007Action" class="cn.com.softvan.web.action.wechat.W007Action" scope="prototype">
+	<bean id="w007Action" class="cn.com.softvan.web.action.wechat.W007Action" parent="baseAction" scope="prototype">
 		<property name="tcWxMenuManager" ref="tcWxMenuManager"></property>
 	</bean>
 	<!-- 微信服务_信息接收  展示 -->
-	<bean id="w010Action" class="cn.com.softvan.web.action.wechat.W010Action" scope="prototype">
+	<bean id="w010Action" class="cn.com.softvan.web.action.wechat.W010Action" parent="baseAction" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_微信关注者_(粉丝)  展示 -->
-	<bean id="w012Action" class="cn.com.softvan.web.action.wechat.W012Action" scope="prototype">
+	<bean id="w012Action" class="cn.com.softvan.web.action.wechat.W012Action" parent="baseAction" scope="prototype">
 		<property name="tcWxUserManager" ref="tcWxUserManager"></property>
 	</bean>
 	<!-- 微信服务_微信关注者_(粉丝)  展示 -->
-	<bean id="w013Action" class="cn.com.softvan.web.action.wechat.W013Action" scope="prototype">
+	<bean id="w013Action" class="cn.com.softvan.web.action.wechat.W013Action" parent="baseAction" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_语音消息 -->
-	<bean id="w014Action" class="cn.com.softvan.web.action.wechat.W014Action" scope="prototype">
+	<bean id="w014Action" class="cn.com.softvan.web.action.wechat.W014Action" parent="baseAction" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!-- 微信服务_自动回复_视频消息 -->
-	<bean id="w006Action" class="cn.com.softvan.web.action.wechat.W006Action" scope="prototype">
+	<bean id="w006Action" class="cn.com.softvan.web.action.wechat.W006Action" parent="baseAction" scope="prototype">
 		<property name="tcWxInfoManager" ref="tcWxInfoManager"></property>
 	</bean>
 	<!--========================= 微信服务 end=================================== -->

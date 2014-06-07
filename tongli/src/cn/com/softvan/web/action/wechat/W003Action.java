@@ -22,7 +22,6 @@ import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.wechat.TcWxInfoBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
-import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.wechat.ITcWxInfoManager;
 import cn.com.softvan.web.action.BaseAction;
@@ -195,7 +194,12 @@ public class W003Action extends BaseAction {
 	 */
 	public String uc() throws IOException {
 		log.info("W003Action updateAllMsgCache.........");
-		(new JedisHelper()).flushDB();
+		try {
+			getJedisHelper().flushDB();
+		} catch (Exception e) {
+			getWriter().print("缓存更新失败!");
+			return null;
+		}
 		tcWxInfoManager.updateAllMsgCache();
 		getWriter().print("缓存已更新!所有数据将自动缓存3天!");
 		return null;
@@ -246,5 +250,21 @@ public class W003Action extends BaseAction {
 	 */
 	public void setTcWxInfoManager(ITcWxInfoManager tcWxInfoManager) {
 	    this.tcWxInfoManager = tcWxInfoManager;
+	}
+
+	/**
+	 * 信息类型取得
+	 * @return 信息类型
+	 */
+	public String getMsgType() {
+	    return msgType;
+	}
+
+	/**
+	 * 信息来源0微信文章1系统资讯取得
+	 * @return 信息来源0微信文章1系统资讯
+	 */
+	public String getInfo_source() {
+	    return info_source;
 	}
 }

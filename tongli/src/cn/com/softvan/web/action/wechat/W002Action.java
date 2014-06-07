@@ -19,15 +19,12 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
-import cn.com.softvan.bean.customerservice.TcCsCustomerServiceBean;
-import cn.com.softvan.bean.sys.TcSysNewsBean;
 import cn.com.softvan.bean.wechat.TcWxInfoBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.wechat.ITcWxInfoManager;
 import cn.com.softvan.web.action.BaseAction;
-import cn.com.softvan.web.tag.PageInfo;
 
 /**
  * 微信服务_自动回复(关键字)_图文消息 ActionClass

@@ -140,10 +140,12 @@
 	<!-- ************************业务处理类************************************* -->
 	<!-- manager基类 -->
 	<bean id="baseManager" class="cn.com.softvan.service.BaseManager" scope="prototype">
-		<property name="userLogsManager" ref="userLogsManager"></property>
+		<!-- <property name="userLogsManager" ref="userLogsManager"></property> -->
+		<property name="jedisHelper" ref="jedisHelper"></property>
+		<property name="taskExecutor" ref="taskExecutor"></property>
 	</bean>
 	<!-- 行政区划 管理 -->
-	<bean id="areaManager" class="cn.com.softvan.service.adi.impl.AreaManager" scope="prototype">
+	<bean id="areaManager" class="cn.com.softvan.service.adi.impl.AreaManager" parent="baseManager" scope="prototype">
 		<property name="areaDao" ref="areaDao"></property>
 	</bean>
 	

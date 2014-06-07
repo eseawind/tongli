@@ -47,28 +47,28 @@
 	<!-- ************************业务处理类************************************* -->
 	<!-- 系统管理 begin -->
 	<!-- 资讯管理 -->
-	<bean id="newsManager" class="cn.com.softvan.service.sys.impl.NewsManager" scope="prototype">
+	<bean id="newsManager" class="cn.com.softvan.service.sys.impl.NewsManager" parent="baseManager" scope="prototype">
 		<property name="tcSysNewsDao" ref="tcSysNewsDao"></property>
 		<property name="tcSysNewsVsTypeDao" ref="tcSysNewsVsTypeDao"></property>
 	</bean>
 	<!-- 资讯 分类 管理 -->
-	<bean id="newsTypeManager" class="cn.com.softvan.service.sys.impl.NewsTypeManager" scope="prototype">
+	<bean id="newsTypeManager" class="cn.com.softvan.service.sys.impl.NewsTypeManager" parent="baseManager" scope="prototype">
 		<property name="tcSysNewsTypeDao" ref="tcSysNewsTypeDao"></property>
 	</bean>
 	<!-- 友情链接 管理 -->
-	<bean id="parterManager" class="cn.com.softvan.service.sys.impl.ParterManager" scope="prototype">
+	<bean id="parterManager" class="cn.com.softvan.service.sys.impl.ParterManager" parent="baseManager" scope="prototype">
 		<property name="tcSysParterDao" ref="tcSysParterDao"></property>
 	</bean>
 	<!-- 数据字典 管理 -->
-	<bean id="variableManager" class="cn.com.softvan.service.sys.impl.VariableManager" scope="prototype">
+	<bean id="variableManager" class="cn.com.softvan.service.sys.impl.VariableManager" parent="baseManager" scope="prototype">
 		<property name="tcSysVariableDao" ref="tcSysVariableDao"></property>
 	</bean>
 	<!-- 通讯录 管理 -->
-	<bean id="telBookManager" class="cn.com.softvan.service.sys.impl.TelBookManager" scope="prototype">
+	<bean id="telBookManager" class="cn.com.softvan.service.sys.impl.TelBookManager" parent="baseManager" scope="prototype">
 		<property name="tcSysTelBookDao" ref="tcSysTelBookDao"></property>
 	</bean>
 	<!-- 短信 管理 -->
-	<bean id="smsManager" class="cn.com.softvan.service.sys.impl.SmsManager" scope="prototype">
+	<bean id="smsManager" class="cn.com.softvan.service.sys.impl.SmsManager" parent="baseManager" scope="prototype">
 		<property name="tcSysSmsDao" ref="tcSysSmsDao"></property>
 	</bean>
 	<!-- 系统管理 end -->

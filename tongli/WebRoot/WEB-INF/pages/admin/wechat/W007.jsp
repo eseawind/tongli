@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-04  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 童励 System. - All Rights Reserved.
+ * Copyright 2014 上海人保财险微信 System. - All Rights Reserved.
  *
  */
 --%>
@@ -81,7 +81,7 @@
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
-							href="${basePath }/home_init.ac">Home</a> <i
+							href="${basePath }/home_init.ac">主页</a> <i
 							class="fa fa-angle-right"></i></li>
 						<li><a href="#">微信服务</a> <i class="fa fa-angle-right"></i></li>
 						<li>服务号菜单</li>
@@ -134,8 +134,10 @@
 									${bean.menu_name}
 									</td>
 									<td></td>
+									<c:set var="del_flag_t" value="0" />
 									<c:choose>
 										<c:when test="${bean.beans!=null && fn:length(bean.beans)>0}">
+											<c:set var="del_flag_t" value="1" />
 											<td></td>
 											<td></td>
 											<td></td>
@@ -154,9 +156,11 @@
 											</td>
 										</c:otherwise>
 									</c:choose>
-									<td><a href="${basePath}/h/w007_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
-										<a href="javascript:void(0)" class="btn btn-danger"
-										onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/w007_del.ac?id=${bean.id}'};">删除</a>
+									<td ><a href="${basePath}/h/w007_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
+										<c:if test="${del_flag_t==0}">
+											<a href="javascript:void(0)" class="btn btn-danger" onclick="if(confirm('确认删除吗?删除后不可恢复!')){location.href='${basePath}/h/w007_del.ac?id=${bean.id}'};" class="btn btn-danger"
+											 rel="nofollow">删除</a>
+										 </c:if>
 									</td>
 								</tr>
 									<c:forEach items="${bean.beans}" var="bean1">
@@ -177,8 +181,8 @@
 										</c:if>
 										</td>
 										<td><a href="${basePath}/h/w007_edit.ac?id=${bean1.id}" class="btn edit green">编辑</a>
-											<a href="javascript:void(0)" class="btn btn-danger"
-											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/w007_del.ac?id=${bean.id}'};">删除</a>
+											<a class="btn btn-danger"
+											 onclick="if(confirm('确认删除吗?删除后不可恢复!')){location.href='${basePath}/h/w007_del.ac?id=${bean1.id}'};" rel="nofollow">删除</a>
 										</td>
 									</tr>
 									</c:forEach>

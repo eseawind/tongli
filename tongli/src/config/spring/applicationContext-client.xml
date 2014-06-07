@@ -21,7 +21,7 @@
 	</bean>
 	<!-- ************************业务处理类************************************* -->
 	<!-- 评论信息 业务处理 -->
-	<bean id="commentManager" class="cn.com.softvan.service.comment.impl.CommentManager" scope="prototype">
+	<bean id="commentManager" class="cn.com.softvan.service.comment.impl.CommentManager" parent="baseManager" scope="prototype">
 		<property name="tcCommentDao" ref="tcCommentDao"></property>
 	</bean>
 </beans>

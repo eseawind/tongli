@@ -12,7 +12,7 @@
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- ************************ACTION类************************************* -->
 	 <!-- 预约参观 action -->
-	<bean id="c202Action" class="cn.com.softvan.web.action.client.course.C202Action" scope="prototype">
+	<bean id="c202Action" class="cn.com.softvan.web.action.client.course.C202Action" parent="baseAction" scope="prototype">
 		<property name="courseBespeakManager" ref="courseBespeakManager"></property>
 	</bean>
 </beans>

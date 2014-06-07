@@ -25,7 +25,7 @@
 	<!-- 会员管理 dao end -->
 	<!-- ************************业务处理类************************************* -->
 	<!-- 会员管理 begin -->
-	<bean id="memberManager" class="cn.com.softvan.service.member.impl.MemberManager" scope="prototype">
+	<bean id="memberManager" class="cn.com.softvan.service.member.impl.MemberManager" parent="baseManager" scope="prototype">
 		<property name="tcMemberDao" ref="tcMemberDao"></property>
 		<property name="tcMemberVsStudentDao" ref="tcMemberVsStudentDao"></property>
 	</bean>

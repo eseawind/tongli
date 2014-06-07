@@ -13,18 +13,16 @@
 	<!-- ************************ACTION类************************************* -->
 	<!--========================= 客服咨询 begin=================================== -->
 	<!-- 咨询  ActionClass -->
-	<bean id="c301Action" class="cn.com.softvan.web.action.consult.C301Action" scope="prototype">
+	<bean id="c301Action" class="cn.com.softvan.web.action.consult.C301Action" parent="baseAction" scope="prototype">
 		<property name="consultManager" ref="consultManager"></property>
 		<property name="consultMsgManager" ref="consultMsgManager"></property>
 		<property name="customerServiceManager" ref="customerServiceManager"></property>
-		<property name="jedisHelper" ref="jedisHelper"></property>
 		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
 	</bean>
 	<!-- 咨询 信息记录 ActionClass -->
-	<bean id="c302Action" class="cn.com.softvan.web.action.consult.C302Action" scope="prototype">
+	<bean id="c302Action" class="cn.com.softvan.web.action.consult.C302Action" parent="baseAction" scope="prototype">
 		<property name="consultManager" ref="consultManager"></property>
 		<property name="consultMsgManager" ref="consultMsgManager"></property>
-		<property name="jedisHelper" ref="jedisHelper"></property>
 		<property name="tcWxPublicUserManager" ref="tcWxPublicUserManager"></property>
 	</bean>
 	<!--========================= 客服咨询 end=================================== -->

@@ -32,20 +32,20 @@
 			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.course.ITcCourseSyllabusPhotoDao"></property>
 		</bean>
 		<!-- ************************业务处理类************************************* -->
-		<bean id="courseManager" class="cn.com.softvan.service.course.impl.CourseManager" scope="prototype">
+		<bean id="courseManager" class="cn.com.softvan.service.course.impl.CourseManager" parent="baseManager" scope="prototype">
 			<property name="tcCourseDao" ref="tcCourseDao"></property>
 		</bean>
-		<bean id="courseSyllabusManager" class="cn.com.softvan.service.course.impl.CourseSyllabusManager" scope="prototype">
+		<bean id="courseSyllabusManager" class="cn.com.softvan.service.course.impl.CourseSyllabusManager" parent="baseManager" scope="prototype">
 			<property name="tcCourseSyllabusDao" ref="tcCourseSyllabusDao"></property>
 			<property name="tcCourseSyllabusItemsDao" ref="tcCourseSyllabusItemsDao"></property>
 		</bean>
-		<bean id="courseSyllabusItemsManager" class="cn.com.softvan.service.course.impl.CourseSyllabusItemsManager" scope="prototype">
+		<bean id="courseSyllabusItemsManager" class="cn.com.softvan.service.course.impl.CourseSyllabusItemsManager" parent="baseManager" scope="prototype">
 			<property name="tcCourseSyllabusItemsDao" ref="tcCourseSyllabusItemsDao"></property>
 		</bean>
-		<bean id="courseBespeakManager" class="cn.com.softvan.service.course.impl.CourseBespeakManager" scope="prototype">
+		<bean id="courseBespeakManager" class="cn.com.softvan.service.course.impl.CourseBespeakManager" parent="baseManager" scope="prototype">
 			<property name="tcCourseBespeakDao" ref="tcCourseBespeakDao"></property>
 		</bean>
-		<bean id="courseSyllabusPhotoManager" class="cn.com.softvan.service.course.impl.CourseSyllabusPhotoManager" scope="prototype">
+		<bean id="courseSyllabusPhotoManager" class="cn.com.softvan.service.course.impl.CourseSyllabusPhotoManager" parent="baseManager" scope="prototype">
 			<property name="tcCourseSyllabusPhotoDao" ref="tcCourseSyllabusPhotoDao"></property>
 		</bean>
 </beans>

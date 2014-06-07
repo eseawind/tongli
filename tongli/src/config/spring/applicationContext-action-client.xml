@@ -12,17 +12,17 @@
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- ************************ACTION类************************************* -->
 	<!-- ==前台首页== -->
-	<bean id="c001Action" class="cn.com.softvan.web.action.client.C001Action" scope="prototype">
+	<bean id="c001Action" class="cn.com.softvan.web.action.client.C001Action" parent="baseAction" scope="prototype">
 		<property name="newsManager" ref="newsManager"></property>
 		<property name="newsTypeManager" ref="newsTypeManager"></property>
 	</bean>
 	<!-- ==资讯栏目页== -->
-	<bean id="c002Action" class="cn.com.softvan.web.action.client.C002Action" scope="prototype">
+	<bean id="c002Action" class="cn.com.softvan.web.action.client.C002Action" parent="baseAction" scope="prototype">
 		<property name="newsManager" ref="newsManager"></property>
 		<property name="newsTypeManager" ref="newsTypeManager"></property>
 	</bean>
 	<!-- ==资讯内容页== -->
-	<bean id="c003Action" class="cn.com.softvan.web.action.client.C003Action" scope="prototype">
+	<bean id="c003Action" class="cn.com.softvan.web.action.client.C003Action" parent="baseAction" scope="prototype">
 		<property name="newsManager" ref="newsManager"></property>
 		<property name="newsTypeManager" ref="newsTypeManager"></property>
 	</bean>

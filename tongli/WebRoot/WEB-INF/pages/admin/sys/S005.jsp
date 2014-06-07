@@ -109,11 +109,11 @@
 								<s:token></s:token>
 								<input type="hidden" id="offsetAA" name="offset" value="0">
 								<label>电话号码:
-								<input name="bean.sms_src_id" value=""   placeholder="输入需要搜索的手机号" 
+								<input name="bean.sms_src_id" class="upload-wrapper" value=""   placeholder="输入需要搜索的手机号" 
 								 type="text">
 								 </label>
 								 <label>短信内容:
-								<input name="bean.keyword"  value=""  placeholder="关键字" 
+								<input name="bean.keyword" class="upload-wrapper"  value=""  placeholder="关键字" 
 								 type="text">
 								 </label>
 								 <label>开始时间:

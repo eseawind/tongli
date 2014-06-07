@@ -22,7 +22,7 @@
 	<!-- 客服 dao end -->
 	<!-- ************************业务处理类************************************* -->
 	<!-- 客服 service begin -->
-	<bean id="customerServiceManager" class="cn.com.softvan.service.customerservice.impl.CustomerServiceManager" scope="prototype">
+	<bean id="customerServiceManager" class="cn.com.softvan.service.customerservice.impl.CustomerServiceManager" parent="baseManager" scope="prototype">
 		<property name="tcCsCustomerServiceDao" ref="tcCsCustomerServiceDao"></property>
 	</bean>
 	<!-- 客服 service end -->

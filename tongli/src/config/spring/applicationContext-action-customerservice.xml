@@ -13,7 +13,7 @@
 	<!-- ************************ACTION类************************************* -->
 	<!--========================= 客服 begin=================================== -->
 	<!-- 咨询  ActionClass -->
-	<bean id="cs101Action" class="cn.com.softvan.web.action.customerservice.CS101Action" scope="prototype">
+	<bean id="cs101Action" class="cn.com.softvan.web.action.customerservice.CS101Action" parent="baseAction" scope="prototype">
 		<property name="customerServiceManager" ref="customerServiceManager"></property>
 	</bean>
 	<!--========================= 客服 end=================================== -->

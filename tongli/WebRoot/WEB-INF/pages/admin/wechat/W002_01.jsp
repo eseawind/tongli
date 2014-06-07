@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-14  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 童励 System. - All Rights Reserved.
+ * Copyright 2014 上海人保财险微信 System. - All Rights Reserved.
  *
  */
 --%>
@@ -69,7 +69,7 @@
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
-							href="${basePath }/home_init.ac">Home</a> <i
+							href="${basePath }/home_init.ac">主页</a> <i
 							class="fa fa-angle-right"></i></li>
 						<li><a href="#">微信服务</a> <i class="fa fa-angle-right"></i></li>
 						<li><a href="#">自动回复</a> <i class="fa fa-angle-right"></i></li>
@@ -429,13 +429,15 @@
 		}
 	}
 	function del_message_article(obj){
-		var data_new_id=$(obj).parent().parent().attr('data-new-id');
-		if(data_new_id){
-			$(obj).parent().parent().remove();
-		}else{
-			$(obj).parent().parent().find('#del_flag').val('1');
-			$(obj).parent().parent().hide();
+		if(confirm('确认删除吗?')){
+			var data_new_id=$(obj).parent().parent().attr('data-new-id');
+			if(data_new_id){
+				$(obj).parent().parent().remove();
+			}else{
+				$(obj).parent().parent().find('#del_flag').val('1');
+				$(obj).parent().parent().hide();
+			}
+			$('.msg-edit').hide();
 		}
-		$('.msg-edit').hide();
 	}
 </script>
