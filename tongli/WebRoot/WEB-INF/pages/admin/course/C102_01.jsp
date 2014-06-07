@@ -262,7 +262,7 @@
 									            <p class="name">
 														<input type="hidden" name="picid" value="${photoBean.id}" />
 														<input type="hidden" name="picurl${photoBean.id}" value="${photoBean.pic_url}" />
-														<textarea name="pictit${photoBean.id}" style="height:100px;width:95%;">${photoBean.pic_title}</textarea>
+														<textarea  class="upload-wrapper" name="pictit${photoBean.id}" style="height:100px;width:95%;">${photoBean.pic_title}</textarea>
 									            </p>
 									        </td>
 									        <td>
@@ -391,7 +391,7 @@
 					
 					<input type="hidden" name="picid" value="{%=uuid%}" />
 					<input type="hidden" name="picurl{%=uuid%}" value="{%=file.url%}" />
-					<textarea name="pictit{%=uuid%}" style="height:100px;width:95%;">{%=file.name%}</textarea>
+					<textarea   class="upload-wrapper" name="pictit{%=uuid%}" style="height:100px;width:95%;">{%=file.name%}</textarea>
                 {% } else { %}
                     <span>{%=file.name%}</span>
                 {% } %}

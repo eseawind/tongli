@@ -90,7 +90,7 @@ ul,li{
 				<form accept-charset="UTF-8"  action="${basePath}/h/c302_send.ac" id="send_content_13632" method="post">
 					<input type="hidden" name="bean.user_id" value="${cbean.user_id}" />
 					<input type="hidden" name="bean.consult_id" value="${cbean.id}" />
-					<textarea id="bean_content" name="bean.content" style="height: 50px;width: 100%;"></textarea>
+					<textarea   class="upload-wrapper" id="bean_content" name="bean.content" style="height: 50px;width: 100%;"></textarea>
 					<a href="javascript:;" class="btn edit green" onclick="submitFrom2();">发送</a>
 					<a href="javascript:;" class="btn edit green">常用信息</a>
 					<a href="javascript:;" class="btn edit green" onclick="wclose();">咨询完结</a>

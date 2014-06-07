@@ -17,7 +17,7 @@
 	<div class="w">Copyright@2014&nbsp;&nbsp;&nbsp;&nbsp;沪ICP备案：110055455号&nbsp;&nbsp;&nbsp;&nbsp;联系电话：021-20556847&nbsp;&nbsp;&nbsp;&nbsp;邮箱：xsds@126.com</div>
 </div>
 <script type="text/javascript">
-		$(function() {
+		jQuery(document).ready(function() {
 			//jquery图片滚动
 			$('#img_slide').bxCarousel({
 				display_num : 2,
@@ -54,5 +54,47 @@
 				 return false;
 				});
 		});
-	</script>
-
+</script>
+<script>
+		getBlockUI();
+		jQuery(document).ready(function() {    
+		   $.unblockUI();
+		});
+		$(document).ajaxStart(function () {
+			$.blockUI({
+		        message: '<img src="'+basePath+'/plugins/bootstrap.admin.theme/assets/img/ajax-loading.gif" />',
+	           css: {
+	               top: '50%',
+	               border: 'none',
+	               padding: '2px',
+	               backgroundColor: 'none'
+	           },
+	           overlayCSS: {
+	               backgroundColor: '#000',
+	               opacity: 0.05,
+	               cursor: 'wait'
+	           }
+		    });
+		});
+		$(document).ajaxStop(function () {
+		    // 直接调用，无延时
+		    $.unblockUI();
+		});
+		function getBlockUI(){
+			 $.blockUI({
+		        message: '<img src="'+basePath+'/plugins/bootstrap.admin.theme/assets/img/ajax-loading.gif" />',
+	           css: {
+	               top: '50%',
+	               border: 'none',
+	               padding: '2px',
+	               backgroundColor: 'none'
+	           },
+	           overlayCSS: {
+	               backgroundColor: '#000',
+	               opacity: 0.05,
+	               cursor: 'wait'
+	           }
+		    });
+			setTimeout($.unblockUI, 500);
+		}
+</script>

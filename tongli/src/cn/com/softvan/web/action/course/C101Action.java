@@ -40,8 +40,6 @@ public class C101Action extends BaseAction {
 	private static final transient Logger log = Logger.getLogger(C101Action.class);
 	/** 课程管理  业务处理*/
 	private ICourseManager courseManager;
-	/** 数据字典管理 service  业务处理 */
-	private IVariableManager variableManager;
 	/**课程信息BEAN*/
 	private TcCourseBean bean;
 	/**课程信息BEAN集合*/
@@ -267,23 +265,6 @@ public class C101Action extends BaseAction {
 	public void setCourseManager(ICourseManager courseManager) {
 	    this.courseManager = courseManager;
 	}
-
-	/**
-	 * 数据字典管理 service  业务处理取得
-	 * @return 数据字典管理 service  业务处理
-	 */
-	public IVariableManager getVariableManager() {
-	    return variableManager;
-	}
-
-	/**
-	 * 数据字典管理 service  业务处理设定
-	 * @param variableManager 数据字典管理 service  业务处理
-	 */
-	public void setVariableManager(IVariableManager variableManager) {
-	    this.variableManager = variableManager;
-	}
-
 	/**
 	 * 课程信息BEAN取得
 	 * @return 课程信息BEAN

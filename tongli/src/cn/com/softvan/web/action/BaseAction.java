@@ -19,6 +19,7 @@ import org.springframework.core.task.TaskExecutor;
 import cn.com.softvan.common.IpUtils;
 import cn.com.softvan.common.JedisHelper;
 import cn.com.softvan.service.IUserLogsManager;
+import cn.com.softvan.service.sys.IVariableManager;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -31,9 +32,11 @@ public class BaseAction extends ActionSupport implements SessionAware, ServletRe
 	/** 管理员操作日志  service类 */
 	protected IUserLogsManager userLogsManager;
 	/**线程池 */
-	private TaskExecutor taskExecutor;
+	protected TaskExecutor taskExecutor;
 	/**redis缓存工具类*/
-	private JedisHelper jedisHelper;
+	protected JedisHelper jedisHelper;
+	/** 数据字典管理 service  业务处理 */
+	protected IVariableManager variableManager;
 	/***
 	 * 返回上次访问链接
 	 * @return
@@ -164,6 +167,20 @@ public class BaseAction extends ActionSupport implements SessionAware, ServletRe
 	 */
 	public void setJedisHelper(JedisHelper jedisHelper) {
 	    this.jedisHelper = jedisHelper;
+	}
+	/**
+	 * 数据字典管理 service  业务处理取得
+	 * @return 数据字典管理 service  业务处理
+	 */
+	public IVariableManager getVariableManager() {
+	    return variableManager;
+	}
+	/**
+	 * 数据字典管理 service  业务处理设定
+	 * @param variableManager 数据字典管理 service  业务处理
+	 */
+	public void setVariableManager(IVariableManager variableManager) {
+	    this.variableManager = variableManager;
 	}
 
 }

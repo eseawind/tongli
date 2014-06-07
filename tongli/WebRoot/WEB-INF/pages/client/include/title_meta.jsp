@@ -14,4 +14,4 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>童励儿童俱乐部</title>
 <meta name="description" content="夏令营,儿童俱乐部,童励" />
-
+<script>var basePath='${basePath}';</script>

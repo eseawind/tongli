@@ -14,5 +14,10 @@
 			<result name="init">/WEB-INF/pages/client/course/C202.jsp</result>
 			<result name="view">/WEB-INF/pages/client/course/C202_01.jsp</result>
 		</action>
+		<!-- 课程-在线报名-->
+		<action name="c203_*" class="c203Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client/course/C203.jsp</result>
+			<result name="view">/WEB-INF/pages/client/course/C203_01.jsp</result>
+		</action>
 	</package>
 </struts>

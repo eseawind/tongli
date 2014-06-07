@@ -21,7 +21,6 @@
 <c:if test="${beans!=null && fn:length(beans)>0 }">
 
 <style>
-.grade p{float: left;text-align: left;color: red;}
 .j-pl-photolist-ul{list-style: none;width:710px;}
 .j-pl-photoitem{list-style: none;float: left;width: 152px;height:150px;margin: 10px;}
 .mod-photo-item{width: 152px;margin: 13px;}
@@ -240,6 +239,36 @@
 				</td>
 			</tr>
 	</table>
+	<table  class="table table-striped table-condensed" >
+		<tr>
+			<td height="30" align="center" >
+				============参与讨论==========
+			</td>
+		</tr>
+		<tr>
+			<td align="left" class="">
+				<div class="col-md-12 blog-page">
+					<div id="comment_list1_div_${bean.id}_${i.index+1}">
+					</div>
+					<hr>
+					<div class="post-comment">
+						<h3>Leave a Comment</h3>
+						<form role="form" id="comment_form_${bean.id}_${i.index+1}" accept-charset="UTF-8"  action="${basePath}/t001_csave.ac"  method="post">
+							<div class="form-group">
+								<label class="control-label">评论信息<span class="required">*200字以内</span></label>
+								<input type="hidden" name="cbean.info_id" id="cbean_info_id" value="${bean.id}"  />
+								<textarea name="cbean.detail_info" id="cbean_detail_info" class="form-control" rows="4"></textarea>
+							</div>
+							<a class="btn blue margin-top-10" onclick="submitFrom4('comment_form_${bean.id}_${i.index+1}','comment_list1_div_${bean.id}_${i.index+1}');">提交评论信息</a>
+						</form>
+					</div>
+				</div>
+				</td>
+			</tr>
+	</table>
+	<script type="text/javascript">
+	loadUrlPageComment(0,'t001_','clist1','comment_list1_div_${bean.id}_${i.index+1}','&cid=${bean.id}');
+	</script>
 	</div>
 </div>
 </c:forEach>
@@ -411,7 +440,5 @@
 		$(obj).hide();
 		$(obj).parent().find('.pdel_flag_a').show();
 	}
-
-	
 </script>
 </c:if>

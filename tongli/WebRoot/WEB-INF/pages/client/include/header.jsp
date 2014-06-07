@@ -16,12 +16,16 @@
 <%@page import="cn.com.softvan.bean.member.TcMemberBean"%>
 
 <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path;
-	request.setAttribute("path", path);
-	request.setAttribute("basePath", basePath);
+String path = request.getContextPath();
+String basePath = null;
+if (request.getServerPort() != 80) {
+	basePath = request.getScheme() + "://" + request.getServerName() 
+			+ ":" + request.getServerPort() + path;	
+} else {
+	basePath = request.getScheme() + "://" + request.getServerName() + path;
+}
+request.setAttribute("path", path);
+request.setAttribute("basePath", basePath);
 %>
 
 <div class="top_line"></div>

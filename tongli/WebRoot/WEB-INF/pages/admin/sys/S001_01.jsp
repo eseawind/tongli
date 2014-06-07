@@ -159,7 +159,7 @@
 						<div class="form-group">
 							<label for="article_description">内容</label>
 							<div class="qeditor_border">
-								<textarea name="bean.detail_info" style="height: 300px;width: 100%;" id="article_description" >
+								<textarea class="form-control" name="bean.detail_info" style="height: 300px;width: 100%;" id="article_description" >
 									${bean.detail_info}
 								</textarea>
 							</div>

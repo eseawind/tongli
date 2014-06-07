@@ -1,17 +1,15 @@
 /*
- * 课程-预约参观 Action Class
+ * 课程-在线报名 Action Class
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.05.17  wuxiaogang      程序・发布
+ * 1.00     2014.06.07  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 童励  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.web.action.client.course;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -20,25 +18,24 @@ import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.course.TcCourseBean;
 import cn.com.softvan.bean.course.TcCourseBespeakBean;
 import cn.com.softvan.common.CommonConstant;
-import cn.com.softvan.common.DateUtil;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.service.course.ICourseBespeakManager;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.web.action.BaseAction;
 
 /**
- * 课程-预约参观  ActionClass
+ * 课程-在线报名  ActionClass
  * 
  * @author wuxiaogang
  * 
  */
-public class C202Action extends BaseAction {
+public class C203Action extends BaseAction {
 
 	/**
 	 * 序列号
 	 */
 	private static final long serialVersionUID = -3061791975484213551L;
-	private static final transient Logger log = Logger.getLogger(C202Action.class);
+	private static final transient Logger log = Logger.getLogger(C203Action.class);
 	
 	/** 课程-预约参观 管理 业务处理*/
 	private ICourseBespeakManager courseBespeakManager;
@@ -49,8 +46,8 @@ public class C202Action extends BaseAction {
 	/** 课程管理  业务处理*/
 	private ICourseManager courseManager;
 	//
-	public C202Action() {
-		log.info("默认构造器......C202Action");
+	public C203Action() {
+		log.info("默认构造器......C203Action");
 	}
 
 	/**
@@ -63,7 +60,7 @@ public class C202Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String init() {
-		log.info("C202Action init.........");
+		log.info("C203Action init.........");
 		String id=request.getParameter("id");
 		if(id!=null){
 			TcCourseBespeakBean bean1=new TcCourseBespeakBean();
@@ -80,10 +77,6 @@ public class C202Action extends BaseAction {
 		List<TcCourseBean> course_beans=courseManager.findDataIsList(course_bean);
 		request.setAttribute("course_beans", course_beans);
 		
-		//日期提前一周--
-	    Calendar cal = Calendar.getInstance();
-	    cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)+7);
-		request.setAttribute("startDate",DateUtil.getDateStr(cal.getTime()));
 		
 		return "init";
 	}
@@ -129,7 +122,7 @@ public class C202Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String view() {
-		log.info("C202Action view.........");
+		log.info("C203Action view.........");
 		TcCourseBespeakBean bean1 = new TcCourseBespeakBean();
 		bean1.setId(request.getParameter("cid"));
 		bean=courseBespeakManager.findDataById(bean1);
@@ -198,11 +191,5 @@ public class C202Action extends BaseAction {
 	 */
 	public void setCourseManager(ICourseManager courseManager) {
 	    this.courseManager = courseManager;
-	}
-	public static void main(String[] args) {
-		//日期提前一周--
-		  Calendar cal = Calendar.getInstance();
-		  cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)+7);
-		System.out.println(DateUtil.getDateStr(cal.getTime()));
 	}
 }

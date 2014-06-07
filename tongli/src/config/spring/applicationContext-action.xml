@@ -16,6 +16,7 @@
 		<!-- <property name="userLogsManager" ref="userLogsManager"></property> -->
 		<property name="jedisHelper" ref="jedisHelper"></property>
 		<property name="taskExecutor" ref="taskExecutor"></property>
+		<property name="variableManager" ref="variableManager"></property>
 	</bean>
 	<!-- 行政区划 管理 -->
 	<bean id="areaAction" class="cn.com.softvan.web.action.adi.AreaAction" parent="baseAction" scope="prototype">

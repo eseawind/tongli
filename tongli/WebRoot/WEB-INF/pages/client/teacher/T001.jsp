@@ -17,15 +17,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
 <script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
-<link href="${basePath}/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<script src="${basePath}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
@@ -168,6 +166,49 @@
 			},
 			error : function() {
 				alert("页面发生错误");
+			}
+		});
+	}
+	// 提交from comment
+	function submitFrom4(from_id,divid) {
+		//登录认证
+		loginCheck()
+		
+		var info_obj=$('#'+from_id).find('#cbean_detail_info');
+		var info_val=$.trim(info_obj.val());
+		if(info_val.length<200){
+			if(info_val==''||info_val.length==0){
+				alert('评论信息为空!');
+				return false;
+			}
+			//提交
+			jQuery("#"+from_id).ajaxSubmit(function(data) {
+				if (data == "1") {
+					var d=new Date(); 
+					var formatdate=d.getFullYear()+'-'+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"";
+					$('#'+divid).prepend('<div class="media"><a href="#" class="pull-left"></a><div class="media-body"><h4 class="media-heading alert-warning"><label style="color: #777;font-size: 12px;">${uid}</label><span>'+formatdate+'</span></h4><p class="alert alert-success alert-dismissable">'+info_val+'</p></div></div>');
+					info_obj.val('');
+					alert('评论成功!');
+				} else {
+					alert(data);
+				}
+			});
+		}else{
+			alert('评论字数超过限制,200字以内!');
+		}
+	}
+	//--加载评论信息--
+	function loadUrlPageComment(offset,url,event,divId,obj) {
+		loginCheck();
+		//var load = "<a class='loading' >信息加载中...</a>";
+		//jQuery("#" + divId).html(load);
+		jQuery.ajax({
+			url : '${basePath}/' + url + event+'.ac?offset='+offset+'&did='+divId+ obj + '&time=' + new Date(),
+			success : function(req) {
+				jQuery("#"+divId).html(req);
+			},
+			error : function() {
+				jQuery("#"+divId).html('信息加载失败!');
 			}
 		});
 	}

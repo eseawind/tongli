@@ -1,6 +1,6 @@
 <%--
 /*
- * 课程--预约报名
+ * 课程--预约参观
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
@@ -17,13 +17,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
 <script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
+<link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
+<script type="text/javascript" src="${basePath}/js/bootstarp-date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${basePath}/js/bootstarp-date/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 </head>
 
 <body class="page-header-fixed">
@@ -47,14 +50,19 @@
 								<li>
 									<div class="tit">参观课程：</div>
 									<div class="con">
-										<input name="bean.course" type="text" class="input"> <em>*
+										<select name="bean.course" class="input">
+										<c:forEach items="${course_beans}" var="course_bean">
+											<option value="${course_bean.title}">${course_bean.title}</option>
+										</c:forEach>
+										</select>
+										<em>*
 												你要参观的课程</em>
 									</div>
 								</li>
 								<li>
 									<div class="tit">参观时间：</div>
 									<div class="con">
-										<input name="bean.day" type="text" class="input"> <em>*
+										<input name="bean.day" type="text"  readonly="readonly" class="input date form_date1"> <em>*
 												你要参观的日期时间</em>
 									</div>
 								</li>
@@ -99,14 +107,14 @@
 									<div class="con" style="height: 80px;">
 										<textarea name="bean.detail_info" cols="5" rows="3"
 											style="width: 200px; height: 70px; margin-top: 10px;"></textarea>
-										<em>* 其它</em>
+										<em> 其它</em>
 									</div>
 								</li>
 							</ul>
 
 							<div class="c10"></div>
 							<div  style="margin-left: 100px;">
-							<input class="reg_submit" type="submit" value="提 交" />
+							<input class="reg_submit" style="width: 80px;" type="submit" value="提 交" />
 							</div>
 							<div class="c10"></div>
 						</form>
@@ -139,3 +147,21 @@
 	<!-- END FOOTER -->
 </body>
 </html>
+<script type="text/javascript">
+
+
+
+$('.form_date1').datetimepicker({
+    language:  'zh-CN',
+	format: "yyyy-mm-dd HH:ii:00",
+    weekStart: 1,
+    todayBtn:  1,
+	autoclose: 1,
+	todayHighlight: 1,
+	startView: 2,
+	minView: 0,
+	maxView: 3,
+	startDate:'${startDate} 00:00:00',
+	pickerPosition:"bottom-left"
+});
+</script>

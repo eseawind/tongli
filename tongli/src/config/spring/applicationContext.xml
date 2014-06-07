@@ -143,6 +143,7 @@
 		<!-- <property name="userLogsManager" ref="userLogsManager"></property> -->
 		<property name="jedisHelper" ref="jedisHelper"></property>
 		<property name="taskExecutor" ref="taskExecutor"></property>
+		<property name="variableManager" ref="variableManager"></property>
 	</bean>
 	<!-- 行政区划 管理 -->
 	<bean id="areaManager" class="cn.com.softvan.service.adi.impl.AreaManager" parent="baseManager" scope="prototype">

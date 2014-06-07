@@ -103,7 +103,7 @@
 						<div class="form-group">
 							<label for="bean_sms_content">短信内容60字以内</label>
 							<div class="qeditor_border">
-								<textarea name="bean.sms_content" style="height: 100px;width: 100%;" id="article_description" >${bean.sms_content}</textarea>
+								<textarea class="upload-wrapper" name="bean.sms_content" style="height: 100px;width: 100%;" id="article_description" >${bean.sms_content}</textarea>
 							</div>
 						</div>
 						<c:if test="${bean!=null && bean.sms_send_time!=null}">

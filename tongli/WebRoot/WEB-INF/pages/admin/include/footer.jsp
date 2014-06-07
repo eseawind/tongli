@@ -51,8 +51,47 @@
 <!-- END CORE PLUGINS -->
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/scripts/app.js"></script>      
 <script>
-	jQuery(document).ready(function() {    
-	   App.init();
-	});
+		getBlockUI();
+		jQuery(document).ready(function() {    
+		   App.init();
+		   $.unblockUI();
+		});
+		$(document).ajaxStart(function () {
+			$.blockUI({
+		        message: '<img src="'+basePath+'/plugins/bootstrap.admin.theme/assets/img/ajax-loading.gif" />',
+	           css: {
+	               top: '50%',
+	               border: 'none',
+	               padding: '2px',
+	               backgroundColor: 'none'
+	           },
+	           overlayCSS: {
+	               backgroundColor: '#000',
+	               opacity: 0.05,
+	               cursor: 'wait'
+	           }
+		    });
+		});
+		$(document).ajaxStop(function () {
+		    // 直接调用，无延时
+		    $.unblockUI();
+		});
+		function getBlockUI(){
+			 $.blockUI({
+		        message: '<img src="'+basePath+'/plugins/bootstrap.admin.theme/assets/img/ajax-loading.gif" />',
+	           css: {
+	               top: '50%',
+	               border: 'none',
+	               padding: '2px',
+	               backgroundColor: 'none'
+	           },
+	           overlayCSS: {
+	               backgroundColor: '#000',
+	               opacity: 0.05,
+	               cursor: 'wait'
+	           }
+		    });
+			setTimeout($.unblockUI, 500);
+		}
 </script>
 <!-- END JAVASCRIPTS -->

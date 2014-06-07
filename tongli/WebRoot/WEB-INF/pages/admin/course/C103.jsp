@@ -26,6 +26,12 @@
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 <link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
+
+<script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
+
+<link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
+<script type="text/javascript" src="${basePath}/js/bootstarp-date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${basePath}/js/bootstarp-date/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -90,6 +96,30 @@
 								</c:otherwise>
 							</c:choose>
 						</c:if>
+						<div class="well form-inline">
+							<form id="small_info_form_list1" accept-charset="UTF-8"  action="${basePath}/h/s005_list1.ac"  method="post">
+								<s:token></s:token>
+								<input type="hidden" id="offsetAA" name="offset" value="0">
+								<label>电话号码:
+								<input name="bean.sms_src_id" class="upload-wrapper" value=""   placeholder="输入需要搜索的手机号" 
+								 type="text">
+								 </label>
+								 <label>短信内容:
+								<input name="bean.keyword" class="upload-wrapper"  value=""  placeholder="关键字" 
+								 type="text">
+								 </label>
+								 <label>开始时间:
+								<input name="bean.date1" class="upload-wrapper date form_date1" value=""  readonly="readonly" placeholder="时间段" 
+								 type="text">
+								 </label>
+								 <label>结束时间:
+								<input name="bean.date2" class="upload-wrapper date form_date2" value=""   readonly="readonly" placeholder="时间段" 
+								 type="text">
+								 </label>
+								 <a onclick="submitFrom1(0,'small_info_form_list1');" class="reload btn btn-primary">检索</a>
+								 <button type="reset" class="reload btn blue">重置</button>
+							 </form>
+						</div>
 								<table class="table table-condensed table-striped">
 								<tbody>
 									<tr>
@@ -139,4 +169,28 @@
 function loadUrlPage(offset, url, event) {
 	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
 }
+$('.form_date1').datetimepicker({
+    language:  'zh-CN',
+	format: "yyyy-mm-dd HH:ii:00",
+    weekStart: 1,
+    todayBtn:  1,
+	autoclose: 1,
+	todayHighlight: 1,
+	startView: 2,
+	minView: 0,
+	maxView: 3,
+	pickerPosition:"bottom-left"
+});
+$('.form_date2').datetimepicker({
+    language:  'zh-CN',
+	format: "yyyy-mm-dd HH:ii:00",
+    weekStart: 1,
+    todayBtn:  1,
+	autoclose: 1,
+	todayHighlight: 1,
+	startView: 2,
+	minView: 0,
+	maxView: 3,
+	pickerPosition:"bottom-left"
+});
 </script>
