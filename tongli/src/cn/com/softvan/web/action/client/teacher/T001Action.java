@@ -122,8 +122,8 @@ public class T001Action extends BaseAction {
 		bean1.setDel_flag("0");
 		TcMemberBean member=(TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO);
 		bean1.setTeacher_id(member.getId());//教师id
-		//--
-		bean1.setNote("0");
+		//--已完成课程
+		bean1.setNote("1");
 		//课程列表
 		List<TcCourseSyllabusBean> beans=courseSyllabusItemsManager.findDataIsPageCourse2(bean1);
 		request.setAttribute("beans",beans);
@@ -157,8 +157,8 @@ public class T001Action extends BaseAction {
 		bean1.setDel_flag("0");
 		TcMemberBean member=(TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO);
 		bean1.setTeacher_id(member.getId());//教师id
-		//--
-		bean1.setNote("1");
+		//--未完成课程
+		bean1.setNote("0");
 		//课程列表
 		List<TcCourseSyllabusBean> beans=courseSyllabusItemsManager.findDataIsPageCourse2(bean1);
 		request.setAttribute("beans",beans);

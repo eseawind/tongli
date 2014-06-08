@@ -282,7 +282,7 @@
     <a class="play-pause"></a>
     <ol class="indicator"></ol>
 </div>
-<customtag:pagingext func="loadUrlPage" params="'t001_','list1','course_info','&status=0'" />
+<customtag:pagingext func="loadUrlPage" params="'t001_','list1','course_info1'" />
 
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">

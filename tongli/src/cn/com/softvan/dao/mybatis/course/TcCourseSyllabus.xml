@@ -110,7 +110,20 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
-     <if test="course_status!=null"> and t1.course_status=#{course_status}</if>
+     <!-- 已完成课程 -->
+    <if test="course_status!=null and course_status==1">
+   		<![CDATA[
+    	and ( TO_DAYS(t1.day)<TO_DAYS(now()) or t1.course_status=#{course_status} )
+		
+		]]><!-- and TO_SECONDS(t1.end_time)<TO_SECONDS(now()) -->
+    </if>
+    <!-- 未完成课程 -->
+    <if test="course_status!=null and course_status==0">
+    	<![CDATA[
+    	and TO_DAYS(t1.day)>=TO_DAYS(now())
+		
+		]]><!-- and TO_SECONDS(t1.end_time)>=TO_SECONDS(now()) -->
+    </if>
     order by t1.day asc,t1.begin_time asc,t1.end_time asc
     </select>
 	<!-- 
@@ -132,7 +145,20 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
-    <if test="course_status!=null"> and t1.course_status=#{course_status}</if>
+     <!-- 已完成课程 -->
+    <if test="course_status!=null and course_status==1">
+   		<![CDATA[
+    	and ( TO_DAYS(t1.day)<TO_DAYS(now()) or t1.course_status=#{course_status} )
+		
+		]]><!-- and TO_SECONDS(t1.end_time)<TO_SECONDS(now()) -->
+    </if>
+    <!-- 未完成课程 -->
+    <if test="course_status!=null and course_status==0">
+    	<![CDATA[
+    	and TO_DAYS(t1.day)>=TO_DAYS(now())
+		
+		]]><!-- and TO_SECONDS(t1.end_time)>=TO_SECONDS(now()) -->
+    </if>
     order by t1.day asc,t1.begin_time asc,t1.end_time asc
    </select>
    <!-- 逻辑删除 -->

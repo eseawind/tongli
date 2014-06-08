@@ -208,6 +208,7 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//VERSION
 				dto.setAddres(bean.getAddres());//地址
+				dto.setCourse_status(bean.getCourse_status());//状态
 				dto.setPageInfo(bean.getPageInfo());//分页
     	   }
 			beans=(List<TcCourseSyllabusBean>) tcCourseSyllabusDao.findDataIsPage(dto);
@@ -245,7 +246,8 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 					dto.setDel_flag(bean.getDel_flag());//是否删除
 					dto.setAddres(bean.getAddres());//地址
 					dto.setVersion(bean.getVersion());//VERSION
-	    		    
+					dto.setCourse_status(bean.getCourse_status());//状态
+					
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }

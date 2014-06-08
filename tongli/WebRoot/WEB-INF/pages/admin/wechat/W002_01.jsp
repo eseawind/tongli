@@ -338,8 +338,8 @@
 		if (url == null || url == "" || divId == null || divId == "") {
 			return;
 		}
-		var load = "<a class='loading' >信息努力加载中...</a>";
-		jQuery("#" + divId).html(load);
+		//var load = "<a class='loading' >信息努力加载中...</a>";
+		//jQuery("#" + divId).html(load);
 		jQuery.ajax({
 			url : '${basePath}/' + url + event+'.ac?offset='
 					+ offset + '&time=' + new Date().getTime(),

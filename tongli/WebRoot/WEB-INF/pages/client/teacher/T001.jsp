@@ -74,14 +74,9 @@
 				</div>
 				<div class="content">
 					<ul>
-						<c:forEach items="${student_beans}" var="student" varStatus="i">
-							<c:if test="${i.index==0}">
-								<c:set var="student_id" value="${student.id}" />
-							</c:if>
 							<li>
-								<a href="javascript:;" onclick="loadInfo('${student.id}');">${student.name}</a>
+								<a href="javascript:;" onclick="loadInfo();">课程表</a>
 							</li>
-						</c:forEach>
 					</ul>
 				</div>
 			</div>
@@ -132,20 +127,18 @@
 </html>
 <script>
 	$(function() {
-		loadUrlPage(0,'t001_','list1','course_info1','${student_id}','&status=0');
-		loadUrlPage(0,'t001_','list2','course_info2','${student_id}','&status=1');
+		loadUrlPage(0,'t001_','list1','course_info1');
+		loadUrlPage(0,'t001_','list2','course_info2');
 	});
 	function loadInfo(sid) {
 		loginCheck();
-		loadUrlPage(0,'t001_','list1','course_info1',sid,'&status=0');
-		loadUrlPage(0,'t001_','list2','course_info2',sid,'&status=1');
+		loadUrlPage(0,'t001_','list1','course_info1');
+		loadUrlPage(0,'t001_','list2','course_info2');
 	}
-	function loadUrlPage(offset,url,event,divId,sid,obj) {
+	function loadUrlPage(offset,url,event,divId,obj) {
 		loginCheck();
-		//var load = "<a class='loading' >信息加载中...</a>";
-		//jQuery("#" + divId).html(load);
 		jQuery.ajax({
-			url : '${basePath}/' + url + event+'.ac?offset='+offset+"&sid="+ sid + obj + '&time=' + new Date(),
+			url : '${basePath}/' + url + event+'.ac?offset='+offset+ obj + '&time=' + new Date(),
 			success : function(req) {
 				jQuery("#"+divId).html(req);
 			},

@@ -4,6 +4,7 @@
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
  * 1.00     2013.11.24  WuXiaogang        程序,发布
+ * 2.00     2013.06.09  WuXiaogang        程序,更新  解决同一页面多个分页问题
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2013 adsp System. - All Rights Reserved.
  *
@@ -84,11 +85,10 @@ public class PagingExtTag extends TagSupport {
 	     cssStr.append(".b_page a.disabled { background:#FFF;  border:1px solid #cdcdcb; color:#5B5B5B; cursor:text; }");
 	     cssStr.append(".clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0px;height:0px;}");
 	     cssStr.append("</style>");
-	
 	     // 上一页
 	     StringBuffer prePage = new StringBuffer();
 	     if (hasPrevious) {
-	         prePage.append("<a href=\"javascript:doSkipPage("+ (currentPageNo-2)*pageRowCount +")\">");
+	         prePage.append("<a href=\"javascript:;\" onclick=\""+ getPageScript((currentPageNo-2)*pageRowCount) +"\">");
 	         prePage.append("上一页");
 	         prePage.append("</a>");
 	     } else {
@@ -99,7 +99,7 @@ public class PagingExtTag extends TagSupport {
 	     // 下一页
 	     StringBuffer nextPage = new StringBuffer();
 	     if (hasNext) {
-	         nextPage.append("<a href=\"javascript:doSkipPage("+ currentPageNo*pageRowCount +")\">");
+	         nextPage.append("<a href=\"javascript:;\" onclick=\""+ getPageScript(currentPageNo*pageRowCount) +"\">");
 	         nextPage.append("下一页");
 	         nextPage.append("</a>");
 	     } else {
@@ -120,7 +120,7 @@ public class PagingExtTag extends TagSupport {
 	         	if (currentPageNo == i) {
 	         		midPage.append("<a class=\"on\">"+ i +"</a>");
 	         	} else {
-	         		midPage.append("<a href=\"javascript:doSkipPage("+ (i - 1)*pageRowCount +")\">");
+	         		midPage.append("<a href=\"javascript:;\" onclick=\""+ getPageScript( (i - 1)*pageRowCount) +"\">");
 	         		midPage.append(i);
 	         		midPage.append("</a>");
 	         	}
@@ -135,7 +135,7 @@ public class PagingExtTag extends TagSupport {
 	         		if (currentPageNo == i) {
 	         			midPage.append("<a class=\"on\">"+ i +"</a>");
 	         		} else {
-	         			midPage.append("<a href=\"javascript:doSkipPage("+ (i - 1)*pageRowCount +")\">");
+	         			midPage.append("<a href=\"javascript:;\" onclick=\""+ getPageScript(+ (i - 1)*pageRowCount) +"\">");
 	         			midPage.append(i);
 	         			midPage.append("</a>");
 	         		}
@@ -144,7 +144,7 @@ public class PagingExtTag extends TagSupport {
 	         			// 加上...
 	         			midPage.append(HTML_3DOT_STRING);
 	         			// 加上末页数字
-	         			midPage.append("<a href=\"javascript:doSkipPage("+ (pageCount - 1)*pageRowCount +")\">");
+	         			midPage.append("<a href=\"javascript:;\" onclick=\""+ getPageScript( (pageCount - 1)*pageRowCount) +"\">");
 	         			midPage.append(pageCount);
 	         			midPage.append("</a>");
 	         			break;
@@ -155,7 +155,7 @@ public class PagingExtTag extends TagSupport {
 	     	} else if (currentPageNo > (pageCount - pageNoCount)) {
 	     	
 	         	// 加上首页数字
-	         	midPage.append("<a href=\"javascript:doSkipPage(0)\">");
+	         	midPage.append("<a href=\"javascript:;\" onclick=\""+ getPageScript(0)+"\">");
 	         	midPage.append(1);
 	         	midPage.append("</a>");
 	         	// 加上...
@@ -165,14 +165,14 @@ public class PagingExtTag extends TagSupport {
 	         		if (currentPageNo == i) {
 	         			midPage.append("<a class=\"on\">"+ i +"</a>");
 	         		} else {
-	         			midPage.append("<a href=\"javascript:doSkipPage("+ (i - 1)*pageRowCount +")\">");
+	         			midPage.append("<a href=\"javascript:;\" onclick=\""+ getPageScript( (i - 1)*pageRowCount) +"\">");
 	         			midPage.append(i);
 	         			midPage.append("</a>");
 	         		}
 	         	}
 	     	} else {
 	     	    // 加上首页数字
-	         	midPage.append("<a href=\"javascript:doSkipPage(0)\">");
+	         	midPage.append("<a href=\"javascript:;\" onclick=\""+ getPageScript(0)+"\">");
 	         	midPage.append(1);
 	         	midPage.append("</a>");
 	         	// 加上...
@@ -181,7 +181,7 @@ public class PagingExtTag extends TagSupport {
 	         		if (currentPageNo == i) {
 	         			midPage.append("<a class=\"on\">"+ i +"</a>");
 	         		} else {
-	         			midPage.append("<a href=\"javascript:doSkipPage("+ (i - 1)*pageRowCount +")\">");
+	         			midPage.append("<a href=\"javascript:;\" onclick=\""+ getPageScript((i - 1)*pageRowCount) +"\">");
 	         			midPage.append(i);
 	         			midPage.append("</a>");
 	         		}
@@ -189,7 +189,7 @@ public class PagingExtTag extends TagSupport {
 	         	// 加上...
 	         	midPage.append(HTML_3DOT_STRING);
 	         	// 加上末页数字
-	         	midPage.append("<a href=\"javascript:doSkipPage("+ (pageCount - 1)*pageRowCount +")\">");
+	         	midPage.append("<a href=\"javascript:;\" onclick=\""+ getPageScript((pageCount - 1)*pageRowCount )+"\">");
 	         	midPage.append(pageCount);
 	         	midPage.append("</a>");
 	     	}
@@ -224,19 +224,19 @@ public class PagingExtTag extends TagSupport {
 	     pageCom.append("</div>");
 //	     pageCom.append(other);
 	
-	     // 输出javascript函数
-	     StringBuffer javascriptStr = new StringBuffer();
-	     javascriptStr.append("<script language=\"javascript\">");
-	     javascriptStr.append("function doSkipPage(offset){");
-	     if (Validator.isNullEmpty(params)) {
-		     javascriptStr.append("	"+ func +"(offset);");
-	     } else {
-		     javascriptStr.append("	"+ func +"(offset,"+ params +");");
-	     }
-
-	     javascriptStr.append("}");
-	     javascriptStr.append("</script>");
-	     pageCom.append(javascriptStr);  
+//	     //TODO 输出javascript函数
+//	     StringBuffer javascriptStr = new StringBuffer();
+//	     javascriptStr.append("<script language=\"javascript\">");
+//	     javascriptStr.append("function doSkipPage(offset){");
+//	     if (Validator.isNullEmpty(params)) {
+//		     javascriptStr.append("	"+ func +"(offset);");
+//	     } else {
+//		     javascriptStr.append("	"+ func +"(offset,"+ params +");");
+//	     }
+//
+//	     javascriptStr.append("}");
+//	     javascriptStr.append("</script>");
+//	     pageCom.append(javascriptStr);  
 	     
         try {
             JspWriter out = super.pageContext.getOut();
@@ -251,7 +251,21 @@ public class PagingExtTag extends TagSupport {
 
         return EVAL_PAGE;
     }
+    private String  getPageScript(Integer offset){
+	     //TODO 翻页函数
+	     StringBuffer javascriptStr = new StringBuffer();
+//	     javascriptStr.append("<script language=\"javascript\">");
+//	     javascriptStr.append("function doSkipPage(offset){");
+	     if (Validator.isNullEmpty(params)) {
+		     javascriptStr.append(""+ func +"("+offset+");");
+	     } else {
+		     javascriptStr.append(""+ func +"("+offset+","+ params +");");
+	     }
 
+//	     javascriptStr.append("}");
+//	     javascriptStr.append("</script>");
+	     return javascriptStr.toString();
+    }
 
 	/**
 	 * 函数名取得

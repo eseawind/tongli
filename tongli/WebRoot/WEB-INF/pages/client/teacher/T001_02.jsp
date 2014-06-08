@@ -124,7 +124,7 @@
 	</div>
 </c:forEach>
 
-<customtag:pagingext func="loadUrlPage" params="'t001_','list2','course_info',''" />
+<customtag:pagingext func="loadUrlPage" params="'t001_','list2','course_info2'" />
 <script>
 	$(".item_li_1").click(function() {
 		if ($(this).hasClass("on")) {

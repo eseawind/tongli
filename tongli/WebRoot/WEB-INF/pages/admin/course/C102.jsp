@@ -93,35 +93,26 @@
 							<div class="btn-toolbar">
 								<a href="${basePath}/h/c102_edit.ac" class="btn btn-primary">新增课程</a>
 							</div>
-								<table class="table table-condensed table-striped">
-								<tbody>
-									<tr>
-										<th class="col-md-1">课程日期</th>
-										<th class="col-md-1">开始时间</th>
-										<th class="col-md-1">结束时间</th>
-										<th class="col-md-3">课程名称</th>
-										<th class="col-md-3">上课地点</th>
-										<th class="col-md-3"></th>
-									</tr>
-									<c:forEach items="${beans}" var="bean">
-									<tr>
-										<td>${bean.day}</td>
-										<td>${bean.begin_time}</td>
-										<td>${bean.end_time}</td>
-										<td>${bean.title}</td>
-										<td>${bean.addres}</td>
-										<td><%-- <a
-											href="${basePath}/h/c102_view.ac?id=${bean.id}"
-											class="btn  btn-info" target="_blank">详情</a> --%> <a
-											href="${basePath}/h/c102_edit.ac?id=${bean.id}"
-											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
-											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/c102_del.ac?id=${bean.id}'};"
-											rel="nofollow">删除</a></td>
-									</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							<customtag:pagingext func="loadUrlPage" params="'h/c102_','init'" />
+							<ul class="nav nav-tabs" style="height:40px; ">
+									<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
+									<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane active" id="tab_0">
+									<!-- BEGIN FORM-->
+									<div class="course_info" id="course_info1">
+										
+									</div>
+									<!-- END FORM--> 
+								</div>
+								<div class="tab-pane" id="tab_1">
+									<!-- BEGIN FORM-->
+									<div class="course_info" id="course_info2">
+										
+									</div>
+									<!-- END FORM--> 
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -138,7 +129,19 @@
 <!-- END BODY -->
 </html>
 <script type="text/javascript">
-function loadUrlPage(offset, url, event) {
-	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
+jQuery(document).ready(function() {
+	loadUrlPage(0,'h/c102_','list1','course_info1');
+	loadUrlPage(0,'h/c102_','list2','course_info2');
+});
+function loadUrlPage(offset,url,event,divId) {
+	jQuery.ajax({
+		url : '${basePath}/' + url + event+'.ac?offset='+offset+ '&time=' + new Date(),
+		success : function(req) {
+			jQuery("#"+divId).html(req);
+		},
+		error : function() {
+			jQuery("#"+divId).html('信息加载失败!');
+		}
+	});
 }
 </script>

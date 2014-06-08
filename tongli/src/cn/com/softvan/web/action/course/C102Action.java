@@ -84,6 +84,19 @@ public class C102Action extends BaseAction {
 	public String init() {
 		log.info("C102Action init.........");
 		
+		return "init";
+	}
+	/**
+	 * <p>
+	 * 已完成的课程。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>已完成的课程。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String list1() {
+		log.info("C102Action list1.........");
 		int offset = 0;
 		// 分页偏移量
 		if (!Validator.isNullEmpty(request.getParameter("offset"))
@@ -94,15 +107,51 @@ public class C102Action extends BaseAction {
 		//当前页
 		page.setCurrOffset(offset);
 		//每页显示条数
-		page.setPageRowCount(15);
+		page.setPageRowCount(1);
 		TcCourseSyllabusBean bean1 = new TcCourseSyllabusBean();
 		bean1.setPageInfo(page);
 		bean1.setDel_flag("0");
+		//--已完成课程--
+		bean1.setCourse_status("1");
 		//列表
 		List<TcCourseSyllabusBean> beans=courseSyllabusManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
-		return "init";
+		
+		return "list1";
+	}
+	/**
+	 * <p>
+	 * 未完成的课程。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>未完成的课程。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String list2() {
+		log.info("C102Action list2.........");
+		int offset = 0;
+		// 分页偏移量
+		if (!Validator.isNullEmpty(request.getParameter("offset"))
+				&& Validator.isNum(request.getParameter("offset"))) {
+			offset = Integer.parseInt(request.getParameter("offset"));
+		}
+		PageInfo page = new PageInfo(); 
+		//当前页
+		page.setCurrOffset(offset);
+		//每页显示条数
+		page.setPageRowCount(1);
+		TcCourseSyllabusBean bean1 = new TcCourseSyllabusBean();
+		bean1.setPageInfo(page);
+		bean1.setDel_flag("0");
+		//--未完成课程--
+		bean1.setCourse_status("0");
+		//列表
+		List<TcCourseSyllabusBean> beans=courseSyllabusManager.findDataIsPage(bean1);
+		request.setAttribute("beans",beans);
+		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
+		return "list2";
 	}
 	/**
 	 * <p>
