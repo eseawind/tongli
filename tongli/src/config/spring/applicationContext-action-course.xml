@@ -29,4 +29,8 @@
 	<bean id="c103Action" class="cn.com.softvan.web.action.course.C103Action" parent="baseAction" scope="prototype">
 		<property name="courseBespeakManager" ref="courseBespeakManager"></property>
 	</bean>
+	<!-- 在线报名管理ACTION -->
+	<bean id="c104Action" class="cn.com.softvan.web.action.course.C104Action" parent="baseAction" scope="prototype">
+		<property name="courseWebEnrollManager" ref="courseWebEnrollManager"></property>
+	</bean>
 </beans>

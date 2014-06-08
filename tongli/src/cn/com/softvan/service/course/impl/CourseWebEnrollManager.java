@@ -1,9 +1,9 @@
 /*
- * 预约参观管理 service 接口实现类
+ * 在线报名管理 service 接口实现类
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.04.01  wuxiaogang      程序・发布
+ * 1.00     2014.06.08  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 童励 System. - All Rights Reserved.
  *
@@ -17,28 +17,28 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.com.softvan.bean.course.TcCourseBespeakBean;
+import cn.com.softvan.bean.course.TcCourseWebEnrollBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.dao.daointer.course.ITcCourseBespeakDao;
-import cn.com.softvan.dao.entity.course.TcCourseBespeak;
+import cn.com.softvan.dao.daointer.course.ITcCourseWebEnrollDao;
+import cn.com.softvan.dao.entity.course.TcCourseWebEnroll;
 import cn.com.softvan.service.BaseManager;
-import cn.com.softvan.service.course.ICourseBespeakManager;
+import cn.com.softvan.service.course.ICourseWebEnrollManager;
 /**
- *<p>预约参观管理 service类。</p>
+ *<p>在线报名管理 service类。</p>
  * <ol>[功能概要] 
  * <div>信息编辑。</div>
  * <div>信息检索。</div>
  * </ol>
  * @author wuxiaogang
  */
-public class CourseBespeakManager extends BaseManager implements ICourseBespeakManager {
+public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnrollManager {
 	/** 日志 */
-	private static final transient Logger log = Logger.getLogger(CourseBespeakManager.class);
+	private static final transient Logger log = Logger.getLogger(CourseWebEnrollManager.class);
 	
 	/**信息DAO 接口类*/
-	private ITcCourseBespeakDao tcCourseBespeakDao;
+	private ITcCourseWebEnrollDao tcCourseWebEnrollDao;
 	/**
 	 * <p>信息编辑。</p>
 	 * <ol>[功能概要] 
@@ -50,19 +50,16 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = CommonConstant.DB_DEFAULT_TIMEOUT, rollbackFor = {
 			Exception.class, RuntimeException.class })
-	public String saveOrUpdateData(TcCourseBespeakBean bean) throws Exception{
+	public String saveOrUpdateData(TcCourseWebEnrollBean bean) throws Exception{
 		String msg="1";
 		if(bean!=null){
 			try {
-				TcCourseBespeak dto=new TcCourseBespeak();
+				TcCourseWebEnroll dto=new TcCourseWebEnroll();
 				dto.setId(bean.getId());//id
 				dto.setName(bean.getName());//姓名
 				dto.setSex(bean.getSex());//性别
 				dto.setTel(bean.getTel());//电话
-				dto.setDay(bean.getDay());//时间
-				dto.setAddres(bean.getAddres());//需要参观的场馆
-				dto.setCourse(bean.getCourse());//预约参观课程
-				dto.setDetail_info(bean.getDetail_info());//详情
+				dto.setCourse(bean.getCourse());//课程
 				dto.setNote(bean.getNote());//备注
 				dto.setDate_created(bean.getDate_created());//数据输入日期
 				dto.setCreate_id(bean.getCreate_id());//建立者id
@@ -73,17 +70,16 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//version
 				dto.setStatus(bean.getStatus());//状态0未完成1已完成
-				dto.setAge(bean.getAge());//年龄
 				//判断数据是否存在
-				if(tcCourseBespeakDao.isDataYN(dto)!=0){
+				if(tcCourseWebEnrollDao.isDataYN(dto)!=0){
 					//数据存在
-					tcCourseBespeakDao.updateByPrimaryKeySelective(dto);
+					tcCourseWebEnrollDao.updateByPrimaryKeySelective(dto);
 				}else{
 					//新增
 					if(Validator.isEmpty(dto.getId())){
 						dto.setId(IdUtils.createUUID(32));
 					}
-					tcCourseBespeakDao.insert(dto);
+					tcCourseWebEnrollDao.insert(dto);
 				}
 			} catch (Exception e) {
 				msg="信息保存失败,数据库处理错误!";
@@ -100,13 +96,13 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 	 * </ol>
 	 * @return 处理结果
 	 */
-	public String deleteData(TcCourseBespeakBean bean) throws Exception{
+	public String deleteData(TcCourseWebEnrollBean bean) throws Exception{
 		String msg="1";
 		if(bean!=null){
 			try {
-				TcCourseBespeak dto=new TcCourseBespeak();
+				TcCourseWebEnroll dto=new TcCourseWebEnroll();
 				dto.setId(bean.getId());//id
-				tcCourseBespeakDao.deleteByPrimaryKey(dto);
+				tcCourseWebEnrollDao.deleteByPrimaryKey(dto);
 			} catch (Exception e) {
 				msg="信息删除失败,数据库处理错误!";
 				log.error(msg, e);
@@ -123,13 +119,13 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = CommonConstant.DB_DEFAULT_TIMEOUT, rollbackFor = {
 			Exception.class, RuntimeException.class })
-	public String deleteDataById(TcCourseBespeakBean bean) throws Exception{
+	public String deleteDataById(TcCourseWebEnrollBean bean) throws Exception{
 		String msg="1";
 		if(bean!=null){
 			try {
-				TcCourseBespeak dto=new TcCourseBespeak();
+				TcCourseWebEnroll dto=new TcCourseWebEnroll();
 				dto.setId(bean.getId());//ID
-				tcCourseBespeakDao.deleteById(dto);
+				tcCourseWebEnrollDao.deleteById(dto);
 			} catch (Exception e) {
 				msg="信息删除失败,数据库处理错误!";
 				log.error(msg, e);
@@ -146,19 +142,16 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 	 * </ol>
 	 * @return 处理结果
 	 */
-	public List<TcCourseBespeakBean> findDataIsPage(TcCourseBespeakBean bean){
-		List<TcCourseBespeakBean> beans=null;
+	public List<TcCourseWebEnrollBean> findDataIsPage(TcCourseWebEnrollBean bean){
+		List<TcCourseWebEnrollBean> beans=null;
 		try {
-    	   TcCourseBespeak dto=new TcCourseBespeak();
+    	   TcCourseWebEnroll dto=new TcCourseWebEnroll();
     	   if(bean!=null){
     		   dto.setId(bean.getId());//id
 				dto.setName(bean.getName());//姓名
 				dto.setSex(bean.getSex());//性别
 				dto.setTel(bean.getTel());//电话
-				dto.setDay(bean.getDay());//时间
-				dto.setAddres(bean.getAddres());//需要参观的场馆
-				dto.setCourse(bean.getCourse());//预约参观课程
-				dto.setDetail_info(bean.getDetail_info());//详情
+				dto.setCourse(bean.getCourse());//课程
 				dto.setNote(bean.getNote());//备注
 				dto.setDate_created(bean.getDate_created());//数据输入日期
 				dto.setCreate_id(bean.getCreate_id());//建立者id
@@ -169,7 +162,6 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//version
 				dto.setStatus(bean.getStatus());//状态0未完成1已完成
-				dto.setAge(bean.getAge());//年龄
 				
 				dto.setKeyword(bean.getKeyword());
 				dto.setDate1(bean.getDate1());
@@ -177,7 +169,7 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 				
 			dto.setPageInfo(bean.getPageInfo());//分页
     	   }
-			beans=(List<TcCourseBespeakBean>) tcCourseBespeakDao.findDataIsPage(dto);
+			beans=(List<TcCourseWebEnrollBean>) tcCourseWebEnrollDao.findDataIsPage(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -191,19 +183,16 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 	 * </ol>
 	 * @return 处理结果
 	 */
-	public List<TcCourseBespeakBean> findDataIsList(TcCourseBespeakBean bean){
-		List<TcCourseBespeakBean> beans=null;
+	public List<TcCourseWebEnrollBean> findDataIsList(TcCourseWebEnrollBean bean){
+		List<TcCourseWebEnrollBean> beans=null;
 		try {
-	    	   TcCourseBespeak dto=new TcCourseBespeak();
+	    	   TcCourseWebEnroll dto=new TcCourseWebEnroll();
 	    	   if(bean!=null){
 	    		   dto.setId(bean.getId());//id
 					dto.setName(bean.getName());//姓名
 					dto.setSex(bean.getSex());//性别
 					dto.setTel(bean.getTel());//电话
-					dto.setDay(bean.getDay());//时间
-					dto.setAddres(bean.getAddres());//需要参观的场馆
-					dto.setCourse(bean.getCourse());//预约参观课程
-					dto.setDetail_info(bean.getDetail_info());//详情
+					dto.setCourse(bean.getCourse());//课程
 					dto.setNote(bean.getNote());//备注
 					dto.setDate_created(bean.getDate_created());//数据输入日期
 					dto.setCreate_id(bean.getCreate_id());//建立者id
@@ -214,12 +203,11 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 					dto.setDel_flag(bean.getDel_flag());//是否删除
 					dto.setVersion(bean.getVersion());//version
 					dto.setStatus(bean.getStatus());//状态0未完成1已完成
-					dto.setAge(bean.getAge());//年龄
 					
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }
-				beans=(List<TcCourseBespeakBean>) tcCourseBespeakDao.findDataIsList(dto);
+				beans=(List<TcCourseWebEnrollBean>) tcCourseWebEnrollDao.findDataIsList(dto);
 		} catch (Exception e) {
 			log.error("信息查询失败,数据库错误!", e);
 		}
@@ -233,14 +221,14 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 	 * </ol>
 	 * @return 处理结果
 	 */
-	public TcCourseBespeakBean findDataById(TcCourseBespeakBean bean){
-       TcCourseBespeakBean bean1=null;
+	public TcCourseWebEnrollBean findDataById(TcCourseWebEnrollBean bean){
+       TcCourseWebEnrollBean bean1=null;
        try {
-    	   TcCourseBespeak dto=new TcCourseBespeak();
+    	   TcCourseWebEnroll dto=new TcCourseWebEnroll();
     	   if(bean!=null){
     		    dto.setId(bean.getId());//ID
     	   }
-			bean1=(TcCourseBespeakBean) tcCourseBespeakDao.selectByPrimaryKey(dto);
+			bean1=(TcCourseWebEnrollBean) tcCourseWebEnrollDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
 			log.error("信息详情查询失败,数据库错误!", e);
 		}
@@ -250,15 +238,15 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 	 * 信息DAO 接口类取得
 	 * @return 信息DAO 接口类
 	 */
-	public ITcCourseBespeakDao getTcCourseBespeakDao() {
-	    return tcCourseBespeakDao;
+	public ITcCourseWebEnrollDao getTcCourseWebEnrollDao() {
+	    return tcCourseWebEnrollDao;
 	}
 	/**
 	 * 信息DAO 接口类设定
-	 * @param tcCourseBespeakDao 信息DAO 接口类
+	 * @param tcCourseWebEnrollDao 信息DAO 接口类
 	 */
-	public void setTcCourseBespeakDao(ITcCourseBespeakDao tcCourseBespeakDao) {
-	    this.tcCourseBespeakDao = tcCourseBespeakDao;
+	public void setTcCourseWebEnrollDao(ITcCourseWebEnrollDao tcCourseWebEnrollDao) {
+	    this.tcCourseWebEnrollDao = tcCourseWebEnrollDao;
 	}
 	/**
 	 * <p>信息 单条。</p>
@@ -267,13 +255,13 @@ public class CourseBespeakManager extends BaseManager implements ICourseBespeakM
 	 * </ol>
 	 * @return 处理结果
 	 */
-	public String recoveryDataById(TcCourseBespeakBean bean) throws Exception{
+	public String recoveryDataById(TcCourseWebEnrollBean bean) throws Exception{
 		String msg="1";
 		if(bean!=null){
 			try {
-				TcCourseBespeak dto=new TcCourseBespeak();
+				TcCourseWebEnroll dto=new TcCourseWebEnroll();
 				dto.setId(bean.getId());//ID
-				tcCourseBespeakDao.recoveryDataById(dto);
+				tcCourseWebEnrollDao.recoveryDataById(dto);
 			} catch (Exception e) {
 				msg="信息删除失败,数据库处理错误!";
 				log.error(msg, e);

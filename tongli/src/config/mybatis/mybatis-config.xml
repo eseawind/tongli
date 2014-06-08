@@ -65,12 +65,14 @@
 		<typeAlias type="cn.com.softvan.bean.course.TcCourseSyllabusItemsBean" alias="tcCourseSyllabusItemsBean"/>
 		<typeAlias type="cn.com.softvan.bean.course.TcCourseBespeakBean" alias="tcCourseBespeakBean"/>
 		<typeAlias type="cn.com.softvan.bean.course.TcCourseSyllabusPhotoBean" alias="tcCourseSyllabusPhotoBean"/>
+		<typeAlias type="cn.com.softvan.bean.course.TcCourseWebEnrollBean" alias="tcCourseWebEnrollBean"/>
 		<!-- entity class -->
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourse" alias="tcCourse"/>
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseSyllabus" alias="tcCourseSyllabus"/>
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseSyllabusItems" alias="tcCourseSyllabusItems"/>
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseBespeak" alias="tcCourseBespeak"/>
 		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseSyllabusPhoto" alias="tcCourseSyllabusPhoto"/>
+		<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseWebEnroll" alias="tcCourseWebEnroll"/>
 		<!-- 课程管理 eng -->
 		<!-- 会员管理 begin -->
 		<!-- bean class -->
@@ -155,6 +157,7 @@
 		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseSyllabusItems.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseBespeak.xml"/>
 		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseSyllabusPhoto.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseWebEnroll.xml"/>
 		<!-- 课程管理 end -->
 		<!-- 会员管理 begin -->
 		<mapper resource="/cn/com/softvan/dao/mybatis/member/TcMember.xml"/>

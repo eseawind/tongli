@@ -41,8 +41,18 @@
 				<div class="content" style="min-height: 390px;">
 				<c:if test="${msg!=null}">
 					<c:choose>
-						<c:when test="${msg=='1'}">信息提交成功!</c:when>
-						<c:otherwise>${msg}</c:otherwise>
+						<c:when test="${msg=='1'}">
+						<div class="alert alert-success">
+							<button class="close" data-dismiss="alert"></button>
+							<strong>Success!</strong> 信息提交成功!
+						</div>
+						</c:when>
+						<c:otherwise>
+							<div class="alert alert-danger">
+								<button class="close" data-dismiss="alert"></button>
+								<strong>Error!</strong> ${msg}
+							</div>
+						</c:otherwise>
 					</c:choose>
 				</c:if>
 					<div class="user_info">

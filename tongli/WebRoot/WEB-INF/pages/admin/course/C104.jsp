@@ -1,10 +1,10 @@
 <%--
 /*
- * 系统管理_预约参观 (页面)
+ * 系统管理_在线报名 (页面)
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
- * 1.00     2014-04-01  wuxiaogang   程序・发布
+ * 1.00     2014-06-08  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 童励 System. - All Rights Reserved.
  *
@@ -46,9 +46,9 @@
 		<%@ include file="../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#sys5,#sys5_sub_menu_l1').addClass('active');
-				$('#sys5_arrow').addClass('open');
-				$('#sys5_sub_menu').show();
+				$('#sys7,#sys7_sub_menu_l1').addClass('active');
+				$('#sys7_arrow').addClass('open');
+				$('#sys7_sub_menu').show();
 			});
 		</script>
 		<!-- END SIDEBAR -->
@@ -62,14 +62,14 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						预约参观 <small><span class="help-inline">预约参观信息</span></small>
+						在线报名 <small><span class="help-inline">在线报名信息</span></small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="${basePath }/h/c103_init.ac">预约参观</a> <i class="fa fa-angle-right"></i></li>
-						<li>预约参观</a> </li>
+						<li><a href="${basePath }/h/c104_init.ac">在线报名</a> <i class="fa fa-angle-right"></i></li>
+						<li>在线报名</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -97,7 +97,7 @@
 							</c:choose>
 						</c:if>
 						<div class="well form-inline">
-							<form id="small_info_form_list1" accept-charset="UTF-8"  action="${basePath}/h/c103_list1.ac"  method="post">
+							<form id="small_info_form_list1" accept-charset="UTF-8"  action="${basePath}/h/c104_list1.ac"  method="post">
 								<s:token></s:token>
 								<input type="hidden" id="offsetAA" name="offset" value="0">
 								<label>姓名:

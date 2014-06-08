@@ -18,7 +18,7 @@
 	</bean>
 	 <!-- 在线报名 action -->
 	<bean id="c203Action" class="cn.com.softvan.web.action.client.course.C203Action" parent="baseAction" scope="prototype">
-		<property name="courseBespeakManager" ref="courseBespeakManager"></property>
+		<property name="courseWebEnrollManager" ref="courseWebEnrollManager"></property>
 		<property name="courseManager" ref="courseManager"></property>
 	</bean>
 </beans>

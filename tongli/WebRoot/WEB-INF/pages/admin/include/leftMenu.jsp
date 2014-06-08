@@ -243,6 +243,23 @@
 						<li id="sys6_sub_menu_l1_sub_menu_l3"><a href="${basePath }/h/s005_init.ac">短信管理</a></li>
 					</ul>
 				</li>
+				<li id="sys7" class="">
+					<a class="active" href="javascript:;">
+					<i class="fa  fa-check-square-o"></i> 
+					<span class="title">在线报名</span>
+					<span id="sys7_arrow" class="arrow"></span>
+					</a>
+					<ul id="sys7_sub_menu" style="display: none;" class="sub-menu">
+						<li id="sys7_sub_menu_l1"><a href="${basePath }/h/c104_init.ac">信息管理</a></li>
+						<li id="sys7_sub_menu_l2"><a href="${basePath }/h/c104_recycle.ac">回收站</a></li>
+					</ul>
+				</li>
+				<li id="sys8" class="">
+					<a class="active" href="javascript:;">
+					<i class="fa  fa-check-square-o"></i> 
+					<span class="title">统计信息</span>
+					</a>
+				</li>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

@@ -16,11 +16,11 @@ import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.course.TcCourseBean;
-import cn.com.softvan.bean.course.TcCourseBespeakBean;
+import cn.com.softvan.bean.course.TcCourseWebEnrollBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
-import cn.com.softvan.service.course.ICourseBespeakManager;
 import cn.com.softvan.service.course.ICourseManager;
+import cn.com.softvan.service.course.ICourseWebEnrollManager;
 import cn.com.softvan.web.action.BaseAction;
 
 /**
@@ -37,12 +37,12 @@ public class C203Action extends BaseAction {
 	private static final long serialVersionUID = -3061791975484213551L;
 	private static final transient Logger log = Logger.getLogger(C203Action.class);
 	
-	/** 课程-预约参观 管理 业务处理*/
-	private ICourseBespeakManager courseBespeakManager;
-	/**课程-预约参观 信息BEAN*/
-	private TcCourseBespeakBean bean;
-	/**课程-预约参观 信息BEAN集合*/
-	private List<TcCourseBespeakBean> beans;
+	/** 课程-在线报名 管理 业务处理*/
+	private ICourseWebEnrollManager courseWebEnrollManager;
+	/**课程-在线报名 信息BEAN*/
+	private TcCourseWebEnrollBean bean;
+	/**课程-在线报名 信息BEAN集合*/
+	private List<TcCourseWebEnrollBean> beans;
 	/** 课程管理  业务处理*/
 	private ICourseManager courseManager;
 	//
@@ -63,12 +63,12 @@ public class C203Action extends BaseAction {
 		log.info("C203Action init.........");
 		String id=request.getParameter("id");
 		if(id!=null){
-			TcCourseBespeakBean bean1=new TcCourseBespeakBean();
+			TcCourseWebEnrollBean bean1=new TcCourseWebEnrollBean();
 			bean1.setId(id);
-			bean=courseBespeakManager.findDataById(bean1);
+			bean=courseWebEnrollManager.findDataById(bean1);
 		}
 		if(bean==null){
-			bean=new TcCourseBespeakBean();
+			bean=new TcCourseWebEnrollBean();
 			bean.setId(IdUtils.createUUID(32));
 		}
 		
@@ -102,7 +102,7 @@ public class C203Action extends BaseAction {
 					bean.setUpdate_ip(getIpAddr());
 					bean.setUpdate_id(user.getUser_id());
 				}
-				msg=courseBespeakManager.saveOrUpdateData(bean);
+				msg=courseWebEnrollManager.saveOrUpdateData(bean);
 			} catch (Exception e) {
 				msg=e.getMessage();
 			}
@@ -123,57 +123,57 @@ public class C203Action extends BaseAction {
 	 */
 	public String view() {
 		log.info("C203Action view.........");
-		TcCourseBespeakBean bean1 = new TcCourseBespeakBean();
+		TcCourseWebEnrollBean bean1 = new TcCourseWebEnrollBean();
 		bean1.setId(request.getParameter("cid"));
-		bean=courseBespeakManager.findDataById(bean1);
+		bean=courseWebEnrollManager.findDataById(bean1);
 		return "init";
 	}
 
 	/**
-	 * 课程-预约参观 管理 业务处理取得
-	 * @return 课程-预约参观 管理 业务处理
+	 * 课程-在线报名 管理 业务处理取得
+	 * @return 课程-在线报名 管理 业务处理
 	 */
-	public ICourseBespeakManager getCourseBespeakManager() {
-	    return courseBespeakManager;
+	public ICourseWebEnrollManager getCourseWebEnrollManager() {
+	    return courseWebEnrollManager;
 	}
 
 	/**
-	 * 课程-预约参观 管理 业务处理设定
-	 * @param courseBespeakManager 课程-预约参观 管理 业务处理
+	 * 课程-在线报名 管理 业务处理设定
+	 * @param courseWebEnrollManager 课程-在线报名 管理 业务处理
 	 */
-	public void setCourseBespeakManager(ICourseBespeakManager courseBespeakManager) {
-	    this.courseBespeakManager = courseBespeakManager;
+	public void setCourseWebEnrollManager(ICourseWebEnrollManager courseWebEnrollManager) {
+	    this.courseWebEnrollManager = courseWebEnrollManager;
 	}
 
 	/**
-	 * 课程-预约参观 信息BEAN取得
-	 * @return 课程-预约参观 信息BEAN
+	 * 课程-在线报名 信息BEAN取得
+	 * @return 课程-在线报名 信息BEAN
 	 */
-	public TcCourseBespeakBean getBean() {
+	public TcCourseWebEnrollBean getBean() {
 	    return bean;
 	}
 
 	/**
-	 * 课程-预约参观 信息BEAN设定
-	 * @param bean 课程-预约参观 信息BEAN
+	 * 课程-在线报名 信息BEAN设定
+	 * @param bean 课程-在线报名 信息BEAN
 	 */
-	public void setBean(TcCourseBespeakBean bean) {
+	public void setBean(TcCourseWebEnrollBean bean) {
 	    this.bean = bean;
 	}
 
 	/**
-	 * 课程-预约参观 信息BEAN集合取得
-	 * @return 课程-预约参观 信息BEAN集合
+	 * 课程-在线报名 信息BEAN集合取得
+	 * @return 课程-在线报名 信息BEAN集合
 	 */
-	public List<TcCourseBespeakBean> getBeans() {
+	public List<TcCourseWebEnrollBean> getBeans() {
 	    return beans;
 	}
 
 	/**
-	 * 课程-预约参观 信息BEAN集合设定
-	 * @param beans 课程-预约参观 信息BEAN集合
+	 * 课程-在线报名 信息BEAN集合设定
+	 * @param beans 课程-在线报名 信息BEAN集合
 	 */
-	public void setBeans(List<TcCourseBespeakBean> beans) {
+	public void setBeans(List<TcCourseWebEnrollBean> beans) {
 	    this.beans = beans;
 	}
 

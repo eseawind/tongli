@@ -1,9 +1,9 @@
 /*
- * 预约参观管理 ActionClass
+ * 在线报名管理 ActionClass
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.05.20  wuxiaogang      程序・发布
+ * 1.00     2014.06.08  wuxiaogang      程序・发布
  * -------- ----------- --------------- ------------------------------------------
  * Copyright 2014 童励  System. - All Rights Reserved.
  *
@@ -15,36 +15,36 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
-import cn.com.softvan.bean.course.TcCourseBespeakBean;
+import cn.com.softvan.bean.course.TcCourseWebEnrollBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.service.course.ICourseBespeakManager;
+import cn.com.softvan.service.course.ICourseWebEnrollManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
 /**
- * 预约参观管理 ActionClass
+ * 在线报名管理 ActionClass
  * 
  * @author wuxiaogang
  * 
  */
-public class C103Action extends BaseAction {
+public class C104Action extends BaseAction {
 
 	/**
 	 * 序列号
 	 */
 	private static final long serialVersionUID = -3061791975484213551L;
-	private static final transient Logger log = Logger.getLogger(C103Action.class);
-	/** 预约参观管理 业务处理*/
-	private ICourseBespeakManager courseBespeakManager;
+	private static final transient Logger log = Logger.getLogger(C104Action.class);
+	/** 在线报名管理 业务处理*/
+	private ICourseWebEnrollManager courseWebEnrollManager;
 	/**课程信息BEAN*/
-	private TcCourseBespeakBean bean;
+	private TcCourseWebEnrollBean bean;
 	/**课程信息BEAN集合*/
-	private List<TcCourseBespeakBean> beans;
+	private List<TcCourseWebEnrollBean> beans;
 	
-	public C103Action() {
-		log.info("默认构造器......C103Action");
+	public C104Action() {
+		log.info("默认构造器......C104Action");
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class C103Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String init() {
-		log.info("C103Action init.........");
+		log.info("C104Action init.........");
 		return "init";
 	}
 	/**
@@ -70,7 +70,7 @@ public class C103Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String list1() {
-		log.info("C103Action list1.........");
+		log.info("C104Action list1.........");
 		
 		int offset = 0;
 		// 分页偏移量
@@ -84,12 +84,12 @@ public class C103Action extends BaseAction {
 		//每页显示条数
 		page.setPageRowCount(15);
 		if(bean==null){
-			bean = new TcCourseBespeakBean();
+			bean = new TcCourseWebEnrollBean();
 		}
 		bean.setPageInfo(page);
 		bean.setDel_flag("0");
 		//列表
-		List<TcCourseBespeakBean> beans=courseBespeakManager.findDataIsPage(bean);
+		List<TcCourseWebEnrollBean> beans=courseWebEnrollManager.findDataIsPage(bean);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "list1";
@@ -104,7 +104,7 @@ public class C103Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String recycle() {
-		log.info("C103Action recycle.........");
+		log.info("C104Action recycle.........");
 		
 		int offset = 0;
 		// 分页偏移量
@@ -117,11 +117,11 @@ public class C103Action extends BaseAction {
 		page.setCurrOffset(offset);
 		//每页显示条数
 		page.setPageRowCount(15);
-		TcCourseBespeakBean bean1 = new TcCourseBespeakBean();
+		TcCourseWebEnrollBean bean1 = new TcCourseWebEnrollBean();
 		bean1.setPageInfo(page);
 		bean1.setDel_flag("1");
 		//列表
-		List<TcCourseBespeakBean> beans=courseBespeakManager.findDataIsPage(bean1);
+		List<TcCourseWebEnrollBean> beans=courseWebEnrollManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		
@@ -138,15 +138,15 @@ public class C103Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String edit() {
-		log.info("C103Action edit.........");
+		log.info("C104Action edit.........");
 		String id=request.getParameter("id");
 		if(id!=null){
-			TcCourseBespeakBean bean1=new TcCourseBespeakBean();
+			TcCourseWebEnrollBean bean1=new TcCourseWebEnrollBean();
 			bean1.setId(id);
-			bean=courseBespeakManager.findDataById(bean1);
+			bean=courseWebEnrollManager.findDataById(bean1);
 		}
 		if(bean==null){
-			bean=new TcCourseBespeakBean();
+			bean=new TcCourseWebEnrollBean();
 			bean.setId(IdUtils.createUUID(32));
 		}
 		return "edit";
@@ -161,13 +161,13 @@ public class C103Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String del() {
-		log.info("C103Action del.........");
+		log.info("C104Action del.........");
 		String id=request.getParameter("id");
-		TcCourseBespeakBean bean1=new TcCourseBespeakBean();
+		TcCourseWebEnrollBean bean1=new TcCourseWebEnrollBean();
 		bean1.setId(id);
 		String msg="1";
 		try {
-			msg=courseBespeakManager.deleteDataById(bean1);
+			msg=courseWebEnrollManager.deleteDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -185,13 +185,13 @@ public class C103Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String delxx() {
-		log.info("C103Action delxx.........");
+		log.info("C104Action delxx.........");
 		String id=request.getParameter("id");
-		TcCourseBespeakBean bean1=new TcCourseBespeakBean();
+		TcCourseWebEnrollBean bean1=new TcCourseWebEnrollBean();
 		bean1.setId(id);
 		String msg="1";
 		try {
-			msg=courseBespeakManager.deleteData(bean1);
+			msg=courseWebEnrollManager.deleteData(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -210,7 +210,7 @@ public class C103Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String save() {
-		log.info("C103Action save.........");
+		log.info("C104Action save.........");
 		if(bean!=null){
 			String msg="1";
 			try {
@@ -221,7 +221,7 @@ public class C103Action extends BaseAction {
 					bean.setUpdate_ip(getIpAddr());
 					bean.setUpdate_id(user.getUser_id());
 				}
-				msg=courseBespeakManager.saveOrUpdateData(bean);
+				msg=courseWebEnrollManager.saveOrUpdateData(bean);
 			} catch (Exception e) {
 				msg=e.getMessage();
 			}
@@ -241,13 +241,13 @@ public class C103Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String recovery() {
-		log.info("C103Action recovery.........");
+		log.info("C104Action recovery.........");
 		String id=request.getParameter("id");
-		TcCourseBespeakBean bean1=new TcCourseBespeakBean();
+		TcCourseWebEnrollBean bean1=new TcCourseWebEnrollBean();
 		bean1.setId(id);
 		String msg="1";
 		try {
-			msg=courseBespeakManager.recoveryDataById(bean1);
+			msg=courseWebEnrollManager.recoveryDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -257,26 +257,26 @@ public class C103Action extends BaseAction {
 	}
 
 	/**
-	 * 预约参观管理 业务处理取得
-	 * @return 预约参观管理 业务处理
+	 * 在线报名管理 业务处理取得
+	 * @return 在线报名管理 业务处理
 	 */
-	public ICourseBespeakManager getCourseBespeakManager() {
-	    return courseBespeakManager;
+	public ICourseWebEnrollManager getCourseWebEnrollManager() {
+	    return courseWebEnrollManager;
 	}
 
 	/**
-	 * 预约参观管理 业务处理设定
-	 * @param courseBespeakManager 预约参观管理 业务处理
+	 * 在线报名管理 业务处理设定
+	 * @param courseWebEnrollManager 在线报名管理 业务处理
 	 */
-	public void setCourseBespeakManager(ICourseBespeakManager courseBespeakManager) {
-	    this.courseBespeakManager = courseBespeakManager;
+	public void setCourseWebEnrollManager(ICourseWebEnrollManager courseWebEnrollManager) {
+	    this.courseWebEnrollManager = courseWebEnrollManager;
 	}
 
 	/**
 	 * 课程信息BEAN取得
 	 * @return 课程信息BEAN
 	 */
-	public TcCourseBespeakBean getBean() {
+	public TcCourseWebEnrollBean getBean() {
 	    return bean;
 	}
 
@@ -284,7 +284,7 @@ public class C103Action extends BaseAction {
 	 * 课程信息BEAN设定
 	 * @param bean 课程信息BEAN
 	 */
-	public void setBean(TcCourseBespeakBean bean) {
+	public void setBean(TcCourseWebEnrollBean bean) {
 	    this.bean = bean;
 	}
 
@@ -292,7 +292,7 @@ public class C103Action extends BaseAction {
 	 * 课程信息BEAN集合取得
 	 * @return 课程信息BEAN集合
 	 */
-	public List<TcCourseBespeakBean> getBeans() {
+	public List<TcCourseWebEnrollBean> getBeans() {
 	    return beans;
 	}
 
@@ -300,7 +300,7 @@ public class C103Action extends BaseAction {
 	 * 课程信息BEAN集合设定
 	 * @param beans 课程信息BEAN集合
 	 */
-	public void setBeans(List<TcCourseBespeakBean> beans) {
+	public void setBeans(List<TcCourseWebEnrollBean> beans) {
 	    this.beans = beans;
 	}
 

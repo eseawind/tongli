@@ -1,10 +1,10 @@
 <%--
 /*
- * 系统管理_预约参观 (页面)
+ * 系统管理_在线报名 (页面)
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
- * 1.00     2014-04-01  wuxiaogang   程序・发布
+ * 1.00     2014-04-07  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 童励 System. - All Rights Reserved.
  *
@@ -26,12 +26,6 @@
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 <link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
-
-<script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
-
-<link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
-<script type="text/javascript" src="${basePath}/js/bootstarp-date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="${basePath}/js/bootstarp-date/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -46,9 +40,9 @@
 		<%@ include file="../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#sys5,#sys5_sub_menu_l1').addClass('active');
-				$('#sys5_arrow').addClass('open');
-				$('#sys5_sub_menu').show();
+				$('#sys7,#sys7_sub_menu_l2').addClass('active');
+				$('#sys7_arrow').addClass('open');
+				$('#sys7_sub_menu').show();
 			});
 		</script>
 		<!-- END SIDEBAR -->
@@ -62,14 +56,14 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						预约参观 <small><span class="help-inline">预约参观信息</span></small>
+						课程列表 <small><span class="help-inline">展示所有未删除的课程信息</span></small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="${basePath }/h/c103_init.ac">预约参观</a> <i class="fa fa-angle-right"></i></li>
-						<li>预约参观</a> </li>
+						<li><a href="${basePath }/h/c104_init.ac">在线报名</a> <i class="fa fa-angle-right"></i></li>
+						<li>课程列表</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -96,28 +90,31 @@
 								</c:otherwise>
 							</c:choose>
 						</c:if>
-						<div class="well form-inline">
-							<form id="small_info_form_list1" accept-charset="UTF-8"  action="${basePath}/h/c103_list1.ac"  method="post">
-								<s:token></s:token>
-								<input type="hidden" id="offsetAA" name="offset" value="0">
-								<label>姓名:
-								<input name="bean.name" class="upload-wrapper" value=""   placeholder="输入需要搜索的姓名" 
-								 type="text">
-								 </label>
-								 <label>开始时间:
-								<input name="bean.date1" class="upload-wrapper date form_date1" value=""  readonly="readonly" placeholder="时间段" 
-								 type="text">
-								 </label>
-								 <label>结束时间:
-								<input name="bean.date2" class="upload-wrapper date form_date2" value=""   readonly="readonly" placeholder="时间段" 
-								 type="text">
-								 </label>
-								 <a onclick="submitFrom1(0,'small_info_form_list1');" class="reload btn btn-primary">检索</a>
-								 <button type="reset" class="reload btn blue">重置</button>
-							 </form>
-						</div>
-						<div class="col-md-12" id="small_info_div_list1">
-						</div>
+							<table class="table table-condensed table-striped">
+								<tbody>
+									<tr>
+										<th class="col-md-1">姓名</th>
+										<th class="col-md-1">性别</th>
+										<th class="col-md-3"></th>
+									</tr>
+									<c:forEach items="${beans}" var="bean">
+									<tr>
+										<td>${bean.name}</td>
+										<td>
+											<c:if test="${bean.sex=='0'}">男</c:if>
+											<c:if test="${bean.sex=='1'}">女</c:if>
+										</td>
+										<td><a href="javascript:void(0)"   class="btn purple" 
+											onclick="if(confirm('确认恢复吗?')){location.href='${basePath}/h/c104_recovery.ac?id=${bean.id}'};"
+											rel="nofollow">恢复</a>
+											<a href="javascript:void(0)" class="btn btn-danger"
+										onclick="if(confirm('确认删除吗?删除后不可恢复!')){location.href='${basePath}/h/c104_delxx.ac?id=${bean.id}'};">删除</a>
+											</td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							<customtag:pagingext func="loadUrlPage" params="'h/c104_','recycle'" />
 						</div>
 					</div>
 				</div>
@@ -130,6 +127,7 @@
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<!-- END FOOTER -->
+	
 </body>
 <!-- END BODY -->
 </html>
@@ -137,36 +135,4 @@
 function loadUrlPage(offset, url, event) {
 	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
 }
-$('.form_date1').datetimepicker({
-    language:  'zh-CN',
-	format: "yyyy-mm-dd HH:ii:00",
-    weekStart: 1,
-    todayBtn:  1,
-	autoclose: 1,
-	todayHighlight: 1,
-	startView: 2,
-	minView: 0,
-	maxView: 3,
-	pickerPosition:"bottom-left"
-});
-$('.form_date2').datetimepicker({
-    language:  'zh-CN',
-	format: "yyyy-mm-dd HH:ii:00",
-    weekStart: 1,
-    todayBtn:  1,
-	autoclose: 1,
-	todayHighlight: 1,
-	startView: 2,
-	minView: 0,
-	maxView: 3,
-	pickerPosition:"bottom-left"
-});
-//提交from
-function submitFrom1(offset,from_id) {
-	$('#offsetAA').val(offset);
-	jQuery("#"+from_id).ajaxSubmit(function(data) {
-		$('#small_info_div_list1').html(data);
-	});
-}
-submitFrom1(0,'small_info_form_list1');
 </script>
