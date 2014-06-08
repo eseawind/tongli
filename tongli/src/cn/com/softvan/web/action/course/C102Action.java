@@ -107,7 +107,7 @@ public class C102Action extends BaseAction {
 		//当前页
 		page.setCurrOffset(offset);
 		//每页显示条数
-		page.setPageRowCount(1);
+		page.setPageRowCount(15);
 		TcCourseSyllabusBean bean1 = new TcCourseSyllabusBean();
 		bean1.setPageInfo(page);
 		bean1.setDel_flag("0");
@@ -141,7 +141,7 @@ public class C102Action extends BaseAction {
 		//当前页
 		page.setCurrOffset(offset);
 		//每页显示条数
-		page.setPageRowCount(1);
+		page.setPageRowCount(15);
 		TcCourseSyllabusBean bean1 = new TcCourseSyllabusBean();
 		bean1.setPageInfo(page);
 		bean1.setDel_flag("0");

@@ -113,15 +113,15 @@
 </html>
 <script>
 	$(function() {
-		loadUrlPage(0,'m201_','list1','course_info1','${student_id}','&status=0');
-		loadUrlPage(0,'m201_','list2','course_info2','${student_id}','&status=1');
+		loadUrlPage(0,'m201_','list1','course_info1','${student_id}');
+		loadUrlPage(0,'m201_','list2','course_info2','${student_id}');
 	});
 	function loadInfo(sid) {
 		loginCheck();
-		loadUrlPage(0,'m201_','list1','course_info1',sid,'&status=0');
-		loadUrlPage(0,'m201_','list2','course_info2',sid,'&status=1');
+		loadUrlPage(0,'m201_','list1','course_info1',sid);
+		loadUrlPage(0,'m201_','list2','course_info2',sid);
 	}
-	function loadUrlPage(offset,url,event,divId,sid,obj) {
+	function loadUrlPage(offset,url,event,divId,sid) {
 		try{
 			$('#s_').find('li').removeClass('on');
 			$('#s_'+sid).addClass('on');
@@ -130,7 +130,7 @@
 		//var load = "<a class='loading' >信息加载中...</a>";
 		//jQuery("#" + divId).html(load);
 		jQuery.ajax({
-			url : '${basePath}/' + url + event+'.ac?offset='+offset+"&sid="+ sid + obj + '&time=' + new Date(),
+			url : '${basePath}/' + url + event+'.ac?offset='+offset+"&sid="+ sid  + '&time=' + new Date(),
 			success : function(req) {
 				jQuery("#"+divId).html(req);
 			},

@@ -21,6 +21,7 @@
 <c:if test="${beans!=null && fn:length(beans)>0 }">
 
 <style>
+.media span{float: right;font-size: 12px;line-height: 20px;}
 .j-pl-photolist-ul{list-style: none;width:710px;}
 .j-pl-photoitem{list-style: none;float: left;width: 152px;height:150px;margin: 10px;}
 .mod-photo-item{width: 152px;margin: 13px;}

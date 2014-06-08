@@ -157,7 +157,7 @@ opacity: 1;
     <a class="play-pause"></a>
     <ol class="indicator"></ol>
 </div>
-<customtag:pagingext func="loadUrlPage" params="'m201_','list1','course_info'" />
+<customtag:pagingext func="loadUrlPage" params="'m201_','list1','course_info1','${sid}'" />
 <script>
 	$(".item_li_0").click(function() {
 		if ($(this).hasClass("on")) {

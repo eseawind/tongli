@@ -112,7 +112,7 @@ public class M201Action extends BaseAction {
 		bean1.setDel_flag("0");
 		bean1.setStudent_id(request.getParameter("sid"));//学员id
 		
-		bean1.setNote("0");//已完成课程
+		bean1.setNote("1");//已完成课程
 		
 		//课程列表
 		List<TcCourseSyllabusBean> beans=courseSyllabusItemsManager.findDataIsPageCourse(bean1);
@@ -122,6 +122,7 @@ public class M201Action extends BaseAction {
 		TcMemberBean user = (TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO);
 		request.setAttribute("uid",user.getUser_id());//
 		
+		request.setAttribute("sid",request.getParameter("sid"));//学员id
 		return "list1";
 	}
 	/**
@@ -150,13 +151,14 @@ public class M201Action extends BaseAction {
 		bean1.setPageInfo(page);
 		bean1.setDel_flag("0");
 		bean1.setStudent_id(request.getParameter("sid"));//学员id
-		
-		bean1.setNote("1");//未完成课程
+		bean1.setNote("0");//未完成课程
 		
 		//课程列表
 		List<TcCourseSyllabusBean> beans=courseSyllabusItemsManager.findDataIsPageCourse(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
+		
+		request.setAttribute("sid",request.getParameter("sid"));//学员id
 		return "list2";
 	}
 	/**
