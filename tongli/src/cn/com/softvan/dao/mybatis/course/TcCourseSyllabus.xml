@@ -19,7 +19,8 @@
 	t1.version,
 	t1.course_status,
 	t1.detail_info,
-	t1.addres
+	t1.addres,
+	t1.type
   </sql>
   <select id="selectByPrimaryKey" resultType="tcCourseSyllabusBean" parameterType="tcCourseSyllabus" >
     select 
@@ -48,7 +49,8 @@
 		version,
 		course_status,
 		detail_info,
-		addres
+		addres,
+		type
       ) values (
 	    #{id},
 		#{course_id},
@@ -65,7 +67,8 @@
 		 0,
 		'0',
 		#{detail_info},
-		#{addres}
+		#{addres},
+		#{type}
     )
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tcCourseSyllabus" >
@@ -83,7 +86,7 @@
 	<if test="course_status!= null" >,course_status=#{course_status}</if>
 	<if test="detail_info!= null" >,detail_info=#{detail_info}</if>
 	<if test="addres!= null" >,addres=#{addres}</if>
-	
+	<if test="type!= null" >,type=#{type}</if>
 	where id=#{id}
   </update>
   	<!--判断是否存在-->
@@ -110,19 +113,18 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
+    <if test="type!= null and type!=''" > and t1.type=#{type}</if>
      <!-- 已完成课程 -->
     <if test="course_status!=null and course_status==1">
    		<![CDATA[
-    	and ( TO_DAYS(t1.day)<TO_DAYS(now()) or t1.course_status=#{course_status} )
-		
-		]]><!-- and TO_SECONDS(t1.end_time)<TO_SECONDS(now()) -->
+    	and (( TIMESTAMP(CONCAT(t1.day,' ',t1.end_time),'%Y-%m-%d %h:%i:%s')<=TIMESTAMP(now(),'%Y-%m-%d %h:%i:%s') ) or t1.course_status=#{course_status} )
+		]]>
     </if>
     <!-- 未完成课程 -->
     <if test="course_status!=null and course_status==0">
     	<![CDATA[
-    	and TO_DAYS(t1.day)>=TO_DAYS(now())
-		
-		]]><!-- and TO_SECONDS(t1.end_time)>=TO_SECONDS(now()) -->
+    	and ( TIMESTAMP(CONCAT(t1.day,' ',t1.end_time),'%Y-%m-%d %h:%i:%s')>TIMESTAMP(now(),'%Y-%m-%d %h:%i:%s') )
+		]]>
     </if>
     order by t1.day asc,t1.begin_time asc,t1.end_time asc
     </select>
@@ -145,19 +147,18 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
+     <if test="type!= null and type!=''" > and t1.type=#{type}</if>
      <!-- 已完成课程 -->
     <if test="course_status!=null and course_status==1">
    		<![CDATA[
-    	and ( TO_DAYS(t1.day)<TO_DAYS(now()) or t1.course_status=#{course_status} )
-		
-		]]><!-- and TO_SECONDS(t1.end_time)<TO_SECONDS(now()) -->
+    	and (( TIMESTAMP(CONCAT(t1.day,' ',t1.end_time),'%Y-%m-%d %h:%i:%s')<=TIMESTAMP(now(),'%Y-%m-%d %h:%i:%s') ) or t1.course_status=#{course_status} )
+		]]>
     </if>
     <!-- 未完成课程 -->
     <if test="course_status!=null and course_status==0">
     	<![CDATA[
-    	and TO_DAYS(t1.day)>=TO_DAYS(now())
-		
-		]]><!-- and TO_SECONDS(t1.end_time)>=TO_SECONDS(now()) -->
+    	and ( TIMESTAMP(CONCAT(t1.day,' ',t1.end_time),'%Y-%m-%d %h:%i:%s')>TIMESTAMP(now(),'%Y-%m-%d %h:%i:%s') )
+		]]>
     </if>
     order by t1.day asc,t1.begin_time asc,t1.end_time asc
    </select>

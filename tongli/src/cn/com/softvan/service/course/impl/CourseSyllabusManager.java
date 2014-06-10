@@ -75,6 +75,8 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//VERSION
+				dto.setType(bean.getType());//类型(0课程1夏令营2冬令营)
+				
 				if(Validator.notEmpty(bean.getDetail_info())){
 					IOHelper.deleteFile(bean.getDetail_info());//TODO=删除文件
 					dto.setDetail_info(IOHelper.writeHtml("html",bean.getDetail_info()));//内容
@@ -209,6 +211,8 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 				dto.setVersion(bean.getVersion());//VERSION
 				dto.setAddres(bean.getAddres());//地址
 				dto.setCourse_status(bean.getCourse_status());//状态
+				dto.setType(bean.getType());//类型(0课程1夏令营2冬令营)
+				
 				dto.setPageInfo(bean.getPageInfo());//分页
     	   }
 			beans=(List<TcCourseSyllabusBean>) tcCourseSyllabusDao.findDataIsPage(dto);
@@ -247,6 +251,7 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 					dto.setAddres(bean.getAddres());//地址
 					dto.setVersion(bean.getVersion());//VERSION
 					dto.setCourse_status(bean.getCourse_status());//状态
+					dto.setType(bean.getType());//类型(0课程1夏令营2冬令营)
 					
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());

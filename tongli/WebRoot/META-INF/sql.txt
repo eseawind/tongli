@@ -1,0 +1,4 @@
+#2014-06-10
+ALTER TABLE `tc_course_syllabus`
+ADD COLUMN `type`  char(1) NULL DEFAULT '0' COMMENT '类型(0课程1夏令营2冬令营)' AFTER `course_status`;
+

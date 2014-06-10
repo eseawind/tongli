@@ -205,4 +205,20 @@
 			}
 		});
 	}
+	// 提交from
+	function submitFrom2(from_id) {
+		//登录认证
+		loginCheck();
+		//提交
+		jQuery("#"+from_id).ajaxSubmit(function(data) {
+			if (data == "1") {
+				$('.xx2'+from_id).attr('readonly','readonly');
+				$('.xx2'+from_id).attr('disabled','disabled');
+				jQuery("#b_"+from_id).remove();
+				alert('提交成功!');
+			} else {
+				alert(data);
+			}
+		});
+	}
 </script>

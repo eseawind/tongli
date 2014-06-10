@@ -82,22 +82,6 @@
 			<!-- BEGIN PAGE CONTENT-->
 			<div class="row">
 				<div class="col-md-12">
-					<style>
-					.nav-list li {
-						position: relative;
-					}
-					
-					.nav-list span.oper {
-						position: absolute;
-						right: 0;
-						top: 0;
-					}
-					
-					.nav-list span.oper,li#add-grp-btn {
-						font-size: 18px;
-					}
-					</style>
-
 					<div class="row-fluid">
 						<div class="col-md-12">
 							<c:if test="${msg!=null}">

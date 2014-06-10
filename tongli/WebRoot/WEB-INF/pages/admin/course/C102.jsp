@@ -90,9 +90,13 @@
 								</c:otherwise>
 							</c:choose>
 						</c:if>
+						<div class="well form-inline">
 							<div class="btn-toolbar">
-								<a href="${basePath}/h/c102_edit.ac" class="btn btn-primary">新增课程</a>
+								<a href="${basePath}/h/c102_edit.ac?type=0" class="btn btn-primary">安排课程表</a>
+								<a href="${basePath}/h/c102_edit.ac?type=1" class="btn purple">安排【夏令营】课程表</a>
+								<a href="${basePath}/h/c102_edit.ac?type=2" class="btn dark">安排冬【令营课】程表</a>
 							</div>
+						</div>
 							<ul class="nav nav-tabs" style="height:40px; ">
 									<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
 									<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>

@@ -228,16 +228,14 @@
 	     <!-- 已完成课程 -->
 	    <if test="note!=null and note==1">
 	   		<![CDATA[
-	    	and (TO_DAYS(t2.day)<TO_DAYS(now()) or t2.course_status=#{note})
-			
-			]]><!-- and TO_SECONDS(t2.end_time)<TO_SECONDS(now()) -->
+	    	and (( TIMESTAMP(CONCAT(t2.day,' ',t2.end_time),'%Y-%m-%d %h:%i:%s')<=TIMESTAMP(now(),'%Y-%m-%d %h:%i:%s') ) or t2.course_status=#{note})
+			]]>
 	    </if>
 	    <!-- 未完成课程 -->
 	    <if test="note!=null and note==0">
 	    	<![CDATA[
-	    	and TO_DAYS(t2.day)>=TO_DAYS(now())
-			
-			]]><!-- and TO_SECONDS(t2.end_time)>=TO_SECONDS(now()) -->
+	    	and TIMESTAMP(CONCAT(t2.day,' ',t2.end_time),'%Y-%m-%d %h:%i:%s')>TIMESTAMP(now(),'%Y-%m-%d %h:%i:%s')
+			]]>
 	    </if>
 	    order by t2.day desc,t2.begin_time asc
    </select>
@@ -342,16 +340,14 @@
 	     <!-- 已完成课程 -->
 	    <if test="note!=null and note==1">
 	   		<![CDATA[
-	    	and (TO_DAYS(t2.day)<TO_DAYS(now()) or t2.course_status=#{note})
-			
-			]]><!-- and TO_SECONDS(t2.end_time)<TO_SECONDS(now()) -->
+	    	and (( TIMESTAMP(CONCAT(t2.day,' ',t2.end_time),'%Y-%m-%d %h:%i:%s')<=TIMESTAMP(now(),'%Y-%m-%d %h:%i:%s') ) or t2.course_status=#{note})
+			]]>
 	    </if>
 	    <!-- 未完成课程 -->
 	    <if test="note!=null and note==0">
 	    	<![CDATA[
-	    	and TO_DAYS(t2.day)>=TO_DAYS(now())
-			
-			]]><!-- and TO_SECONDS(t2.end_time)>=TO_SECONDS(now()) -->
+	    	and TIMESTAMP(CONCAT(t2.day,' ',t2.end_time),'%Y-%m-%d %h:%i:%s')>TIMESTAMP(now(),'%Y-%m-%d %h:%i:%s')
+			]]>
 	    </if>
 	    group by t1.teacher_id,t2.course_id
 	    order by t2.day desc,t2.begin_time asc

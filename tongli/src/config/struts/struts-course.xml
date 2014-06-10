@@ -21,6 +21,7 @@
 			<result name="clist1">/WEB-INF/pages/admin/course/C102_05.jsp</result>
 			<result name="list1">/WEB-INF/pages/admin/course/C102_06.jsp</result>
 			<result name="list2">/WEB-INF/pages/admin/course/C102_07.jsp</result>
+			<result name="edit2">/WEB-INF/pages/admin/course/C102_08.jsp</result>
 			<result name="success" type="chain">c102_init</result>
 		</action>
 		<!-- 预约参观管理 -->

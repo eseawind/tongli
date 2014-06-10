@@ -250,9 +250,21 @@ public class C102Action extends BaseAction {
 				e.printStackTrace();
 			}
 		}
+		String s="edit";//普通课程
 		if(bean==null){
 			bean=new TcCourseSyllabusBean();
 			bean.setId(IdUtils.createUUID(32));
+		}
+		String type=request.getParameter("type");
+		if(type!=null){
+			if("0".equals(type)){
+				bean.setType("0");//普通课程
+			}else{
+				bean.setType(type);
+				s="edit2";//冬夏令营
+			}
+		}else{
+			bean.setType("0");//普通课程
 		}
 		//-------------学员集合-all------
 		request.setAttribute("student_beans", studentManager.findDataIsList(null));
@@ -265,7 +277,8 @@ public class C102Action extends BaseAction {
 		
 		BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
 		request.setAttribute("uid", user.getUser_id());//
-		return "edit";
+		
+		return s;
 	}
 	/**
 	 * <p>

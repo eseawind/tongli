@@ -18,87 +18,34 @@
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
 <c:if test="${beans!=null && fn:length(beans)>0 }">
-
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <c:forEach items="${beans}" var="bean" varStatus="i">
 	<div class="item_li item_li_1">${i.index+1}. ${bean.title}</div>
 	<div class="item_con item_con_1">
 		<div class="grade">
-			<table width="600" border="0" cellspacing="0" cellpadding="2">
+			<table class="table table-striped table-condensed">
 				<tr>
-					<td width="118" height="30" align="right"><strong>时间：</strong></td>
-					<td width="474">${bean.day}&nbsp;${bean.begin_time}&nbsp;${bean.end_time}</td>
+					<td width="90" height="30" ><strong>上课时间：</strong></td>
+					<td>日期<font color="blue">${bean.day}</font>&nbsp;上课时间<font color="blue">${bean.begin_time}</font>&nbsp;下课时间<font color="blue">${bean.end_time}</font></td>
 				</tr>
-				<tr>
-					<td height="30" align="right"><strong>地点：</strong></td>
+				<tr class="alert alert-success">
+					<td height="30" ><strong>上课地点：</strong></td>
 					<td>${bean.addres}</td>
 				</tr>
+			</table>
+			<table class="table table-striped table-condensed">
 				<tr>
-					<td height="30" align="right"><strong>${bean.teacher_name}老师：</strong></td>
-					<td>${bean.brief_info}</td>
+					<td height="30"><strong>上课老师简介</strong></td>
 				</tr>
 				<tr>
-					<td height="30" align="right"><strong>我的上课信息：</strong></td>
-					<td>
-					<c:choose>
-						<c:when test="${bean.student_status!=null}">
-							<p>
-							<c:if test="${bean.student_status=='0'}">签到完成</c:if>
-							<c:if test="${bean.student_status=='1'}">旷课</c:if>
-							<c:if test="${bean.student_status=='2'}">请假</c:if>
-							</p>
-							<p>
-								备注:
-								${bean.student_status_note}
-							</p>
-						</c:when>
-						<c:otherwise>
-							暂未评价
-						</c:otherwise>
-					</c:choose>
-				</td>
+					<td>${bean.teacher_name}:${bean.brief_info}</td>
 				</tr>
-				<%-- <tr>
-					<td height="30" align="right" valign="top"><strong>对老师评分：</strong></td>
-					<td align="left">
-						<c:choose>
-							<c:when test="${ bean.teacher_score!=null}">
-								<c:if test="${bean.teacher_score=='0'}">差</c:if>
-								<c:if test="${bean.teacher_score=='1'}">良</c:if>
-								<c:if test="${bean.teacher_score=='2'}">优</c:if>
-								<p>
-									备注:
-									${bean.teacher_score_note}
-								</p>
-							</c:when>
-							<c:otherwise>
-								<form style="float: left;width: 100%;"  id="${bean.course_syllabus_item_id}" accept-charset="UTF-8"  action="${basePath}/m201_save.ac"  method="post">
-								<input type="hidden" name="item_bean.id" value="${bean.course_syllabus_item_id}">
-								<input type="hidden" name="item_bean.course_syllabus_id" value="${bean.id}">
-								<input type="hidden" name="item_bean.teacher_id" value="${bean.teacher_id}">
-								<input type="hidden" name="item_bean.student_id" value="${bean.student_id}">
-								<p>
-									<label><input type="radio" class="xx2${bean.course_syllabus_item_id}" name="item_bean.teacher_score" value="0">差</label>
-									<label><input type="radio" class="xx2${bean.course_syllabus_item_id}" name="item_bean.teacher_score" value="1">良</label>
-									<label><input type="radio" class="xx2${bean.course_syllabus_item_id}" name="item_bean.teacher_score" value="2">优</label>
-								</p>
-								<p style="height: 15px;"> </p>
-								<p>
-								<textarea style="width: 100%;height: 100%;" class="xx2${bean.course_syllabus_item_id}" name="item_bean.teacher_score_note"></textarea>
-								</p>
-								<p style="float: left;margin-left: 200px;">
-									<input class="login_btn" id="b_${bean.course_syllabus_item_id}" type="button" value="提交" onclick="if(confirm('确认提交吗?')){submitFrom2('${bean.course_syllabus_item_id}');}">
-								</p>
-								</form>
-							</c:otherwise>
-						</c:choose>
-					</td>
-				</tr> --%>
 			</table>
 		</div>
 	</div>
 </c:forEach>
 <customtag:pagingext func="loadUrlPage" params="'m201_','list2','course_info2','${sid}'" />
+</c:if>
 <script>
 	$(".item_li_1").click(function() {
 		if ($(this).hasClass("on")) {
@@ -108,23 +55,7 @@
 		}
 		$(this).next(".item_con_1").slideToggle();
 	});
-	/* // 提交from
-	function submitFrom2(from_id) {
-		//登录认证
-		loginCheck()
-		//提交
-		jQuery("#"+from_id).ajaxSubmit(function(data) {
-			if (data == "1") {
-				$('.xx2'+from_id).attr('readonly','readonly');
-				jQuery("#b_"+from_id).remove();
-				alert('提交成功!');
-			} else {
-				alert(data);
-			}
-		});
-	} */
 	try{
 		$('._struts_1').html('${PAGEROW_OBJECT_KEY.recordCount}');
 	}catch(e){}
 </script>
-</c:if>

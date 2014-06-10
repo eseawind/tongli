@@ -158,6 +158,7 @@ opacity: 1;
     <ol class="indicator"></ol>
 </div>
 <customtag:pagingext func="loadUrlPage" params="'m201_','list1','course_info1','${sid}'" />
+</c:if>
 <script>
 	$(".item_li_0").click(function() {
 		if ($(this).hasClass("on")) {
@@ -214,4 +215,3 @@ opacity: 1;
 		$('._struts_0').html('${PAGEROW_OBJECT_KEY.recordCount}');
 	}catch(e){}
 </script>
-</c:if>

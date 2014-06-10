@@ -50,6 +50,8 @@ public class TcCourseSyllabusBean extends BaseBean {
 	private String course_status;
 	/** 简介 */
 	private String brief_info;
+	/** 类型(0课程1夏令营2冬令营) */
+	private String type;
 	//--------------------------------------------------------------
 	/** 标题 */
 	private String title;
@@ -249,6 +251,20 @@ public class TcCourseSyllabusBean extends BaseBean {
 	 */
 	public void setBrief_info(String brief_info) {
 	    this.brief_info = brief_info;
+	}
+	/**
+	 * 类型(0课程1夏令营2冬令营)取得
+	 * @return 类型(0课程1夏令营2冬令营)
+	 */
+	public String getType() {
+	    return type;
+	}
+	/**
+	 * 类型(0课程1夏令营2冬令营)设定
+	 * @param type 类型(0课程1夏令营2冬令营)
+	 */
+	public void setType(String type) {
+	    this.type = type;
 	}
 	/**
 	 * 标题取得

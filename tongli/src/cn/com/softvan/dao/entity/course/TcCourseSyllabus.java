@@ -40,6 +40,8 @@ public class TcCourseSyllabus extends BaseEntity {
 	private String course_status;
 	/** 地址 */
 	private String addres;
+	/** 类型(0课程1夏令营2冬令营) */
+	private String type;
 	/**
 	 * id取得
 	 * @return id
@@ -182,6 +184,22 @@ public class TcCourseSyllabus extends BaseEntity {
 	 */
 	public void setAddres(String addres) {
 	    this.addres = addres;
+	}
+
+	/**
+	 * 类型(0课程1夏令营2冬令营)取得
+	 * @return 类型(0课程1夏令营2冬令营)
+	 */
+	public String getType() {
+	    return type;
+	}
+
+	/**
+	 * 类型(0课程1夏令营2冬令营)设定
+	 * @param type 类型(0课程1夏令营2冬令营)
+	 */
+	public void setType(String type) {
+	    this.type = type;
 	}
 
 }

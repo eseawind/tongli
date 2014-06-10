@@ -374,12 +374,8 @@
     </tr>
 {% } %}
 </script>
+</c:if>
 <script type="text/javascript">
-	jQuery(document).ready(function() {
-	//	try{
-	//	}catch(e){alert(e);}
-	});
-
 	$(".item_li_0").click(function() {
 		$(".item_li").removeClass("on");
 		if ($(this).hasClass("on")) {
@@ -389,22 +385,6 @@
 		}
 		$(this).next(".item_con_0").slideToggle();
 	});
-	// 提交from 
-	function submitFrom2(from_id) {
-		//登录认证
-		loginCheck();
-		//提交
-		jQuery("#"+from_id).ajaxSubmit(function(data) {
-			if (data == "1") {
-				$('.xx2'+from_id).attr('readonly','readonly');
-				$('.xx2'+from_id).attr('disabled','disabled');
-				jQuery("#b_"+from_id).remove();
-				alert('提交成功!');
-			} else {
-				alert(data);
-			}
-		});
-	}
 	// 提交from
 	function submitFrom3(from_id) {
 		//登录认证
@@ -442,4 +422,3 @@
 		$(obj).parent().find('.pdel_flag_a').show();
 	}
 </script>
-</c:if>
