@@ -94,24 +94,56 @@
 							<div class="btn-toolbar">
 								<a href="${basePath}/h/c102_edit.ac?type=0" class="btn btn-primary">安排课程表</a>
 								<a href="${basePath}/h/c102_edit.ac?type=1" class="btn purple">安排【夏令营】课程表</a>
-								<a href="${basePath}/h/c102_edit.ac?type=2" class="btn dark">安排冬【令营课】程表</a>
+								<a href="${basePath}/h/c102_edit.ac?type=2" class="btn dark">安排【冬令营】程表</a>
 							</div>
 						</div>
 							<ul class="nav nav-tabs" style="height:40px; ">
-									<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
-									<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>
+									<li id="tab_1_li" class="active "><a href="#tab_1" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
+									<li id="tab_2_li"><a href="#tab_2" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>
+									<li id="tab_3_li"><a href="#tab_3" data-toggle="tab">完结课程【夏令营】(<font class="_struts_2" color="red">0</font>)</a></li>
+									<li id="tab_4_li"><a href="#tab_4" data-toggle="tab">未完课程【夏令营】(<font class="_struts_3" color="red">0</font>)</a></li>
+									<li id="tab_5_li"><a href="#tab_5" data-toggle="tab">完结课程【冬令营】(<font class="_struts_4" color="red">0</font>)</a></li>
+									<li id="tab_6_li"><a href="#tab_6" data-toggle="tab">未完课程【冬令营】(<font class="_struts_5" color="red">0</font>)</a></li>
 							</ul>
 							<div class="tab-content">
-								<div class="tab-pane active" id="tab_0">
+								<div class="tab-pane active" id="tab_1">
 									<!-- BEGIN FORM-->
 									<div class="course_info" id="course_info1">
 										
 									</div>
 									<!-- END FORM--> 
 								</div>
-								<div class="tab-pane" id="tab_1">
+								<div class="tab-pane" id="tab_2">
 									<!-- BEGIN FORM-->
 									<div class="course_info" id="course_info2">
+										
+									</div>
+									<!-- END FORM--> 
+								</div>
+								<div class="tab-pane" id="tab_3">
+									<!-- BEGIN FORM-->
+									<div class="course_info" id="course_info3">
+										
+									</div>
+									<!-- END FORM--> 
+								</div>
+								<div class="tab-pane" id="tab_4">
+									<!-- BEGIN FORM-->
+									<div class="course_info" id="course_info4">
+										
+									</div>
+									<!-- END FORM--> 
+								</div>
+								<div class="tab-pane" id="tab_5">
+									<!-- BEGIN FORM-->
+									<div class="course_info" id="course_info5">
+										
+									</div>
+									<!-- END FORM--> 
+								</div>
+								<div class="tab-pane" id="tab_6">
+									<!-- BEGIN FORM-->
+									<div class="course_info" id="course_info6">
 										
 									</div>
 									<!-- END FORM--> 
@@ -134,12 +166,16 @@
 </html>
 <script type="text/javascript">
 jQuery(document).ready(function() {
-	loadUrlPage(0,'h/c102_','list1','course_info1');
-	loadUrlPage(0,'h/c102_','list2','course_info2');
+	loadUrlPage(0,'h/c102_','list1','course_info1','&t=0');
+	loadUrlPage(0,'h/c102_','list2','course_info2','&t=0');
+	loadUrlPage(0,'h/c102_','list1','course_info3','&t=1');
+	loadUrlPage(0,'h/c102_','list2','course_info4','&t=1');
+	loadUrlPage(0,'h/c102_','list1','course_info5','&t=2');
+	loadUrlPage(0,'h/c102_','list2','course_info6','&t=2');
 });
-function loadUrlPage(offset,url,event,divId) {
+function loadUrlPage(offset,url,event,divId,obj) {
 	jQuery.ajax({
-		url : '${basePath}/' + url + event+'.ac?offset='+offset+ '&time=' + new Date(),
+		url : '${basePath}/' + url + event+'.ac?offset='+offset+ obj + '&time=' + new Date(),
 		success : function(req) {
 			jQuery("#"+divId).html(req);
 		},

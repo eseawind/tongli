@@ -87,6 +87,64 @@
 						<s:token></s:token>
 						<input name="bean.id" type="hidden" value="${bean.id}">
 						<input name="bean.type" type="text" value="${bean.type}">
+						<input name="type_flag" type="hidden" value="2x">
+						<div class="well form-inline form-group">
+							<div class="col-md-1"><label>开始日期</label></div> 
+							<div id="article_date1" style="margin-top: -8px;" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+								<input type="text" name="bean.date1" value="${bean.day}" class="form-control" readonly="">
+								<span class="input-group-btn">
+								<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div>
+							<div class="col-md-1"><label>结束日期</label></div> 
+							<div id="article_date2" style="margin-top: -8px;" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+								<input type="text" name="bean.date2" value="${bean.day}" class="form-control" readonly="">
+								<span class="input-group-btn">
+								<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div>
+							&nbsp; 
+						</div>
+						<div class="well form-inline">
+							<label>
+								<input name="day_week"  value="0"	 type="checkbox" />星期日
+							</label>
+							<label>
+								<input name="day_week"  value="1"	 type="checkbox" />星期一
+							</label>
+							<label>
+								<input name="day_week"  value="2"	 type="checkbox" />星期二
+							</label>
+							<label>
+								<input name="day_week"  value="3"	 type="checkbox" />星期三
+							</label>
+							<label>
+								<input name="day_week"  value="4"	 type="checkbox" />星期四
+							</label>
+							<label>
+								<input name="day_week"  value="5"	 type="checkbox" />星期五
+							</label>
+							<label>
+								<input name="day_week"  value="6"	 type="checkbox" />星期六
+							</label>
+						</div>
+						<div class="well form-inline form-group">
+							<div class="col-md-1"><label>上课时间</label></div> 
+							<div  class="input-group bootstrap-timepicker col-md-2" id="article_begin_time_toggle" style="margin-top: -8px;" >                                       
+								<input id="article_begin_time" name="bean.begin_time" value="${bean.begin_time}" type="text" class="form-control" readonly="" />
+								<span class="input-group-btn">
+								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
+								</span>
+							</div>
+							<div class="col-md-1"><label>下课时间</label></div> 
+							<div  class="input-group bootstrap-timepicker col-md-2" id="article_end_time_toggle" style="margin-top: -8px;" >                                       
+								<input id="article_end_time" type="text" name="bean.end_time" value="${bean.end_time}" class="form-control" readonly="" >
+								<span class="input-group-btn">
+								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
+								</span>
+							</div>
+							&nbsp; 
+						</div>
 						<div class="form-group">
 							 &nbsp;  <label class="control-label">课程</label>
 							 <label class="control-label col-md-12">
@@ -152,29 +210,6 @@
 								</div>
 							</label>
 						</div>
-						<div class="well form-inline form-group">
-							<div class="col-md-1"><label>上课时间</label></div> 
-							<div id="article_day" style="margin-top: -8px;" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
-								<input type="text" name="bean.day" value="${bean.day}" class="form-control" readonly="">
-								<span class="input-group-btn">
-								<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-								</span>
-							</div>
-							
-							<div  class="input-group bootstrap-timepicker col-md-2" id="article_begin_time_toggle" style="margin-top: -8px;" >                                       
-								<input id="article_begin_time" name="bean.begin_time" value="${bean.begin_time}" type="text" class="form-control" readonly="" />
-								<span class="input-group-btn">
-								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
-								</span>
-							</div>
-							<div  class="input-group bootstrap-timepicker col-md-2" id="article_end_time_toggle" style="margin-top: -8px;" >                                       
-								<input id="article_end_time" type="text" name="bean.end_time" value="${bean.end_time}" class="form-control" readonly="" >
-								<span class="input-group-btn">
-								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
-								</span>
-							</div>
-							&nbsp; 
-						</div>
 						<div class="form-group">
 							<label for="article_addres">地址</label> <input class="form-control"
 								id="article_addres" name="bean.addres" size="150" type="text" value="${bean.addres}">
@@ -216,7 +251,8 @@
 </html>
 <script type="text/javascript">
 jQuery(document).ready(function() {
-	$('#article_day').datepicker();
+	$('#article_date1').datepicker();
+	$('#article_date2').datepicker();
 	//
 	 $('#article_begin_time').clockface({
          format: 'HH:mm',

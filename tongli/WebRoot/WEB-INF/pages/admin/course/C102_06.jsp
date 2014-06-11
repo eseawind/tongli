@@ -53,7 +53,7 @@
 	</c:choose>
 	</tbody>
 </table>
-<customtag:pagingext func="loadUrlPage" params="'h/c102_','list1','course_info1'" />
+<customtag:pagingext func="loadUrlPage" params="'h/c102_','list1','course_info1','&t=0'" />
 <script>
 try{
 	$('._struts_0').html('${PAGEROW_OBJECT_KEY.recordCount}');

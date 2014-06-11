@@ -1,10 +1,10 @@
 <%--
 /*
- * 系统管理_课程管理_课程表--未完成 (页面)
+ * 系统管理_课程管理_课程表[夏令营]--未完成 (页面)
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
- * 1.00     2014-06-08  wuxiaogang   程序・发布
+ * 1.00     2014-06-11  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 童励 System. - All Rights Reserved.
  *
@@ -53,9 +53,9 @@
 	</c:choose>
 	</tbody>
 </table>
-<customtag:pagingext func="loadUrlPage" params="'h/c102_','list2','course_info2','&t=0'" />
+<customtag:pagingext func="loadUrlPage" params="'h/c102_','list2','course_info4','&t=1'" />
 <script>
 try{
-	$('._struts_1').html('${PAGEROW_OBJECT_KEY.recordCount}');
+	$('._struts_3').html('${PAGEROW_OBJECT_KEY.recordCount}');
 }catch(e){}
 </script>

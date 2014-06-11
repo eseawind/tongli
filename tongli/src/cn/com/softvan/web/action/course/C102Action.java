@@ -12,6 +12,7 @@ package cn.com.softvan.web.action.course;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -23,6 +24,7 @@ import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusPhotoBean;
 import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.common.CommonConstant;
+import cn.com.softvan.common.DateUtil;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.comment.ICommentManager;
@@ -97,6 +99,16 @@ public class C102Action extends BaseAction {
 	 */
 	public String list1() {
 		log.info("C102Action list1.........");
+		String s="list1";//普通课程
+		String t=request.getParameter("t");//0 普通课程1夏令营2冬令营
+		if(t!=null){
+			if("1".equals(t)){
+				s="list1_1";//1夏令营
+			}
+			if("2".equals(t)){
+				s="list1_2";//2冬令营
+			}
+		}
 		int offset = 0;
 		// 分页偏移量
 		if (!Validator.isNullEmpty(request.getParameter("offset"))
@@ -113,12 +125,14 @@ public class C102Action extends BaseAction {
 		bean1.setDel_flag("0");
 		//--已完成课程--
 		bean1.setCourse_status("1");
+		//--
+		bean1.setType(t);
 		//列表
 		List<TcCourseSyllabusBean> beans=courseSyllabusManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		
-		return "list1";
+		return s;
 	}
 	/**
 	 * <p>
@@ -131,6 +145,16 @@ public class C102Action extends BaseAction {
 	 */
 	public String list2() {
 		log.info("C102Action list2.........");
+		String s="list2";//普通课程
+		String t=request.getParameter("t");//0 普通课程1夏令营2冬令营
+		if(t!=null){
+			if("1".equals(t)){
+				s="list2_1";//1夏令营
+			}
+			if("2".equals(t)){
+				s="list2_2";//2冬令营
+			}
+		}
 		int offset = 0;
 		// 分页偏移量
 		if (!Validator.isNullEmpty(request.getParameter("offset"))
@@ -147,11 +171,13 @@ public class C102Action extends BaseAction {
 		bean1.setDel_flag("0");
 		//--未完成课程--
 		bean1.setCourse_status("0");
+		//--
+		bean1.setType(t);
 		//列表
 		List<TcCourseSyllabusBean> beans=courseSyllabusManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
-		return "list2";
+		return s;
 	}
 	/**
 	 * <p>
@@ -246,8 +272,7 @@ public class C102Action extends BaseAction {
 					bean.setPicBeans(courseSyllabusPhotoManager.findDataIsList(photoBean));
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				log.error("学员集合获取出错!", e);
 			}
 		}
 		String s="edit";//普通课程
@@ -255,16 +280,18 @@ public class C102Action extends BaseAction {
 			bean=new TcCourseSyllabusBean();
 			bean.setId(IdUtils.createUUID(32));
 		}
-		String type=request.getParameter("type");
-		if(type!=null){
-			if("0".equals(type)){
-				bean.setType("0");//普通课程
+		if(Validator.isEmpty(bean.getType())){
+			String type=request.getParameter("type");
+			if(type!=null){
+				if("0".equals(type)){
+					bean.setType("0");//普通课程
+				}else{
+					bean.setType(type);
+					s="edit2";//冬夏令营
+				}
 			}else{
-				bean.setType(type);
-				s="edit2";//冬夏令营
+				bean.setType("0");//普通课程
 			}
-		}else{
-			bean.setType("0");//普通课程
 		}
 		//-------------学员集合-all------
 		request.setAttribute("student_beans", studentManager.findDataIsList(null));
@@ -343,17 +370,53 @@ public class C102Action extends BaseAction {
 		if(bean!=null){
 			String msg="1";
 			try {
-				if(Validator.isEmpty(bean.getTeacher_id())){
-					msg="保存失败!信息为空!";
-				}else{
-					BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
-					if(user!=null){
-						bean.setCreate_ip(getIpAddr());
-						bean.setCreate_id(user.getUser_id());
-						bean.setUpdate_ip(getIpAddr());
-						bean.setUpdate_id(user.getUser_id());
+				BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
+				if(user!=null){
+					bean.setCreate_ip(getIpAddr());
+					bean.setCreate_id(user.getUser_id());
+					bean.setUpdate_ip(getIpAddr());
+					bean.setUpdate_id(user.getUser_id());
+				}
+				//-----冬夏令营
+				if("2x".equals(request.getParameter("type_flag"))){
+					if(Validator.isEmpty(bean.getTeacher_id())||Validator.isEmpty(bean.getDate1())||Validator.isEmpty(bean.getDate2())){
+						msg="保存失败!信息为空!";
+					}else{
+						String[] day_week=request.getParameterValues("day_week");
+						if(day_week!=null){
+							String s=bean.getDate1();
+							String e=bean.getDate2();
+							Calendar ca=Calendar.getInstance();
+							ca.setTime(DateUtil.parseDate(s));
+							Calendar ca1=Calendar.getInstance();
+							ca1.setTime(DateUtil.parseDate(e));
+							
+							for(;ca.getTimeInMillis()<=ca1.getTimeInMillis();){
+//								System.out.println("星期"+(ca.get(Calendar.DAY_OF_WEEK)-1));
+//								System.out.println(DateUtil.getDateStr(ca.getTime()));
+								try {
+									String DAY_OF_WEEK=""+(ca.get(Calendar.DAY_OF_WEEK)-1);
+									for(String week:day_week){
+										if(DAY_OF_WEEK.equals(week)){
+											bean.setId(null);
+											bean.setDay(DateUtil.getDateStr(ca.getTime()));//上课日期
+											msg=courseSyllabusManager.saveOrUpdateData(bean);
+										}
+									}
+									ca.set(Calendar.DATE,ca.get(Calendar.DATE)+1);
+								} catch (Exception e1) {
+									log.error("冬夏令营课程信息保存失败!", e1);
+								}
+							}
+						}
 					}
-					msg=courseSyllabusManager.saveOrUpdateData(bean);
+				}else{
+					//-----普通课程
+					if(Validator.isEmpty(bean.getTeacher_id())){
+						msg="保存失败!信息为空!";
+					}else{
+						msg=courseSyllabusManager.saveOrUpdateData(bean);
+					}
 				}
 			} catch (Exception e) {
 				msg=e.getMessage();
