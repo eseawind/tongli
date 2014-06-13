@@ -53,5 +53,6 @@
 		</bean>
 		<bean id="courseWebEnrollManager" class="cn.com.softvan.service.course.impl.CourseWebEnrollManager" parent="baseManager" scope="prototype">
 			<property name="tcCourseWebEnrollDao" ref="tcCourseWebEnrollDao"></property>
+			<property name="smsManager" ref="smsManager"></property>
 		</bean>
 </beans>

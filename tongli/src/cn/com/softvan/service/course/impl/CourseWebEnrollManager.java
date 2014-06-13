@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.softvan.bean.course.TcCourseWebEnrollBean;
+import cn.com.softvan.bean.sys.TcSysSmsBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
@@ -25,6 +26,7 @@ import cn.com.softvan.dao.daointer.course.ITcCourseWebEnrollDao;
 import cn.com.softvan.dao.entity.course.TcCourseWebEnroll;
 import cn.com.softvan.service.BaseManager;
 import cn.com.softvan.service.course.ICourseWebEnrollManager;
+import cn.com.softvan.service.sys.ISmsManager;
 /**
  *<p>在线报名管理 service类。</p>
  * <ol>[功能概要] 
@@ -39,6 +41,8 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 	
 	/**信息DAO 接口类*/
 	private ITcCourseWebEnrollDao tcCourseWebEnrollDao;
+	/**短信 信息管理 业务处理*/
+	private ISmsManager smsManager;
 	/**
 	 * <p>信息编辑。</p>
 	 * <ol>[功能概要] 
@@ -80,6 +84,17 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 						dto.setId(IdUtils.createUUID(32));
 					}
 					tcCourseWebEnrollDao.insert(dto);
+				}
+				//TODO 报名成功发送短信
+				if("1".equals(dto.getStatus()) && Validator.notEmpty(dto.getTel()) && Validator.isMobile(dto.getTel())){
+					try {
+						TcSysSmsBean smsBean=new TcSysSmsBean();
+						smsBean.setSms_dst_id(dto.getTel());
+						smsBean.setSms_content("童励俱乐部提醒,您已成功报名;http://www.tlkidsclub.com");
+						smsManager.saveOrUpdateData(smsBean);
+					} catch (Exception e) {
+						log.error("报名成功发送短信异常!", e);
+					}
 				}
 			} catch (Exception e) {
 				msg="信息保存失败,数据库处理错误!";
@@ -269,5 +284,19 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 			}
 		}
 		return msg;
+	}
+	/**
+	 * 短信 信息管理 业务处理取得
+	 * @return 短信 信息管理 业务处理
+	 */
+	public ISmsManager getSmsManager() {
+	    return smsManager;
+	}
+	/**
+	 * 短信 信息管理 业务处理设定
+	 * @param smsManager 短信 信息管理 业务处理
+	 */
+	public void setSmsManager(ISmsManager smsManager) {
+	    this.smsManager = smsManager;
 	}
 }

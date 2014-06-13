@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.bean.student.TcStudentBean;
+import cn.com.softvan.bean.sys.TcSysSmsBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IOHelper;
 import cn.com.softvan.common.IdUtils;
@@ -29,6 +30,7 @@ import cn.com.softvan.dao.entity.member.TcMember;
 import cn.com.softvan.dao.entity.member.TcMemberVsStudent;
 import cn.com.softvan.service.BaseManager;
 import cn.com.softvan.service.member.IMemberManager;
+import cn.com.softvan.service.sys.ISmsManager;
 /**
  *<p>会员信息管理 service类。</p>
  * <ol>[功能概要] 
@@ -45,6 +47,8 @@ public class MemberManager extends BaseManager implements IMemberManager {
 	private ITcMemberDao tcMemberDao;
 	/**会员与学员关联表信息 Dao类 */
 	private ITcMemberVsStudentDao tcMemberVsStudentDao;
+	/**短信 信息管理 业务处理*/
+	private ISmsManager smsManager;
 	/**
 	 * <p>信息编辑。</p>
 	 * <ol>[功能概要] 
@@ -96,6 +100,17 @@ public class MemberManager extends BaseManager implements IMemberManager {
 						dto.setId(IdUtils.createUUID(32));
 					}
 					tcMemberDao.insert(dto);
+					//TODO 注册成功提醒短信发送
+					if(Validator.notEmpty(dto.getBind_mobile()) && Validator.isMobile(dto.getBind_mobile())){
+						try {
+							TcSysSmsBean smsBean=new TcSysSmsBean();
+							smsBean.setSms_dst_id(dto.getBind_mobile());
+							smsBean.setSms_content("童励俱乐部提醒,您已成为会员,登录id:"+dto.getUser_id()+",登录密码:"+dto.getPasswd()+";http://www.tlkidsclub.com");
+							smsManager.saveOrUpdateData(smsBean);
+						} catch (Exception e) {
+							log.error("注册成功提醒短信发送异常!", e);
+						}
+					}
 				}
 				//TODO ------保存会员与学员关系-------
 				//会员类型为家长 user_type==1
@@ -439,5 +454,19 @@ public class MemberManager extends BaseManager implements IMemberManager {
 				log.error("信息详情查询失败,数据库错误!", e);
 			}
 			return bean1;
+	}
+	/**
+	 * 短信 信息管理 业务处理取得
+	 * @return 短信 信息管理 业务处理
+	 */
+	public ISmsManager getSmsManager() {
+	    return smsManager;
+	}
+	/**
+	 * 短信 信息管理 业务处理设定
+	 * @param smsManager 短信 信息管理 业务处理
+	 */
+	public void setSmsManager(ISmsManager smsManager) {
+	    this.smsManager = smsManager;
 	}
 }

@@ -136,6 +136,8 @@ public class WeChatApiAction extends BaseAction {
 	private void msgManager(WxRecvMsg msg,WxReplyMsg replyMsg){
 		TcWxInfoBean bean=null;
 		try {
+			//地址位置标记
+			boolean localton_flag=false;
 			//多媒体上传标记
 			boolean media_flag=true;
 			//多媒体接收成功返回信息
@@ -202,6 +204,7 @@ public class WeChatApiAction extends BaseAction {
 						msg = WeChatUtil.recv(new ByteArrayInputStream(xml.getBytes()));
 						m = (WxRecvEventMsg) msg;
 						m.setEvent("LOCATION");
+						localton_flag=true;
 					}
 				}
 				//-----------封装信息--------------
@@ -211,6 +214,9 @@ public class WeChatApiAction extends BaseAction {
 				bean.setLocation_y(m.getLongitude());
 				bean.setLocation_precision(m.getPrecision());
 				bean.setTicket(m.getTicket());
+				if(localton_flag){
+					return;
+				}
 			}else
 			//TODO ----- 文本信息
 			if(msg instanceof WxRecvTextMsg) {

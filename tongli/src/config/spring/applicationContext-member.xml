@@ -28,6 +28,7 @@
 	<bean id="memberManager" class="cn.com.softvan.service.member.impl.MemberManager" parent="baseManager" scope="prototype">
 		<property name="tcMemberDao" ref="tcMemberDao"></property>
 		<property name="tcMemberVsStudentDao" ref="tcMemberVsStudentDao"></property>
+		<property name="smsManager" ref="smsManager"></property>
 	</bean>
 	<!-- 会员管理 end -->
 </beans>
