@@ -23,7 +23,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
-<script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
+
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
@@ -44,7 +44,7 @@
 		<div class="w">
 			<div class="body fr" style="width: 770px;">
 				<div class="title">&nbsp; 我的课程表</div>
-				<div class="content " style="min-height: 500px;">
+				<div class="content " style="min-height: 600px;">
 					<ul class="nav nav-tabs" style="height:40px; ">
 							<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
 							<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>
@@ -80,20 +80,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="body fl mt10" style="width: 197px;">
-				<div class="title">
-					<a href="${basePath}/c202_init.ac" class="ico_recommend">预约参观</a>
-				</div>
-				<div class="content" style="height: 150px;">
-					<a href="${basePath}/c202_init.ac"><img src="images/img4.jpg" width="177" height="150" /></a>
-				</div>
-			</div>
-
-			<div class="body fl mt10" style="width: 197px;">
-				<div class="content" style="height: 177px;">
-					<img src="images/erweima.jpg" width="177" height="177" />
-				</div>
-			</div>
+			<%@ include file="../include/nav_left.jsp"%>
 			<div class="c10"></div>
 		</div>
 

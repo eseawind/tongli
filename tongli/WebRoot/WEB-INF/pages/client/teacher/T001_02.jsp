@@ -19,11 +19,11 @@
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
 <c:if test="${beans!=null && fn:length(beans)>0 }">
 <style>
-.grade p{float: left;text-align: left;color: red;}
+.grade p{text-align: left;color: red;}
 </style>
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <c:forEach items="${beans}" var="bean" varStatus="i">
-	<div class="item_li item_li_1">${i.index+1}. ${bean.title}</div>
+	<div class="item_li item_li_1">${i.index+1}.<font color="#333">${bean.day}&nbsp;${bean.begin_time}</font>  ${bean.title}</div>
 	<div class="item_con item_con_1">
 	<div class="grade">
 		<table  class="table table-striped table-condensed" >
@@ -74,7 +74,7 @@
 											<label><input type="radio" class="xx2${bean.id}" checked="checked" name="sstatus${s_bean.id}" value="0">已到</label>
 											<label><input type="radio" class="xx2${bean.id}" name="sstatus${s_bean.id}" value="1">旷课</label>
 											<label><input type="radio" class="xx2${bean.id}" name="sstatus${s_bean.id}" value="2">请假</label>
-											<input style="width:400px;height: 30px;" class=" xx2${bean.id}" name="sstatus_note${s_bean.id}"/>
+											<input  style="width:400px;height: 30px;border: 1px solid #CCC;transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;" class="xx2${bean.id}" name="sstatus_note${s_bean.id}"/>
 									</c:otherwise>
 								</c:choose>
 							</li>

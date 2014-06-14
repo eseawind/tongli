@@ -121,7 +121,7 @@
 	    and t1.info_source=#{info_source}
 	    <if test="type_id!=null"> and t2.type_id=#{type_id}</if>
 	    group  by t1.id
-	    order by t1.last_updated desc
+	    order by t1.date_created desc
     </select>
 	<!-- 
 	 * <p>信息列表。</p>
@@ -130,8 +130,10 @@
 			t1.id ,
 			t1.title ,
 			t1.last_updated,
+			t1.date_created,
 			t2.type_id,
-			t1.pic_url
+			t1.pic_url,
+			left(t1.brief_info,40) as brief_info
 	</sql>
 	<select id="findDataIsList" resultType="tcSysNewsBean" parameterType="tcSysNews" >
 	<choose>
@@ -144,31 +146,7 @@
 			left join tc_sys_news_vs_type t2 on (t1.id=t2.new_id)
 			where t2.type_id='3f2b286347174e728d39169c212fe56b'
 			and t1.del_flag='0'
-			order by t1.last_updated desc
-			limit 0,6
-			) as t1
-			union
-			<!-- 视频资讯 -->
-			select * from (
-			select
-			<include refid="findDataIsList_index_sql"/>
-			from tc_sys_news t1
-			left join tc_sys_news_vs_type t2 on (t1.id=t2.new_id)
-			where t2.type_id='d76b4e2ba4b84e5db471988377f8ba52'
-			and t1.del_flag='0'
-			order by t1.last_updated desc
-			limit 0,6
-			) as t1
-			union
-			<!-- 图片资讯 -->
-			select * from (
-			select
-			<include refid="findDataIsList_index_sql"/>
-			from tc_sys_news t1
-			left join tc_sys_news_vs_type t2 on (t1.id=t2.new_id)
-			where t2.type_id='690e3d1f73224bb7bd766b4648041798'
-			and t1.del_flag='0'
-			order by t1.last_updated desc
+			order by t1.date_created desc
 			limit 0,6
 			) as t1
 		</when>
@@ -191,7 +169,7 @@
 		    and t1.info_source=#{info_source}
 		    <if test="type_id!=null"> and t2.type_id=#{type_id}</if>
 		    group  by t1.id
-		    order by t1.last_updated desc
+		    order by t1.date_created desc
 		    <if test="limit_s!=null and limit_e!=null">
 		     limit #{limit_s},#{limit_e}
 		    </if>

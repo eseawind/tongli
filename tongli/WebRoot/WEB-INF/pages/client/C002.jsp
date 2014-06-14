@@ -23,7 +23,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="include/title_meta.jsp"%>
 <%@ include file="include/public_js_css.jsp"%>
-<script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
+
 </head>
 
 <body class="page-header-fixed">
@@ -60,7 +60,7 @@
 </div>
 <customtag:pagingext func="loadUrlPage" params="'c002_','init'" />
 </div>
-<div class="body fl" style="width: 197px;">
+<div class="body fl mb10" style="width: 197px;">
 	<div class="title">
 		<a href="javascript:void(0);" class="ico_aboutus"><c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if></a>
 	</div>
@@ -88,18 +88,7 @@
 		</ul>
 	</div>
 </div>
-<div class="body fl mt10" style=" width:197px;">
-<div class="title"><a href="${basePath}/c202_init.ac" class="ico_recommend">预约参观</a></div>
-<div class="content" style="height:150px;">
-<a href="${basePath}/c202_init.ac"> <img src="images/img4.jpg" width="177" height="150"/> </a>
-</div>
-</div>
-
-<div class="body fl mt10" style=" width:197px;">
-<div class="content" style="height:177px;">
-<img src="images/erweima.jpg" width="177" height="177">
-</div>
-</div>
+<%@ include file="include/nav_left.jsp"%>
 <div class="c10"></div>
 </div>
 

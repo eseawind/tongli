@@ -1,4 +1,4 @@
-<link rel="shortcut icon" href="favicon.ico">
+<link rel="shortcut icon" href="/favicon.ico">
 <link rel="stylesheet" href="${basePath}/css/reset.css" type="text/css">
 <link rel="stylesheet" href="${basePath}/css/style.css" type="text/css">
 

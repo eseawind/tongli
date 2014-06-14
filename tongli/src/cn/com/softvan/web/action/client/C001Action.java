@@ -82,26 +82,11 @@ public class C001Action extends BaseAction {
 //		a534ef573de54297acd70f93937985c6	舞蹈社团
 //		cff7aad3a82041d08a6a1565ac87fc7b	小小铁人三项训练营
 
-
-
 		TcSysNewsBean bean1=new TcSysNewsBean();
 		bean1.setInfo_source(info_source);
 		bean1.setMsgtype("index");//首页展示 标记
-		List<TcSysNewsBean> list=newsManager.findDataIsList(bean1);
-		// 按照type_id对信息进行分组
-		LinkedHashMap<String, List<TcSysNewsBean>> map = new LinkedHashMap<String, List<TcSysNewsBean>>();
-		if (list!=null){
-			for (TcSysNewsBean news : list) {
-				if(map.containsKey(news.getType_id())){
-					 map.get(news.getType_id()).add(news);
-				}else{
-					 List<TcSysNewsBean> tempList=new ArrayList<TcSysNewsBean>();
-					 tempList.add(news);
-					 map.put(news.getType_id(),tempList);
-				}
-			}
-		}
-		request.setAttribute("maps", map);
+		
+		request.setAttribute("beans", newsManager.findDataIsList(bean1));
 		return "init";
 	}
 	/**

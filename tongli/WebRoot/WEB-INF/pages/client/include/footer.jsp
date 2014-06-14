@@ -18,18 +18,6 @@
 </div>
 <script type="text/javascript">
 		jQuery(document).ready(function() {
-			//jquery图片滚动
-			$('#img_slide').bxCarousel({
-				display_num : 2,
-				move : 1,
-				margin : 0
-			});
-
-			$('#video_slide').bxCarousel({
-				display_num : 3,
-				move : 1,
-				margin : 0
-			});
 			//-----------
 			var mw = $(".mbox").width() + 10;
 			var ml = $(".mbox").length;
@@ -41,7 +29,7 @@
 					opacity : 1
 				}, 500);
 			})
-			//nav menu
+			/* //nav menu
 			$("#navmenu ul li").hover(function() {
 				$(this).children("a").css({color:"#3e7900"});
 				$(this).children(".subMenu").stop(true, true).slideDown(200);
@@ -52,7 +40,16 @@
 				$(this).children(".subMenu").stop(true, true).slideUp(200);
 				$("#mask").slideUp(10);
 				 return false;
-				});
+				}); */
+			//----菜单选中
+			try{
+				var url=location.href;
+				var array=url.split('pid=');
+				if(array!=null && array.length>1){
+					$('.m').removeClass('on');
+					$('.'+array[1]).addClass('on');
+				}
+			}catch(e){}
 		});
 </script>
 <script>

@@ -23,7 +23,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
-<script type="text/javascript" src="${basePath}/js/bxCarousel.js"></script>
+
 <link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
 <script type="text/javascript" src="${basePath}/js/bootstarp-date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${basePath}/js/bootstarp-date/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
@@ -93,20 +93,7 @@
 
 				</div>
 			</div>
-			<div class="body fl mt10" style="width: 197px;">
-				<div class="title">
-					<a href="${basePath}/c203_init.ac" class="ico_recommend">在线报名</a>
-				</div>
-				<div class="content" style="height: 150px;">
-					<a href="${basePath}/c203_init.ac"><img src="images/img4.jpg" width="177" height="150"></a>
-				</div>
-			</div>
-
-			<div class="body fl mt10" style="width: 197px;">
-				<div class="content" style="height: 177px;">
-					<img src="images/erweima.jpg" width="177" height="177">
-				</div>
-			</div>
+			<%@ include file="../include/nav_left.jsp"%>
 			<div class="c10"></div>
 		</div>
 

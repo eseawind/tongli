@@ -156,6 +156,12 @@
 								id="article_second_title" name="bean.second_title" size="50" type="text" value="${bean.second_title}">
 						</div>
 						 -->
+						 <div class="form-group">
+							<label for="article_brief_info">简介</label> 
+							<div class="qeditor_border">
+								<textarea class="form-control" name="bean.brief_info" style="height: 100px;width: 100%;" id="article_brief_info" >${bean.brief_info}</textarea>
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="article_description">内容</label>
 							<div class="qeditor_border">
