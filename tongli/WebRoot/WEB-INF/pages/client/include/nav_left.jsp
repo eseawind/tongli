@@ -8,4 +8,4 @@
 		<a href="${basePath}/c202_init.ac"><img src="images/img4.jpg" width="177" height="150" /></a>
 	</div>
 </div>
-<%@ include file="nav_erweima.jsp"%>
+<%@ include file="nav_left_erweima.jsp"%>

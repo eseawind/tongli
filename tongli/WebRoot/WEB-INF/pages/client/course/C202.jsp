@@ -33,8 +33,6 @@
 	<!-- BEGIN HEADER -->
 	<%@ include file="../include/header.jsp"%>
 	<!-- END   HEADER -->
-	<%@ include file="../include/slider.jsp"%>
-
 	<div class="main pr">
 		<div class="c10"></div>
 		<div class="w">

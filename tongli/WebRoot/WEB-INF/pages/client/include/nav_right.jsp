@@ -4,8 +4,8 @@
 	<div class="title">
 		<a href="${basePath}/c202_init.ac" class="ico_recommend">预约参观</a>
 	</div>
-	<div class="content" style="height: 150px;">
+	<div class="content" style="height: 177px;">
 		<img src="images/img4.jpg" width="177" height="150" />
 	</div>
 </div>
-<%@ include file="nav_erweima.jsp"%>
+<%@ include file="nav_right_erweima.jsp"%>

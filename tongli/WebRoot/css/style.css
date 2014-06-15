@@ -145,10 +145,10 @@ ul.card li{
 	  }
 /**首页资讯列表 end*/
 
-
+input[type="radio"]{position: relative; top:-2px;}
 
 /* body */
-.body{ border:1px solid #cbcbcb;}
+.body{ border:1px solid #cbcbcb;margin-bottom: 10px;}
 .body .title{ height:31px; line-height:30px; background:url(images/tit_bg.jpg) repeat-x; clear:both;font-family:"微软雅黑"; font-size:16px;color:#3e7900; position:relative;}
 .body .title a{text-indent:2.2em; display:block;}
 .body .title em{ width:20px; height:20px; display:block; background:url(images/nav_bg.png) -7px -580px no-repeat; position:absolute; right:10px; top:8px; cursor:pointer;}

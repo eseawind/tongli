@@ -59,11 +59,36 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 		if(bean!=null){
 			try {
 				TcCourseWebEnroll dto=new TcCourseWebEnroll();
-				dto.setId(bean.getId());//id
+				dto.setId(bean.getId());//编号
+				dto.setType(bean.getType());//类型(0培训班1冬夏令营)
+				dto.setCode(bean.getCode());//报名课程期代码(第几期)
+				dto.setAddres(bean.getAddres());//报名地址
+				dto.setPrice(bean.getPrice());//报名价格
+				dto.setBegin_day(bean.getBegin_day());//课程开始时间
+				dto.setEnd_day(bean.getEnd_day());//课程结束时间
+				dto.setPay_day(bean.getPay_day());//缴费日期
+				dto.setAgent(bean.getAgent());//经办人
+				dto.setStudent_num(bean.getStudent_num());//学员号
 				dto.setName(bean.getName());//姓名
 				dto.setSex(bean.getSex());//性别
-				dto.setTel(bean.getTel());//电话
-				dto.setCourse(bean.getCourse());//课程
+				dto.setTel(bean.getTel());//家庭电话
+				dto.setCell_tel(bean.getCell_tel());//移动电话
+				dto.setNationality(bean.getNationality());//国籍
+				dto.setBirthday(bean.getBirthday());//生日
+				dto.setSchool(bean.getSchool());//学校
+				dto.setHome_address(bean.getHome_address());//家庭住址
+				dto.setEmail(bean.getEmail());//邮箱
+				dto.setCard_num(bean.getCard_num());//学员身份证
+				dto.setShuttle_time(bean.getShuttle_time());//接送时间
+				dto.setOther_note(bean.getOther_note());//其它
+				dto.setGuardian(bean.getGuardian());//学员/监护人姓名
+				dto.setSwim_survey(bean.getSwim_survey());//游泳技能调查
+				dto.setBasketball_skills(bean.getBasketball_skills());//篮球技能
+				dto.setTennis_skills(bean.getTennis_skills());//网球技能
+				dto.setBadminton_skills(bean.getBadminton_skills());//羽毛球技能
+				dto.setKarate_skills(bean.getKarate_skills());//空手道技能
+				dto.setInline_skaters_skills(bean.getInline_skaters_skills());//轮滑
+				dto.setSwim_skills(bean.getSwim_skills());//游泳技能
 				dto.setNote(bean.getNote());//备注
 				dto.setDate_created(bean.getDate_created());//数据输入日期
 				dto.setCreate_id(bean.getCreate_id());//建立者id
@@ -73,7 +98,8 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//version
-				dto.setStatus(bean.getStatus());//状态0未完成1已完成
+				dto.setStatus(bean.getStatus());//状态0未处理1报名失败2报名完成
+
 				//判断数据是否存在
 				if(tcCourseWebEnrollDao.isDataYN(dto)!=0){
 					//数据存在
@@ -86,7 +112,7 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 					tcCourseWebEnrollDao.insert(dto);
 				}
 				//TODO 报名成功发送短信
-				if("1".equals(dto.getStatus()) && Validator.notEmpty(dto.getTel()) && Validator.isMobile(dto.getTel())){
+				if("2".equals(dto.getStatus()) && Validator.notEmpty(dto.getTel()) && Validator.isMobile(dto.getTel())){
 					try {
 						TcSysSmsBean smsBean=new TcSysSmsBean();
 						smsBean.setSms_dst_id(dto.getTel());
@@ -162,21 +188,47 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 		try {
     	   TcCourseWebEnroll dto=new TcCourseWebEnroll();
     	   if(bean!=null){
-    		   dto.setId(bean.getId());//id
-				dto.setName(bean.getName());//姓名
-				dto.setSex(bean.getSex());//性别
-				dto.setTel(bean.getTel());//电话
-				dto.setCourse(bean.getCourse());//课程
-				dto.setNote(bean.getNote());//备注
-				dto.setDate_created(bean.getDate_created());//数据输入日期
-				dto.setCreate_id(bean.getCreate_id());//建立者id
-				dto.setCreate_ip(bean.getCreate_ip());//建立者ip
-				dto.setLast_updated(bean.getLast_updated());//资料更新日期
-				dto.setUpdate_id(bean.getUpdate_id());//修改者id
-				dto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
-				dto.setDel_flag(bean.getDel_flag());//是否删除
-				dto.setVersion(bean.getVersion());//version
-				dto.setStatus(bean.getStatus());//状态0未完成1已完成
+    		   dto.setId(bean.getId());//编号
+    		   dto.setType(bean.getType());//类型(0培训班1冬夏令营)
+    		   dto.setCode(bean.getCode());//报名课程期代码(第几期)
+    		   dto.setAddres(bean.getAddres());//报名地址
+    		   dto.setPrice(bean.getPrice());//报名价格
+    		   dto.setBegin_day(bean.getBegin_day());//课程开始时间
+    		   dto.setEnd_day(bean.getEnd_day());//课程结束时间
+    		   dto.setPay_day(bean.getPay_day());//缴费日期
+    		   dto.setAgent(bean.getAgent());//经办人
+    		   dto.setStudent_num(bean.getStudent_num());//学员号
+    		   dto.setName(bean.getName());//姓名
+    		   dto.setSex(bean.getSex());//性别
+    		   dto.setTel(bean.getTel());//家庭电话
+    		   dto.setCell_tel(bean.getCell_tel());//移动电话
+    		   dto.setNationality(bean.getNationality());//国籍
+    		   dto.setBirthday(bean.getBirthday());//生日
+    		   dto.setSchool(bean.getSchool());//学校
+    		   dto.setHome_address(bean.getHome_address());//家庭住址
+    		   dto.setEmail(bean.getEmail());//邮箱
+    		   dto.setCard_num(bean.getCard_num());//学员身份证
+    		   dto.setShuttle_time(bean.getShuttle_time());//接送时间
+    		   dto.setOther_note(bean.getOther_note());//其它
+    		   dto.setGuardian(bean.getGuardian());//学员/监护人姓名
+    		   dto.setSwim_survey(bean.getSwim_survey());//游泳技能调查
+    		   dto.setBasketball_skills(bean.getBasketball_skills());//篮球技能
+    		   dto.setTennis_skills(bean.getTennis_skills());//网球技能
+    		   dto.setBadminton_skills(bean.getBadminton_skills());//羽毛球技能
+    		   dto.setKarate_skills(bean.getKarate_skills());//空手道技能
+    		   dto.setInline_skaters_skills(bean.getInline_skaters_skills());//轮滑
+    		   dto.setSwim_skills(bean.getSwim_skills());//游泳技能
+    		   dto.setNote(bean.getNote());//备注
+    		   dto.setDate_created(bean.getDate_created());//数据输入日期
+    		   dto.setCreate_id(bean.getCreate_id());//建立者id
+    		   dto.setCreate_ip(bean.getCreate_ip());//建立者ip
+    		   dto.setLast_updated(bean.getLast_updated());//资料更新日期
+    		   dto.setUpdate_id(bean.getUpdate_id());//修改者id
+    		   dto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
+    		   dto.setDel_flag(bean.getDel_flag());//是否删除
+    		   dto.setVersion(bean.getVersion());//version
+    		   dto.setStatus(bean.getStatus());//状态0未处理1报名失败2报名完成
+
 				
 				dto.setKeyword(bean.getKeyword());
 				dto.setDate1(bean.getDate1());
@@ -203,21 +255,47 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 		try {
 	    	   TcCourseWebEnroll dto=new TcCourseWebEnroll();
 	    	   if(bean!=null){
-	    		   dto.setId(bean.getId());//id
-					dto.setName(bean.getName());//姓名
-					dto.setSex(bean.getSex());//性别
-					dto.setTel(bean.getTel());//电话
-					dto.setCourse(bean.getCourse());//课程
-					dto.setNote(bean.getNote());//备注
-					dto.setDate_created(bean.getDate_created());//数据输入日期
-					dto.setCreate_id(bean.getCreate_id());//建立者id
-					dto.setCreate_ip(bean.getCreate_ip());//建立者ip
-					dto.setLast_updated(bean.getLast_updated());//资料更新日期
-					dto.setUpdate_id(bean.getUpdate_id());//修改者id
-					dto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
-					dto.setDel_flag(bean.getDel_flag());//是否删除
-					dto.setVersion(bean.getVersion());//version
-					dto.setStatus(bean.getStatus());//状态0未完成1已完成
+	    		   dto.setId(bean.getId());//编号
+	    		   dto.setType(bean.getType());//类型(0培训班1冬夏令营)
+	    		   dto.setCode(bean.getCode());//报名课程期代码(第几期)
+	    		   dto.setAddres(bean.getAddres());//报名地址
+	    		   dto.setPrice(bean.getPrice());//报名价格
+	    		   dto.setBegin_day(bean.getBegin_day());//课程开始时间
+	    		   dto.setEnd_day(bean.getEnd_day());//课程结束时间
+	    		   dto.setPay_day(bean.getPay_day());//缴费日期
+	    		   dto.setAgent(bean.getAgent());//经办人
+	    		   dto.setStudent_num(bean.getStudent_num());//学员号
+	    		   dto.setName(bean.getName());//姓名
+	    		   dto.setSex(bean.getSex());//性别
+	    		   dto.setTel(bean.getTel());//家庭电话
+	    		   dto.setCell_tel(bean.getCell_tel());//移动电话
+	    		   dto.setNationality(bean.getNationality());//国籍
+	    		   dto.setBirthday(bean.getBirthday());//生日
+	    		   dto.setSchool(bean.getSchool());//学校
+	    		   dto.setHome_address(bean.getHome_address());//家庭住址
+	    		   dto.setEmail(bean.getEmail());//邮箱
+	    		   dto.setCard_num(bean.getCard_num());//学员身份证
+	    		   dto.setShuttle_time(bean.getShuttle_time());//接送时间
+	    		   dto.setOther_note(bean.getOther_note());//其它
+	    		   dto.setGuardian(bean.getGuardian());//学员/监护人姓名
+	    		   dto.setSwim_survey(bean.getSwim_survey());//游泳技能调查
+	    		   dto.setBasketball_skills(bean.getBasketball_skills());//篮球技能
+	    		   dto.setTennis_skills(bean.getTennis_skills());//网球技能
+	    		   dto.setBadminton_skills(bean.getBadminton_skills());//羽毛球技能
+	    		   dto.setKarate_skills(bean.getKarate_skills());//空手道技能
+	    		   dto.setInline_skaters_skills(bean.getInline_skaters_skills());//轮滑
+	    		   dto.setSwim_skills(bean.getSwim_skills());//游泳技能
+	    		   dto.setNote(bean.getNote());//备注
+	    		   dto.setDate_created(bean.getDate_created());//数据输入日期
+	    		   dto.setCreate_id(bean.getCreate_id());//建立者id
+	    		   dto.setCreate_ip(bean.getCreate_ip());//建立者ip
+	    		   dto.setLast_updated(bean.getLast_updated());//资料更新日期
+	    		   dto.setUpdate_id(bean.getUpdate_id());//修改者id
+	    		   dto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
+	    		   dto.setDel_flag(bean.getDel_flag());//是否删除
+	    		   dto.setVersion(bean.getVersion());//version
+	    		   dto.setStatus(bean.getStatus());//状态0未处理1报名失败2报名完成
+
 					
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());

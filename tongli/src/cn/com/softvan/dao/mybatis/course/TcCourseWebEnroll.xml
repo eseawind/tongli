@@ -3,10 +3,35 @@
 <mapper namespace="cn.com.softvan.dao.daointer.course.ITcCourseWebEnrollDao" >
   <sql id="Base_Column_List" >
 	t1.id,
-	t1.course,
+	t1.type,
+	t1.code,
+	t1.addres,
+	t1.price,
+	t1.begin_day,
+	t1.end_day,
+	t1.pay_day,
+	t1.agent,
+	t1.student_num,
 	t1.name,
 	t1.sex,
 	t1.tel,
+	t1.cell_tel,
+	t1.nationality,
+	t1.birthday,
+	t1.school,
+	t1.home_address,
+	t1.email,
+	t1.card_num,
+	t1.shuttle_time,
+	t1.other_note,
+	t1.guardian,
+	t1.swim_survey,
+	t1.basketball_skills,
+	t1.tennis_skills,
+	t1.badminton_skills,
+	t1.karate_skills,
+	t1.inline_skaters_skills,
+	t1.swim_skills,
 	t1.note,
 	t1.date_created,
 	t1.create_id,
@@ -30,11 +55,36 @@
   </delete>
   <insert id="insert" parameterType="tcCourseWebEnroll" >
     insert into tc_course_web_enroll (
-	    id,
-		course,
+    	id,
+		type,
+		code,
+		addres,
+		price,
+		begin_day,
+		end_day,
+		pay_day,
+		agent,
+		student_num,
 		name,
 		sex,
 		tel,
+		cell_tel,
+		nationality,
+		birthday,
+		school,
+		home_address,
+		email,
+		card_num,
+		shuttle_time,
+		other_note,
+		guardian,
+		swim_survey,
+		basketball_skills,
+		tennis_skills,
+		badminton_skills,
+		karate_skills,
+		inline_skaters_skills,
+		swim_skills,
 		note,
 		date_created,
 		create_id,
@@ -47,10 +97,35 @@
 		status
       ) values (
 	    #{id},
-		#{course},
+		#{type},
+		#{code},
+		#{addres},
+		#{price},
+		#{begin_day},
+		#{end_day},
+		#{pay_day},
+		#{agent},
+		#{student_num},
 		#{name},
 		#{sex},
 		#{tel},
+		#{cell_tel},
+		#{nationality},
+		#{birthday},
+		#{school},
+		#{home_address},
+		#{email},
+		#{card_num},
+		#{shuttle_time},
+		#{other_note},
+		#{guardian},
+		#{swim_survey},
+		#{basketball_skills},
+		#{tennis_skills},
+		#{badminton_skills},
+		#{karate_skills},
+		#{inline_skaters_skills},
+		#{swim_skills},
 		#{note},
 		now(),
 		#{create_id},
@@ -68,10 +143,35 @@
     ,last_updated=now()
 	,update_id=#{update_id}
 	,update_ip=#{update_ip}
+	<if test="type!= null" >,type=#{type}</if>
+	<if test="code!= null" >,code=#{code}</if>
+	<if test="addres!= null" >,addres=#{addres}</if>
+	<if test="price!= null" >,price=#{price}</if>
+	<if test="begin_day!= null" >,begin_day=#{begin_day}</if>
+	<if test="end_day!= null" >,end_day=#{end_day}</if>
+	<if test="pay_day!= null" >,pay_day=#{pay_day}</if>
+	<if test="agent!= null" >,agent=#{agent}</if>
+	<if test="student_num!= null" >,student_num=#{student_num}</if>
 	<if test="name!= null" >,name=#{name}</if>
 	<if test="sex!= null" >,sex=#{sex}</if>
 	<if test="tel!= null" >,tel=#{tel}</if>
-	<if test="course!= null" >,course=#{course}</if>
+	<if test="cell_tel!= null" >,cell_tel=#{cell_tel}</if>
+	<if test="nationality!= null" >,nationality=#{nationality}</if>
+	<if test="birthday!= null" >,birthday=#{birthday}</if>
+	<if test="school!= null" >,school=#{school}</if>
+	<if test="home_address!= null" >,home_address=#{home_address}</if>
+	<if test="email!= null" >,email=#{email}</if>
+	<if test="card_num!= null" >,card_num=#{card_num}</if>
+	<if test="shuttle_time!= null" >,shuttle_time=#{shuttle_time}</if>
+	<if test="other_note!= null" >,other_note=#{other_note}</if>
+	<if test="guardian!= null" >,guardian=#{guardian}</if>
+	<if test="swim_survey!= null" >,swim_survey=#{swim_survey}</if>
+	<if test="basketball_skills!= null" >,basketball_skills=#{basketball_skills}</if>
+	<if test="tennis_skills!= null" >,tennis_skills=#{tennis_skills}</if>
+	<if test="badminton_skills!= null" >,badminton_skills=#{badminton_skills}</if>
+	<if test="karate_skills!= null" >,karate_skills=#{karate_skills}</if>
+	<if test="inline_skaters_skills!= null" >,inline_skaters_skills=#{inline_skaters_skills}</if>
+	<if test="swim_skills!= null" >,swim_skills=#{swim_skills}</if>
 	<if test="note!= null" >,note=#{note}</if>
 	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
 	<if test="status!= null" >,status=#{status}</if>
@@ -98,6 +198,7 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
+    <if test="status!= null and status!= ''" > and status=#{status}</if>
     <if test="name!= null and name!=''"> and t1.name like concat('%',#{name},'%')</if>
 	<if test="date1!= null and date1!=''"> 
 	<![CDATA[
@@ -127,6 +228,7 @@
     	    and t1.del_flag='0'
     	</otherwise>
     </choose>
+    <if test="status!= null and status!= ''" > and status=#{status}</if>
     order by t1.date_created desc
    </select>
    <!-- 逻辑删除 -->
