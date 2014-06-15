@@ -88,6 +88,8 @@ public class TcCourseWebEnrollBean extends BaseBean {
 	private String swim_skills;
 	/** 状态0未处理1报名失败2报名完成 */
 	private String status;
+	/** 课程 */
+	private String course;
 	/**
 	 * 编号取得
 	 * @return 编号
@@ -521,6 +523,20 @@ public class TcCourseWebEnrollBean extends BaseBean {
 	 */
 	public void setStatus(String status) {
 	    this.status = status;
+	}
+	/**
+	 * 课程取得
+	 * @return 课程
+	 */
+	public String getCourse() {
+	    return course;
+	}
+	/**
+	 * 课程设定
+	 * @param course 课程
+	 */
+	public void setCourse(String course) {
+	    this.course = course;
 	}
 
 }

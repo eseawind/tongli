@@ -201,6 +201,9 @@ vertical-align: baseline;line-height: 38px;outline:0;background: url(images/spri
 .user_info li .con{ width:400px; font-size:12px;}.user_info li .con em{color:#aaa;}
 .user_info li .con .input{ width:200px; height:30px;}
 
+/* web_enroll_info */
+.web_enroll_info{ width:960px;}
+
 /* global btn */
 .btn_login{ width:80px;height:38px;text-align: center;cursor: pointer;float:left;color: white;box-shadow: 0 2px 5px rgba(0, 94, 21, .3);font-weight: 700;font-size:16px;display: inline-block;
 vertical-align: baseline;line-height: 38px;outline:0;background: url(images/sprite_bg.png) 0 -95px no-repeat;background-color: transparent;border-radius: 3px; margin-top:10px;}

@@ -80,7 +80,7 @@
 			</div>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN PAGE CONTENT-->
-			<div class="row">
+			<div class="row  tabbable tabbable-custom">
 			<ul class="nav nav-tabs" style="height:40px; ">
 					<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">课程信息</a></li>
 					<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">课程相册</a></li>

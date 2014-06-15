@@ -44,7 +44,7 @@
 		<div class="w">
 			<div class="body fr" style="width: 770px;">
 				<div class="title">&nbsp; 我的课程表</div>
-				<div class="content " style="min-height: 600px;">
+				<div class="content  tabbable tabbable-custom" style="min-height: 600px;">
 					<ul class="nav nav-tabs" style="height:40px; ">
 							<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
 							<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>

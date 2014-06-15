@@ -77,7 +77,7 @@
 								<li>
 									<div class="tit">手机号码：</div>
 									<div class="con">
-										${bean.tel }
+										${bean.cell_tel }
 									</div>
 								</li>
 							</ul>

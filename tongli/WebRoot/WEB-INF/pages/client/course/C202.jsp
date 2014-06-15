@@ -48,7 +48,7 @@
 								<li>
 									<div class="tit">参观课程：</div>
 									<div class="con">
-										<select name="bean.course" class="input">
+										<select name="bean.course" class="input" style="border:1px solid #ddd;">
 										<c:forEach items="${course_beans}" var="course_bean">
 											<option value="${course_bean.title}">${course_bean.title}</option>
 										</c:forEach>

@@ -41,7 +41,8 @@
 	t1.update_ip,
 	t1.del_flag,
 	t1.version,
-	t1.status
+	t1.status,
+	t1.course
   </sql>
   <select id="selectByPrimaryKey" resultType="tcCourseWebEnrollBean" parameterType="tcCourseWebEnroll" >
     select 
@@ -94,7 +95,8 @@
 		update_ip,
 		del_flag,
 		version,
-		status
+		status,
+		course
       ) values (
 	    #{id},
 		#{type},
@@ -135,7 +137,8 @@
 		#{update_ip},
 		'0',
 		 0,
-		'0'
+		'0',
+		#{course}
     )
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tcCourseWebEnroll" >
@@ -175,6 +178,8 @@
 	<if test="note!= null" >,note=#{note}</if>
 	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
 	<if test="status!= null" >,status=#{status}</if>
+	<if test="course!= null" >,course=#{course}</if>
+	
 	where id=#{id}
   </update>
   	<!--判断是否存在-->

@@ -23,9 +23,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
-
-<link href="${basePath}/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<script src="${basePath}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
@@ -46,7 +43,7 @@
 		<div class="w">
 			<div class="body fr" style="width: 770px;">
 				<div class="title">&nbsp; 我的课程表</div>
-				<div class="content" style="min-height: 700px;">
+				<div class="content  tabbable tabbable-custom" style="min-height: 700px;">
 					<ul class="nav nav-tabs" style="height:40px; ">
 							<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
 							<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>
