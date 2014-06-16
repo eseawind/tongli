@@ -93,8 +93,10 @@
 							<table class="table table-condensed table-striped">
 								<tbody>
 									<tr>
-										<th class="col-md-1">姓名</th>
+										<th class="col-md-3">姓名</th>
 										<th class="col-md-1">性别</th>
+										<th class="col-md-2"></th>
+										<th class="col-md-2"></th>
 										<th class="col-md-3"></th>
 									</tr>
 									<c:forEach items="${beans}" var="bean">
@@ -103,6 +105,16 @@
 										<td>
 											<c:if test="${bean.sex=='0'}">男</c:if>
 											<c:if test="${bean.sex=='1'}">女</c:if>
+										</td>
+										<td>
+											<c:if test="${bean.type=='0'}"><span class="label label-info">培训班</span></c:if>
+											<c:if test="${bean.type=='1'}"><span class="label label-danger">冬夏令营</span></c:if>
+											
+										</td>
+										<td>
+											<c:if test="${bean.status=='0'}"><span class="label label-info">未处理</span></c:if>
+											<c:if test="${bean.status=='1'}"><span class="label label-danger">报名失败</span></c:if>
+											<c:if test="${bean.status=='2'}"><span class="label label-success">报名完成</span></c:if>
 										</td>
 										<td><a href="javascript:void(0)"   class="btn purple" 
 											onclick="if(confirm('确认恢复吗?')){location.href='${basePath}/h/c104_recovery.ac?id=${bean.id}'};"

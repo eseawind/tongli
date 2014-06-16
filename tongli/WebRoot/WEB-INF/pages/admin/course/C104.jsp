@@ -112,6 +112,29 @@
 								<input name="bean.date2" class="upload-wrapper date form_date2" value=""   readonly="readonly" placeholder="时间段" 
 								 type="text">
 								 </label>
+								 <br>
+								 <label>
+								<input name="bean.type" value="0"  
+								 type="radio">培训班
+								 </label>
+								 <label>
+								<input name="bean.type"  value="1" 
+								 type="radio">冬夏令营
+								 </label>
+								  <wbr>
+								  <label>
+							<input name="bean.status" value="0"
+							 type="radio">
+							 未处理</label>
+							 <label>
+							<input name="bean.status" value="1"
+							 type="radio">
+							 报名失败</label>
+							 <label>
+							<input name="bean.status" value="2"
+							 type="radio">
+							 报名成功</label>
+							 <wbr>
 								 <a onclick="submitFrom1(0,'small_info_form_list1');" class="reload btn btn-primary">检索</a>
 								 <button type="reset" class="reload btn blue">重置</button>
 							 </form>

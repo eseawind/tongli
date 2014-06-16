@@ -63,12 +63,12 @@
 										</tr>
 									</table>
 									<table class="table table-striped table-condensed">
-										<tr class="alert alert-warning" >
+										<tr class="alert alert-success" >
 											<td height="30" colspan="4"><i class="fa  fa-bar-chart-o"></i> <strong>申请人资料</strong></td>
 										</tr>
 									</table>
 										<div class="form-group">
-											<label class="col-md-3 control-label">学员号</label>
+											<label class="col-md-2 control-label">学员号</label>
 											<div class="col-md-8">
 												<input class="form-control" type="text" placeholder="请输入学员号"
 													name="bean.student_num" value="${bean.student_num}">
@@ -76,7 +76,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-3 control-label">姓名</label>
+											<label class="col-md-2 control-label">姓名</label>
 											<div class="col-md-3">
 												<input class="form-control" type="text" placeholder="请输入姓名"
 													name="bean.name" value="${bean.name}"> <span
@@ -94,7 +94,7 @@
 											
 										</div>
 										<div class="form-group">
-											<label class="col-md-3 control-label"
+											<label class="col-md-2 control-label"
 												style="margin-top: -8px;">性别</label>
 											<div class="col-md-8">
 												<label><input type="radio" name="bean.sex" value="0">
@@ -104,7 +104,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-3 control-label">移动电话</label>
+											<label class="col-md-2 control-label">移动电话</label>
 											<div class="col-md-3">
 												<input class="form-control" type="text"
 													placeholder="请输入移动电话" name="bean.cell_tel"
@@ -118,7 +118,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-3 control-label">家庭住址</label>
+											<label class="col-md-2 control-label">家庭住址</label>
 											<div class="col-md-8">
 												<input class="form-control" type="text"
 													placeholder="请输入家庭住址" name="bean.home_address"
@@ -127,7 +127,7 @@
 											</div>
 										</div>
 										<table class="table table-striped table-condensed">
-											<tr class="alert alert-warning" >
+											<tr class="alert alert-success" >
 												<td height="30" colspan="4"><i class="fa  fa-bar-chart-o"></i> <strong>详情</strong></td>
 											</tr>
 										</table>
@@ -139,14 +139,14 @@
 													<span class=help-block"></span>
 											</div>
 										</div>
-										<div class="form-group"> <label class="col-md-3 control-label" style="margin-top: -8px;">游泳技能</label> <div class="col-md-8"> 
+										<div class="form-group"> <label class="col-md-2 control-label" style="margin-top: -8px;">游泳技能</label> <div class="col-md-8"> 
 											<label><input type="radio" name="bean.swim_skills" value="0"> 初级 </label>
 											<label><input type="radio" name="bean.swim_skills" value="1"> 中级 </label>
 											<label><input type="radio" name="bean.swim_skills" value="2"> 专业 </label>
 											<span class=help-block"></span> </div> 
 										</div>
 										<div class="form-group">
-										 <label class="col-md-3 control-label">培训课程</label>
+										 <label class="col-md-2 control-label">培训课程</label>
 										 <div class="col-md-8">
 											 <div class="input-group">
 											 	<span class="input-group-addon">
@@ -165,7 +165,7 @@
 									</div>
 										<div class="panel panel-warning">
 											<div class="panel-heading ">
-												<div class="panel-title" style="color: #999;"><i class="fa fa-bar-chart-o"></i> 学员须知</div>
+												<div class="panel-title" style="color: #468847;"><i class="fa fa-bar-chart-o"></i> <strong>学员须知</strong></div>
 											</div>
 											<div class="panel-body">
 												<div class="note note-danger">
@@ -183,12 +183,12 @@
 											</div>
 										</div>
 										<table class="table table-striped table-condensed">
-											<tr class="alert alert-warning" >
-												<td height="30" colspan="4"><i class="fa  fa-bar-chart-o"></i> <strong>=============</strong></td>
+											<tr class="alert alert-success" >
+												<td height="30" colspan="4"><i class="fa  fa-bar-chart-o"></i> <strong>报名信息</strong></td>
 											</tr>
 										</table>
 										<div class="form-group">
-											<label class="col-md-3 control-label">学员/监护人姓名</label>
+											<label class="col-md-2 control-label">学员/监护人姓名</label>
 											<div class="col-md-8">
 												<input class="form-control" type="text"
 													placeholder="请输入学员/监护人姓名" name="bean.guardian"
@@ -196,7 +196,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-3 control-label">学费</label>
+											<label class="col-md-2 control-label">学费</label>
 											<div class="col-md-3">
 												<input class="form-control" type="number"
 													placeholder="请输入报名价格" name="bean.price"
@@ -210,7 +210,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-3 control-label">缴费日期</label>
+											<label class="col-md-2 control-label">缴费日期</label>
 											<div id="bean_pay_day1" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="-50d">
 												<input class="form-control" type="text"
 													placeholder="请输入缴费日期" name="bean.pay_day" readonly="readonly"
@@ -222,7 +222,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-md-3 control-label">课程开始时间</label>
+											<label class="col-md-2 control-label">课程开始时间</label>
 											<div id="bean_begin_day1" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
 												<input class="form-control" type="text"
 													placeholder="请输入课程开始时间" name="bean.begin_day" readonly="readonly"
@@ -246,7 +246,7 @@
 										
 										<div class="c10"></div>
 										<div class="alert alert-danger">
-											<label><input type="checkbox" style="margin-top: -1px;" onclick="if(!!$(this).prop('checked')){$('#btn1_1111').show();}else{$('#btn1_1111').hide()}">本人承诺遵守俱乐部规章制度以及以上学员行为准则.</label> 
+											<label><input type="checkbox" style="margin-top: -1px;" onclick="if(!!$(this).prop('checked')){$('#btn1_1111').show();}else{$('#btn1_1111').hide()}"> 本人承诺遵守俱乐部规章制度以及以上学员行为准则.</label> 
 										</div>
 										<div class="c10"></div>
 									<div  style="margin-left: 410px;">
@@ -267,37 +267,235 @@
 											<td height="30"><strong style="font-size: 3em;">童励运动冬夏令营报名表</strong></td>
 										</tr>
 									</table>
-<div class="form-group"> <label class="col-md-3 control-label">报名课程期代码(第几期)</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入报名课程期代码(第几期)" name="bean.code" value="${bean.code}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">报名地址</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入报名地址" name="bean.addres" value="${bean.addres}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">报名价格</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入报名价格" name="bean.price" value="${bean.price}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">课程开始时间</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入课程开始时间" name="bean.begin_day" value="${bean.begin_day}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">课程结束时间</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入课程结束时间" name="bean.end_day" value="${bean.end_day}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">缴费日期</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入缴费日期" name="bean.pay_day" value="${bean.pay_day}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">经办人</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入经办人" name="bean.agent" value="${bean.agent}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">学员号</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入学员号" name="bean.student_num" value="${bean.student_num}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">姓名</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入姓名" name="bean.name" value="${bean.name}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">性别</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入性别" name="bean.sex" value="${bean.sex}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">家庭电话</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入家庭电话" name="bean.tel" value="${bean.tel}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">移动电话</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入移动电话" name="bean.cell_tel" value="${bean.cell_tel}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">国籍</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入国籍" name="bean.nationality" value="${bean.nationality}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">生日</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入生日" name="bean.birthday" value="${bean.birthday}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">学校</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入学校" name="bean.school" value="${bean.school}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">家庭住址</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入家庭住址" name="bean.home_address" value="${bean.home_address}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">邮箱</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入邮箱" name="bean.email" value="${bean.email}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">学员身份证</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入学员身份证" name="bean.card_num" value="${bean.card_num}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">接送时间</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入接送时间" name="bean.shuttle_time" value="${bean.shuttle_time}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">其它</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入其它" name="bean.other_note" value="${bean.other_note}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">学员/监护人姓名</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入学员/监护人姓名" name="bean.guardian" value="${bean.guardian}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">游泳技能调查</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入游泳技能调查" name="bean.swim_survey" value="${bean.swim_survey}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">篮球技能</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入篮球技能" name="bean.basketball_skills" value="${bean.basketball_skills}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">网球技能</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入网球技能" name="bean.tennis_skills" value="${bean.tennis_skills}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">羽毛球技能</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入羽毛球技能" name="bean.badminton_skills" value="${bean.badminton_skills}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">空手道技能</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入空手道技能" name="bean.karate_skills" value="${bean.karate_skills}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">轮滑</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入轮滑" name="bean.inline_skaters_skills" value="${bean.inline_skaters_skills}"> <span class=help-block"></span> </div> </div>
-<div class="form-group"> <label class="col-md-3 control-label">游泳技能</label> <div class="col-md-8"> <input class="form-control"  type="text" placeholder="请输入游泳技能" name="bean.swim_skills" value="${bean.swim_skills}"> <span class=help-block"></span> </div> </div>
+									<table class="table table-striped table-condensed">
+										<tr class="alert alert-danger" >
+											<td height="30" colspan="4"><i class="fa  fa-bullhorn"></i> <strong>报名信息</strong></td>
+										</tr>
+									</table>
+									<div class="form-group">
+										<label class="col-md-2 control-label">(第几期)</label>
+										<div class="col-md-3">
+											<input class="form-control" type="text"
+												placeholder="请输入报名课程期代码(第几期)" name="bean.code"
+												value="${bean.code}"> <span class=help-block"></span>
+										</div>
+										<label class="col-md-2 control-label">报名价格</label>
+										<div class="col-md-3">
+											<input class="form-control" type="number" placeholder="请输入报名价格"
+												name="bean.price" value="${bean.price}"> 
+												<span class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">课程开始时间</label>
+										<div  id="bean_begin_day2" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+											<input class="form-control" type="text" readonly="readonly"
+												placeholder="请输入课程开始时间" name="bean.begin_day"
+												value="${bean.begin_day}"> 
+												<span class="input-group-btn">
+													<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+												</span>
+												<span class=help-block"></span>
+										</div>
+										<label class="col-md-2 control-label">课程结束时间</label>
+										<div  id="bean_end_day2" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+											<input class="form-control" type="text" readonly="readonly"
+												placeholder="请输入课程结束时间" name="bean.end_day"
+												value="${bean.end_day}">  
+												<span class="input-group-btn">
+													<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+												</span>
+												<span class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+											<label class="col-md-2 control-label">报名地址</label>
+											<div class="col-md-8">
+												<input class="form-control" type="text"
+													placeholder="请输报名地址" name="bean.addres"
+													value="${bean.addres}"> <span
+													class=help-block"></span>
+											</div>
+									</div>
+									<table class="table table-striped table-condensed">
+										<tr class="alert alert-danger" >
+											<td height="30" colspan="4"><i class="fa  fa-bullhorn"></i> <strong>学员基本信息</strong></td>
+										</tr>
+									</table>
+									<div class="form-group">
+										<label class="col-md-2 control-label">姓名</label>
+										<div class="col-md-3">
+											<input class="form-control" type="text" placeholder="请输入姓名"
+												name="bean.name" value="${bean.name}"> <span
+												class=help-block"></span>
+										</div>
+										<label class="col-md-2 control-label"
+											style="margin-top: -8px;">性别</label>
+										<div class="col-md-3">
+											<label><input type="radio" name="bean.sex" value="0">
+												男 </label>&nbsp; &nbsp; <label><input type="radio"
+												name="bean.sex" value="1"> 女 </label> <span
+												class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">国籍</label>
+										<div class="col-md-3">
+											<input class="form-control" type="text" placeholder="请输入国籍"
+												name="bean.nationality" value="${bean.nationality}">
+											<span class=help-block"></span>
+										</div>
+										<label class="col-md-2 control-label">生日</label>
+											<div id="bean_birthday2" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-end-date="-730d">
+												<input class="form-control" type="text" placeholder="请输入生日" readonly="readonly"
+													name="bean.birthday" value="${bean.birthday}">
+													 <span class="input-group-btn">
+													<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+													</span>
+													<span class=help-block"></span>
+											</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">学校</label>
+										<div class="col-md-3">
+											<input class="form-control" type="text" placeholder="请输入学校"
+												name="bean.school" value="${bean.school}"> <span
+												class=help-block"></span>
+										</div>
+										<label class="col-md-2 control-label">学员身份证</label>
+										<div class="col-md-3">
+											<input class="form-control" type="text"
+												placeholder="请输入学员身份证" name="bean.card_num"
+												value="${bean.card_num}"> <span class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">邮箱</label>
+										<div class="col-md-3">
+											<input class="form-control" type="text" placeholder="请输入邮箱"
+												name="bean.email" value="${bean.email}"> <span
+												class=help-block"></span>
+										</div>
+										<label class="col-md-2 control-label">移动电话</label>
+										<div class="col-md-3">
+											<input class="form-control" type="text" placeholder="请输入移动电话"
+												name="bean.cell_tel" value="${bean.cell_tel}"> <span
+												class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">家庭住址</label>
+										<div class="col-md-8">
+											<input class="form-control" type="text" placeholder="请输入家庭住址"
+												name="bean.home_address" value="${bean.home_address}">
+											<span class=help-block"></span>
+										</div>
+									</div>
+									<table class="table table-striped table-condensed">
+										<tr class="alert alert-danger" >
+											<td height="30" colspan="4"><i class="fa  fa-bullhorn"></i> <strong>学员技能信息</strong></td>
+										</tr>
+									</table>
+									<div class="form-group">
+										<label class="col-md-2 control-label" style="margin-top: -8px;">篮球</label>
+										<div class="col-md-8">
+												<label><input type="radio" name="bean.basketball_skills" value="0"> 初级 </label>
+												<label><input type="radio" name="bean.basketball_skills" value="1"> 中级 </label>
+												<label><input type="radio" name="bean.basketball_skills" value="2"> 专业 </label>
+												<span class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label" style="margin-top: -8px;">网球</label>
+										<div class="col-md-8">
+											<label><input type="radio" name="bean.tennis_skills" value="0"> 初级 </label>
+											<label><input type="radio" name="bean.tennis_skills" value="1"> 中级 </label>
+											<label><input type="radio" name="bean.tennis_skills" value="2"> 专业 </label>
+											<span class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label" style="margin-top: -8px;">羽毛球</label>
+										<div class="col-md-8">
+												<label><input type="radio" name="bean.badminton_skills" value="0"> 初级 </label>
+												<label><input type="radio" name="bean.badminton_skills" value="1"> 中级 </label>
+												<label><input type="radio" name="bean.badminton_skills" value="2"> 专业 </label>
+												 <span class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label" style="margin-top: -8px;">空手道</label>
+										<div class="col-md-8">
+											<label><input type="radio" name="bean.karate_skills" value="0"> 初级 </label>
+											<label><input type="radio" name="bean.karate_skills" value="1"> 中级 </label>
+											<label><input type="radio" name="bean.karate_skills" value="2"> 专业 </label>
+											<span class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label" style="margin-top: -8px;">轮滑</label>
+										<div class="col-md-8">
+											<label><input type="radio" name="bean.inline_skaters_skills" value="0"> 初级 </label>
+											<label><input type="radio" name="bean.inline_skaters_skills" value="1"> 中级 </label>
+											<label><input type="radio" name="bean.inline_skaters_skills" value="2"> 专业 </label>
+											<span class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group"> <label class="col-md-2 control-label" style="margin-top: -8px;">游泳</label> 
+										<div class="col-md-8"> 
+											<label><input type="radio" name="bean.swim_skills" value="0"> 初级 </label>
+											<label><input type="radio" name="bean.swim_skills" value="1"> 中级 </label>
+											<label><input type="radio" name="bean.swim_skills" value="2"> 专业 </label>
+											<span class=help-block"></span> 
+										</div> 
+									</div>
+									<table class="table table-striped table-condensed">
+										<tr class="alert alert-danger" >
+											<td height="30" colspan="4"><i class="fa  fa-bullhorn"></i> <strong>备注</strong></td>
+										</tr>
+									</table>
+									<div class="form-group">
+										<label class="col-md-2 control-label">接送时间</label>
+										<div class="col-md-8">
+											<input class="form-control" type="text" placeholder="请输入接送时间"
+												name="bean.shuttle_time" value="${bean.shuttle_time}">
+											<span class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">其它</label>
+										<div class="col-md-8">
+											<input class="form-control" type="text" placeholder="请输入其它"
+												name="bean.other_note" value="${bean.other_note}"> <span
+												class=help-block"></span>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-md-2 control-label">学员/监护人姓名</label>
+										<div class="col-md-8">
+											<input class="form-control" type="text"
+												placeholder="请输入学员/监护人姓名" name="bean.guardian"
+												value="${bean.guardian}"> <span class=help-block"></span>
+										</div>
+									</div>
+									<div class="panel panel-warning">
+											<div class="panel-heading ">
+												<div class="panel-title" style="color: #B94A48;"><i class="fa fa-bar-chart-o"></i> <strong>报名须知</strong></div>
+											</div>
+											<div class="panel-body">
+												<div class="note note-success">
+													<p>
+														略
+													</p>
+												</div>
+											</div>
+										</div>
+									<div class="alert alert-danger">
+											<label><input type="checkbox" style="margin-top: -1px;" onclick="if(!!$(this).prop('checked')){$('#btn2_222').show();}else{$('#btn2_222').hide()}"> 本人承诺遵守俱乐部规章制度以及以上学员行为准则.</label> 
+										</div>
 									<div class="c10"></div>
-									<div  style="margin-left: 100px;">
-									<button type="button" class="btn purple"><i class="fa fa-bullhorn"></i> Feeds</button>
+									<div  style="margin-left: 400px;">
+									<button type="submit" id="btn2_222" style="display: none;" class="btn purple">提交冬夏令营报名表</button>
 									</div>
 									<div class="c10"></div>
 								</form>
@@ -333,5 +531,9 @@ jQuery(document).ready(function() {
 	$('#bean_begin_day1').datepicker();
 	$('#bean_end_day1').datepicker();
 	$('#bean_pay_day1').datepicker();
+	
+	$('#bean_birthday2').datepicker();
+	$('#bean_begin_day2').datepicker();
+	$('#bean_end_day2').datepicker();
 });
 </script>

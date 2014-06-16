@@ -39,7 +39,7 @@
 					<li>
 						<a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b"> 
 							<img src="${bean.pic_url}"  onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';" 
-								width="300" height="170" title="${bean.title}" alt="${bean.title}">
+								width="300" height="170" title="${bean.title}" />
 								<h5>${bean.title}</h5>
 								<p>${bean.brief_info}..</p>
 								<div class="tips">

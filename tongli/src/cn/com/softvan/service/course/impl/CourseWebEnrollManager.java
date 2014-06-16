@@ -99,7 +99,8 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//version
 				dto.setStatus(bean.getStatus());//状态0未处理1报名失败2报名完成
-
+				dto.setCourse(bean.getCourse());//课程
+				
 				//判断数据是否存在
 				if(tcCourseWebEnrollDao.isDataYN(dto)!=0){
 					//数据存在
@@ -228,7 +229,7 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
     		   dto.setDel_flag(bean.getDel_flag());//是否删除
     		   dto.setVersion(bean.getVersion());//version
     		   dto.setStatus(bean.getStatus());//状态0未处理1报名失败2报名完成
-
+    		   dto.setCourse(bean.getCourse());//课程
 				
 				dto.setKeyword(bean.getKeyword());
 				dto.setDate1(bean.getDate1());
@@ -295,7 +296,7 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 	    		   dto.setDel_flag(bean.getDel_flag());//是否删除
 	    		   dto.setVersion(bean.getVersion());//version
 	    		   dto.setStatus(bean.getStatus());//状态0未处理1报名失败2报名完成
-
+	    		   dto.setCourse(bean.getCourse());//课程
 					
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());

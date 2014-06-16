@@ -129,7 +129,7 @@
 														<input class="pic-url" id="picurl" name="picurl${bean1.id }" value="${bean1.picurl }" type="hidden">
 														<input class="url" id="url" name="url${bean1.id }" value="${bean1.url }" type="hidden">
 														<div class="pic-url">
-															 <img onerror="this.src='${basePath}/images/error/404.jpg'" src="${bean1.picurl }" alt="">
+															 <img onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';" src="${bean1.picurl }" alt="">
 														</div>
 														<h4 class="title">${bean1.title }</h4>
 														<input type="hidden" class="description"  name="description${bean1.id }" value="${bean1.description}">
@@ -207,7 +207,7 @@
 											
 										<div id="article-info-filequeue" class="filequeue" <c:if test="${bean0.picurl==null}">style="display: none;"</c:if>>
 											<div class="uploadifyQueueItem item">
-												<img onerror="this.src='${basePath}/images/error/404.jpg'" class="pic-url" id="new_picurl"  src="${bean0.picurl}">
+												<img onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';" class="pic-url" id="new_picurl"  src="${bean0.picurl}">
 											</div>
 											<!--TODO fix to span_xx -->
 											<div class="clearfix"></div>

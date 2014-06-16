@@ -44,7 +44,7 @@
 </div>
 <div class="body fl" style="width: 197px;">
 	<div class="title">
-		<a href="javascript:void(0);" class="ico_aboutus"><c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if></a>
+		<label class="ico_aboutus"><c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if><i class="fa  fa-arrow-right"></i></label>
 	</div>
 	<div class="content">
 		<ul>

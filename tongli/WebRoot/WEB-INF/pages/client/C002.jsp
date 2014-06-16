@@ -37,7 +37,16 @@
 <div class="w">
 
 <div class="body fr" style=" width:770px;">
-<div class="title">&nbsp; <c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if>-->${typeBean.name}</div>
+<div class="title">&nbsp; <i class="fa  fa-star-half-full "></i><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if>
+<c:choose>
+	<c:when test="${typeBeanP.name==typeBean.name}">
+		<c:if test="${typeBeanP.name!=null}">${typeBeanP.name}</c:if>
+	</c:when>
+	<c:otherwise>
+		<c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if>-->${typeBean.name}
+	</c:otherwise>
+</c:choose>
+</div>
 <div class="content home_news pr" style="min-height:600px;">
 	<c:choose>
 		<c:when test="${beans!=null && fn:length(beans)>0 }">
@@ -61,8 +70,8 @@
 <customtag:pagingext func="loadUrlPage" params="'c002_','init'" />
 </div>
 <div class="body fl mb10" style="width: 197px;">
-	<div class="title">
-		<a href="javascript:void(0);" class="ico_aboutus"><c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if></a>
+	<div class="title ">
+		<label class="ico_aboutus"> <c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if><i class="fa  fa-arrow-right"></i></label>
 	</div>
 	<div class="content">
 		<ul>

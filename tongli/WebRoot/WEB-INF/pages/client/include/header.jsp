@@ -26,7 +26,7 @@ request.setAttribute("path", path);
 request.setAttribute("basePath", basePath);
 %>
 
-<div class="header">
+<div class="header_1">
 	<div class="nav_top">
 	<div id="top" style=" border:1px solid #fff;"> 
              <div id="menu_bar">

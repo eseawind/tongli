@@ -115,7 +115,7 @@
 											</c:if>
 											<div class="pic-url">
 												<span class="default-tip" style="display: none">封面图片</span> 
-												<img  onerror="this.src='${basePath}/images/error/404.jpg'"  src="${bean1.picurl}"
+												<img  onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';"  src="${bean1.picurl}"
 													alt="" style="">
 											</div> <a href=${bean1.url} target="_blank"><h4
 													class="title">${bean1.title}</h4></a>

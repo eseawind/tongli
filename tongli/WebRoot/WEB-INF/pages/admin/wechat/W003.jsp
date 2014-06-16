@@ -108,7 +108,7 @@
 										<div class="msg-date">关键字:${bean1.keyword}</div>
 										<div class="msg-date">${bean1.last_updated}</div>
 										<div class="pic-url">
-											<img onerror="this.src='${basePath}/images/error/404.jpg'" src="${bean1.picurl}"
+											<img onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';" src="${bean1.picurl}"
 												alt="" style="">
 										</div>
 									</li>
