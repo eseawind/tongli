@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="w_client_teacher_info" namespace="/w" extends="wechat-default" >
+   		<default-interceptor-ref name="teacher-auth" /> 
+		<!-- 教师首页 -->
+		<action name="t001_*" class="t001Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client_w/teacher/T001.jsp</result>
+			<result name="list1">/WEB-INF/pages/client_w/teacher/T001_01.jsp</result>
+			<result name="list2">/WEB-INF/pages/client_w/teacher/T001_02.jsp</result>
+			<result name="clist1">/WEB-INF/pages/client_w/teacher/T001_03.jsp</result>
+			<result name="success" type="redirect" >/w/t001_init.ac</result>
+		</action>
+	</package>
+	<package name="client_teacher_info_check" extends="wechat-default" >
+		<!-- 登录验证 -->
+		<action name="tcheck" class="t001Action" method="check">
+		</action>
+	</package>
+</struts>

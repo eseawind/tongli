@@ -1,10 +1,10 @@
 <%--
 /*
- * 课程列表页
+ * 课程详情
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
- * 1.00     2014-04-21  wuxiaogang        程序・发布
+ * 1.00     2014-03-30  wuxiaogang        程序・发布
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 wechat System. - All Rights Reserved.
  *
@@ -15,50 +15,32 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="customtag" uri="/custom-tags"%>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<%@ include file="../include/title_meta.jsp"%>
-<%@ include file="../include/public_js_css.jsp"%>
+<%@ include file="include/title_meta.jsp"%>
+<%@ include file="include/public_js_css.jsp"%>
 
 </head>
 
 <body class="page-header-fixed">
 <!-- BEGIN HEADER -->
-<%@ include file="../include/header.jsp"%>
+<%@ include file="include/header.jsp"%>
 <!-- END   HEADER -->
-<%-- <%@ include file="../include/slider.jsp"%> --%>
+<%@ include file="include/slider.jsp"%>
 
 <div class="main pr">
 <div class="c10"></div>
 <div class="w">
 
 <div class="body fr" style=" width:770px;">
-<div class="title">&nbsp; <c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if>-->${typeBean.name}</div>
-<div class="content home_news pr" style="min-height:500px;">
-	<c:choose>
-		<c:when test="${beans!=null && fn:length(beans)>0 }">
-		<ul>
-			
-			<c:forEach items="${beans}" var="bean">
-			<li>
-			<a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=${pid}" >• ${bean.title}</a>
-			<em>
-			${fn:substring(bean.last_updated,0,10)}
-			</em>
-			</li>
-			</c:forEach>
-		</ul>
-		</c:when>
-		<c:otherwise>
-			${typeBean.detail_info}
-		</c:otherwise>
-	</c:choose>
+<h1> ${bean.title}信息标题</h1>
+<!--<h3>发布日期：${bean.last_updated} &nbsp;&nbsp;&nbsp;&nbsp;发布人：${bean.create_id}</h3>-->
+<div class="content" style="min-height:500px;">
+  ${bean.detail_info}
 </div>
-<customtag:pagingext func="loadUrlPage" params="'c002_','init'" />
 </div>
 <div class="body fl" style="width: 197px;">
 	<div class="title">
@@ -68,16 +50,16 @@
 		<ul>
 			<c:forEach items="${tree_array}" var="tree">
 		      	<li class="li_0" <c:if test="${tree.id==tid}">class="on"</c:if>>
-		      	<a <a href="${basePath}/c002_init.ac?tid=${tree.id}&pid=<c:choose><c:when test='${tree.parent_id!=null && tree.parent_id!=""}'>${tree.parent_id}</c:when><c:otherwise>${tree.id}</c:otherwise></c:choose>">${tree.name}</a>
+		      	<a <a href="${basePath}/w/c002_init.ac?tid=${tree.id}&pid=<c:choose><c:when test='${tree.parent_id!=null && tree.parent_id!=""}'>${tree.parent_id}</c:when><c:otherwise>${tree.id}</c:otherwise></c:choose>">${tree.name}</a>
 		      	<c:if test="${tree.beans!=null && fn:length(tree.beans)>0}">
 		      		<c:forEach items="${tree.beans}" var="bean">
 		      		     <li class="li_0" <c:if test="${bean.id==tid}">class="on"</c:if>>
-		      		     	|-<a href="${basePath}/c002_init.ac?tid=${bean.id}&pid=<c:choose><c:when test='${bean.parent_id!=null && bean.parent_id!=""}'>${bean.parent_id}</c:when><c:otherwise>${bean.id}</c:otherwise></c:choose>">${bean.name }</a>
+		      		     	|-<a href="${basePath}/w/c002_init.ac?tid=${bean.id}&pid=<c:choose><c:when test='${bean.parent_id!=null && bean.parent_id!=""}'>${bean.parent_id}</c:when><c:otherwise>${bean.id}</c:otherwise></c:choose>">${bean.name }</a>
 		      		     </li>
 		      		     <c:if test="${bean.beans!=null && fn:length(bean.beans)>0}">
 				      		<c:forEach items="${bean.beans}" var="bean2">
 				      		     <li class="li_0" <c:if test="${bean2.id==tid}">class="on"</c:if>>
-				      		     	|-|-<a href="${basePath}/c002_init.ac?tid=${bean2.id}&pid=<c:choose><c:when test='${bean2.parent_id!=null && bean2.parent_id!=""}'>${bean2.parent_id}</c:when><c:otherwise>${bean2.id}</c:otherwise></c:choose>">${bean2.name }</a>
+				      		     	|-|-<a href="${basePath}/w/c002_init.ac?tid=${bean2.id}&pid=<c:choose><c:when test='${bean2.parent_id!=null && bean2.parent_id!=""}'>${bean2.parent_id}</c:when><c:otherwise>${bean2.id}</c:otherwise></c:choose>">${bean2.name }</a>
 				      		     </li>
 		           			</c:forEach>
 				      	</c:if>
@@ -98,12 +80,7 @@
 <div class="c10"></div>
 </div>
 <!-- BEGIN FOOTER -->
-<%@ include file="../include/footer.jsp"%>
+<%@ include file="include/footer.jsp"%>
 <!-- END FOOTER -->
 </body>
 </html>
-<script type="text/javascript">
-function loadUrlPage(offset, url, event) {
-	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
-}
-</script>

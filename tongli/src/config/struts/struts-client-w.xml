@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="w_client_info" namespace="/w" extends="wechat-default" >
+		<!-- 前台首页 -->
+		<action name="index" class="c001Action" method="init">
+			<result name="init">/WEB-INF/pages/client_w/C001.jsp</result>
+		</action>
+		<!-- 栏目页 -->
+		<action name="c002_*" class="c002Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client_w/C002.jsp</result>
+		</action>
+		<!-- 内容页 -->
+		<action name="c003_*" class="c003Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client_w/C003.jsp</result>
+			<result name="list1">/WEB-INF/pages/client_w/C003_01.jsp</result>
+		</action>
+	</package>
+</struts>
