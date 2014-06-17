@@ -20,7 +20,7 @@
 		<c:forEach items="${beans}" var="bean">
 		<li>
 		<a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b" >
-		<img src="${bean.pic_url}" />
+		<img src="${bean.pic_url}"  onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';"  />
 		</a>
 		</li>
 		</c:forEach>

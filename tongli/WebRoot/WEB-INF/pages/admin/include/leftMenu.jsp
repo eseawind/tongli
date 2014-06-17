@@ -12,6 +12,7 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" session="false"%>
+<%@ taglib prefix="security" uri="/WEB-INF/permission-tags.tld"%>
 <div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->        
 			<ul class="page-sidebar-menu">
@@ -26,6 +27,7 @@
 					系统主页
 					</a>
 				</li>
+				<security:permission id="" name="/weixin">
 				<li id="wechat" class="">
 					<a class="" href="javascript:;">
 					<i class="fa fa-leaf"></i> 
@@ -69,6 +71,7 @@
 						</li>
 					</ul>
 				</li>
+				</security:permission>
 				<li id="course" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-flag"></i> 
@@ -131,6 +134,7 @@
 						</li>
 					</ul>
 				</li>
+				<security:permission id="" name="/zixun">
 				<li id="sys" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-bar-chart-o"></i> 
@@ -143,6 +147,7 @@
 						<li id="sys_sub_menu_l1_sub_menu_l2"><a href="${basePath }/h/s001_recycle.ac">资讯回收站</a></li>
 					</ul>
 				</li>
+				</security:permission>
 				<li id="sys3" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-coffee"></i> 
@@ -204,6 +209,7 @@
 					<span class="title">统计信息</span>
 					</a>
 				</li>
+				 <security:permission id="" name="/sys">
 				<li id="sys9" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa  fa-check-square-o"></i> 
@@ -215,6 +221,7 @@
 						<li id="sys9_sub_menu_l2"><a href="${basePath }/h/u002_init.ac">角色管理</a></li>
 					</ul>
 				</li>
+				</security:permission>
 				
 			</ul>
 			<!-- END SIDEBAR MENU -->

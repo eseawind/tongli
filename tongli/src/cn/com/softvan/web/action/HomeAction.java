@@ -22,7 +22,6 @@ import cn.com.softvan.bean.backuser.TcUaUmBaseUserBean;
 import cn.com.softvan.common.CipherUtils;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IpUtils;
-import cn.com.softvan.common.Validator;
 import cn.com.softvan.common.VerifyUtils;
 import cn.com.softvan.service.user.ITcUaUmBaseUserManager;
 
@@ -66,8 +65,8 @@ public class HomeAction  extends BaseAction {
 			}else{
 				request.setAttribute("msg","登陆失败!用户名或密码错误!");
 			}*/
-			String authCode=request.getParameter("authCode");
-			if(Validator.isEmpty(authCode)||VerifyUtils.checkVeifyCode(request, authCode)){
+			HttpServletRequest request = ServletActionContext.getRequest();
+			if(!VerifyUtils.checkVeifyCode(request, "authCode")){
 				request.setAttribute("msg","验证码校验失败!");
 				return "login";
 			}

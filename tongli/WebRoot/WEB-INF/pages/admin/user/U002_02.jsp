@@ -180,7 +180,6 @@ font-size: 14px;
 							class="fa fa-angle-right"></i></li>
 						<li><a href="#">角色管理</a> <i class="fa fa-angle-right"></i></li>
 						<li>角色编辑</li>
-
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -194,7 +193,7 @@ font-size: 14px;
 							<div class="form-group">
                       				  <label class="col-lg-3 control-label"><span class="pn-frequired">*</span>角色名:</label>
                         				<div class="col-lg-5">
-                            			<input type="text" class="form-control" name="bean.ro_name"         value="${bean.ro_name}"/>
+                            			<input type="text" class="form-control" name="bean.ro_name" value="${bean.ro_name}"/>
                        				 </div>
                     				</div>
 							</td>
@@ -202,7 +201,7 @@ font-size: 14px;
 							<div class="form-group">
                       				  <label class="col-lg-3 control-label">排列顺序:</label>
                         				<div class="col-lg-5">
-                            			<input type="text" class="form-control" name="bean.ro_priority"         value="${bean.ro_priority}"/>
+                            			<input type="text" class="form-control" name="bean.ro_priority" value="${bean.ro_priority}"/>
                        				 </div>
                     				</div>
 							</td>
@@ -218,8 +217,7 @@ font-size: 14px;
 							<td width="15%" class="pn-flabel pn-flabel-h">功能权限:</td>
 							<td colspan="3" width="85%" class="pn-fcontent">
 								<div class="perm-container">
-									<input type="hidden" name="perms"
-										value="/home">
+									<input type="hidden" name="perms" value="/home">
 
 									<!-- <div class="perm-layout-1">
 										<label><input value="/home" type="checkbox"  name="perms">主页</label>
@@ -236,48 +234,13 @@ font-size: 14px;
 												<label><input   value="/w007"   type="checkbox" name="perms">自定义菜单</label>
 										 </div>
 									 </div>
-
-									<div class="perm-layout-1">
-									    <label><input  value="/baoxian"  type="checkbox" name="perms">保险服务</label>
-										    <div class="perm-layout-2">
-												<label><input   value="/c301"  type="checkbox" name="perms">咨询</label>
-												<label><input   value="/i002"   type="checkbox" name="perms">报案</label>
-												<label><input	value="/i001"   type="checkbox" name="perms">投诉</label>
-										     </div>
-									</div>
-
-									<div class="perm-layout-1">
-									
-									     <label><input  value="/zixun"  type="checkbox" name="perms">咨询管理</label>
-										 <div class="perm-layout-2">
-												<label><input   value="/s002"  type="checkbox" name="perms">栏目管理</label>
-												<label><input   value="/s001"   type="checkbox" name="perms">咨询管理</label>
-												<label><input	value="/s001_recycle"   type="checkbox" name="perms">咨询回收站</label>
-										  </div>
-										 
-									</div>
-
 									<div class="perm-layout-1">
 									        <label><input  value="/system"  type="checkbox" name="perms">系统管理</label>
 										    <div class="perm-layout-2">
-												<label><input   value="/i006"  type="checkbox" name="perms">二维码管理</label>
-												<label><input   value="/i004"   type="checkbox" name="perms">待处理任务统计</label>
-												<label><input	value="/i005"   type="checkbox" name="perms">人员工作量统计</label>
-												<!-- <label><input   value=""   type="checkbox" name="perms">客服列表</label> -->
 												<label><input   value="/u001"   type="checkbox" name="perms">用户管理</label>
 												<label><input   value="/u002"   type="checkbox" name="perms">角色管理</label>
 										     </div>
 									</div>
-									<div class="perm-layout-1">
-									        <label><input  value="/zenzhi"  type="checkbox" name="perms">增值服务</label>
-										    <div class="perm-layout-2">
-												<label><input   value="/eb001,/eb002"  type="checkbox" name="perms">订单管理</label>
-												<label><input   value="/eb101"   type="checkbox" name="perms">会员等级管理</label>
-												<label><input   value="/eb003,/eb004"   type="checkbox" name="perms">商品管理</label>
-												<label><input   value=""   type="checkbox" name="perms">服务商管理</label>
-										     </div>
-									</div>
-									
 									
  								</div>
 								<script type="text/javascript">

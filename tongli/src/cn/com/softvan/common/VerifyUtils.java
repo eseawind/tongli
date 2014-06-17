@@ -113,7 +113,7 @@ public class VerifyUtils {
 	public static boolean checkVeifyCode(HttpServletRequest req, String inputVerifyId) throws Exception {
 
 		String verifyCode = (String) req.getSession().getAttribute(CommonConstant.SESSION_VERIFY_CODE);
-		if (Validator.isNullEmpty(verifyCode)) {
+		if (Validator.isEmpty(verifyCode)) {
 			return false;
 		} else {
 			return CipherUtils.decrypt(verifyCode).equals(req.getParameter(inputVerifyId));
