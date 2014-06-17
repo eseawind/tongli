@@ -3,9 +3,9 @@
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
- * 1.00     2014.02.26  wuxiaogang           程序.发布
+ * 1.00     2014.02.26  wangzi           程序发布
  * -------- ----------- --------------- ------------------------------------------
- * Copyright 2014 童励  System. - All Rights Reserved.
+ * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
 package cn.com.softvan.dao.entity.user;
@@ -13,7 +13,7 @@ package cn.com.softvan.dao.entity.user;
 import cn.com.softvan.dao.entity.BaseEntity;
 /**
  * <p> 权限表 <p>
- * @author wuxiaogang
+ * @author wangzi
  *
  */
 public class TcUaUmPermission  extends BaseEntity {

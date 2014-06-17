@@ -1,10 +1,14 @@
 package cn.com.softvan.filter;
 
+
+
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.backuser.TcUaUmBaseUserBean;
 import cn.com.softvan.common.CommonConstant;
 
 import com.opensymphony.xwork2.ActionInvocation;
@@ -16,6 +20,22 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
  */
 public class AuthInterceptor extends AbstractInterceptor {
 	private static final long serialVersionUID = 5006910018523878858L;
+	
+	private boolean permistionPass(String uri, Set<String> perms) {
+		String u = null;
+		int i;
+		boolean flag = false;
+	    for (String perm : perms) {
+				if (uri.startsWith(perm)) {
+					  flag= true;
+					break;
+				}
+			}
+		 
+		return flag;
+	}
+	
+	
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
@@ -35,19 +55,27 @@ public class AuthInterceptor extends AbstractInterceptor {
 		request.setAttribute("basePath", basePath);
 //		log.info("basePath值："+ basePath);
 		String actionName=invocation.getInvocationContext().getName();
-//		//用户信息
-//		BaseUserBean userBean=new BaseUserBean();
-//		//用户名
-//		userBean.setUser_id("admin");
-//		request.getSession().setAttribute(CommonConstant.SESSION_KEY_USER, userBean);
+		//用户信息
 		//判断用户是否登陆 
-		if(request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER)==null
-				&&!"home_login".equals(actionName)
-				){
+		if(request.getSession().getAttribute(CommonConstant.SESSION_SYS_KEY_USER)==null
+				&&!"home_login".equals(actionName)){
 			//回到登录页面
 			return "login";
 		}
-			// 执行该拦截器的下一个拦截器，或者如果没有下一个拦截器，直接执行Action的execute方法
+		String refereuri = request.getHeader("referer");
+		
+		if(actionName.equals("home_login")){
+			return invocation.invoke();
+		}
+		
+		//判断用户是否有权限操作
+		TcUaUmBaseUserBean user=(TcUaUmBaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_SYS_KEY_USER);
+		if (user!=null&&!user.isSuper()&& !permistionPass("/"+actionName, user.getPerms())) {
+			//说明该用户没有当前action的操作权限
+			//return refereuri;
+			return "noauth";
+		}
+		
 		return invocation.invoke();
 	}
 }

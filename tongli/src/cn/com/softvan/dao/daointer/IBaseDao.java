@@ -33,6 +33,10 @@ public interface IBaseDao {
      */
     int insert(List<IEntity> dtos) throws Exception;
     /**
+     * 插入数据
+     */
+    int insertSelective(IEntity dto) throws Exception;
+    /**
      * 详情
      */
     Object selectByPrimaryKey(IEntity dto) throws Exception;

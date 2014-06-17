@@ -105,6 +105,15 @@
 		<!-- entity class -->
 		<typeAlias type="cn.com.softvan.dao.entity.comment.TcComment" alias="tcComment"/>
 		<!-- 评论管理 end -->
+		<!-- 用户角色  begin-->
+		 <!-- bean class  -->
+		<typeAlias type="cn.com.softvan.bean.backuser.TcUaUmBaseUserBean" alias="tcUaUmBaseUserBean"/>
+		<typeAlias type="cn.com.softvan.bean.backuser.TcUaUmBaseRoleBean" alias="tcUaUmBaseRoleBean"/>
+		 <!-- entity class -->
+		<typeAlias type="cn.com.softvan.dao.entity.user.TcUaUmBaseUser" alias="tcUaUmBaseUser"/>
+		<typeAlias type="cn.com.softvan.dao.entity.user.TcUaUmBaseRole" alias="tcUaUmBaseRole"/>
+		
+		<!-- 用户角色  end-->
 	</typeAliases>
 	<!-- 插件 -->
 	<plugins>

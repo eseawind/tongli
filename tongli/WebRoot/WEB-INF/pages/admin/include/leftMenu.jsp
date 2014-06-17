@@ -20,19 +20,6 @@
 					<div class="sidebar-toggler hidden-phone"></div>
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 				</li>
-				<li>
-					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-					<form class="sidebar-search" action="#" method="POST">
-						<div class="form-container">
-							<div class="input-box">
-								<a href="javascript:;" class="remove"></a>
-								<input placeholder="Search..." type="text">
-								<input class="submit" value=" " type="button">
-							</div>
-						</div>
-					</form>
-					<!-- END RESPONSIVE QUICK SEARCH FORM -->
-				</li>
 				<li id="home_init" class="">
 					<a href="${basePath}/home_init.ac">
 					<i class="fa fa-home"></i> 
@@ -82,49 +69,6 @@
 						</li>
 					</ul>
 				</li>
-				<%-- <li id="CustomerService">
-					<a class="active" href="javascript:;">
-					<i class="fa  fa-sitemap"></i> 
-					<span class="title">客服管理</span>
-					<span id="CustomerService_arrow" class="arrow "></span>
-					</a>
-					<ul id="CustomerService_sub_menu" style="display: none;" class="sub-menu">
-						<li id="CustomerService_sub_menu_l0">
-							<a  href="#" onclick="myAlert('功能即将开放')"><!-- ${basePath}/h/cs101_key.ac -->
-								关键字设置
-							</a>
-						</li>
-						<li id="CustomerService_sub_menu_l1">
-							<a   href="${basePath}/h/cs101_init.ac">
-								客服列表
-							</a>
-						</li>
-						<li id="CustomerService_sub_menu_l2">
-							<a  href="#" onclick="myAlert('功能即将开放')"><!-- ${basePath}/h/c303_init.ac -->
-								咨询统计
-							</a>
-						</li>
-					</ul>
-				</li> --%>
-				<%-- <li id="consult">
-					<a class="active" href="javascript:;">
-					<i class="fa fa-comment-o"></i> 
-					<span class="title">客服响应</span>
-					<span id="consult_arrow" class="arrow "></span>
-					</a>
-					<ul id="consult_sub_menu" style="display: none;" class="sub-menu">
-						<li id="consult_sub_menu_l1">
-							<a  href="${basePath}/h/c301_init.ac">
-								咨询队列
-							</a>
-						</li>
-						<li id="consult_sub_menu_l2">
-							<a  href="${basePath}/h/c301_list1.ac">
-								我的咨询
-							</a>
-						</li>
-					</ul>
-				</li> --%>
 				<li id="course" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-flag"></i> 
@@ -260,6 +204,18 @@
 					<span class="title">统计信息</span>
 					</a>
 				</li>
+				<li id="sys9" class="">
+					<a class="active" href="javascript:;">
+					<i class="fa  fa-check-square-o"></i> 
+					<span class="title">系统管理</span>
+					<span id="sys9_arrow" class="arrow"></span>
+					</a>
+					<ul id="sys9_sub_menu" style="display: none;" class="sub-menu">
+						<li id="sys9_sub_menu_l1"><a href="${basePath }/h/u001_init.ac">用户管理</a></li>
+						<li id="sys9_sub_menu_l2"><a href="${basePath }/h/u002_init.ac">角色管理</a></li>
+					</ul>
+				</li>
+				
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

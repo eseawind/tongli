@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.softvan.cms.dao.main.ICmsRoleDao">
+	
+	<resultMap id="sysRoleMap" type="cmsRole">
+		<id property="id" column="id" />
+		<result property="name" column="name"/>
+		<result property="priority" column="priority"/>
+		<result property="m_super" column="m_super"/>
+		<collection property="perms" column="id" javaType="java.util.Set" select="getPerms" ofType="java.lang.String">
+		</collection>
+		
+	</resultMap>
+	
+	<select id="getPerms" parameterType="HashMap" resultType="java.lang.String">
+	     select 
+		     rp_uri
+	     from cms_role_permission
+	     where role_id=#{id}
+     </select>
+	<resultMap id="sysRoleMap1" type="cmsRole">
+		<id property="id" column="id" />
+		<result property="name" column="name"/>
+		<result property="priority" column="priority"/>
+		<result property="m_super" column="m_super"/>
+		<collection property="perms" column="id" javaType="java.util.Set" select="getPerms1" ofType="java.lang.String">
+		</collection>
+		
+	</resultMap>
+	
+	<select id="getPerms1" parameterType="HashMap" resultType="java.lang.String">
+	    select 
+		     rp.rp_uri
+	     from cms_role_permission rp
+            
+	     where rp.role_id=#{id}
+     </select>
+	
+	<!-- public List<CmsRole>  getList(); -->
+	<select id="getList" resultMap="sysRoleMap">
+		select 
+			role.role_id as id,
+			role.ro_name as name,
+			role.ro_priority as priority,
+			role.ro_super as m_super,
+			
+			
+		from cms_role as role
+		order by ro_priority asc
+	</select>
+	
+	<!-- public CmsRole findById(@Param("id")Integer id); -->
+	<select id="findById" resultMap="sysRoleMap">
+		select 
+			role.role_id as id,
+			role.ro_name as name,
+			role.ro_priority as priority,
+			role.ro_super as m_super,
+		from cms_role as role
+		where role.role_id=#{id}
+	</select>
+	
+	<!-- public CmsRole save(CmsRole bean); -->
+	<insert id="save" parameterType="cmsRole">
+		insert into cms_role(
+			role_id,
+			ro_name,
+			ro_priority,
+			ro_super
+		)values(
+			#{id},
+			#{name},
+			#{priority},
+			#{m_super}
+		)
+	</insert>
+	
+	<!-- public CmsRole updateByUpdater(CmsRole updater); -->
+	<update id="updateByUpdater" parameterType="cmsRole">
+		update cms_role set role_id=#{id}
+			<if test="name!=null and name!=''">
+				,ro_name=#{name}
+			</if>
+			<if test="priority!=null and priority!=''">
+				,ro_priority=#{priority}
+			</if>
+			<if test="m_super!=null">
+				,ro_super=${m_super}
+			</if>
+		where role_id=#{id}
+	</update>
+	
+	<!-- public CmsRole deleteById(@Param("id")Integer id); -->
+	<delete id="deleteById" parameterType="cmsRole">
+		delete from cms_role where role_id=${id}
+	</delete>
+	
+	<!-- public void savePermission(@Param("roleId")Integer roleId,@Param("perms")Set<String> perms); -->
+	<insert id="savePermission" parameterType="java.util.Set">
+		insert into cms_role_permission  
+        (role_id,rp_uri)values  
+        <foreach collection="perms" item="item" index="index"  
+            separator=",">  
+            (#{roleId},#{item,jdbcType=VARCHAR})  
+        </foreach> 
+	</insert>
+	
+	<!-- public void deletePermById(@Param("roleId")Integer roleId); -->
+	<delete id="deletePermById" >
+		delete from cms_role_permission where role_id=#{roleId}
+    </delete>
+	
+</mapper>

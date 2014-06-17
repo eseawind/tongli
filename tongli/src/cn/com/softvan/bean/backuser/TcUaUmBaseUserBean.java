@@ -1,5 +1,5 @@
 /*
- * 基础Entity类   用户
+ * 基础bean类   用户
  *
  * VERSION  DATE        BY              REASON
  * -------- ----------- --------------- ------------------------------------------
@@ -8,11 +8,13 @@
  * Copyright 2014 车主管家  System. - All Rights Reserved.
  *
  */
-package cn.com.softvan.dao.entity.user;
+package cn.com.softvan.bean.backuser;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import cn.com.softvan.dao.entity.BaseEntity;
+import cn.com.softvan.bean.BaseBean;
 
 /**
  * <p>
@@ -22,7 +24,11 @@ import cn.com.softvan.dao.entity.BaseEntity;
  * @author wangzi
  * 
  */
-public class TcUaUmBaseUser extends BaseEntity {
+public class TcUaUmBaseUserBean extends BaseBean {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6083723100878216045L;
 	/** 用户编号 **/
 	private String id;
 	/** 生日 **/
@@ -67,11 +73,17 @@ public class TcUaUmBaseUser extends BaseEntity {
 	private String credential_code;
 	/** 证件类型 **/
 	private String credential;
+	/**组织机构代码*/
+	private String orgCode;
 	/**
 	 * 用户权限
 	 */
-	private java.util.Set<TcUaUmBaseRole> roles;
+	private java.util.Set<TcUaUmBaseRoleBean> roles;
 	
+	/**
+	 * 用户权限id
+	 */
+	private java.util.Set<String> roleSetIds;
 	/**
 	 * 用户编号 *取得。
 	 * @return 用户编号 *
@@ -381,18 +393,91 @@ public class TcUaUmBaseUser extends BaseEntity {
 	    this.credential = credential;
 	}
 	/**
+	 * 组织机构代码取得。
+	 * @return 组织机构代码
+	 */
+	public String getOrgCode() {
+	    return orgCode;
+	}
+	/**
+	 * 组织机构代码设定。
+	 * @param orgCode 组织机构代码
+	 */
+	public void setOrgCode(String orgCode) {
+	    this.orgCode = orgCode;
+	}
+	
+	public boolean isSuper() {
+		Set<TcUaUmBaseRoleBean> roles = getRoles();
+		if (roles == null) {
+			return false;
+		}
+		for (TcUaUmBaseRoleBean role : roles) {
+			if (role.getRo_super().equals("1")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Set<String> getPerms() {
+		Set<TcUaUmBaseRoleBean> roles = getRoles();
+		if (roles == null) {
+			return null;
+		}
+		Set<String> allPerms = new HashSet<String>();
+		for (TcUaUmBaseRoleBean role :  roles) {
+			allPerms.addAll(role.getPerms());
+		}
+		return allPerms;
+	}
+	
+	
+	/**
 	 * 用户权限取得。
 	 * @return 用户权限
 	 */
-	public java.util.Set<TcUaUmBaseRole> getRoles() {
+	public java.util.Set<TcUaUmBaseRoleBean> getRoles() {
 	    return roles;
 	}
 	/**
 	 * 用户权限设定。
 	 * @param roles 用户权限
 	 */
-	public void setRoles(java.util.Set<TcUaUmBaseRole> roles) {
+	public void setRoles(java.util.Set<TcUaUmBaseRoleBean> roles) {
 	    this.roles = roles;
 	}
-
+	/**
+	 * 用户权限id取得。
+	 * @return 用户权限id
+	 */
+	public String[] getRoleIds() {
+		Set<TcUaUmBaseRoleBean> roles = getRoles();
+		if (roles == null) {
+			return null;
+		}
+		String[] ids = new String[roles.size()];
+		int i = 0;
+			for (TcUaUmBaseRoleBean r : roles) {
+				ids[i++] = r.getRole_id();
+			}
+			return ids;
+		}
+	/**
+	 * 用户权限id取得。
+	 * @return 用户权限id
+	 */
+	public java.util.Set<String> getRoleSetIds() {
+	    return roleSetIds;
+	}
+	/**
+	 * 用户权限id设定。
+	 * @param roleSetIds 用户权限id
+	 */
+	public void setRoleSetIds(java.util.Set<String> roleSetIds) {
+	    this.roleSetIds = roleSetIds;
+	}
+	 
+	 
+	
 }

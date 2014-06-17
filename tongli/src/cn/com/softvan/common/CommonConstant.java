@@ -26,7 +26,10 @@ public class CommonConstant {
 	public static final String SESSION_WECHAT_BEAN_FLAG = "SESSION_WECHAT_BEAN_FLAG_";
 	/** SESSION里面存放 用户信息 */
 	public static final String SESSION_KEY_USER = "SESSION_KEY_USER";
-	
+	/** SESSION里面存放系统 用户信息 */
+	public static final String SESSION_SYS_KEY_USER = "SESSION_SYS_KEY_USER";
+	/** SESSION里面存放 用户信息 */
+	public static final String SESSION_SYS_KEY_USER_PERMS = "SESSION_SYS_KEY_USER_PERMS";
 	/** 路径分隔符 */
 	public static final String PATH_SEPARATOR = "/";
 	/** 系统默认编码 */
