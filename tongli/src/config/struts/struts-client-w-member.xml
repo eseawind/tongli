@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="w_client_member_info" namespace="/w" extends="wechat-default" >
+    	<default-interceptor-ref name="member-auth" /> 
+		<!-- 会员首页 -->
+		<action name="m201_*" class="m201Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client_w/member/M201.jsp</result>
+			<result name="list1">/WEB-INF/pages/client_w/member/M201_01.jsp</result>
+			<result name="list2">/WEB-INF/pages/client_w/member/M201_02.jsp</result>
+			<result name="clist1">/WEB-INF/pages/client_w/member/M201_03.jsp</result>
+			<result name="success" type="redirect" >/w/m201_init.ac</result>
+		</action>
+	</package>
+	<package name="client_member_info_check" extends="wechat-default" >
+		<!-- 登录验证 -->
+		<action name="mcheck" class="m201Action" method="check">
+		</action>
+	</package>
+</struts>
