@@ -1,4 +1,4 @@
-<%--
+﻿<%--
 /*
  * 上海人保财险微信后台主页(初始化页面)
  *
@@ -68,7 +68,7 @@ width: 53.33333333%;
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						上海人保财险微信系统V1.0 <small>后台</small>
+						童励俱乐部V1.0 <small>后台</small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
