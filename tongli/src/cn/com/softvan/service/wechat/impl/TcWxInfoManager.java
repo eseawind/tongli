@@ -10,7 +10,9 @@
  */
 package cn.com.softvan.service.wechat.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -746,9 +748,26 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	}
 	/**
 	 * 根据openID获取用户经纬度
+	 * 距离当前时间1小时之类
+	 * 
 	 * @throws Exception 
 	 */
 	public TcWxInfoBean queryLocation(TcWxInfoBean bean) throws Exception {
-		return tcWxInfoDao.queryLocation(bean);
+		TcWxInfoBean tcWxInfoBean = tcWxInfoDao.queryLocation(bean);
+		// 时间监测（1小时内有效）
+		if(tcWxInfoBean != null){
+			String dateString = tcWxInfoBean.getLast_updated();
+			if(dateString != null && !dateString.equals("")){
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = format.parse(dateString);
+				Date dateNow = new Date();
+				if(dateNow.getTime() -  date.getTime() <= 1*60*60*1000){
+					return tcWxInfoBean;
+				}
+			}
+			
+		}
+		
+		return null;
 	}
 }
