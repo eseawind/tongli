@@ -553,6 +553,26 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 					WxApiUtil wxApiUtil=new WxApiUtil();
 					for(TcWxInfoBean bean1:beans){
 						if(bean1!=null){
+							if(Validator.notEmpty(bean1.getKeyword())){
+								addLuceneIndex(bean1);//TODO=========将关键字放入索引============
+								//TODO 存放原始 关键字信息 用于更新关键字时清理旧缓存信息
+								getJedisHelper().set("key_flag_uuid_"+bean1.getId(),bean1.getKeyword());
+								//TODO 
+								String[] keys=bean1.getKeyword().split(" ");
+								for(String s:keys){
+									if(Validator.notEmpty(s)){
+										//保存关键字对象的数据id
+										if(!"news".equals(msgType)){
+											getJedisHelper().set("key_flag_"+s,bean1.getId());
+											log.debug("key_flag_"+s+"========"+bean1.getId());
+										}else{
+											getJedisHelper().set("key_flag_"+s,bean1.getArticles_id());
+											log.debug("key_flag_"+s+"========"+bean1.getArticles_id());
+										}
+										
+									}
+								}
+							}
 							msgType=bean1.getMsgtype();
 							log.debug("=======自动回复信息msgType="+msgType+",Keyword="+bean1.getKeyword()+",id="+bean1.getId());
 							//自动回复对象
@@ -642,6 +662,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	 * 将自动回复信息  放入缓存
 	 */
 	private void init(){
+		log.debug("===任务准备====将所有自动回复信息放入缓存,任务启动!");
 		if(!"1".equals(getJedisHelper().get("tc_wechat_info_cache_flag"))){
 			log.debug("=======将所有自动回复信息放入缓存,任务启动!");
 			TcWxInfoBean bean1=new TcWxInfoBean();
@@ -678,6 +699,8 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 			log.debug("=======将所有自动回复信息放入缓存,任务完成!");
 			//已存入缓存标记  数据缓存3天
 			getJedisHelper().set("tc_wechat_info_cache_flag","1",3*23*60*60);
+		}else{
+			log.debug("===任务失败==条件未满足==将所有自动回复信息放入缓存,任务启动!");
 		}
 	}
 	/**删除当前信息缓存
