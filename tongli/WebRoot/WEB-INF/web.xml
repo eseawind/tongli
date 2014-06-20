@@ -116,4 +116,48 @@
   <listener>
     <listener-class>cn.com.softvan.listenner.ThreadListener</listener-class>
   </listener>
+  <!-- js.css缓存过滤器 -->
+    <filter>  
+        <description>给某些文件加上缓存.</description>  
+        <filter-name>CacheControlFilter</filter-name>  
+        <filter-class>cn.com.softvan.filter.CacheControlFilter</filter-class>  
+        <init-param>  
+        	<description>max-age单位(秒).</description>  
+            <param-name>Cache-Control</param-name>  
+            <param-value>public,max-age=259200</param-value>  
+        </init-param>  
+        <init-param>  
+            <param-name>Pragma</param-name>  
+            <param-value>public</param-value>  
+        </init-param>
+        <init-param>  
+        	<description>Expires单位(秒).</description>  
+            <param-name>Expires</param-name>  
+            <param-value>259200</param-value>  
+        </init-param>  
+    </filter>  
+    <filter-mapping>  
+        <filter-name>CacheControlFilter</filter-name>  
+        <url-pattern>*.js</url-pattern>  
+    </filter-mapping>
+     <filter-mapping>  
+        <filter-name>CacheControlFilter</filter-name>  
+        <url-pattern>*.ico</url-pattern>  
+    </filter-mapping>  
+    <filter-mapping>  
+        <filter-name>CacheControlFilter</filter-name>  
+        <url-pattern>*.css</url-pattern>  
+    </filter-mapping>
+    <filter-mapping>  
+        <filter-name>CacheControlFilter</filter-name>  
+        <url-pattern>*.jpg</url-pattern>  
+    </filter-mapping>
+    <filter-mapping>  
+        <filter-name>CacheControlFilter</filter-name>  
+        <url-pattern>*.png</url-pattern>  
+    </filter-mapping>
+     <filter-mapping>  
+        <filter-name>CacheControlFilter</filter-name>  
+        <url-pattern>*.gif</url-pattern>
+    </filter-mapping>
 </web-app>
