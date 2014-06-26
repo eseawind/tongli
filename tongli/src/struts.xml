@@ -62,6 +62,10 @@
 			<interceptor name="authCustomerServiceInterceptor"
 				class="cn.com.softvan.filter.AuthCustomerServiceInterceptor">
 			</interceptor>
+			<!-- XSS拦截器 -->
+			<interceptor name="xssInterceptor"
+				class="cn.com.softvan.filter.XssInterceptor">
+			</interceptor>
 			<!-- 前台教师权限拦截器 -->
 			<interceptor name="teacherAuthInterceptor"
 				class="cn.com.softvan.filter.TeacherAuthInterceptor">
@@ -75,6 +79,11 @@
 			<interceptor-stack name="wechat-auth-customer-service">
 				<interceptor-ref name="defaultStack" />
 				<interceptor-ref name="authCustomerServiceInterceptor" />
+			</interceptor-stack>
+			<!-- 定义XSS拦截器栈 -->
+			<interceptor-stack name="wechat-xss">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="xssInterceptor" />
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="wechat-default" />
