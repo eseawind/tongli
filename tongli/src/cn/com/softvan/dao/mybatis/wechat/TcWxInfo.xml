@@ -340,6 +340,22 @@
     	<if test="note=='notNews'">
     	and t.msgtype!='news'
     	</if>
+    	<if test="keyword!=null and keyword!=''">
+    	and t.content like concat('%',#{keyword},'%')
+    	</if>
+    	<!-- <if test="nickname!=null and nickname!=''">
+    	and t2.nickname like concat('%',#{nickname},'%')
+    	</if> -->
+    	<if test="date1!= null and date1!=''"> 
+		<![CDATA[
+		and UNIX_TIMESTAMP(t.createtime) >=UNIX_TIMESTAMP(#{date1})
+		]]>
+		</if>
+		<if test="date2!= null and date2!=''"> 
+		<![CDATA[
+		and UNIX_TIMESTAMP(t.createtime) <=UNIX_TIMESTAMP(#{date2})
+		]]>
+		</if>
     	order by t.createtime desc,t.sort_num asc
     </select>
     <!-- 
@@ -391,4 +407,15 @@
 		order by createtime desc
 		limit 0,1
 	</select>
+	
+	<select id="selectCountByCode" parameterType="map" resultType="int">
+		select count(*)
+		from tc_wx_info
+		where 
+		event = #{eventType}
+		<if test="code != null and code != ''">
+			and eventkey = #{code}
+		</if>
+	</select>
+	
 </mapper>

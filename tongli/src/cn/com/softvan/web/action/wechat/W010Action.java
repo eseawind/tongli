@@ -43,7 +43,7 @@ public class W010Action extends BaseAction {
 	private ITcWxInfoManager tcWxInfoManager;
 	//
 	public W010Action() {
-		log.info("默认构造器......W005Action");
+		log.info("默认构造器......W010Action");
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class W010Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String init() {
-		log.info("W005Action init.........");
+		log.info("W010Action init.........");
 		
 		return "init";
 	}
@@ -70,26 +70,24 @@ public class W010Action extends BaseAction {
 	 * @return 转发字符串
 	 */
 	public String list() {
-		log.info("W005Action edit.........");
+		log.info("W010Action list.........");
 		int offset = 0;
 		// 分页偏移量
 		if (!Validator.isNullEmpty(request.getParameter("offset"))
 				&& Validator.isNum(request.getParameter("offset"))) {
 			offset = Integer.parseInt(request.getParameter("offset"));
 		}
-		String mt=request.getParameter("mt");
-		TcWxInfoBean bean1=new TcWxInfoBean();
-		bean1.setInfo_source("1");
-		if(mt!=null){
-			bean1.setMsgtype(mt);
+		if(bean==null){
+			bean=new TcWxInfoBean();
 		}
+		bean.setInfo_source("1");
 		PageInfo page = new PageInfo(); 
 		//当前页
 		page.setCurrOffset(offset);
 		//每页显示条数
 		page.setPageRowCount(15);
-		bean1.setPageInfo(page);
-		beans=tcWxInfoManager.findDataIsPage(bean1);
+		bean.setPageInfo(page);
+		beans=tcWxInfoManager.findDataIsPage(bean);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "list";

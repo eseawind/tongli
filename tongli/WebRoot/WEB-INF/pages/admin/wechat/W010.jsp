@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-19  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 上海人保财险微信 System. - All Rights Reserved.
+ * Copyright 2014 tongli System. - All Rights Reserved.
  *
  */
 --%>
@@ -53,6 +53,9 @@
 	float: right;color: #333;
 }
 </style>
+<link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
+<script type="text/javascript" src="${basePath}/js/bootstarp-date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="${basePath}/js/bootstarp-date/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -65,33 +68,6 @@
 	<div class="page-container">
 		<!-- BEGIN SIDEBAR -->
 		<%@ include file="../include/leftMenu.jsp"%>
-		<script type="text/javascript">
-			jQuery(document).ready(function() {
-				$('#wechat,#w010_init').addClass('active');
-				$('#wechat_arrow').addClass('open');
-				$('#wechat_sub_menu').show();
-				//
-				loadUrlPage(0, 'h/w010_', 'list', 'a_div_info_list_');
-			});
-			// 分页查询
-			function loadUrlPage(offset, url, event, divId) {
-				if (url == null || url == "" || divId == null || divId == "") {
-					return;
-				}
-				//var load = "<a class='loading' >信息努力加载中...</a>";
-				//jQuery("#" + divId).html(load);
-				jQuery.ajax({
-					url : '${basePath}/' + url + event+'.ac?offset='
-							+ offset + '&time=' + new Date().getTime(),
-					success : function(req) {
-						jQuery("#" + divId).html(req);
-					},
-					error : function() {
-						jQuery("#" + divId).html("信息加载发生错误");
-					}
-				});
-			}
-		</script>
 		<!-- END SIDEBAR -->
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
@@ -108,7 +84,7 @@
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
-							href="${basePath }/home_init.ac">主页</a> <i
+							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
 						<li><a href="#">微信服务</a> <i class="fa fa-angle-right"></i></li>
 						<li>消息展示</li>
@@ -121,27 +97,43 @@
 			<div class="row">
 				<div class="col-md-12">
 				<div class="well form-inline">
+				<form id="small_info_form_list1" accept-charset="UTF-8"  action="${basePath}/h/w010_list.ac"  method="post">
+					<s:token></s:token>
+					<input type="hidden" id="offsetAA" name="offset" value="0">
 						<label>信息类型
 							<select class="upload-wrapper " name="bean.msgtype" style="width: 150px;">
-								<option>事件信息</option>
+								<option value="">全部</option>
+								<option value="text">文本类型 </option>
+								<option value="image">图片信息 </option>
+								<option value="voice">语音 </option>
+								<option value="video">视频 </option>
+								<option value="music">音乐 </option>
+								<option value="news">图文 </option>
+								<option value="location">地理位置 </option>
+								<option value="link">链接  </option>
+								<option value="event">事件推送</option>
 							</select>
 						</label>
 						&nbsp; 
 						<label>关键字 
 							<input class="upload-wrapper" id="message_keyword" name="bean.keyword" size="20" value="" placeholder="关键字" title="关键字" type="text">
 						</label>
-						&nbsp; 
+						<!-- &nbsp; 
 						<label>粉丝昵称
-							<input class="upload-wrapper" id="message_keyword" name="bean.keyword" size="20" value="" placeholder="粉丝昵称" title="粉丝昵称" type="text">
+							<input class="upload-wrapper" id="message_nickname" name="bean.nickname" size="20" value="" placeholder="粉丝昵称" title="粉丝昵称" type="text">
+						</label> -->
+						&nbsp; 
+						<label>开始时间
+							<input class="upload-wrapper date form_date1" id="message_date1" name="bean.date1" size="20" value="" placeholder="接收时间段(开始)" readonly="readonly" title="接收时间" type="text">
 						</label>
 						&nbsp; 
-						<label>接收时间
-							<input class="upload-wrapper" id="message_keyword" name="bean.keyword" size="20" value="" placeholder="接收时间" title="接收时间" type="text">
+						<label>结束时间
+							<input class="upload-wrapper date form_date2" id="message_date2" name="bean.date2" size="20" value="" placeholder="接收时间段(结束)" readonly="readonly" title="接收时间" type="text">
 						</label>
 						&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-						<label>
-						<input class="btn default" name="commit" type="submit" value="检索">
-						</label>
+						<a onclick="submitFrom1(0,'small_info_form_list1');" class="reload btn btn-primary">检索</a>
+					    <button type="reset" class="reload btn blue">重置</button>
+					</form>
 				</div>
 				<div id="a_div_info_list_"  class="col-md-12" >
 					
@@ -156,7 +148,51 @@
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<!-- END FOOTER -->
-
+	<script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 </body>
 <!-- END BODY -->
 </html>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		$('#wechat,#w010_init').addClass('active');
+		$('#wechat_arrow').addClass('open');
+		$('#wechat_sub_menu').show();
+		//
+		submitFrom1(0,'small_info_form_list1');
+		
+		$('.form_date1').datetimepicker({
+		    language:  'zh-CN',
+			format: "yyyy-mm-dd HH:ii:00",
+		    weekStart: 1,
+		    todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 0,
+			maxView: 3,
+			pickerPosition:"bottom-left"
+		});
+		$('.form_date2').datetimepicker({
+		    language:  'zh-CN',
+			format: "yyyy-mm-dd HH:ii:00",
+		    weekStart: 1,
+		    todayBtn:  1,
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 0,
+			maxView: 3,
+			pickerPosition:"bottom-left"
+		});
+		/* function loadUrlPage(offset, url, event) {
+			location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
+		} */
+	});
+	//提交from
+	function submitFrom1(offset,from_id) {
+		$('#offsetAA').val(offset);
+		$("#"+from_id).ajaxSubmit(function(data) {
+			$('#a_div_info_list_').html(data);
+		});
+	}
+</script>

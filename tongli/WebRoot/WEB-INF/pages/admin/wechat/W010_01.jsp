@@ -6,7 +6,7 @@
  * -------- ----------- ------------ ------------------------------------------
  * 1.00     2014-03-19  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
- * Copyright 2014 上海人保财险微信 System. - All Rights Reserved.
+ * Copyright 2014 车主管家 System. - All Rights Reserved.
  *
  */
 --%>
@@ -29,7 +29,7 @@ event:事件推送 --%>
 <ul class="timeline">
 <c:forEach items="${beans}" var="bean" varStatus="i">
 	<li class="timeline-blue">
-		<div class="timeline-icon"><img onerror="this.src='${basePath}/images/getheadimg.jpg'" 
+		<div class="timeline-icon"><img
 		<c:choose>
 			<c:when test="${bean.headimgurl!=null && bean.headimgurl!=''}">
 				src="${bean.headimgurl}"
@@ -38,7 +38,12 @@ event:事件推送 --%>
 			src="${basePath}/images/getheadimg.jpg"
 			</c:otherwise>
 		</c:choose>
-		 style="width: 40px;height: 40px;box-shadow: 0px 0px 0px 8px #CCC;border-radius: 30px !important;" class="avatar img-circle"></i></div>
+		title="${bean.nickname}"
+		 style="width: 40px;height: 40px;box-shadow: 0px 0px 0px 8px #CCC;border-radius: 30px !important;"
+		  onerror="this.src='${basePath}/images/getheadimg.jpg'" 
+		  class="avatar img-circle"/>
+		 </i>
+		 </div>
 		<div class=" timeline-body">
 			<p class="userInfo">
 				<span class="name">${bean.nickname}</span>
@@ -119,6 +124,6 @@ event:事件推送 --%>
 	</li>
 	</c:forEach>
 	<li> 
-	<customtag:pagingext func="loadUrlPage" params="'h/w010_', 'list', 'a_div_info_list_'" />
+	<customtag:pagingext func="submitFrom1" params="'small_info_form_list1'" />
 	</li>
 </ul>

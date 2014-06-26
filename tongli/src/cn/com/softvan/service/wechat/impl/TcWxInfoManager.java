@@ -281,6 +281,10 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 				dto.setSort_num(bean.getSort_num());
 				dto.setNote(bean.getNote());
 				dto.setConsult_flag(bean.getConsult_flag());//
+
+				dto.setDate1(bean.getDate1());//
+				dto.setDate2(bean.getDate2());//
+				
 				dto.setPageInfo(bean.getPageInfo());
     	   }
 			beans=tcWxInfoDao.findDataIsPage(dto);
@@ -405,13 +409,13 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	 */
 	private void setMsgCacheSubscribeXDefault(TcWxInfoBean bean){
 			try{
-				String keyword=(String) getJedisHelper().get("key_flag_uuid_"+bean.getId());
+				String keyword=(String) jedisHelper.get("key_flag_uuid_"+bean.getId());
 				if(Validator.notEmpty(keyword)){
 					String[] keys=keyword.split(" ");
 					for(String s:keys){
 						if(Validator.notEmpty(s)){
 							//删除关键字对象的数据id
-							getJedisHelper().del("key_flag_"+s);
+							jedisHelper.del("key_flag_"+s);
 						}
 					}
 				}
@@ -419,19 +423,19 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 			}
 			try {
 				//首次关注回复信息
-				String u1=(String) getJedisHelper().get("key_flag_subscribe");
+				String u1=(String) jedisHelper.get("key_flag_subscribe");
 				if(bean.getId().equals(u1)
 						&&!"1".equals(bean.getSubscribe_flag())){
-					getJedisHelper().del("key_flag_subscribe");
+					jedisHelper.del("key_flag_subscribe");
 				}
 			} catch (Exception e) {
 			}
 			try {
 				//默认回复信息
-				String u2=(String) getJedisHelper().get("key_flag_default");
+				String u2=(String) jedisHelper.get("key_flag_default");
 				if(bean.getId().equals(u2)
 						&&!"1".equals(bean.getDefault_flag())){
-					getJedisHelper().del("key_flag_default");
+					jedisHelper.del("key_flag_default");
 				}
 			} catch (Exception e) {
 			}
@@ -771,8 +775,6 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 	}
 	/**
 	 * 根据openID获取用户经纬度
-	 * 距离当前时间1小时之类
-	 * 
 	 * @throws Exception 
 	 */
 	public TcWxInfoBean queryLocation(TcWxInfoBean bean) throws Exception {
@@ -788,9 +790,7 @@ public class TcWxInfoManager extends BaseManager implements ITcWxInfoManager {
 					return tcWxInfoBean;
 				}
 			}
-			
 		}
-		
 		return null;
 	}
 }
