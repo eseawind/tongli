@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" session="false"%><div class="navBar">
+	pageEncoding="utf-8" session="false"%>
 <div class="body fl" style="width: 197px;">
 	<div class="title">
 		<a href="${basePath}/c203_init.ac" class="ico_recommend">在线报名</a>

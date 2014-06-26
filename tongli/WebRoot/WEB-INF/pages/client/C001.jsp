@@ -31,24 +31,28 @@
 <%@ include file="include/slider.jsp"%>
 
 <div class="main">
-<div class="c10"></div>
 <div class="w">
-				<div class="more_info"><div class="w980"><a href="${basePath}/c002_init.ac?tid=3f2b286347174e728d39169c212fe56b&pid=3f2b286347174e728d39169c212fe56b">更多资讯</a></div></div>
-                <ul class="card">
-                <c:forEach items="${beans}" var="bean" varStatus="i">
-					<li>
-						<a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b"> 
-							<img  onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';"  src="${bean.pic_url}" 
-								width="300" height="170" title="${bean.title}" />
-								<h5>${bean.title}</h5>
-								<p>${bean.brief_info}..</p>
-								<div class="tips">
-								 <span class="r">${bean.date_created}</span>
-								 </div>
-						</a>
-					</li>
-				</c:forEach>
-                </ul>
+<div class="more_info">
+<div style="width: 89%;border-top: 1px dotted #333;float: left;margin-top: 18px;margin-left: 15px;filter: Alpha(opacity=30);-moz-opacity:.30;opacity:0.30;"></div>
+<div style="float:right;margin-right: 10px;">
+<a href="${basePath}/c002_init.ac?tid=3f2b286347174e728d39169c212fe56b&pid=3f2b286347174e728d39169c212fe56b">更多资讯</a></div></div>
+   <ul class="card">
+	   <c:forEach items="${beans}" var="bean" varStatus="i">
+	   	<c:if test="${i.index<3}">
+		<li>
+			<a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b"> 
+				<img  onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';"  src="${bean.pic_url}" 
+					width="300" height="170" title="${bean.title}" />
+					<h5>${bean.title}</h5>
+					<%-- <p>${bean.brief_info}..</p>
+					<div class="tips">
+					 <span class="r">${bean.date_created}</span>
+					 </div> --%>
+			</a>
+		</li>
+		</c:if>
+	</c:forEach>
+  </ul>
 
 </div>
 <div class="c10"></div>

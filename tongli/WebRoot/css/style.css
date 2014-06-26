@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
-.main{ background:#FFF; display:block; clear:both;}
-.w{width: 980px; display:block; clear:both; margin: 0 auto;}
+.main{ background:#FFF;width: 980px;}
+.w{width: 980px;margin: 0 auto;}
 
 /*头部*/
 #top{
@@ -20,23 +20,18 @@
 #menu_bar .back{
 	float: right;
 }
-
-a {outline: 0;text-decoration:none;}
-a:active {star:expression(this.onFocus=this.blur());}
-a,input,button{ outline:none; }
-button::-moz-focus-inner{border:0px;}
-input::-moz-focus-inner{border:0px;}
 .autowrap{word-wrap: break-word; word-break:break-all}
 
-.w1000 {width: 1200px;margin: 0 auto;clear:both;}
-.w980 {width:950px;margin: 0 auto;clear:both;}
+.w1000 {width: 1300px;margin: 0 auto;clear:both;}
+.w980 {width:980px;margin: 0 auto;clear:both;}
+.w950 {width:950px;margin: 0 auto;clear:both;}
 .maLeft10{margin-left: 10px;}
 /*菜单 begin*/
 .header_1{}
 .header_1 .nav_top{ height:60px;}
-.header_1 .nav_box{ height:40px; background:url(images/navbg.png) no-repeat; position:relative;}
+.header_1 .nav_box{ height:40px; background:url(images/navbg.png) no-repeat center; position:relative;}
 .logo{ width:173px; height:65px; float:left; background: url(images/logo.jpg) no-repeat; position:absolute; left:160px; top:-30px;}
-.nav_body{ width:750px; height:40px;float: right;}
+.nav_body{ width:850px; height:40px;float: right;}
 .nav_body li{ height:24px;float:left;font-family:"微软雅黑"; font-size:14px; position:relative; padding:2px 15px; text-indent:0.4em;}
 .nav_body li a,.nav_body li a:visited{ color:#fff; display:block;}
 .nav_body li a:hover,.nav_body li:hover a{color:#5CBFC2;text-decoration:none; }
@@ -65,12 +60,11 @@ input::-moz-focus-inner{border:0px;}
 .v_title{ height:50px; background:url(images/arr_sort.png) 120px 10px no-repeat; padding-left:20px;}
 
 /*滚动图片*/
-.slider{ clear:both; display:block;margin:10px auto;background-color: #f9f9f9; }
+.slider{ margin:10px auto;background-color: #f9f9f9;width: 980px;height: 375px; }
 /* 首页资讯列表 begin */
 .l{float:left;}
 .r{float:right;}
 ul.card  { 
-  padding-top:20px;
   list-style:none;
   font-family:"微软雅黑";
   overflow:hidden;
@@ -176,12 +170,12 @@ input[type="radio"]{position: relative; top:-2px;}
 
 .home_news{}
 .home_news li{ height:24px; line-height:24px; position:relative;}
-.home_news li em{ width:80px; position:absolute; right:0px; text-align:right; color:#999;}
+.home_news li em{ width:180px; position:absolute; right:0px; text-align:right; color:#999;}
 
 /* login panel */
 .login_box{ width:340px; margin-top:50px;}
-.login_box .login_header{ height:32px;border-bottom:4px solid #01a550;}
-.login_box .login_header .login_title{ padding:0 20px; text-align:center; float:left; height:32px; line-height:32px; font-size:18px;font-family:"微软雅黑"; color:#FFF;background:#01a550;}
+.login_box .login_header{ height:32px;border-bottom:4px solid #5CBFC2;}
+.login_box .login_header .login_title{ padding:0 20px; text-align:center; float:left; height:32px; line-height:32px; font-size:18px;font-family:"微软雅黑"; color:#FFF;background:#5CBFC2;}
 .login_box .login_body{ background:#FFF; border:1px solid #CCC; border-top:0; padding:30px; background:#f9f9f9;}
 .login_box .login_row{ height:40px; clear:both; display:block;}
 .login_box .login_lable{ width:60px; height:30px; font-size:14px; color:#666; line-height:30px; float:left;}
@@ -233,11 +227,14 @@ vertical-align: baseline;line-height: 38px;outline:0;background: url(images/spri
 
 
 /* footer */
-.footer{ height:70px; line-height:60px; color:#999; text-align:center;width: 980px;margin: 0 auto;}
+/* .footer{ height:70px; line-height:60px; color:#999; text-align:center;width: 980px;margin: 0 auto;} */
+/* footer */
+.footer{ height:40px; line-height:40px; color:#999; text-align:center; clear:both; border-bottom:1px solid #cedc8d;padding: 0px; margin-bottom: 20px;}
+.footer_line{ height:42px;border:1px solid #cedc8d;border-bottom:0;background:#fff;}
 
-.focusBox { position: relative; height:270px; overflow: hidden;width:980px; margin:0 auto }
+.focusBox { position: relative; height:375px; overflow: hidden;width:947px; margin:0 auto }
 .focusBox .pic{ position:relative; z-index:0; }
-.focusBox .pic img { width:980px; height:270px; display: block; }
+.focusBox .pic img { width:947px; height:375px; display: block; }
 .focusBox .hd { width:100%; position: absolute; bottom: 10px; text-align: center; font-size:0; z-index:1; }
 .focusBox .hd li{margin: 0 5px; background: url(../images/dot.png) no-repeat 0 -16px; height: 16px; overflow: hidden; width: 16px; cursor: pointer;
 	display:inline-block; *display:inline; zoom:1;  _background: url(../images/dot8.png) no-repeat 0 -16px;
@@ -245,7 +242,7 @@ vertical-align: baseline;line-height: 38px;outline:0;background: url(images/spri
 .focusBox .hd .on{ background-position:0 0; }
 
 .focusBox .prev,
-.focusBox .next { width: 60px; height: 90px; margin: -60px 0 0; display: none; background: url(../images/ad_ctr.png) no-repeat 0 0; position: absolute; top: 50%; z-index: 10; cursor: pointer; text-indent: -9999px; filter:alpha(opacity=20);opacity:0.2;  }
+.focusBox .next { width: 60px; height: 90px; margin: -60px 0 0; display: none; background: url(images/ad_ctr.png) no-repeat 0 0; position: absolute; top: 50%; z-index: 10; cursor: pointer; text-indent: -9999px; filter:alpha(opacity=20);opacity:0.2;  }
 .focusBox .prev { left: 0; }
 .focusBox .next { background-position: 0 -90px; right: 0; }
 .focusBox .prev:hover,

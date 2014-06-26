@@ -48,7 +48,7 @@
 								<li>
 									<div class="tit">参观课程：</div>
 									<div class="con">
-										<select name="bean.course" class="input" style="border:1px solid #ddd;">
+										<select name="bean.course" class="" style="border:1px solid #ddd;">
 										<c:forEach items="${course_beans}" var="course_bean">
 											<option value="${course_bean.title}">${course_bean.title}</option>
 										</c:forEach>
@@ -112,7 +112,7 @@
 
 							<div class="c10"></div>
 							<div  style="margin-left: 100px;">
-							<input class="reg_submit" style="width: 80px;" type="submit" value="提 交" />
+							<button type="submit" class="btn btn-info" style="margin-left: 40px;" >登 录</button>
 							</div>
 							<div class="c10"></div>
 						</form>

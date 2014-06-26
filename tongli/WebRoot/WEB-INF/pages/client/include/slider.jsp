@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" session="false"%><div class="navBar">
+	pageEncoding="utf-8" session="false"%>
 	<div class="slider" id="scrollDiv_keleyi_com">
 		
 			
