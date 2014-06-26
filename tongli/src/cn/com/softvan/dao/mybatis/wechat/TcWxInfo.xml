@@ -334,7 +334,7 @@
 		</if>
     	and t.del_flag='0'
     	and t.info_source=#{info_source}
-    	<if test="msgtype!=null">
+    	<if test="msgtype!=null and msgtype!=''">
     	and t.msgtype=#{msgtype}
     	</if>
     	<if test="note=='notNews'">
