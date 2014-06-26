@@ -23,7 +23,7 @@
 </style>
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <c:forEach items="${beans}" var="bean" varStatus="i">
-	<div class="item_li item_li_1">${i.index+1}.<font color="#333">${bean.day}&nbsp;${bean.begin_time}</font>  ${bean.title}</div>
+	<div class="item_li item_li_1"><span class="badge badge-success">${i.index+1}</span><font color="#333">${bean.day}&nbsp;${bean.begin_time}</font>  ${bean.title}</div>
 	<div class="item_con item_con_1">
 	<div class="grade">
 		<table  class="table table-striped table-condensed" >
