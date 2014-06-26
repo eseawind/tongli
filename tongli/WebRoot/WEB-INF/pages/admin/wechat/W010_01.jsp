@@ -54,7 +54,7 @@ event:事件推送 --%>
 					${bean.content}
 				</c:if>
 				<c:if test="${bean.msgtype=='image'}">
-					<a href="${basePath}/${bean.picurl}" target="_blank"><img  onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';"  src="${basePath}/${bean.picurl}" style="height: 100px;"></a>
+					<a href="${basePath}/${bean.picurl}" target="_blank"><img  src="${basePath}/${bean.picurl}" style="height: 100px;"  onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';" ></a>
 				</c:if>
 				<c:if test="${bean.msgtype=='voice'}">
 					${bean.url}
