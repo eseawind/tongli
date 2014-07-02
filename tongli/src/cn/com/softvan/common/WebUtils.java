@@ -2,6 +2,7 @@ package cn.com.softvan.common;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -18,10 +19,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.apache.struts2.ServletActionContext;
 
 public class WebUtils {
 	private static final transient Logger log = Logger.getLogger(WebUtils.class);
@@ -469,7 +472,25 @@ public class WebUtils {
         }
 
     }
-
+    /**
+     * 简单的代码为文件设置版本号，这个版本号其实就是最后修改的日期
+     * @param filePath
+     * @return
+     */
+    public static String setVersion(String filePath){
+    	String verFilePath = filePath;
+    	try {
+			ServletRequest request=ServletActionContext.getRequest();
+			String serverPath =request.getServletContext().getRealPath("/")+(filePath);
+			File file=new File(serverPath);
+			if (file.exists()){
+			    verFilePath = verFilePath+"?v="+file.lastModified();
+			}
+		} catch (Exception e) {
+			log.error("css,js文件添加版本号 系统处理失败!",e);
+		}
+        return verFilePath;
+    }
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         // Map log = new Hashtable();
         // log.put("ID", WebUtils.generateUuidHex());
@@ -481,6 +502,8 @@ public class WebUtils {
         // log.info("unserialize:"+(Map)unserialize(text, "UTF-8"));
 
 //        log.info(WebUtils.formatString("fdafda", 2, "..."));
-    	System.out.println(getFileExt("http://xx.jpg?xx=2?"));
+//    	System.out.println(getFileExt("http://xx.jpg?xx=2?"));
+    	
+    	System.out.println();
     }
 }
