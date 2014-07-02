@@ -278,9 +278,9 @@
 		});
 		$('.msg-edit').find('#title').blur(function(){
 			var data_rid=$('.msg-edit').find('.rid').val();
-			if($(this).val()){
+			//if($(this).val()){
 				$('#'+data_rid).find('.title').html($(this).val());
-			}
+			//}
 			$('#'+data_rid).find('#title').val($(this).val());
 			//myAlert(data_rid);
 		});

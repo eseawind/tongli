@@ -17,5 +17,9 @@
 			<result name="init">/WEB-INF/pages/client/C003.jsp</result>
 			<result name="list1">/WEB-INF/pages/client/C003_01.jsp</result>
 		</action>
+		<!-- 前台菜单 -->
+		<action name="menu" class="menuAction" method="init">
+			<result name="init">/WEB-INF/pages/client/MenuSub.jsp</result>
+		</action>
 	</package>
 </struts>

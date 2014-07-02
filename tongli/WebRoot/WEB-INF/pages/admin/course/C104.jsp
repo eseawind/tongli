@@ -112,7 +112,11 @@
 								<input name="bean.date2" class="upload-wrapper date form_date2" value=""   readonly="readonly" placeholder="时间段" 
 								 type="text">
 								 </label>
-								 <br>
+								  <br>
+								   <label>
+								<input name="bean.type" value="0"  
+								 type="radio"> 全部报名
+								 </label>
 								 <label>
 								<input name="bean.type" value="0"  
 								 type="radio">培训班
@@ -121,7 +125,11 @@
 								<input name="bean.type"  value="1" 
 								 type="radio">冬夏令营
 								 </label>
-								  <wbr>
+								  <br>
+								  <label>
+							<input name="bean.status" value=""
+							 type="radio">
+							 全部状态</label>
 								  <label>
 							<input name="bean.status" value="0"
 							 type="radio">

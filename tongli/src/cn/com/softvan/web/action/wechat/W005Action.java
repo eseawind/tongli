@@ -130,8 +130,8 @@ public class W005Action extends BaseAction {
 		if(bean!=null){
 			String msg="1";
 			try {
-				if(Validator.isNullEmpty(bean.getTitle())
-					|| Validator.isNullEmpty(bean.getMusicurl())){
+				if(Validator.isEmpty(bean.getTitle())
+					|| Validator.isEmpty(bean.getMusicurl())){
 					msg="保存失败!信息为空!";
 				}else{
 					List<TcWxInfoBean> beans=new ArrayList<TcWxInfoBean>();

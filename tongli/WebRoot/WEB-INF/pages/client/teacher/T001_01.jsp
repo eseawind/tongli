@@ -231,9 +231,7 @@
 					<div class="panel panel-success">
 						<div class="panel-body">
 							<ul>
-								<li>The maximum file size for uploads in this  is <strong>5 MB</strong> (default file size is unlimited).</li>
-								<li>Only image files (<strong>JPG, GIF, PNG</strong>) are allowed in this demo (by default there is no file type restriction).</li>
-								<li>Uploaded files will be deleted automatically after <strong>5 minutes</strong> ( setting).</li>
+								<li></li>
 							</ul>
 						</div>
 					</div>

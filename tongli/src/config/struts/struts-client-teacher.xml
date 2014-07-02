@@ -4,9 +4,10 @@
     "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
     <package name="client_teacher_info" extends="wechat-default" >
-   		<default-interceptor-ref name="teacher-auth" /> 
 		<!-- 教师首页 -->
 		<action name="t001_*" class="t001Action" method="{1}">
+			<interceptor-ref name="teacher-auth" /> 
+			<interceptor-ref name="wechat-xss" />
 			<result name="init">/WEB-INF/pages/client/teacher/T001.jsp</result>
 			<result name="list1">/WEB-INF/pages/client/teacher/T001_01.jsp</result>
 			<result name="list2">/WEB-INF/pages/client/teacher/T001_02.jsp</result>

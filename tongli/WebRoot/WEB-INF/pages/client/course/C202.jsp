@@ -67,8 +67,10 @@
 								<li>
 									<div class="tit">参观场馆：</div>
 									<div class="con">
-										<input name="bean.addres" type="text" class="input"> <em>*
-												你要参观的场馆</em>
+									<select name="bean.addres" class="" style="border:1px solid #ddd;">
+									<option value="绿城总部(浦东锦和路99弄)">绿城总部(浦东锦和路99弄)</option>
+									</select>
+									<em>*你要参观的场馆</em>
 									</div>
 								</li>
 								<li>
@@ -112,7 +114,7 @@
 
 							<div class="c10"></div>
 							<div  style="margin-left: 100px;">
-							<button type="submit" class="btn btn-info" style="margin-left: 40px;" >登 录</button>
+							<button type="submit" class="btn btn-info" style="margin-left: 40px;" >提  交</button>
 							</div>
 							<div class="c10"></div>
 						</form>

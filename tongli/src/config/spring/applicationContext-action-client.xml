@@ -11,6 +11,10 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 	<!-- ************************ACTION类************************************* -->
+	<!-- ==菜单== -->
+	<bean id="menuAction" class="cn.com.softvan.web.action.client.MenuAction" parent="baseAction" scope="prototype">
+		<property name="newsTypeManager" ref="newsTypeManager"></property>
+	</bean>
 	<!-- ==前台首页== -->
 	<bean id="c001Action" class="cn.com.softvan.web.action.client.C001Action" parent="baseAction" scope="prototype">
 		<property name="newsManager" ref="newsManager"></property>

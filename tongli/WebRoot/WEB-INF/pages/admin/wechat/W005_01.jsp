@@ -117,7 +117,7 @@
 										<c:when test="${bean!=null}">
 											<li id="data_rid_0" data-img-version="circle.header" class="article pos-rel cover">
 												<div class="msg-date">${bean.last_updated}</div>
-												<input class="title" name="bean.title" value="${bean.title }" type="hidden">
+												<input class="titleX" name="bean.title" value="${bean.title }" type="hidden">
 												<input class="pic-url" id="picurl" name="bean.picurl" value="${bean.picurl }" type="hidden">
 												<input class="description" id="description" name="bean.description" value="${bean.description}" type="hidden">
 												<input class="musicurl" id="musicurl" name="bean.musicurl" value="${bean.musicurl}" type="hidden">
@@ -132,7 +132,7 @@
 										<c:otherwise>
 											<li id="data_rid_0" data-img-version="circle.header" class="article pos-rel cover">
 												<div class="msg-date">${date}</div> 
-												<input class="title" id="title" name="bean.title" type="hidden">
+												<input class="titleX" id="title" name="bean.title" type="hidden">
 												<input class="description" id="description" name="bean.description" type="hidden">
 												<input class="musicurl" id="musicurl" name="bean.musicurl" type="hidden">
 												<input class="hqmusicurl" id="hqmusicurl" name="bean.hqmusicurl" type="hidden">
@@ -242,10 +242,10 @@
 		});
 		$('.msg-edit').find('#title').blur(function(){
 			var data_rid=$('.msg-edit').find('.rid').val();
-			if($(this).val()){
+			//if($(this).val()){
 				$('#'+data_rid).find('.title').html($(this).val());
-			}
-			$('#'+data_rid).find('#title').val($(this).val());
+			//}
+			$('#'+data_rid).find('.titleX').val($(this).val());
 			//myAlert(data_rid);
 		});
 		$('.msg-edit').find('#description').blur(function(){

@@ -113,7 +113,7 @@ request.setAttribute("basePath", basePath);
 	<!-- END LOGIN -->
 	<!-- BEGIN COPYRIGHT -->
 	<div class="copyright">
-		Copyright 2014 car steward System. - All Rights Reserved.
+		Copyright 2014 car 童励儿童俱乐部 System. - All Rights Reserved.
 	</div>
 	<!-- END COPYRIGHT -->
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->

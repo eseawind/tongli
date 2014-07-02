@@ -32,19 +32,7 @@
 					opacity : 1
 				}, 500);
 			})
-			/* //nav menu
-			$("#navmenu ul li").hover(function() {
-				$(this).children("a").css({color:"#3e7900"});
-				$(this).children(".subMenu").stop(true, true).slideDown(200);
-				$("#mask").slideDown(60);
-				return false;
-			},function() {
-				$(this).children("a").css({color:"#333"});
-				$(this).children(".subMenu").stop(true, true).slideUp(200);
-				$("#mask").slideUp(10);
-				 return false;
-				}); */
-			//----菜单选中
+			//----菜单选中-----
 			try{
 				var url=location.href;
 				var array=url.split('pid=');
@@ -53,9 +41,22 @@
 					$('.'+array[1]).addClass('on');
 				}
 			}catch(e){}
+			//-关于我们
+			loadMenuSub('966a13c753f34faa927510c610b5e0b6');
+			//-童励课程
+			loadMenuSub('6690aceda07a405a9428e6e02ba2d416');
+			//-东夏令营
+			loadMenuSub('26f1017792024a358c73639b08e74393');
+			 //nav menu
+			$("#navmenu > li").hover(function() {
+				$(this).children(".subMenu").stop(true, true).slideDown(200);
+				return false;
+			},function() {
+				$(this).children(".subMenu").stop(true, true).slideUp(200);
+				 return false;
+			});
 		});
-</script>
-<script>
+		//------------------------------------------------------------
 		getBlockUI();
 		jQuery(document).ready(function() {    
 		   $.unblockUI();
@@ -96,5 +97,21 @@
 	           }
 		    });
 			setTimeout($.unblockUI, 500);
+		}
+		//------------子菜单-----------------------------------------
+		function loadMenuSub(pid) {
+			jQuery.ajax({
+				url : '${basePath}/menu.ac?pid='+pid,
+				success : function(req) {
+					try{
+						$("."+pid).find('.subMenu').html(req);
+					}catch(e){
+						
+					}
+				},
+				error : function() {
+					//--异常--
+				}
+			});
 		}
 </script>

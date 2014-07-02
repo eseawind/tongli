@@ -52,12 +52,12 @@ public class XssInterceptor  extends AbstractInterceptor{
 					if (paramValues.length == 1) { // 参数只有一个值，绝大多数情况
 						//TODO XSS 字符过滤
 						paramValues[0]=StrUtil.xssEncode(paramValues[0]);
-						System.out.println("------"+paramValues[0]);
+//						System.out.println("------"+paramValues[0]);
 					} else {
 						for (String paramValue : paramValues) {
 							//TODO XSS 字符过滤
 							paramValue=StrUtil.xssEncode(paramValue);
-							System.out.println("------"+paramValue);
+//							System.out.println("------"+paramValue);
 						}
 					}
 				}

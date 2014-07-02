@@ -40,7 +40,7 @@
 .nav_body li.on a{ color:#5CBFC2;}
 .nav_body li:hover #navmenu .subMenu{display:block;}
 #navmenu{ position:relative;z-index:999999;}
-#navmenu .subMenu{background:#5CBFC2;position: absolute;top:26px;display:none;left:10px; padding:2px; z-index:9999;filter: Alpha(opacity=95);-moz-opacity:.95;opacity:0.95;}
+#navmenu .subMenu{min-width:95px;background:#5CBFC2;position: absolute;top:26px;display:none;left:10px; padding:2px; z-index:9999;filter: Alpha(opacity=95);-moz-opacity:.95;opacity:0.95;}
 #navmenu .subMenu a{font-size:12px;color:#fff; float:left; margin:5px; padding:4px 6px 4px 2px;}
 #navmenu .subMenu a:hover{color:#5CBFC2; background:#FFF; font-weight:bold;text-decoration:none;}
 /*菜单 end*/
@@ -206,7 +206,7 @@ vertical-align: baseline;line-height: 38px;outline:0;background: url(images/spri
 .user_info li{height:40px; border-bottom:1px solid #eee;}
 .user_info .tit,.user_info li .con{ width:100px; height:40px; line-height:40px; float:left; font-size:14px;}
 .user_info li .con{ width:400px; font-size:12px;}.user_info li .con em{color:#aaa;}
-.user_info li .con .input{ width:200px; height:30px;}
+.user_info li .con .input{ width:200px; height:30px;line-height:30px;}
 
 /* web_enroll_info */
 .web_enroll_info{ width:960px;}

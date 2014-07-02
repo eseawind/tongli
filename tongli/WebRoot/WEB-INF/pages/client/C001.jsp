@@ -42,9 +42,9 @@
 		<li>
 			<a href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b"> 
 				<img  onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';"  src="${bean.pic_url}" 
-					width="300" height="170" title="${bean.title}" />
-					<h5>${bean.title}</h5>
-					<%-- <p>${bean.brief_info}..</p>
+					width="300" height="170" />
+					<%--<h5>${bean.title}</h5>
+					 <p>${bean.brief_info}..</p>
 					<div class="tips">
 					 <span class="r">${bean.date_created}</span>
 					 </div> --%>

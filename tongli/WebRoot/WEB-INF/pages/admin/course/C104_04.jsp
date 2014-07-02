@@ -21,8 +21,8 @@
 	<tr>
 		<th class="col-md-3">姓名</th>
 		<th class="col-md-1">性别</th>
-		<th class="col-md-2"></th>
-		<th class="col-md-2"></th>
+		<th class="col-md-2">报名</th>
+		<th class="col-md-2">状态</th>
 		<th class="col-md-3"></th>
 	</tr>
 	<c:forEach items="${beans}" var="bean">

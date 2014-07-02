@@ -364,12 +364,12 @@ public class StrUtil {
 			case '#':
 				sb.append("＃");// 转义＃
 				break;
-//			case '(':
-//				sb.append("（");// 转义小括号（
-//				break;
-//			case ')':
-//				sb.append("）");// 转义小括号）
-//				break;
+			case '(':
+				sb.append("（");// 转义小括号（
+				break;
+			case ')':
+				sb.append("）");// 转义小括号）
+				break;
 			default:
 				sb.append(c);
 				break;

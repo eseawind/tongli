@@ -36,6 +36,8 @@ public class TcCommentBean extends BaseBean {
 	private String info_id;
 	/** 评论内容 */
 	private String detail_info;
+	/** 评论人名称 */
+	private String user_name;
 	/**
 	 * id取得
 	 * @return id
@@ -105,6 +107,20 @@ public class TcCommentBean extends BaseBean {
 	 */
 	public void setDetail_info(String detail_info) {
 	    this.detail_info = detail_info;
+	}
+	/**
+	 * 评论人名称取得
+	 * @return 评论人名称
+	 */
+	public String getUser_name() {
+	    return user_name;
+	}
+	/**
+	 * 评论人名称设定
+	 * @param user_name 评论人名称
+	 */
+	public void setUser_name(String user_name) {
+	    this.user_name = user_name;
 	}
 
 }

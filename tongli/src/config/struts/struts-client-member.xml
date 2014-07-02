@@ -4,9 +4,10 @@
     "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
     <package name="client_member_info" extends="wechat-default" >
-    	<default-interceptor-ref name="member-auth" /> 
 		<!-- 会员首页 -->
 		<action name="m201_*" class="m201Action" method="{1}">
+			<interceptor-ref name="member-auth" /> 
+			<interceptor-ref name="wechat-xss" />
 			<result name="init">/WEB-INF/pages/client/member/M201.jsp</result>
 			<result name="list1">/WEB-INF/pages/client/member/M201_01.jsp</result>
 			<result name="list2">/WEB-INF/pages/client/member/M201_02.jsp</result>

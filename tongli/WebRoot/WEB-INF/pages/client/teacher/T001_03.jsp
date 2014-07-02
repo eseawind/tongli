@@ -23,7 +23,12 @@
 			<a href="#" class="pull-left">
 			</a>
 			<div class="media-body">
-				<h4 class="media-heading alert-warning"><label style="color: #777;font-size: 12px;">${bean.create_id}</label><span>${bean.date_created} </span></h4>
+				<h4 class="media-heading alert-warning"><label style="color: #777;font-size: 12px;">
+				<c:choose>
+					<c:when test="${bean.user_name!=null && fn:length(bean.user_name)>0}">${bean.user_name}</c:when>
+					<c:otherwise>匿名</c:otherwise>
+				</c:choose>
+				</label><span>${bean.date_created} </span></h4>
 				<p class="alert alert-success alert-dismissable">${bean.detail_info} </p>
 			</div>
 		</div>

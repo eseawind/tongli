@@ -77,7 +77,9 @@
      <select id="findDataIsPage" parameterType="tcComment" resultType="tcCommentBean">
     	 select 
 			<include refid="Base_Column_List"/>
+			,t2.name as user_name
 		 from tc_comment t1
+		 left join tc_member t2 on (t1.create_id=t2.user_id)
 		 where t1.info_id=#{info_id}
 		 <choose>
 	    	<when test="del_flag!=null">

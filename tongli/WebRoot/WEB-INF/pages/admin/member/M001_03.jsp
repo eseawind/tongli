@@ -104,8 +104,8 @@
 										<td><a href="javascript:void(0)"   class="btn purple" 
 											onclick="if(confirm('确认恢复吗?')){location.href='${basePath}/h/m001_recovery.ac?id=${bean.id}'};"
 											rel="nofollow">恢复</a>
-											<a href="javascript:void(0)" class="btn btn-danger"
-										onclick="if(confirm('确认删除吗?删除后不可恢复!')){location.href='${basePath}/h/m001_delxx.ac?id=${bean.id}'};">删除</a>
+											<%-- <a href="javascript:void(0)" class="btn btn-danger"
+										onclick="if(confirm('确认删除吗?删除后不可恢复!')){location.href='${basePath}/h/m001_delxx.ac?id=${bean.id}'};">删除</a> --%>
 											</td>
 									</tr>
 									</c:forEach>
