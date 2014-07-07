@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" session="false"%><div class="navBar">
-	<div class="body fr" style="width: 197px;">
+	pageEncoding="utf-8" session="false"%>
+	<div class="body" style="width: 197px;">
 		<div class="content" style="height: 197px;">
 			<img src="images/erweima.jpg" width="177" height="177">
 		</div>

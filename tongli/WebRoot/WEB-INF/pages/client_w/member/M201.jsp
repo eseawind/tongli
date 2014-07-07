@@ -26,22 +26,20 @@
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" href="${basePath}/w/css/blueimp-gallery.min.css">
 <%-- <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/dropzone/css/dropzone.css" rel="stylesheet"/> --%>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/pages/blog.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/pages/news.css" rel="stylesheet" type="text/css"/>
-
+<link rel="stylesheet" href="${basePath}/css/blueimp-gallery.min.css">
 </head>
 
-<body class="page-header-fixed">
+<body class="blueBg ">
 	<!-- BEGIN HEADER -->
-	<%@ include file="../include/header.jsp"%>
+	<div class="w640">
 	<!-- END   HEADER -->
-	<%-- <%@ include file="../include/slider.jsp"%> --%>
 	<div class="main pr">
 		<div class="c10"></div>
 		<div class="w">
-			<div class="body fr" style="width: 770px;">
+			<div class="body" >
 				<div class="title">&nbsp; 我的课程表</div>
 				<div class="content  tabbable tabbable-custom" style="min-height: 700px;">
 					<ul class="nav nav-tabs" style="height:40px; ">
@@ -67,7 +65,7 @@
 				</div>
 			</div>
 			<c:set var="student_id" value="" />
-			<div class="body fl" style="width: 197px;">
+			<div class="body" style="width: 197px;">
 				<div class="title">
 					<a href="javascript:void(0);" class="ico_aboutus">学员列表</a>
 				</div>
@@ -84,13 +82,13 @@
 					</ul>
 				</div>
 			</div>
-			<%@ include file="../include/nav_left.jsp"%>
 			<div class="c10"></div>
 		</div>
 
 	</div>
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
+	</div>
 		<script src="${basePath}/js/jquery.blueimp-gallery.min.js"></script>
 	<!-- END FOOTER -->
 </body>

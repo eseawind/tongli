@@ -12,48 +12,16 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" session="false"%>
-<div style="clear: both"></div>
-<div class="footer">
-	<div class="w">Copyright@2014&nbsp;&nbsp;&nbsp;&nbsp;沪ICP备案：110055455号&nbsp;&nbsp;&nbsp;&nbsp;联系电话：021-20556847&nbsp;&nbsp;&nbsp;&nbsp;邮箱：xsds@126.com</div>
+<div class="i_bottom">
+		<p>童励儿童俱乐部 版权所有</p>
 </div>
+
+<script type="text/javascript" src="${basePath}/js/swipe.js"></script>
 <script type="text/javascript">
-		jQuery(document).ready(function() {
-			//-----------
-			var mw = $(".mbox").width() + 10;
-			var ml = $(".mbox").length;
-			$(".themes").width(mw * ml);
-			$(".t_menu li").mouseover(function() {
-				var index = $(this).index();
-				$(".themes").animate({
-					left : -mw * index,
-					opacity : 1
-				}, 500);
-			})
-			/* //nav menu
-			$("#navmenu ul li").hover(function() {
-				$(this).children("a").css({color:"#3e7900"});
-				$(this).children(".subMenu").stop(true, true).slideDown(200);
-				$("#mask").slideDown(60);
-				return false;
-			},function() {
-				$(this).children("a").css({color:"#333"});
-				$(this).children(".subMenu").stop(true, true).slideUp(200);
-				$("#mask").slideUp(10);
-				 return false;
-				}); */
-			//----菜单选中
-			try{
-				var url=location.href;
-				var array=url.split('pid=');
-				if(array!=null && array.length>1){
-					$('.m').removeClass('on');
-					$('.'+array[1]).addClass('on');
-				}
-			}catch(e){}
-		});
-</script>
+!window.jQuery && document.write('<script src=http://static.weiwubao.com/asset/lib/js/jquery/jquery-1.10.0.min.js><\/script>');
+</script> 
 <script>
-		getBlockUI();
+		 getBlockUI();
 		jQuery(document).ready(function() {    
 		   $.unblockUI();
 		});
@@ -95,3 +63,19 @@
 			setTimeout($.unblockUI, 500);
 		}
 </script>
+<script type="text/javascript" src="${basePath}/js/wechat.api.js"></script>
+<script type="text/javascript">
+var wechat = new wechatAPI();
+wechat.shareData = {
+shareImageUrl: "http://static.weiwubao.com/upload/800066/image/20140515/100x100_201405151034051.jpg",
+shareLink: "http://www.weiwubao.com/web/800066/",
+shareTitle: "重庆交巡警",
+shareContent: "关注重庆交巡警，服务查询更便捷！",
+};
+/*****分享初始化*****/
+wechat.shareInit();
+/*****隐藏工具条*****/
+wechat.hideBottomTool();
+//wechat.hideTopTool();
+</script>
+<script type="text/javascript" src="${basePath}/js/global.js"></script>

@@ -26,83 +26,77 @@
 
 </head>
 
-<body class="page-header-fixed">
-	<!-- BEGIN HEADER -->
-	<%@ include file="../include/header.jsp"%>
-	<!-- END   HEADER -->
-	<%-- <%@ include file="../include/slider.jsp"%> --%>
-
+<body class="blueBg">
+	<div class="w640">
 	<div class="main pr">
 		<div class="c10"></div>
 		<div class="w">
 
-			<div class="body fr" style="width: 770px;">
+			<div class="body" >
 				<div class="title">&nbsp; 预约参观</div>
 				<div class="content" style="min-height: 390px;">
 				<c:if test="${msg!=null}">
 					<c:choose>
 						<c:when test="${msg=='1'}">
 						<div class="alert alert-success">
-							<button class="close" data-dismiss="alert"></button>
 							<strong>Success!</strong> 信息提交成功!
 						</div>
 						</c:when>
 						<c:otherwise>
 							<div class="alert alert-danger">
-								<button class="close" data-dismiss="alert"></button>
 								<strong>Error!</strong> ${msg}
 							</div>
 						</c:otherwise>
 					</c:choose>
 				</c:if>
-					<div class="user_info">
+					<div class="col-xs-12 ">
 							<ul>
 								<li>
 									<div class="tit">参观课程：</div>
-									<div class="con">
+									<div class="com form-control">
 										${bean.course} 
 									</div>
 								</li>
 								<li>
 									<div class="tit">参观时间：</div>
-									<div class="con">
+									<div class="com form-control">
 										${bean.day} 
 									</div>
 								</li>
 								<li>
 									<div class="tit">参观场馆：</div>
-									<div class="con">
+									<div class="com form-control">
 										${bean.addres} 
 									</div>
 								</li>
 								<li>
 									<div class="tit">孩子姓名：</div>
-									<div class="con">
+									<div class="com form-control">
 										${bean.name }
 									</div>
 								</li>
 								<li>
 									<div class="tit">孩子性别：</div>
-									<div class="con">
+									<div class="com form-control">
 									<c:if test="${bean.sex=='0'}">男</c:if>
 									<c:if test="${bean.sex=='1'}">女</c:if>
 									</div>
 								</li>
 								<li>
 									<div class="tit">孩子年龄：</div>
-									<div class="con">
+									<div class="com form-control">
 										${bean.age}
 									</div>
 								</li>
 								<li>
 									<div class="tit">手机号码：</div>
-									<div class="con">
+									<div class="com form-control">
 										${bean.tel }
 									</div>
 								</li>
 								<li class="li_0" style="height: 100px;">
 									<div class="tit">其它：</div>
-									<div class="con" style="height: 80px;">
+									<div class="com form-control" style="height: 80px;">
 										${bean.detail_info}
 									</div>
 								</li>
@@ -116,15 +110,11 @@
 
 				</div>
 			</div>
-			<%@ include file="../include/nav_left.jsp"%>
-			<div class="c10"></div>
 		</div>
-
-	</div>
-	<div class="c10"></div>
 	</div>
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<!-- END FOOTER -->
+	</div>
 </body>
 </html>

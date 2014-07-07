@@ -30,7 +30,6 @@
 <%-- <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/dropzone/css/dropzone.css" rel="stylesheet"/> --%>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/pages/blog.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/pages/news.css" rel="stylesheet" type="text/css"/>
-
 </head>
 
 <body class="page-header-fixed">

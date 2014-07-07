@@ -96,6 +96,8 @@
 			<result name="cslogin">/WEB-INF/pages/admin/consult/login.jsp</result>
 			<result name="tlogin">/WEB-INF/pages/client/teacher/login.jsp</result>
 			<result name="mlogin">/WEB-INF/pages/client/member/login.jsp</result>
+			<result name="w_tlogin">/WEB-INF/pages/client_w/teacher/login.jsp</result>
+			<result name="w_mlogin">/WEB-INF/pages/client_w/member/login.jsp</result>
 			<result name="noauth">/WEB-INF/pages/admin/noauth.jsp</result>
 		</global-results>
 		 <global-exception-mappings>

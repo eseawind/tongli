@@ -26,9 +26,9 @@
 
 </head>
 
-<body class="page-header-fixed">
+<body class="blueBg">
 	<!-- BEGIN HEADER -->
-	<%@ include file="../include/header.jsp"%>
+	<div class="w640">
 	<!-- END   HEADER -->
 	<div class="main pr">
 		<div class="c10"></div>
@@ -318,7 +318,7 @@
 												<label >学员身份证</label>
 												<div class="">
 													<input class="form-control" type="text"
-														placeholder="请输入学员身份证" name="bean.card_num"
+														placeholder="请输入学员身份证" name="bean.card_num"  readonly="readonly"
 														value="${bean.card_num}"> <span class="help-block"></span>
 												</div>
 											</div>
@@ -443,5 +443,6 @@
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<!-- END FOOTER -->
+	</div>
 </body>
 </html>

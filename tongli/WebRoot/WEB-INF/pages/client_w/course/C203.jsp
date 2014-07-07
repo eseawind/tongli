@@ -23,6 +23,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
+<script type="text/javascript" src="${basePath}/js/jquery.SuperSlide.2.1.1.js"></script>
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/css/multi-select.css" />
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2_metro.css"  rel="stylesheet" type="text/css"  />
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/css/datepicker.css" />
@@ -35,14 +42,14 @@
 </style>
 </head>
 
-<body class="page-header-fixed">
+<body class="blueBg">
 	<!-- BEGIN HEADER -->
-	<%@ include file="../include/header.jsp"%>
+	<div class="w640">
 	<!-- END   HEADER -->
 	<div class="main pr">
 		<div class="c10"></div>
 		<div class="w">
-			<div class="body fr">
+			<div class="body">
 				<div class="title">&nbsp; 在线报名</div>
 				<div class="content" style="min-height: 390px;">
 					<div class="web_enroll_info tabbable tabbable-custom">

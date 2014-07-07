@@ -26,9 +26,9 @@
 
 </head>
 
-<body class="page-header-fixed">
+<body class="blueBg">
 <!-- BEGIN HEADER -->
-<%@ include file="include/header.jsp"%>
+<div class="w640">
 <!-- END   HEADER -->
 <%-- <%@ include file="include/slider.jsp"%> --%>
 
@@ -36,7 +36,7 @@
 <div class="c10"></div>
 <div class="w">
 
-<div class="body fr" style=" width:770px;">
+<div class="body">
 <div class="title">&nbsp; <i class="fa  fa-star-half-full "></i><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if>
 <c:choose>
 	<c:when test="${typeBeanP.name==typeBean.name}">
@@ -69,44 +69,14 @@
 </div>
 <customtag:pagingext func="loadUrlPage" params="'c002_','init'" />
 </div>
-<div class="body fl mb10" style="width: 197px;">
-	<div class="title ">
-		<label class="ico_aboutus"> <c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if><i class="fa  fa-arrow-right"></i></label>
-	</div>
-	<div class="content">
-		<ul>
-			<c:forEach items="${tree_array}" var="tree">
-		      	<li <c:if test="${tree.id==tid}">class="on"</c:if>>
-		      	<a <a href="${basePath}/w/c002_init.ac?tid=${tree.id}&pid=<c:choose><c:when test='${tree.parent_id!=null && tree.parent_id!=""}'>${tree.parent_id}</c:when><c:otherwise>${tree.id}</c:otherwise></c:choose>">${tree.name}</a>
-		      	<c:if test="${tree.beans!=null && fn:length(tree.beans)>0}">
-		      		<c:forEach items="${tree.beans}" var="bean">
-		      		     <li <c:if test="${bean.id==tid}">class="on"</c:if>>
-		      		     	|-<a href="${basePath}/w/c002_init.ac?tid=${bean.id}&pid=<c:choose><c:when test='${bean.parent_id!=null && bean.parent_id!=""}'>${bean.parent_id}</c:when><c:otherwise>${bean.id}</c:otherwise></c:choose>">${bean.name }</a>
-		      		     </li>
-		      		     <c:if test="${bean.beans!=null && fn:length(bean.beans)>0}">
-				      		<c:forEach items="${bean.beans}" var="bean2">
-				      		     <li <c:if test="${bean2.id==tid}">class="on"</c:if>>
-				      		     	|-|-<a href="${basePath}/w/c002_init.ac?tid=${bean2.id}&pid=<c:choose><c:when test='${bean2.parent_id!=null && bean2.parent_id!=""}'>${bean2.parent_id}</c:when><c:otherwise>${bean2.id}</c:otherwise></c:choose>">${bean2.name }</a>
-				      		     </li>
-		           			</c:forEach>
-				      	</c:if>
-           			</c:forEach>
-		      	</c:if>
-		      	</li>
-	      	</c:forEach>
-		</ul>
-	</div>
-</div>
-<%@ include file="include/nav_left.jsp"%>
-<div class="c10"></div>
 </div>
 
 </div>
-<div class="c10"></div>
-</div>
+
 <!-- BEGIN FOOTER -->
 <%@ include file="include/footer.jsp"%>
 <!-- END FOOTER -->
+</div>
 </body>
 </html>
 <script type="text/javascript">

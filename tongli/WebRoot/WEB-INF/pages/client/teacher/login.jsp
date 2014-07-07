@@ -63,12 +63,12 @@
 									<a href="#">忘记密码？</a>
 								</div> -->
 								<div class="login_register">
-									<label><input type="radio" checked="checked" name="t" value="0" onclick="$('#edit_article_13632').attr('action','${basePath}/t001_login.ac');"/>老师</label>
+									<label><input type="radio" name="t" value="0" onclick="$('#edit_article_13632').attr('action','${basePath}/t001_login.ac');"/>老师</label>
 								</div>
 								<div class="login_register">	
-									<label><input type="radio" name="t" value="1"  onclick="$('#edit_article_13632').attr('action','${basePath}/m201_login.ac');" />学生/家长</label>
+									<label><input type="radio" checked="checked" name="t" value="1"  onclick="$('#edit_article_13632').attr('action','${basePath}/m201_login.ac');" />学生/家长</label>
 								</div>
-								<input type="submit" class="login_btn" value="登 录" />
+								<button type="submit" class="btn btn-info" style="margin-left: 40px;" >登 录</button>
 								<div class="clear"></div>
 							</div>
 						</div>

@@ -186,6 +186,12 @@ public class M201Action extends BaseAction {
 			}
 		}
 		request.setAttribute("msg", "登录失败,用户名或密码错误!");
+		
+		String requestURL = request.getRequestURL().toString(); // 获取客户端请求的URL
+		if(requestURL.contains("/w/")){
+			// 回到登录页面
+			return "w_mlogin";
+		}
 		return "mlogin";
 	}
 	/**
@@ -439,6 +445,12 @@ public class M201Action extends BaseAction {
 		//清空用户登录信息
 		request.getSession().removeAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO);
 		request.getSession().invalidate();
+		
+		String requestURL = request.getRequestURL().toString(); // 获取客户端请求的URL
+		if(requestURL.contains("/w/")){
+			// 回到登录页面
+			return "w_mlogin";
+		}
 		return "mlogin";
 	}
 	/**

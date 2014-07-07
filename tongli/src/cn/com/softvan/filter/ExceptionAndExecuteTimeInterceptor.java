@@ -1,5 +1,9 @@
 package cn.com.softvan.filter;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
@@ -18,9 +22,9 @@ public class ExceptionAndExecuteTimeInterceptor extends AbstractInterceptor {
 
 	private static final Log log = LogFactory
 			.getLog(ExceptionAndExecuteTimeInterceptor.class);
-//	private static final String EQUAL_SIGN = "=";
-//	private static final String PLUS_SIGN = "+";
-//	private static final String AND = "&";
+	private static final String EQUAL_SIGN = "=";
+	private static final String PLUS_SIGN = "+";
+	private static final String AND = "&";
 
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
@@ -40,64 +44,63 @@ public class ExceptionAndExecuteTimeInterceptor extends AbstractInterceptor {
         }
 		request.setAttribute("path", path);
 		request.setAttribute("basePath", basePath);
-////		log.info("basePath值："+ basePath);
-//		String remoteHost = request.getRemoteAddr(); // 获取客户端的主机名
-//		String requestURL = request.getRequestURL().toString(); // 获取客户端请求的URL
-//		Map<String, String[]> paramsMap = (Map<String, String[]>) request
-//				.getParameterMap(); // 获取所有的请求参数
-//
-//		/*
-//		 * 获取所有参数的名值对信息的字符串表示，存储在变量paramsStr中
-//		 */
-//		StringBuilder paramsStrSb = new StringBuilder();
-//		if (paramsMap != null && paramsMap.size() > 0) {
-//			Set<Entry<String, String[]>> paramsSet = paramsMap.entrySet();
-//			for (Entry<String, String[]> param : paramsSet) {
-//				StringBuilder paramStrSb = new StringBuilder();
-//				String paramName = param.getKey(); // 参数的名字
-//				String[] paramValues = param.getValue(); // 参数的值
-//				if (paramValues.length == 1) { // 参数只有一个值，绝大多数情况
-//					paramStrSb.append(paramName).append(EQUAL_SIGN)
-//							.append(paramValues[0]);
-//				} else {
-//					paramStrSb.append(paramName).append(EQUAL_SIGN);
-//					for (String paramValue : paramValues) {
-//						paramStrSb.append(paramValue);
-//						paramStrSb.append(PLUS_SIGN);
-//					}
-//					paramStrSb.deleteCharAt(paramStrSb.length() - 1);
-//				}
-//				paramsStrSb.append(paramStrSb).append(AND);
-//			}
-//			paramsStrSb.deleteCharAt(paramsStrSb.length() - 1);
-//		}
-//		String paramsStr = paramsStrSb.toString();
+//		log.info("basePath值："+ basePath);
+		String remoteHost = request.getRemoteAddr(); // 获取客户端的主机名
+		String requestURL = request.getRequestURL().toString(); // 获取客户端请求的URL
+		Map<String, String[]> paramsMap = (Map<String, String[]>) request
+				.getParameterMap(); // 获取所有的请求参数
+
+		/*
+		 * 获取所有参数的名值对信息的字符串表示，存储在变量paramsStr中
+		 */
+		StringBuilder paramsStrSb = new StringBuilder();
+		if (paramsMap != null && paramsMap.size() > 0) {
+			Set<Entry<String, String[]>> paramsSet = paramsMap.entrySet();
+			for (Entry<String, String[]> param : paramsSet) {
+				StringBuilder paramStrSb = new StringBuilder();
+				String paramName = param.getKey(); // 参数的名字
+				String[] paramValues = param.getValue(); // 参数的值
+				if (paramValues.length == 1) { // 参数只有一个值，绝大多数情况
+					paramStrSb.append(paramName).append(EQUAL_SIGN)
+							.append(paramValues[0]);
+				} else {
+					paramStrSb.append(paramName).append(EQUAL_SIGN);
+					for (String paramValue : paramValues) {
+						paramStrSb.append(paramValue);
+						paramStrSb.append(PLUS_SIGN);
+					}
+					paramStrSb.deleteCharAt(paramStrSb.length() - 1);
+				}
+				paramsStrSb.append(paramStrSb).append(AND);
+			}
+			paramsStrSb.deleteCharAt(paramsStrSb.length() - 1);
+		}
+		String paramsStr = paramsStrSb.toString();
 
 		/*
 		 * 如果Action的执行过程中抛出异常，则记录到日志里； 或者Action执行成功，但执行时间过长，也记录到日志里
 		 */
 		String result = null;
-//		// 获得Action执行的开始时间
-//		long start = System.currentTimeMillis();
+		// 获得Action执行的开始时间
+		long start = System.currentTimeMillis();
 		try {
 			// 执行该拦截器的下一个拦截器，或者如果没有下一个拦截器，直接执行Action的execute方法
 			result = invocation.invoke();
 		} catch (Exception e) {
-//			String msg = "抛出了异常！" + remoteHost + "的请求，URL:" + requestURL
-//					+ "，参数：" + paramsStr;
-//			log.error(msg, e);
-			log.error("异常!", e);
+			String msg = "抛出了异常！" + remoteHost + "的请求，URL:" + requestURL
+					+ "，参数：" + paramsStr;
+			log.error(msg, e);
 			return "exception";
 		}
-//		// 获得Action执行的结束时间
-//		long end = System.currentTimeMillis();
-//		// 如果该Action的执行时间超过了500毫秒，则日志记录下来
-//		final int MAX_TIME = 500;
-//		long executeTimeMillis = end - start;
-//		if (executeTimeMillis >= MAX_TIME) {
-//			log.info("Action执行时间过长！执行" + remoteHost + "的请求，URL:" + requestURL
-//					+ "，参数：" + paramsStr + "，共用时" + executeTimeMillis + "毫秒");
-//		}
+		// 获得Action执行的结束时间
+		long end = System.currentTimeMillis();
+		// 如果该Action的执行时间超过了500毫秒，则日志记录下来
+		final int MAX_TIME = 500;
+		long executeTimeMillis = end - start;
+		if (executeTimeMillis >= MAX_TIME) {
+			log.error("Action执行时间过长！执行" + remoteHost + "的请求，URL:" + requestURL
+					+ "，参数：" + paramsStr + "，共用时" + executeTimeMillis + "毫秒");
+		}
 		return result;
 	}
 }

@@ -25,24 +25,20 @@
 
 </head>
 
-<body class="page-header-fixed">
-<!-- BEGIN HEADER -->
-<%@ include file="include/header.jsp"%>
-<!-- END   HEADER -->
-<%@ include file="include/slider.jsp"%>
-
+<body class="blueBg">
+<div class="w640">
 <div class="main pr">
 <div class="c10"></div>
 <div class="w">
 
-<div class="body fr" style=" width:770px;">
+<div class="body">
 <h1> ${bean.title}信息标题</h1>
 <!--<h3>发布日期：${bean.last_updated} &nbsp;&nbsp;&nbsp;&nbsp;发布人：${bean.create_id}</h3>-->
 <div class="content" style="min-height:500px;">
   ${bean.detail_info}
 </div>
 </div>
-<div class="body fl" style="width: 197px;">
+<div class="body" style="width: 197px;">
 	<div class="title">
 		<a href="javascript:void(0);" class="ico_aboutus"><c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if></a>
 	</div>
@@ -70,17 +66,11 @@
 		</ul>
 	</div>
 </div>
-<!-- 二维码 -->
-<%@ include file="../include/nav_left_erweima.jsp"%>
-
-<div class="c10"></div>
 </div>
-
-</div>
-<div class="c10"></div>
 </div>
 <!-- BEGIN FOOTER -->
 <%@ include file="include/footer.jsp"%>
 <!-- END FOOTER -->
+</div>
 </body>
 </html>

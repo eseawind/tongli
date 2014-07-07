@@ -25,17 +25,15 @@
 
 </head>
 
-<body class="page-header-fixed">
+<body class="blueBg">
 	<!-- BEGIN HEADER -->
-	<%@ include file="../include/header.jsp"%>
+	<div class="w640">
 	<!-- END   HEADER -->
-	<%-- <%@ include file="../include/slider.jsp"%> --%>
 
 	<div class="main pr">
 		<div class="c10"></div>
 		<div class="w">
-
-			<div class="body fl" style="width: 770px;">
+			<div class="body" >
 				<div class="content" style="min-height: 390px;">
 					<form accept-charset="UTF-8"  action="${basePath}/w/m201_login.ac" class="edit_article" id="edit_article_13632" method="post">
 						<s:token></s:token>
@@ -68,20 +66,19 @@
 								<div class="login_register">	
 									<label><input type="radio" checked="checked" name="t" value="1"  onclick="$('#edit_article_13632').attr('action','${basePath}/w/m201_login.ac');" />学生/家长</label>
 								</div>
-								<input type="submit" class="login_btn" value="登 录" style="margin-top: -4px;" />
+								<button type="submit" class="btn btn-info" style="margin-left: 40px;" >登 录</button>
 								<div class="clear"></div>
 							</div>
 						</div>
 					</form>
 				</div>
 			</div>
-			<%@ include file="../include/nav_right.jsp"%>
 			<div class="c10"></div>
 		</div>
-
 	</div>
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<!-- END FOOTER -->
+	</div>
 </body>
 </html>

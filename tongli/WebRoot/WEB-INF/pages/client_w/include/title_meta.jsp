@@ -14,8 +14,8 @@
 <title>童励儿童俱乐部</title>
 <meta name="description" content="夏令营,儿童俱乐部,童励" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-<meta http-equive="Cache-Control" content="max-age=86400"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta content="telephone=no" name="format-detection">
 <meta name="MobileOptimized" content="320">
 <link rel="shortcut icon" href="/favicon.ico" />
 <script>var basePath='${basePath}';</script>

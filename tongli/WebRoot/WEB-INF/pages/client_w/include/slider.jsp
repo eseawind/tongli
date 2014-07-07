@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" session="false"%><div class="navBar">
-	<div class="slider" id="scrollDiv_keleyi_com">
-		
-			
-		
-	</div>
+	pageEncoding="utf-8" session="false"%>
+	<div id="scrollDiv_keleyi_com"> </div>
 	<script type="text/javascript">
 	//焦点图
 	function loadUrlListScrollDiv() {

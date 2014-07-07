@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" session="false"%><div class="navBar">
+	pageEncoding="utf-8" session="false"%>
 	<ul class="nav clearfix">
 		<li id="m1" class="m">
 			<h1>

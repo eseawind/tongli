@@ -26,9 +26,9 @@
 
 </head>
 
-<body class="page-header-fixed">
+<body class="blueBg">
 <!-- BEGIN HEADER -->
-<%@ include file="../include/header.jsp"%>
+<div class="w640">
 <!-- END   HEADER -->
 <%-- <%@ include file="../include/slider.jsp"%> --%>
 
@@ -36,7 +36,7 @@
 <div class="c10"></div>
 <div class="w">
 
-<div class="body fr" style=" width:770px;">
+<div class="body">
 <div class="title">&nbsp; <c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if>-->${typeBean.name}</div>
 <div class="content home_news pr" style="min-height:500px;">
 	<c:choose>
@@ -60,7 +60,7 @@
 </div>
 <customtag:pagingext func="loadUrlPage" params="'c002_','init'" />
 </div>
-<div class="body fl" style="width: 197px;">
+<div class="body" style="width: 197px;">
 	<div class="title">
 		<a href="javascript:void(0);" class="ico_aboutus"><c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if></a>
 	</div>
@@ -88,18 +88,11 @@
 		</ul>
 	</div>
 </div>
-<!-- 二维码 -->
-<%@ include file="../include/nav_left_erweima.jsp"%>
 
-<div class="c10"></div>
-</div>
-
-</div>
-<div class="c10"></div>
-</div>
 <!-- BEGIN FOOTER -->
 <%@ include file="../include/footer.jsp"%>
 <!-- END FOOTER -->
+</div>
 </body>
 </html>
 <script type="text/javascript">

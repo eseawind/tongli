@@ -43,11 +43,15 @@ public class MemberAuthInterceptor extends AbstractInterceptor {
 		request.setAttribute("basePath", basePath);
 		// log.info("basePath值："+ basePath);
 		String actionName = invocation.getInvocationContext().getName();
-
+		String requestURL = request.getRequestURL().toString(); // 获取客户端请求的URL
 		// 判断用户是否登陆
 		if (request.getSession().getAttribute(
 				CommonConstant.SESSION_KEY_USER_MEMBER_INFO) == null
 				&& !"m201_login".equals(actionName)) {
+			if(requestURL.contains("/w/")){
+				// 回到登录页面
+				return "w_mlogin";
+			}
 			// 回到登录页面
 			return "mlogin";
 		}

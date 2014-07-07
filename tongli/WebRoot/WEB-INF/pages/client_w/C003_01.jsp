@@ -15,39 +15,48 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<div class="focusBox" >
-	<ul class="pic">
-		<c:forEach items="${beans}" var="bean">
-		<li>
-		<a href="${basePath}/w/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=3f2b286347174e728d39169c212fe56b" >
-		<img src="${bean.pic_url}"  onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';"  />
-		</a>
-		</li>
-		</c:forEach>
-	</ul>
-	<a class="prev" href="javascript:void(0)"></a> <a class="next"
-		href="javascript:void(0)"></a>
-	<ul class="hd">
-	<c:forEach items="${beans}" var="bean">
-		<li></li>
-	</c:forEach>
-	</ul>
+<div id="mySwipe" class="swipe" style="visibility: visible; ">
+    <div id="image" class="swipe_wrap" style="width:${(fn:length(beans))*640}px;max-height:320px; ">
+      <!--图片--> 
+         <c:forEach items="${beans}" var="bean" varStatus="i">
+			<div class="item"
+				style="width: 640px; left: ${0-(i.index*640)}px; -webkit-transition: 0ms; -webkit-transform: translate(${(i.index*640)}px, 0px) translateZ(0px); " data-index="${i.index}">
+				<img src="${bean.pic_url}"  onerror="this.src='${basePath}/images/error/404.jpg';this.onerror='';"  />
+				<span class="text">${bean.title}</span>
+			</div>
+		</c:forEach>   
+    </div>
+    <!--页码-->
+    <ul class="dian">
+    	<c:forEach begin="1" end="${fn:length(beans)}" varStatus="i" step="1">
+    		<c:choose>
+    			<c:when test="${i.index==(fn:length(beans))}">
+    				 <li class="on"></li>
+    			</c:when>
+    			<c:otherwise>
+    				 <li class=""></li>
+    			</c:otherwise>
+    		</c:choose>
+        </c:forEach>
+    </ul>
+    <!--页码end--> 
 </div>
-<script type="text/javascript">
-	/*鼠标移过，左右按钮显示*/
-	jQuery(".focusBox").hover(
-			function() {
-				jQuery(this).find(".prev,.next").stop(true, true).fadeTo(
-						"show", 0.2)
-			}, function() {
-				jQuery(this).find(".prev,.next").fadeOut()
-			});
-	/*SuperSlide图片切换*/
-	jQuery(".focusBox").slide({
-		mainCell : ".pic",
-		effect : "left",
-		autoPlay : true,
-		delayTime : 600,
-		trigger : "click"
-	});
-</script>
+<script>
+// pure JS
+function loadSwipe(){
+var aaa = document.getElementById('mySwipe');
+window.mySwipe = Swipe(aaa, {
+startSlide: 0,
+speed: 400,
+auto: 5000,//设置自动切换时间，单位毫秒
+continuous: true,//无限循环的图片切换效果
+disableScroll: false, //阻止由于触摸而滚动屏幕
+stopPropagation: false,//停止滑动事件
+callback: function(pos) {
+$(".dian li").removeClass('on')
+$(".dian li").eq(pos).addClass('on');		
+  },
+transitionEnd: function(auto, aaa) {}//回调函数，切换结束调用该函数。
+});
+}
+</script> 

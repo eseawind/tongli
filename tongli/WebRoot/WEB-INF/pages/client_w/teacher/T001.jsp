@@ -34,15 +34,15 @@
 <link rel="stylesheet" href="${basePath}/w/css/blueimp-gallery.min.css">
 </head>
 
-<body class="page-header-fixed">
+<body class="blueBg">
 	<!-- BEGIN HEADER -->
-	<%@ include file="../include/header.jsp"%>
+	<div class="w640">
 	<!-- END   HEADER -->
 	<%-- <%@ include file="../include/slider.jsp"%> --%>
 	<div class="main pr">
 		<div class="c10"></div>
 		<div class="w">
-			<div class="body fr" style="width: 770px;">
+			<div class="body" >
 				<div class="title">&nbsp; 我的课程表</div>
 				<div class="content  tabbable tabbable-custom" style="min-height: 600px;">
 					<ul class="nav nav-tabs" style="height:40px; ">
@@ -68,7 +68,7 @@
 				</div>
 			</div>
 			<c:set var="student_id" value="" />
-			<div class="body fl" style="width: 197px;">
+			<div class="body" style="width: 197px;">
 				<div class="title">
 					<a href="javascript:void(0);" class="ico_recommend">个人中心</a>
 				</div>
@@ -87,6 +87,7 @@
 	</div>
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
+	</div>
 	<!-- END FOOTER -->
 
 	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>

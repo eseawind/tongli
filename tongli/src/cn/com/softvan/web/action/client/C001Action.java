@@ -82,11 +82,20 @@ public class C001Action extends BaseAction {
 //		a534ef573de54297acd70f93937985c6	舞蹈社团
 //		cff7aad3a82041d08a6a1565ac87fc7b	小小铁人三项训练营
 
-		TcSysNewsBean bean1=new TcSysNewsBean();
-		bean1.setInfo_source(info_source);
-		bean1.setMsgtype("index");//首页展示 标记
-		
-		request.setAttribute("beans", newsManager.findDataIsList(bean1));
+		String requestURL = request.getRequestURL().toString(); // 获取客户端请求的URL
+		if(requestURL.contains("/w/")){
+			TcSysNewsBean bean1=new TcSysNewsBean();
+			bean1.setInfo_source(info_source);
+			bean1.setLimit_s(0);
+			bean1.setLimit_e(5);
+			bean1.setType_id("6fba86e8436049e5b30123c538b7fc83");
+			beans=newsManager.findDataIsList(bean1);
+		}else{
+			TcSysNewsBean bean1=new TcSysNewsBean();
+			bean1.setInfo_source(info_source);
+			bean1.setMsgtype("index");//首页展示 标记
+			request.setAttribute("beans", newsManager.findDataIsList(bean1));
+		}
 		return "init";
 	}
 	/**
