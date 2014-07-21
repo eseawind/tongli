@@ -86,7 +86,7 @@
 					<form accept-charset="UTF-8"  action="${basePath}/h/c102_save.ac" class="edit_article" id="edit_article_13632" method="post">
 						<s:token></s:token>
 						<input name="bean.id" type="hidden" value="${bean.id}">
-						<input name="bean.type" type="text" value="${bean.type}">
+						<input name="bean.type" type="hidden" value="${bean.type}">
 						<input name="type_flag" type="hidden" value="2x">
 						<div class="well form-inline form-group">
 							<div class="col-md-1"><label>开始日期</label></div> 

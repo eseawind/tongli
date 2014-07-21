@@ -36,6 +36,8 @@ public class BaseBean implements Serializable,IBean,Cloneable {
 	private String note;
 	/** 删除 */
 	private String del_flag;
+	/** 是否显示 0否 1是 */
+	private String is_show;
 	/** 数据输入日期 */
 	private String date_created;
 	/** 建立者id */
@@ -129,6 +131,20 @@ public class BaseBean implements Serializable,IBean,Cloneable {
 	 */
 	public void setDel_flag(String del_flag) {
 	    this.del_flag = del_flag;
+	}
+	/**
+	 * 是否显示 0否 1是取得
+	 * @return 是否显示 0否 1是
+	 */
+	public String getIs_show() {
+	    return is_show;
+	}
+	/**
+	 * 是否显示 0否 1是设定
+	 * @param is_show 是否显示 0否 1是
+	 */
+	public void setIs_show(String is_show) {
+	    this.is_show = is_show;
 	}
 	/**
 	 * 数据输入日期取得

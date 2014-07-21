@@ -15,7 +15,8 @@
 	t1.update_id,
 	t1.update_ip,
 	t1.del_flag,
-	t1.version
+	t1.version,
+	t1.is_show
   </sql>
   <select id="selectByPrimaryKey" resultType="tcCommentBean" parameterType="tcComment" >
     select 
@@ -42,7 +43,8 @@
 		update_id,
 		update_ip,
 		del_flag,
-		version
+		version,
+		is_show
 	) values (
    		#{id},
 		#{member_type},
@@ -57,13 +59,15 @@
 		#{update_id},
 		#{update_ip},
 		'0',
-		 0
+		 0,
+		'1'
      )
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tcComment" >
     update tc_comment set version=version+1,last_updated=now(),update_id=#{update_id},update_ip=#{update_ip}
 		<if test="detail_info!= null" >,detail_info=#{detail_info}</if>
 		<if test="note!= null" >,note=#{note}</if>
+		<if test="is_show!= null" >,is_show=#{is_show}</if>
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <!-- 判断信息是否存在
@@ -89,6 +93,7 @@
 	    	    and t1.del_flag='0'
 	    	</otherwise>
 	    </choose>
+	    <if test="is_show!=null"> and t1.is_show=#{is_show}</if>
 		 order by t1.date_created desc
      </select>
     <!-- 查询信息 列表-->
@@ -105,6 +110,7 @@
 	    	    and t1.del_flag='0'
 	    	</otherwise>
 	    </choose>
+	    <if test="is_show!=null"> and t1.is_show=#{is_show}</if>
 		 order by t1.date_created desc
      </select>
       <!-- 恢复逻辑删除的数据 -->

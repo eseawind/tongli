@@ -252,6 +252,7 @@ public class M201Action extends BaseAction {
 			TcCommentBean bean1 = new TcCommentBean();
 			bean1.setPageInfo(page);
 			bean1.setDel_flag("0");
+			bean1.setIs_show("1");//0否1是
 //			TcMemberBean user = (TcMemberBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO);
 	//		bean1.setMember_id(user.getId());//会员id
 	//		bean1.setMember_type(user.getUser_type());//会员类型

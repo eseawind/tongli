@@ -48,6 +48,8 @@ public class BaseEntity implements IEntity {
 	private Long invalid_time;
 	/** 0否1是 **/
 	private String del_flag;
+	/** 是否显示 0否 1是 */
+	private String is_show;
 	/** limit 起 */
 	private Integer limit_s;
 	/** limit 止 */
@@ -247,6 +249,20 @@ public class BaseEntity implements IEntity {
 	 */
 	public void setDel_flag(String del_flag) {
 	    this.del_flag = del_flag;
+	}
+	/**
+	 * 是否显示 0否 1是取得
+	 * @return 是否显示 0否 1是
+	 */
+	public String getIs_show() {
+	    return is_show;
+	}
+	/**
+	 * 是否显示 0否 1是设定
+	 * @param is_show 是否显示 0否 1是
+	 */
+	public void setIs_show(String is_show) {
+	    this.is_show = is_show;
 	}
 	/**
 	 * limit 起取得

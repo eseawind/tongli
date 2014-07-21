@@ -100,9 +100,9 @@ request.setAttribute("basePath", basePath);
 				</div>
 			</div>
 			<div class="form-actions">
-				<label class="checkbox">
+				<!-- <label class="checkbox">
 				<input type="checkbox" name="remember" value="1"/> 自动登陆
-				</label>
+				</label> -->
 				<button type="submit" class="btn blue pull-right">
 				登陆 <i class="m-icon-swapright m-icon-white"></i>
 				</button>            

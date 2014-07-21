@@ -741,7 +741,42 @@ public class C102Action extends BaseAction {
 		getWriter().print(msg);
 		return null;
 	}
-
+	/**
+	 * <p>
+	 * 评论信息 显示与隐藏 状态改变
+	 * </p>
+	 * <ol>
+	 * [功能概要] 
+	 * <div>是否显示 状态改变。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws IOException 
+	 */
+	public String csh() throws IOException {
+		log.info("C102Action csh.........");
+		String msg="1";
+		String id=request.getParameter("id");//评论id
+		String s=request.getParameter("s");//状态
+		if(Validator.notEmpty(id) && Validator.notEmpty(s)){
+			try {
+				if(cbean==null){
+					cbean=new TcCommentBean();
+				}
+				BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
+				cbean.setUpdate_ip(getIpAddr());
+				cbean.setUpdate_id(user.getUser_id());
+				cbean.setId(id);
+				cbean.setIs_show(s);
+				msg=commentManager.saveOrUpdateData(cbean);
+			} catch (Exception e) {
+				msg=e.getMessage();
+			}
+		}else{
+			msg="信息保存失败!";
+		}
+		getWriter().print(msg);
+		return null;
+	}
 	/**
 	 * 评论信息 管理业务处理取得
 	 * @return 评论信息 管理业务处理

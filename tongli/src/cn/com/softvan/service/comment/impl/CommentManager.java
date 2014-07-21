@@ -67,7 +67,7 @@ public class CommentManager extends BaseManager implements ICommentManager {
 			dto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
 			dto.setDel_flag(bean.getDel_flag());//是否删除
 			dto.setVersion(bean.getVersion());//version
-
+			dto.setIs_show(bean.getIs_show());//是否显示
 			//判断数据是否存在
 			if(tcCommentDao.isDataYN(dto)!=0){
 				
@@ -112,7 +112,7 @@ public class CommentManager extends BaseManager implements ICommentManager {
 			dto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
 			dto.setDel_flag(bean.getDel_flag());//是否删除
 			dto.setVersion(bean.getVersion());//version
-
+			dto.setIs_show(bean.getIs_show());//是否显示
 			//数据存在
 			tcCommentDao.updateByPrimaryKeySelective(dto);
 		} catch (Exception e) {
@@ -148,7 +148,7 @@ public class CommentManager extends BaseManager implements ICommentManager {
 			dto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
 			dto.setDel_flag(bean.getDel_flag());//是否删除
 			dto.setVersion(bean.getVersion());//version
-			
+			dto.setIs_show(bean.getIs_show());//是否显示
 			dto.setLimit_s(bean.getLimit_s());
 			dto.setLimit_e(bean.getLimit_e());
 			beans=(List<TcCommentBean>) tcCommentDao.findDataIsList(dto);
@@ -184,7 +184,7 @@ public class CommentManager extends BaseManager implements ICommentManager {
 			dto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
 			dto.setDel_flag(bean.getDel_flag());//是否删除
 			dto.setVersion(bean.getVersion());//version
-
+			dto.setIs_show(bean.getIs_show());//是否显示
 			dto.setPageInfo(bean.getPageInfo());
 			beans=(List<TcCommentBean>) tcCommentDao.findDataIsPage(dto);
 		} catch (Exception e) {
@@ -220,7 +220,7 @@ public class CommentManager extends BaseManager implements ICommentManager {
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者ip
 				dto.setDel_flag(bean.getDel_flag());//是否删除
 				dto.setVersion(bean.getVersion());//version
-
+				dto.setIs_show(bean.getIs_show());//是否显示
 			}
 			bean1=(TcCommentBean) tcCommentDao.selectByPrimaryKey(dto);
 		} catch (Exception e) {
