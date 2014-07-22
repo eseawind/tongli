@@ -63,14 +63,14 @@
 											<td height="30" colspan="4"><i class="fa  fa-bar-chart-o"></i> <strong>申请人资料</strong></td>
 										</tr>
 									</table>
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<label class="col-md-2 control-label">学员号</label>
 											<div class="col-md-8">
 												<input class="form-control" type="text" placeholder="请输入学员号" readonly="readonly" disabled="disabled"
 													name="bean.student_num" value="${bean.student_num}">
 												<span class="help-block"></span>
 											</div>
-										</div>
+										</div> --%>
 										<div class="form-group">
 											<label class="col-md-2 control-label">姓名</label>
 											<div class="col-md-3">
@@ -128,14 +128,14 @@
 											</tr>
 										</table>
 										<div class="form-group">
-											<label class="col-md-3 control-label" style="margin-top: -8px;">是否接受过任何游泳教学课程</label>
+											<label class="col-md-3 control-label" style="margin-top: -8px;">是否接受过任何教学课程</label>
 											<div class="col-md-8">
-													<label><input type="radio" readonly="readonly" disabled="disabled" name="bean.swim_survey" <c:if test="${bean.swim_survey==0}"> checked="checked"</c:if> value="0"> 是(曾参加过游泳学习/培训) </label>
-													<label><input type="radio" readonly="readonly" disabled="disabled" name="bean.swim_survey" <c:if test="${bean.swim_survey==1}"> checked="checked"</c:if> value="1"> 否(从未接触过游泳学习/培训) </label>
+													<label><input type="radio" readonly="readonly" disabled="disabled" name="bean.swim_survey" <c:if test="${bean.swim_survey==0}"> checked="checked"</c:if> value="0"> 是(曾参加过学习/培训) </label>
+													<label><input type="radio" readonly="readonly" disabled="disabled" name="bean.swim_survey" <c:if test="${bean.swim_survey==1}"> checked="checked"</c:if> value="1"> 否(从未接触过学习/培训) </label>
 													<span class="help-block"></span>
 											</div>
 										</div>
-										<div class="form-group"> <label class="col-md-2 control-label" style="margin-top: -8px;">游泳技能</label> <div class="col-md-8"> 
+										<div class="form-group"> <label class="col-md-2 control-label" style="margin-top: -8px;">技能</label> <div class="col-md-8"> 
 											<label><input type="radio"  readonly="readonly" disabled="disabled" name="bean.swim_skills" <c:if test="${bean.swim_skills==0}"> checked="checked"</c:if> value="0"> 初级 </label>
 											<label><input type="radio" readonly="readonly" disabled="disabled" name="bean.swim_skills" <c:if test="${bean.swim_skills==1}"> checked="checked"</c:if> value="1"> 中级 </label>
 											<label><input type="radio" readonly="readonly" disabled="disabled" name="bean.swim_skills" <c:if test="${bean.swim_skills==2}"> checked="checked"</c:if> value="2"> 专业 </label>
@@ -168,14 +168,14 @@
 													placeholder="请输入报名价格" name="bean.price"
 													value="${bean.price}"> <span class="help-block"></span>
 											</div>
-											<label class="col-md-2 control-label">经办人</label>
+											<%-- <label class="col-md-2 control-label">经办人</label>
 											<div class="col-md-3">
 												<input class="form-control" type="text" placeholder="请输入经办人" readonly="readonly" disabled="disabled"
 													name="bean.agent" value="${bean.agent}"> <span
 													class="help-block"></span>
-											</div>
+											</div> --%>
 										</div>
-										<div class="form-group">
+										<%-- <div class="form-group">
 											<label class="col-md-2 control-label">缴费日期</label>
 											<div id="bean_pay_day1" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="-50d">
 												<input class="form-control" type="text"
@@ -208,6 +208,14 @@
 													</span>
 													<span class="help-block"></span>
 											</div>
+										</div> --%>
+										<div class="form-group">
+											<label class="col-md-2 control-label">期望上课时间</label>
+											<div class="col-md-8">
+												<input class="form-control" type="text" readonly="readonly" disabled="disabled"
+													placeholder="期望上课时间" name="bean.note"
+													value="${bean.note}"> <span class="help-block"></span>
+											</div>
 										</div>
 									</c:if>
 									
@@ -237,7 +245,7 @@
 														<span class="help-block"></span>
 												</div>
 											</div>
-											<div class="form-group">
+											<%-- <div class="form-group">
 												<label class="col-md-2 control-label">课程开始时间</label>
 												<div  id="bean_begin_day2" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
 													<input class="form-control" type="text"  readonly="readonly" disabled="disabled"
@@ -258,7 +266,7 @@
 														</span>
 														<span class="help-block"></span>
 												</div>
-											</div>
+											</div> --%>
 											<div class="form-group">
 													<label class="col-md-2 control-label">报名地址</label>
 													<div class="col-md-8">
@@ -405,12 +413,28 @@
 													<td height="30" colspan="4"><i class="fa  fa-bullhorn"></i> <strong>备注</strong></td>
 												</tr>
 											</table>
-											<div class="form-group">
+											<%-- <div class="form-group">
 												<label class="col-md-2 control-label">接送时间</label>
 												<div class="col-md-8">
 													<input class="form-control" type="text" placeholder="请输入接送时间" readonly="readonly" disabled="disabled"
 														name="bean.shuttle_time" value="${bean.shuttle_time}">
 													<span class="help-block"></span>
+												</div>
+											</div> --%>
+											<div class="form-group">
+												<label class="col-md-2 control-label">是否重大疾病</label>
+												<div class="col-md-8">
+													<input class="form-control" type="text" placeholder="请输入是否重大疾病" readonly="readonly" disabled="disabled"
+														name="bean.disease_note" value="${bean.disease_note}"> <span
+														class="help-block"></span>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-2 control-label">是否食物过敏</label>
+												<div class="col-md-8">
+													<input class="form-control" type="text" placeholder="请输入是否重大疾病" readonly="readonly" disabled="disabled"
+														name="bean.allergy_note" value="${bean.allergy_note}"> <span
+														class="help-block"></span>
 												</div>
 											</div>
 											<div class="form-group">

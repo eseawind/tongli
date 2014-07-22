@@ -100,7 +100,8 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 				dto.setVersion(bean.getVersion());//version
 				dto.setStatus(bean.getStatus());//状态0未处理1报名失败2报名完成
 				dto.setCourse(bean.getCourse());//课程
-				
+				dto.setDisease_note(bean.getDisease_note());//是否重大疾病
+				dto.setAllergy_note(bean.getAllergy_note());//是否食物过敏
 				//判断数据是否存在
 				if(tcCourseWebEnrollDao.isDataYN(dto)!=0){
 					//数据存在
@@ -230,7 +231,8 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
     		   dto.setVersion(bean.getVersion());//version
     		   dto.setStatus(bean.getStatus());//状态0未处理1报名失败2报名完成
     		   dto.setCourse(bean.getCourse());//课程
-				
+    		   dto.setDisease_note(bean.getDisease_note());//是否重大疾病
+				dto.setAllergy_note(bean.getAllergy_note());//是否食物过敏
 				dto.setKeyword(bean.getKeyword());
 				dto.setDate1(bean.getDate1());
 				dto.setDate2(bean.getDate2());
@@ -297,7 +299,8 @@ public class CourseWebEnrollManager extends BaseManager implements ICourseWebEnr
 	    		   dto.setVersion(bean.getVersion());//version
 	    		   dto.setStatus(bean.getStatus());//状态0未处理1报名失败2报名完成
 	    		   dto.setCourse(bean.getCourse());//课程
-					
+	    		   dto.setDisease_note(bean.getDisease_note());//是否重大疾病
+					dto.setAllergy_note(bean.getAllergy_note());//是否食物过敏
 		   			dto.setLimit_s(bean.getLimit_s());
 		   			dto.setLimit_e(bean.getLimit_e());
 	    	   }

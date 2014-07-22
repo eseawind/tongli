@@ -42,7 +42,9 @@
 	t1.del_flag,
 	t1.version,
 	t1.status,
-	t1.course
+	t1.course,
+	t1.disease_note,
+	t1.allergy_note
   </sql>
   <select id="selectByPrimaryKey" resultType="tcCourseWebEnrollBean" parameterType="tcCourseWebEnroll" >
     select 
@@ -96,7 +98,9 @@
 		del_flag,
 		version,
 		status,
-		course
+		course,
+		disease_note,
+	    allergy_note
       ) values (
 	    #{id},
 		#{type},
@@ -138,7 +142,9 @@
 		'0',
 		 0,
 		'0',
-		#{course}
+		#{course},
+		#{disease_note},
+	    #{allergy_note}
     )
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="tcCourseWebEnroll" >
@@ -179,7 +185,9 @@
 	<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
 	<if test="status!= null" >,status=#{status}</if>
 	<if test="course!= null" >,course=#{course}</if>
-	
+	<if test="course!= null" >,course=#{course}</if>
+	<if test="disease_note!= null" >,disease_note=#{disease_note}</if>
+	<if test="allergy_note!= null" >,allergy_note=#{allergy_note}</if>
 	where id=#{id}
   </update>
   	<!--判断是否存在-->

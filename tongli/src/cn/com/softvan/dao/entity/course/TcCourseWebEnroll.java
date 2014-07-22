@@ -85,6 +85,10 @@ public class TcCourseWebEnroll extends BaseEntity {
 	private String status;
 	/** 课程 */
 	private String course;
+	/**是否状态疾病*/
+	private String disease_note;
+	/**是否食物过敏*/
+	private String allergy_note;
 	/**
 	 * 编号取得
 	 * @return 编号
@@ -532,5 +536,33 @@ public class TcCourseWebEnroll extends BaseEntity {
 	 */
 	public void setCourse(String course) {
 	    this.course = course;
+	}
+	/**
+	 * 是否状态疾病取得
+	 * @return 是否状态疾病
+	 */
+	public String getDisease_note() {
+	    return disease_note;
+	}
+	/**
+	 * 是否状态疾病设定
+	 * @param disease_note 是否状态疾病
+	 */
+	public void setDisease_note(String disease_note) {
+	    this.disease_note = disease_note;
+	}
+	/**
+	 * 是否食物过敏取得
+	 * @return 是否食物过敏
+	 */
+	public String getAllergy_note() {
+	    return allergy_note;
+	}
+	/**
+	 * 是否食物过敏设定
+	 * @param allergy_note 是否食物过敏
+	 */
+	public void setAllergy_note(String allergy_note) {
+	    this.allergy_note = allergy_note;
 	}
 }
