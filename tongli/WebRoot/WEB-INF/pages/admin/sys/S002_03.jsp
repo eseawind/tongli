@@ -49,7 +49,7 @@
 		<%@ include file="../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#sys,#sys_sub_menu_l1_sub_menu_l0').addClass('active');
+				$('#sys,#sys_sub_menu_l1_sub_menu_l3').addClass('active');
 				$('#sys_arrow,#sys_sub_l1_arrow').addClass('open');
 				$('#sys_sub_menu,#sys_sub_l1_sub_menu').show();
 			});
@@ -65,7 +65,7 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						资讯栏目 <small><span class="help-inline">展示所有资讯栏目</span></small>
+						资讯栏目 回收站 <small><span class="help-inline">展示所有已删除资讯栏目</span></small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
@@ -73,7 +73,7 @@
 							class="fa fa-angle-right"></i></li>
 						<li><a href="#">资讯管理</a> <i class="fa fa-angle-right"></i></li>
 						<li><a href="${basePath }/h/s001_init.ac">资讯栏目</a> <i class="fa fa-angle-right"></i></li>
-						<li>列表</a> </li>
+						<li>回收站</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -100,9 +100,6 @@
 							</c:choose>
 						</c:if>
 						<div id="msg"></div>
-						<div class="btn btn-toolbar">
-							<a href="${basePath}/h/s002_edit.ac" class="btn btn-primary">新增</a>
-						</div>
 						<table class="table table-condensed table-striped">
 							<tbody>
 								<tr>
@@ -110,55 +107,16 @@
 									<th class="col-md-4">名称</th>
 									<th class="col-md-2"></th>
 								</tr>
-							<c:forEach items="${beans}" var="bean">
-								<tr>
-									<td>${bean.sort_num}</td>
-									<td>
-									${bean.name}
-									</td>
-									<td><a href="${basePath}/h/s002_edit.ac?id=${bean.id}" class="btn edit green">编辑</a>
-									<c:if test="${bean.beans==null || fn:length(bean.beans)<1}">
-										<a href="javascript:void(0)" class="btn btn-danger" onclick="if(confirm('确认删除吗!')){location.href='${basePath}/h/s002_del.ac?id=${bean.id}'};" class="btn btn-danger" rel="nofollow">删除</a>
-									</c:if>
-									</td>
-								</tr>
-									<c:forEach items="${bean.beans}" var="bean1">
+								<c:forEach items="${beans}" var="bean">
 									<tr>
-										<td>${bean1.sort_num}</td>
+										<td>${bean.sort_num}</td>
 										<td>
-										|-- ${bean1.name}
+										${bean.name}
 										</td>
-										<td><a href="${basePath}/h/s002_edit.ac?id=${bean1.id}" class="btn edit green">编辑</a>
-										<c:if test="${bean1.beans==null || fn:length(bean1.beans)<1}">
-											<a href="javascript:void(0)" class="btn btn-danger" onclick="if(confirm('确认删除吗!')){location.href='${basePath}/h/s002_del.ac?id=${bean1.id}'};" class="btn btn-danger" rel="nofollow">删除</a>
-										</c:if>
-											</td>
-										</tr>
-											<c:forEach items="${bean1.beans}" var="bean2">
-										<tr>
-											<td>${bean2.sort_num}</td>
-											<td>
-											|--|-- ${bean2.name}
-											</td>
-											<td><a href="${basePath}/h/s002_edit.ac?id=${bean2.id}" class="btn edit green">编辑</a>
-											<c:if test="${bean2.beans==null || fn:length(bean2.beans)<1}">
-												<a href="javascript:void(0)" class="btn btn-danger" onclick="if(confirm('确认删除吗!')){location.href='${basePath}/h/s002_del.ac?id=${bean2.id}'};" class="btn btn-danger" rel="nofollow">删除</a>
-											</c:if>
-											</td>
-										</tr>
-										<c:forEach items="${bean2.beans}" var="bean3">
-										<tr>
-											<td>${bean3.sort_num}</td>
-											<td>
-											|--|--|-- ${bean3.name}
-											</td>
-											<td><a href="${basePath}/h/s002_edit.ac?id=${bean3.id}" class="btn edit green">编辑</a>
-												<a href="javascript:void(0)" class="btn btn-danger" onclick="if(confirm('确认删除吗!')){location.href='${basePath}/h/s002_del.ac?id=${bean3.id}'};" class="btn btn-danger" rel="nofollow">删除</a>
-											</td>
-										</tr>
-										</c:forEach>
-										</c:forEach>
-									</c:forEach>
+										<td>
+											<a href="javascript:void(0)" class="btn purple" onclick="if(confirm('确认恢复吗!')){location.href='${basePath}/h/s002_recovery.ac?id=${bean.id}'};" class="btn btn-danger" rel="nofollow">恢复</a>
+										</td>
+									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -177,24 +135,3 @@
 </body>
 <!-- END BODY -->
 </html>
-<!-- Modal -->
-<div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-				<h4 class="modal-title">新增分组</h4>
-			</div>
-			<div class="modal-body">
-				<p></p>
-				<div class="form-group">
-					<input class="form-control" placeholder="请输入分组名称" size="5" data-tabindex="1" type="text">
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button class="btn default" data-dismiss="modal" aria-hidden="true">关闭</button>
-				<button class="btn blue">保存</button>
-			</div>
-		</div>
-	</div>
-</div>

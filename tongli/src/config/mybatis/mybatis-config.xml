@@ -112,8 +112,19 @@
 		 <!-- entity class -->
 		<typeAlias type="cn.com.softvan.dao.entity.user.TcUaUmBaseUser" alias="tcUaUmBaseUser"/>
 		<typeAlias type="cn.com.softvan.dao.entity.user.TcUaUmBaseRole" alias="tcUaUmBaseRole"/>
-		
 		<!-- 用户角色  end-->
+		<!-- 班级管理 begin -->
+		<!--============= bean class==begin========= -->
+		<!-- 班级信息表 bean -->
+		<typeAlias type="cn.com.softvan.bean.classes.TcClassesBean" alias="tcClassesBean"/>
+		<!-- 班级_学员关联表 bean -->
+		<typeAlias type="cn.com.softvan.bean.classes.TcClassesVsStudentBean" alias="tcClassesVsStudentBean"/>
+		<!--=========== entity class====begin======= -->
+		<!-- 班级信息表 entity -->
+		<typeAlias type="cn.com.softvan.dao.entity.classes.TcClasses" alias="tcClasses"/>
+		<!-- 班级_学员关联表 entity -->
+		<typeAlias type="cn.com.softvan.dao.entity.classes.TcClassesVsStudent" alias="tcClassesVsStudent"/>
+		<!-- 班级管理 end -->
 	</typeAliases>
 	<!-- 插件 -->
 	<plugins>
@@ -184,5 +195,11 @@
 		<!-- 评论管理 begin -->
 		<mapper resource="/cn/com/softvan/dao/mybatis/comment/TcComment.xml"/>
 		<!-- 评论管理 end -->
+		<!-- ==========班级 xml=======begin====== -->
+		<!-- 班级信息表 -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/classes/TcClasses.xml"/>
+		<!-- 班级_学员关联表 -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/classes/TcClassesVsStudent.xml"/>
+		<!-- ==========班级 xml=======end====== -->
 	</mappers>
 </configuration>

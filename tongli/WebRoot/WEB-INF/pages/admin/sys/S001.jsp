@@ -152,8 +152,9 @@
 										<td>${bean.last_updated}</td>
 										<td>${bean.title}</td>
 										<td><a
-											href="${basePath}/h/s001_view.ac?id=${bean.id}"
-											class="btn  btn-info" target="_blank">预览</a> <a
+											href="${basePath}/c003_init.ac?id=${bean.id}&tid=${bean.id}&tid=${tid}&pid=${tid}"
+											class="btn  btn-info" target="_blank">预览</a> 
+											<a
 											href="${basePath}/h/s001_edit.ac?id=${bean.id}"
 											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
 											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/s001_del.ac?id=${bean.id}'};"

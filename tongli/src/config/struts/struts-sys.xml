@@ -17,6 +17,7 @@
 		<action name="s002_*" class="s002Action" method="{1}">
 			<result name="init">/WEB-INF/pages/admin/sys/S002.jsp</result>
 			<result name="edit">/WEB-INF/pages/admin/sys/S002_01.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/sys/S002_03.jsp</result>
 			<result name="success" type="chain">s002_init</result>
 		</action>
 		<!-- 友情链接 管理 -->

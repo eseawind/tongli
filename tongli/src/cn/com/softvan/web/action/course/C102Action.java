@@ -289,6 +289,7 @@ public class C102Action extends BaseAction {
 					bean.setType(type);
 					s="edit2";//冬夏令营
 				}
+				request.setAttribute("type",type);
 			}else{
 				bean.setType("0");//普通课程
 			}

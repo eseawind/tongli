@@ -113,6 +113,16 @@
 							会员回收站
 							</a>
 						</li>
+						<li id="member_sub_menu_l3" >
+							<a href="${basePath}/h/m002_init.ac" >
+							班级管理
+							</a>
+						</li>
+						<li id="member_sub_menu_l4" >
+							<a href="${basePath}/h/m002_recycle.ac" >
+							班级回收站
+							</a>
+						</li>
 					</ul>
 				</li>
 				<li id="student" class="">
@@ -143,6 +153,7 @@
 					</a>
 					<ul id="sys_sub_menu" style="display: none;" class="sub-menu">
 						<li id="sys_sub_menu_l1_sub_menu_l0"><a href="${basePath }/h/s002_init.ac">栏目管理</a></li>
+						<li id="sys_sub_menu_l1_sub_menu_l3"><a href="${basePath }/h/s002_recycle.ac">栏目回收站</a></li>
 						<li id="sys_sub_menu_l1_sub_menu_l1"><a href="${basePath }/h/s001_init.ac">资讯管理</a></li>
 						<li id="sys_sub_menu_l1_sub_menu_l2"><a href="${basePath }/h/s001_recycle.ac">资讯回收站</a></li>
 					</ul>

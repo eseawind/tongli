@@ -21,6 +21,7 @@ import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.sys.INewsTypeManager;
 import cn.com.softvan.web.action.BaseAction;
+import cn.com.softvan.web.tag.PageInfo;
 
 /**
  * 资讯管理_栏目管理 ActionClass
@@ -112,6 +113,30 @@ public class S002Action extends BaseAction {
 	}
 	/**
 	 * <p>
+	 * 删除。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>物理删除。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String delxx() {
+		log.info("S002Action delxx.........");
+		String id=request.getParameter("id");
+		TcSysNewsTypeBean bean1=new TcSysNewsTypeBean();
+		bean1.setId(id);
+		String msg="1";
+		try {
+			msg=newsTypeManager.deleteData(bean1);
+		} catch (Exception e) {
+			msg=e.getMessage();
+		}
+		request.setAttribute("msg",msg);
+		
+		return SUCCESS;
+	}
+	/**
+	 * <p>
 	 * 信息保存
 	 * </p>
 	 * <ol>
@@ -164,6 +189,49 @@ public class S002Action extends BaseAction {
 			bean=newsTypeManager.findDataById(bean1);
 		}
 		return "view";
+	}
+	/**
+	 * <p>
+	 * 回收站。
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>回收站。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String recycle() {
+		log.info("S001Action recycle.........");
+		TcSysNewsTypeBean bean1 = new TcSysNewsTypeBean();
+		//已删除
+		bean1.setDel_flag("1");
+		//栏目资讯列表
+		List<TcSysNewsTypeBean> beans=newsTypeManager.findDataIsList(bean1);
+		request.setAttribute("beans",beans);
+		return "recycle";
+	}
+	/**
+	 * <p>
+	 * 恢复。
+	 * </p>
+	 * <ol>[功能概要] 
+	 * <div>恢复逻辑删除的数据。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 */
+	public String recovery() {
+		log.info("S001Action recovery.........");
+		String id=request.getParameter("id");
+		TcSysNewsTypeBean bean1=new TcSysNewsTypeBean();
+		bean1.setId(id);
+		String msg="1";
+		try {
+			msg=newsTypeManager.recoveryDataById(bean1);
+		} catch (Exception e) {
+			msg=e.getMessage();
+		}
+		request.setAttribute("msg",msg);
+		
+		return SUCCESS;
 	}
 
 	/**

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="classes_info" namespace="/h" extends="wechat-default" >
+    	<default-interceptor-ref name="wechat-auth" /> 
+		<!-- 班级管理 -->
+		<action name="c401_*" class="c401Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/classes/C401.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/classes/C401_01.jsp</result>
+			<result name="view">/WEB-INF/pages/admin/classes/C401_02.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/classes/C401_03.jsp</result>
+			<result name="success" type="chain">c401_init</result>
+		</action>
+	</package>
+</struts>

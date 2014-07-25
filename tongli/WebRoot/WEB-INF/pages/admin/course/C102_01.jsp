@@ -80,6 +80,11 @@
 			</div>
 			<!-- END PAGE HEADER-->
 			<!-- BEGIN PAGE CONTENT-->
+			
+			
+		<c:choose>
+			<c:when test="${type==null}">
+			
 			<div class="row  tabbable tabbable-custom">
 			<ul class="nav nav-tabs" style="height:40px; ">
 					<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">课程信息</a></li>
@@ -94,7 +99,9 @@
 						<s:token></s:token>
 						<input name="bean.id" type="hidden" value="${bean.id}">
 						<input name="bean.type" type="hidden" value="${bean.type}">
-						<input name="type_flag" type="hidden" value="0">
+						
+								<input name="type_flag" type="hidden" value="0">
+							
 						<div class="form-group">
 							 &nbsp;  <label class="control-label">课程</label>
 							 <label class="control-label col-md-12">
@@ -449,6 +456,162 @@
 		<!-- END PAGE -->
 	</div>
 	<!-- END CONTAINER -->
+	</c:when>
+		<c:otherwise>
+			<div class="row">
+			<div class="tab-content">
+				<div class="col-md-12">
+					<form accept-charset="UTF-8"  action="${basePath}/h/c102_save.ac" class="edit_article" id="edit_article_13632" method="post">
+						<s:token></s:token>
+						<input name="bean.id" type="hidden" value="${bean.id}">
+						<input name="bean.type" type="hidden" value="${bean.type}">
+						<input name="type_flag" type="hidden" value="2x">
+						<div class="well form-inline form-group">
+							<div class="col-md-1"><label>开始日期</label></div> 
+							<div id="article_date1" style="margin-top: -8px;" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+								<input type="text" name="bean.date1" value="${bean.day}" class="form-control" readonly="">
+								<span class="input-group-btn">
+								<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div>
+							<div class="col-md-1"><label>结束日期</label></div> 
+							<div id="article_date2" style="margin-top: -8px;" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+								<input type="text" name="bean.date2" value="${bean.day}" class="form-control" readonly="">
+								<span class="input-group-btn">
+								<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div>
+							&nbsp; 
+						</div>
+						<div class="well form-inline">
+							<label>
+								<input name="day_week"  value="0"	 type="checkbox" />星期日
+							</label>
+							<label>
+								<input name="day_week"  value="1"	 type="checkbox" />星期一
+							</label>
+							<label>
+								<input name="day_week"  value="2"	 type="checkbox" />星期二
+							</label>
+							<label>
+								<input name="day_week"  value="3"	 type="checkbox" />星期三
+							</label>
+							<label>
+								<input name="day_week"  value="4"	 type="checkbox" />星期四
+							</label>
+							<label>
+								<input name="day_week"  value="5"	 type="checkbox" />星期五
+							</label>
+							<label>
+								<input name="day_week"  value="6"	 type="checkbox" />星期六
+							</label>
+						</div>
+						<div class="well form-inline form-group">
+							<div class="col-md-1"><label>上课时间</label></div> 
+							<div  class="input-group bootstrap-timepicker col-md-2" id="article_begin_time_toggle" style="margin-top: -8px;" >                                       
+								<input id="article_begin_time" name="bean.begin_time" value="${bean.begin_time}" type="text" class="form-control" readonly="" />
+								<span class="input-group-btn">
+								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
+								</span>
+							</div>
+							<div class="col-md-1"><label>下课时间</label></div> 
+							<div  class="input-group bootstrap-timepicker col-md-2" id="article_end_time_toggle" style="margin-top: -8px;" >                                       
+								<input id="article_end_time" type="text" name="bean.end_time" value="${bean.end_time}" class="form-control" readonly="" >
+								<span class="input-group-btn">
+								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
+								</span>
+							</div>
+							&nbsp; 
+						</div>
+						<div class="form-group">
+							 &nbsp;  <label class="control-label">课程</label>
+							 <label class="control-label col-md-12">
+							 <div class="input-group">
+							 <span class="input-group-addon">
+								<i class="fa fa-flag"></i>
+								</span>
+								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" data-placeholder="选择课程..">
+									<optgroup label="课程列表">
+									<c:forEach items="${course_beans}" var="course">
+										<c:set var="xxcc" value='' />
+											<c:if test="${bean.course_id==course.id}">
+												<c:set var="xxcc" value='selected="selected"' />
+											</c:if>
+										<option ${xxcc} value="${course.id}">${course.title}</option>
+									</c:forEach>
+									</optgroup>
+								</select>
+							</div>
+							</label>
+						</div>
+						<div class="form-group">
+							 &nbsp;  <label class="control-label">教练</label>
+							 <label class="control-label col-md-12">
+							 <div class="input-group">
+								<span class="input-group-addon">
+								<i class="fa fa-user"></i>
+								</span>
+								<select name="bean.teacher_id" id="teacher_select2_sample2"  class="form-control select2me" data-placeholder="选择教练..">
+									<optgroup label="教练列表">
+									<c:forEach items="${teacher_beans}" var="teacher">
+										<c:set var="xxcc" value='' />
+											<c:if test="${bean.teacher_id==teacher.id}">
+												<c:set var="xxcc" value='selected="selected"' />
+											</c:if>
+										<option ${xxcc} value="${teacher.id}">${teacher.name }</option>
+									</c:forEach>
+									</optgroup>
+								</select>
+							</div>
+							</label>
+						</div>
+						<div class="form-group">
+							 &nbsp;  <label class="control-label">学员</label>
+							 <label class="control-label col-md-12">
+							 <div class="input-group">
+							 	<span class="input-group-addon">
+								<i class="fa fa-female"></i>
+								</span>
+								<select name="bean.sids" id="student_select2_sample2" class="form-control select2 select2me" multiple>
+										<optgroup label="学员列表">
+											<c:forEach items="${student_beans}" var="student">
+												<c:set var="xxcc" value='' />
+												<c:forEach items="${course_student_beans}" var="the_student">
+													<c:if test="${the_student.id==student.id}">
+													<c:set var="xxcc" value='selected="selected"' />
+													</c:if>
+												</c:forEach>
+												<option ${xxcc} value="${student.id}">${student.name }</option>
+											</c:forEach>
+										</optgroup>
+									</select>
+								</div>
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="article_addres">地址</label> <input class="form-control"
+								id="article_addres" name="bean.addres" size="150" type="text" value="${bean.addres}">
+						</div>
+						<div class="form-group">
+							<label for="article_description">详情</label>
+							<div class="qeditor_border">
+								<textarea name="bean.detail_info" style="height: 300px;width: 100%;" id="article_description" >
+									${bean.detail_info}
+								</textarea>
+							</div>
+						</div>
+						<div class="form-actions">
+							<input class="btn btn-primary" name="commit" type="submit"
+								value="保存"> | <a
+								href="${basePath}/h/c102_init.ac">返回</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		</c:otherwise>
+	</c:choose>
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
@@ -486,6 +649,8 @@
 </html>
 <script type="text/javascript">
 jQuery(document).ready(function() {
+	$('#article_date1').datepicker();
+	$('#article_date2').datepicker();
 	$('#article_day').datepicker();
 	//
 	 $('#article_begin_time').clockface({
