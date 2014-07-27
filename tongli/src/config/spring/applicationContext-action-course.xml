@@ -33,4 +33,10 @@
 	<bean id="c104Action" class="cn.com.softvan.web.action.course.C104Action" parent="baseAction" scope="prototype">
 		<property name="courseWebEnrollManager" ref="courseWebEnrollManager"></property>
 	</bean>
+	<!--============ action class======begin========= -->
+	<!-- 课程地址信息表 ActionCalss -->	
+	<bean id="c105Action" class="cn.com.softvan.web.action.course.C105Action" parent="baseAction" scope="prototype">	
+		<property name="addresMamager" ref="addresMamager"></property>	
+	</bean>	
+	<!--============ action class======end========= -->
 </beans>

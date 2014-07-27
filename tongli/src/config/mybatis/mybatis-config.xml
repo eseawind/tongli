@@ -125,6 +125,20 @@
 		<!-- 班级_学员关联表 entity -->
 		<typeAlias type="cn.com.softvan.dao.entity.classes.TcClassesVsStudent" alias="tcClassesVsStudent"/>
 		<!-- 班级管理 end -->
+		<!-- 课程地址 begin -->
+		<!--============= bean class==begin========= -->
+		<!-- 课程地址信息表 bean -->
+		<typeAlias type="cn.com.softvan.bean.addres.TcAddresBean" alias="tcAddresBean"/>
+		<!-- 课程_上课地点关联关系 bean -->
+		<typeAlias type="cn.com.softvan.bean.addres.TcCourseVsAddresBean" alias="tcCourseVsAddresBean"/>
+		<!--============= bean class==end========= -->
+		<!--=========== entity class====begin======= -->
+		<!-- 课程地址信息表 entity -->
+		<typeAlias type="cn.com.softvan.dao.entity.addres.TcAddres" alias="tcAddres"/>
+		<!-- 课程_上课地点关联关系 entity -->
+		<typeAlias type="cn.com.softvan.dao.entity.addres.TcCourseVsAddres" alias="tcCourseVsAddres"/>
+		<!--=========== entity class====end======= -->
+		<!-- 课程地址 end -->
 	</typeAliases>
 	<!-- 插件 -->
 	<plugins>
@@ -201,5 +215,13 @@
 		<!-- 班级_学员关联表 -->
 		<mapper resource="/cn/com/softvan/dao/mybatis/classes/TcClassesVsStudent.xml"/>
 		<!-- ==========班级 xml=======end====== -->
+		<!-- 课程地址 begin -->
+		<!-- ==========mybatis xml=======begin====== -->
+		<!-- 课程地址信息表 -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/addres/TcAddres.xml"/>
+		<!-- 课程_上课地点关联关系 -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/addres/TcCourseVsAddres.xml"/>
+		<!-- ==========mybatis xml=======end====== -->
+		<!-- 课程地址 end -->
 	</mappers>
 </configuration>

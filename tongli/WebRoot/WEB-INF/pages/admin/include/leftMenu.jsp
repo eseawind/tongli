@@ -84,6 +84,11 @@
 							课程表管理
 							</a>
 						</li>
+						<li id="course_sub_menu_l3">
+							<a   href="${basePath}/h/c102_recycle.ac">
+							课程表回收站
+							</a>
+						</li>
 						<li id="course_sub_menu_l1">
 							<a   href="${basePath}/h/c101_init.ac">
 							课程管理
@@ -92,6 +97,16 @@
 						<li id="course_sub_menu_l2">
 							<a  href="${basePath}/h/c101_recycle.ac">
 							课程回收站
+							</a>
+						</li>
+						<li id="course_sub_menu_l1">
+							<a   href="${basePath}/h/c105_init.ac">
+							课程地址管理
+							</a>
+						</li>
+						<li id="course_sub_menu_l2">
+							<a  href="${basePath}/h/c105_recycle.ac">
+							课程地址回收站
 							</a>
 						</li>
 					</ul>
