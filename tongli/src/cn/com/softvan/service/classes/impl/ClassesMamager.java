@@ -11,18 +11,25 @@
  */
 package cn.com.softvan.service.classes.impl;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import cn.com.softvan.bean.classes.TcClassesBean;
+import cn.com.softvan.bean.member.TcMemberBean;
+import cn.com.softvan.bean.student.TcStudentBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IOHelper;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.service.BaseManager;
-import cn.com.softvan.dao.entity.classes.TcClasses;
-import cn.com.softvan.bean.classes.TcClassesBean;
 import cn.com.softvan.dao.daointer.classes.ITcClassesDao;
+import cn.com.softvan.dao.daointer.classes.ITcClassesVsStudentDao;
+import cn.com.softvan.dao.entity.classes.TcClasses;
+import cn.com.softvan.dao.entity.classes.TcClassesVsStudent;
+import cn.com.softvan.dao.entity.member.TcMemberVsStudent;
+import cn.com.softvan.service.BaseManager;
 import cn.com.softvan.service.classes.IClassesMamager;
 /**
  * <p>班级信息表   业务处理实现类。</p>	
@@ -42,7 +49,10 @@ public class ClassesMamager extends BaseManager implements IClassesMamager{
 	private static final transient Logger log = Logger.getLogger(ClassesMamager.class);
 	/**班级信息表 Dao接口类*/
 	private ITcClassesDao tcClassesDao;
-/**	
+	/**班级_学员关联表 数据库处理接口类*/
+	private ITcClassesVsStudentDao tcClassesVsStudentDao;
+	
+	/**	
 	 * <p>信息编辑。</p>	
 	 * <ol>[功能概要] 	
 	 * <div>新增信息。</div>	
@@ -85,7 +95,24 @@ public class ClassesMamager extends BaseManager implements IClassesMamager{
 						dto.setId(IdUtils.createUUID(32));	
 					}	
 					tcClassesDao.insert(dto);	
-				}	
+				}
+				//TODO ------保存班级与学员关系-------
+				//清空当前班级与学员的关联关系
+				TcClassesVsStudent msDto=new TcClassesVsStudent();
+				//班级id
+				msDto.setClasses_id(dto.getId());
+				//清空
+				tcClassesVsStudentDao.deleteByPrimaryKey(msDto);
+				if(bean.getSids()!=null){
+					for(String sid:bean.getSids()){
+						msDto.setStudent_id(sid);
+						msDto.setCreate_id(bean.getCreate_id());
+						msDto.setCreate_ip(bean.getCreate_ip());
+						//写入数据库
+						tcClassesVsStudentDao.insert(msDto);
+					}
+				}
+					//
 			} catch (Exception e) {	
 				msg="信息保存失败,数据库处理错误!";	
 				log.error(msg, e);	
@@ -168,6 +195,7 @@ public class ClassesMamager extends BaseManager implements IClassesMamager{
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP	
 				dto.setDel_flag(bean.getDel_flag());//0否1是	
 				dto.setPic_url(bean.getPic_url());//pic_url	
+				dto.setPageInfo(bean.getPageInfo());//
 		   }	
 			beans=(List<TcClassesBean>) tcClassesDao.findDataIsPage(dto);	
 		} catch (Exception e) {	
@@ -194,7 +222,10 @@ public class ClassesMamager extends BaseManager implements IClassesMamager{
 				dto.setSort_num(bean.getSort_num());//序号	
 				dto.setKeyword(bean.getKeyword());//关键字	
 				dto.setBrief_info(bean.getBrief_info());//摘要	
-				dto.setDetail_info(bean.getDetail_info());//内容	
+				if(Validator.notEmpty(bean.getDetail_info())){
+					IOHelper.deleteFile(bean.getDetail_info());//TODO=删除文件
+					dto.setDetail_info(IOHelper.writeHtml("html",bean.getDetail_info()));//内容
+				}
 				dto.setNote(bean.getNote());//备注	
 				dto.setDate_created(bean.getDate_created());//数据输入日期	
 				dto.setCreate_id(bean.getCreate_id());//建立者ID	
@@ -242,9 +273,9 @@ public class ClassesMamager extends BaseManager implements IClassesMamager{
 				dto.setPic_url(bean.getPic_url());//pic_url	
 		   }	
 			bean1=(TcClassesBean) tcClassesDao.selectByPrimaryKey(dto);	
-			//if(bean1!=null){	
-				//bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));	
-			//}	
+			if(bean1!=null && Validator.notEmpty(bean1.getDetail_info())){	
+				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));	
+			}	
 		} catch (Exception e) {	
 			log.error("信息详情查询失败,数据库错误!", e);	
 		}	
@@ -272,18 +303,55 @@ public class ClassesMamager extends BaseManager implements IClassesMamager{
 		}	
 		return msg;	
 	}	
-	/**	
-	 * 信息DAO 接口类取得	
-	 * @return 信息DAO 接口类	
-	 */	
-	public ITcClassesDao gettcClassesDao() {	
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>当前会员关联的学员列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcStudentBean> findDataIsListStudent(TcClassesBean bean){
+		List<TcStudentBean> beans=null;
+		try {
+			TcClassesVsStudent dto=new TcClassesVsStudent();
+	    	   if(bean!=null){
+	    		    dto.setClasses_id(bean.getId());
+		   			dto.setLimit_s(bean.getLimit_s());
+		   			dto.setLimit_e(bean.getLimit_e());
+	    	   }
+			beans=tcClassesVsStudentDao.findDataIsListStudent(dto);
+		} catch (Exception e) {
+			log.error("信息查询失败,数据库错误!", e);
+		}
+		return beans;
+	}
+	/**
+	 * 班级信息表 Dao接口类取得
+	 * @return 班级信息表 Dao接口类
+	 */
+	public ITcClassesDao getTcClassesDao() {	
 		return tcClassesDao;	
-	}	
-	/**	
-	 * 信息DAO 接口类设定	
-	 * @param tcClassesDao 信息DAO 接口类	
-	 */	
-	public void settcClassesDao(ITcClassesDao tcClassesDao) {	
+	}
+	/**
+	 * 班级信息表 Dao接口类设定
+	 * @param tcClassesDao 班级信息表 Dao接口类
+	 */
+	public void setTcClassesDao(ITcClassesDao tcClassesDao) {	
 		this.tcClassesDao = tcClassesDao;	
+	}
+	/**
+	 * 班级_学员关联表 数据库处理接口类取得
+	 * @return 班级_学员关联表 数据库处理接口类
+	 */
+	public ITcClassesVsStudentDao getTcClassesVsStudentDao() {
+	    return tcClassesVsStudentDao;
+	}
+	/**
+	 * 班级_学员关联表 数据库处理接口类设定
+	 * @param tcClassesVsStudentDao 班级_学员关联表 数据库处理接口类
+	 */
+	public void setTcClassesVsStudentDao(ITcClassesVsStudentDao tcClassesVsStudentDao) {
+	    this.tcClassesVsStudentDao = tcClassesVsStudentDao;
 	}	
 }

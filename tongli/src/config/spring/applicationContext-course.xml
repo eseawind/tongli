@@ -34,6 +34,12 @@
 		<bean id="tcCourseWebEnrollDao" parent="baseDao">
 			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.course.ITcCourseWebEnrollDao"></property>
 		</bean>
+		<!-- ==========daointer class===begin======= -->
+		<!-- 课程与班级关联关系 数据库处理接口类	 -->
+		<bean id="tcCourseVsClassesDao" parent="baseDao">
+			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.course.ITcCourseVsClassesDao"></property>
+		</bean>
+		<!-- ==========daointer class===end======= -->
 		<!-- ************************业务处理类************************************* -->
 		<bean id="courseManager" class="cn.com.softvan.service.course.impl.CourseManager" parent="baseManager" scope="prototype">
 			<property name="tcCourseDao" ref="tcCourseDao"></property>

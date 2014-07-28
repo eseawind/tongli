@@ -1,30 +1,28 @@
 
 /*	
- * 班级信息表  ACTION类	
+ * 课程地址信息表  ACTION类	
  *		
  * VERSION      DATE          BY              REASON		
  * -------- ----------- --------------- ------------------------------------------	
- * 1.00     2014.07.26      wuxiaogang         程序.发布		
+ * 1.00     2014.07.28      wuxiaogang         程序.发布		
  * -------- ----------- --------------- ------------------------------------------	
  * Copyright 2014 tongli  System. - All Rights Reserved.		
  *	
  */
-package cn.com.softvan.web.action.classes;
+package cn.com.softvan.web.action.addres;
+import java.net.URLDecoder;
 import java.util.List;
-
 import org.apache.log4j.Logger;
-
 import cn.com.softvan.bean.BaseUserBean;
-import cn.com.softvan.bean.classes.TcClassesBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.service.classes.IClassesMamager;
-import cn.com.softvan.service.student.IStudentManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
+import cn.com.softvan.bean.addres.TcAddresBean;
+import cn.com.softvan.service.addres.IAddresMamager;
 /**
- * <p>班级信息表  ACTION类。</p>	
+ * <p>课程地址信息表  ACTION类。</p>	
  * <ol>[功能概要] 
  * <div>初始化。</div> 
  * <div>编辑页面(页面)(新增or修改)。</div> 
@@ -37,18 +35,16 @@ import cn.com.softvan.web.tag.PageInfo;
  *</ol> 
  * @author wuxiaogang
  */
-public class C401Action extends BaseAction{
+public class C105Action extends BaseAction{
 
-	private static final long serialVersionUID = -403318159539951021L;
-	private static final transient Logger log = Logger.getLogger(C401Action.class);
-	/**BEAN类  班级信息表*/
-	private TcClassesBean bean;
-	/**BEAN类  班级信息表 集合*/
-	private List<TcClassesBean> beans;
-	/**班级信息表 业务处理*/
-	private IClassesMamager classesMamager;
-	/**学员信息管理 业务处理*/
-	private IStudentManager studentManager;
+	private static final long serialVersionUID = -590192510636361652L;
+	private static final transient Logger log = Logger.getLogger(C105Action.class);
+	/**BEAN类  课程地址信息表*/
+	private TcAddresBean bean;
+	/**BEAN类  课程地址信息表 集合*/
+	private List<TcAddresBean> beans;
+	/**课程地址信息表 业务处理*/
+	private IAddresMamager addresMamager;
 	/**
 	 * <p> 初始化处理。 </p>
 	 * <ol>
@@ -58,7 +54,7 @@ public class C401Action extends BaseAction{
 	 * @return 转发字符串
 	 */
 	public String init() {
-		log.info("C401Action init.........");
+		log.info("C105Action init.........");
 		int offset = 0;
 		// 分页偏移量
 		if (!Validator.isNullEmpty(request.getParameter("offset"))
@@ -70,10 +66,8 @@ public class C401Action extends BaseAction{
 		page.setCurrOffset(offset);
 		//每页显示条数
 		page.setPageRowCount(15);
-		TcClassesBean bean1 = new TcClassesBean();
+		TcAddresBean bean1 = new TcAddresBean();
 		bean1.setPageInfo(page);
-		//列表
-		List<TcClassesBean> beans=classesMamager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "init";
@@ -87,21 +81,17 @@ public class C401Action extends BaseAction{
 	 * @return 转发字符串
 	 */
 	public String edit() {
-		log.info("C401Action edit.........");
+		log.info("C105Action edit.........");
 		String id=request.getParameter("id");
 		if(id!=null){
-			TcClassesBean bean1=new TcClassesBean();
+			TcAddresBean bean1=new TcAddresBean();
 			bean1.setId(id);
-			bean=classesMamager.findDataById(bean1);
-			//当前会员关联的学员
-			request.setAttribute("classes_student_beans", classesMamager.findDataIsListStudent(bean1));
+			bean=addresMamager.findDataById(bean1);
 		}
 		if(bean==null){
-			bean=new TcClassesBean();
+			bean=new TcAddresBean();
 			bean.setId(IdUtils.createUUID(32));
 		}
-		//所有学员信息
-		request.setAttribute("student_beans",studentManager.findDataIsList(null));
 		return "edit";
 	}
 	/**
@@ -113,13 +103,13 @@ public class C401Action extends BaseAction{
 	 * @return 转发字符串
 	 */
 	public String del() {
-		log.info("C401Action del.........");
+		log.info("C105Action del.........");
 		String id=request.getParameter("id");
-			TcClassesBean bean1=new TcClassesBean();
+			TcAddresBean bean1=new TcAddresBean();
 		bean1.setId(id);
 		String msg="1";
 		try {
-			msg=classesMamager.deleteDataById(bean1);
+			msg=addresMamager.deleteDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -137,11 +127,11 @@ public class C401Action extends BaseAction{
 	 * @return 转发字符串
 	 */
 	public String save() {
-		log.info("C401Action save.........");
+		log.info("C105Action save.........");
 		if(bean!=null){
 			String msg="1";
 			try {
-				if(Validator.isEmpty(bean.getName())){
+				if(Validator.isEmpty("需要验证的信息")){
 					msg="保存失败!信息为空!";
 				}else{
 					BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
@@ -151,7 +141,7 @@ public class C401Action extends BaseAction{
 						bean.setUpdate_ip(getIpAddr());
 						bean.setUpdate_id(user.getUser_id());
 					}
-					msg=classesMamager.saveOrUpdateData(bean);
+					msg=addresMamager.saveOrUpdateData(bean);
 				}
 			} catch (Exception e) {
 				msg=e.getMessage();
@@ -171,12 +161,12 @@ public class C401Action extends BaseAction{
 	 * @return 转发字符串
 	 */
 	public String view() {
-		log.info("C401Action view.........");
+		log.info("C105Action view.........");
 		String id=request.getParameter("id");
 		if(id!=null){
-			TcClassesBean bean1=new TcClassesBean();
+			TcAddresBean bean1=new TcAddresBean();
 			bean1.setId(id);
-			bean=classesMamager.findDataById(bean1);
+			bean=addresMamager.findDataById(bean1);
 		}
 		return "view";
 	}
@@ -189,7 +179,7 @@ public class C401Action extends BaseAction{
 	 * @return 转发字符串
 	 */
 	public String recycle() {
-		log.info("C401Action recycle.........");
+		log.info("C105Action recycle.........");
 		int offset = 0;
 		// 分页偏移量
 		if (!Validator.isNullEmpty(request.getParameter("offset"))
@@ -201,12 +191,12 @@ public class C401Action extends BaseAction{
 		page.setCurrOffset(offset);
 		//每页显示条数
 		page.setPageRowCount(15);
-		TcClassesBean bean1 = new TcClassesBean();
+		TcAddresBean bean1 = new TcAddresBean();
 		bean1.setPageInfo(page);
 		//已删除
 		bean1.setDel_flag("1");
 		//栏目资讯列表
-		List<TcClassesBean> beans=classesMamager.findDataIsPage(bean1);
+		List<TcAddresBean> beans=addresMamager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "recycle";
@@ -219,13 +209,13 @@ public class C401Action extends BaseAction{
 	 * @return 转发字符串
 	 */
 	public String recovery() {
-		log.info("C401Action recovery.........");
+		log.info("C105Action recovery.........");
 		String id=request.getParameter("id");
-		TcClassesBean bean1=new TcClassesBean();
+		TcAddresBean bean1=new TcAddresBean();
 		bean1.setId(id);
 		String msg="1";
 		try {
-			msg=classesMamager.recoveryDataById(bean1);
+			msg=addresMamager.recoveryDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -234,59 +224,45 @@ public class C401Action extends BaseAction{
 		return SUCCESS;
 	}
 	/**
-	 * BEAN类  班级信息表取得
-	 * @return BEAN类  班级信息表
+	 * BEAN类 课程地址信息表 设定 
+	 * @param beanBEAN类 课程地址信息表
 	 */
-	public TcClassesBean getBean(){
-		return bean;
-	}
-	/**
-	 * BEAN类  班级信息表设定
-	 * @param bean BEAN类  班级信息表
-	 */
-	public void setBean(TcClassesBean bean){
+	public void setBean(TcAddresBean bean){
 		this.bean=bean;
 	}
 	/**
-	 * BEAN类  班级信息表 集合取得
-	 * @return BEAN类  班级信息表 集合
+	 * BEAN类 课程地址信息表 取得 
+	 * @return BEAN类 课程地址信息表
 	 */
-	public List<TcClassesBean> getBeans(){
-		return beans;
+	public TcAddresBean getBean(){
+		return bean;
 	}
 	/**
-	 * BEAN类  班级信息表 集合设定
-	 * @param beans BEAN类  班级信息表 集合
+	 * BEAN类 集合 课程地址信息表 设定 
+	 * @param beansBEAN类 集合 课程地址信息表
 	 */
-	public void setBeans(List<TcClassesBean> beans){
+	public void setBeans(List<TcAddresBean> beans){
 		this.beans=beans;
 	}
 	/**
-	 * 班级信息表 业务处理取得
-	 * @return 班级信息表 业务处理
+	 * BEAN类  集合 课程地址信息表 取得 
+	 * @return BEAN类  集合 课程地址信息表
 	 */
-	public IClassesMamager getClassesMamager(){
-		return classesMamager;
+	public List<TcAddresBean> getBeans(){
+		return beans;
 	}
 	/**
-	 * 班级信息表 业务处理设定
-	 * @param classesMamager 班级信息表 业务处理
+	 * 业务处理 课程地址信息表 设定 
+	 * @param addresMamager业务处理 课程地址信息表
 	 */
-	public void setClassesMamager(IClassesMamager classesMamager){
-		this.classesMamager=classesMamager;
+	public void setAddresMamager(IAddresMamager addresMamager){
+		this.addresMamager=addresMamager;
 	}
 	/**
-	 * 学员信息管理 业务处理取得
-	 * @return 学员信息管理 业务处理
+	 * 业务处理 课程地址信息表 取得 
+	 * @return 业务处理 课程地址信息表
 	 */
-	public IStudentManager getStudentManager() {
-	    return studentManager;
-	}
-	/**
-	 * 学员信息管理 业务处理设定
-	 * @param studentManager 学员信息管理 业务处理
-	 */
-	public void setStudentManager(IStudentManager studentManager) {
-	    this.studentManager = studentManager;
+	public IAddresMamager getAddresMamager(){
+		return addresMamager;
 	}
 }

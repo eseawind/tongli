@@ -1,1 +1,28 @@
+
+	<!--============= bean class==begin========= -->
+	<!-- 课程与班级关联关系 bean -->
+	<typeAlias type="cn.com.softvan.bean.course.TcCourseVsClassesBean" alias="tcCourseVsClassesBean"/>
+	<!--============= bean class==end========= -->
+	
+	<!--=========== entity class====begin======= -->
+	<!-- 课程与班级关联关系 entity -->
+	<typeAlias type="cn.com.softvan.dao.entity.course.TcCourseVsClasses" alias="tcCourseVsClasses"/>
+	<!--=========== entity class====end======= -->
+	<!-- ==========mybatis xml=======begin====== -->
+	<!-- 课程与班级关联关系 -->
+	<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseVsClasses.xml"/>
+	<!-- ==========mybatis xml=======end====== -->
+	
+	<!-- ==========daointer class===begin======= -->
+	<!-- 课程与班级关联关系 数据库处理接口类	 -->
+	<bean id="tcCourseVsClassesDao" parent="baseDao">
+		<property name="mapperInterface" value="cn.com.softvan.dao.daointer.course.ITcCourseVsClassesDao"></property>
+	</bean>
+	<!-- ==========daointer class===end======= -->
+	
+	<!--========== service class impl===begin=======-->
+	<!--========== service class impl===end=======-->
+	
+	<!--============ action class======begin========= -->
+	<!--============ action class======end========= -->
 	

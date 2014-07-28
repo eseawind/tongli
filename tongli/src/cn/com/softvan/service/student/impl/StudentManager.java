@@ -228,7 +228,7 @@ public class StudentManager extends BaseManager implements IStudentManager {
 	   			dto.setDel_flag(bean.getDel_flag());//是否删除
     	   }
 			bean1=(TcStudentBean) tcStudentDao.selectByPrimaryKey(dto);
-			if(bean1!=null){
+			if(bean1!=null && Validator.notEmpty(bean1.getDetail_info())){	
 				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 			}
 		} catch (Exception e) {

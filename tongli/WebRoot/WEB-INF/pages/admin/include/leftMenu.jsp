@@ -84,7 +84,7 @@
 							课程表管理
 							</a>
 						</li>
-						<li id="course_sub_menu_l3">
+						<li id="course_sub_menu_l4">
 							<a   href="${basePath}/h/c102_recycle.ac">
 							课程表回收站
 							</a>
@@ -99,12 +99,12 @@
 							课程回收站
 							</a>
 						</li>
-						<li id="course_sub_menu_l1">
+						<li id="course_sub_menu_l5">
 							<a   href="${basePath}/h/c105_init.ac">
 							课程地址管理
 							</a>
 						</li>
-						<li id="course_sub_menu_l2">
+						<li id="course_sub_menu_l6">
 							<a  href="${basePath}/h/c105_recycle.ac">
 							课程地址回收站
 							</a>
@@ -128,16 +128,6 @@
 							会员回收站
 							</a>
 						</li>
-						<li id="member_sub_menu_l3" >
-							<a href="${basePath}/h/m002_init.ac" >
-							班级管理
-							</a>
-						</li>
-						<li id="member_sub_menu_l4" >
-							<a href="${basePath}/h/m002_recycle.ac" >
-							班级回收站
-							</a>
-						</li>
 					</ul>
 				</li>
 				<li id="student" class="">
@@ -155,6 +145,16 @@
 						<li id="student_sub_menu_l2" >
 							<a href="${basePath}/h/s201_recycle.ac" >
 							学员回收站
+							</a>
+						</li>
+						<li id="student_sub_menu_l3" >
+							<a href="${basePath}/h/c401_init.ac" >
+							班级管理
+							</a>
+						</li>
+						<li id="student_sub_menu_l4" >
+							<a href="${basePath}/h/c401_recycle.ac" >
+							班级回收站
 							</a>
 						</li>
 					</ul>

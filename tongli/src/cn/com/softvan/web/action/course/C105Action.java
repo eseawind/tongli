@@ -10,17 +10,18 @@
  *	
  */
 package cn.com.softvan.web.action.course;
-import java.net.URLDecoder;
 import java.util.List;
+
 import org.apache.log4j.Logger;
+
 import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.addres.TcAddresBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
+import cn.com.softvan.service.addres.IAddresMamager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
-import cn.com.softvan.bean.addres.TcAddresBean;
-import cn.com.softvan.service.addres.IAddresMamager;
 /**
  * <p>课程地址信息表  ACTION类。</p>	
  * <ol>[功能概要] 
@@ -68,6 +69,8 @@ public class C105Action extends BaseAction{
 		page.setPageRowCount(15);
 		TcAddresBean bean1 = new TcAddresBean();
 		bean1.setPageInfo(page);
+		//列表
+		List<TcAddresBean> beans=addresMamager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "init";
@@ -131,7 +134,7 @@ public class C105Action extends BaseAction{
 		if(bean!=null){
 			String msg="1";
 			try {
-				if(Validator.isEmpty("需要验证的信息")){
+				if(Validator.isEmpty(bean.getAddres())){
 					msg="保存失败!信息为空!";
 				}else{
 					BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);

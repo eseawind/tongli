@@ -12,6 +12,7 @@
 package cn.com.softvan.service.classes;
 import java.util.List;
 import cn.com.softvan.bean.classes.TcClassesBean;
+import cn.com.softvan.bean.student.TcStudentBean;
 /**
  * <p>班级信息表   业务处理接口类。</p>	
  * <ol>[功能概要] 
@@ -87,4 +88,13 @@ public interface IClassesMamager{
 	 * @return 处理结果	
 	 */	
 	public TcClassesBean findDataById(TcClassesBean bean);	
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>当前会员关联的学员列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcStudentBean> findDataIsListStudent(TcClassesBean bean);
 }

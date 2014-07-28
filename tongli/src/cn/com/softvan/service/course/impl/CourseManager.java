@@ -17,12 +17,16 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.com.softvan.bean.classes.TcClassesBean;
 import cn.com.softvan.bean.course.TcCourseBean;
+import cn.com.softvan.bean.course.TcCourseVsClassesBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
 import cn.com.softvan.dao.daointer.course.ITcCourseDao;
+import cn.com.softvan.dao.daointer.course.ITcCourseVsClassesDao;
 import cn.com.softvan.dao.entity.course.TcCourse;
+import cn.com.softvan.dao.entity.course.TcCourseVsClasses;
 import cn.com.softvan.service.BaseManager;
 import cn.com.softvan.service.course.ICourseManager;
 /**
@@ -39,6 +43,8 @@ public class CourseManager extends BaseManager implements ICourseManager {
 	
 	/**信息DAO 接口类*/
 	private ITcCourseDao tcCourseDao;
+	/**信息DAO 课程与班级关联关系 数据库处理接口类。*/
+	private ITcCourseVsClassesDao tcCourseVsClassesDao;
 	/**
 	 * <p>信息编辑。</p>
 	 * <ol>[功能概要] 
@@ -292,5 +298,42 @@ public class CourseManager extends BaseManager implements ICourseManager {
 			}
 		}
 		return msg;
+	}
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>当前课程关联的的班级列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcClassesBean> findDataIsListClasses(TcCourseVsClassesBean bean){
+		List<TcClassesBean> beans=null;
+		try {
+			TcCourseVsClasses dto=new TcCourseVsClasses();
+	    	   if(bean!=null){
+	    		    dto.setCourse_id(bean.getCourse_id());
+		   			dto.setLimit_s(bean.getLimit_s());
+		   			dto.setLimit_e(bean.getLimit_e());
+	    	   }
+			beans=tcCourseVsClassesDao.findDataIsListClasses(dto);
+		} catch (Exception e) {
+			log.error("信息查询失败,数据库错误!", e);
+		}
+		return beans;
+	}
+	/**
+	 * 信息DAO 课程与班级关联关系 数据库处理接口类。取得
+	 * @return 信息DAO 课程与班级关联关系 数据库处理接口类。
+	 */
+	public ITcCourseVsClassesDao getTcCourseVsClassesDao() {
+	    return tcCourseVsClassesDao;
+	}
+	/**
+	 * 信息DAO 课程与班级关联关系 数据库处理接口类。设定
+	 * @param tcCourseVsClassesDao 信息DAO 课程与班级关联关系 数据库处理接口类。
+	 */
+	public void setTcCourseVsClassesDao(ITcCourseVsClassesDao tcCourseVsClassesDao) {
+	    this.tcCourseVsClassesDao = tcCourseVsClassesDao;
 	}
 }

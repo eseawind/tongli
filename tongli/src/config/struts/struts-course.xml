@@ -44,5 +44,12 @@
 			<result name="list1">/WEB-INF/pages/admin/course/C104_04.jsp</result>
 			<result name="success" type="chain">c104_init</result>
 		</action>
+		<!-- 地址管理 -->
+		<action name="c105_*" class="c105Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/course/C105.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/course/C105_01.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/course/C105_03.jsp</result>
+			<result name="success" type="chain">c105_init</result>
+		</action>
 	</package>
 </struts>

@@ -96,12 +96,30 @@
 		select
 		<include refid="Base_Column_List" />
 		from tc_classes t1 
+		 where 1=1
+	    <choose>
+	    	<when test="del_flag!=null">
+	    		and t1.del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and t1.del_flag='0'
+	    	</otherwise>
+	    </choose>
 	</select>
 	<!--信息列表 -->
 	<select id="findDataIsList" parameterType="tcClasses" resultType="tcClassesBean">
 		select
 		<include refid="Base_Column_List" />
 		from tc_classes t1 
+		where 1=1
+	    <choose>
+	    	<when test="del_flag!=null">
+	    		and t1.del_flag=#{del_flag}
+	    	</when>
+	    	<otherwise>
+	    	    and t1.del_flag='0'
+	    	</otherwise>
+	    </choose>
 	</select>
 	<!-- 逻辑删除 -->
 	<update id="deleteById" parameterType="tcClasses" >

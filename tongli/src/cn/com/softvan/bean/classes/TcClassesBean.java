@@ -10,6 +10,8 @@
  *	
  */
 package cn.com.softvan.bean.classes;
+import java.util.List;
+
 import cn.com.softvan.bean.BaseBean;
 /**
  * <p>班级信息表  BEAN类。</p>	
@@ -30,88 +32,104 @@ public class TcClassesBean extends BaseBean{
 	private String detail_info;
 	/**pic_url */
 	private String pic_url;
+	/** 学员id集合 */
+	private List<String> sids;
 	/**
-	 * ID 设定 
-	 * @param idID
-	 */
-	public void setId(String id){
-		this.id=id;
-	}
-	/**
-	 * ID 取得 
+	 * ID取得
 	 * @return ID
 	 */
 	public String getId(){
 		return id;
 	}
 	/**
-	 * 班级名称 设定 
-	 * @param name班级名称
+	 * ID设定
+	 * @param id ID
 	 */
-	public void setName(String name){
-		this.name=name;
+	public void setId(String id){
+		this.id=id;
 	}
 	/**
-	 * 班级名称 取得 
+	 * 班级名称取得
 	 * @return 班级名称
 	 */
 	public String getName(){
 		return name;
 	}
 	/**
-	 * 序号 设定 
-	 * @param sort_num序号
+	 * 班级名称设定
+	 * @param name 班级名称
 	 */
-	public void setSort_num(String sort_num){
-		this.sort_num=sort_num;
+	public void setName(String name){
+		this.name=name;
 	}
 	/**
-	 * 序号 取得 
+	 * 序号取得
 	 * @return 序号
 	 */
 	public String getSort_num(){
 		return sort_num;
 	}
 	/**
-	 * 摘要 设定 
-	 * @param brief_info摘要
+	 * 序号设定
+	 * @param sort_num 序号
 	 */
-	public void setBrief_info(String brief_info){
-		this.brief_info=brief_info;
+	public void setSort_num(String sort_num){
+		this.sort_num=sort_num;
 	}
 	/**
-	 * 摘要 取得 
+	 * 摘要取得
 	 * @return 摘要
 	 */
 	public String getBrief_info(){
 		return brief_info;
 	}
 	/**
-	 * 内容 设定 
-	 * @param detail_info内容
+	 * 摘要设定
+	 * @param brief_info 摘要
 	 */
-	public void setDetail_info(String detail_info){
-		this.detail_info=detail_info;
+	public void setBrief_info(String brief_info){
+		this.brief_info=brief_info;
 	}
 	/**
-	 * 内容 取得 
+	 * 内容取得
 	 * @return 内容
 	 */
 	public String getDetail_info(){
 		return detail_info;
 	}
 	/**
-	 * pic_url 设定 
-	 * @param pic_urlpic_url
+	 * 内容设定
+	 * @param detail_info 内容
+	 */
+	public void setDetail_info(String detail_info){
+		this.detail_info=detail_info;
+	}
+	/**
+	 * pic_url取得
+	 * @return pic_url
+	 */
+	public String getPic_url(){
+		return pic_url;
+	}
+	/**
+	 * pic_url设定
+	 * @param pic_url pic_url
 	 */
 	public void setPic_url(String pic_url){
 		this.pic_url=pic_url;
 	}
 	/**
-	 * pic_url 取得 
-	 * @return pic_url
+	 * 学员id集合取得
+	 * @return 学员id集合
 	 */
-	public String getPic_url(){
-		return pic_url;
+	public List<String> getSids() {
+	    return sids;
+	}
+	/**
+	 * 学员id集合设定
+	 * @param sids 学员id集合
+	 */
+	public void setSids(List<String> sids) {
+	    this.sids = sids;
 	}
 }

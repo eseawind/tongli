@@ -4,25 +4,29 @@
  *		
  * VERSION      DATE          BY              REASON		
  * -------- ----------- --------------- ------------------------------------------	
- * 1.00     2014.07.27      wuxiaogang         程序.发布		
+ * 1.00     2014.07.28      wuxiaogang         程序.发布		
  * -------- ----------- --------------- ------------------------------------------	
  * Copyright 2014 tongli  System. - All Rights Reserved.		
  *	
  */
 package cn.com.softvan.service.addres.impl;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import cn.com.softvan.bean.addres.TcAddresBean;
+import cn.com.softvan.bean.addres.TcCourseVsAddresBean;
 import cn.com.softvan.common.CommonConstant;
-import cn.com.softvan.common.IOHelper;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.service.BaseManager;
-import cn.com.softvan.dao.entity.addres.TcAddres;
-import cn.com.softvan.bean.addres.TcAddresBean;
 import cn.com.softvan.dao.daointer.addres.ITcAddresDao;
+import cn.com.softvan.dao.daointer.addres.ITcCourseVsAddresDao;
+import cn.com.softvan.dao.entity.addres.TcAddres;
+import cn.com.softvan.dao.entity.addres.TcCourseVsAddres;
+import cn.com.softvan.service.BaseManager;
 import cn.com.softvan.service.addres.IAddresMamager;
 /**
  * <p>课程地址信息表   业务处理实现类。</p>	
@@ -42,6 +46,9 @@ public class AddresMamager extends BaseManager implements IAddresMamager{
 	private static final transient Logger log = Logger.getLogger(AddresMamager.class);
 	/**课程地址信息表 Dao接口类*/
 	private ITcAddresDao tcAddresDao;
+	/**课程_上课地点关联关系 数据库处理接口类。*/
+	private ITcCourseVsAddresDao tcCourseVsAddresDao;
+	
 /**	
 	 * <p>信息编辑。</p>	
 	 * <ol>[功能概要] 	
@@ -164,6 +171,8 @@ public class AddresMamager extends BaseManager implements IAddresMamager{
 				dto.setUpdate_ip(bean.getUpdate_ip());//修改者IP	
 				dto.setDel_flag(bean.getDel_flag());//0否1是	
 				dto.setVersion(bean.getVersion());//VERSION	
+				
+				dto.setPageInfo(bean.getPageInfo());//
 		   }	
 			beans=(List<TcAddresBean>) tcAddresDao.findDataIsPage(dto);	
 		} catch (Exception e) {	
@@ -264,18 +273,55 @@ public class AddresMamager extends BaseManager implements IAddresMamager{
 		}	
 		return msg;	
 	}	
-	/**	
-	 * 信息DAO 接口类取得	
-	 * @return 信息DAO 接口类	
-	 */	
-	public ITcAddresDao gettcAddresDao() {	
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>当前课程关联的的地址列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcAddresBean> findDataIsListAddres(TcCourseVsAddresBean bean){
+		List<TcAddresBean> beans=null;
+		try {
+			TcCourseVsAddres dto=new TcCourseVsAddres();
+	    	   if(bean!=null){
+	    		    dto.setCourse_id(bean.getCourse_id());
+		   			dto.setLimit_s(bean.getLimit_s());
+		   			dto.setLimit_e(bean.getLimit_e());
+	    	   }
+			beans=tcCourseVsAddresDao.findDataIsListAddres(dto);
+		} catch (Exception e) {
+			log.error("信息查询失败,数据库错误!", e);
+		}
+		return beans;
+	}
+	/**
+	 * 课程地址信息表 Dao接口类取得
+	 * @return 课程地址信息表 Dao接口类
+	 */
+	public ITcAddresDao getTcAddresDao() {	
 		return tcAddresDao;	
-	}	
-	/**	
-	 * 信息DAO 接口类设定	
-	 * @param tcAddresDao 信息DAO 接口类	
-	 */	
-	public void settcAddresDao(ITcAddresDao tcAddresDao) {	
+	}
+	/**
+	 * 课程地址信息表 Dao接口类设定
+	 * @param tcAddresDao 课程地址信息表 Dao接口类
+	 */
+	public void setTcAddresDao(ITcAddresDao tcAddresDao) {	
 		this.tcAddresDao = tcAddresDao;	
+	}
+	/**
+	 * 课程_上课地点关联关系 数据库处理接口类。取得
+	 * @return 课程_上课地点关联关系 数据库处理接口类。
+	 */
+	public ITcCourseVsAddresDao getTcCourseVsAddresDao() {
+	    return tcCourseVsAddresDao;
+	}
+	/**
+	 * 课程_上课地点关联关系 数据库处理接口类。设定
+	 * @param tcCourseVsAddresDao 课程_上课地点关联关系 数据库处理接口类。
+	 */
+	public void setTcCourseVsAddresDao(ITcCourseVsAddresDao tcCourseVsAddresDao) {
+	    this.tcCourseVsAddresDao = tcCourseVsAddresDao;
 	}	
 }

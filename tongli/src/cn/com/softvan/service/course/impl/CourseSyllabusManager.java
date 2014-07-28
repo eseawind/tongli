@@ -278,7 +278,7 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
     		    dto.setId(bean.getId());//ID
     	   }
 			bean1=(TcCourseSyllabusBean) tcCourseSyllabusDao.selectByPrimaryKey(dto);
-			if(bean1!=null){
+			if(bean1!=null && Validator.notEmpty(bean1.getDetail_info())){	
 				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 			}
 		} catch (Exception e) {

@@ -1,6 +1,6 @@
 
 /*	
- * 课程_上课地点关联关系  数据库entity类	
+ * 课程与班级关联关系  数据库entity类	
  *		
  * VERSION      DATE          BY              REASON		
  * -------- ----------- --------------- ------------------------------------------	
@@ -9,44 +9,44 @@
  * Copyright 2014 tongli  System. - All Rights Reserved.		
  *	
  */
-package cn.com.softvan.dao.entity.addres;
+package cn.com.softvan.dao.entity.course;
 import cn.com.softvan.dao.entity.BaseEntity;
 /**
- * <p>课程_上课地点关联关系  数据库entity类。</p>	
+ * <p>课程与班级关联关系  数据库entity类。</p>	
  * @author wuxiaogang
  */
-public class TcCourseVsAddres extends BaseEntity{
+public class TcCourseVsClasses extends BaseEntity{
 
-	/**课程编号 */
+	/**课程id */
 	private String course_id;
-	/**地址编号 */
-	private String addres_id;
+	/**班级id */
+	private String classes_id;
 	/**
-	 * 课程编号 设定 
-	 * @param course_id课程编号
+	 * 课程id 设定 
+	 * @param course_id课程id
 	 */
 	public void setCourse_id(String course_id){
 		this.course_id=course_id;
 	}
 	/**
-	 * 课程编号 取得 
-	 * @return 课程编号
+	 * 课程id 取得 
+	 * @return 课程id
 	 */
 	public String getCourse_id(){
 		return course_id;
 	}
 	/**
-	 * 地址编号 设定 
-	 * @param addres_id地址编号
+	 * 班级id 设定 
+	 * @param classes_id班级id
 	 */
-	public void setAddres_id(String addres_id){
-		this.addres_id=addres_id;
+	public void setClasses_id(String classes_id){
+		this.classes_id=classes_id;
 	}
 	/**
-	 * 地址编号 取得 
-	 * @return 地址编号
+	 * 班级id 取得 
+	 * @return 班级id
 	 */
-	public String getAddres_id(){
-		return addres_id;
+	public String getClasses_id(){
+		return classes_id;
 	}
 }

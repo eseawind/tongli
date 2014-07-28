@@ -1,6 +1,6 @@
 
 /*	
- * 课程_上课地点关联关系  数据库处理接口类	
+ * 课程与班级关联关系  数据库处理接口类	
  *		
  * VERSION      DATE          BY              REASON		
  * -------- ----------- --------------- ------------------------------------------	
@@ -9,24 +9,24 @@
  * Copyright 2014 tongli  System. - All Rights Reserved.		
  *	
  */
-package cn.com.softvan.dao.daointer.addres;
+package cn.com.softvan.dao.daointer.course;
 import java.util.List;
 
-import cn.com.softvan.bean.addres.TcAddresBean;
+import cn.com.softvan.bean.classes.TcClassesBean;
 import cn.com.softvan.dao.daointer.IBaseDao;
 import cn.com.softvan.dao.entity.IEntity;
 /**
- * <p>课程_上课地点关联关系  数据库处理接口类。</p>	
+ * <p>课程与班级关联关系  数据库处理接口类。</p>	
  * @author wuxiaogang
  */
-public interface ITcCourseVsAddresDao extends IBaseDao{
+public interface ITcCourseVsClassesDao extends IBaseDao{
 	/**
 	 * <p>信息列表。</p>
 	 * <ol>[功能概要] 
 	 * <div>信息检索。</div>
-	 * <div>当前课程关联的的地址列表。</div>
+	 * <div>当前课程关联的的班级列表。</div>
 	 * </ol>
 	 * @return 处理结果
 	 */
-	List<TcAddresBean> findDataIsListAddres(IEntity dto);
+	List<TcClassesBean> findDataIsListClasses(IEntity dto);
 }

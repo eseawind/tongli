@@ -4,7 +4,7 @@
  *		
  * VERSION      DATE          BY              REASON		
  * -------- ----------- --------------- ------------------------------------------	
- * 1.00     2014.07.27      wuxiaogang         程序.发布		
+ * 1.00     2014.07.28      wuxiaogang         程序.发布		
  * -------- ----------- --------------- ------------------------------------------	
  * Copyright 2014 tongli  System. - All Rights Reserved.		
  *	
@@ -17,7 +17,7 @@ import cn.com.softvan.bean.BaseBean;
  */
 public class TcCourseVsAddresBean extends BaseBean{
 
-	private static final long serialVersionUID = -324374666729440080L;
+	private static final long serialVersionUID = -461821940780294365L;
 	/**课程编号 */
 	private String course_id;
 	/**地址编号 */

@@ -246,7 +246,7 @@ public class NewsManager extends BaseManager implements INewsManager {
 	   			dto.setInfo_source(bean.getInfo_source());//0微信1网站
     	   }
 			bean1=(TcSysNewsBean) tcSysNewsDao.selectByPrimaryKey(dto);
-			if(bean1!=null){
+			if(bean1!=null && Validator.notEmpty(bean1.getDetail_info())){	
 				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 			}
 		} catch (Exception e) {

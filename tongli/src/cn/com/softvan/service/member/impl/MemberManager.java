@@ -318,7 +318,7 @@ public class MemberManager extends BaseManager implements IMemberManager {
     		   dto.setVersion(bean.getVersion());//VERSION
     	   }
 			bean1=(TcMemberBean) tcMemberDao.selectByPrimaryKey(dto);
-			if(bean1!=null){
+			if(bean1!=null && Validator.notEmpty(bean1.getDetail_info())){	
 				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 			}
 		} catch (Exception e) {
@@ -443,7 +443,7 @@ public class MemberManager extends BaseManager implements IMemberManager {
 					bean1=tcMemberDao.checkMemberPWD(dto);
 					
 					if(bean1!=null){
-						if(bean1!=null){
+						if(bean1!=null && Validator.notEmpty(bean1.getDetail_info())){	
 							bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 						}
 						//登录次数+1 更新最后登录时间 更新最后登录ip

@@ -228,7 +228,7 @@ public class NewsTypeManager extends BaseManager implements INewsTypeManager {
     			dto.setDel_flag(bean.getDel_flag());//是否删除
     	   }
 			bean1=(TcSysNewsTypeBean) tcSysNewsDao.selectByPrimaryKey(dto);
-			if(bean1!=null){
+			if(bean1!=null && Validator.notEmpty(bean1.getDetail_info())){	
 				bean1.setDetail_info(IOHelper.readHtml(bean1.getDetail_info()));
 			}
 		} catch (Exception e) {

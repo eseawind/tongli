@@ -12,7 +12,9 @@ package cn.com.softvan.service.course;
 
 import java.util.List;
 
+import cn.com.softvan.bean.classes.TcClassesBean;
 import cn.com.softvan.bean.course.TcCourseBean;
+import cn.com.softvan.bean.course.TcCourseVsClassesBean;
 
 
 /**
@@ -81,4 +83,13 @@ public interface ICourseManager {
 	 * @return 处理结果
 	 */
 	public TcCourseBean findDataById(TcCourseBean bean);
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>当前课程关联的的班级列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcClassesBean> findDataIsListClasses(TcCourseVsClassesBean bean);
 }

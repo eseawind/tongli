@@ -15,6 +15,7 @@
 	<!-- 班级信息表 ActionCalss -->	
 	<bean id="c401Action" class="cn.com.softvan.web.action.classes.C401Action" parent="baseAction" scope="prototype">	
 		<property name="classesMamager" ref="classesMamager"></property>	
+		<property name="studentManager" ref="studentManager"></property>
 	</bean>	
 	<!--============ action class======end========= -->
 </beans>
