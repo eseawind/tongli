@@ -30,6 +30,7 @@
 		<!-- 课程地址信息表 业务处理 -->	
 		<bean id="addresMamager" class="cn.com.softvan.service.addres.impl.AddresMamager" parent="baseManager" scope="prototype">	
 			<property name="tcAddresDao" ref="tcAddresDao"></property>	
+			<property name="tcCourseVsAddresDao" ref="tcCourseVsAddresDao"></property>	
 		</bean>	
 		<!--========== service class impl===end=======-->
 </beans>

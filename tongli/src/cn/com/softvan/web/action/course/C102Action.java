@@ -18,6 +18,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.addres.TcAddresBean;
+import cn.com.softvan.bean.addres.TcCourseVsAddresBean;
 import cn.com.softvan.bean.comment.TcCommentBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
@@ -27,6 +29,7 @@ import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.DateUtil;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
+import cn.com.softvan.service.addres.IAddresMamager;
 import cn.com.softvan.service.comment.ICommentManager;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.course.ICourseSyllabusItemsManager;
@@ -70,6 +73,8 @@ public class C102Action extends BaseAction {
 	private ICourseSyllabusPhotoManager courseSyllabusPhotoManager;
 	/**评论信息 管理业务处理*/
 	private ICommentManager commentManager;
+	/**课程地址信息表 业务处理接口类。 */
+	private IAddresMamager addresMamager;
 	public C102Action() {
 		log.info("默认构造器......C102Action");
 	}
@@ -452,7 +457,33 @@ public class C102Action extends BaseAction {
 		
 		return SUCCESS;
 	}
-
+	/**
+	 * <p>
+	 * 根据课程id获取课程地址
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>课程地址检索。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws Exception 
+	 */
+	public String getAddres() throws Exception {
+		log.info("C202Action getAddres.........");
+		String cid=request.getParameter("cid");
+		StringBuffer sb=new StringBuffer("");
+		if(Validator.notEmpty(cid)){
+			TcCourseVsAddresBean course_vs_addres_bean=new TcCourseVsAddresBean();
+			course_vs_addres_bean.setCourse_id(cid);
+			List<TcAddresBean> addres_beans=addresMamager.findDataIsListAddres(course_vs_addres_bean);
+			if(addres_beans!=null){
+				for(TcAddresBean addresBean:addres_beans){
+					sb.append("<option value=\""+addresBean.getAddres()+"\">"+addresBean.getAddres()+"</option>");
+				}
+			}
+		}
+		getWriter().print(sb.toString());
+		return null;
+	}
 	/**
 	 * 课程表管理 业务处理取得
 	 * @return 课程表管理 业务处理
@@ -792,5 +823,21 @@ public class C102Action extends BaseAction {
 	 */
 	public void setCommentManager(ICommentManager commentManager) {
 	    this.commentManager = commentManager;
+	}
+
+	/**
+	 * 课程地址信息表 业务处理接口类。取得
+	 * @return 课程地址信息表 业务处理接口类。
+	 */
+	public IAddresMamager getAddresMamager() {
+	    return addresMamager;
+	}
+
+	/**
+	 * 课程地址信息表 业务处理接口类。设定
+	 * @param addresMamager 课程地址信息表 业务处理接口类。
+	 */
+	public void setAddresMamager(IAddresMamager addresMamager) {
+	    this.addresMamager = addresMamager;
 	}
 }

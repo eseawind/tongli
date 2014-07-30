@@ -158,8 +158,21 @@
 								id="article_market_price" name="bean.market_price" size="50" type="text" value="${bean.market_price}">
 						</div>
 						<div class="form-group">
-							<label for="article_addres">地址</label> <input class="form-control"
-								id="article_addres" name="bean.addres" size="150" type="text" value="${bean.addres}">
+							<label for="article_addres">地址</label>
+							<div class="checkbox-list">
+							<c:forEach items="${addres_beans}" var="addres_bean" varStatus="i">
+								<c:set var="i_checkbox" value="" />
+								<c:forEach items="${course_addres_beans}" var="addres_bean2">
+									<c:if test="${addres_bean.id==addres_bean2.id}">
+										<c:set var="i_checkbox" value="checked='checked'" />
+									</c:if>
+								</c:forEach>
+							
+								<label>
+								<input type="checkbox" name="bean.aids" ${i_checkbox} value="${addres_bean.id}">${addres_bean.addres}
+								</label>
+							</c:forEach>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="article_member_price">会员价</label> <input class="form-control"

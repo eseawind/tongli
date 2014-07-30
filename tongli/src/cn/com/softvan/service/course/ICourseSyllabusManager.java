@@ -81,4 +81,13 @@ public interface ICourseSyllabusManager {
 	 * @return 处理结果
 	 */
 	public TcCourseSyllabusBean findDataById(TcCourseSyllabusBean bean);
+	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcCourseSyllabusBean> findDataIsListDate(TcCourseSyllabusBean bean);
 }

@@ -43,6 +43,8 @@
 		<!-- ************************业务处理类************************************* -->
 		<bean id="courseManager" class="cn.com.softvan.service.course.impl.CourseManager" parent="baseManager" scope="prototype">
 			<property name="tcCourseDao" ref="tcCourseDao"></property>
+			<property name="tcCourseVsAddresDao" ref="tcCourseVsAddresDao"></property>
+			<property name="tcCourseVsClassesDao" ref="tcCourseVsClassesDao"></property>
 		</bean>
 		<bean id="courseSyllabusManager" class="cn.com.softvan.service.course.impl.CourseSyllabusManager" parent="baseManager" scope="prototype">
 			<property name="tcCourseSyllabusDao" ref="tcCourseSyllabusDao"></property>

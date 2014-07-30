@@ -23,8 +23,10 @@ import cn.com.softvan.bean.course.TcCourseVsClassesBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
+import cn.com.softvan.dao.daointer.addres.ITcCourseVsAddresDao;
 import cn.com.softvan.dao.daointer.course.ITcCourseDao;
 import cn.com.softvan.dao.daointer.course.ITcCourseVsClassesDao;
+import cn.com.softvan.dao.entity.addres.TcCourseVsAddres;
 import cn.com.softvan.dao.entity.course.TcCourse;
 import cn.com.softvan.dao.entity.course.TcCourseVsClasses;
 import cn.com.softvan.service.BaseManager;
@@ -45,6 +47,8 @@ public class CourseManager extends BaseManager implements ICourseManager {
 	private ITcCourseDao tcCourseDao;
 	/**信息DAO 课程与班级关联关系 数据库处理接口类。*/
 	private ITcCourseVsClassesDao tcCourseVsClassesDao;
+	/**信息DAO 课程_上课地点关联关系 数据库处理接口类。*/
+	private ITcCourseVsAddresDao tcCourseVsAddresDao;
 	/**
 	 * <p>信息编辑。</p>
 	 * <ol>[功能概要] 
@@ -97,6 +101,20 @@ public class CourseManager extends BaseManager implements ICourseManager {
 					}
 					tcCourseDao.insert(dto);
 				}
+				
+				if(bean.getAids()!=null){
+					TcCourseVsAddres dto2=new TcCourseVsAddres();
+					dto2.setCourse_id(dto.getId());
+					//清空关联关系
+					tcCourseVsAddresDao.deleteByPrimaryKey(dto2);
+					for(String aid:bean.getAids()){
+						if(Validator.notEmpty(aid)){
+							dto2.setAddres_id(aid);
+							tcCourseVsAddresDao.insert(dto2);
+						}
+					}
+				}
+				
 			} catch (Exception e) {
 				msg="信息保存失败,数据库处理错误!";
 				log.error(msg, e);
@@ -335,5 +353,19 @@ public class CourseManager extends BaseManager implements ICourseManager {
 	 */
 	public void setTcCourseVsClassesDao(ITcCourseVsClassesDao tcCourseVsClassesDao) {
 	    this.tcCourseVsClassesDao = tcCourseVsClassesDao;
+	}
+	/**
+	 * 信息DAO 课程_上课地点关联关系 数据库处理接口类。取得
+	 * @return 信息DAO 课程_上课地点关联关系 数据库处理接口类。
+	 */
+	public ITcCourseVsAddresDao getTcCourseVsAddresDao() {
+	    return tcCourseVsAddresDao;
+	}
+	/**
+	 * 信息DAO 课程_上课地点关联关系 数据库处理接口类。设定
+	 * @param tcCourseVsAddresDao 信息DAO 课程_上课地点关联关系 数据库处理接口类。
+	 */
+	public void setTcCourseVsAddresDao(ITcCourseVsAddresDao tcCourseVsAddresDao) {
+	    this.tcCourseVsAddresDao = tcCourseVsAddresDao;
 	}
 }

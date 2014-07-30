@@ -48,29 +48,35 @@
 								<li>
 									<div class="tit">参观课程：</div>
 									<div class="con">
-										<select name="bean.course" class="" style="border:1px solid #ddd;">
-										<c:forEach items="${course_beans}" var="course_bean">
-											<option value="${course_bean.title}">${course_bean.title}</option>
+										<c:set var="bean_course" value="" />
+										<select id="bean_course_select" class="" style="border:1px solid #ddd;" onchange="getDA()">
+										<c:forEach items="${course_beans}" var="course_bean" varStatus="i">
+											<c:if test="${i.index==0}">
+												<c:set var="bean_course" value="${course_bean.title}" />
+											</c:if>
+											<option value="${course_bean.id}">${course_bean.title}</option>
 										</c:forEach>
 										</select>
-										<em>*
-												你要参观的课程</em>
+										<input type="hidden" name="bean.course" id="bean_course_1" value="${bean_course}" />
+										<em>* 你要参观的课程</em>
 									</div>
 								</li>
 								<li>
 									<div class="tit">参观时间：</div>
 									<div class="con">
-										<input name="bean.day" type="text"  readonly="readonly" class="input date form_date1"> <em>*
-												你要参观的日期时间</em>
+										<select id="bean_day" name="bean.day" class="" style="border:1px solid #ddd;" onchange="">
+											
+										</select>
+										<em>* 你要参观的日期时间</em>
 									</div>
 								</li>
 								<li>
 									<div class="tit">参观场馆：</div>
 									<div class="con">
-									<select name="bean.addres" class="" style="border:1px solid #ddd;">
-									<option value="绿城总部(浦东锦和路99弄)">绿城总部(浦东锦和路99弄)</option>
+									<select id="bean_addres" name="bean.addres" class="" style="border:1px solid #ddd;">
+									
 									</select>
-									<em>*你要参观的场馆</em>
+									<em>* 你要参观的场馆</em>
 									</div>
 								</li>
 								<li>
@@ -135,9 +141,33 @@
 </body>
 </html>
 <script type="text/javascript">
-
-
-
+function getDA(){
+	$('#bean_course_1').val($("#bean_course_select option:selected").text());
+	var cid=$("#bean_course_select").val();
+	//alert(cid);
+	if(cid){
+		jQuery.ajax({
+			url : '${basePath}/c202_getDate.ac?cid='+cid,
+			success : function(req) {
+				jQuery("#bean_day").html(req);
+			},
+			error : function() {
+				//--异常--
+			}
+		});
+		jQuery.ajax({
+			url : '${basePath}/c202_getAddres.ac?cid='+cid,
+			success : function(req) {
+				//alert(req);
+				jQuery("#bean_addres").html(req);
+			},
+			error : function() {
+				//--异常--
+			}
+		});
+	}
+}
+/* 
 $('.form_date1').datetimepicker({
     language:  'zh-CN',
 	format: "yyyy-mm-dd HH:ii:00",
@@ -150,5 +180,8 @@ $('.form_date1').datetimepicker({
 	maxView: 3,
 	startDate:'${startDate} 07:00:00',
 	pickerPosition:"bottom-left"
-});
+}); */
+if('${bean_course}'!=''){
+	getDA();
+}
 </script>

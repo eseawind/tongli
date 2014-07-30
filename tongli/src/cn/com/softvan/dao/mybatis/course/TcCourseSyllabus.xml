@@ -174,4 +174,26 @@
 	   ,update_ip=#{update_ip}
 	  	where id=#{id}
    </update>
-</mapper>
+   <!--  <p>信息列表。</p>  -->
+	<select id="findDataIsListDate" resultType="tcCourseSyllabusBean" parameterType="tcCourseSyllabus" >
+	select
+		t1.day,
+		t1.begin_time,
+		t1.end_time
+	from tc_course_syllabus t1
+    where t1.course_id=#{course_id}
+    <choose>
+    	<when test="del_flag!=null">
+    		and t1.del_flag=#{del_flag}
+    	</when>
+    	<otherwise>
+    	    and t1.del_flag='0'
+    	</otherwise>
+    </choose>
+     <if test="type!= null and type!=''" > and t1.type=#{type}</if>
+  		 <![CDATA[
+    	and ( TIMESTAMP(CONCAT(t1.day,' ',t1.end_time),'%Y-%m-%d %h:%i:%s')>TIMESTAMP(now(),'%Y-%m-%d %h:%i:%s') )
+		]]>
+    order by t1.day asc,t1.begin_time asc,t1.end_time asc
+   </select>
+   </mapper>

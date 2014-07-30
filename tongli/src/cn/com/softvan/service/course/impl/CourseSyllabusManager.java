@@ -263,6 +263,31 @@ public class CourseSyllabusManager extends BaseManager implements ICourseSyllabu
 		return beans;
 	}
 	/**
+	 * <p>信息列表。</p>
+	 * <ol>[功能概要] 
+	 * <div>信息检索。</div>
+	 * <div>列表。</div>
+	 * </ol>
+	 * @return 处理结果
+	 */
+	public List<TcCourseSyllabusBean> findDataIsListDate(TcCourseSyllabusBean bean){
+		List<TcCourseSyllabusBean> beans=null;
+		try {
+			TcCourseSyllabus dto=new TcCourseSyllabus();
+	    	   if(bean!=null){
+					dto.setCourse_id(bean.getCourse_id());//课程id
+					dto.setType(bean.getType());//类型(0课程1夏令营2冬令营)
+					
+		   			dto.setLimit_s(bean.getLimit_s());
+		   			dto.setLimit_e(bean.getLimit_e());
+	    	   }
+				beans=(List<TcCourseSyllabusBean>) tcCourseSyllabusDao.findDataIsListDate(dto);
+		} catch (Exception e) {
+			log.error("信息查询失败,数据库错误!", e);
+		}
+		return beans;
+	}
+	/**
 	 * <p>信息详情。</p>
 	 * <ol>[功能概要] 
 	 * <div>信息检索。</div>

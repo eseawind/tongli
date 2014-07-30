@@ -15,13 +15,15 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.addres.TcAddresBean;
+import cn.com.softvan.bean.addres.TcCourseVsAddresBean;
 import cn.com.softvan.bean.course.TcCourseBean;
 import cn.com.softvan.bean.sys.TcSysVariableBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
+import cn.com.softvan.service.addres.IAddresMamager;
 import cn.com.softvan.service.course.ICourseManager;
-import cn.com.softvan.service.sys.IVariableManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 
@@ -40,6 +42,8 @@ public class C101Action extends BaseAction {
 	private static final transient Logger log = Logger.getLogger(C101Action.class);
 	/** 课程管理  业务处理*/
 	private ICourseManager courseManager;
+	/** 地址管理  业务处理*/
+	private IAddresMamager addresMamager;
 	/**课程信息BEAN*/
 	private TcCourseBean bean;
 	/**课程信息BEAN集合*/
@@ -131,6 +135,12 @@ public class C101Action extends BaseAction {
 			TcCourseBean bean1=new TcCourseBean();
 			bean1.setId(id);
 			bean=courseManager.findDataById(bean1);
+			
+			//当前课程关联地址
+			TcCourseVsAddresBean addres_bean=new TcCourseVsAddresBean();
+			addres_bean.setCourse_id(bean1.getId());
+			List<TcAddresBean> course_addres_beans=addresMamager.findDataIsListAddres(addres_bean);
+			request.setAttribute("course_addres_beans",course_addres_beans);
 		}
 		if(bean==null){
 			bean=new TcCourseBean();
@@ -140,6 +150,11 @@ public class C101Action extends BaseAction {
 		TcSysVariableBean bean1=new TcSysVariableBean();
 		bean1.setVariable_id("course_subject");//课程主题
 		request.setAttribute("course_subject",variableManager.findDataIsList(bean1));
+		
+		//所有地址
+		List<TcAddresBean> addres_beans=addresMamager.findDataIsList(null);
+		request.setAttribute("addres_beans",addres_beans);
+		
 		return "edit";
 	}
 	/**
@@ -265,6 +280,22 @@ public class C101Action extends BaseAction {
 	public void setCourseManager(ICourseManager courseManager) {
 	    this.courseManager = courseManager;
 	}
+	/**
+	 * 地址管理  业务处理取得
+	 * @return 地址管理  业务处理
+	 */
+	public IAddresMamager getAddresMamager() {
+	    return addresMamager;
+	}
+
+	/**
+	 * 地址管理  业务处理设定
+	 * @param addresMamager 地址管理  业务处理
+	 */
+	public void setAddresMamager(IAddresMamager addresMamager) {
+	    this.addresMamager = addresMamager;
+	}
+
 	/**
 	 * 课程信息BEAN取得
 	 * @return 课程信息BEAN

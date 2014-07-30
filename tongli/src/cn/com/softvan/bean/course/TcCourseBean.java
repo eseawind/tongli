@@ -10,6 +10,8 @@
  */
 package cn.com.softvan.bean.course;
 
+import java.util.List;
+
 import cn.com.softvan.bean.BaseBean;
 
 
@@ -58,6 +60,8 @@ public class TcCourseBean extends BaseBean {
 	private String detail_info;
 	/** 教师名称 */
 	private String teacher_name;
+	/** 地址id集合 */
+	private List<String> aids;
 	/**
 	 * 课程编号取得
 	 * @return 课程编号
@@ -281,6 +285,20 @@ public class TcCourseBean extends BaseBean {
 	 */
 	public void setTeacher_name(String teacher_name) {
 	    this.teacher_name = teacher_name;
+	}
+	/**
+	 * 地址id集合取得
+	 * @return 地址id集合
+	 */
+	public List<String> getAids() {
+	    return aids;
+	}
+	/**
+	 * 地址id集合设定
+	 * @param aids 地址id集合
+	 */
+	public void setAids(List<String> aids) {
+	    this.aids = aids;
 	}
 
 }

@@ -11,19 +11,24 @@
 package cn.com.softvan.web.action.client.course;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import cn.com.softvan.bean.BaseUserBean;
+import cn.com.softvan.bean.addres.TcAddresBean;
+import cn.com.softvan.bean.addres.TcCourseVsAddresBean;
 import cn.com.softvan.bean.course.TcCourseBean;
 import cn.com.softvan.bean.course.TcCourseBespeakBean;
+import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.DateUtil;
 import cn.com.softvan.common.IdUtils;
+import cn.com.softvan.common.Validator;
+import cn.com.softvan.service.addres.IAddresMamager;
 import cn.com.softvan.service.course.ICourseBespeakManager;
 import cn.com.softvan.service.course.ICourseManager;
+import cn.com.softvan.service.course.ICourseSyllabusManager;
 import cn.com.softvan.web.action.BaseAction;
 
 /**
@@ -48,6 +53,10 @@ public class C202Action extends BaseAction {
 	private List<TcCourseBespeakBean> beans;
 	/** 课程管理  业务处理*/
 	private ICourseManager courseManager;
+	/**课程表管理 业务处理 */
+	private ICourseSyllabusManager courseSyllabusManager;
+	/**课程地址信息表 业务处理接口类。 */
+	private IAddresMamager addresMamager;
 	//
 	public C202Action() {
 		log.info("默认构造器......C202Action");
@@ -135,7 +144,61 @@ public class C202Action extends BaseAction {
 		bean=courseBespeakManager.findDataById(bean1);
 		return "init";
 	}
-
+	/**
+	 * <p>
+	 * 根据课程id获取参观时间
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>课程时间检索。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws Exception 
+	 */
+	public String getDate() throws Exception {
+		log.info("C202Action getDate.........");
+		String cid=request.getParameter("cid");
+		StringBuffer sb=new StringBuffer("");
+		if(Validator.notEmpty(cid)){
+			TcCourseSyllabusBean course_bean=new TcCourseSyllabusBean();
+			course_bean.setCourse_id(cid);
+			course_bean.setType("0");
+			List<TcCourseSyllabusBean> course_beans=courseSyllabusManager.findDataIsListDate(course_bean);
+			if(course_beans!=null){
+				for(TcCourseSyllabusBean courseSyllabusBean:course_beans){
+					sb.append("<option value=\""+courseSyllabusBean.getDay()+" "+courseSyllabusBean.getBegin_time()+"\">"+courseSyllabusBean.getDay()+" "+courseSyllabusBean.getBegin_time()+"</option>");
+				}
+			}
+		}
+		getWriter().print(sb.toString());
+		return null;
+	}
+	/**
+	 * <p>
+	 * 根据课程id获取课程地址
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>课程地址检索。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws Exception 
+	 */
+	public String getAddres() throws Exception {
+		log.info("C202Action getAddres.........");
+		String cid=request.getParameter("cid");
+		StringBuffer sb=new StringBuffer("");
+		if(Validator.notEmpty(cid)){
+			TcCourseVsAddresBean course_vs_addres_bean=new TcCourseVsAddresBean();
+			course_vs_addres_bean.setCourse_id(cid);
+			List<TcAddresBean> addres_beans=addresMamager.findDataIsListAddres(course_vs_addres_bean);
+			if(addres_beans!=null){
+				for(TcAddresBean addresBean:addres_beans){
+					sb.append("<option value=\""+addresBean.getAddres()+"\">"+addresBean.getAddres()+"</option>");
+				}
+			}
+		}
+		getWriter().print(sb.toString());
+		return null;
+	}
 	/**
 	 * 课程-预约参观 管理 业务处理取得
 	 * @return 课程-预约参观 管理 业务处理
@@ -204,5 +267,37 @@ public class C202Action extends BaseAction {
 		  Calendar cal = Calendar.getInstance();
 		  cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)+7);
 		System.out.println(DateUtil.getDateStr(cal.getTime()));
+	}
+
+	/**
+	 * 课程表管理 业务处理取得
+	 * @return 课程表管理 业务处理
+	 */
+	public ICourseSyllabusManager getCourseSyllabusManager() {
+	    return courseSyllabusManager;
+	}
+
+	/**
+	 * 课程表管理 业务处理设定
+	 * @param courseSyllabusManager 课程表管理 业务处理
+	 */
+	public void setCourseSyllabusManager(ICourseSyllabusManager courseSyllabusManager) {
+	    this.courseSyllabusManager = courseSyllabusManager;
+	}
+
+	/**
+	 * 课程地址信息表 业务处理接口类。取得
+	 * @return 课程地址信息表 业务处理接口类。
+	 */
+	public IAddresMamager getAddresMamager() {
+	    return addresMamager;
+	}
+
+	/**
+	 * 课程地址信息表 业务处理接口类。设定
+	 * @param addresMamager 课程地址信息表 业务处理接口类。
+	 */
+	public void setAddresMamager(IAddresMamager addresMamager) {
+	    this.addresMamager = addresMamager;
 	}
 }
