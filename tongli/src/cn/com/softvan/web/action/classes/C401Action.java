@@ -19,7 +19,7 @@ import cn.com.softvan.bean.classes.TcClassesBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.service.classes.IClassesMamager;
+import cn.com.softvan.service.classes.IClassesManager;
 import cn.com.softvan.service.student.IStudentManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
@@ -46,7 +46,7 @@ public class C401Action extends BaseAction{
 	/**BEAN类  班级信息表 集合*/
 	private List<TcClassesBean> beans;
 	/**班级信息表 业务处理*/
-	private IClassesMamager classesMamager;
+	private IClassesManager classesManager;
 	/**学员信息管理 业务处理*/
 	private IStudentManager studentManager;
 	/**
@@ -73,7 +73,7 @@ public class C401Action extends BaseAction{
 		TcClassesBean bean1 = new TcClassesBean();
 		bean1.setPageInfo(page);
 		//列表
-		List<TcClassesBean> beans=classesMamager.findDataIsPage(bean1);
+		List<TcClassesBean> beans=classesManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "init";
@@ -92,9 +92,9 @@ public class C401Action extends BaseAction{
 		if(id!=null){
 			TcClassesBean bean1=new TcClassesBean();
 			bean1.setId(id);
-			bean=classesMamager.findDataById(bean1);
+			bean=classesManager.findDataById(bean1);
 			//当前会员关联的学员
-			request.setAttribute("classes_student_beans", classesMamager.findDataIsListStudent(bean1));
+			request.setAttribute("classes_student_beans", classesManager.findDataIsListStudent(bean1));
 		}
 		if(bean==null){
 			bean=new TcClassesBean();
@@ -119,7 +119,7 @@ public class C401Action extends BaseAction{
 		bean1.setId(id);
 		String msg="1";
 		try {
-			msg=classesMamager.deleteDataById(bean1);
+			msg=classesManager.deleteDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -151,7 +151,7 @@ public class C401Action extends BaseAction{
 						bean.setUpdate_ip(getIpAddr());
 						bean.setUpdate_id(user.getUser_id());
 					}
-					msg=classesMamager.saveOrUpdateData(bean);
+					msg=classesManager.saveOrUpdateData(bean);
 				}
 			} catch (Exception e) {
 				msg=e.getMessage();
@@ -176,7 +176,7 @@ public class C401Action extends BaseAction{
 		if(id!=null){
 			TcClassesBean bean1=new TcClassesBean();
 			bean1.setId(id);
-			bean=classesMamager.findDataById(bean1);
+			bean=classesManager.findDataById(bean1);
 		}
 		return "view";
 	}
@@ -206,7 +206,7 @@ public class C401Action extends BaseAction{
 		//已删除
 		bean1.setDel_flag("1");
 		//栏目资讯列表
-		List<TcClassesBean> beans=classesMamager.findDataIsPage(bean1);
+		List<TcClassesBean> beans=classesManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "recycle";
@@ -225,7 +225,7 @@ public class C401Action extends BaseAction{
 		bean1.setId(id);
 		String msg="1";
 		try {
-			msg=classesMamager.recoveryDataById(bean1);
+			msg=classesManager.recoveryDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -265,15 +265,15 @@ public class C401Action extends BaseAction{
 	 * 班级信息表 业务处理取得
 	 * @return 班级信息表 业务处理
 	 */
-	public IClassesMamager getClassesMamager(){
-		return classesMamager;
+	public IClassesManager getClassesManager() {
+	    return classesManager;
 	}
 	/**
 	 * 班级信息表 业务处理设定
-	 * @param classesMamager 班级信息表 业务处理
+	 * @param classesManager 班级信息表 业务处理
 	 */
-	public void setClassesMamager(IClassesMamager classesMamager){
-		this.classesMamager=classesMamager;
+	public void setClassesManager(IClassesManager classesManager) {
+	    this.classesManager = classesManager;
 	}
 	/**
 	 * 学员信息管理 业务处理取得

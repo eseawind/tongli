@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.softvan.bean.classes.TcClassesBean;
-import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.bean.student.TcStudentBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IOHelper;
@@ -28,9 +27,8 @@ import cn.com.softvan.dao.daointer.classes.ITcClassesDao;
 import cn.com.softvan.dao.daointer.classes.ITcClassesVsStudentDao;
 import cn.com.softvan.dao.entity.classes.TcClasses;
 import cn.com.softvan.dao.entity.classes.TcClassesVsStudent;
-import cn.com.softvan.dao.entity.member.TcMemberVsStudent;
 import cn.com.softvan.service.BaseManager;
-import cn.com.softvan.service.classes.IClassesMamager;
+import cn.com.softvan.service.classes.IClassesManager;
 /**
  * <p>班级信息表   业务处理实现类。</p>	
  * <ol>[功能概要] 
@@ -44,9 +42,9 @@ import cn.com.softvan.service.classes.IClassesMamager;
  *</ol> 
  * @author wuxiaogang
  */
-public class ClassesMamager extends BaseManager implements IClassesMamager{
+public class ClassesManager extends BaseManager implements IClassesManager{
 
-	private static final transient Logger log = Logger.getLogger(ClassesMamager.class);
+	private static final transient Logger log = Logger.getLogger(ClassesManager.class);
 	/**班级信息表 Dao接口类*/
 	private ITcClassesDao tcClassesDao;
 	/**班级_学员关联表 数据库处理接口类*/

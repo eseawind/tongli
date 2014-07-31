@@ -17,5 +17,8 @@
 			<result name="init">/WEB-INF/pages/client_w/C003.jsp</result>
 			<result name="list1">/WEB-INF/pages/client_w/C003_01.jsp</result>
 		</action>
+		<!-- 获取班级学员 -->
+		<action name="getStu" class="c102Action" method="getStu">
+		</action>
 	</package>
 </struts>

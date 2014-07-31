@@ -14,7 +14,7 @@
 	 <!-- 课程管理ACTION -->
 	<bean id="c101Action" class="cn.com.softvan.web.action.course.C101Action" parent="baseAction" scope="prototype">
 		<property name="courseManager" ref="courseManager"></property>
-		<property name="addresMamager" ref="addresMamager"></property>
+		<property name="addresManager" ref="addresManager"></property>
 	</bean>
 	<!-- 课程表管理ACTION -->
 	<bean id="c102Action" class="cn.com.softvan.web.action.course.C102Action" parent="baseAction" scope="prototype">
@@ -25,7 +25,8 @@
 		<property name="courseSyllabusItemsManager" ref="courseSyllabusItemsManager"></property>
 		<property name="courseSyllabusPhotoManager" ref="courseSyllabusPhotoManager"></property>
 		<property name="commentManager" ref="commentManager"></property>
-		<property name="addresMamager" ref="addresMamager"></property>
+		<property name="addresManager" ref="addresManager"></property>
+		<property name="classesManager" ref="classesManager"></property>
 	</bean>
 	<!-- 预约参观管理ACTION -->
 	<bean id="c103Action" class="cn.com.softvan.web.action.course.C103Action" parent="baseAction" scope="prototype">
@@ -38,7 +39,7 @@
 	<!--============ action class======begin========= -->
 	<!-- 课程地址信息表 ActionCalss -->	
 	<bean id="c105Action" class="cn.com.softvan.web.action.course.C105Action" parent="baseAction" scope="prototype">	
-		<property name="addresMamager" ref="addresMamager"></property>	
+		<property name="addresManager" ref="addresManager"></property>	
 	</bean>	
 	<!--============ action class======end========= -->
 </beans>

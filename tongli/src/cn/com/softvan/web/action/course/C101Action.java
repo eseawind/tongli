@@ -22,7 +22,7 @@ import cn.com.softvan.bean.sys.TcSysVariableBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.service.addres.IAddresMamager;
+import cn.com.softvan.service.addres.IAddresManager;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
@@ -43,7 +43,7 @@ public class C101Action extends BaseAction {
 	/** 课程管理  业务处理*/
 	private ICourseManager courseManager;
 	/** 地址管理  业务处理*/
-	private IAddresMamager addresMamager;
+	private IAddresManager addresManager;
 	/**课程信息BEAN*/
 	private TcCourseBean bean;
 	/**课程信息BEAN集合*/
@@ -139,7 +139,7 @@ public class C101Action extends BaseAction {
 			//当前课程关联地址
 			TcCourseVsAddresBean addres_bean=new TcCourseVsAddresBean();
 			addres_bean.setCourse_id(bean1.getId());
-			List<TcAddresBean> course_addres_beans=addresMamager.findDataIsListAddres(addres_bean);
+			List<TcAddresBean> course_addres_beans=addresManager.findDataIsListAddres(addres_bean);
 			request.setAttribute("course_addres_beans",course_addres_beans);
 		}
 		if(bean==null){
@@ -152,7 +152,7 @@ public class C101Action extends BaseAction {
 		request.setAttribute("course_subject",variableManager.findDataIsList(bean1));
 		
 		//所有地址
-		List<TcAddresBean> addres_beans=addresMamager.findDataIsList(null);
+		List<TcAddresBean> addres_beans=addresManager.findDataIsList(null);
 		request.setAttribute("addres_beans",addres_beans);
 		
 		return "edit";
@@ -284,16 +284,16 @@ public class C101Action extends BaseAction {
 	 * 地址管理  业务处理取得
 	 * @return 地址管理  业务处理
 	 */
-	public IAddresMamager getAddresMamager() {
-	    return addresMamager;
+	public IAddresManager getAddresManager() {
+	    return addresManager;
 	}
 
 	/**
 	 * 地址管理  业务处理设定
-	 * @param addresMamager 地址管理  业务处理
+	 * @param addresManager 地址管理  业务处理
 	 */
-	public void setAddresMamager(IAddresMamager addresMamager) {
-	    this.addresMamager = addresMamager;
+	public void setAddresManager(IAddresManager addresManager) {
+	    this.addresManager = addresManager;
 	}
 
 	/**

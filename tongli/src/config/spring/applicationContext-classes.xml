@@ -28,7 +28,7 @@
 		
 		<!--========== service class impl===begin=======-->
 		<!-- 班级信息表 业务处理 -->	
-		<bean id="classesMamager" class="cn.com.softvan.service.classes.impl.ClassesMamager" parent="baseManager" scope="prototype">	
+		<bean id="classesManager" class="cn.com.softvan.service.classes.impl.ClassesManager" parent="baseManager" scope="prototype">	
 			<property name="tcClassesDao" ref="tcClassesDao"></property>	
 			<property name="tcClassesVsStudentDao" ref="tcClassesVsStudentDao"></property>	
 		</bean>	

@@ -1,20 +1,21 @@
 
 /*	
- * 班级信息表   业务处理接口类	
+ * 课程地址信息表   业务处理接口类	
  *		
  * VERSION      DATE          BY              REASON		
  * -------- ----------- --------------- ------------------------------------------	
- * 1.00     2014.07.26      wuxiaogang         程序.发布		
+ * 1.00     2014.07.28      wuxiaogang         程序.发布		
  * -------- ----------- --------------- ------------------------------------------	
  * Copyright 2014 tongli  System. - All Rights Reserved.		
  *	
  */
-package cn.com.softvan.service.classes;
+package cn.com.softvan.service.addres;
 import java.util.List;
-import cn.com.softvan.bean.classes.TcClassesBean;
-import cn.com.softvan.bean.student.TcStudentBean;
+
+import cn.com.softvan.bean.addres.TcAddresBean;
+import cn.com.softvan.bean.addres.TcCourseVsAddresBean;
 /**
- * <p>班级信息表   业务处理接口类。</p>	
+ * <p>课程地址信息表   业务处理接口类。</p>	
  * <ol>[功能概要] 
  * <div>编辑(新增or修改)。</div> 
  * <div>详情检索。</div> 
@@ -26,7 +27,7 @@ import cn.com.softvan.bean.student.TcStudentBean;
  *</ol> 
  * @author wuxiaogang
  */
-public interface IClassesMamager{
+public interface IAddresManager{
 
 	/**	
 	 * <p>信息编辑。</p>	
@@ -36,7 +37,7 @@ public interface IClassesMamager{
 	 * </ol>	
 	 * @return 处理结果	
 	 */	
-	public String saveOrUpdateData(TcClassesBean bean) throws Exception;	
+	public String saveOrUpdateData(TcAddresBean bean) throws Exception;	
 	/**	
 	 * <p>信息编辑。</p>	
 	 * <ol>[功能概要] 	
@@ -44,7 +45,7 @@ public interface IClassesMamager{
 	 * </ol>	
 	 * @return 处理结果	
 	 */	
-	public String deleteData(TcClassesBean bean) throws Exception;	
+	public String deleteData(TcAddresBean bean) throws Exception;	
 	/**	
 	 * <p>信息 单条。</p>	
 	 * <ol>[功能概要] 	
@@ -52,7 +53,7 @@ public interface IClassesMamager{
 	 * </ol>	
 	 * @return 处理结果	
 	 */	
-	public String recoveryDataById(TcClassesBean bean) throws Exception;	
+	public String recoveryDataById(TcAddresBean bean) throws Exception;	
 	/**	
 	 * <p>信息 单条。</p>	
 	 * <ol>[功能概要] 	
@@ -60,7 +61,7 @@ public interface IClassesMamager{
 	 * </ol>	
 	 * @return 处理结果	
 	 */	
-	public String deleteDataById(TcClassesBean bean) throws Exception;	
+	public String deleteDataById(TcAddresBean bean) throws Exception;	
 	/**	
 	 * <p>信息列表 分页。</p>	
 	 * <ol>[功能概要] 	
@@ -69,7 +70,7 @@ public interface IClassesMamager{
 	 * </ol>	
 	 * @return 处理结果	
 	 */	
-	public List<TcClassesBean> findDataIsPage(TcClassesBean bean);	
+	public List<TcAddresBean> findDataIsPage(TcAddresBean bean);	
 	/**	
 	 * <p>信息列表。</p>	
 	 * <ol>[功能概要] 	
@@ -78,7 +79,7 @@ public interface IClassesMamager{
 	 * </ol>	
 	 * @return 处理结果	
 	 */	
-	public List<TcClassesBean> findDataIsList(TcClassesBean bean);	
+	public List<TcAddresBean> findDataIsList(TcAddresBean bean);	
 	/**	
 	 * <p>信息详情。</p>	
 	 * <ol>[功能概要] 	
@@ -87,14 +88,14 @@ public interface IClassesMamager{
 	 * </ol>	
 	 * @return 处理结果	
 	 */	
-	public TcClassesBean findDataById(TcClassesBean bean);	
+	public TcAddresBean findDataById(TcAddresBean bean);	
 	/**
 	 * <p>信息列表。</p>
 	 * <ol>[功能概要] 
 	 * <div>信息检索。</div>
-	 * <div>当前会员关联的学员列表。</div>
+	 * <div>当前课程关联的的地址列表。</div>
 	 * </ol>
 	 * @return 处理结果
 	 */
-	public List<TcStudentBean> findDataIsListStudent(TcClassesBean bean);
+	public List<TcAddresBean> findDataIsListAddres(TcCourseVsAddresBean bean);
 }

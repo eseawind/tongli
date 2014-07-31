@@ -20,16 +20,19 @@ import org.apache.log4j.Logger;
 import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.addres.TcAddresBean;
 import cn.com.softvan.bean.addres.TcCourseVsAddresBean;
+import cn.com.softvan.bean.classes.TcClassesBean;
 import cn.com.softvan.bean.comment.TcCommentBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusPhotoBean;
 import cn.com.softvan.bean.member.TcMemberBean;
+import cn.com.softvan.bean.student.TcStudentBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.DateUtil;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.service.addres.IAddresMamager;
+import cn.com.softvan.service.addres.IAddresManager;
+import cn.com.softvan.service.classes.IClassesManager;
 import cn.com.softvan.service.comment.ICommentManager;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.course.ICourseSyllabusItemsManager;
@@ -74,7 +77,9 @@ public class C102Action extends BaseAction {
 	/**评论信息 管理业务处理*/
 	private ICommentManager commentManager;
 	/**课程地址信息表 业务处理接口类。 */
-	private IAddresMamager addresMamager;
+	private IAddresManager addresManager;
+	/**班级信息表 业务处理接口类*/
+	private IClassesManager classesManager;
 	public C102Action() {
 		log.info("默认构造器......C102Action");
 	}
@@ -285,6 +290,8 @@ public class C102Action extends BaseAction {
 			bean=new TcCourseSyllabusBean();
 			bean.setId(IdUtils.createUUID(32));
 		}
+		//---班级---
+		request.setAttribute("classes_beans",classesManager.findDataIsList(null));
 		if(Validator.isEmpty(bean.getType())){
 			String type=request.getParameter("type");
 			if(type!=null){
@@ -360,6 +367,38 @@ public class C102Action extends BaseAction {
 		request.setAttribute("msg",msg);
 		
 		return SUCCESS;
+	}
+	/**
+	 * <p>
+	 * 根据课程id获取课程地址
+	 * </p>
+	 * <ol>
+	 * [功能概要] <div>班级学员检索。</div>
+	 * </ol>
+	 * @return 转发字符串
+	 * @throws Exception 
+	 */
+	public String getStu() throws Exception {
+		log.info("C202Action getStu.........");
+		String cid=request.getParameter("cid");
+		StringBuffer sb=new StringBuffer("[");
+		if(Validator.notEmpty(cid)){
+			TcClassesBean classes_vs_student_bean=new TcClassesBean();
+			classes_vs_student_bean.setId(cid);
+			List<TcStudentBean> student_beans=classesManager.findDataIsListStudent(classes_vs_student_bean);
+			if(student_beans!=null){
+				for(int i=0;i<student_beans.size();i++){
+					TcStudentBean studentBean=student_beans.get(i);
+					sb.append("{\"id\":\""+studentBean.getId()+"\",\"name\":\""+studentBean.getName()+"\"}");
+					if(i<student_beans.size()-1){
+						sb.append(",");
+					}
+				}
+			}
+		}
+		sb.append("]");
+		getWriter().print(sb.toString());
+		return null;
 	}
 	/**
 	 * <p>
@@ -474,7 +513,7 @@ public class C102Action extends BaseAction {
 		if(Validator.notEmpty(cid)){
 			TcCourseVsAddresBean course_vs_addres_bean=new TcCourseVsAddresBean();
 			course_vs_addres_bean.setCourse_id(cid);
-			List<TcAddresBean> addres_beans=addresMamager.findDataIsListAddres(course_vs_addres_bean);
+			List<TcAddresBean> addres_beans=addresManager.findDataIsListAddres(course_vs_addres_bean);
 			if(addres_beans!=null){
 				for(TcAddresBean addresBean:addres_beans){
 					sb.append("<option value=\""+addresBean.getAddres()+"\">"+addresBean.getAddres()+"</option>");
@@ -829,15 +868,31 @@ public class C102Action extends BaseAction {
 	 * 课程地址信息表 业务处理接口类。取得
 	 * @return 课程地址信息表 业务处理接口类。
 	 */
-	public IAddresMamager getAddresMamager() {
-	    return addresMamager;
+	public IAddresManager getAddresManager() {
+	    return addresManager;
 	}
 
 	/**
 	 * 课程地址信息表 业务处理接口类。设定
-	 * @param addresMamager 课程地址信息表 业务处理接口类。
+	 * @param addresManager 课程地址信息表 业务处理接口类。
 	 */
-	public void setAddresMamager(IAddresMamager addresMamager) {
-	    this.addresMamager = addresMamager;
+	public void setAddresManager(IAddresManager addresManager) {
+	    this.addresManager = addresManager;
+	}
+
+	/**
+	 * 班级信息表 业务处理接口类取得
+	 * @return 班级信息表 业务处理接口类
+	 */
+	public IClassesManager getClassesManager() {
+	    return classesManager;
+	}
+
+	/**
+	 * 班级信息表 业务处理接口类设定
+	 * @param classesManager 班级信息表 业务处理接口类
+	 */
+	public void setClassesManager(IClassesManager classesManager) {
+	    this.classesManager = classesManager;
 	}
 }

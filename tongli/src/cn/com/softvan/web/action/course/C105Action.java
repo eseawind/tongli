@@ -19,7 +19,7 @@ import cn.com.softvan.bean.addres.TcAddresBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.service.addres.IAddresMamager;
+import cn.com.softvan.service.addres.IAddresManager;
 import cn.com.softvan.web.action.BaseAction;
 import cn.com.softvan.web.tag.PageInfo;
 /**
@@ -45,7 +45,7 @@ public class C105Action extends BaseAction{
 	/**BEAN类  课程地址信息表 集合*/
 	private List<TcAddresBean> beans;
 	/**课程地址信息表 业务处理*/
-	private IAddresMamager addresMamager;
+	private IAddresManager addresManager;
 	/**
 	 * <p> 初始化处理。 </p>
 	 * <ol>
@@ -70,7 +70,7 @@ public class C105Action extends BaseAction{
 		TcAddresBean bean1 = new TcAddresBean();
 		bean1.setPageInfo(page);
 		//列表
-		List<TcAddresBean> beans=addresMamager.findDataIsPage(bean1);
+		List<TcAddresBean> beans=addresManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "init";
@@ -89,7 +89,7 @@ public class C105Action extends BaseAction{
 		if(id!=null){
 			TcAddresBean bean1=new TcAddresBean();
 			bean1.setId(id);
-			bean=addresMamager.findDataById(bean1);
+			bean=addresManager.findDataById(bean1);
 		}
 		if(bean==null){
 			bean=new TcAddresBean();
@@ -112,7 +112,7 @@ public class C105Action extends BaseAction{
 		bean1.setId(id);
 		String msg="1";
 		try {
-			msg=addresMamager.deleteDataById(bean1);
+			msg=addresManager.deleteDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -144,7 +144,7 @@ public class C105Action extends BaseAction{
 						bean.setUpdate_ip(getIpAddr());
 						bean.setUpdate_id(user.getUser_id());
 					}
-					msg=addresMamager.saveOrUpdateData(bean);
+					msg=addresManager.saveOrUpdateData(bean);
 				}
 			} catch (Exception e) {
 				msg=e.getMessage();
@@ -169,7 +169,7 @@ public class C105Action extends BaseAction{
 		if(id!=null){
 			TcAddresBean bean1=new TcAddresBean();
 			bean1.setId(id);
-			bean=addresMamager.findDataById(bean1);
+			bean=addresManager.findDataById(bean1);
 		}
 		return "view";
 	}
@@ -199,7 +199,7 @@ public class C105Action extends BaseAction{
 		//已删除
 		bean1.setDel_flag("1");
 		//栏目资讯列表
-		List<TcAddresBean> beans=addresMamager.findDataIsPage(bean1);
+		List<TcAddresBean> beans=addresManager.findDataIsPage(bean1);
 		request.setAttribute("beans",beans);
 		request.setAttribute(CommonConstant.PAGEROW_OBJECT_KEY,page);
 		return "recycle";
@@ -218,7 +218,7 @@ public class C105Action extends BaseAction{
 		bean1.setId(id);
 		String msg="1";
 		try {
-			msg=addresMamager.recoveryDataById(bean1);
+			msg=addresManager.recoveryDataById(bean1);
 		} catch (Exception e) {
 			msg=e.getMessage();
 		}
@@ -256,16 +256,16 @@ public class C105Action extends BaseAction{
 	}
 	/**
 	 * 业务处理 课程地址信息表 设定 
-	 * @param addresMamager业务处理 课程地址信息表
+	 * @param addresManager业务处理 课程地址信息表
 	 */
-	public void setAddresMamager(IAddresMamager addresMamager){
-		this.addresMamager=addresMamager;
+	public void setAddresManager(IAddresManager addresManager){
+		this.addresManager=addresManager;
 	}
 	/**
 	 * 业务处理 课程地址信息表 取得 
 	 * @return 业务处理 课程地址信息表
 	 */
-	public IAddresMamager getAddresMamager(){
-		return addresMamager;
+	public IAddresManager getAddresManager(){
+		return addresManager;
 	}
 }

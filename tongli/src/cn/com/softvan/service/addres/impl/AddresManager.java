@@ -27,7 +27,7 @@ import cn.com.softvan.dao.daointer.addres.ITcCourseVsAddresDao;
 import cn.com.softvan.dao.entity.addres.TcAddres;
 import cn.com.softvan.dao.entity.addres.TcCourseVsAddres;
 import cn.com.softvan.service.BaseManager;
-import cn.com.softvan.service.addres.IAddresMamager;
+import cn.com.softvan.service.addres.IAddresManager;
 /**
  * <p>课程地址信息表   业务处理实现类。</p>	
  * <ol>[功能概要] 
@@ -41,9 +41,9 @@ import cn.com.softvan.service.addres.IAddresMamager;
  *</ol> 
  * @author wuxiaogang
  */
-public class AddresMamager extends BaseManager implements IAddresMamager{
+public class AddresManager extends BaseManager implements IAddresManager{
 
-	private static final transient Logger log = Logger.getLogger(AddresMamager.class);
+	private static final transient Logger log = Logger.getLogger(AddresManager.class);
 	/**课程地址信息表 Dao接口类*/
 	private ITcAddresDao tcAddresDao;
 	/**课程_上课地点关联关系 数据库处理接口类。*/

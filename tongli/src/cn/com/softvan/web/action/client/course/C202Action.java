@@ -25,7 +25,7 @@ import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.DateUtil;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.common.Validator;
-import cn.com.softvan.service.addres.IAddresMamager;
+import cn.com.softvan.service.addres.IAddresManager;
 import cn.com.softvan.service.course.ICourseBespeakManager;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.course.ICourseSyllabusManager;
@@ -56,7 +56,7 @@ public class C202Action extends BaseAction {
 	/**课程表管理 业务处理 */
 	private ICourseSyllabusManager courseSyllabusManager;
 	/**课程地址信息表 业务处理接口类。 */
-	private IAddresMamager addresMamager;
+	private IAddresManager addresManager;
 	//
 	public C202Action() {
 		log.info("默认构造器......C202Action");
@@ -189,7 +189,7 @@ public class C202Action extends BaseAction {
 		if(Validator.notEmpty(cid)){
 			TcCourseVsAddresBean course_vs_addres_bean=new TcCourseVsAddresBean();
 			course_vs_addres_bean.setCourse_id(cid);
-			List<TcAddresBean> addres_beans=addresMamager.findDataIsListAddres(course_vs_addres_bean);
+			List<TcAddresBean> addres_beans=addresManager.findDataIsListAddres(course_vs_addres_bean);
 			if(addres_beans!=null){
 				for(TcAddresBean addresBean:addres_beans){
 					sb.append("<option value=\""+addresBean.getAddres()+"\">"+addresBean.getAddres()+"</option>");
@@ -289,15 +289,15 @@ public class C202Action extends BaseAction {
 	 * 课程地址信息表 业务处理接口类。取得
 	 * @return 课程地址信息表 业务处理接口类。
 	 */
-	public IAddresMamager getAddresMamager() {
-	    return addresMamager;
+	public IAddresManager getAddresManager() {
+	    return addresManager;
 	}
 
 	/**
 	 * 课程地址信息表 业务处理接口类。设定
-	 * @param addresMamager 课程地址信息表 业务处理接口类。
+	 * @param addresManager 课程地址信息表 业务处理接口类。
 	 */
-	public void setAddresMamager(IAddresMamager addresMamager) {
-	    this.addresMamager = addresMamager;
+	public void setAddresManager(IAddresManager addresManager) {
+	    this.addresManager = addresManager;
 	}
 }
