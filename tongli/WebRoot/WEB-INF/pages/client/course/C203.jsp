@@ -152,10 +152,10 @@
 												 	<span class="input-group-addon">
 													<i class="fa fa-flag"></i>
 													</span>
-													<select name="bean.course" id="course_select2_sample2"  class="form-control select2 select2me" data-placeholder="选择课程.." multiple>
+													<select name="bean.course" id="course_select2_sample2" onchange="sumPrice(this)" class="form-control select2 select2me" data-placeholder="选择课程.." multiple>
 														<optgroup label="课程列表">
 														<c:forEach items="${course_beans}" var="course_bean">
-															<option value="${course_bean.title}">${course_bean.title}</option>
+															<option value="${course_bean.title}"  price="${course_bean.market_price}">${course_bean.title}</option>
 														</c:forEach>
 														</optgroup>
 													</select>
@@ -174,8 +174,8 @@
 											<label class="col-md-2 control-label">学费</label>
 											<div class="col-md-3">
 												<input class="form-control" type="number"
-													placeholder="请输入报名价格" name="bean.price"
-													value="${bean.price}"> <span class="help-block"></span>
+													placeholder="请输入报名价格" id="bean_price_1" name="bean.price" readonly="readonly"
+													value="0.00"> <span class="help-block"></span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -301,14 +301,14 @@
 									</table>
 									<div class="form-group">
 										<label class="col-md-2 control-label">(第几期)</label>
-										<div class="col-md-3" style="margin-top:5px;">
-											<label> <input type="radio" checked="checked" name="bean.code" onclick="$('#bean_price').val(88888)" value="1"> 第一期</label>
-											<label> <input type="radio" name="bean.code" onclick="$('#bean_price').val(99999)" value="2"> 第二期</label>
+										<div class="col-md-3" style="margin-top:5px;" id="bean_code_2" >
+											<label> <input type="checkbox" name="bean.code"  onclick="sumPriceB()" price="5000.00" value="1"> 第一期</label>
+											<label> <input type="checkbox" name="bean.code"  onclick="sumPriceB()" price="4000.00" value="2"> 第二期</label>
 										</div>
 										<label class="col-md-2 control-label">报名价格</label>
 										<div class="col-md-3">
-											<input class="form-control" type="number" readonly="readonly" id="bean_price" placeholder="请输入报名价格"
-												name="bean.price" value="88888"> 
+											<input class="form-control" type="number" readonly="readonly" id="bean_price_2" placeholder="请输入报名价格"
+												name="bean.price" value="0.00"> 
 												<span class="help-block"></span>
 										</div>
 									</div>
@@ -610,4 +610,32 @@ jQuery(document).ready(function() {
 	//$('#bean_begin_day2').datepicker();
 	//$('#bean_end_day2').datepicker();
 });
+function sumPrice(obj){
+	var sum=0.00;
+	$(obj).find("option:selected").each(function(){
+		sum=sum+Number(($(this).attr('price')),10);
+	});
+	$('#bean_price_1').val(sum);
+}
+function sumPrice(obj){
+	var sum=0.00;
+	$(obj).find("option:selected").each(function(){
+		sum=sum+Number(($(this).attr('price')),10);
+	});
+	$('#bean_price_1').val(sum);
+}
+function sumPriceB(){
+	var sum=0.00;
+	
+	var codeLength1=$('#bean_code_2').find("[name='bean.code']").length;
+	var codeLength2=0;
+	$('#bean_code_2').find("[name='bean.code']:checked").each(function(){
+		sum=sum+Number(($(this).attr('price')),10);
+		codeLength2++;
+	});
+	if(codeLength1==codeLength2){
+		sum=8000;
+	}
+	$('#bean_price_2').val(sum);
+}
 </script>

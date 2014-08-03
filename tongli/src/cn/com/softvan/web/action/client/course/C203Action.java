@@ -102,6 +102,14 @@ public class C203Action extends BaseAction {
 					bean.setUpdate_ip(getIpAddr());
 					bean.setUpdate_id(user.getUser_id());
 				}
+				
+				if("0".equals(bean.getType())){
+					//培训班
+					//获取所有选择的所有课程 且 计算课程总价
+				}else if("0".equals(bean.getType())){
+					//夏令营
+					
+				}
 				msg=courseWebEnrollManager.saveOrUpdateData(bean);
 			} catch (Exception e) {
 				msg=e.getMessage();
