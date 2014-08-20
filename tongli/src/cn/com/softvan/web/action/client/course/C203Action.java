@@ -10,6 +10,7 @@
  */
 package cn.com.softvan.web.action.client.course;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -17,6 +18,7 @@ import org.apache.log4j.Logger;
 import cn.com.softvan.bean.BaseUserBean;
 import cn.com.softvan.bean.course.TcCourseBean;
 import cn.com.softvan.bean.course.TcCourseWebEnrollBean;
+import cn.com.softvan.bean.sys.TcSysVariableBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
 import cn.com.softvan.service.course.ICourseManager;
@@ -72,9 +74,34 @@ public class C203Action extends BaseAction {
 			bean.setId(IdUtils.createUUID(32));
 		}
 		
+		//数据字典中获取课程类型
+		TcSysVariableBean bean1=new TcSysVariableBean();
+		bean1.setVariable_id("course_subject");//课程主题
+		List<TcSysVariableBean> course_subjects=variableManager.findDataIsList(bean1);
 		//课程列表
-		TcCourseBean course_bean=new TcCourseBean();
-		List<TcCourseBean> course_beans=courseManager.findDataIsList(course_bean);
+		TcCourseBean course_bean_1=new TcCourseBean();
+		List<TcCourseBean> course_beans_all=courseManager.findDataIsList(course_bean_1);
+		//--
+		List<TcCourseBean> course_beans=new ArrayList<TcCourseBean>();
+		if(course_subjects!=null){
+			for(TcSysVariableBean variablebean:course_subjects){
+				TcCourseBean course_bean=new TcCourseBean();
+				course_bean.setSubject_id(variablebean.getVariable_sub_id());
+				course_bean.setSubject_name(variablebean.getVariable_sub_name());
+				List<TcCourseBean> course_beans_temp=new ArrayList<TcCourseBean>();
+				if(course_beans_all!=null){
+					for(TcCourseBean courseBean:course_beans_all){
+						if(course_bean.getSubject_id().equals(courseBean.getSubject_id())){
+							course_beans_temp.add(courseBean);
+						}
+					}
+				}
+				if(course_beans_temp.size()>0){
+					course_bean.setBeans(course_beans_temp);
+					course_beans.add(course_bean);
+				}
+			}
+		}
 		request.setAttribute("course_beans", course_beans);
 		
 		

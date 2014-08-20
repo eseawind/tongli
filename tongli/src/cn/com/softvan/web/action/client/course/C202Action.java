@@ -10,6 +10,7 @@
  */
 package cn.com.softvan.web.action.client.course;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -21,6 +22,7 @@ import cn.com.softvan.bean.addres.TcCourseVsAddresBean;
 import cn.com.softvan.bean.course.TcCourseBean;
 import cn.com.softvan.bean.course.TcCourseBespeakBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
+import cn.com.softvan.bean.sys.TcSysVariableBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.DateUtil;
 import cn.com.softvan.common.IdUtils;
@@ -29,6 +31,7 @@ import cn.com.softvan.service.addres.IAddresManager;
 import cn.com.softvan.service.course.ICourseBespeakManager;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.course.ICourseSyllabusManager;
+import cn.com.softvan.service.sys.IVariableManager;
 import cn.com.softvan.web.action.BaseAction;
 
 /**
@@ -57,6 +60,8 @@ public class C202Action extends BaseAction {
 	private ICourseSyllabusManager courseSyllabusManager;
 	/**课程地址信息表 业务处理接口类。 */
 	private IAddresManager addresManager;
+	/** 数据字典管理 service  业务处理 */
+	protected IVariableManager variableManager;
 	//
 	public C202Action() {
 		log.info("默认构造器......C202Action");
@@ -83,16 +88,40 @@ public class C202Action extends BaseAction {
 			bean=new TcCourseBespeakBean();
 			bean.setId(IdUtils.createUUID(32));
 		}
-		
+		//数据字典中获取课程类型
+		TcSysVariableBean bean1=new TcSysVariableBean();
+		bean1.setVariable_id("course_subject");//课程主题
+		List<TcSysVariableBean> course_subjects=variableManager.findDataIsList(bean1);
 		//课程列表
-		TcCourseBean course_bean=new TcCourseBean();
-		List<TcCourseBean> course_beans=courseManager.findDataIsList(course_bean);
+		TcCourseBean course_bean_1=new TcCourseBean();
+		List<TcCourseBean> course_beans_all=courseManager.findDataIsList(course_bean_1);
+		//--
+		List<TcCourseBean> course_beans=new ArrayList<TcCourseBean>();
+		if(course_subjects!=null){
+			for(TcSysVariableBean variablebean:course_subjects){
+				TcCourseBean course_bean=new TcCourseBean();
+				course_bean.setSubject_id(variablebean.getVariable_sub_id());
+				course_bean.setSubject_name(variablebean.getVariable_sub_name());
+				List<TcCourseBean> course_beans_temp=new ArrayList<TcCourseBean>();
+				if(course_beans_all!=null){
+					for(TcCourseBean courseBean:course_beans_all){
+						if(course_bean.getSubject_id().equals(courseBean.getSubject_id())){
+							course_beans_temp.add(courseBean);
+						}
+					}
+				}
+				if(course_beans_temp.size()>0){
+					course_bean.setBeans(course_beans_temp);
+					course_beans.add(course_bean);
+				}
+			}
+		}
 		request.setAttribute("course_beans", course_beans);
 		
-		//日期提前一周--
-	    Calendar cal = Calendar.getInstance();
-	    cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)+7);
-		request.setAttribute("startDate",DateUtil.getDateStr(cal.getTime()));
+//		//日期提前一周--
+//	    Calendar cal = Calendar.getInstance();
+//	    cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE)+7);
+//		request.setAttribute("startDate",DateUtil.getDateStr(cal.getTime()));
 		
 		return "init";
 	}
@@ -299,5 +328,21 @@ public class C202Action extends BaseAction {
 	 */
 	public void setAddresManager(IAddresManager addresManager) {
 	    this.addresManager = addresManager;
+	}
+
+	/**
+	 * 数据字典管理 service  业务处理取得
+	 * @return 数据字典管理 service  业务处理
+	 */
+	public IVariableManager getVariableManager() {
+	    return variableManager;
+	}
+
+	/**
+	 * 数据字典管理 service  业务处理设定
+	 * @param variableManager 数据字典管理 service  业务处理
+	 */
+	public void setVariableManager(IVariableManager variableManager) {
+	    this.variableManager = variableManager;
 	}
 }

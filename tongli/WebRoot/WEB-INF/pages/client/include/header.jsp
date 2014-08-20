@@ -72,13 +72,13 @@ request.setAttribute("basePath", basePath);
 				<ul id="navmenu">
 					<li class="sy" style="padding: 2px 10px"><a href="${basePath}/index.ac?pid=sy">首 页</a></li>
 					<li class="966a13c753f34faa927510c610b5e0b6"><a href="${basePath}/c002_init.ac?tid=966a13c753f34faa927510c610b5e0b6&pid=966a13c753f34faa927510c610b5e0b6">关于我们</a>
-						<div class="subMenu" style="margin-left: -13px;"></div>
+						<div class="subMenu" style="margin-left: -12px;"></div>
 					</li>
 					<li class="6690aceda07a405a9428e6e02ba2d416"><a href="${basePath}/c002_init.ac?tid=6690aceda07a405a9428e6e02ba2d416&pid=6690aceda07a405a9428e6e02ba2d416">童励课程</a>
-						<div class="subMenu" style="margin-left: -200px;"></div>
+						<div class="subMenu" style="margin-left: -12px;"></div>
 					</li>
 					<li class="26f1017792024a358c73639b08e74393"><a href="${basePath}/c002_init.ac?tid=26f1017792024a358c73639b08e74393&pid=26f1017792024a358c73639b08e74393">冬夏令营</a>
-						<div class="subMenu" style="margin-left: -150px;"></div>
+						<div class="subMenu" style="margin-left: -12px;"></div>
 					</li>
 					<li class="yycg"><a href="${basePath}/c202_init.ac?pid=yycg">预约体验</a></li>
 					<li class="zxbm"><a href="${basePath}/c203_init.ac?pid=zxbm">在线报名</a></li>

@@ -22,11 +22,13 @@ import cn.com.softvan.bean.addres.TcAddresBean;
 import cn.com.softvan.bean.addres.TcCourseVsAddresBean;
 import cn.com.softvan.bean.classes.TcClassesBean;
 import cn.com.softvan.bean.comment.TcCommentBean;
+import cn.com.softvan.bean.course.TcCourseBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusItemsBean;
 import cn.com.softvan.bean.course.TcCourseSyllabusPhotoBean;
 import cn.com.softvan.bean.member.TcMemberBean;
 import cn.com.softvan.bean.student.TcStudentBean;
+import cn.com.softvan.bean.sys.TcSysVariableBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.DateUtil;
 import cn.com.softvan.common.IdUtils;
@@ -313,7 +315,35 @@ public class C102Action extends BaseAction {
 		memberBean.setUser_type("0");//教师
 		request.setAttribute("teacher_beans", memberManager.findDataIsList(memberBean));
 		//--------------课程--all----------
-		request.setAttribute("course_beans", courseManager.findDataIsList(null));
+		//数据字典中获取课程类型
+		TcSysVariableBean bean1=new TcSysVariableBean();
+		bean1.setVariable_id("course_subject");//课程主题
+		List<TcSysVariableBean> course_subjects=variableManager.findDataIsList(bean1);
+		//课程列表
+		TcCourseBean course_bean_1=new TcCourseBean();
+		List<TcCourseBean> course_beans_all=courseManager.findDataIsList(course_bean_1);
+		//--
+		List<TcCourseBean> course_beans=new ArrayList<TcCourseBean>();
+		if(course_subjects!=null){
+			for(TcSysVariableBean variablebean:course_subjects){
+				TcCourseBean course_bean=new TcCourseBean();
+				course_bean.setSubject_id(variablebean.getVariable_sub_id());
+				course_bean.setSubject_name(variablebean.getVariable_sub_name());
+				List<TcCourseBean> course_beans_temp=new ArrayList<TcCourseBean>();
+				if(course_beans_all!=null){
+					for(TcCourseBean courseBean:course_beans_all){
+						if(course_bean.getSubject_id().equals(courseBean.getSubject_id())){
+							course_beans_temp.add(courseBean);
+						}
+					}
+				}
+				if(course_beans_temp.size()>0){
+					course_bean.setBeans(course_beans_temp);
+					course_beans.add(course_bean);
+				}
+			}
+		}
+		request.setAttribute("course_beans", course_beans);
 		
 		BaseUserBean user = (BaseUserBean) request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER);
 		request.setAttribute("uid", user.getUser_id());//

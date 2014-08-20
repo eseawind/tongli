@@ -23,7 +23,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
-
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/css/multi-select.css" />
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2_metro.css"  rel="stylesheet" type="text/css"  />
 <link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
 <script type="text/javascript" src="${basePath}/js/bootstarp-date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${basePath}/js/bootstarp-date/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
@@ -55,10 +56,14 @@ select{width: 200px;}
 										<c:set var="bean_course" value="" />
 										<select id="bean_course_select" class="" style="border:1px solid #ddd;" onchange="getDA()">
 										<c:forEach items="${course_beans}" var="course_bean" varStatus="i">
-											<c:if test="${i.index==0}">
-												<c:set var="bean_course" value="${course_bean.title}" />
-											</c:if>
-											<option value="${course_bean.id}">${course_bean.title}</option>
+											<optgroup label="${course_bean.subject_name}">
+												<c:forEach items="${course_bean.beans}" var="course_bean2"  varStatus="n">
+													<c:if test="${i.index==0 && n.index==0}">
+														<c:set var="bean_course" value="${course_bean2.title}" />
+													</c:if>
+													<option value="${course_bean2.id}">${course_bean2.title}</option>
+												</c:forEach>
+											</optgroup>
 										</c:forEach>
 										</select>
 										<input type="hidden" name="bean.course" id="bean_course_1" value="${bean_course}" />
@@ -144,6 +149,7 @@ select{width: 200px;}
 	<!-- END FOOTER -->
 </body>
 </html>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2.min.js"></script>
 <script type="text/javascript">
 function getDA(){
 	$('#bean_course_1').val($("#bean_course_select option:selected").text());

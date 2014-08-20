@@ -153,11 +153,13 @@
 													<i class="fa fa-flag"></i>
 													</span>
 													<select name="bean.course" id="course_select2_sample2" onchange="sumPrice(this)" class="form-control select2 select2me" data-placeholder="选择课程.." multiple>
-														<optgroup label="课程列表">
-														<c:forEach items="${course_beans}" var="course_bean">
-															<option value="${course_bean.title}"  price="${course_bean.market_price}">${course_bean.title}</option>
+														<c:forEach items="${course_beans}" var="course_bean" varStatus="i">
+															<optgroup label="${course_bean.subject_name}">
+																<c:forEach items="${course_bean.beans}" var="course_bean2"  varStatus="n">
+																	<option  price="${course_bean2.market_price}" value="${course_bean2.id}">${course_bean2.title}</option>
+																</c:forEach>
+															</optgroup>
 														</c:forEach>
-														</optgroup>
 													</select>
 												</div>
 											</div>

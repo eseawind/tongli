@@ -34,6 +34,8 @@ public class TcCourseBean extends BaseBean {
 	private String title;
 	/** 主题 */
 	private String subject_id;
+	/** 主题  名称*/
+	private String subject_name;
 	/** 课种 */
 	private String course_type;
 	/** 时长 */
@@ -62,6 +64,8 @@ public class TcCourseBean extends BaseBean {
 	private String teacher_name;
 	/** 地址id集合 */
 	private List<String> aids;
+	/** 课程集合 */
+	private List<TcCourseBean> beans;
 	/**
 	 * 课程编号取得
 	 * @return 课程编号
@@ -103,6 +107,20 @@ public class TcCourseBean extends BaseBean {
 	 */
 	public void setSubject_id(String subject_id) {
 	    this.subject_id = subject_id;
+	}
+	/**
+	 * 主题  名称取得
+	 * @return 主题  名称
+	 */
+	public String getSubject_name() {
+	    return subject_name;
+	}
+	/**
+	 * 主题  名称设定
+	 * @param subject_name 主题  名称
+	 */
+	public void setSubject_name(String subject_name) {
+	    this.subject_name = subject_name;
 	}
 	/**
 	 * 课种取得
@@ -299,6 +317,20 @@ public class TcCourseBean extends BaseBean {
 	 */
 	public void setAids(List<String> aids) {
 	    this.aids = aids;
+	}
+	/**
+	 * 课程集合取得
+	 * @return 课程集合
+	 */
+	public List<TcCourseBean> getBeans() {
+	    return beans;
+	}
+	/**
+	 * 课程集合设定
+	 * @param beans 课程集合
+	 */
+	public void setBeans(List<TcCourseBean> beans) {
+	    this.beans = beans;
 	}
 
 }

@@ -153,15 +153,17 @@
 								<i class="fa fa-flag"></i>
 								</span>
 								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" data-placeholder="选择课程..">
-									<optgroup label="课程列表">
-									<c:forEach items="${course_beans}" var="course">
-										<c:set var="xxcc" value='' />
-											<c:if test="${bean.course_id==course.id}">
-												<c:set var="xxcc" value='selected="selected"' />
-											</c:if>
-										<option ${xxcc} value="${course.id}">${course.title}</option>
+									<c:forEach items="${course_beans}" var="course_bean" varStatus="i">
+										<optgroup label="${course_bean.subject_name}">
+											<c:forEach items="${course_bean.beans}" var="course_bean2"  varStatus="n">
+												<c:set var="xxcc" value='' />
+												<c:if test="${bean.course_id==course.id}">
+													<c:set var="xxcc" value='selected="selected"' />
+												</c:if>
+												<option ${xxcc} value="${course_bean2.id}">${course_bean2.title}</option>
+											</c:forEach>
+										</optgroup>
 									</c:forEach>
-									</optgroup>
 								</select>
 							</div>
 							</label>
