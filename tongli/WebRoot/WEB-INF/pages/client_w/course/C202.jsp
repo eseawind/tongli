@@ -25,9 +25,10 @@
 <%@ include file="../include/public_js_css.jsp"%>
 
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  
-<link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
-<script type="text/javascript" src="${basePath}/js/bootstarp-date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="${basePath}/js/bootstarp-date/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<style type="text/css">
+select{width: 200px;}
+
+</style>
 </head>
 
 <body class="blueBg">
@@ -44,66 +45,88 @@
 						<form accept-charset="UTF-8" action="${basePath}/w/c202_save.ac" method="post">
 							<input type="hidden" name="bean.id" value="${bean.id}" />
 							<ul>
-								<li class="form-group">
+								<li>
 									<div class="tit">参观课程：</div>
 									<div class="con">
-										<select name="bean.course" class="form-control" style="border:1px solid #ddd;">
-										<c:forEach items="${course_beans}" var="course_bean">
-											<option value="${course_bean.title}">${course_bean.title}</option>
+										<c:set var="bean_course" value="" />
+										<select id="bean_course_select" class="form-control" type="text"
+													placeholder="请输入你要参观的课程"  style="border:1px solid #ddd;" onchange="getDA()">
+										<c:forEach items="${course_beans}" var="course_bean" varStatus="i">
+											<optgroup label="${course_bean.subject_name}">
+												<c:forEach items="${course_bean.beans}" var="course_bean2"  varStatus="n">
+													<c:if test="${i.index==0 && n.index==0}">
+														<c:set var="bean_course" value="${course_bean2.title}" />
+													</c:if>
+													<option value="${course_bean2.id}">${course_bean2.title}</option>
+												</c:forEach>
+											</optgroup>
 										</c:forEach>
 										</select>
+										<input type="hidden" class="form-control" type="text"
+													placeholder="请输入你要参观的课程" name="bean.course" id="bean_course_1" value="${bean_course}" />
 									</div>
 								</li>
-								<li class="form-group">
+								<li>
 									<div class="tit">参观时间：</div>
 									<div class="con">
-										<input name="bean.day" type="text"  placeholder="你要参观的日期时间" readonly="readonly" class="date form_date1 form-control"> 
+										<select id="bean_day" class="form-control" type="text"
+													placeholder="请输入你要参观的日期时间" name="bean.day" style="border:1px solid #ddd;" onchange="">
+											
+										</select>
+										
 									</div>
 								</li>
-								<li class="form-group">
+								<li>
 									<div class="tit">参观场馆：</div>
 									<div class="con">
-										<select name="bean.addres" class="form-control" style="border:1px solid #ddd;">
-										<option value="绿城总部(浦东锦和路99弄)">绿城总部(浦东锦和路99弄)</option>
-										</select>
+									<select id="bean_addres"  class="form-control" type="text"
+													placeholder="请输入你要参观的场馆" name="bean.addres"  style="border:1px solid #ddd;">
+									</select>
 									</div>
 								</li>
-								<li class="form-group">
+								<li>
 									<div class="tit">孩子姓名：</div>
 									<div class="con">
-										<input type="text" name="bean.name"  placeholder="孩子姓名" class="form-control" value="">
+										<input type="text"  class="form-control" type="text"
+													placeholder="请输入孩子姓名" name="bean.name" class="input" value="">
+											
 									</div>
 								</li>
-								<li class="form-group">
-									<div class="tit">孩子性别：
+								<li>
+									<div class="tit">孩子性别：</div>
+									<div class="con">
 										<input type="radio" name="bean.sex" value="0" id="sex_0">
 											男 &nbsp; &nbsp; <input type="radio" name="bean.sex" value="1"
 											id="sex_1"> 女 
 									</div>
 								</li>
-								<li class="form-group">
+								<li>
 									<div class="tit">孩子年龄：</div>
 									<div class="con">
-										<input name="bean.age" type="text" placeholder="孩子年龄(数字)"  class="form-control"> 
+										<input name="bean.age"   class="form-control" type="text"
+													placeholder="请输入孩子年龄" type="text" class="input"> 
+													
 									</div>
 								</li>
-								<li class="form-group">
+								<li>
 									<div class="tit">手机号码：</div>
 									<div class="con">
-										<input name="bean.tel" type="text"  placeholder="你的联系电话" class="form-control"> 
+										<input name="bean.tel"  class="form-control" type="text"
+													placeholder="请输入联系电话" type="text" class="input">
 									</div>
 								</li>
 								<li class="li_0" style="height: 100px;">
 									<div class="tit">其它：</div>
 									<div class="con" style="height: 80px;">
-										<textarea name="bean.detail_info"  class="form-control"   placeholder="其它备注信息"
-											style="width: 100%; height: 70px; margin-top: 10px;"></textarea>
+										<textarea name="bean.detail_info" class="form-control" type="text"
+													placeholder="请输入其它备注信息" cols="5" rows="3"
+											style="width: 98%; height: 70px; margin-top: 10px;"></textarea>
 									</div>
 								</li>
 							</ul>
 
 							<div class="c10"></div>
-							<div  style="margin-left: 100px;">
+							<div  style="margin-left: 30%;">
 							<button type="submit" class="btn btn-info" style="margin-left: 40px;" >提  交</button>
 							</div>
 							<div class="c10"></div>
@@ -123,10 +146,35 @@
 	</div>
 </body>
 </html>
+<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2.min.js"></script>
 <script type="text/javascript">
-
-
-
+function getDA(){
+	$('#bean_course_1').val($("#bean_course_select option:selected").text());
+	var cid=$("#bean_course_select").val();
+	//alert(cid);
+	if(cid){
+		jQuery.ajax({
+			url : '${basePath}/w/c202_getDate.ac?cid='+cid,
+			success : function(req) {
+				jQuery("#bean_day").html(req);
+			},
+			error : function() {
+				//--异常--
+			}
+		});
+		jQuery.ajax({
+			url : '${basePath}/w/c202_getAddres.ac?cid='+cid,
+			success : function(req) {
+				//alert(req);
+				jQuery("#bean_addres").html(req);
+			},
+			error : function() {
+				//--异常--
+			}
+		});
+	}
+}
+/* 
 $('.form_date1').datetimepicker({
     language:  'zh-CN',
 	format: "yyyy-mm-dd HH:ii:00",
@@ -139,5 +187,8 @@ $('.form_date1').datetimepicker({
 	maxView: 3,
 	startDate:'${startDate} 07:00:00',
 	pickerPosition:"bottom-left"
-});
+}); */
+if('${bean_course}'!=''){
+	getDA();
+}
 </script>

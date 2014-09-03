@@ -25,9 +25,6 @@
 <%@ include file="../include/public_js_css.jsp"%>
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/css/multi-select.css" />
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2_metro.css"  rel="stylesheet" type="text/css"  />
-<link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
-<script type="text/javascript" src="${basePath}/js/bootstarp-date/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-<script type="text/javascript" src="${basePath}/js/bootstarp-date/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 <style type="text/css">
 select{width: 200px;}
 

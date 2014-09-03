@@ -67,7 +67,7 @@ request.setAttribute("basePath", basePath);
 	</div>
 	<div class="w1000">
 		<div class="nav_box">
-			<div class="logo"><img alt="" src="${basePath}/css/images/logo.jpg" style="width:193px; height:75px;"></div>
+			<div class="logo"><a href="${basePath}/index.ac"><img alt="" src="${basePath}/css/images/logo.jpg" style="width:193px; height:75px;"></a></div>
 			<div class="nav_body">
 				<ul id="navmenu">
 					<li class="sy" style="padding: 2px 10px"><a href="${basePath}/index.ac?pid=sy">首 页</a></li>
