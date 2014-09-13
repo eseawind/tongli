@@ -537,7 +537,7 @@ public class C102Action extends BaseAction {
 	 * @throws Exception 
 	 */
 	public String getAddres() throws Exception {
-		log.info("C202Action getAddres.........");
+		log.info("C102Action getAddres.........");
 		String cid=request.getParameter("cid");
 		StringBuffer sb=new StringBuffer("");
 		if(Validator.notEmpty(cid)){

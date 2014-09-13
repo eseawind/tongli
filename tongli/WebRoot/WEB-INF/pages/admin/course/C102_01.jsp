@@ -109,7 +109,8 @@
 							 <span class="input-group-addon">
 								<i class="fa fa-flag"></i>
 								</span>
-								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" data-placeholder="选择课程..">
+								<c:set var="xxcc" value='' />
+								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" onchange="getAddres()" data-placeholder="选择课程..">
 									<c:forEach items="${course_beans}" var="course_bean" varStatus="i">
 										<optgroup label="${course_bean.subject_name}">
 											<c:forEach items="${course_bean.beans}" var="course_bean2"  varStatus="n">
@@ -211,8 +212,10 @@
 							&nbsp; 
 						</div>
 						<div class="form-group">
-							<label for="article_addres">地址</label> <input class="form-control"
-								id="article_addres" name="bean.addres" size="150" type="text" value="${bean.addres}">
+							<label for="article_addres">地址</label> 
+							<select id="bean_addres" name="bean.addres" class="form-control select2 select2me" style="border:1px solid #ddd;" data-placeholder="选择地址..">
+									<option value="${bean.addres}">${bean.addres}</option>
+							</select>
 						</div>
 						<div class="form-group">
 							<label for="article_description">详情</label>
@@ -550,7 +553,7 @@
 							 <span class="input-group-addon">
 								<i class="fa fa-flag"></i>
 								</span>
-								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" data-placeholder="选择课程..">
+								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" onchange="getAddres()" data-placeholder="选择课程..">
 									<c:forEach items="${course_beans}" var="course_bean" varStatus="i">
 										<optgroup label="${course_bean.subject_name}">
 											<c:forEach items="${course_bean.beans}" var="course_bean2"  varStatus="n">
@@ -629,8 +632,10 @@
 							</label>
 						</div>
 						<div class="form-group">
-							<label for="article_addres">地址</label> <input class="form-control"
-								id="article_addres" name="bean.addres" size="150" type="text" value="${bean.addres}">
+							<label for="article_addres">地址</label> 
+							<select id="bean_addres" name="bean.addres" class="form-control select2 select2me" style="border:1px solid #ddd;">
+									<option value="${bean.addres}">${bean.addres}</option>
+							</select>
 						</div>
 						<div class="form-group">
 							<label for="article_description">详情</label>
@@ -835,5 +840,25 @@ function loadStu() {
 			//jQuery("#"+divId).html('信息加载失败!');
 		}
 	});
+}
+function getAddres(){
+	$('#bean_course_1').val($("#course_select2_sample2 option:selected").text());
+	var cid=$("#course_select2_sample2").val();
+	//alert(cid);
+	if(cid){
+		jQuery.ajax({
+			url : '${basePath}/c202_getAddres.ac?cid='+cid,
+			success : function(req) {
+				//alert(req);
+				jQuery("#bean_addres").html(req);
+			},
+			error : function() {
+				//--异常--
+			}
+		});
+	}
+}
+if('${xxcc}'!=''){
+	getAddres();
 }
 </script>

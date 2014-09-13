@@ -22,9 +22,9 @@
 					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 				</li>
 				<li id="home_init" class="">
-					<a href="${basePath}/home_init.ac">
+					<a class="active" href="${basePath}/home_init.ac">
 					<i class="fa fa-home"></i> 
-					系统主页
+					<span class="title">系统主页</span>
 					</a>
 				</li>
 				<security:permission id="" name="/weixin">
@@ -52,6 +52,17 @@
 								<li id="wechat_sub_menu_li_sub_menu_4"><a href="${basePath}/h/w005_init.ac" >音乐</a></li>
 								<!-- <li id="wechat_sub_menu_li_sub_menu_10"><a href="#" onclick="myAlert('功能即将开放')">语音</a></li>${basePath}/h/w014_init.ac
 								<li id="wechat_sub_menu_li_sub_menu_5"><a href="#" onclick="myAlert('功能即将开放')">视频</a></li>${basePath}/h/w006_init.ac -->
+							</ul>
+						</li>
+						<li id="wechat_sub_menu_li_2" class="">
+							<a href="javascript:;">
+							信息群发
+							<span id="wechat_sub_menu_li_2_arrow" class="arrow"></span>
+							</a>
+							<ul id="wechat_sub_menu_li_2_sub_menu" style="display: none;" class="sub-menu">
+								<li id="wechat_sub_menu_li_2_sub_menu_1"><a href="#" onclick="myAlert('功能即将开放')">图文</a></li><!-- ${basePath}/h/w101_init.ac -->
+								<li id="wechat_sub_menu_li_2_sub_menu_2"><a href="#" onclick="myAlert('功能即将开放')">图片</a></li>
+								<li id="wechat_sub_menu_li_2_sub_menu_3"><a href="#" onclick="myAlert('功能即将开放')">文本</a></li>
 							</ul>
 						</li>
 						<li id="w010_init">

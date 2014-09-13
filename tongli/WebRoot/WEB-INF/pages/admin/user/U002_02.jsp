@@ -228,12 +228,71 @@ font-size: 14px;
 										 <div class="perm-layout-2">
 										        <label><input   value="/w004"  type="checkbox" name="perms">文章管理</label>
 												<label><input   value="/w002,/w003,/w009"  type="checkbox" name="perms">自动回复</label>
+												<label><input   value="/w101,/w102,/w103"  type="checkbox" name="perms">信息群发</label>
 												<label><input   value="/w010"   type="checkbox" name="perms">信息接收</label>
 												<label><input	value="/w013"   type="checkbox" name="perms">客服响应</label>
 												<label><input   value="/w012"   type="checkbox" name="perms">粉丝列表</label>
 												<label><input   value="/w007"   type="checkbox" name="perms">自定义菜单</label>
 										 </div>
 									 </div>
+									 <div class="perm-layout-1">
+										 <label><input  value="/course"  type="checkbox" name="perms">课程管理</label>
+										 <div class="perm-layout-2">
+										        <label><input   value="/c102"  type="checkbox" name="perms">课程表管理</label>
+												<label><input   value="/w101"   type="checkbox" name="perms">课程管理</label>
+												<label><input	value="/w105"   type="checkbox" name="perms">课程地址管理</label>
+										 </div>
+									 </div>
+									 <div class="perm-layout-1">
+									        <label><input  value="/member"  type="checkbox" name="perms">会员管理</label>
+										    <div class="perm-layout-2">
+												<label><input   value="/m001"   type="checkbox" name="perms">会员管理</label>
+										     </div>
+									</div>
+									<div class="perm-layout-1">
+									        <label><input  value="/student"  type="checkbox" name="perms">学员管理</label>
+										    <div class="perm-layout-2">
+												<label><input   value="/s201"   type="checkbox" name="perms">学员管理</label>
+												<label><input   value="/c401"   type="checkbox" name="perms">班级管理</label>
+										     </div>
+									</div>
+									<div class="perm-layout-1">
+									        <label><input  value="/info"  type="checkbox" name="perms">资讯管理</label>
+										    <div class="perm-layout-2">
+												<label><input   value="/s002"   type="checkbox" name="perms">栏目管理</label>
+												<label><input   value="/s001"   type="checkbox" name="perms">资讯管理</label>
+										     </div>
+									</div>
+									<div class="perm-layout-1">
+									        <label><input  value="/yqlj"  type="checkbox" name="perms">友情链接管理</label>
+										    <div class="perm-layout-2">
+												<label><input   value="/s003"   type="checkbox" name="perms">信息管理</label>
+										     </div>
+									</div>
+									<div class="perm-layout-1">
+									        <label><input  value="/yycg"  type="checkbox" name="perms">预约参观</label>
+										    <div class="perm-layout-2">
+												<label><input   value="/c103"   type="checkbox" name="perms">信息管理</label>
+										     </div>
+									</div>
+									<div class="perm-layout-1">
+									        <label><input  value="/sms"  type="checkbox" name="perms">短信管理</label>
+										    <div class="perm-layout-2">
+												<label><input   value="/s004"   type="checkbox" name="perms">通讯录管理</label>
+												<label><input   value="/s005"   type="checkbox" name="perms">短信管理</label>
+										     </div>
+									</div>
+									<div class="perm-layout-1">
+									        <label><input  value="/sms"  type="checkbox" name="perms">在线报名管理</label>
+										    <div class="perm-layout-2">
+												<label><input   value="/c104"   type="checkbox" name="perms">信息管理</label>
+										     </div>
+									</div>
+									<div class="perm-layout-1">
+									        <label><input  value="/tongji"  type="checkbox" name="perms">统计信息管理</label>
+										    <div class="perm-layout-2">
+										     </div>
+									</div>
 									<div class="perm-layout-1">
 									        <label><input  value="/system"  type="checkbox" name="perms">系统管理</label>
 										    <div class="perm-layout-2">

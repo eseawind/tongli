@@ -152,7 +152,8 @@
 							 <span class="input-group-addon">
 								<i class="fa fa-flag"></i>
 								</span>
-								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" data-placeholder="选择课程..">
+								<c:set var="xxcc" value='' />
+								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" onchange="getAddres()" data-placeholder="选择课程..">
 									<c:forEach items="${course_beans}" var="course_bean" varStatus="i">
 										<optgroup label="${course_bean.subject_name}">
 											<c:forEach items="${course_bean.beans}" var="course_bean2"  varStatus="n">
@@ -190,6 +191,24 @@
 							</label>
 						</div>
 						<div class="form-group">
+							 &nbsp;  <label class="control-label">班级</label>
+							 <label class="control-label col-md-12">
+							 <div class="input-group">
+								<span class="input-group-addon">
+								<i class="fa fa-user"></i>
+								</span>
+								<select id="classes_id" id="classes_select2_sample2" onchange="loadStu()"  class="form-control select2me" data-placeholder="选择班级..">
+									<optgroup label="班级列表">
+									<option   value="">--请选择班级--</option>
+									<c:forEach items="${classes_beans}" var="classes">
+										<option value="${classes.id}">${classes.name }</option>
+									</c:forEach>
+									</optgroup>
+								</select>
+							</div>
+							</label>
+						</div>
+						<div class="form-group">
 							 &nbsp;  <label class="control-label">学员</label>
 							 <label class="control-label col-md-12">
 							 <div class="input-group">
@@ -213,8 +232,10 @@
 							</label>
 						</div>
 						<div class="form-group">
-							<label for="article_addres">地址</label> <input class="form-control"
-								id="article_addres" name="bean.addres" size="150" type="text" value="${bean.addres}">
+							<label for="article_addres">地址</label> 
+							<select id="bean_addres" name="bean.addres" class="form-control select2 select2me" style="border:1px solid #ddd;" data-placeholder="选择地址..">
+									<option value="${bean.addres}">${bean.addres}</option>
+							</select>
 						</div>
 						<div class="form-group">
 							<label for="article_description">详情</label>
@@ -289,4 +310,61 @@ jQuery(document).ready(function() {
 		});
 	});
 });
+//--加载班级学员信息--
+function loadStu() {
+	var cid=$('#classes_id').val();
+	if(cid==null || cid==''){
+		return false;
+	}
+	jQuery.ajax({
+		url : '${basePath}/w/getStu.ac?cid='+cid+ '&time=' + new Date(),
+		success : function(req) {
+			try{
+				var json = eval("("+req+")");
+				if(json){
+					$("#student_select2_sample2 option").each(function(){
+						for(var i=0;i<json.length;i++){
+							if($(this).val() == json[i].id){
+								var lt_flag=false;
+								var xx=$('#s2id_student_select2_sample2').find('.select2-search-choice').each(function(){
+									if(json[i].name==$(this).find('div').html()){
+										lt_flag=true;
+									}
+								});
+								if(!lt_flag){
+									var li='<li class="select2-search-choice">    <div>'+json[i].name+'</div>    <a href="#" onclick="return false;" class="select2-search-choice-close" tabindex="-1"></a></li>';
+									$('#s2id_student_select2_sample2').find('.select2-choices').find('.select2-search-field').before(li);
+								}
+								$(this).attr('selected','selected');
+							}
+						}
+					});
+				}
+			}catch(e){}
+		},
+		error : function() {
+			//jQuery("#"+divId).html('信息加载失败!');
+		}
+	});
+}
+function getAddres(){
+	$('#bean_course_1').val($("#course_select2_sample2 option:selected").text());
+	var cid=$("#course_select2_sample2").val();
+	//alert(cid);
+	if(cid){
+		jQuery.ajax({
+			url : '${basePath}/c202_getAddres.ac?cid='+cid,
+			success : function(req) {
+				//alert(req);
+				jQuery("#bean_addres").html(req);
+			},
+			error : function() {
+				//--异常--
+			}
+		});
+	}
+}
+if('${xxcc}'!=''){
+	getAddres();
+}
 </script>
