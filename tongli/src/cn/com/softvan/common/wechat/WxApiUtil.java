@@ -643,6 +643,15 @@ public final class WxApiUtil {
 		}
 		return msg;
 	}
+	public String sendInfo(){
+		/*
+		 * 1.图文信息--a.循环获取单个信息 b.取得标题图 上传获取media_id c.设置media_id
+		 * 2.文本消息直接发送
+		 * 3.图片信息 上传获取media_id
+		 */
+		
+		return null;
+	}
 	// test
 	public static void main(String[] args) throws Exception {
 		WxApiUtil api=new WxApiUtil();
