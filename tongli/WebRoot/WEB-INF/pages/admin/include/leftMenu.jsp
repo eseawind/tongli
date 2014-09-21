@@ -83,6 +83,7 @@
 					</ul>
 				</li>
 				</security:permission>
+				<security:permission id="" name="/course">
 				<li id="course" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-flag"></i> 
@@ -122,6 +123,8 @@
 						</li>
 					</ul>
 				</li>
+				</security:permission>
+				<security:permission id="" name="/member">
 				<li id="member" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-cogs"></i> 
@@ -141,6 +144,8 @@
 						</li>
 					</ul>
 				</li>
+				</security:permission>
+				<security:permission id="" name="/student">
 				<li id="student" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-pagelines"></i> 
@@ -170,7 +175,8 @@
 						</li>
 					</ul>
 				</li>
-				<security:permission id="" name="/zixun">
+				</security:permission>
+				<security:permission id="" name="/info">
 				<li id="sys" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-bar-chart-o"></i> 
@@ -185,6 +191,7 @@
 					</ul>
 				</li>
 				</security:permission>
+				<security:permission id="" name="/yqlj">
 				<li id="sys3" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-coffee"></i> 
@@ -196,6 +203,7 @@
 						<li id="sys3_sub_menu_l1_sub_menu_l2"><a href="${basePath }/h/s003_recycle.ac">信息回收站</a></li>
 					</ul>
 				</li>
+				</security:permission>
 				<%-- <li id="sys4" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa fa-bullhorn"></i> 
@@ -206,17 +214,20 @@
 						<li id="sys4_sub_menu_l1_sub_menu_l1"><a href="${basePath }/h/t001_init.ac">信息管理</a></li>
 					</ul>
 				</li> --%>
+				<security:permission id="" name="/yycg">
 				<li id="sys5" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa  fa-check-square-o"></i> 
 					<span class="title">预约参观</span>
 					<span id="sys5_arrow" class="arrow"></span>
 					</a>
-					<ul id="sys5_sub_menu" style="display: none;" class="sub-menu">
-						<li id="sys5_sub_menu_l1"><a href="${basePath }/h/c103_init.ac">信息管理</a></li>
-						<li id="sys5_sub_menu_l2"><a href="${basePath }/h/c103_recycle.ac">回收站</a></li>
+					<ul id="sys5_sub_menu_li_1_sub_menu" style="display: none;" class="sub-menu">
+						<li id="sys5_sub_menu_li_1_sub_menu_1"><a href="${basePath }/h/c103_init.ac">信息管理</a></li>
+						<li id="sys5_sub_menu_li_1_sub_menu_2"><a href="${basePath }/h/c103_recycle.ac">回收站</a></li>
 					</ul>
 				</li>
+				</security:permission>
+				<security:permission id="" name="/sms">
 				<li id="sys6" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa  fa-comment"></i> 
@@ -229,6 +240,8 @@
 						<li id="sys6_sub_menu_l1_sub_menu_l3"><a href="${basePath }/h/s005_init.ac">短信管理</a></li>
 					</ul>
 				</li>
+				</security:permission>
+				<security:permission id="" name="/zxbm">
 				<li id="sys7" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa  fa-check-square-o"></i> 
@@ -240,13 +253,16 @@
 						<li id="sys7_sub_menu_l2"><a href="${basePath }/h/c104_recycle.ac">回收站</a></li>
 					</ul>
 				</li>
+				</security:permission>
+				<security:permission id="" name="//tongji">
 				<li id="sys8" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa  fa-check-square-o"></i> 
 					<span class="title">统计信息</span>
 					</a>
 				</li>
-				 <security:permission id="" name="/sys">
+				</security:permission>
+				 <security:permission id="" name="/system">
 				<li id="sys9" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa  fa-check-square-o"></i> 
@@ -259,7 +275,57 @@
 					</ul>
 				</li>
 				</security:permission>
-				
+				<security:permission id="" name="/yygl">
+				<li id="sys10" class="">
+					<a class="active" href="javascript:;">
+					<i class="fa  fa-check-square-o"></i> 
+					<span class="title">泳易</span>
+					<span id="sys10_arrow" class="arrow"></span>
+					</a>
+					<ul id="sys10_sub_menu" style="display: none;" class="sub-menu">
+						<li id="sys10_sub_menu_li_1" class="">
+							<a href="javascript:;">
+							课程管理
+							<span id="sys10_sub_menu_li_1_arrow" class="arrow"></span>
+							</a>
+							<ul id="sys10_sub_menu_li_1_sub_menu" style="display: none;" class="sub-menu">
+								<li id="sys10_sub_menu_li_1_sub_menu_1"><a href="${basePath }/h/yc101_init.ac">信息管理</a></li>
+								<li id="sys10_sub_menu_li_1_sub_menu_2"><a href="${basePath }/h/yc101_recycle.ac">回收站</a></li>
+							</ul>
+						</li>
+						<li id="sys10_sub_menu_li_3" class="">
+							<a href="javascript:;">
+							课程表管理
+							<span id="sys10_sub_menu_li_3_arrow" class="arrow"></span>
+							</a>
+							<ul id="sys10_sub_menu_li_3_sub_menu" style="display: none;" class="sub-menu">
+								<li id="sys10_sub_menu_li_3_sub_menu_1"><a href="${basePath }/h/yc102_init.ac">信息管理</a></li>
+								<li id="sys10_sub_menu_li_3_sub_menu_2"><a href="${basePath }/h/yc102_recycle.ac">回收站</a></li>
+							</ul>
+						</li>
+						<li id="sys10_sub_menu_li_4" class="">
+							<a href="javascript:;">
+							场馆地址管理
+							<span id="sys10_sub_menu_li_4_arrow" class="arrow"></span>
+							</a>
+							<ul id="sys10_sub_menu_li_4_sub_menu" style="display: none;" class="sub-menu">
+								<li id="sys10_sub_menu_li_4_sub_menu_1"><a href="${basePath }/h/yc105_init.ac">信息管理</a></li>
+								<li id="sys10_sub_menu_li_4_sub_menu_2"><a href="${basePath }/h/yc105_recycle.ac">回收站</a></li>
+							</ul>
+						</li>
+						<li id="sys10_sub_menu_li_2" class="">
+							<a href="javascript:;">
+							预约参观
+							<span id="sys10_sub_menu_li_2_arrow" class="arrow"></span>
+							</a>
+							<ul id="sys10_sub_menu_li_2_sub_menu" style="display: none;" class="sub-menu">
+								<li id="sys10_sub_menu_li_2_sub_menu_1"><a href="${basePath }/h/yc103_init.ac">信息管理</a></li>
+								<li id="sys10_sub_menu_li_2_sub_menu_2"><a href="${basePath }/h/yc103_recycle.ac">回收站</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				</security:permission>
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

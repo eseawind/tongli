@@ -283,7 +283,7 @@ font-size: 14px;
 										     </div>
 									</div>
 									<div class="perm-layout-1">
-									        <label><input  value="/sms"  type="checkbox" name="perms">在线报名管理</label>
+									        <label><input  value="/zxbm"  type="checkbox" name="perms">在线报名管理</label>
 										    <div class="perm-layout-2">
 												<label><input   value="/c104"   type="checkbox" name="perms">信息管理</label>
 										     </div>

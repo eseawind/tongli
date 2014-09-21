@@ -20,9 +20,9 @@
 <html lang="zh-CN" class="no-js">
 <head>
 <meta charset="utf-8" />
-<%@include file="../include/admin_title.jsp" %>
+<%@include file="../../include/admin_title.jsp" %>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-<%@ include file="../include/public_js_css.jsp"%>
+<%@ include file="../../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 <link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
@@ -37,25 +37,25 @@
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
 	<!-- BEGIN HEADER -->
-	<%@ include file="../include/header.jsp"%>
+	<%@ include file="../../include/header.jsp"%>
 	<!-- END HEADER -->
 	<div class="clearfix"></div>
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
 		<!-- BEGIN SIDEBAR -->
-		<%@ include file="../include/leftMenu.jsp"%>
+		<%@ include file="../../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#sys5,#sys5_sub_menu_li_1_sub_menu_1').addClass('active');
-				$('#sys5_arrow').addClass('open');
-				$('#sys5_sub_menu,#sys5_sub_menu_li_1_sub_menu').show();
+				$('#sys10,#sys10_sub_menu_li_2_sub_menu_1').addClass('active');
+				$('#sys10_arrow,#sys10_sub_menu_li_2_arrow').addClass('open');
+				$('#sys10_sub_menu,#sys10_sub_menu_li_2_sub_menu').show();
 			});
 		</script>
 		<!-- END SIDEBAR -->
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN STYLE CUSTOMIZER -->
-			<%@ include file="../include/style_customizer.jsp"%>
+			<%@ include file="../../include/style_customizer.jsp"%>
 			<!-- END BEGIN STYLE CUSTOMIZER -->
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
@@ -68,7 +68,7 @@
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="${basePath }/h/c103_init.ac">预约参观</a> <i class="fa fa-angle-right"></i></li>
+						<li><a href="${basePath }/h/yc103_init.ac">预约参观</a> <i class="fa fa-angle-right"></i></li>
 						<li>预约参观</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
@@ -97,7 +97,7 @@
 							</c:choose>
 						</c:if>
 						<div class="well form-inline">
-							<form id="small_info_form_list1" accept-charset="UTF-8"  action="${basePath}/h/c103_list1.ac"  method="post">
+							<form id="small_info_form_list1" accept-charset="UTF-8"  action="${basePath}/h/yc103_list1.ac"  method="post">
 								<s:token></s:token>
 								<input type="hidden" id="offsetAA" name="offset" value="0">
 								<label>姓名:
@@ -128,7 +128,7 @@
 	</div>
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
-	<%@ include file="../include/footer.jsp"%>
+	<%@ include file="../../include/footer.jsp"%>
 	<!-- END FOOTER -->
 </body>
 <!-- END BODY -->

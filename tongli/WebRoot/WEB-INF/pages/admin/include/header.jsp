@@ -14,6 +14,7 @@
 	pageEncoding="utf-8" session="false"%>
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@page import="cn.com.softvan.bean.BaseUserBean"%>
+<%@ taglib prefix="security" uri="/WEB-INF/permission-tags.tld"%>
 <%
 String path = request.getContextPath();
 String basePath = null;
@@ -46,11 +47,13 @@ request.setAttribute("basePath", basePath);
 					<i class="fa fa-home"></i>首页
 					</a>
 				</li>
+				 <security:permission id="" name="/w001_init">
 				<li class="dropdown">
 					<a class="dropdown-toggle" href="${basePath}/h/w001_init.ac">
 					<i class="fa fa-user"></i>微信公共号绑定
 					</a>
 				</li>
+				</security:permission>
 				<!-- BEGIN USER LOGIN DROPDOWN -->
 				<li class="dropdown user">
 					 <%
@@ -64,7 +67,9 @@ request.setAttribute("basePath", basePath);
 					</a>
 					<ul class="dropdown-menu">
 						<li><a href="${basePath}/h/home_edit.ac?id=<%=user.getId()%>"><i class="fa fa-cogs"></i> 信息修改</a></li>
+						<security:permission id="" name="/update">
 						<li><a href="${basePath}/h/w003_uc.ac" target="_blank"><i class="fa fa-tasks"></i> 缓存更新 </a></li>
+						</security:permission>
 						<li class="divider"></li>
 						<li><a href="javascript:;" id="trigger_fullscreen"><i class="fa fa-move"></i> 全屏展示</a></li>
 						<li><a href="<%=basePath%>/home_logout.ac"><i class="fa fa-key"></i> 安全退出</a></li>

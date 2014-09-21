@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>	
+<beans xmlns="http://www.springframework.org/schema/beans"	
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"	
+		xmlns:context="http://www.springframework.org/schema/context"	
+		xmlns:aop="http://www.springframework.org/schema/aop"	
+		xmlns:tx="http://www.springframework.org/schema/tx"	
+		xmlns:jee="http://www.springframework.org/schema/jee"	
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 	
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd	
+		http://www.springframework.org/schema/context 	
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd	
+		http://www.springframework.org/schema/tx 	
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd	
+		http://www.springframework.org/schema/aop 	
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd	
+		http://www.springframework.org/schema/jee 	
+		http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">	
+		
+		<!--===泳易 模块=dao=begin=== -->
+		<!-- 课程信息_y 数据库处理接口类	 -->
+		<bean id="tcYCourseDao" parent="baseDao">
+			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.yongyi.course.ITcYCourseDao"></property>
+		</bean>
+		<!-- 课程地址_y 数据库处理接口类	 -->
+		<bean id="tcYAddresDao" parent="baseDao">
+			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.yongyi.course.ITcYAddresDao"></property>
+		</bean>
+		<bean id="tcYCourseVsAddresDao" parent="baseDao">
+			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.yongyi.course.ITcYCourseVsAddresDao"></property>
+		</bean>
+		<!-- 课程表_y 数据库处理接口类	 -->
+		<bean id="tcYCourseSyllabusDao" parent="baseDao">
+			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.yongyi.course.ITcYCourseSyllabusDao"></property>
+		</bean>
+		<!-- 预约参观_y 数据库处理接口类	 -->
+		<bean id="tcYCourseBespeakDao" parent="baseDao">
+			<property name="mapperInterface" value="cn.com.softvan.dao.daointer.yongyi.course.ITcYCourseBespeakDao"></property>
+		</bean>
+			<!--===泳易 模块=dao=end=== -->
+			
+			<!--===泳易 模块=service=begin=== -->
+		<!-- 课程信息_y 业务处理 -->	
+		<bean id="tcYCourseManager" class="cn.com.softvan.service.yongyi.course.impl.TcYCourseManager" parent="baseManager" scope="prototype">	
+			<property name="tcYCourseDao" ref="tcYCourseDao"></property>	
+			<property name="tcYCourseVsAddresDao" ref="tcYCourseVsAddresDao"></property>	
+		</bean>	
+		<!-- 课程地址_y 业务处理 -->	
+		<bean id="tcYAddresManager" class="cn.com.softvan.service.yongyi.course.impl.TcYAddresManager" parent="baseManager" scope="prototype">	
+			<property name="tcYAddresDao" ref="tcYAddresDao"></property>	
+			<property name="tcYCourseVsAddresDao" ref="tcYCourseVsAddresDao"></property>	
+		</bean>	
+		<!-- 课程表_y 业务处理 -->	
+		<bean id="tcYCourseSyllabusManager" class="cn.com.softvan.service.yongyi.course.impl.TcYCourseSyllabusManager" parent="baseManager" scope="prototype">	
+			<property name="tcYCourseSyllabusDao" ref="tcYCourseSyllabusDao"></property>	
+		</bean>	
+		<!-- 预约参观_y 业务处理 -->	
+		<bean id="tcYCourseBespeakManager" class="cn.com.softvan.service.yongyi.course.impl.TcYCourseBespeakManager" parent="baseManager" scope="prototype">	
+			<property name="tcYCourseBespeakDao" ref="tcYCourseBespeakDao"></property>	
+		</bean>	
+		<!--===泳易 模块=service=end=== -->
+</beans>

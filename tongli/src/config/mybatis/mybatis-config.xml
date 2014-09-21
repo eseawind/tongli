@@ -147,6 +147,28 @@
 		<!--=========== entity class====end======= -->
 		<!--============= bean class==begin========= -->
 		<!-- 课程地址 end -->
+		<!--===泳易 模块==begin=== -->
+		<!--bean class-->
+		<!-- 课程信息_y bean -->
+		<typeAlias type="cn.com.softvan.bean.yongyi.course.TcYCourseBean" alias="tcYCourseBean"/>
+		<!-- 课程地址_y bean -->
+		<typeAlias type="cn.com.softvan.bean.yongyi.course.TcYAddresBean" alias="tcYAddresBean"/>
+		<typeAlias type="cn.com.softvan.bean.yongyi.course.TcYCourseVsAddresBean" alias="tcYCourseVsAddresBean"/>
+		<!-- 课程表_y bean -->
+		<typeAlias type="cn.com.softvan.bean.yongyi.course.TcYCourseSyllabusBean" alias="tcYCourseSyllabusBean"/>
+		<!-- 预约参观_y bean -->
+		<typeAlias type="cn.com.softvan.bean.yongyi.course.TcYCourseBespeakBean" alias="tcYCourseBespeakBean"/>
+		<!--entity class -->
+		<!-- 课程信息_y entity -->
+		<typeAlias type="cn.com.softvan.dao.entity.yongyi.course.TcYCourse" alias="tcYCourse"/>
+		<!-- 课程地址_y entity -->
+		<typeAlias type="cn.com.softvan.dao.entity.yongyi.course.TcYAddres" alias="tcYAddres"/>
+		<typeAlias type="cn.com.softvan.dao.entity.yongyi.course.TcYCourseVsAddres" alias="tcYCourseVsAddres"/>
+		<!-- 课程表_y entity -->
+		<typeAlias type="cn.com.softvan.dao.entity.yongyi.course.TcYCourseSyllabus" alias="tcYCourseSyllabus"/>
+		<!-- 预约参观_y entity -->
+		<typeAlias type="cn.com.softvan.dao.entity.yongyi.course.TcYCourseBespeak" alias="tcYCourseBespeak"/>
+		<!--===泳易 模块==end=== -->
 	</typeAliases>
 	<!-- 插件 -->
 	<plugins>
@@ -235,5 +257,16 @@
 		<!-- 课程与班级关联关系 -->
 		<mapper resource="/cn/com/softvan/dao/mybatis/course/TcCourseVsClasses.xml"/>
 		<!-- ==========mybatis xml=======end====== -->
+		<!--===泳易 模块==begin=== -->
+		<!-- 课程信息_y -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/yongyi/course/TcYCourse.xml"/>
+		<!-- 课程地址_y -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/yongyi/course/TcYAddres.xml"/>
+		<mapper resource="/cn/com/softvan/dao/mybatis/yongyi/course/TcYCourseVsAddres.xml"/>
+		<!-- 课程表_y -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/yongyi/course/TcYCourseSyllabus.xml"/>
+		<!-- 预约参观_y -->
+		<mapper resource="/cn/com/softvan/dao/mybatis/yongyi/course/TcYCourseBespeak.xml"/>
+		<!--===泳易 模块==end=== -->
 	</mappers>
 </configuration>

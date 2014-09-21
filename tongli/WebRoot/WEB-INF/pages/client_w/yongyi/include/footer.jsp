@@ -13,7 +13,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" session="false"%>
 <div class="i_bottom">
-		<p>童励儿童俱乐部 版权所有</p>
+		<p>泳易俱乐部 版权所有</p>
 </div>
 
 <script type="text/javascript" src="${basePath}/js/swipe.js"></script>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="y_course_info" namespace="/h" extends="wechat-default" >
+    	<default-interceptor-ref name="wechat-auth" /> 
+		<!-- 课程管理 -->
+		<action name="yc101_*" class="yc101Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/yongyi/course/YC101.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/yongyi/course/YC101_01.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/yongyi/course/YC101_03.jsp</result>
+			<result name="success" type="chain">yc101_init</result>
+		</action>
+		<!-- 课程表管理 -->
+		<action name="yc102_*" class="yc102Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/yongyi/course/YC102.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/yongyi/course/YC102_01.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/yongyi/course/YC102_03.jsp</result>
+			<result name="init2">/WEB-INF/pages/admin/yongyi/course/YC102_04.jsp</result>
+			<result name="clist1">/WEB-INF/pages/admin/yongyi/course/YC102_05.jsp</result>
+			<result name="list1">/WEB-INF/pages/admin/yongyi/course/YC102_06.jsp</result>
+			<result name="list2">/WEB-INF/pages/admin/yongyi/course/YC102_07.jsp</result>
+			<result name="edit2">/WEB-INF/pages/admin/yongyi/course/YC102_08.jsp</result>
+			<result name="list1_1">/WEB-INF/pages/admin/yongyi/course/YC102_09.jsp</result>
+			<result name="list2_1">/WEB-INF/pages/admin/yongyi/course/YC102_10.jsp</result>
+			<result name="list1_2">/WEB-INF/pages/admin/yongyi/course/YC102_11.jsp</result>
+			<result name="list2_2">/WEB-INF/pages/admin/yongyi/course/YC102_12.jsp</result>
+			<result name="success" type="chain">yc102_init</result>
+		</action>
+		<!-- 预约参观管理 -->
+		<action name="yc103_*" class="yc103Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/yongyi/course/YC103.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/yongyi/course/YC103_01.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/yongyi/course/YC103_03.jsp</result>
+			<result name="list1">/WEB-INF/pages/admin/yongyi/course/YC103_04.jsp</result>
+			<result name="success" type="chain">yc103_init</result>
+		</action>
+		<!-- 地址管理 -->
+		<action name="yc105_*" class="yc105Action" method="{1}">
+			<result name="init">/WEB-INF/pages/admin/yongyi/course/YC105.jsp</result>
+			<result name="edit">/WEB-INF/pages/admin/yongyi/course/YC105_01.jsp</result>
+			<result name="recycle">/WEB-INF/pages/admin/yongyi/course/YC105_03.jsp</result>
+			<result name="success" type="chain">yc105_init</result>
+		</action>
+	</package>
+</struts>

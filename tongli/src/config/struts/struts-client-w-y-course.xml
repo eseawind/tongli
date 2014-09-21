@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+    <package name="w_y_client_course_info" namespace="/w" extends="wechat-default" >
+		<default-interceptor-ref name="wechat-xss" />
+		<!-- 课程-预约参观-->
+		<action name="yc202_*" class="yc202Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client_w/yongyi/course/YC202.jsp</result>
+			<result name="view">/WEB-INF/pages/client_w/yongyi/course/YC202_01.jsp</result>
+		</action>
+		<!-- 课程-在线报名
+		<action name="yc203_*" class="yc203Action" method="{1}">
+			<result name="init">/WEB-INF/pages/client_w/yongyi/course/YC203.jsp</result>
+			<result name="view">/WEB-INF/pages/client_w/yongyi/course/YC203_01.jsp</result>
+		</action>-->
+	</package>
+</struts>

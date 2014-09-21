@@ -4,7 +4,7 @@
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
- * 1.00     2014-04-07  wuxiaogang   程序・发布
+ * 1.00     2014-04-01  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 童励 System. - All Rights Reserved.
  *
@@ -20,9 +20,9 @@
 <html lang="zh-CN" class="no-js">
 <head>
 <meta charset="utf-8" />
-<%@include file="../include/admin_title.jsp" %>
+<%@include file="../../include/admin_title.jsp" %>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-<%@ include file="../include/public_js_css.jsp"%>
+<%@ include file="../../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 <link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
@@ -31,25 +31,25 @@
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
 	<!-- BEGIN HEADER -->
-	<%@ include file="../include/header.jsp"%>
+	<%@ include file="../../include/header.jsp"%>
 	<!-- END HEADER -->
 	<div class="clearfix"></div>
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
 		<!-- BEGIN SIDEBAR -->
-		<%@ include file="../include/leftMenu.jsp"%>
+		<%@ include file="../../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#course,#course_sub_menu_l4').addClass('active');
-				$('#course_arrow').addClass('open');
-				$('#course_sub_menu').show();
+				$('#sys10,#sys10_sub_menu_li_1_sub_menu_1').addClass('active');
+				$('#sys10_arrow,#sys10_sub_menu_li_1_arrow').addClass('open');
+				$('#sys10_sub_menu,#sys10_sub_menu_li_1_sub_menu').show();
 			});
 		</script>
 		<!-- END SIDEBAR -->
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN STYLE CUSTOMIZER -->
-			<%@ include file="../include/style_customizer.jsp"%>
+			<%@ include file="../../include/style_customizer.jsp"%>
 			<!-- END BEGIN STYLE CUSTOMIZER -->
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
@@ -62,7 +62,7 @@
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="${basePath }/h/c102_init.ac">课程管理</a> <i class="fa fa-angle-right"></i></li>
+						<li><a href="${basePath }/h/yc101_init.ac">课程管理</a> <i class="fa fa-angle-right"></i></li>
 						<li>课程列表</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
@@ -90,28 +90,32 @@
 								</c:otherwise>
 							</c:choose>
 						</c:if>
+							<div class="btn-toolbar">
+								<a href="${basePath}/h/yc101_edit.ac" class="btn btn-primary">新增课程</a>
+							</div>
 							<table class="table table-condensed table-striped">
 								<tbody>
 									<tr>
-										<th class="col-md-3">时间</th>
+										<th class="col-md-3">更新时间</th>
 										<th class="col-md-6">课程名称</th>
 										<th class="col-md-3"></th>
 									</tr>
 									<c:forEach items="${beans}" var="bean">
 									<tr>
-										<td>${bean.day} ${bean.begin_time} ${bean.end_time}</td>
+										<td>${bean.last_updated}</td>
 										<td>${bean.title}</td>
-										<td><a href="javascript:void(0)"   class="btn purple" 
-											onclick="if(confirm('确认恢复吗?')){location.href='${basePath}/h/c102_recovery.ac?id=${bean.id}'};"
-											rel="nofollow">恢复</a>
-											<a href="javascript:void(0)" class="btn btn-danger"
-										onclick="if(confirm('确认删除吗?删除后不可恢复!')){location.href='${basePath}/h/c102_delxx.ac?id=${bean.id}'};">删除</a>
-											</td>
+										<td><%-- <a
+											href="${basePath}/h/yc101_view.ac?id=${bean.id}"
+											class="btn  btn-info" target="_blank">详情</a>  --%><a
+											href="${basePath}/h/yc101_edit.ac?id=${bean.id}"
+											class="btn edit green">编辑</a> <a href="javascript:void(0)"   class="btn btn-danger" 
+											onclick="if(confirm('确认删除吗?')){location.href='${basePath}/h/yc101_del.ac?id=${bean.id}'};"
+											rel="nofollow">删除</a></td>
 									</tr>
 									</c:forEach>
 								</tbody>
 							</table>
-							<customtag:pagingext func="loadUrlPage" params="'h/c102_','recycle'" />
+							<customtag:pagingext func="loadUrlPage" params="'h/yc101_','init'" />
 						</div>
 					</div>
 				</div>
@@ -122,9 +126,9 @@
 	</div>
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
-	<%@ include file="../include/footer.jsp"%>
+	<%@ include file="../../include/footer.jsp"%>
 	<!-- END FOOTER -->
-	
+
 </body>
 <!-- END BODY -->
 </html>

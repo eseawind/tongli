@@ -1,10 +1,10 @@
 <%--
 /*
- * 系统管理_课程管理 (页面)
+ * 系统管理_课程管理_课程表 (页面)
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
- * 1.00     2014-04-07  wuxiaogang   程序・发布
+ * 1.00     2014-04-01  wuxiaogang   程序・发布
  * -------- ----------- ------------ ------------------------------------------
  * Copyright 2014 童励 System. - All Rights Reserved.
  *
@@ -20,27 +20,30 @@
 <html lang="zh-CN" class="no-js">
 <head>
 <meta charset="utf-8" />
-<%@include file="../include/admin_title.jsp" %>
+<%@include file="../../include/admin_title.jsp" %>
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-<%@ include file="../include/public_js_css.jsp"%>
+<%@ include file="../../include/public_js_css.jsp"%>
 <link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
 <link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+<link href='${basePath}/plugins/bootstrap.admin.theme/assets/plugins/fullcalendar/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
 	<!-- BEGIN HEADER -->
-	<%@ include file="../include/header.jsp"%>
+	<%@ include file="../../include/header.jsp"%>
 	<!-- END HEADER -->
 	<div class="clearfix"></div>
 	<!-- BEGIN CONTAINER -->
 	<div class="page-container">
 		<!-- BEGIN SIDEBAR -->
-		<%@ include file="../include/leftMenu.jsp"%>
+		<%@ include file="../../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#course,#course_sub_menu_l4').addClass('active');
+				$('#course,#course_sub_menu_l3').addClass('active');
 				$('#course_arrow').addClass('open');
 				$('#course_sub_menu').show();
 			});
@@ -49,21 +52,21 @@
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 			<!-- BEGIN STYLE CUSTOMIZER -->
-			<%@ include file="../include/style_customizer.jsp"%>
+			<%@ include file="../../include/style_customizer.jsp"%>
 			<!-- END BEGIN STYLE CUSTOMIZER -->
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						课程列表 <small><span class="help-inline">展示所有未删除的课程信息</span></small>
+						课程表 <small><span class="help-inline">课程表信息</span></small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="${basePath }/h/c102_init.ac">课程管理</a> <i class="fa fa-angle-right"></i></li>
-						<li>课程列表</a> </li>
+						<li><a href="${basePath }/h/yc101_init.ac">课程管理</a> <i class="fa fa-angle-right"></i></li>
+						<li>课程表</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
@@ -85,33 +88,41 @@
 								<c:otherwise>
 									<div class="alert alert-success">
 										<button class="close" data-dismiss="alert"></button>
-										<strong>Success!</strong> 课程操作成功。
+										<strong>Success!</strong> 课程表操作成功。
 									</div>
 								</c:otherwise>
 							</c:choose>
 						</c:if>
-							<table class="table table-condensed table-striped">
-								<tbody>
-									<tr>
-										<th class="col-md-3">时间</th>
-										<th class="col-md-6">课程名称</th>
-										<th class="col-md-3"></th>
-									</tr>
-									<c:forEach items="${beans}" var="bean">
-									<tr>
-										<td>${bean.day} ${bean.begin_time} ${bean.end_time}</td>
-										<td>${bean.title}</td>
-										<td><a href="javascript:void(0)"   class="btn purple" 
-											onclick="if(confirm('确认恢复吗?')){location.href='${basePath}/h/c102_recovery.ac?id=${bean.id}'};"
-											rel="nofollow">恢复</a>
-											<a href="javascript:void(0)" class="btn btn-danger"
-										onclick="if(confirm('确认删除吗?删除后不可恢复!')){location.href='${basePath}/h/c102_delxx.ac?id=${bean.id}'};">删除</a>
-											</td>
-									</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-							<customtag:pagingext func="loadUrlPage" params="'h/c102_','recycle'" />
+							<div class="portlet box blue calendar">
+								<div class="portlet-title">
+									<div class="caption"><i class="fa fa-reorder"></i>课程表管理</div>
+								</div>
+								<div class="portlet-body light-grey">
+									<div class="row">
+										<div class="col-md-3 col-sm-12">
+											<!-- BEGIN DRAGGABLE EVENTS PORTLET-->    
+											<h3 class="event-form-title">Draggable Events</h3>
+											<div id="external-events">
+												<form class="inline-form">
+													<input type="text" value="" class="form-control" placeholder="Event Title..." id="event_title" /><br />
+													<a href="javascript:;" id="event_add" class="btn green">Add Event</a>
+												</form>
+												<hr />
+												<div id="event_box"></div>
+												<label for="drop-remove">
+												<input type="checkbox" id="drop-remove" />remove after drop                         
+												</label>
+												<hr class="visible-xs" />
+											</div>
+											<!-- END DRAGGABLE EVENTS PORTLET-->            
+										</div>
+										<div class="col-md-9 col-sm-9">
+											<div id="calendar" class="has-toolbar"></div>
+										</div>
+									</div>
+									<!-- END CALENDAR PORTLET-->
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -122,9 +133,12 @@
 	</div>
 	<!-- END CONTAINER -->
 	<!-- BEGIN FOOTER -->
-	<%@ include file="../include/footer.jsp"%>
+	<%@ include file="../../include/footer.jsp"%>
 	<!-- END FOOTER -->
-	
+	<!-- <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script> -->
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>      
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/fullcalendar/fullcalendar/fullcalendar.js"></script>
+	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/scripts/calendar.js"></script> 
 </body>
 <!-- END BODY -->
 </html>
@@ -132,4 +146,7 @@
 function loadUrlPage(offset, url, event) {
 	location.href='${basePath}/' + url + event+'.ac?offset=' + offset;
 }
+jQuery(document).ready(function() {       
+	   Calendar.init();
+});
 </script>

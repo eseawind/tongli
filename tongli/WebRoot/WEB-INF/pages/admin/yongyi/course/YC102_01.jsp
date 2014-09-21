@@ -1,0 +1,356 @@
+<%--
+/*
+ * 系统管理_课程管理_课程表_编辑 (页面)
+ *
+ * VERSION  DATE        BY           REASON
+ * -------- ----------- ------------ ------------------------------------------
+ * 1.00     2014-04-07  wuxiaogang   程序・发布
+ * -------- ----------- ------------ ------------------------------------------
+ * Copyright 2014 童励 System. - All Rights Reserved.
+ *
+ */
+--%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8" session="false"%>
+<%@page import="cn.com.softvan.common.CommonConstant"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!DOCTYPE html>
+<html lang="zh-CN" class="no-js">
+<head>
+<meta charset="utf-8" />
+<%@include file="../../include/admin_title.jsp" %>
+<%@ include file="../../include/public_js_css.jsp"%>
+<link href="${basePath}/css/messages.css" media="all" rel="stylesheet" type="text/css" />
+<link href="${basePath}/css/font-awesome/css/font-awesome.css" rel="stylesheet">
+<link href="${basePath}/css/font-awesome/css/font-awesome-ie7.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/css/datepicker.css" />
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/less/datepicker.less" />
+
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/css/multi-select.css" />
+
+<link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/clockface/css/clockface.css" />
+</head>
+<!-- BEGIN BODY -->
+<body class="page-header-fixed">
+	<!-- BEGIN HEADER -->
+	<%@ include file="../../include/header.jsp"%>
+	<!-- END HEADER -->
+	<div class="clearfix"></div>
+	<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+		<!-- BEGIN SIDEBAR -->
+		<%@ include file="../../include/leftMenu.jsp"%>
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+				$('#sys10,#sys10_sub_menu_li_3_sub_menu_1').addClass('active');
+				$('#sys10_arrow,#sys10_sub_menu_li_3_arrow').addClass('open');
+				$('#sys10_sub_menu,#sys10_sub_menu_li_3_sub_menu').show();
+			});
+		</script>
+		<!-- END SIDEBAR -->
+		<!-- BEGIN PAGE -->
+		<div class="page-content">
+			<!-- BEGIN STYLE CUSTOMIZER -->
+			<%@ include file="../../include/style_customizer.jsp"%>
+			<!-- END BEGIN STYLE CUSTOMIZER -->
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+					<h3 class="page-title">
+						课程管理 <small><span class="help-inline">在这里你可以编辑课程信息</span></small>
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li><i class="fa fa-home"></i> <a
+							href="${basePath }/home_init.ac">Home</a> <i
+							class="fa fa-angle-right"></i></li>
+						<li><a href="#">系统管理</a> <i class="fa fa-angle-right"></i></li>
+						<li><a href="${basePath}/h/yc102_init.ac">课程管理</a> <i class="fa fa-angle-right"></i></li>
+						<li>编辑</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->
+			
+			
+		<c:choose>
+			<c:when test="${type==null}">
+			
+			<div class="row  tabbable tabbable-custom">
+			<ul class="nav nav-tabs" style="height:40px; ">
+					<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">课程信息</a></li>
+			</ul>
+			<div class="tab-content">
+						<div class="tab-pane active" id="tab_0">
+						
+				<div class="col-md-12">
+					<form accept-charset="UTF-8"  action="${basePath}/h/yc102_save.ac" class="edit_article" id="edit_article_13632" method="post">
+						<s:token></s:token>
+						<input name="bean.id" type="hidden" value="${bean.id}">
+						<input name="bean.type" type="hidden" value="${bean.type}">
+						
+								<input name="type_flag" type="hidden" value="0">
+							
+						<div class="form-group">
+							 &nbsp;  <label class="control-label">课程</label>
+							 <label class="control-label col-md-12">
+							 <div class="input-group">
+							 <span class="input-group-addon">
+								<i class="fa fa-flag"></i>
+								</span>
+								<c:set var="xxcc" value='' />
+								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" onchange="getAddres()" data-placeholder="选择课程..">
+									<c:forEach items="${course_beans}" var="course_bean" varStatus="i">
+										<optgroup label="${course_bean.subject_name}">
+											<c:forEach items="${course_bean.beans}" var="course_bean2"  varStatus="n">
+												<c:set var="xxcc" value='' />
+												<c:if test="${bean.course_id==course.id}">
+													<c:set var="xxcc" value='selected="selected"' />
+												</c:if>
+												<option ${xxcc} value="${course_bean2.id}">${course_bean2.title}</option>
+											</c:forEach>
+										</optgroup>
+									</c:forEach>
+								</select>
+							</div>
+							</label>
+						</div>
+						<div class="well form-inline form-group">
+							<div class="col-md-1"><label>上课时间</label></div> 
+							<div id="article_day" style="margin-top: -8px;" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+								<input type="text" name="bean.day" value="${bean.day}" class="form-control" readonly="">
+								<span class="input-group-btn">
+								<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div>
+							
+							<div  class="input-group bootstrap-timepicker col-md-2" id="article_begin_time_toggle" style="margin-top: -8px;" >                                       
+								<input id="article_begin_time" name="bean.begin_time" value="${bean.begin_time}" type="text" class="form-control" readonly="" />
+								<span class="input-group-btn">
+								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
+								</span>
+							</div>
+							<div  class="input-group bootstrap-timepicker col-md-2" id="article_end_time_toggle" style="margin-top: -8px;" >                                       
+								<input id="article_end_time" type="text" name="bean.end_time" value="${bean.end_time}" class="form-control" readonly="" >
+								<span class="input-group-btn">
+								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
+								</span>
+							</div>
+							&nbsp; 
+						</div>
+						<div class="form-group">
+							<label for="article_addres">地址</label> 
+							<select id="bean_addres" name="bean.addres" class="form-control select2 select2me" style="border:1px solid #ddd;" data-placeholder="选择地址..">
+									<option value="${bean.addres}">${bean.addres}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="article_description">详情</label>
+							<div class="qeditor_border">
+								<textarea name="bean.detail_info" style="height: 300px;width: 100%;" id="article_description" >
+									${bean.detail_info}
+								</textarea>
+							</div>
+						</div>
+						<div class="form-actions">
+							<input class="btn btn-primary" name="commit" type="submit"
+								value="保存"> | <a
+								href="${basePath}/h/yc102_init.ac">返回</a>
+						</div>
+					</form>
+				</div>
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		<!-- END PAGE -->
+	</div>
+	<!-- END CONTAINER -->
+	</c:when>
+		<c:otherwise>
+			<div class="row">
+			<div class="tab-content">
+				<div class="col-md-12">
+					<form accept-charset="UTF-8"  action="${basePath}/h/yc102_save.ac" class="edit_article" id="edit_article_13632" method="post">
+						<s:token></s:token>
+						<input name="bean.id" type="hidden" value="${bean.id}">
+						<input name="bean.type" type="hidden" value="${bean.type}">
+						<input name="type_flag" type="hidden" value="2x">
+						<div class="well form-inline form-group">
+							<div class="col-md-1"><label>开始日期</label></div> 
+							<div id="article_date1" style="margin-top: -8px;" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+								<input type="text" name="bean.date1" value="${bean.day}" class="form-control" readonly="">
+								<span class="input-group-btn">
+								<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div>
+							<div class="col-md-1"><label>结束日期</label></div> 
+							<div id="article_date2" style="margin-top: -8px;" class="input-group input-medium date date-picker col-md-2" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
+								<input type="text" name="bean.date2" value="${bean.day}" class="form-control" readonly="">
+								<span class="input-group-btn">
+								<button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+								</span>
+							</div>
+							&nbsp; 
+						</div>
+						<div class="well form-inline">
+							<label>
+								<input name="day_week"  value="0"	 type="checkbox" />星期日
+							</label>
+							<label>
+								<input name="day_week"  value="1"	 type="checkbox" />星期一
+							</label>
+							<label>
+								<input name="day_week"  value="2"	 type="checkbox" />星期二
+							</label>
+							<label>
+								<input name="day_week"  value="3"	 type="checkbox" />星期三
+							</label>
+							<label>
+								<input name="day_week"  value="4"	 type="checkbox" />星期四
+							</label>
+							<label>
+								<input name="day_week"  value="5"	 type="checkbox" />星期五
+							</label>
+							<label>
+								<input name="day_week"  value="6"	 type="checkbox" />星期六
+							</label>
+						</div>
+						<div class="well form-inline form-group">
+							<div class="col-md-1"><label>上课时间</label></div> 
+							<div  class="input-group bootstrap-timepicker col-md-2" id="article_begin_time_toggle" style="margin-top: -8px;" >                                       
+								<input id="article_begin_time" name="bean.begin_time" value="${bean.begin_time}" type="text" class="form-control" readonly="" />
+								<span class="input-group-btn">
+								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
+								</span>
+							</div>
+							<div class="col-md-1"><label>下课时间</label></div> 
+							<div  class="input-group bootstrap-timepicker col-md-2" id="article_end_time_toggle" style="margin-top: -8px;" >                                       
+								<input id="article_end_time" type="text" name="bean.end_time" value="${bean.end_time}" class="form-control" readonly="" >
+								<span class="input-group-btn">
+								<button class="btn default" type="button" ><i class="fa fa-clock-o"></i></button>
+								</span>
+							</div>
+							&nbsp; 
+						</div>
+						<div class="form-group">
+							 &nbsp;  <label class="control-label">课程</label>
+							 <label class="control-label col-md-12">
+							 <div class="input-group">
+							 <span class="input-group-addon">
+								<i class="fa fa-flag"></i>
+								</span>
+								<select name="bean.course_id" id="course_select2_sample2"  class="form-control select2me" onchange="getAddres()" data-placeholder="选择课程..">
+									<c:forEach items="${course_beans}" var="course_bean" varStatus="i">
+										<optgroup label="${course_bean.subject_name}">
+											<c:forEach items="${course_bean.beans}" var="course_bean2"  varStatus="n">
+												<c:set var="xxcc" value='' />
+												<c:if test="${bean.course_id==course.id}">
+													<c:set var="xxcc" value='selected="selected"' />
+												</c:if>
+												<option ${xxcc} value="${course_bean2.id}">${course_bean2.title}</option>
+											</c:forEach>
+										</optgroup>
+									</c:forEach>
+								</select>
+							</div>
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="article_addres">地址</label> 
+							<select id="bean_addres" name="bean.addres" class="form-control select2 select2me" style="border:1px solid #ddd;">
+									<option value="${bean.addres}">${bean.addres}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="article_description">详情</label>
+							<div class="qeditor_border">
+								<textarea name="bean.detail_info" style="height: 300px;width: 100%;" id="article_description" >
+									${bean.detail_info}
+								</textarea>
+							</div>
+						</div>
+						<div class="form-actions">
+							<input class="btn btn-primary" name="commit" type="submit"
+								value="保存"> | <a
+								href="${basePath}/h/yc102_init.ac">返回</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<!-- END PAGE CONTENT-->
+		</div>
+		</c:otherwise>
+	</c:choose>
+	<!-- BEGIN FOOTER -->
+	<%@ include file="../../include/footer.jsp"%>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2.min.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/js/jquery.quicksearch.js"></script>   
+	
+	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/clockface/js/clockface.js"></script>
+	<!-- END FOOTER -->
+	<script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
+</body>
+<!-- END BODY -->
+</html>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	$('#article_date1').datepicker();
+	$('#article_date2').datepicker();
+	$('#article_day').datepicker();
+	//
+	 $('#article_begin_time').clockface({
+         format: 'HH:mm',
+         trigger: 'manual'
+     });
+	  $('#article_begin_time_toggle').click(function (e) {
+          e.stopPropagation();
+          $('#article_begin_time').clockface('toggle');
+      });
+	//
+	$('#article_end_time').clockface({
+        format: 'HH:mm',
+        trigger: 'manual'
+    });
+	$('#article_end_time_toggle').click(function (e) {
+        e.stopPropagation();
+        $('#article_end_time').clockface('toggle');
+    });
+	KindEditor.ready(function(K) {
+		//--编辑框
+		K.create('#article_description', {
+			 resizeType : 2,
+	         uploadJson : '${basePath}/uploadFile?isrich=1',
+	         fileManagerJson : '${basePath}/plugins/editor/jsp/file_manager_json.jsp',
+			 allowFileManager : true
+		});
+	});
+});
+function getAddres(){
+	$('#bean_course_1').val($("#course_select2_sample2 option:selected").text());
+	var cid=$("#course_select2_sample2").val();
+	//alert(cid);
+	if(cid){
+		jQuery.ajax({
+			url : '${basePath}/w/yc202_getAddres.ac?cid='+cid,
+			success : function(req) {
+				//alert(req);
+				jQuery("#bean_addres").html(req);
+			},
+			error : function() {
+				//--异常--
+			}
+		});
+	}
+}
+if('${xxcc}'!=''){
+	getAddres();
+}
+</script>

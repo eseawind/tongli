@@ -40,9 +40,9 @@
 		<%@ include file="../include/leftMenu.jsp"%>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				$('#sys5,#sys5_sub_menu_l2').addClass('active');
+				$('#sys5,#sys5_sub_menu_li_1_sub_menu_2').addClass('active');
 				$('#sys5_arrow').addClass('open');
-				$('#sys5_sub_menu').show();
+				$('#sys5_sub_menu,#sys5_sub_menu_li_1_sub_menu').show();
 			});
 		</script>
 		<!-- END SIDEBAR -->

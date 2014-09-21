@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.softvan.dao.daointer.yongyi.course.ITcYCourseDao" >
+	<!-- 字段列表 -->
+	<sql id="Base_Column_List" >
+		t1.id,
+		t1.subject_id,
+		t1.pic_url,
+		t1.course_type,
+		t1.title,
+		t1.duration,
+		t1.duration_unit,
+		t1.age_group,
+		t1.number,
+		t1.market_price,
+		t1.member_price,
+		t1.is_indoor,
+		t1.is_site_fee,
+		t1.addres,
+		t1.detail_info,
+		t1.note,
+		t1.date_created,
+		t1.create_id,
+		t1.create_ip,
+		t1.last_updated,
+		t1.update_id,
+		t1.update_ip,
+		t1.del_flag,
+		t1.version
+	</sql>
+	<!-- 根据主键获取信息详情 -->
+	<select id="selectByPrimaryKey" resultType="tcYCourseBean" parameterType="tcYCourse" >
+		select
+		<include refid="Base_Column_List" />
+		from tc_y_course t1 
+		where  t1.id = #{id}
+	</select>
+	<!-- 根据主键物理删除信息 -->
+	<delete id="deleteByPrimaryKey" parameterType="tcYCourse" >
+		delete
+		from tc_y_course
+		where  id = #{id}
+	</delete>
+	<!-- 新增单条数据 -->
+	<insert id="insert" parameterType="tcYCourse" >
+		insert into tc_y_course(
+		id,
+		subject_id,
+		pic_url,
+		course_type,
+		title,
+		duration,
+		duration_unit,
+		age_group,
+		number,
+		market_price,
+		member_price,
+		is_indoor,
+		is_site_fee,
+		addres,
+		detail_info,
+		note,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		update_id,
+		update_ip,
+		del_flag,
+		version
+	) values (
+		#{id},
+		#{subject_id},
+		#{pic_url},
+		#{course_type},
+		#{title},
+		#{duration},
+		#{duration_unit},
+		#{age_group},
+		#{number},
+		#{market_price},
+		#{member_price},
+		#{is_indoor},
+		#{is_site_fee},
+		#{addres},
+		#{detail_info},
+		#{note},
+		now(),
+		#{create_id},
+		#{create_ip},
+		now(),
+		#{update_id},
+		#{update_ip},
+		'0',
+		 0
+	)
+	</insert>
+	<!-- 新增 批量数据 -->
+	<insert id="insertBatch">
+		insert into tc_metro_fees(
+		id,
+		subject_id,
+		pic_url,
+		course_type,
+		title,
+		duration,
+		duration_unit,
+		age_group,
+		number,
+		market_price,
+		member_price,
+		is_indoor,
+		is_site_fee,
+		addres,
+		detail_info,
+		note,
+		date_created,
+		create_id,
+		create_ip,
+		last_updated,
+		update_id,
+		update_ip,
+		del_flag,
+		version
+		) values 
+		<foreach collection="tcMetroFees" item="t" open="("  close=")"  separator=",">
+		#{t.id},
+		#{t.subject_id},
+		#{t.pic_url},
+		#{t.course_type},
+		#{t.title},
+		#{t.duration},
+		#{t.duration_unit},
+		#{t.age_group},
+		#{t.number},
+		#{t.market_price},
+		#{t.member_price},
+		#{t.is_indoor},
+		#{t.is_site_fee},
+		#{t.addres},
+		#{t.detail_info},
+		#{t.note},
+		now(),
+		#{t.create_id},
+		#{t.create_ip},
+		now(),
+		#{t.update_id},
+		#{t.update_ip},
+		'0',
+		 0
+		</foreach>
+	</insert>
+	<!-- 数据更新 -->
+	<update id="updateByPrimaryKeySelective" parameterType="tcYCourse" >
+		update tc_y_course set version=version+1
+		,last_updated=now()
+		,update_id=#{update_id}
+		,update_ip=#{update_ip}
+		<if test="subject_id!= null" >,subject_id=#{subject_id}</if>
+		<if test="pic_url!= null" >,pic_url=#{pic_url}</if>
+		<if test="course_type!= null" >,course_type=#{course_type}</if>
+		<if test="title!= null" >,title=#{title}</if>
+		<if test="duration!= null" >,duration=#{duration}</if>
+		<if test="duration_unit!= null" >,duration_unit=#{duration_unit}</if>
+		<if test="age_group!= null" >,age_group=#{age_group}</if>
+		<if test="number!= null" >,number=#{number}</if>
+		<if test="market_price!= null" >,market_price=#{market_price}</if>
+		<if test="member_price!= null" >,member_price=#{member_price}</if>
+		<if test="is_indoor!= null" >,is_indoor=#{is_indoor}</if>
+		<if test="is_site_fee!= null" >,is_site_fee=#{is_site_fee}</if>
+		<if test="addres!= null" >,addres=#{addres}</if>
+		<if test="detail_info!= null" >,detail_info=#{detail_info}</if>
+		<if test="note!= null" >,note=#{note}</if>
+		<if test="del_flag!= null" >,del_flag=#{del_flag}</if>
+		where  id = #{id}
+	</update>
+	<!-- 判断是否存在 -->
+	<select id="isDataYN" parameterType="tcYCourse" resultType="int">
+		select count(0) from tc_y_course where  id = #{id}
+	</select>
+	<!--信息列表 分页 -->
+	<select id="findDataIsPage" parameterType="tcYCourse" resultType="tcYCourseBean">
+		select
+		<include refid="Base_Column_List" />
+		from tc_y_course t1 
+		where 1=1 
+	<choose>
+		<when test="del_flag!=null">
+			and t1.del_flag=#{del_flag}
+		</when>
+		<otherwise>
+			and t1.del_flag='0'
+		</otherwise>
+	</choose>
+	</select>
+	<!--信息列表 -->
+	<select id="findDataIsList" parameterType="tcYCourse" resultType="tcYCourseBean">
+		select
+		<include refid="Base_Column_List" />
+		from tc_y_course t1 
+		where 1=1 
+	<choose>
+		<when test="del_flag!=null">
+			and t1.del_flag=#{del_flag}
+		</when>
+		<otherwise>
+			and t1.del_flag='0'
+		</otherwise>
+	</choose>
+	</select>
+	<!-- 逻辑删除 -->
+	<update id="deleteById" parameterType="tcYCourse" >
+		update tc_y_course set version=version+1
+		,last_updated=now()
+		,update_id=#{update_id}
+		,update_ip=#{update_ip}
+		,del_flag='1'
+		where  id = #{id}
+	</update>
+	<!-- 恢复逻辑删除 -->
+	<update id="recoveryDataById" parameterType="tcYCourse" >
+		update tc_y_course set version=version+1
+		,last_updated=now()
+		,update_id=#{update_id}
+		,update_ip=#{update_ip}
+		,del_flag='0'
+		where  id = #{id}
+	</update>
+</mapper>
