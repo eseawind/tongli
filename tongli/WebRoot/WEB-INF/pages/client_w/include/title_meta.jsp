@@ -12,10 +12,8 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" session="false"%>
 <title>童励儿童俱乐部</title>
-<meta name="description" content="夏令营,儿童俱乐部,童励" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta content="telephone=no" name="format-detection">
-<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="shortcut icon" href="/favicon.ico" />
 <script>var basePath='${basePath}';</script>

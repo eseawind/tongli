@@ -22,19 +22,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="${basePath}/css/w_style.css"		 rel="stylesheet" type="text/css">
 
+<style type="text/css">
+.page-header {
+    padding-bottom: 9px;
+    margin: 0px 0px 20px;
+    border-bottom: 1px solid #EEE;
+}
+div{
+overflow: visible;
+}
+</style>
 </head>
-
-<body class="blueBg">
-	<!-- BEGIN HEADER -->
-	<div class="w640">
-	<!-- END   HEADER -->
-
-	<div class="main pr">
-		<div class="c10"></div>
-		<div class="w">
-			<div class="body" >
-				<div class="content" style="min-height: 390px;">
+<body>
+	<div class="all-elements">
+		<%@ include file="../include/header.jsp"%>
+		<div id="content" class="page-content">
+			<div class="page-header">
+				<a href="#" class="deploy-sidebar"></a>
+				<p class="bread-crumb">
+					登录验证
+				</p>
+				<a href="javascript:history.go(-1);" class="deploy-contact left-list"></a>
+			</div>
+			<div class="content">
 					<form accept-charset="UTF-8"  action="${basePath}/w/m201_login.ac" class="edit_article" id="edit_article_13632" method="post">
 						<s:token></s:token>
 						<div class="login_box">
@@ -71,14 +86,9 @@
 							</div>
 						</div>
 					</form>
+					<%@ include file="../include/footer.jsp"%>
 				</div>
-			</div>
-			<div class="c10"></div>
 		</div>
-	</div>
-	<!-- BEGIN FOOTER -->
-	<%@ include file="../include/footer.jsp"%>
-	<!-- END FOOTER -->
 	</div>
 </body>
 </html>

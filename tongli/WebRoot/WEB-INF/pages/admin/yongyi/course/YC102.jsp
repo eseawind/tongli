@@ -93,17 +93,17 @@
 						<div class="well form-inline">
 							<div class="btn-toolbar">
 								<a href="${basePath}/h/yc102_edit.ac?type=0" class="btn btn-primary">安排课程表</a>
-								<a href="${basePath}/h/yc102_edit.ac?type=1" class="btn purple">安排【夏令营】课程表</a>
-								<a href="${basePath}/h/yc102_edit.ac?type=2" class="btn dark">安排【冬令营】程表</a>
+								<%-- <a href="${basePath}/h/yc102_edit.ac?type=1" class="btn purple">安排【夏令营】课程表</a>
+								<a href="${basePath}/h/yc102_edit.ac?type=2" class="btn dark">安排【冬令营】程表</a> --%>
 							</div>
 						</div>
 							<ul class="nav nav-tabs" style="height:40px; ">
 									<li id="tab_1_li" class="active "><a href="#tab_1" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
 									<li id="tab_2_li"><a href="#tab_2" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>
-									<li id="tab_3_li"><a href="#tab_3" data-toggle="tab">完结课程【夏令营】(<font class="_struts_2" color="red">0</font>)</a></li>
+									<!-- <li id="tab_3_li"><a href="#tab_3" data-toggle="tab">完结课程【夏令营】(<font class="_struts_2" color="red">0</font>)</a></li>
 									<li id="tab_4_li"><a href="#tab_4" data-toggle="tab">未完课程【夏令营】(<font class="_struts_3" color="red">0</font>)</a></li>
 									<li id="tab_5_li"><a href="#tab_5" data-toggle="tab">完结课程【冬令营】(<font class="_struts_4" color="red">0</font>)</a></li>
-									<li id="tab_6_li"><a href="#tab_6" data-toggle="tab">未完课程【冬令营】(<font class="_struts_5" color="red">0</font>)</a></li>
+									<li id="tab_6_li"><a href="#tab_6" data-toggle="tab">未完课程【冬令营】(<font class="_struts_5" color="red">0</font>)</a></li> -->
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane active" id="tab_1">
@@ -168,10 +168,10 @@
 jQuery(document).ready(function() {
 	loadUrlPage(0,'h/yc102_','list1','course_info1','&t=0');
 	loadUrlPage(0,'h/yc102_','list2','course_info2','&t=0');
-	loadUrlPage(0,'h/yc102_','list1','course_info3','&t=1');
+	/* loadUrlPage(0,'h/yc102_','list1','course_info3','&t=1');
 	loadUrlPage(0,'h/yc102_','list2','course_info4','&t=1');
 	loadUrlPage(0,'h/yc102_','list1','course_info5','&t=2');
-	loadUrlPage(0,'h/yc102_','list2','course_info6','&t=2');
+	loadUrlPage(0,'h/yc102_','list2','course_info6','&t=2'); */
 });
 function loadUrlPage(offset,url,event,divId,obj) {
 	jQuery.ajax({

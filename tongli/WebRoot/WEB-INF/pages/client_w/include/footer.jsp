@@ -12,70 +12,57 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" session="false"%>
-<div class="i_bottom">
-		<p>童励儿童俱乐部 版权所有</p>
+<div class="decoration"></div>
+<div class="content-footer">
+	<p class="copyright-content">童励儿童俱乐部.<br> &nbsp;&nbsp;&nbsp;版权所有</p>
+    <a href="#" class="go-up-footer"></a>
+    <div class="clear"></div>
 </div>
+<script type="text/javascript" src="${basePath}/plugins/slideby/scripts/jqueryui.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/slideby/scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/slideby/scripts/jquery.swipebox.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/slideby/scripts/colorbox.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/slideby/scripts/snap.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/slideby/scripts/contact.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/slideby/scripts/custom.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/slideby/scripts/framework.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/slideby/scripts/framework.launcher.js"></script>
 
-<script type="text/javascript" src="${basePath}/js/swipe.js"></script>
 <script type="text/javascript">
-!window.jQuery && document.write('<script src=http://static.weiwubao.com/asset/lib/js/jquery/jquery-1.10.0.min.js><\/script>');
-</script> 
-<script>
-		 getBlockUI();
-		jQuery(document).ready(function() {    
-		   $.unblockUI();
+	function reSetH(){
+		var sidebar_h=$('#sidebar').height();
+		var content_h=$('#content').height();
+		if(content_h<sidebar_h){
+			$('#content').height(sidebar_h)
+		}
+	}
+		jQuery(document).ready(function() {
+			//-新闻资讯
+			loadMenuSub('3f2b286347174e728d39169c212fe56b');
+			//-关于我们
+			loadMenuSub('966a13c753f34faa927510c610b5e0b6');
+			//-童励课程
+			loadMenuSub('6690aceda07a405a9428e6e02ba2d416');
+			//-东夏令营
+			loadMenuSub('26f1017792024a358c73639b08e74393');
+			
+			reSetH();//重设高
 		});
-		$(document).ajaxStart(function () {
-			$.blockUI({
-		        message: '<img src="'+basePath+'/plugins/bootstrap.admin.theme/assets/img/ajax-loading.gif" />',
-	           css: {
-	               top: '50%',
-	               border: 'none',
-	               padding: '2px',
-	               backgroundColor: 'none'
-	           },
-	           overlayCSS: {
-	               backgroundColor: '#000',
-	               opacity: 0.05,
-	               cursor: 'wait'
-	           }
-		    });
-		});
-		$(document).ajaxStop(function () {
-		    // 直接调用，无延时
-		    $.unblockUI();
-		});
-		function getBlockUI(){
-			 $.blockUI({
-		        message: '<img src="'+basePath+'/plugins/bootstrap.admin.theme/assets/img/ajax-loading.gif" />',
-	           css: {
-	               top: '50%',
-	               border: 'none',
-	               padding: '2px',
-	               backgroundColor: 'none'
-	           },
-	           overlayCSS: {
-	               backgroundColor: '#000',
-	               opacity: 0.05,
-	               cursor: 'wait'
-	           }
-		    });
-			setTimeout($.unblockUI, 500);
+		//------------子菜单-----------------------------------------
+		function loadMenuSub(pid) {
+			jQuery.ajax({
+				url : '${basePath}/w/menu.ac?pid='+pid,
+				success : function(req) {
+					try{
+						$("."+pid).next('.nav-item-submenu').html(req);
+					}catch(e){
+						
+					}
+				},
+				error : function() {
+					//--异常--
+				}
+			});
 		}
 </script>
-<script type="text/javascript" src="${basePath}/js/wechat.api.js"></script>
-<!-- <script type="text/javascript">
-var wechat = new wechatAPI();
-wechat.shareData = {
-shareImageUrl: "http://static.weiwubao.com/upload/800066/image/20140515/100x100_201405151034051.jpg",
-shareLink: "http://www.weiwubao.com/web/800066/",
-shareTitle: "童厉儿童俱乐部",
-shareContent: "关注童厉儿童俱乐部,给孩子一个快乐的童年！",
-};
-/*****分享初始化*****/
-wechat.shareInit();
-/*****隐藏工具条*****/
-wechat.hideBottomTool();
-//wechat.hideTopTool();
-</script> -->
 <script type="text/javascript" src="${basePath}/js/global.js"></script>

@@ -17,16 +17,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
+<div class="container no-bottom">
 <c:if test="${beans!=null && fn:length(beans)>0 }">
 	<c:forEach items="${beans}" var="bean" varStatus="i">
-		<div class="media">
-			<a href="#" class="pull-left">
-			</a>
-			<div class="media-body">
-				<h4 class="media-heading alert-warning"><label style="color: #777;font-size: 12px;">${bean.create_id}</label><span>${bean.date_created} </span></h4>
-				<p class="alert alert-success alert-dismissable">${bean.detail_info} </p>
-			</div>
-		</div>
+	<em class="speach-left-title"><span>${bean.date_created} </span>${bean.create_id}:</em>
+     <p class="speach-left">${bean.detail_info}</p>
+     <div class="clear"></div>
 	</c:forEach>
+ <div class="clear"></div>
 <customtag:pagingext func="loadUrlPageComment" params="'m201_','clist1','${did}','&cid=${cid}'" />
 </c:if>
+</div>

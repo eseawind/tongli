@@ -23,18 +23,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
-
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script> 
+<style type="text/css">
+.page-header {
+    padding-bottom: 9px;
+    margin: 0px 0px 20px;
+    border-bottom: 1px solid #EEE;
+}
+</style>
 </head>
-
-<body class="blueBg">
-	<div class="w640">
-	<div class="main pr">
-		<div class="c10"></div>
-		<div class="w">
-
-			<div class="body" >
-				<div class="title">&nbsp; 预约参观</div>
-				<div class="content" style="min-height: 390px;">
+<body>
+	<div class="all-elements">
+		<%@ include file="../include/header.jsp"%>
+		<div id="content" class="page-content">
+			<div class="page-header">
+				<a href="#" class="deploy-sidebar"></a>
+				<p class="bread-crumb">
+					预约参观
+				</p>
+				<a href="javascript:history.go(-1);" class="deploy-contact left-list"></a>
+			</div>
+			<div class="content ">
 				<c:if test="${msg!=null}">
 					<c:choose>
 						<c:when test="${msg=='1'}">
@@ -107,14 +121,9 @@
 							</div>
 							<div class="c10"></div>
 					</div>
-
-				</div>
+				<%@ include file="../include/footer.jsp"%>
 			</div>
 		</div>
-	</div>
-	<!-- BEGIN FOOTER -->
-	<%@ include file="../include/footer.jsp"%>
-	<!-- END FOOTER -->
 	</div>
 </body>
 </html>

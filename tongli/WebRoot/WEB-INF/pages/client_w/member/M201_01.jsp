@@ -23,13 +23,13 @@
 .blog-images li img {
 opacity: 1;
 }
+
 </style>
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <input type="hidden"   id="uid" value="${uid}"  />
 <c:forEach items="${beans}" var="bean" varStatus="i">
-	<div class="item_li item_li_0">${i.index+1}.<font color="#333">${bean.day}&nbsp;${bean.begin_time}</font> ${bean.title}</div>
+	<div class="item_li item_li_0"><span class="badge badge-info">${i.index+1}</span><font color="#333">${bean.day}&nbsp;${bean.begin_time}</font> ${bean.title}</div>
 	<div class="item_con item_con_0">
-		<div class="grade">
 			<table class="table table-striped table-condensed">
 				<tr>
 					<td width="90" height="30" ><strong>上课时间：</strong></td>
@@ -91,8 +91,8 @@ opacity: 1;
 								<label><input type="radio" class="xx2${bean.course_syllabus_item_id}" name="item_bean.teacher_score" value="0">一般</label>
 								<label><input type="radio" class="xx2${bean.course_syllabus_item_id}" name="item_bean.teacher_score" value="1">很好</label>
 								<label><input type="radio" class="xx2${bean.course_syllabus_item_id}" name="item_bean.teacher_score" value="2">优秀</label>
-								<textarea style="width: 100%;height: 50px;" class="xx2${bean.course_syllabus_item_id}" name="item_bean.teacher_score_note"></textarea>
-								<a style="margin-left:300px;" class="btn blue" id="b_${bean.course_syllabus_item_id}" onclick="if(confirm('确认提交评价信息吗?')){submitFrom2('${bean.course_syllabus_item_id}');}">提交评价信息</a>
+								<textarea style="width: 100%;height: 50px; " class="xx2${bean.course_syllabus_item_id}" name="item_bean.teacher_score_note"></textarea>
+								<a style="margin-top:10px;" class="button-icon icon-setting button-green" id="b_${bean.course_syllabus_item_id}" onclick="if(confirm('确认提交评价信息吗?')){submitFrom2('${bean.course_syllabus_item_id}');}">提交评价信息</a>
 								</form>
 							</c:otherwise>
 						</c:choose>
@@ -103,7 +103,7 @@ opacity: 1;
 			<table  class="table table-striped table-condensed" >
 				<tr>
 					<td height="30" align="center" >
-						============课堂详情==========
+						课堂详情
 					</td>
 				</tr>
 				<tr>
@@ -121,20 +121,20 @@ opacity: 1;
 				</tr>
 				<tr>
 					<td align="left" class="">
-						<div class="col-xs-12 blog-page">
+						<div class="blog-page">
 							<h3>参与讨论</h3>
 							<div id="comment_list1_div_${bean.id}_${i.index+1}">
 							</div>
 							<hr>
 							<div class="post-comment">
-								<h3>Leave a Comment</h3>
+								<h3></h3>
 								<form role="form" id="comment_form_${bean.id}_${i.index+1}" accept-charset="UTF-8"  action="${basePath}/w/m201_csave.ac"  method="post">
 									<div class="form-group">
 										<label class="control-label">评论信息<span class="required">*200字以内</span></label>
 										<input type="hidden" name="cbean.info_id" id="cbean_info_id" value="${bean.id}"  />
-										<textarea name="cbean.detail_info" id="cbean_detail_info" class="form-control" rows="4"></textarea>
+										<textarea style="border: 1px solid #eee;" name="cbean.detail_info" id="cbean_detail_info" class="form-control" rows="4"></textarea>
 									</div>
-									<a class="btn blue margin-top-10" onclick="submitFrom4('comment_form_${bean.id}_${i.index+1}','comment_list1_div_${bean.id}_${i.index+1}');">提交评论信息</a>
+									<a class="button button-blue margin-top-10" onclick="submitFrom4('comment_form_${bean.id}_${i.index+1}','comment_list1_div_${bean.id}_${i.index+1}');">提交评论信息</a>
 								</form>
 							</div>
 						</div>
@@ -144,7 +144,6 @@ opacity: 1;
 			<script type="text/javascript">
 			loadUrlPageComment(0,'m201_','clist1','comment_list1_div_${bean.id}_${i.index+1}','&cid=${bean.id}');
 			</script>
-		</div>
 	</div>
 </c:forEach>
 <!-- The blueimp Gallery widget data-filter=":even" -->
@@ -167,6 +166,7 @@ opacity: 1;
 			$(this).addClass("on");
 		}
 		$(this).next(".item_con_0").slideToggle();
+		reSetH();//重设高
 	});
 	// 提交from
 	function submitFrom2(from_id) {
@@ -200,9 +200,9 @@ opacity: 1;
 				if (data == "1") {
 					var d=new Date(); 
 					var formatdate=d.getFullYear()+'-'+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"";
-					$('#'+divid).prepend('<div class="media"><a href="#" class="pull-left"></a><div class="media-body"><h4 class="media-heading alert-warning"><label style="color: #777;font-size: 12px;">${uid}</label><span>'+formatdate+'</span></h4><p class="alert alert-success alert-dismissable">'+info_val+'</p></div></div>');
+					$('#'+divid).prepend('<em class="speach-right-title"><span>'+formatdate+' </span>${uid}:</em><p class="speach-right blue-bubble">'+info_val+'</p><div class="clear"></div>');
 					info_obj.val('');
-					alert('评论成功!');
+					//alert('评论成功!');
 				} else {
 					alert(data);
 				}

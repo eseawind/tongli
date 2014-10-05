@@ -24,27 +24,91 @@
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
 
-<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
-<link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
-<%-- <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" /> --%>
+<link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
-
-<link rel="stylesheet" href="${basePath}/w/css/blueimp-gallery.min.css">
+<link href="${basePath}/css/w_style.css"		 rel="stylesheet" type="text/css">
+<style type="text/css">
+.page-header {
+    padding-bottom: 9px;
+    margin: 0px 0px 20px;
+    border-bottom: 1px solid #EEE;
+}
+.tab-content {
+    display: block;
+    overflow: visible;
+	position: relative;
+	margin: 0px;
+	padding: 0px;
+}
+.page-content {
+    margin-top: 0px;
+    min-height: 760px;
+}
+.content {
+    margin:0px;
+}
+.item_con {
+ margin:0px;
+}
+.next-quote {
+    z-index: 99999;
+    background-image: url('${basePath}/plugins/slideby/images/ui/next1.png');
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 10px;
+    background-size: 10px 10px;
+    position: absolute;
+    right: 0px;
+    margin-top:35px;;
+}
+.prev-quote {
+    z-index: 99999;
+    background-image: url('${basePath}/plugins/slideby/images/ui/prev1.png');
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 10px;
+    background-size: 10px 10px;
+    position: absolute;
+    left: 0px;
+    margin-top:35px;;
+}
+table tr td{
+    text-align: left;
+}
+textarea{border: 1px solid #ddd;}
+.tabbable-custom {
+    margin-bottom: 15px;
+    padding: 0px;
+    overflow: visible;
+}
+div{
+    overflow: visible;
+}
+.container{
+width:auto;
+margin-left: 5px;
+margin-right: 5px;
+}
+p{
+   border-radius:15px;
+}
+</style>
 </head>
-
-<body class="blueBg">
-	<!-- BEGIN HEADER -->
-	<div class="w640">
-	<!-- END   HEADER -->
-	<%-- <%@ include file="../include/slider.jsp"%> --%>
-	<div class="main pr">
-		<div class="c10"></div>
-		<div class="w">
-			<div class="body" >
-				<div class="title">&nbsp; 我的课程表</div>
-				<div class="content  tabbable tabbable-custom" style="min-height: 600px;">
+<body>
+	<div class="all-elements">
+		<%@ include file="../include/header.jsp"%>
+		<div id="content" class="page-content">
+			<div class="page-header">
+				<a href="#" class="deploy-sidebar"></a>
+				<p class="bread-crumb">
+					我的课程表
+				</p>
+				<a href="javascript:history.go(-1);" class="deploy-contact left-list"></a>
+			</div>
+			<div class="content">
+				<div class="web_enroll_info tabbable tabbable-custom">
 					<ul class="nav nav-tabs" style="height:40px; ">
 							<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab">完结课程(<font class="_struts_0" color="red">0</font>)</a></li>
 							<li id="tab_1_li"><a href="#tab_1" data-toggle="tab">未完课程(<font class="_struts_1" color="red">0</font>)</a></li>
@@ -66,29 +130,11 @@
 						</div>
 					</div>
 				</div>
-			</div>
 			<c:set var="student_id" value="" />
-			<div class="body" style="width: 197px;">
-				<div class="title">
-					<a href="javascript:void(0);" class="ico_recommend">个人中心</a>
-				</div>
-				<div class="content">
-					<ul>
-							<li>
-								<a href="javascript:;" onclick="loadInfo();">课程表</a>
-							</li>
-					</ul>
-				</div>
-			</div>
-			<%@ include file="../include/nav_left.jsp"%>
-			<div class="c10"></div>
+			<%@ include file="../include/footer.jsp"%>
 		</div>
-
 	</div>
-	<!-- BEGIN FOOTER -->
-	<%@ include file="../include/footer.jsp"%>
 	</div>
-	<!-- END FOOTER -->
 
 	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
 	<!-- The Templates plugin is included to render the upload/download listings -->
@@ -109,7 +155,6 @@
 	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
 	<!-- The File Upload user interface plugin -->
 	<script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
-	<script src="${basePath}/js/jquery.blueimp-gallery.min.js"></script>
 	
 </body>
 </html>
@@ -126,7 +171,7 @@
 	function loadUrlPage(offset,url,event,divId,obj) {
 		loginCheck();
 		jQuery.ajax({
-			url : '${basePath}/' + url + event+'.ac?offset='+offset+ obj + '&time=' + new Date(),
+			url : '${basePath}/w/' + url + event+'.ac?offset='+offset+ obj + '&time=' + new Date(),
 			success : function(req) {
 				jQuery("#"+divId).html(req);
 			},
@@ -138,7 +183,7 @@
 	function loginCheck() {
 		jQuery.ajax({
 			async : false,
-			url : '${basePath}/tcheck.ac?time=' + new Date().getTime(),
+			url : '${basePath}/w/tcheck.ac?time=' + new Date().getTime(),
 			success : function(req) {
 				if(req!='1'){
 					alert('未登录或登录超时!请重新登录!');
@@ -167,9 +212,9 @@
 				if (data == "1") {
 					var d=new Date(); 
 					var formatdate=d.getFullYear()+'-'+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"";
-					$('#'+divid).prepend('<div class="media"><a href="#" class="pull-left"></a><div class="media-body"><h4 class="media-heading alert-warning"><label style="color: #777;font-size: 12px;">${uid}</label><span>'+formatdate+'</span></h4><p class="alert alert-success alert-dismissable">'+info_val+'</p></div></div>');
+					$('#'+divid).prepend('<em class="speach-right-title"><span>'+formatdate+' </span>${uid}:</em><p class="speach-right blue-bubble">'+info_val+'</p><div class="clear"></div>');
 					info_obj.val('');
-					alert('评论成功!');
+					//alert('评论成功!');
 				} else {
 					alert(data);
 				}
@@ -184,7 +229,7 @@
 		//var load = "<a class='loading' >信息加载中...</a>";
 		//jQuery("#" + divId).html(load);
 		jQuery.ajax({
-			url : '${basePath}/' + url + event+'.ac?offset='+offset+'&did='+divId+ obj + '&time=' + new Date(),
+			url : '${basePath}/w/' + url + event+'.ac?offset='+offset+'&did='+divId+ obj + '&time=' + new Date(),
 			success : function(req) {
 				jQuery("#"+divId).html(req);
 			},

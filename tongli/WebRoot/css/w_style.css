@@ -2,35 +2,11 @@
 /* CSS Document */
 
 a {outline: none;}
-a:active {star:expression(this.onFocus=this.blur());}
 a,input,button{ outline:none; }
 button::-moz-focus-inner{border:0px;}
 input::-moz-focus-inner{border:0px;}
-.autowrap{word-wrap: break-word; word-break:break-all}
-
-.v_title{ height:50px; background:url(images/arr_sort.png) 120px 10px no-repeat; padding-left:20px;}
 
 input[type="radio"]{position: relative; top:-2px;}
-
-/* body */
-.body{ border:1px solid #eee;margin-bottom: 10px;background: #fff;}
-.body .title{ height:30px; line-height:30px; background:url(images/tit_bg.jpg) repeat-x; clear:both;font-family:"微软雅黑"; font-size:16px;color:#5CBFC2; position:relative;}
-.body .title a{text-indent:2.2em; display:block;}
-.body .title em{ width:20px; height:20px; display:block; background:url(images/nav_bg.png) -7px -580px no-repeat; position:absolute; right:10px; top:8px; cursor:pointer;}
-.body .title em a{width:20px; height:20px; display:block;}
-.body .content{ clear:both; display:block; padding:10px;font-size:14px;margin: 0 auto;}
-.body .content  .on{font-weight:bolder;color:#5CBFC2;}
-.body .content  .on a{color:#5CBFC2;}
-.body .content p{ font-size:14px; text-indent:2em;}
-.body .content li{ min-height:30px; line-height:30px; border-bottom:1px solid #eee;}
-.body  h1{ font-size:20px; line-height:30px; margin:20px; text-align:center; color:#5CBFC2;}
-.body  h3{ font-size:12px; line-height:20px; margin:10px; text-align:center;color:#999;}
-.ico_aboutus{text-align: left;color: #333;text-indent:2em;}
-
-
-.home_news{}
-.home_news li{ height:24px; line-height:24px; position:relative;}
-.home_news li em{ width:80px; position:absolute; right:0px; text-align:right; color:#999;}
 
 /* login panel */
 .login_box{  margin-top:50px;}
@@ -78,10 +54,10 @@ vertical-align: baseline;line-height: 38px;outline:0;background: url(images/spri
 .btn_login:hover{background-position:0 -143px;}
 
 /* course info */
-.course_info{}
+.course_info{margin: 0px;padding: 0px;}
 .course_info .item_li{ height:30px; line-height:30px; border-bottom:1px solid #eee;font-size:16px; cursor:pointer;}
 .course_info .item_li:hover,.course_info .item_li.on{color:#3e7900;border-bottom:1px solid #3e7900;}
-.course_info .item_con{ line-height:20px; clear:both; padding:10px;font-size:14px; display:none; background:#FFF;}
+.course_info .item_con{ line-height:20px; clear:both; padding:0px;font-size:14px; display:none; background:#FFF;}
 .grade{ border:1px solid #ddd; padding:10px;}
 .grade .login_btn{width:80px;height:38px;text-align: center;cursor: pointer;float:right;color: white;box-shadow: 0 2px 5px rgba(0, 94, 21, .3);font-weight: 700;font-size:16px;display: inline-block;
 vertical-align: baseline;line-height: 38px;outline:0;background: url(images/sprite_bg.png) no-repeat;background-color: transparent;border-radius: 3px;margin-top:10px;}
@@ -132,9 +108,9 @@ a{color:#333;text-decoration:none}
 
 
 /*首页*/
-.i_menu,.i_bottom{ background:#294687;}
-.i_menu{ padding:10px 0; border-bottom:#35518D solid 1px;}
-.i_menu_item{ display:block; float:left; width:33.33%; padding:15px 0;text-align:center; color:#FFF; font-size:0.7em; border-right:#25427C solid 1px;border-bottom:#25427C solid 1px; border-top:#3A5999 solid 1px; border-left:#3A5999 solid 1px;}
+.i_menu,.i_bottom{background:#294687;}
+.i_menu{ padding:0px 0; border-bottom:#eee solid 1px;}
+.i_menu_item{ display:block; float:left; width:33.33%; padding:15px 0;text-align:center; color:#FFF; font-size:0.7em; border-right:#eee solid 1px;border-bottom:#eee solid 1px; border-top:#eee solid 1px; border-left:#eee solid 1px;}
 .br_t{ border-top:none;}
 .br_b{ border-bottom:none;}
 .i_menu_item i{ display:block; height:35px; margin-bottom:5px;}
@@ -155,9 +131,9 @@ a{color:#333;text-decoration:none}
 .swipe_wrap{overflow: hidden;position: relative;}
 .swipe_wrap .item{float:left;width:100%;position: relative;}
 .swipe_wrap .item .text{ position:absolute; left:0; bottom:0; display:block; width:100%; height:30px; line-height:30px; padding:0 10px; background:rgba(0,0,0,0.5); color:#FFF;overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:0.8em; display:none;}
-.dian{display:-webkit-box;width:100%;text-align:center; background:#405581;}
-.dian li{display:-webkit-box;-webkit-box-flex:1; width:100%; height:3px;}
-.dian li.on{ background:#d83c27; border-top:#e4786a solid 1px;}
+.dianx{display:-webkit-box;width:100%;text-align:center; background:#405581;}
+.dianx li{display:-webkit-box;-webkit-box-flex:1; width:100%; height:3px;}
+.dianx li.on{ background:#d83c27; border-top:#e4786a solid 1px;}
 
 /*欢迎页*/
 .welcome{ position:fixed; top:0; bottom:0; left:0; right:0; z-index:3000; background:#294687;}

@@ -39,7 +39,7 @@
 		<table  class="table table-striped table-condensed" >
 			<tr>
 				<td height="30" align="center" colspan="2">
-			============学员签到==========
+			学员签到
 				</td>
 			</tr>
 			<tr>
@@ -108,6 +108,7 @@
 			$(this).addClass("on");
 		}
 		$(this).next(".item_con_1").slideToggle();
+		reSetH();//重设高
 	});
 	try{
 		$('._struts_1').html('${PAGEROW_OBJECT_KEY.recordCount}');

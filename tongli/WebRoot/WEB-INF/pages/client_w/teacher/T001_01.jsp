@@ -27,12 +27,74 @@
 .mod-photo-item{width: 152px;margin: 13px;}
 .item-bd{}
 .item-bd img{width: 152px; height: 129px; margin: 0px;border: 0px;}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 0px 0px 20px;
+    border-bottom: 1px solid #EEE;
+}
+.tab-content {
+    display: block;
+    overflow: visible;
+	position: relative;
+}
+.page-content {
+    margin-top: 0px;
+    min-height: 760px;
+}
+.content {
+    margin:0px;
+}
+.item_con {
+ margin:0px;
+}
+.next-quote {
+    z-index: 99999;
+    background-image: url('${basePath}/plugins/slideby/images/ui/next1.png');
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 10px;
+    background-size: 10px 10px;
+    position: absolute;
+    right: 0px;
+    margin-top:35px;;
+}
+.prev-quote {
+    z-index: 99999;
+    background-image: url('${basePath}/plugins/slideby/images/ui/prev1.png');
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 10px;
+    background-size: 10px 10px;
+    position: absolute;
+    left: 0px;
+    margin-top:35px;;
+}
+table tr td{
+    text-align: left;
+}
+textarea{border: 1px solid #ddd;}
+.tabbable-custom {
+    margin-bottom: 15px;
+    padding: 0px;
+    overflow: visible;
+}
+div{
+    overflow: visible;
+}
+.container{
+width:auto;
+margin-left: 5px;
+margin-right: 5px;
+}
+p{
+   border-radius:15px;
+}
 </style>
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <c:forEach items="${beans}" var="bean" varStatus="i">
-<div class="item_li item_li_0">${i.index+1}.<font color="#333">${bean.day}&nbsp;${bean.begin_time}</font> ${bean.title}</div>
+<div class="item_li item_li_0"><span class="badge badge-info">${i.index+1}</span><font color="#333">${bean.day}&nbsp;${bean.begin_time}</font> ${bean.title}</div>
 <div class="item_con item_con_0">
-	<div class="grade">
 		<table  class="table table-striped table-condensed" >
 			<tr>
 				<td width="90" height="30" align="right"><strong>时间：</strong></td>
@@ -46,7 +108,7 @@
 		<table  class="table table-striped table-condensed" >
 			<tr>
 				<td height="30" align="center" colspan="2">
-			============学员签到==========
+			学员签到
 				</td>
 			</tr>
 			<tr>
@@ -95,7 +157,7 @@
 											<label><input type="radio" class="xx2${bean.id}" checked="checked" name="sstatus${s_bean.id}" value="0">已到</label>
 											<label><input type="radio" class="xx2${bean.id}" name="sstatus${s_bean.id}" value="1">旷课</label>
 											<label><input type="radio" class="xx2${bean.id}" name="sstatus${s_bean.id}" value="2">请假</label>
-											<input style="width:400px;height: 30px;border: 1px solid #CCC;transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;" class=" xx2${bean.id}" name="sstatus_note${s_bean.id}"/>
+											<input style="width:100%;height: 30px;border: 1px solid #CCC;transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;" class=" xx2${bean.id}" name="sstatus_note${s_bean.id}"/>
 									</c:otherwise>
 								</c:choose>
 							</li>
@@ -105,9 +167,9 @@
 					</div>
 					<div style="clear: both;"></div>
 					<c:if test="${num!=fn:length(bean.itemBeans)}">
-					<div class="panel panel-success">
+					<div class="panel">
 						<div class="panel-heading">
-							<a style="margin-left:300px;" type="submit" id="b_${bean.id}"class="btn blue"  onclick="if(confirm('确认提交学员签到情况吗?\n提交后不可更改!')){submitFrom2('${bean.id}');}">签到完成</a></h3>
+							<a  type="submit" id="b_${bean.id}"class="button button-turqoise margin-top-10"  onclick="if(confirm('确认提交学员签到情况吗?\n提交后不可更改!')){submitFrom2('${bean.id}');}">签到完成</a></h3>
 						</div>
 					</div>
 					</c:if>
@@ -118,7 +180,7 @@
 		<table  class="table table-striped table-condensed" >
 			<tr>
 				<td height="30" align="center" >
-					============课堂详情==========
+					课堂详情
 				</td>
 			</tr>
 			<tr>
@@ -221,9 +283,9 @@
 							});
 						</script>
 						<div style="clear: both;"></div>
-						<div class="panel panel-success">
+						<div class="panel">
 							<div class="panel-heading">
-									<a style="margin-left:300px;"  id="c_${bean.id}" class="btn blue"  onclick="submitFrom3('fileupload${bean.id}');">相册保存</a></h3>
+									<a id="c_${bean.id}" class="button button-blue margin-top-10"  onclick="submitFrom3('fileupload${bean.id}');">相册保存</a></h3>
 							</div>
 						</div>
 					</form>
@@ -237,50 +299,33 @@
 					</div>
 				</td>
 			</tr>
-	</table>
-	<table  class="table table-striped table-condensed" >
 		<tr>
-			<td height="30" align="center" >
-				============参与讨论==========
-			</td>
-		</tr>
-		<tr>
-			<td align="left" class="">
-				<div class="col-xs-12 blog-page">
-					<div id="comment_list1_div_${bean.id}_${i.index+1}">
-					</div>
-					<hr>
-					<div class="post-comment">
-						<h3>Leave a Comment</h3>
-						<form role="form" id="comment_form_${bean.id}_${i.index+1}" accept-charset="UTF-8"  action="${basePath}/w/t001_csave.ac"  method="post">
-							<div class="form-group">
-								<label class="control-label">评论信息<span class="required">*200字以内</span></label>
-								<input type="hidden" name="cbean.info_id" id="cbean_info_id" value="${bean.id}"  />
-								<textarea name="cbean.detail_info" id="cbean_detail_info" class="form-control" rows="4"></textarea>
+					<td align="left" class="">
+						<div class="blog-page">
+							<h3>参与讨论</h3>
+							<div id="comment_list1_div_${bean.id}_${i.index+1}">
 							</div>
-							<a class="btn blue margin-top-10" onclick="submitFrom4('comment_form_${bean.id}_${i.index+1}','comment_list1_div_${bean.id}_${i.index+1}');">提交评论信息</a>
-						</form>
-					</div>
-				</div>
-				</td>
-			</tr>
+							<hr>
+							<div class="post-comment">
+								<h3></h3>
+								<form role="form" id="comment_form_${bean.id}_${i.index+1}" accept-charset="UTF-8"  action="${basePath}/w/t001_csave.ac"  method="post">
+									<div class="form-group">
+										<label class="control-label">评论信息<span class="required">*200字以内</span></label>
+										<input type="hidden" name="cbean.info_id" id="cbean_info_id" value="${bean.id}"  />
+										<textarea style="border: 1px solid #eee;" name="cbean.detail_info" id="cbean_detail_info" class="form-control" rows="4"></textarea>
+									</div>
+									<a class="button button-blue margin-top-10" onclick="submitFrom4('comment_form_${bean.id}_${i.index+1}','comment_list1_div_${bean.id}_${i.index+1}');">提交评论信息</a>
+								</form>
+							</div>
+						</div>
+						</td>
+					</tr>
 	</table>
 	<script type="text/javascript">
 	loadUrlPageComment(0,'t001_','clist1','comment_list1_div_${bean.id}_${i.index+1}','&cid=${bean.id}');
 	</script>
-	</div>
 </div>
 </c:forEach>
-<!-- The blueimp Gallery widget data-filter=":even" -->
-<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" >
-    <div class="slides"></div>
-    <h3 class="title"></h3>
-    <a class="prev">‹</a>
-    <a class="next">›</a>
-    <a class="close">×</a>
-    <a class="play-pause"></a>
-    <ol class="indicator"></ol>
-</div>
 <customtag:pagingext func="loadUrlPage" params="'t001_','list1','course_info1'" />
 
 <!-- The template to display files available for upload -->

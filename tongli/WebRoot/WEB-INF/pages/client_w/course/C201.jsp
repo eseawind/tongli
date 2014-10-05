@@ -25,8 +25,9 @@
 <%@ include file="../include/public_js_css.jsp"%>
 
 </head>
-
-<body class="blueBg">
+<body>
+<div class="all-elements">
+	<%@ include file="../include/header.jsp"%>
 <!-- BEGIN HEADER -->
 <div class="w640">
 <!-- END   HEADER -->

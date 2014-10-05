@@ -20,5 +20,9 @@
 		<!-- 获取班级学员 -->
 		<action name="getStu" class="c102Action" method="getStu">
 		</action>
+		<!-- 前台菜单 -->
+		<action name="menu" class="menuAction" method="init">
+			<result name="init">/WEB-INF/pages/client_w/MenuSub.jsp</result>
+		</action>
 	</package>
 </struts>
