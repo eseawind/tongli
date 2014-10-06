@@ -16,4 +16,4 @@
 <link href="${basePath}/plugins/slideby/styles/swipebox.css"		 rel="stylesheet" type="text/css">
 <link href="${basePath}/plugins/slideby/styles/colorbox.css"		 rel="stylesheet" type="text/css">
 <link href="${basePath}/css/w_reset.css"		 rel="stylesheet" type="text/css">
-<script src="${basePath}/js/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="${basePath}/plugins/slideby/scripts/jquery.js" type="text/javascript"></script>

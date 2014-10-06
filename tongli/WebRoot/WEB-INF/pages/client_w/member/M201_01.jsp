@@ -28,7 +28,7 @@ opacity: 1;
 <script type="text/javascript" src="${basePath}/js/jquery.form.js"></script>
 <input type="hidden"   id="uid" value="${uid}"  />
 <c:forEach items="${beans}" var="bean" varStatus="i">
-	<div class="item_li item_li_0"><span class="badge badge-info">${i.index+1}</span><font color="#333">${bean.day}&nbsp;${bean.begin_time}</font> ${bean.title}</div>
+	<div class="item_li item_li_0"  style="margin:10px 0;width: 100%;"><span class="badge badge-info">${i.index+1}</span><font >${bean.day}&nbsp;${bean.begin_time}</font> ${bean.title}</div>
 	<div class="item_con item_con_0">
 			<table class="table table-striped table-condensed">
 				<tr>
@@ -160,12 +160,19 @@ opacity: 1;
 </c:if>
 <script>
 	$(".item_li_0").click(function() {
+		$(".item_li").removeClass("on");
 		if ($(this).hasClass("on")) {
 			$(this).removeClass("on");
 		} else {
 			$(this).addClass("on");
 		}
-		$(this).next(".item_con_0").slideToggle();
+		var xxobj=$(this).next(".item_con_0").is(":hidden");
+		$(".item_con_0").hide();
+		if(xxobj){
+			$(this).next(".item_con_0").slideToggle();
+		}else{
+			//$(this).next(".item_con_0").show();
+		}
 		reSetH();//重设高
 	});
 	// 提交from

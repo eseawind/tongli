@@ -19,6 +19,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="include/title_meta.jsp"%>
 <%@ include file="include/public_js_css.jsp"%>
@@ -41,8 +42,6 @@
 					</div>
 				</c:forEach>              
                </div>
-               <a href="#" class="next-slider"></a>
-               <a href="#" class="prev-slider"></a>
 				<div class="decoration"></div>
 				<div class="i_menu">
 					<a class="i_menu_item br_t" href="${basePath}/w/index.ac?pid=sy"><i class="icon3"></i>首页</a> 

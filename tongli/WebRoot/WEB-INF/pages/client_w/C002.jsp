@@ -20,6 +20,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="include/title_meta.jsp"%>
 <%@ include file="include/public_js_css.jsp"%>
@@ -111,19 +112,16 @@
 	                </div>
 	            </div>    
 				<div class="decoration"></div>
-				<div class="container">
+				<div class="container no-bottom">
 					<c:choose>
 						<c:when test="${beans!=null && fn:length(beans)>0 }">
 							<div class="one-half-responsive">
-								<h4>General Features</h4>
-								<ul>
 									<c:forEach items="${beans}" var="bean">
-										<li><a
-											href="${basePath}/w/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=${pid}">•
-												${bean.title}</a> <em>
-												${fn:substring(bean.last_updated,0,10)} </em></li>
+										<p class="quote-item" style="padding-bottom:10px;width: 100%;"><a style="display:block;padding-top:10px;width: 100%;"
+											href="${basePath}/w/c003_init.ac?id=${bean.id}&tid=${bean.type_id}&pid=${pid}">
+												${bean.title}</a> <%-- <em>
+												${fn:substring(bean.last_updated,0,10)} </em> --%></p>
 									</c:forEach>
-								</ul>
 							</div>
 						</c:when>
 						<c:otherwise>

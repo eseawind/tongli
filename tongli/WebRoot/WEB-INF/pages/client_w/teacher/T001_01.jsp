@@ -426,7 +426,14 @@ p{
 		} else {
 			$(this).addClass("on");
 		}
-		$(this).next(".item_con_0").slideToggle();
+		var xxobj=$(this).next(".item_con_0").is(":hidden");
+		$(".item_con_0").hide();
+		if(xxobj){
+			$(this).next(".item_con_0").slideToggle();
+		}else{
+			//$(this).next(".item_con_0").show();
+		}
+		reSetH();//重设高
 	});
 	// 提交from
 	function submitFrom3(from_id) {

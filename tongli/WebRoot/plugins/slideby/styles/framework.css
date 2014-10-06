@@ -11,9 +11,9 @@
 /*////////////////*/
 
 * {
-	appearance:normal;
+	/* appearance:normal;
 	-webkit-appearance: none;
-	-moz-appearance: none;
+	-moz-appearance: none; */
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -47,7 +47,7 @@ a:hover{
 
 div, a, p, img, blockquote, form, fieldset, textarea, input, label, iframe, code, pre {
 	display: block;
-	overflow:hidden;
+	/* overflow:hidden; */
 	position:relative;
 }
 

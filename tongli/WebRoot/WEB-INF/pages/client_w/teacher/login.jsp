@@ -17,8 +17,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
@@ -76,10 +77,10 @@ overflow: visible;
 									<a href="#">忘记密码？</a>
 								</div> -->
 								<div class="login_register">
-									<label><input type="radio" name="t" value="0" onclick="$('#edit_article_13632').attr('action','${basePath}/w/t001_login.ac');"/>老师</label>
+									<label><input type="radio" class=" radio-one" name="t" value="0" onclick="$('#edit_article_13632').attr('action','${basePath}/w/t001_login.ac');"/>老师</label>
 								</div>
 								<div class="login_register">	
-									<label><input type="radio" checked="checked" name="t" value="1"  onclick="$('#edit_article_13632').attr('action','${basePath}/w/m201_login.ac');" />学生/家长</label>
+									<label><input type="radio" class=" radio-one" checked="checked" name="t" value="1"  onclick="$('#edit_article_13632').attr('action','${basePath}/w/m201_login.ac');" />学生/家长</label>
 								</div>
 								<button type="submit" class="btn btn-info" style="margin-left: 40px;" >登 录</button>
 								<div class="clear"></div>
