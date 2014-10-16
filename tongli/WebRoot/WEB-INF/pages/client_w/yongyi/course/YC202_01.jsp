@@ -1,6 +1,6 @@
 <%--
 /*
- * 课程--预约参观
+ * 课程--预约体验
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
@@ -34,7 +34,7 @@
 		<div class="w">
 
 			<div class="body" >
-				<div class="title">&nbsp; 预约参观</div>
+				<div class="title">&nbsp; 预约体验</div>
 				<div class="content" style="min-height: 390px;">
 				<c:if test="${msg!=null}">
 					<c:choose>

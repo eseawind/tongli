@@ -1,6 +1,6 @@
 <%--
 /*
- * 系统管理_预约参观 (页面)
+ * 系统管理_预约体验 (页面)
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
@@ -62,7 +62,7 @@
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="${basePath }/h/c103_init.ac">预约参观</a> <i class="fa fa-angle-right"></i></li>
+						<li><a href="${basePath }/h/c103_init.ac">预约体验</a> <i class="fa fa-angle-right"></i></li>
 						<li>课程列表</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->

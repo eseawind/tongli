@@ -218,7 +218,7 @@
 				<li id="sys5" class="">
 					<a class="active" href="javascript:;">
 					<i class="fa  fa-check-square-o"></i> 
-					<span class="title">预约参观</span>
+					<span class="title">预约体验</span>
 					<span id="sys5_arrow" class="arrow"></span>
 					</a>
 					<ul id="sys5_sub_menu_li_1_sub_menu" style="display: none;" class="sub-menu">
@@ -315,7 +315,7 @@
 						</li>
 						<li id="sys10_sub_menu_li_2" class="">
 							<a href="javascript:;">
-							预约参观
+							预约体验
 							<span id="sys10_sub_menu_li_2_arrow" class="arrow"></span>
 							</a>
 							<ul id="sys10_sub_menu_li_2_sub_menu" style="display: none;" class="sub-menu">

@@ -38,7 +38,7 @@
 				<div class="slider-controls" data-snap-ignore="true">  
               	 <c:forEach items="${beans}" var="bean" varStatus="i">
 					<div>
-						<img src="${bean.pic_url}" class="responsive-image" alt="img" />
+						<img src="${fn:replace(fn:replace(bean.pic_url, "n3", "n4"), "n4", "n4")}" class="responsive-image" alt="img" />
 					</div>
 				</c:forEach>              
                </div>
@@ -50,7 +50,7 @@
 					<a class="i_menu_item" href="${basePath}/w/c002_init.ac?tid=966a13c753f34faa927510c610b5e0b6&pid=966a13c753f34faa927510c610b5e0b6"><i class="icon4"></i>关于我们</a> 
 					<a class="i_menu_item" href="${basePath}/w/c002_init.ac?tid=6690aceda07a405a9428e6e02ba2d416&pid=6690aceda07a405a9428e6e02ba2d416"><i class="icon2"></i>童厉课程</a> 
 					<a class="i_menu_item" href="${basePath}/w/c002_init.ac?tid=26f1017792024a358c73639b08e74393&pid=26f1017792024a358c73639b08e74393"><i class="icon7"></i>冬夏令营</a> 
-					<a class="i_menu_item" href="${basePath}/w/c202_init.ac?pid=yycg"><i class="icon5"></i>预约参观</a>
+					<a class="i_menu_item" href="${basePath}/w/c202_init.ac?pid=yycg"><i class="icon5"></i>预约体验</a>
 					<a class="i_menu_item" href="${basePath}/w/c203_init.ac?pid=zxbm"><i class="icon6"></i>在线报名</a> 
 					<a class="i_menu_item" href=""><i class="icon9"></i>警民互动</a>
 					<div class="clear"></div>

@@ -1167,7 +1167,7 @@ table tr:hover td{
 .chart-round div{
 	border-radius:10px;
 }
-
+/* 
 .p100{width:100%;}
 .p90{width:90%;}
 .p80{width:80%;}
@@ -1178,7 +1178,7 @@ table tr:hover td{
 .p30{width:30%;}
 .p20{width:20%;}
 .p10{width:10%;}
-.p0{width:0%;}
+.p0{width:0%;} */
 
 
 /*//////////////////*/

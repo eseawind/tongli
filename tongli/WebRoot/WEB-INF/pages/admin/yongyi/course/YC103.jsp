@@ -1,6 +1,6 @@
 <%--
 /*
- * 系统管理_预约参观 (页面)
+ * 系统管理_预约体验 (页面)
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
@@ -62,14 +62,14 @@
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						预约参观 <small><span class="help-inline">预约参观信息</span></small>
+						预约体验 <small><span class="help-inline">预约体验信息</span></small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li><i class="fa fa-home"></i> <a
 							href="${basePath }/home_init.ac">Home</a> <i
 							class="fa fa-angle-right"></i></li>
-						<li><a href="${basePath }/h/yc103_init.ac">预约参观</a> <i class="fa fa-angle-right"></i></li>
-						<li>预约参观</a> </li>
+						<li><a href="${basePath }/h/yc103_init.ac">预约体验</a> <i class="fa fa-angle-right"></i></li>
+						<li>预约体验</a> </li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>

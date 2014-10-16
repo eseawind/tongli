@@ -16,7 +16,7 @@
 			<result name="success" type="redirect" >/w/t001_init.ac</result>
 		</action>
 	</package>
-	<package name="client_teacher_info_check" extends="wechat-default" >
+	<package name="client_teacher_info_check" namespace="/w" extends="wechat-default" >
 		<!-- 登录验证 -->
 		<action name="tcheck" class="t001Action" method="check">
 		</action>

@@ -22,6 +22,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="include/title_meta.jsp"%>
 <%@ include file="include/public_js_css.jsp"%>
+<script type="text/javascript" src="${basePath}/js/jquery.SuperSlide.2.1.1.js"></script>
+
 </head>
 
 <body class="page-header-fixed">

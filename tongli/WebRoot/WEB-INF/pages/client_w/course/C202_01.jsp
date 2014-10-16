@@ -1,6 +1,6 @@
 <%--
 /*
- * 课程--预约参观
+ * 课程--预约体验
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
@@ -45,7 +45,7 @@
 			<div class="page-header">
 				<a href="#" class="deploy-sidebar"></a>
 				<p class="bread-crumb">
-					预约参观
+					预约体验
 				</p>
 				<a href="javascript:history.go(-1);" class="deploy-contact left-list"></a>
 			</div>

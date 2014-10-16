@@ -34,15 +34,15 @@
 .nav_body{ width:850px; height:40px;float: right;}
 .nav_body li{ height:24px;float:left;font-family:"微软雅黑"; font-size:14px; position:relative; padding:2px 15px; text-indent:0.4em;}
 .nav_body li a,.nav_body li a:visited{ color:#fff; display:block;}
-.nav_body li a:hover,.nav_body li:hover a{color:#5CBFC2;text-decoration:none; }
-.nav_body li:hover{ background:#FFF;height:27px;border-top: 1px solid #5CBFC2;border-bottom: 1px solid #5CBFC2;}
-.nav_body li.on{ color:#5CBFC2;background:#FFF;height:27px;border-top: 1px solid #5CBFC2;border-bottom: 1px solid #5CBFC2;}
-.nav_body li.on a{ color:#5CBFC2;}
+.nav_body li a:hover,.nav_body li:hover a{color:#111;text-decoration:none; }
+.nav_body li:hover{background:url(images/navbg2.png) no-repeat;;height:27px;border-top: 0px solid #5CBFC2;border-bottom: 0px solid #5CBFC2;}
+.nav_body li.on{ color:#111;background:url(images/navbg2.png) no-repeat;height:27px;border-top: 0px solid #5CBFC2;border-bottom: 0px solid #5CBFC2;}
+.nav_body li.on a{ color:#111;}
 .nav_body li:hover #navmenu .subMenu{display:block;}
 #navmenu{ position:relative;z-index:999999;}
-#navmenu .subMenu{min-width:95px;background:#5CBFC2;position: absolute;top:26px;display:none;left:10px; padding:2px; z-index:9999;filter: Alpha(opacity=95);-moz-opacity:.95;opacity:0.95;}
-#navmenu .subMenu a{font-size:12px;color:#fff; float:left; margin:5px; padding:4px 6px 4px 2px;}
-#navmenu .subMenu a:hover{color:#5CBFC2; background:#FFF; font-weight:bold;text-decoration:none;}
+#navmenu .subMenu{min-width:130px;background:#5CBFC2;position: absolute;top:26px;display:none;left:-10px; padding:2px; z-index:9999;filter: Alpha(opacity=95);-moz-opacity:.95;opacity:0.95;}
+#navmenu .subMenu a{width:100%;font-size:12px;color:#fff; float:left; margin:0px; padding:4px 6px 4px 2px;}
+#navmenu .subMenu a:hover{color:#111;background:url(images/navbg2.png) no-repeat; font-weight:bold;text-decoration:none;}
 /*菜单 end*/
 .more_info{ height:30px; clear:both;}
 .more_info a{ height:18px; line-height:16px; display:block; background:url(images/more_info.png) no-repeat; float:right; text-indent:1.5em; margin:10px 5px 0 0;}

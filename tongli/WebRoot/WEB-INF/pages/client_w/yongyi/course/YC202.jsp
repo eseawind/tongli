@@ -1,6 +1,6 @@
 <%--
 /*
- * 课程--预约参观
+ * 课程--预约体验
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
@@ -40,7 +40,7 @@ select{width: 200px;}
 		<div class="c10"></div>
 		<div class="w">
 			<div class="body" >
-				<div class="title">&nbsp; 预约参观</div>
+				<div class="title">&nbsp; 预约体验</div>
 				<div class="content">
 					<div class="col-xs-12 ">
 						<form accept-charset="UTF-8" action="${basePath}/w/yc202_save.ac" method="post">

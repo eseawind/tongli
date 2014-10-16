@@ -70,8 +70,8 @@
 <customtag:pagingext func="loadUrlPage" params="'c002_','init'" />
 </div>
 <div class="body fl mb10" style="width: 197px;">
-	<div class="title ">
-		<label class="ico_aboutus"> <c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if><i class="fa  fa-arrow-right"></i></label>
+	<div class="title " style="cursor: pointer;"  onclick="location.href='${basePath}/c002_init.ac?tid=${typeBeanP.id}&pid=${pid}';">
+		<label class="ico_aboutus" style="cursor: pointer;" > <c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if><i class="fa  fa-arrow-right"></i></label>
 	</div>
 	<div class="content">
 		<ul>

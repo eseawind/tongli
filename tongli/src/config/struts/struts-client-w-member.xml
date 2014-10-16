@@ -15,7 +15,7 @@
 			<result name="success" type="redirect" >/w/m201_init.ac</result>
 		</action>
 	</package>
-	<package name="client_member_info_check" extends="wechat-default" >
+	<package name="client_member_info_check" namespace="/w" extends="wechat-default" >
 		<!-- 登录验证 -->
 		<action name="mcheck" class="m201Action" method="check">
 		</action>

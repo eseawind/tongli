@@ -270,7 +270,7 @@ font-size: 14px;
 										     </div>
 									</div>
 									<div class="perm-layout-1">
-									        <label><input  value="/yycg"  type="checkbox" name="perms">预约参观</label>
+									        <label><input  value="/yycg"  type="checkbox" name="perms">预约体验</label>
 										    <div class="perm-layout-2">
 												<label><input   value="/c103"   type="checkbox" name="perms">信息管理</label>
 										     </div>

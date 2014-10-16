@@ -1,6 +1,6 @@
 <%--
 /*
- * 课程--预约参观
+ * 课程--预约体验
  *
  * VERSION  DATE        BY           REASON
  * -------- ----------- ------------ ------------------------------------------
@@ -25,9 +25,25 @@
 <%@ include file="../include/public_js_css.jsp"%>
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery-multi-select/css/multi-select.css" />
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2_metro.css"  rel="stylesheet" type="text/css"  />
+<script type="text/javascript" src="${basePath}/js/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="${basePath}/js/c202.js"></script>
 <style type="text/css">
 select{width: 200px;}
 
+em.invalid {
+	color: red;
+	padding-left: 18px;
+	vertical-align: top;
+	width: 196px;
+	background: url("${basePath}/css/images/main_bg.gif") 0px -1352px
+		no-repeat;
+}
+
+em.valid {
+	background: url("${basePath}/css/images/main_bg.gif") 0px -1377px
+		no-repeat;
+	color: #065FB9;
+}
 </style>
 </head>
 
@@ -40,11 +56,11 @@ select{width: 200px;}
 		<div class="w">
 
 			<div class="body fr" style="width: 770px;">
-				<div class="title">&nbsp; 预约参观</div>
+				<div class="title">&nbsp; 预约体验</div>
 				<div class="content" style="min-height: 390px;">
 
 					<div class="user_info">
-						<form accept-charset="UTF-8" action="${basePath}/c202_save.ac" method="post">
+						<form id="c202Form_1" accept-charset="UTF-8" action="javascript:onCheckForm1('c202Form_1');" method="post">
 							<input type="hidden" name="bean.id" value="${bean.id}" />
 							<ul>
 								<li>
@@ -110,7 +126,7 @@ select{width: 200px;}
 								<li>
 									<div class="tit">手机号码：</div>
 									<div class="con">
-										<input name="bean.tel" type="text" class="input"> <em>*
+										<input name="bean.tel" id="bean_tel" type="text" class="input"> <em>*
 												联系电话</em>
 									</div>
 								</li>
@@ -147,6 +163,7 @@ select{width: 200px;}
 </body>
 </html>
 	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2.min.js"></script>
+	
 <script type="text/javascript">
 function getDA(){
 	$('#bean_course_1').val($("#bean_course_select option:selected").text());
@@ -190,5 +207,11 @@ $('.form_date1').datetimepicker({
 }); */
 if('${bean_course}'!=''){
 	getDA();
+}
+function onCheckForm1(formId){
+	initc202Validator_1(formId);
+	if(c202Validator.form()){
+		$('#'+formId).submit();
+	}
 }
 </script>
