@@ -35,7 +35,7 @@
 		<div class="c10"></div>
 		<div class="w">
 
-			<div class="body fl" style="width: 770px;">
+			<div class="body fl" style="width: 970px;">
 				<div class="content" style="min-height: 390px;">
 					<form accept-charset="UTF-8"  action="${basePath}/t001_login.ac" class="edit_article" id="edit_article_13632" method="post">
 						<s:token></s:token>
@@ -63,10 +63,10 @@
 									<a href="#">忘记密码？</a>
 								</div> -->
 								<div class="login_register">
-									<label><input type="radio" name="t" value="0" onclick="$('#edit_article_13632').attr('action','${basePath}/t001_login.ac');"/>老师</label>
+									<label><input type="radio"  checked="checked" name="t" value="0" onclick="$('#edit_article_13632').attr('action','${basePath}/t001_login.ac');"/>老师</label>
 								</div>
 								<div class="login_register">	
-									<label><input type="radio" checked="checked" name="t" value="1"  onclick="$('#edit_article_13632').attr('action','${basePath}/m201_login.ac');" />学生/家长</label>
+									<label><input type="radio" name="t" value="1"  onclick="$('#edit_article_13632').attr('action','${basePath}/m201_login.ac');" />学生/家长</label>
 								</div>
 								<button type="submit" class="btn btn-info" style="margin-left: 40px;" >登 录</button>
 								<div class="clear"></div>
@@ -75,7 +75,7 @@
 					</form>
 				</div>
 			</div>
-			<%@ include file="../include/nav_right.jsp"%>
+			<%-- <%@ include file="../include/nav_right.jsp"%> --%>
 			<div class="c10"></div>
 		</div>
 

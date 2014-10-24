@@ -17,7 +17,7 @@
 	<div class="w">Copyright@2014&nbsp;&nbsp;&nbsp;&nbsp;沪ICP备案：110055455号&nbsp;&nbsp;&nbsp;&nbsp;联系电话：021-20556847&nbsp;&nbsp;&nbsp;&nbsp;邮箱：xsds@126.com</div>
 </div> -->
 <div class="footer">
-<div class="w980 footer_line">Copyright@2014&nbsp;&nbsp;&nbsp;&nbsp;沪ICP备案：110055455号&nbsp;&nbsp;&nbsp;&nbsp;联系电话：021-20556847&nbsp;&nbsp;&nbsp;&nbsp;邮箱：xsds@126.com</div>
+<div class="w980 footer_line">Copyright@2014&nbsp;&nbsp;&nbsp;&nbsp;沪ICP备11046863号&nbsp;&nbsp;&nbsp;&nbsp;联系电话：400-005-0806&nbsp;&nbsp;&nbsp;&nbsp;</div>
 </div>
 <script type="text/javascript">
 		jQuery(document).ready(function() {
@@ -34,7 +34,7 @@
 			})
 			//----菜单选中-----
 			try{
-				var url=location.href;
+				var url=(location.href).split('#')[0];
 				var array=url.split('pid=');
 				if(array!=null && array.length>1){
 					$('.m').removeClass('on');

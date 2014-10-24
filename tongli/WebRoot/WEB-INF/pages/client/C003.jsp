@@ -40,11 +40,29 @@
 <!--<h3>发布日期：${bean.last_updated} &nbsp;&nbsp;&nbsp;&nbsp;发布人：${bean.create_id}</h3>-->
 <div class="content" style="min-height:600px;">
   ${bean.detail_info}
+  <c:if test="${pid eq '6690aceda07a405a9428e6e02ba2d416' }">
+	<a href="${basePath}/c203_init.ac?pid=zxbm#tab_x0">
+  	<table class="table table-striped table-condensed" style="text-align: center;">
+		<tbody><tr class="alert alert-success">
+			<td height="10"><strong style="font-size: 1em;">我要报名</strong></td>
+		</tr>
+	</tbody></table>
+	</a>
+  </c:if>
+  <c:if test="${pid eq '26f1017792024a358c73639b08e74393' }">
+	<a href="${basePath}/c203_init.ac?pid=zxbm#tab_x1">
+  	<table class="table table-striped table-condensed" style="text-align: center;">
+		<tbody><tr class="alert alert-danger">
+			<td height="10"><strong style="font-size: 1em;">我要报名</strong></td>
+		</tr>
+	</tbody></table>
+	</a>
+  </c:if>
 </div>
 </div>
 <div class="body fl" style="width: 197px;">
-	<div class="title">
-		<label class="ico_aboutus"><c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if><i class="fa  fa-arrow-right"></i></label>
+	<div class="title " style="cursor: pointer;"  onclick="location.href='${basePath}/c002_init.ac?tid=${typeBeanP.id}&pid=${pid}';">
+		<label class="ico_aboutus" style="cursor: pointer;" > <c:if test="${typeBeanP.name!=null}">${typeBeanP.name }</c:if><c:if test="${typeBeanP.name==null}">童励俱乐部</c:if><i class="fa  fa-arrow-right"></i></label>
 	</div>
 	<div class="content">
 		<ul>

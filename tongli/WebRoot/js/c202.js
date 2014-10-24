@@ -59,7 +59,7 @@ function initc202Validator_1(fid) {
 				maxlength : "<font color='red'>*姓名最大20个字</font>"
 			},
 			"bean.sex" : {//性别
-				required : "<font color='red'>*请输入您孩子的姓名</font>"
+				required : "<font color='red'>*</font>"
 			},
 			"bean.age" : {//年龄
 				required : "<font color='red'>*请输入您孩子的年龄</font>",

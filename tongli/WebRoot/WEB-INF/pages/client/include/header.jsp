@@ -31,6 +31,7 @@ request.setAttribute("basePath", basePath);
 	<div id="top" style=" border:1px solid #fff;"> 
              <div id="menu_bar">
                 <div class="back">
+                <p style="padding-left: 25px;">
                  <%
 				 	TcMemberBean member=(TcMemberBean)request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_MEMBER_INFO);
 				 	TcMemberBean teacher=(TcMemberBean)request.getSession().getAttribute(CommonConstant.SESSION_KEY_USER_TEACHER_INFO);
@@ -61,6 +62,10 @@ request.setAttribute("basePath", basePath);
 					<%		
 						}
 					%>
+					</p>
+					<p>
+					联系电话 400-005-0806
+					</p>
                 </div>
              </div>
     </div>
@@ -70,7 +75,7 @@ request.setAttribute("basePath", basePath);
 			<div class="logo"><a href="${basePath}/index.ac"><img alt="" src="${basePath}/css/images/logo.jpg" style="width:193px; height:75px;"></a></div>
 			<div class="nav_body">
 				<ul id="navmenu">
-					<li class="sy" style="padding: 2px 10px"><a href="${basePath}/index.ac?pid=sy">首 页</a></li>
+					<li class="sy" style="padding: 8px 10px"><a href="${basePath}/index.ac?pid=sy">首 页</a></li>
 					<li class="966a13c753f34faa927510c610b5e0b6"><a href="${basePath}/c002_init.ac?tid=966a13c753f34faa927510c610b5e0b6&pid=966a13c753f34faa927510c610b5e0b6">关于我们</a>
 						<div class="subMenu" style="margin-left: -12px;"></div>
 					</li>

@@ -15,7 +15,6 @@
 <%@page import="cn.com.softvan.common.CommonConstant"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib prefix="customtag" uri="/custom-tags"%>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -28,8 +27,8 @@
 <script type="text/javascript" src="${basePath}/js/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="${basePath}/js/c202.js"></script>
 <style type="text/css">
-select{width: 200px;}
-
+select{width: 300px;}
+.user_info li .con .input{width: 300px;}
 em.invalid {
 	color: red;
 	padding-left: 18px;
@@ -44,6 +43,8 @@ em.valid {
 		no-repeat;
 	color: #065FB9;
 }
+.user_info{width: 600px;}
+.user_info li .con{width:500px;}
 </style>
 </head>
 
@@ -55,7 +56,7 @@ em.valid {
 		<div class="c10"></div>
 		<div class="w">
 
-			<div class="body fr" style="width: 770px;">
+			<div class="body fr" style="width: 980px;">
 				<div class="title">&nbsp; 预约体验</div>
 				<div class="content" style="min-height: 390px;">
 
@@ -134,14 +135,14 @@ em.valid {
 									<div class="tit">其它：</div>
 									<div class="con" style="height: 80px;">
 										<textarea name="bean.detail_info" cols="5" rows="3"
-											style="width: 200px; height: 70px; margin-top: 10px;"></textarea>
+											style="width: 300px; height: 70px; margin-top: 10px;"></textarea>
 										<em> 其它</em>
 									</div>
 								</li>
 							</ul>
 
 							<div class="c10"></div>
-							<div  style="margin-left: 100px;">
+							<div  style="margin-left: 200px;">
 							<button type="submit" class="btn btn-info" style="margin-left: 40px;" >提  交</button>
 							</div>
 							<div class="c10"></div>
@@ -150,13 +151,12 @@ em.valid {
 
 				</div>
 			</div>
-			<%@ include file="../include/nav_left.jsp"%>
-			<div class="c10"></div>
+<%-- 			<%@ include file="../include/nav_left.jsp"%>
+ --%>			<div class="c10"></div>
 		</div>
 
 	</div>
 	<div class="c10"></div>
-	</div>
 	<!-- BEGIN FOOTER -->
 	<%@ include file="../include/footer.jsp"%>
 	<!-- END FOOTER -->

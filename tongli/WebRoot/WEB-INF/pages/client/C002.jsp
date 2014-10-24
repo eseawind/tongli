@@ -64,6 +64,24 @@
 		</c:when>
 		<c:otherwise>
 			${typeBean.detail_info}
+			<c:if test="${pid eq '6690aceda07a405a9428e6e02ba2d416' }">
+			<a href="${basePath}/c203_init.ac?pid=zxbm#tab_x0">
+		  	<table class="table table-striped table-condensed" style="text-align: center;">
+				<tbody><tr class="alert alert-success">
+					<td height="10"><strong style="font-size: 1em;">我要报名</strong></td>
+				</tr>
+			</tbody></table>
+			</a>
+		  </c:if>
+		  <c:if test="${pid eq '26f1017792024a358c73639b08e74393' }">
+			<a href="${basePath}/c203_init.ac?pid=zxbm#tab_x1">
+		  	<table class="table table-striped table-condensed" style="text-align: center;">
+				<tbody><tr class="alert alert-danger">
+					<td height="10"><strong style="font-size: 1em;">我要报名</strong></td>
+				</tr>
+			</tbody></table>
+			</a>
+		  </c:if>
 		</c:otherwise>
 	</c:choose>
 </div>

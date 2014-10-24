@@ -47,8 +47,8 @@
 				<div class="content" style="min-height: 390px;">
 					<div class="web_enroll_info tabbable tabbable-custom">
 						<ul class="nav nav-tabs" style="height:40px; ">
-								<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab" style="color: #468847;">运动培训班</a></li>
-								<li id="tab_1_li"><a href="#tab_1" data-toggle="tab" style="color: #B94A48;">冬夏令营</a></li>
+								<li id="tab_0_li" class="active "><a id="xxxa1" href="#tab_0" data-toggle="tab" style="color: #468847;">运动培训班</a></li>
+								<li id="tab_1_li"><a  id="xxxa2" href="#tab_1" data-toggle="tab" style="color: #B94A48;">冬夏令营</a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_0" >
@@ -611,6 +611,15 @@ jQuery(document).ready(function() {
 	$('#bean_birthday2').datepicker();
 	//$('#bean_begin_day2').datepicker();
 	//$('#bean_end_day2').datepicker();
+	
+	
+	var url=location.href;
+	if(url.indexOf('#tab_x0')!=-1){
+		$('#xxxa1').click();
+	}
+	if(url.indexOf('#tab_x1')!=-1){
+		$('#xxxa2').click();
+	}
 });
 function sumPrice(obj){
 	var sum=0.00;

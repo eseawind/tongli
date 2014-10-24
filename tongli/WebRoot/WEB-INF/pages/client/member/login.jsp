@@ -35,7 +35,7 @@
 		<div class="c10"></div>
 		<div class="w">
 
-			<div class="body fl" style="width: 770px;">
+			<div class="body fl" style="width: 970px;">
 				<div class="content" style="min-height: 390px;">
 					<form accept-charset="UTF-8"  action="${basePath}/m201_login.ac" class="edit_article" id="edit_article_13632" method="post">
 						<s:token></s:token>
@@ -75,7 +75,7 @@
 					</form>
 				</div>
 			</div>
-			<%@ include file="../include/nav_right.jsp"%>
+			<%-- <%@ include file="../include/nav_right.jsp"%> --%>
 			<div class="c10"></div>
 		</div>
 
