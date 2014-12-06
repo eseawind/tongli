@@ -11,6 +11,7 @@
  */
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" session="false"%>
+<%@page import="cn.com.softvan.common.WebUtils"%>
 <title>童励儿童俱乐部</title>
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
 <meta name="apple-mobile-web-app-capable" content="yes"/>

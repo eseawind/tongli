@@ -449,9 +449,9 @@ p{
 				//$('.xx2'+from_id).attr('readonly','readonly');
 				//$('.xx2'+from_id).attr('disabled','disabled');
 				//jQuery("#b_"+from_id).remove();
-				alert('提交成功!');
+				myAlert('提交成功!');
 			} else {
-				alert(data);
+				myAlert_error(data);
 			}
 		});
 	}

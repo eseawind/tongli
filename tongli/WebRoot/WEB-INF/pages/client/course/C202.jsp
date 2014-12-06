@@ -61,7 +61,7 @@ em.valid {
 				<div class="content" style="min-height: 390px;">
 
 					<div class="user_info">
-						<form id="c202Form_1" accept-charset="UTF-8" action="javascript:onCheckForm1('c202Form_1');" method="post">
+						<form id="c202Form_1" accept-charset="UTF-8"  action="${basePath}/c202_save.ac"  method="post">
 							<input type="hidden" name="bean.id" value="${bean.id}" />
 							<ul>
 								<li>
@@ -143,7 +143,7 @@ em.valid {
 
 							<div class="c10"></div>
 							<div  style="margin-left: 200px;">
-							<button type="submit" class="btn btn-info" style="margin-left: 40px;" >提  交</button>
+										<button type="button" class="btn btn-info" onclick="javascript:onCheckForm1('c202Form_1');" style="margin-left: 40px;" >提  交</button>
 							</div>
 							<div class="c10"></div>
 						</form>

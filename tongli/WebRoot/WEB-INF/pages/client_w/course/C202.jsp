@@ -29,7 +29,23 @@
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script> 
+
+<script type="text/javascript" src="${basePath}/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${basePath}/js/c202.js"></script>
 <style type="text/css">
+em.invalid {
+	color: red;
+	padding-left: 18px;
+	vertical-align: top;
+	width: 196px;
+	background: url("${basePath}/css/images/main_bg.gif") 0px -1352px
+		no-repeat;
+}
+em.valid {
+	background: url("${basePath}/css/images/main_bg.gif") 0px -1377px
+		no-repeat;
+	color: #065FB9;
+}
 select{width: 200px;}
 .page-header {
     padding-bottom: 9px;
@@ -57,7 +73,7 @@ select{width: 200px;}
 			<div class="content">
 				<!-- END   HEADER -->
 							<div class="col-xs-12">
-									<form accept-charset="UTF-8" action="${basePath}/w/c202_save.ac" method="post">
+									<form id="c202Form_1" accept-charset="UTF-8" action="${basePath}/w/c202_save.ac" method="post">
 										<input type="hidden" name="bean.id" value="${bean.id}" />
 										<ul>
 											<li>
@@ -126,7 +142,7 @@ select{width: 200px;}
 											<li>
 												<div class="tit">手机号码：</div>
 												<div class="con">
-													<input name="bean.tel"  class="form-control" type="text"
+													<input name="bean.tel" id="bean_tel"  class="form-control" type="text"
 																placeholder="请输入联系电话" type="text" class="input">
 												</div>
 											</li>
@@ -142,7 +158,7 @@ select{width: 200px;}
 			
 										<div class="c10"></div>
 										<div  style="margin-left: 30%;">
-										<button type="submit" class="btn btn-info" style="margin-left: 40px;" >提  交</button>
+										<button type="button" class="btn btn-info" onclick="javascript:onCheckForm1('c202Form_1');" style="margin-left: 40px;" >提  交</button>
 										</div>
 										<div class="c10"></div>
 									</form>
@@ -159,7 +175,7 @@ select{width: 200px;}
 function getDA(){
 	$('#bean_course_1').val($("#bean_course_select option:selected").text());
 	var cid=$("#bean_course_select").val();
-	//alert(cid);
+	//myAlert(cid);
 	if(cid){
 		jQuery.ajax({
 			url : '${basePath}/w/c202_getDate.ac?cid='+cid,
@@ -173,7 +189,7 @@ function getDA(){
 		jQuery.ajax({
 			url : '${basePath}/w/c202_getAddres.ac?cid='+cid,
 			success : function(req) {
-				//alert(req);
+				//myAlert(req);
 				jQuery("#bean_addres").html(req);
 			},
 			error : function() {
@@ -198,5 +214,11 @@ $('.form_date1').datetimepicker({
 }); */
 if('${bean_course}'!=''){
 	getDA();
+}
+function onCheckForm1(formId){
+	initc202Validator_1(formId);
+	if(c202Validator.form()){
+		$('#'+formId).submit();
+	}
 }
 </script>

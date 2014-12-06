@@ -18,7 +18,7 @@
 <c:forEach items="${tree_array}" var="tree">
 	<c:if test="${tree.id!='6fba86e8436049e5b30123c538b7fc83'}">
      	<a href="${basePath}/w/c002_init.ac?tid=${tree.id}&pid=<c:choose><c:when test='${tree.parent_id!=null && tree.parent_id!=""}'>${tree.parent_id}</c:when><c:otherwise>${tree.id}</c:otherwise></c:choose>">${tree.name}<em class="${tree.id} unselected-sub-nav"></em></a>
-     	<c:if test="${tree.beans!=null && fn:length(tree.beans)>0}">
+     	<%-- <c:if test="${tree.beans!=null && fn:length(tree.beans)>0}">
      		<c:forEach items="${tree.beans}" var="bean">
      		     	<a href="${basePath}/w/c002_init.ac?tid=${bean.id}&pid=<c:choose><c:when test='${bean.parent_id!=null && bean.parent_id!=""}'>${bean.parent_id}</c:when><c:otherwise>${bean.id}</c:otherwise></c:choose>">${bean.name }<em class="${bean.id} unselected-sub-nav"></em></a>
      		      <c:if test="${bean.beans!=null && fn:length(bean.beans)>0}">
@@ -27,7 +27,7 @@
          		</c:forEach>
 	      	</c:if>
         </c:forEach>
-     	</c:if>
+     	</c:if> --%>
      </c:if>
 </c:forEach>
 <script type="text/javascript">
@@ -47,7 +47,7 @@ jQuery(document).ready(function() {
 					if(array3!=null && array3.length>1){
 						$('.active-submenu').removeClass('active-submenu');
 						array3[0]=array3[0].replace('&','');
-						//alert($('.'+array3[0]).attr('class'));
+						//myAlert($('.'+array3[0]).attr('class'));
 						$('.'+array3[0]).parent().parent().addClass('active-submenu');
 						$('.'+array3[0]).removeClass('unselected-sub-nav');
 						$('.'+array3[0]).addClass('selected-sub-nav');

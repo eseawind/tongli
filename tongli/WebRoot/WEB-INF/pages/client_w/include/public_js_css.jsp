@@ -1,3 +1,4 @@
+<%@page import="cn.com.softvan.common.WebUtils"%>
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="${basePath}/plugins/slideby/images/splash/splash-icon.png">
 <link rel="apple-touch-startup-image" href="${basePath}/plugins/slideby/images/splash/splash-screen.png" 			media="screen and (max-device-width: 320px)" />  
 <link rel="apple-touch-startup-image" href="${basePath}/plugins/slideby/images/splash/splash-screen%402x.png" 		media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" /> 
@@ -17,3 +18,4 @@
 <link href="${basePath}/plugins/slideby/styles/colorbox.css"		 rel="stylesheet" type="text/css">
 <link href="${basePath}/css/w_reset.css"		 rel="stylesheet" type="text/css">
 <script src="${basePath}/plugins/slideby/scripts/jquery.js" type="text/javascript"></script>
+<link rel="stylesheet" href="${basePath}<%=WebUtils.setVersion("/css/w_style.css") %>" type="text/css">

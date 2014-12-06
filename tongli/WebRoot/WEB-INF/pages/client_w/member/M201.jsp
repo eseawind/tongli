@@ -28,7 +28,7 @@
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <script src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<link href="${basePath}/css/w_style.css"		 rel="stylesheet" type="text/css">
+<link href="${basePath}<%=WebUtils.setVersion("/css/w_style.css") %>" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="${basePath}/css/blueimp-gallery.min.css">
 <style type="text/css">
 .page-header {
@@ -188,12 +188,12 @@ p{
 			url : '${basePath}/w/mcheck.ac?time=' + new Date().getTime(),
 			success : function(req) {
 				if(req!='1'){
-					alert('未登录或登录超时!请重新登录!');
+					myAlert_error('未登录或登录超时!请重新登录!');
 					location.href='${basePath}/w/m201_login.ac';
 				}
 			},
 			error : function() {
-				alert("页面发生错误");
+				myAlert_error("页面发生错误");
 			}
 		});
 	}

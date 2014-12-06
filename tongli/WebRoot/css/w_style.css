@@ -9,7 +9,7 @@ input::-moz-focus-inner{border:0px;}
 input[type="radio"]{position: relative; top:2px;width: 20px;}
 
 /* login panel */
-.login_box{  margin-top:50px;}
+.login_box{  margin-top:50px;margin-left: auto;margin-right: auto; width: 340px;}
 .login_box .login_header{ height:32px;border-bottom:4px solid #5CBFC2;}
 .login_box .login_header .login_title{ padding:0 20px; text-align:center; float:left; height:32px; line-height:32px; font-size:18px;font-family:"微软雅黑"; color:#FFF;background:#5CBFC2;}
 .login_box .login_body{ background:#FFF; border:1px solid #CCC; border-top:0; padding:30px; background:#f9f9f9;}
@@ -279,3 +279,6 @@ background: linear-gradient(to right, rgba(60,91,157,1) 0%, rgba(53,81,142,1) 10
 .uploadBox-txt{ padding:0 10px;}
 .uploadBox-txt h2{ margin:5px 0; font-size:14px; font-weight:500; font-weight:700;}
 .uploadBox-txt p{ color:#4d4d4d; font-size:12px;}
+
+
+.content-footer{width: 100%;background: #fff;display: none;}

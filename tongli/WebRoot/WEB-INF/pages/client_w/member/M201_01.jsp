@@ -184,9 +184,9 @@ opacity: 1;
 			if (data == "1") {
 				$('.xx2'+from_id).attr('readonly','readonly');
 				jQuery("#b_"+from_id).remove();
-				alert('提交成功!');
+				myAlert('提交成功!');
 			} else {
-				alert(data);
+				myAlert(data);
 			}
 		});
 	}
@@ -199,7 +199,7 @@ opacity: 1;
 		var info_val=$.trim(info_obj.val());
 		if(info_val.length<200){
 			if(info_val==''||info_val.length==0){
-				alert('评论信息为空!');
+				myAlert_error('评论信息为空!');
 				return false;
 			}
 			//提交
@@ -209,13 +209,13 @@ opacity: 1;
 					var formatdate=d.getFullYear()+'-'+(d.getMonth()+1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+"";
 					$('#'+divid).prepend('<em class="speach-right-title"><span>'+formatdate+' </span>${uid}:</em><p class="speach-right blue-bubble">'+info_val+'</p><div class="clear"></div>');
 					info_obj.val('');
-					//alert('评论成功!');
+					//myAlert('评论成功!');
 				} else {
-					alert(data);
+					myAlert_error(data);
 				}
 			});
 		}else{
-			alert('评论字数超过限制,200字以内!');
+			myAlert_error('评论字数超过限制,200字以内!');
 		}
 	}
 	try{

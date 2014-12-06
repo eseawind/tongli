@@ -12,12 +12,12 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" session="false"%>
-<div class="decoration"></div>
+<!-- <div class="decoration22"></div>
 <div class="content-footer">
 	<p class="copyright-content">童励儿童俱乐部.<br> &nbsp;&nbsp;&nbsp;版权所有</p>
     <a href="#" class="go-up-footer"></a>
     <div class="clear"></div>
-</div>
+</div> -->
 <script type="text/javascript" src="${basePath}/plugins/slideby/scripts/jqueryui.js"></script>
 <script type="text/javascript" src="${basePath}/plugins/slideby/scripts/owl.carousel.min.js"></script>
 <script type="text/javascript" src="${basePath}/plugins/slideby/scripts/jquery.swipebox.js"></script>
@@ -27,6 +27,10 @@
 <script type="text/javascript" src="${basePath}/plugins/slideby/scripts/custom.js"></script>
 <script type="text/javascript" src="${basePath}/plugins/slideby/scripts/framework.js"></script>
 <script type="text/javascript" src="${basePath}/plugins/slideby/scripts/framework.launcher.js"></script>
+
+<script type="text/javascript" src="${basePath}/plugins/noty/js/jquery.noty.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/noty/js/layouts/top.js"></script>
+<script type="text/javascript" src="${basePath}/plugins/noty/js/themes/default.js"></script>
 
 <script type="text/javascript">
 	function reSetH(){

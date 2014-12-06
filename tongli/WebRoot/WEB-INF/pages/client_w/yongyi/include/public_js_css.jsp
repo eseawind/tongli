@@ -1,6 +1,8 @@
+<%@page import="cn.com.softvan.common.WebUtils"%>
 <link rel="shortcut icon" href="/favicon.ico">
 <%-- <link rel="stylesheet" href="${basePath}/css/w_reset.css" type="text/css">
- --%><link rel="stylesheet" href="${basePath}/css/w_style.css" type="text/css">
+ --%>
+ <link rel="stylesheet" href="${basePath}<%=WebUtils.setVersion("/css/w_style.css") %>" type="text/css">
 <script src="${basePath}/js/jquery-2.1.0.min.js" type="text/javascript"></script>
 
 <link href="${basePath}/plugins/bootstrap.admin.theme/assets/css/style.css" rel="stylesheet" type="text/css"/>

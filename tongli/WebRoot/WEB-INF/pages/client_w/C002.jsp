@@ -130,14 +130,14 @@
 					</c:choose>
 				</div>
 				<customtag:pagingext func="loadUrlPage" params="'c002_','init'" />
-				<%@ include file="include/footer.jsp"%>
 			</div>
 		</div>
+		<%@ include file="include/footer.jsp"%>
 	</div>
 </body>
 </html>
 <script type="text/javascript">
 	function loadUrlPage(offset, url, event) {
-		location.href = '${basePath}/' + url + event + '.ac?offset=' + offset;
+		location.href = '${basePath}/w/' + url + event + '.ac?offset=' + offset;
 	}
 </script>

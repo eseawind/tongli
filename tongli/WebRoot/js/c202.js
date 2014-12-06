@@ -35,7 +35,7 @@ function initc202Validator_1(fid) {
 			"bean.age" : {//年龄
 				required : true,
 				minlength : 1,
-				maxlength : 10
+				maxlength : 3
 			},
 			"bean.tel": {//手机
 				checkmobile : true,
