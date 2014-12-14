@@ -115,9 +115,20 @@
 				<a href="${basePath}/w/c203_init.ac?pid=zxbm"
 					class="zxbm monitor-list">在线报名<em class="unselected-nav"></em></a>
 			</div>
-			<div class="nav-item">
-				<a href="#" class="close-nav">Close<em class="unselected-nav"></em></a>
-			</div>
+			
+				    <%
+						if ( member!= null) {
+					%>
+						<div class="nav-item"> <a class="clipboard-list" href="${basePath}/w/m201_logout.ac"><em class="unselected-nav"></em></a></div>
+					<%
+						}else
+						if (teacher != null) {
+					%>
+						<div class="nav-item"><a class="clipboard-list" href="${basePath}/w/t001_logout.ac"><em class="unselected-nav"></em></a></div>
+					<%		
+						}
+					%>
+			
 			<div class="sidebar-decoration"></div>
 		</div>
 		<div class="sidebar-section copyright-sidebar">

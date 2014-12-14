@@ -42,20 +42,19 @@
                </div>
 				<div class="decoration"></div>
 				<div class="i_menu">
-					<a class="i_menu_item br_t" href="${basePath}/w/index.ac?pid=sy"><i class="icon3"></i>首页</a> 
 					<%
 						if ( member!= null) {
 					%>
-						<a class="i_menu_item br_t" href="${basePath}/w/m201_init.ac?pid=grzx"><i class="icon8"></i>个人中心</a> 
+						<a class="i_menu_item a_1 br_t" href="${basePath}/w/m201_init.ac?pid=grzx"><i class="icon1"></i><!-- 个人中心 --></a> 
 					<%
 						}else
 						if (teacher != null) {
 					%>
-						<a class="i_menu_item br_t" href="${basePath}/w/t001_init.ac?pid=grzx"><i class="icon8"></i>个人中心</a> 
+						<a class="i_menu_item a_1 br_t" href="${basePath}/w/t001_init.ac?pid=grzx"><i class="icon1"></i><!-- 个人中心 --></a> 
 					<%		
 						}else{
 					%>
-						<a class="i_menu_item br_t" href="${basePath}/w/m201_init.ac?pid=grzx"><i class="icon8"></i>个人中心</a> 
+						<a class="i_menu_item a_1 br_t" href="${basePath}/w/m201_init.ac?pid=grzx"><i class="icon1"></i><!-- 个人中心 --></a> 
 					<%
 						}
 					%>
@@ -71,24 +70,11 @@
 					<%		
 						}
 					%> --%>
-					<a class="i_menu_item br_t" href="${basePath}/w/c002_init.ac??tid=3f2b286347174e728d39169c212fe56b&pid=3f2b286347174e728d39169c212fe56b"><i class="icon1"></i>新闻资讯</a> 
-					<a class="i_menu_item" href="${basePath}/w/c002_init.ac?tid=966a13c753f34faa927510c610b5e0b6&pid=966a13c753f34faa927510c610b5e0b6"><i class="icon4"></i>关于我们</a> 
-					<a class="i_menu_item" href="${basePath}/w/c002_init.ac?tid=6690aceda07a405a9428e6e02ba2d416&pid=6690aceda07a405a9428e6e02ba2d416"><i class="icon2"></i>童厉课程</a> 
-					<a class="i_menu_item" href="${basePath}/w/c002_init.ac?tid=26f1017792024a358c73639b08e74393&pid=26f1017792024a358c73639b08e74393"><i class="icon7"></i>冬夏令营</a> 
-					<a class="i_menu_item" href="${basePath}/w/c202_init.ac?pid=yycg"><i class="icon5"></i>预约体验</a>
-					<a class="i_menu_item" href="${basePath}/w/c203_init.ac?pid=zxbm"><i class="icon6"></i>在线报名</a> 
-					 <%
-						if ( member!= null) {
-					%>
-						<a class="i_menu_item" href="${basePath}/w/m201_logout.ac"><i class="icon9"></i>安全退出</a>
-					<%
-						}else
-						if (teacher != null) {
-					%>
-						<a class="i_menu_item" href="${basePath}/w/t001_logout.ac"><i class="icon9"></i>安全退出</a>
-					<%		
-						}
-					%>
+					<a class="i_menu_item a_2 br_t" href="${basePath}/w/c002_init.ac??tid=3f2b286347174e728d39169c212fe56b&pid=3f2b286347174e728d39169c212fe56b"><i class="icon2"></i><!-- 新闻资讯 --></a> 
+					<a class="i_menu_item a_3" href="${basePath}/w/c002_init.ac?tid=6690aceda07a405a9428e6e02ba2d416&pid=6690aceda07a405a9428e6e02ba2d416"><i class="icon3"></i><!-- 童厉课程 --></a> 
+					<a class="i_menu_item a_4" href="${basePath}/w/c002_init.ac?tid=26f1017792024a358c73639b08e74393&pid=26f1017792024a358c73639b08e74393"><i class="icon4"></i><!-- 冬夏令营 --></a> 
+					<a class="i_menu_item a_5" href="${basePath}/w/c202_init.ac?pid=yycg"><i class="icon5"></i><!-- 预约体验 --></a>
+					<a class="i_menu_item a_6" href="${basePath}/w/c203_init.ac?pid=zxbm"><i class="icon6"></i><!-- 在线报名 --></a> 
 					<div class="clear"></div>
 				</div>
 				<!-- BEGIN FOOTER -->
