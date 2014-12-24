@@ -11,7 +11,9 @@
 package cn.com.softvan.web.action.client.course;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -21,6 +23,8 @@ import cn.com.softvan.bean.course.TcCourseWebEnrollBean;
 import cn.com.softvan.bean.sys.TcSysVariableBean;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.IdUtils;
+import cn.com.softvan.common.StrUtil;
+import cn.com.softvan.common.Validator;
 import cn.com.softvan.service.course.ICourseManager;
 import cn.com.softvan.service.course.ICourseWebEnrollManager;
 import cn.com.softvan.web.action.BaseAction;
@@ -103,7 +107,19 @@ public class C203Action extends BaseAction {
 			}
 		}
 		request.setAttribute("course_beans", course_beans);
-		
+		//数据字典  网上报名 价格
+		TcSysVariableBean bean2=new TcSysVariableBean();
+		bean2.setVariable_id("course_web_enroll");//课程主题
+		List<TcSysVariableBean> course_web_enroll_list=variableManager.findDataIsList(bean2);
+		if(course_web_enroll_list!=null){
+			for(TcSysVariableBean course_web_enroll:course_web_enroll_list){
+				if(Validator.isNumber1(course_web_enroll.getVariable_sub_name())){
+					request.setAttribute(course_web_enroll.getVariable_sub_id(),course_web_enroll.getVariable_sub_name());
+				}else{
+					request.setAttribute(course_web_enroll.getVariable_sub_id(),0);
+				}
+			}
+		}
 		
 		return "init";
 	}
@@ -132,10 +148,61 @@ public class C203Action extends BaseAction {
 				
 				if("0".equals(bean.getType())){
 					//培训班
-					//获取所有选择的所有课程 且 计算课程总价
-				}else if("0".equals(bean.getType())){
+					if(Validator.notEmpty(bean.getCourse())){
+						//存储课程map
+						Map<String,TcCourseBean> course_beans_all_map=new HashMap<String,TcCourseBean>();
+						//课程列表
+						TcCourseBean course_bean_1=new TcCourseBean();
+						List<TcCourseBean> course_beans_all=courseManager.findDataIsList(course_bean_1);
+						if(course_beans_all!=null){
+							for(TcCourseBean courseBean:course_beans_all){
+								course_beans_all_map.put(courseBean.getId().trim(), courseBean);
+							}
+						}
+						//获取所有选择的所有课程 且 计算课程总价
+						String[] courses=bean.getCourse().split(",");
+						if(courses!=null){
+							Double total_price=0d;
+							for(int i=0;i<courses.length;i++){
+								if(courses[i]!=null){
+									TcCourseBean courseBean=course_beans_all_map.get(courses[i].trim());
+									 String member_price=courseBean.getMarket_price();
+									if(Validator.isNumber1(member_price)){
+										total_price+=Double.parseDouble(member_price);
+										bean.setCourse(StrUtil.replaceAll(bean.getCourse(),courseBean.getId(), courseBean.getTitle()));
+									}
+								}
+							}
+							bean.setPrice(""+total_price);
+						}
+					}
+				}else if("1".equals(bean.getType())){
 					//夏令营
-					
+					if(Validator.notEmpty(bean.getCode())){
+						//数据字典  网上报名 价格
+						Map<String,String> course_web_enroll_map=new HashMap<String,String>();
+						TcSysVariableBean bean2=new TcSysVariableBean();
+						bean2.setVariable_id("course_web_enroll");//课程主题
+						List<TcSysVariableBean> course_web_enroll_list=variableManager.findDataIsList(bean2);
+						if(course_web_enroll_list!=null){
+							for(TcSysVariableBean course_web_enroll:course_web_enroll_list){
+								if(Validator.isNumber1(course_web_enroll.getVariable_sub_name())){
+									course_web_enroll_map.put(course_web_enroll.getVariable_sub_id(),course_web_enroll.getVariable_sub_name());
+								}else{
+									course_web_enroll_map.put(course_web_enroll.getVariable_sub_id(),""+0);
+								}
+							}
+						}
+						String[] codes=bean.getCode().split(",");
+						if(codes!=null){
+							for(int i=0;i<codes.length;i++){
+								bean.setPrice(course_web_enroll_map.get("course_web_enroll_"+codes[i]));
+							}
+							if(codes.length==2){
+								bean.setPrice(course_web_enroll_map.get("course_web_enroll_total"));
+							}
+						}
+					}
 				}
 				msg=courseWebEnrollManager.saveOrUpdateData(bean);
 			} catch (Exception e) {
@@ -226,5 +293,12 @@ public class C203Action extends BaseAction {
 	 */
 	public void setCourseManager(ICourseManager courseManager) {
 	    this.courseManager = courseManager;
+	}
+	public static void main(String[] args) {
+		System.out.println(Validator.isNumber1("2.0"));
+		System.out.println(Validator.isNumber1("2"));
+		System.out.println(Validator.isNumber("2.0"));
+		System.out.println(Validator.isNumber("2"));
+		System.out.println(StrUtil.replaceAll("675ebeaaefc144588c73b3799b41dbbd, 8cef612813894fd1bb3ba29971017f75", "8cef612813894fd1bb3ba29971017f75", "哈哈哈"));
 	}
 }

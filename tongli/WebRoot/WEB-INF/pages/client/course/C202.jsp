@@ -29,20 +29,6 @@
 <style type="text/css">
 select{width: 300px;}
 .user_info li .con .input{width: 300px;}
-em.invalid {
-	color: red;
-	padding-left: 18px;
-	vertical-align: top;
-	width: 196px;
-	background: url("${basePath}/css/images/main_bg.gif") 0px -1352px
-		no-repeat;
-}
-
-em.valid {
-	background: url("${basePath}/css/images/main_bg.gif") 0px -1377px
-		no-repeat;
-	color: #065FB9;
-}
 .user_info{width: 600px;}
 .user_info li .con{width:500px;}
 </style>

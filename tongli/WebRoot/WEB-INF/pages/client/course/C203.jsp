@@ -29,9 +29,9 @@
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/less/datepicker.less" />
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/clockface/css/clockface.css" />
 <link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
-
+<script type="text/javascript" src="${basePath}/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${basePath}/js/c203.js"></script>
 <style type="text/css">
-
 </style>
 </head>
 
@@ -53,7 +53,7 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_0" >
 								<!-- BEGIN FORM-->
-								<form accept-charset="UTF-8" role="form"   action="${basePath}/c203_save.ac" method="post">
+								<form id="c203Form_1"  accept-charset="UTF-8" role="form"   action="${basePath}/c203_save.ac" method="post">
 								<div class="form-horizontal" >
 									<input type="hidden" name="bean.id" value="${bean.id}" />
 									<input type="hidden" name="bean.type" value="0">
@@ -106,13 +106,13 @@
 										<div class="form-group">
 											<label class="col-md-2 control-label">移动电话</label>
 											<div class="col-md-3">
-												<input class="form-control" type="text"
+												<input class="form-control" type="text" id="c203Form_1_mobile"
 													placeholder="请输入移动电话" name="bean.cell_tel"
 													value="${bean.cell_tel}"> <span class="help-block"></span>
 											</div>
 											<label class="col-md-2 control-label">家庭电话</label>
 											<div class="col-md-3">
-												<input class="form-control" type="text"
+												<input class="form-control" type="text" id="c203Form_1_tel"
 													placeholder="请输入家庭电话" name="bean.tel" value="${bean.tel}">
 												<span class="help-block"></span>
 											</div>
@@ -279,7 +279,7 @@
 										</div>
 										<div class="c10"></div>
 									<div align="center">
-									<button id="btn1_1111" type="submit"  class="btn green">提交报名申请表</button>
+									<button id="btn1_1111" type="submit"  onclick="javascript:onCheckForm2('c203Form_1');" class="btn green">提交报名申请表</button>
 									</div>
 									<div class="c10"></div>
 									</div>
@@ -288,7 +288,7 @@
 							</div>
 							<div class="tab-pane" id="tab_1">
 								<!-- BEGIN FORM-->
-								<form accept-charset="UTF-8" class="form-horizontal" action="${basePath}/c203_save.ac" method="post">
+								<form id="c203Form_2" accept-charset="UTF-8" class="form-horizontal" action="${basePath}/c203_save.ac" method="post">
 									<input type="hidden" name="bean.id" value="${bean.id}" />
 									<input type="hidden" name="bean.type" value="1">
 									<table class="table table-striped table-condensed" style="text-align: center;">
@@ -304,8 +304,8 @@
 									<div class="form-group">
 										<label class="col-md-2 control-label">(第几期)</label>
 										<div class="col-md-3" style="margin-top:5px;" id="bean_code_2" >
-											<label> <input type="checkbox" name="bean.code"  onclick="sumPriceB()" price="5000.00" value="1"> 第一期</label>
-											<label> <input type="checkbox" name="bean.code"  onclick="sumPriceB()" price="4000.00" value="2"> 第二期</label>
+											<label> <input type="checkbox" name="bean.code"  onclick="sumPriceB()" price="${course_web_enroll_1}" value="1"> 第一期</label>
+											<label> <input type="checkbox" name="bean.code"  onclick="sumPriceB()" price="${course_web_enroll_2}" value="2"> 第二期</label>
 										</div>
 										<label class="col-md-2 control-label">报名价格</label>
 										<div class="col-md-3">
@@ -406,7 +406,7 @@
 										</div>
 										<label class="col-md-2 control-label">移动电话</label>
 										<div class="col-md-3">
-											<input class="form-control" type="text" placeholder="请输入移动电话"
+											<input class="form-control" type="text" placeholder="请输入移动电话"  id="c203Form_2_mobile"
 												name="bean.cell_tel" value="${bean.cell_tel}"> <span
 												class="help-block"></span>
 										</div>
@@ -571,7 +571,7 @@
 										</div>
 									<div class="c10"></div>
 									<div align="center">
-									<button type="submit" id="btn2_222" class="btn purple">提交冬夏令营报名表</button>
+									<button type="submit" id="btn2_222"  onclick="javascript:onCheckForm3('c203Form_2');" class="btn purple">提交冬夏令营报名表</button>
 									</div>
 									<div class="c10"></div>
 								</form>
@@ -645,8 +645,20 @@ function sumPriceB(){
 		codeLength2++;
 	});
 	if(codeLength1==codeLength2){
-		sum=8000;
+		sum=${course_web_enroll_total};
 	}
 	$('#bean_price_2').val(sum);
+}
+function onCheckForm2(formId){
+	initc203Validator_2(formId);
+	if(c203Validator_2.form()){
+		$('#'+formId).submit();
+	}
+}
+function onCheckForm3(formId){
+	initc203Validator_3(formId);
+	if(c203Validator_3.form()){
+		$('#'+formId).submit();
+	}
 }
 </script>
