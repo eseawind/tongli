@@ -18,9 +18,8 @@
 <%@ taglib prefix="customtag" uri="/custom-tags"%>
 
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <%@ include file="../include/title_meta.jsp"%>
 <%@ include file="../include/public_js_css.jsp"%>
@@ -38,6 +37,8 @@
 <link rel="stylesheet" type="text/css" href="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/clockface/css/clockface.css" />
 <link href="${basePath}/js/bootstarp-date/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
 
+<script type="text/javascript" src="${basePath}/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="${basePath}/js/c203.js"></script>
 <style type="text/css">
 .page-header {
     padding-bottom: 9px;
@@ -51,10 +52,12 @@
 }
 </style>
 </head>
-<body>
-	<div class="all-elements">
-		<%@ include file="../include/header.jsp"%>
-		<div id="content" class="page-content">
+
+<body class="page-header-fixed">
+	<!-- BEGIN HEADER -->
+	<%@ include file="../include/header.jsp"%>
+	<!-- END   HEADER -->
+	<div id="content" class="page-content">
 			<div class="page-header">
 				<a href="#" class="deploy-sidebar"></a>
 				<p class="bread-crumb">
@@ -65,24 +68,24 @@
 			<div class="content ">
 					<div class="web_enroll_info tabbable tabbable-custom">
 						<ul class="nav nav-tabs" style="height:40px; ">
-								<li id="tab_0_li" class="active "><a href="#tab_0" data-toggle="tab" style="color: #468847;">运动培训班</a></li>
-								<li id="tab_1_li"><a href="#tab_1" data-toggle="tab" style="color: #B94A48;">冬夏令营</a></li>
+								<li id="tab_0_li" class="active "><a id="xxxa1" href="#tab_0" data-toggle="tab" style="color: #468847;">运动培训班</a></li>
+								<li id="tab_1_li"><a  id="xxxa2" href="#tab_1" data-toggle="tab" style="color: #B94A48;">冬夏令营</a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab_0" >
 								<!-- BEGIN FORM-->
-								<form accept-charset="UTF-8" role="form"   action="${basePath}/w/c203_save.ac" method="post">
+								<form id="c203Form_1"  accept-charset="UTF-8" role="form"   action="${basePath}/w/c203_save.ac" method="post">
 								<div class="form-horizontal" >
 									<input type="hidden" name="bean.id" value="${bean.id}" />
 									<input type="hidden" name="bean.type" value="0">
 									<table class="table table-striped table-condensed" style="text-align: center;">
-										<tr >
-											<td height="30" class="alert alert-success" style="text-align: center;"><strong style="font-size: 2em;">运动培训班申请表</strong></td>
+										<tr class="alert alert-success">
+											<td height="30"><strong style="font-size: 3em;">运动培训班申请表</strong></td>
 										</tr>
 									</table>
 									<table class="table table-striped table-condensed">
-										<tr >
-											<td height="30" class="alert alert-success"><i class="fa  fa-bar-chart-o"></i> <strong>申请人资料</strong></td>
+										<tr class="alert alert-success" >
+											<td height="30" colspan="4"><i class="fa  fa-bar-chart-o"></i> <strong>申请人资料</strong></td>
 										</tr>
 									</table>
 										<%-- <div class="form-group">
@@ -124,13 +127,13 @@
 										<div class="form-group">
 											<label class="col-md-2 control-label">移动电话</label>
 											<div class="col-md-3">
-												<input class="form-control" type="text"
+												<input class="form-control" type="text" id="c203Form_1_mobile"
 													placeholder="请输入移动电话" name="bean.cell_tel"
 													value="${bean.cell_tel}"> <span class="help-block"></span>
 											</div>
 											<label class="col-md-2 control-label">家庭电话</label>
 											<div class="col-md-3">
-												<input class="form-control" type="text"
+												<input class="form-control" type="text" id="c203Form_1_tel"
 													placeholder="请输入家庭电话" name="bean.tel" value="${bean.tel}">
 												<span class="help-block"></span>
 											</div>
@@ -145,8 +148,8 @@
 											</div>
 										</div>
 										<table class="table table-striped table-condensed">
-											<tr >
-											<td height="30" class="alert alert-success"><i class="fa  fa-bar-chart-o"></i> <strong>详情</strong></td>
+											<tr class="alert alert-success" >
+												<td height="30" colspan="4"><i class="fa  fa-bar-chart-o"></i> <strong>详情</strong></td>
 											</tr>
 										</table>
 										<div class="form-group">
@@ -297,7 +300,7 @@
 										</div>
 										<div class="c10"></div>
 									<div align="center">
-									<button id="btn1_1111" type="submit"  class="btn green">提交报名申请表</button>
+									<button id="btn1_1111" type="submit"  onclick="javascript:onCheckForm2('c203Form_1');" class="btn green">提交报名申请表</button>
 									</div>
 									<div class="c10"></div>
 									</div>
@@ -306,24 +309,24 @@
 							</div>
 							<div class="tab-pane" id="tab_1">
 								<!-- BEGIN FORM-->
-								<form accept-charset="UTF-8" class="form-horizontal" action="${basePath}/w/c203_save.ac" method="post">
+								<form id="c203Form_2" accept-charset="UTF-8" class="form-horizontal" action="${basePath}/w/c203_save.ac" method="post">
 									<input type="hidden" name="bean.id" value="${bean.id}" />
 									<input type="hidden" name="bean.type" value="1">
-									<table class="table table-striped table-condensed">
-										<tr >
-											<td height="30" class="alert alert-danger" style="text-align: center;"><strong style="font-size: 2em;">童励运动冬夏令营报名表</strong></td>
+									<table class="table table-striped table-condensed" style="text-align: center;">
+										<tr class="alert alert-danger">
+											<td height="30"><strong style="font-size: 3em;">童励运动冬夏令营报名表</strong></td>
 										</tr>
 									</table>
 									<table class="table table-striped table-condensed">
-										<tr >
-											<td height="30" class="alert alert-danger"><i class="fa  fa-bullhorn"></i> <strong>报名信息</strong></td>
+										<tr class="alert alert-danger" >
+											<td height="30" colspan="4"><i class="fa  fa-bullhorn"></i> <strong>报名信息</strong></td>
 										</tr>
 									</table>
 									<div class="form-group">
 										<label class="col-md-2 control-label">(第几期)</label>
 										<div class="col-md-3" style="margin-top:5px;" id="bean_code_2" >
-											<label> <input type="checkbox" name="bean.code"  onclick="sumPriceB()" price="5000.00" value="1"> 第一期</label>
-											<label> <input type="checkbox" name="bean.code"  onclick="sumPriceB()" price="4000.00" value="2"> 第二期</label>
+											<label> <input type="checkbox" name="bean.code"  onclick="sumPriceB()" price="${course_web_enroll_1}" value="1"> 第一期</label>
+											<label> <input type="checkbox" name="bean.code"  onclick="sumPriceB()" price="${course_web_enroll_2}" value="2"> 第二期</label>
 										</div>
 										<label class="col-md-2 control-label">报名价格</label>
 										<div class="col-md-3">
@@ -364,8 +367,8 @@
 											</div>
 									</div>
 									<table class="table table-striped table-condensed">
-										<tr >
-											<td height="30" class="alert alert-danger"><i class="fa  fa-bullhorn"></i> <strong>学员基本信息</strong></td>
+										<tr class="alert alert-danger" >
+											<td height="30" colspan="4"><i class="fa  fa-bullhorn"></i> <strong>学员基本信息</strong></td>
 										</tr>
 									</table>
 									<div class="form-group">
@@ -424,7 +427,7 @@
 										</div>
 										<label class="col-md-2 control-label">移动电话</label>
 										<div class="col-md-3">
-											<input class="form-control" type="text" placeholder="请输入移动电话"
+											<input class="form-control" type="text" placeholder="请输入移动电话"  id="c203Form_2_mobile"
 												name="bean.cell_tel" value="${bean.cell_tel}"> <span
 												class="help-block"></span>
 										</div>
@@ -438,8 +441,8 @@
 										</div>
 									</div>
 									<table class="table table-striped table-condensed">
-										<tr >
-											<td height="30" class="alert alert-danger"><i class="fa  fa-bullhorn"></i> <strong>学员技能信息</strong></td>
+										<tr class="alert alert-danger" >
+											<td height="30" colspan="4"><i class="fa  fa-bullhorn"></i> <strong>学员技能信息</strong></td>
 										</tr>
 									</table>
 									<div class="form-group">
@@ -496,8 +499,8 @@
 										</div> 
 									</div>
 									<table class="table table-striped table-condensed">
-										<tr >
-											<td height="30" class="alert alert-danger"><i class="fa  fa-bullhorn"></i> <strong>备注</strong></td>
+										<tr class="alert alert-danger" >
+											<td height="30" colspan="4"><i class="fa  fa-bullhorn"></i> <strong>备注</strong></td>
 										</tr>
 									</table>
 									<%-- <div class="form-group">
@@ -589,7 +592,7 @@
 										</div>
 									<div class="c10"></div>
 									<div align="center">
-									<button type="submit" id="btn2_222" class="btn purple">提交冬夏令营报名表</button>
+									<button type="submit" id="btn2_222"  onclick="javascript:onCheckForm3('c203Form_2');" class="btn purple">提交冬夏令营报名表</button>
 									</div>
 									<div class="c10"></div>
 								</form>
@@ -598,10 +601,15 @@
 						</div>
 					</div>
 				</div>
-			<%@ include file="../include/footer.jsp"%>
 			</div>
+			<div class="c10"></div>
 		</div>
+
 	</div>
+	<div class="c10"></div>
+	</div>
+	<!-- BEGIN FOOTER -->
+	<%@ include file="../include/footer.jsp"%>
 	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
 	<script type="text/javascript" src="${basePath}/plugins/bootstrap.admin.theme/assets/plugins/select2/select2.min.js"></script>
@@ -624,6 +632,15 @@ jQuery(document).ready(function() {
 	$('#bean_birthday2').datepicker();
 	//$('#bean_begin_day2').datepicker();
 	//$('#bean_end_day2').datepicker();
+	
+	
+	var url=location.href;
+	if(url.indexOf('#tab_x0')!=-1){
+		$('#xxxa1').click();
+	}
+	if(url.indexOf('#tab_x1')!=-1){
+		$('#xxxa2').click();
+	}
 });
 function sumPrice(obj){
 	var sum=0.00;
@@ -649,8 +666,20 @@ function sumPriceB(){
 		codeLength2++;
 	});
 	if(codeLength1==codeLength2){
-		sum=8000;
+		sum=${course_web_enroll_total};
 	}
 	$('#bean_price_2').val(sum);
+}
+function onCheckForm2(formId){
+	initc203Validator_2(formId);
+	if(c203Validator_2.form()){
+		$('#'+formId).submit();
+	}
+}
+function onCheckForm3(formId){
+	initc203Validator_3(formId);
+	if(c203Validator_3.form()){
+		$('#'+formId).submit();
+	}
 }
 </script>
