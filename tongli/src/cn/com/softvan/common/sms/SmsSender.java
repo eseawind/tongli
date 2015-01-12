@@ -11,6 +11,7 @@
 package cn.com.softvan.common.sms;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -20,6 +21,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.apache.log4j.Logger;
 
+import cn.com.softvan.common.CipherUtils;
 import cn.com.softvan.common.CommonConstant;
 import cn.com.softvan.common.Resources;
 import cn.com.softvan.common.Validator;
@@ -172,7 +174,8 @@ public class SmsSender implements ISmsSender {
 		String content=smsInfo.getBody();
 		String phonestr=smsInfo.getSms_dst_id();//收短信人号码
 		String x = new SmsSender().doGet(host, "Sd_UserName="+account+"&Sd_UserPsd="+psw+"&Sd_Phones="+phonestr+"&Sd_MsgContent="+content+"&Sd_SchTime=&Sd_ExNumber=&Sd_SeqNum=",
-					"utf-8", false); 
+				Resources.getData("sms.SMS_DEFAULT_ENCODE"), false); 
+		smsInfo.setSms_note(x);
 		return true;
 	}
 	
@@ -195,21 +198,26 @@ public class SmsSender implements ISmsSender {
 		HttpClient client = new HttpClient();
 		HttpMethod method = new GetMethod(url);
 		try {
-				System.out.println(queryString);
+//				System.out.println(queryString);
 				if (queryString != null && !queryString.equals("")){
 					// 对get请求参数做了http请求默认编码，好像没有任何问题，汉字编码后，就成为%式样的字符串
 					method.setQueryString(URIUtil.encodeQuery(queryString));
 				}
 				client.executeMethod(method);
-				System.out.println("-----------"+method.getStatusCode()+"----------");
+//				System.out.println("-----------"+method.getStatusCode()+"----------");
 //				if (method.getStatusCode() == HttpStatus.SC_OK) {
-					 String result = method.getResponseBodyAsString();
-					 System.out.println(result);
+				String result=method.getResponseBodyAsString();
+				response.append(result);
+//					 System.out.println(result);
+				try {
+					log.info(result+"===="+queryString);//+CipherUtils.md5(queryString));
+				} catch (Throwable e) {
+				}
 //				}else{
 //					return "短信接口无法访问!";
 //				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.error("短信发送异常!",e);
 			} finally {
 				method.releaseConnection();
 			}

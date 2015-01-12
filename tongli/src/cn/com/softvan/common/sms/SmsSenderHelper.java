@@ -219,6 +219,7 @@ public class SmsSenderHelper {
 //		}
 		int count = info.getSms_send_count() == null?0:Integer.parseInt(info.getSms_send_count());
 		data.put("SMS_SEND_COUNT", (count + 1) + "");
+		data.put("SMS_NOTE", info.getSms_note());
 		try {
 			SmsInfoDao.updateById(data);
 		} catch (Exception e) {

@@ -79,6 +79,7 @@
     	 select 
 			<include refid="Base_Column_List"/>
 		 from tc_wx_user 
+		 where subscribe!=0
 		 order by subscribe_time desc
      </select>
     <!-- 
@@ -88,6 +89,7 @@
     	 select 
 			<include refid="Base_Column_List"/>
 		 from tc_wx_user 
+		  where subscribe!=0
 		 order by subscribe_time desc
      </select>
 </mapper>

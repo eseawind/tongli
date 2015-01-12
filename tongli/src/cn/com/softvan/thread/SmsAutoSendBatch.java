@@ -51,7 +51,7 @@ public class SmsAutoSendBatch implements Runnable{
 					try {
 						helper.setSmsSender(new SmsSender());
 						smsList = helper.queryNoSendInfo();
-						System.out.println(smsList.size());
+//						System.out.println(smsList.size());
 						if (smsList != null && !smsList.isEmpty()) {
 							SmsInfo info = null;
 							for (int i = 0; i < smsList.size(); i++) {
@@ -59,13 +59,13 @@ public class SmsAutoSendBatch implements Runnable{
 								info.copyValue();
 								boolean result = helper.synSend(info);
 								if(!result) {
-									log.info("短信编号【"+ info.getSms_id() +"】发送失败");
+									log.error("短信编号【"+ info.getSms_id() +"】发送失败");
 								}
 								
 								// 更新短信的状态
 								boolean dbResult = helper.changeStatus(info, result);
 								if(!dbResult) {
-									log.info("短信编号【"+ info.getSms_id() +"】状态更新失败");
+									log.error("短信编号【"+ info.getSms_id() +"】状态更新失败");
 								}
 							}
 						}
